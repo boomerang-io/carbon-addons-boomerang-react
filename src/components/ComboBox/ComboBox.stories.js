@@ -19,6 +19,21 @@ const items = [
   { label: 'Penguim', value: 'penguim' },
 ];
 
+const ComboBoxExternallyControlled = () => {
+  const [selectedItem, setSelectedItem] = React.useState([]);
+
+  return (
+    <ComboBox
+      onChange={() => setSelectedItem({ label: 'Penguim', value: 'penguim' })}
+      id="select-default"
+      items={items}
+      placeholder="Search for something"
+      titleText="Should always select penguim"
+      selectedItem={selectedItem}
+    />
+  )
+}
+
 storiesOf('ComboBox', module)
   .add('default', () => {
     return (
@@ -86,6 +101,25 @@ storiesOf('ComboBox', module)
           tooltipContent="Tooltip for select"
           tooltipProps={{ direction: 'top' }}
         />
+      </div>
+    );
+  }).add('with menu opening upwards', () => {
+    return (
+      <div style={{ width: '25rem', height: '30rem', display: 'flex', alignItems: 'flex-end' }}>
+        <ComboBox
+          onChange={action('select change')}
+          id="select-default"
+          items={items}
+          placeholder="Search for something"
+          titleText="Menu should open upwards"
+          direction="top"
+        />
+      </div>
+    );
+  }).add('with external control', () => {
+    return (
+      <div style={{ width: '25rem' }}>
+        <ComboBoxExternallyControlled />
       </div>
     );
   });

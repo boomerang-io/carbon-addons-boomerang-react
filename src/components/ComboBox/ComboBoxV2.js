@@ -11,7 +11,10 @@ import PropTypes from 'prop-types';
 import Downshift from 'downshift';
 import { settings } from 'carbon-components';
 // import WarningFilled16 from '@carbon/icons-react/lib/warning--filled/16';
-import { WarningFilled16 } from '@carbon/icons-react';
+import { Checkmark16, WarningFilled16 } from '@carbon/icons-react';
+import { match, keys } from '../../internal/keyboard';
+import setupGetInstanceId from '../../tools/setupGetInstanceId';
+import { mapDownshiftProps } from '../../tools/createPropAdapter';
 import ListBox, {
   PropTypes as ListBoxPropTypes,
 } from 'carbon-components-react/lib/components/ListBox';
@@ -28,15 +31,19 @@ const defaultItemToString = (item) => {
 
 const defaultShouldFilterItem = ({ item, inputValue }) => {
   if (typeof item === 'string') {
-    return item.toLowerCase().includes(inputValue.toLowerCase());
+    return item.toLowerCase().includes(inputValue?.toLowerCase());
   }
   if (item && item.label) {
-    return item.label.toLowerCase().includes(inputValue.toLowerCase());
+    return item.label.toLowerCase().includes(inputValue?.toLowerCase());
   }
   return item;
 };
 
 const getInputValue = (props, state) => {
+  if (props.selectedItem) {
+    return props.itemToString(props.selectedItem);
+  }
+  // TODO: consistent `initialSelectedItem` behavior with other listbox components in v11
   if (props.initialSelectedItem) {
     return props.itemToString(props.initialSelectedItem);
   }
@@ -61,6 +68,8 @@ const findHighlightedIndex = ({ items, itemToString }, inputValue) => {
   return -1;
 };
 
+const getInstanceId = setupGetInstanceId();
+
 export default class ComboBox extends React.Component {
   static propTypes = {
     /**
@@ -74,9 +83,23 @@ export default class ComboBox extends React.Component {
     className: PropTypes.string,
 
     /**
+     * Specify the direction of the combobox dropdown. Can be either top or bottom.
+     */
+    direction: PropTypes.oneOf(['top', 'bottom']),
+
+    /**
      * Specify if the control should be disabled, or not
      */
     disabled: PropTypes.bool,
+
+     /**
+     * Additional props passed to Downshift
+     */
+    downshiftProps: PropTypes.shape(Downshift.propTypes),
+
+    /**
+     * Provide helper text to help understand what the input is used for
+     */
     helperText: PropTypes.string,
 
     /**
@@ -89,6 +112,16 @@ export default class ComboBox extends React.Component {
      * from their collection that are pre-selected
      */
     initialSelectedItem: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+
+    /**
+     * Specify if the currently selected value is invalid.
+     */
+    invalid: PropTypes.bool,
+
+    /**
+     * Message which is displayed if the value is invalid.
+     */
+    invalidText: PropTypes.string,
 
     /**
      * We try to stay as generic as possible here to allow individuals to pass
@@ -110,18 +143,40 @@ export default class ComboBox extends React.Component {
     itemToElement: PropTypes.func,
 
     /**
+     * should use "light theme" (white background)?
+     */
+    light: PropTypes.bool,
+
+    /**
      * `onChange` is a utility for this controlled component to communicate to a
      * consuming component when a specific dropdown item is selected.
      * @param {{ selectedItem }}
      */
     onChange: PropTypes.func.isRequired,
-    onSelectItem: PropTypes.func,
+    
+    /**
+     * Callback function to notify consumer when the text input changes.
+     * This provides support to change available items based on the text.
+     * @param {string} inputText
+     */
+    onInputChange: PropTypes.func,
+
+    /**
+     * Callback function that fires when the combobox menu toggle is clicked
+     * @param {MouseEvent} event
+     */
+    onToggleClick: PropTypes.func,
 
     /**
      * Used to provide a placeholder text node before a user enters any input.
      * This is only present if the control has no items selected
      */
     placeholder: PropTypes.string.isRequired,
+
+    /**
+     * For full control of the selection
+     */
+    selectedItem: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
 
     /**
      * Specify your own filtering logic by passing in a `shouldFilterItem`
@@ -131,14 +186,15 @@ export default class ComboBox extends React.Component {
     shouldFilterItem: PropTypes.func,
 
     /**
-     * Specify if the currently selected value is invalid.
+     * Specify the size of the ListBox. Currently supports either `sm`, `lg` or `xl` as an option.
      */
-    invalid: PropTypes.bool,
+    size: ListBoxPropTypes.ListBoxSize,
 
     /**
-     * Message which is displayed if the value is invalid.
+     * Provide text to be used in a `<label>` element that is tied to the
+     * combobox via ARIA attributes.
      */
-    invalidText: PropTypes.string,
+    titleText: PropTypes.node,
 
     /**
      * Specify a custom translation function that takes in a message identifier
@@ -146,58 +202,54 @@ export default class ComboBox extends React.Component {
      */
     translateWithId: PropTypes.func,
 
-    titleText: PropTypes.node,
     /**
      * Currently supports either the default type, or an inline variant
      */
     type: ListBoxPropTypes.ListBoxType,
-
-    /**
-     * Callback function to notify consumer when the text input changes.
-     * This provides support to change available items based on the text.
-     * @param {string} inputText
-     */
-    onInputChange: PropTypes.func,
-
-    /**
-     * should use "light theme" (white background)?
-     */
-    light: PropTypes.bool,
   };
 
   static defaultProps = {
     disabled: false,
-    itemToElement: null,
     itemToString: defaultItemToString,
+    itemToElement: null,
+    shouldFilterItem: defaultShouldFilterItem,
     type: 'default',
     ariaLabel: 'Choose an item',
     light: false,
-    shouldFilterItem: defaultShouldFilterItem,
+    direction: 'bottom',
   };
+
+  static getDerivedStateFromProps(nextProps, state) {
+    const { prevSelectedItem, doneInitialSelectedItem } = state;
+    const { selectedItem } = nextProps;
+    if (!doneInitialSelectedItem || prevSelectedItem !== selectedItem) {
+      return {
+        doneInitialSelectedItem: true,
+        prevSelectedItem: selectedItem,
+        inputValue: getInputValue(nextProps, state),
+      };
+    }
+    return null;
+  }
 
   constructor(props) {
     super(props);
 
     this.textInput = React.createRef();
 
+    this.comboBoxInstanceId = getInstanceId();
+
     this.state = {
       inputValue: getInputValue(props, {}),
     };
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    this.setState((state) => ({
-      inputValue: getInputValue(nextProps, state),
-    }));
-  }
-
   // TB: added here only use the filter if the user has entered a value
   // removed default prop for filter so component can easily know when to filter or not
   filterItems = (items, itemToString, inputValue) => {
-    const { hasEnteredSearchValue } = this.state;
     const { shouldFilterItem } = this.props;
 
-    return shouldFilterItem && hasEnteredSearchValue
+    return shouldFilterItem
       ? items.filter((item) =>
           shouldFilterItem({
             item,
@@ -214,29 +266,22 @@ export default class ComboBox extends React.Component {
     }
   };
 
-  handleOnSelectItem = (selectedItem) => {
-    if (this.props.onSelectItem) {
-      this.props.onSelectItem({ selectedItem });
-    }
-  };
-
   // TB: Set has entered value to true so the filter is used
   // clear out the input value so they are typing a new word. The selected item remains as is.
   // Adding in the selectedItem here just to show that it isn't changing
-  handleOnInputKeyDown = (event) => {
-    event.stopPropagation();
-    const { onInputChange, shouldFilterItem } = this.props;
-    if (onInputChange || shouldFilterItem) {
-      if (this.state.isFirstKeyDownEvent) {
-        this.setState(() => ({
-          hasEnteredSearchValue: true,
-          isFirstKeyDownEvent: false,
-        }));
-      } else {
-        this.setState(() => ({ hasEnteredSearchValue: true }));
-      }
-    }
-  };
+  // handleOnInputKeyDown = (event) => {
+  //   const { onInputChange, shouldFilterItem } = this.props;
+  //   if (onInputChange || shouldFilterItem) {
+  //     if (this.state.isFirstKeyDownEvent) {
+  //       this.setState(() => ({
+  //         hasEnteredSearchValue: true,
+  //         isFirstKeyDownEvent: false,
+  //       }));
+  //     } else {
+  //       this.setState(() => ({ hasEnteredSearchValue: true }));
+  //     }
+  //   }
+  // };
 
   handleOnInputValueChange = (inputValue, { setHighlightedIndex }) => {
     const { onInputChange, shouldFilterItem } = this.props;
@@ -260,33 +305,63 @@ export default class ComboBox extends React.Component {
     );
   };
 
+  handleSelectionClear = () => {
+    if (this.textInput?.current) {
+      this.textInput.current.focus();
+    }
+  };
+
+  handleOnStateChange = (newState, { setHighlightedIndex }) => {
+    if (Object.prototype.hasOwnProperty.call(newState, 'inputValue')) {
+      const { inputValue } = newState;
+      const items = this.filterItems(
+        this.props.items,
+        this.props.itemToString,
+        inputValue
+      );
+      setHighlightedIndex(
+        findHighlightedIndex(
+          {
+            ...this.props,
+            items,
+          },
+          inputValue
+        )
+      );
+    }
+  };
+
   onToggleClick = (isOpen) => (event) => {
+    if (this.props.onToggleClick) {
+      this.props.onToggleClick(event);
+    }
+
     if (event.target === this.textInput.current && isOpen) {
       event.preventDownshiftDefault = true;
       event.persist();
     }
-    const { hasEnteredSearchValue } = this.state;
+    //const { hasEnteredSearchValue } = this.state;
 
     // TB: need to emit event for a controlled component to update if they are
     // filtering the options based on the input
-    const { onInputChange, shouldFilterItem } = this.props;
-    if (onInputChange) {
-      onInputChange(''); // Could move this to the keydown if you don't want to clear until typing starts or remove if we don't want to support
-    }
+    // const { onInputChange, shouldFilterItem } = this.props;
+    // if (onInputChange) {
+    //   onInputChange(''); // Could move this to the keydown if you don't want to clear until typing starts or remove if we don't want to support
+    // }
 
     // TB: added here. If they did start typing to filter, reset things when toggling menu
-    if (onInputChange || shouldFilterItem) {
-      if (hasEnteredSearchValue) {
-        this.setState(() => ({
-          hasEnteredSearchValue: false,
-          isFirstKeyDownEvent: true,
-        }));
-      } else {
-        this.setState(() => ({
-          inputValue: '', // Could move this to the keydown if you don't want to clear until typing starts
-        }));
-      }
-    }
+    // if (onInputChange || shouldFilterItem) {
+    //   if (hasEnteredSearchValue) {
+    //     this.setState(() => ({
+    //       hasEnteredSearchValue: false,
+    //       isFirstKeyDownEvent: true,
+    //     }));
+    //   } else {
+    //     this.setState(() => ({
+    //       inputValue: '', // Could move this to the keydown if you don't want to clear until typing starts
+    //     }));
+    //   }
+    // }
   };
 
   render() {
@@ -301,127 +376,163 @@ export default class ComboBox extends React.Component {
       helperText,
       placeholder,
       initialSelectedItem,
+      selectedItem,
       ariaLabel,
       translateWithId,
       invalid,
       invalidText,
       light,
       type, // eslint-disable-line no-unused-vars
+      size,
       shouldFilterItem, // eslint-disable-line no-unused-vars
       onChange, // eslint-disable-line no-unused-vars
       onInputChange, // eslint-disable-line no-unused-vars
+      onToggleClick, // eslint-disable-line no-unused-vars
+      downshiftProps,
+      direction,
       ...rest
     } = this.props;
-    const className = cx(`${prefix}--combo-box`, containerClassName);
+    const className = cx(`${prefix}--combo-box`, containerClassName, {
+      [`${prefix}--list-box--up`]: direction === 'top',
+    });
     const titleClasses = cx(`${prefix}--label`, {
       [`${prefix}--label--disabled`]: disabled,
     });
-    const title = titleText ? (
-      <label htmlFor={id} className={titleClasses}>
-        {titleText}
-      </label>
-    ) : null;
+    const comboBoxHelperId = !helperText
+      ? undefined
+      : `combobox-helper-text-${this.comboBoxInstanceId}`;
     const helperClasses = cx(`${prefix}--form__helper-text`, {
       [`${prefix}--form__helper-text--disabled`]: disabled,
     });
-    const helper = helperText ? <div className={helperClasses}>{helperText}</div> : null;
     const wrapperClasses = cx(`${prefix}--list-box__wrapper`);
+    const inputClasses = cx(`${prefix}--text-input`, {
+      [`${prefix}--text-input--empty`]: !this.state.inputValue,
+    });
 
     // needs to be Capitalized for react to render it correctly
     const ItemToElement = itemToElement;
-    const input = (
+    return (
       <Downshift
+        {...mapDownshiftProps(downshiftProps)}
         onChange={this.handleOnChange}
-        onSelectItem={this.handleOnSelectItem}
         onInputValueChange={this.handleOnInputValueChange}
+        onStateChange={this.handleOnStateChange}
         inputValue={this.state.inputValue || ''}
         itemToString={itemToString}
-        defaultSelectedItem={initialSelectedItem}
+        initialSelectedItem={initialSelectedItem}
+        inputId={id}
+        selectedItem={selectedItem}
       >
         {({
-          getButtonProps,
+          getToggleButtonProps,
           getInputProps,
           getItemProps,
-          getRootProps,
+          getLabelProps,
           isOpen,
           inputValue,
           selectedItem,
           highlightedIndex,
           clearSelection,
+          toggleMenu,
+          getMenuProps,
         }) => (
-          <ListBox
-            className={className}
-            disabled={disabled}
-            invalid={invalid}
-            invalidText={invalidText}
-            isOpen={isOpen}
-            light={light}
-            {...getRootProps({ refKey: 'innerRef' })}
-          >
-            <ListBox.Field
-              id={id}
-              {...getButtonProps({
-                disabled,
-                onClick: this.onToggleClick(isOpen),
-              })}
-            >
-              {invalid && <WarningFilled16 className={`${prefix}--list-box__invalid-icon`} />}
-              <input
-                className={`${prefix}--text-input`}
-                aria-label={ariaLabel}
-                aria-controls={`${id}__menu`}
-                aria-autocomplete="list"
-                ref={this.textInput}
-                // onClick={clearSelection} //TB: Causes what I presume is an undesired render w/ the value cleared
-                {...rest}
-                {...getInputProps({
-                  disabled,
-                  id,
-                  placeholder,
-                  onKeyDown: this.handleOnInputKeyDown,
-                })}
-              />
-              {inputValue && (
-                <ListBox.Selection
-                  clearSelection={clearSelection}
-                  translateWithId={translateWithId}
-                />
-              )}
-              <ListBox.MenuIcon isOpen={isOpen} translateWithId={translateWithId} />
-            </ListBox.Field>
-            {isOpen && (
-              <ListBox.Menu aria-label={ariaLabel} id={id}>
-                {this.filterItems(items, itemToString, inputValue).map((item, index) => {
-                  const itemProps = getItemProps({ item, index });
-                  return (
-                    <ListBox.MenuItem
-                      key={itemToString(item)}
-                      isActive={selectedItem === item}
-                      isHighlighted={highlightedIndex === index || false}
-                      title={itemToElement ? item.text : itemToString(item)}
-                      {...itemProps}
-                    >
-                      {itemToElement ? (
-                        <ItemToElement key={itemProps.id} {...item} />
-                      ) : (
-                        itemToString(item)
-                      )}
-                    </ListBox.MenuItem>
-                  );
-                })}
-              </ListBox.Menu>
+          <div className={wrapperClasses}>
+            {titleText && (
+              <label className={titleClasses} {...getLabelProps()}>
+                {titleText}
+              </label>
             )}
-          </ListBox>
+            <ListBox
+              className={className}
+              disabled={disabled}
+              invalid={invalid}
+              aria-label={ariaLabel}
+              invalidText={invalidText}
+              isOpen={isOpen}
+              light={light}
+              size={size}
+            >
+              <ListBox.Field
+                id={id}
+                {...getToggleButtonProps({
+                  disabled,
+                  onClick: this.onToggleClick(isOpen),
+                })}
+              >
+                <input
+                  disabled={disabled}
+                  className={inputClasses}
+                  type="text"
+                  tabIndex="0"
+                  aria-autocomplete="list"
+                  ref={this.textInput}
+                  {...rest}
+                  {...getInputProps({
+                    disabled,
+                    placeholder,
+                    onKeyDown: (event) => {
+                      if (match(event, keys.Space)) {
+                        event.stopPropagation();
+                      }
+
+                      if (match(event, keys.Enter)) {
+                        toggleMenu();
+                      }
+                    },
+                  })}
+                />
+                {invalid && (
+                  <WarningFilled16
+                    className={`${prefix}--list-box__invalid-icon`}
+                  />
+                )}  
+                {inputValue && (
+                  <ListBox.Selection
+                    clearSelection={clearSelection}
+                    translateWithId={translateWithId}
+                    disabled={disabled}
+                    onClearSelection={this.handleSelectionClear}
+                  />
+                )}
+                <ListBox.MenuIcon isOpen={isOpen} translateWithId={translateWithId} />
+              </ListBox.Field>
+              {isOpen && (
+                <ListBox.Menu {...getMenuProps({ 'aria-label': ariaLabel })}>
+                  {this.filterItems(items, itemToString, inputValue).map((item, index) => {
+                    const itemProps = getItemProps({ item, index });
+                    return (
+                      <ListBox.MenuItem
+                        key={itemProps.id}
+                        isActive={selectedItem === item}
+                        tabIndex="-1"
+                        isHighlighted={highlightedIndex === index || false}
+                        title={itemToElement ? item.text : itemToString(item)}
+                        {...itemProps}
+                      >
+                        {itemToElement ? (
+                          <ItemToElement key={itemProps.id} {...item} />
+                        ) : (
+                          itemToString(item)
+                        )}
+                        {selectedItem === item && (
+                          <Checkmark16
+                            className={`${prefix}--list-box__menu-item__selected-icon`}
+                          />
+                        )}
+                      </ListBox.MenuItem>
+                    );
+                  })}
+                </ListBox.Menu>
+              )}
+            </ListBox>
+            {helperText && !invalid && (
+              <div id={comboBoxHelperId} className={helperClasses}>
+                {helperText}
+              </div>
+            )}
+          </div>
         )}
       </Downshift>
-    );
-
-    return (
-      <div className={wrapperClasses}>
-        {title}
-        {helper}
-        {input}
-      </div>
     );
   }
 }
