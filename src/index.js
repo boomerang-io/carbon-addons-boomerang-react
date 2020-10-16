@@ -23,6 +23,7 @@ export { default as Error } from './components/ErrorMessage'; //legacy export su
 export { default as Error403 } from './components/Error403';
 export { default as Error404 } from './components/Error404';
 export { default as ErrorBoundary } from './components/ErrorBoundary';
+export { default as ErrorBoundaryPoc } from './components/ErrorBoundaryPoc';
 export { default as ErrorDragon } from './components/ErrorDragon';
 export { default as ErrorMessage } from './components/ErrorMessage';
 export { default as ErrorPage } from './components/ErrorPage';
