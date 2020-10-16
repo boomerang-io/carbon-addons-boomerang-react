@@ -1,0 +1,53 @@
+@include exports('addons-bmrg-autoSuggest') {
+  .#{$prefix}--bmrg-auto-suggest {
+    width: 100%;
+
+    .react-autosuggest__suggestions-container {
+      background-color: $ui-01;
+      box-shadow: 0 0.1875rem 0.1875rem 0 rgba(0, 0, 0, 0.1);
+      color: $text-02;
+      max-height: 8.75rem;
+      overflow-y: auto;
+      width: 100%;
+    }
+
+    .react-autosuggest__suggestion {
+      cursor: pointer;
+      font-size: 0.875rem;
+      font-weight: 400;
+      height: 2.5rem;
+      letter-spacing: 0.01rem;
+      line-height: 1rem;
+      overflow: hidden;
+      padding: 0.75rem 1rem;
+      position: relative;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      &:last-of-type {
+        &:after {
+          background-color: transparent;
+        }
+      }
+
+      &:after {
+        background-color: $ui-03;
+        bottom: 0;
+        content: '';
+        height: 0.08rem;
+        left: 1rem;
+        position: absolute;
+        width: calc(100% - 2rem);
+      }
+
+      &--highlighted {
+        color: $interactive-02;
+        background-color: $hover-ui;
+
+        &:after {
+          background-color: transparent;
+        }
+      }
+    }
+  }
+}

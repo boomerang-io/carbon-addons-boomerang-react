@@ -1,0 +1,23 @@
+@include exports('addons-bmrg-radio') {
+  .#{$prefix}--bmrg-radio-group {
+    position: relative;
+    width: 100%;
+  }
+
+  .#{$prefix}--bmrg-radio-group__info {
+    align-items: center;
+    display: flex;
+  }
+
+  .#{$prefix}--bmrg-radio-group__title {
+    display: flex;
+    .#{$prefix}--label {
+      margin-bottom: 0;
+    }
+  }
+
+  .#{$prefix}--bmrg-radio-group__tooltip {
+    line-height: 0;
+    margin-left: 0.5rem;
+  }
+}

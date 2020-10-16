@@ -1,0 +1,13 @@
+@include exports('addons-bmrg-textArea') {
+  .#{$prefix}--bmrg-text-area {
+    align-items: center;
+    display: flex;
+    position: relative;
+    width: 100%;
+  }
+
+  .#{$prefix}--bmrg-text-area__tooltip {
+    line-height: 0;
+    margin-left: 0.5rem;
+  }
+}

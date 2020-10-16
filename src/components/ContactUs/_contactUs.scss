@@ -1,0 +1,50 @@
+@include exports('addons-bmrg-contactUs') {
+  .#{$prefix}--bmrg-contact-us-container {
+    .#{$prefix}--modal-container {
+      height: rem(348px);
+      width: rem(500px);
+    }
+
+    .#{$prefix}--bmrg-contact-us {
+      height: rem(100px);
+      width: 100%;
+      margin-top: rem(16px);
+
+      &__error {
+        color: #fb4b53;
+        font-size: 0.875rem;
+        font-weight: 400;
+        line-height: 1.125rem;
+        margin-top: rem(4px);
+        position: absolute;
+      }
+
+      .#{$prefix}--label {
+        color: $bmrg-brand-white;
+        font-size: rem(14px);
+        font-weight: 500;
+        line-height: rem(18px);
+      }
+    }
+
+    .#{$prefix}--bmrg-contact-us__textarea {
+      height: rem(74px);
+      width: rem(420px);
+      border-radius: rem(4px);
+      background: $bmrg-brand-white !important;
+      color: #242a2e !important;
+      font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+      font-size: rem(14px);
+      line-height: rem(18px);
+      padding: rem(8px);
+      resize: none;
+      ::placeholder {
+        height: rem(18px);
+        color: #9fa5ad;
+        font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+        font-size: rem(14px);
+        line-height: rem(18px);
+      }
+    }
+  }
+}

@@ -1,0 +1,26 @@
+@include exports('addons-bmrg-headerDropDown') {
+  .#{$prefix}--bmrg-header-drop-down {
+    animation: fade-in $carbon-motion--timing--productive $carbon-motion--easing--productive;
+    background: $bmrg-tertiary-color;
+    border-top: 0.375rem solid $bmrg-header-menu-options-accent-color;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    right: 0;
+    top: 100%;
+  }
+
+  .#{$prefix}--bmrg-header-drop-down__item {
+    color: $bmrg-secondary-color;
+    width: 100%;
+
+    &:hover {
+      background: $bmrg-header-hover-background-color;
+    }
+
+    a {
+      color: $bmrg-secondary-color;
+      text-decoration: none;
+    }
+  }
+}

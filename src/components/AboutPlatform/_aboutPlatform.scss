@@ -1,0 +1,38 @@
+@include exports('addons-bmrg-aboutPlatform') {
+  .#{$prefix}--bmrg-aboutPlatform-container {
+    .#{$prefix}--modal-container {
+      height: rem(244px);
+      width: rem(500px);
+    }
+
+    .#{$prefix}--modal-content {
+      height: 100%;
+    }
+
+    .#{$prefix}--modal-header {
+      .#{$prefix}--modal-header__label.#{$prefix}--type-delta {
+        white-space: pre;
+      }
+    }
+
+    .#{$prefix}--bmrg-aboutPlatform-footer__header {
+      color: $bmrg-brand-white;
+      margin-bottom: rem(18px);
+      margin-top: rem(16px);
+      font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+      font-size: rem(14px);
+      font-weight: 500;
+      line-height: rem(18px);
+    }
+
+    .#{$prefix}--bmrg-aboutPlatform-images {
+      display: flex;
+    }
+
+    .#{$prefix}--bmrg-aboutPlatform-images__img {
+      height: 2rem;
+      margin-right: 2rem;
+      width: auto;
+    }
+  }
+}

@@ -1,0 +1,45 @@
+@include exports('addons-bmrg-comboBoxMultiSelect') {
+  .#{$prefix}--bmrg-multi-select {
+    position: relative;
+    width: 100%;
+
+    .#{$prefix}--list-box {
+      height: fit-content;
+      max-height: fit-content;
+      min-height: 2.5rem;
+    }
+
+    .#{$prefix}--list-box__field {
+      min-height: 2.5rem;
+    }
+
+    .#{$prefix}--text-input {
+      min-height: 2.5rem;
+    }
+
+    .#{$prefix}--combo-box.#{$prefix}--list-box {
+      &:hover {
+        background: $ui-01;
+      }
+    }
+
+    &.--disableClear {
+      .#{$prefix}--list-box__selection {
+        display: none;
+      }
+    }
+  }
+
+  .#{$prefix}--bmrg-multi-select-selected {
+    background: $ui-01;
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    padding-right: 3rem;
+  }
+
+  .#{$prefix}--bmrg-multi-select__tooltip {
+    line-height: 0;
+    margin-left: 0.5rem;
+  }
+}

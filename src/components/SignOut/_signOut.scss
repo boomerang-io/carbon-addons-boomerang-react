@@ -1,0 +1,32 @@
+@include exports('addons-bmrg-signOut') {
+  .#{$prefix}--bmrg-signout-container {
+    .#{$prefix}--modal-container {
+      height: rem(226px);
+      width: rem(500px);
+    }
+
+    .#{$prefix}--modal-content {
+      margin-bottom: 0.5rem;
+    }
+
+    .#{$prefix}--bmrg-signout {
+      margin-top: 1rem;
+      margin-bottom: 2rem;
+      &__message {
+        color: #9fa5ad;
+        font-size: rem(14px);
+        line-height: rem(18px);
+      }
+    }
+
+    .#{$prefix}--btn {
+      &.#{$prefix}--btn--primary {
+        min-width: 50%;
+      }
+
+      &.#{$prefix}--btn--secondary {
+        max-width: 50%;
+      }
+    }
+  }
+}

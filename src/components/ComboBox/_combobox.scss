@@ -1,0 +1,17 @@
+@include exports('addons-bmrg-select') {
+  .#{$prefix}--bmrg-select {
+    position: relative;
+    width: 100%;
+
+    &.--disableClear {
+      .#{$prefix}--list-box__selection {
+        display: none;
+      }
+    }
+  }
+
+  .#{$prefix}--bmrg-select__tooltip {
+    line-height: 0;
+    margin-left: 0.5rem;
+  }
+}

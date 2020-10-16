@@ -1,0 +1,54 @@
+@include exports('addons-bmrg-toggle') {
+  .#{$prefix}--bmrg-toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    .#{$prefix}--toggle-input__label .#{$prefix}--toggle__switch {
+      margin-top: 0rem;
+    }
+
+    &.--reversed {
+      flex-direction: row-reverse;
+    }
+
+    &.--vertical {
+      flex-direction: column;
+      justify-content: initial;
+      align-items: flex-start;
+
+      .#{$prefix}--toggle-input__label .#{$prefix}--toggle__switch {
+        margin-top: 0.5rem;
+      }
+    }
+
+    &.--reversed.--vertical {
+      flex-direction: column-reverse;
+      .#{$prefix}--form-item {
+        margin-bottom: 0.5rem;
+      }
+    }
+  }
+
+  .#{$prefix}--bmrg-toggle .bx--form-item {
+    max-width: 3rem;
+  }
+
+  .#{$prefix}--bmrg-toggle__info {
+    align-items: center;
+    display: flex;
+    margin-right: 1rem;
+    position: relative;
+  }
+
+  .#{$prefix}--bmrg-toggle__title {
+    align-items: center;
+    display: flex;
+  }
+
+  .#{$prefix}--bmrg-toggle__tooltip {
+    line-height: 0rem;
+    margin-left: 0.5rem;
+  }
+}

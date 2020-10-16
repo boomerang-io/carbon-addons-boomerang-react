@@ -1,0 +1,130 @@
+@include exports('addons-bmrg-privacyStatement') {
+  .#{$prefix}--bmrg-privacy-statement-container {
+    .#{$prefix}--modal-container {
+      height: rem(598px);
+      width: rem(700px);
+    }
+
+    .#{$prefix}--bmrg-privacy-statement-delete {
+      width: 100%;
+
+      .#{$prefix}--modal-container {
+        height: rem(476px);
+        width: rem(500px);
+        padding-left: 0;
+        padding-right: 0;
+      }
+
+      .#{$prefix}--modal-content {
+        overflow-x: hidden;
+      }
+
+      .#{$prefix}--modal-header {
+        padding-left: 2rem;
+      }
+
+      .#{$prefix}--modal-footer {
+        margin-top: 1.125rem;
+      }
+
+      .#{$prefix}--btn--danger {
+        width: 100%;
+      }
+
+      .#{$prefix}--bmrg-privacy-statement-delete__desc {
+        width: rem(420px);
+        color: #9fa5ad;
+        font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+        font-size: rem(14px);
+        line-height: rem(18px);
+        padding-left: 2rem;
+        margin-top: 1rem;
+      }
+    }
+
+    .#{$prefix}--modal-content {
+      .#{$prefix}--bmrg-privacy-statement {
+        height: rem(368px);
+        margin-top: rem(16px);
+        overflow-y: auto;
+
+        .#{$prefix}--accordion {
+          overflow-y: hidden;
+        }
+
+        &__content {
+          h3 {
+            color: $bmrg-brand-white;
+            padding: 1rem 0 0.3125rem;
+          }
+          a {
+            color: $bmrg-secondary-color;
+            text-decoration: none;
+          }
+        }
+
+        &__message {
+          height: rem(36px);
+          width: rem(620px);
+          color: #9fa5ad;
+          font-size: rem(14px);
+          line-height: rem(18px);
+          margin-top: rem(24px);
+
+          a {
+            color: $bmrg-secondary-color;
+            text-decoration: none;
+          }
+        }
+        &__error {
+          color: #fb4b53;
+          font-size: 0.875rem;
+          font-weight: 400;
+          line-height: 1.125rem;
+          margin-top: rem(4px);
+          position: absolute;
+        }
+      }
+
+      .#{$prefix}--accordion__arrow {
+        transform: rotate(90deg);
+        path {
+          fill: $bmrg-brand-white;
+        }
+      }
+
+      .#{$prefix}--accordion__item {
+        border-top-color: rgba(251, 252, 252, 0.1);
+        &:last-child {
+          border-bottom-color: rgba(251, 252, 252, 0.1);
+        }
+        &--active {
+          .#{$prefix}--accordion__heading > .#{$prefix}--accordion__arrow {
+            transform: rotate(-90deg);
+          }
+        }
+      }
+
+      .#{$prefix}--accordion__heading:focus {
+        .#{$prefix}--accordion__arrow {
+          outline: rem(1px) solid $bmrg-secondary-color;
+        }
+      }
+
+      .#{$prefix}--accordion__title {
+        height: rem(18px);
+        color: $bmrg-brand-white;
+        font-size: rem(14px);
+        font-weight: 600;
+        line-height: rem(18px);
+      }
+
+      .#{$prefix}--accordion__content {
+        color: #9fa5ad;
+        font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+        font-size: rem(14px);
+        line-height: rem(18px);
+      }
+    }
+  }
+}

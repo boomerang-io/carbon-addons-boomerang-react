@@ -1,0 +1,30 @@
+@include exports('addons-bmrg-noDisplay') {
+  .#{$prefix}--bmrg-no-display {
+    color: $text-01;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .#{$prefix}--bmrg-no-display__text {
+    text-align: center;
+    font-size: 1.375rem;
+    color: $text-01;
+    font-weight: 300;
+    line-height: 1.6875rem;
+    margin-bottom: 1.875rem;
+
+    &.--above {
+      margin-bottom: 1.875rem;
+    }
+
+    &.--below {
+      margin-top: 1.875rem;
+    }
+  }
+
+  .#{$prefix}--bmrg-no-display__img {
+    max-width: 31.25rem;
+  }
+}

@@ -1,0 +1,188 @@
+{
+  "name": "@boomerang-io/carbon-addons-boomerang-react",
+  "description": "Carbon Addons for Boomerang apps",
+  "version": "0.0.19",
+  "author": {
+    "name": "Tim Bula",
+    "email": "timrbula@gmail.com"
+  },
+  "license": "Apache-2",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:boomerang-io/carbon-addons-boomerang-react"
+  },
+  "homepage": "https://carbon-addons-boomerang-react.netlify.app",
+  "bugs": {
+    "url": "https://github.com/boomerang-io/carbon-addons-boomerang-react/issues"
+  },
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "files": [
+    "lib/**/*",
+    "es/**/*",
+    "umd/**/*",
+    "styles/**/*"
+  ],
+  "keywords": [
+    "react",
+    "carbon",
+    "components",
+    "boomerang",
+    "storybook"
+  ],
+  "scripts": {
+    "build": "cross-env NODE_ENV=production yarn build:pre && rollup -c",
+    "build:pre": "rimraf lib styles es umd docs",
+    "build:storybook": "build-storybook -s public/production -c .storybook -o docs",
+    "format": "prettier --write \"**/*.{scss,css,js,jsx,md,ts}\"",
+    "format:diff": "prettier --list-different \"**/*.{scss,css,js,jsx,md,ts}\"",
+    "lint": "yarn lint:javascript && yarn lint:stylelint",
+    "lint:javascript": "eslint 'src/**/*.{js,jsx}'",
+    "lint:stylelint": "stylelint './src/**/*.scss' --syntax scss --ignorePath .gitignore",
+    "precommit": "lint-staged",
+    "prepublishOnly": "yarn build",
+    "publish-npm": "yarn semantic-release",
+    "start": "yarn --max_old_space_size=16384 storybook",
+    "storybook": "start-storybook -p 3000 -s public/development",
+    "test": "react-scripts test",
+    "test:coverage": "react-scripts test --coverage",
+    "test:staged": "cross-env CI=true react-scripts test --passWithNoTests --findRelatedTests --bail"
+  },
+  "dependencies": {
+    "@carbon/elements": "10.12.0",
+    "@carbon/themes": "10.12.0",
+    "@stomp/stompjs": "^5.4.2",
+    "@tippyjs/react": "^4.0.2",
+    "carbon-icons": "7.0.7",
+    "classnames": "^2.2.5",
+    "date-fns": "^1.30.1",
+    "dompurify": "^2.0.6",
+    "downshift": "^1.31.14",
+    "invariant": "^2.2.3",
+    "js-file-download": "^0.4.7",
+    "lodash.isequal": "^4.5.0",
+    "match-sorter": "^4.0.1",
+    "react-autosuggest": "^9.4.3",
+    "react-dropzone": "^10.0.6",
+    "react-focus-trap": "^2.7.1",
+    "react-modal": "^3.10.1",
+    "react-toastify": "^5.3.2",
+    "warning": "^4.0.3",
+    "window-or-global": "^1.0.1"
+  },
+  "peerDependencies": {
+    "carbon-components": "10.12.0",
+    "carbon-components-react": "7.12.0",
+    "formik": "^2.1.4",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-router-dom": "^5.1.2",
+    "yup": "^0.27.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@carbon/icons-react": "^10.15.0",
+    "@ibma/aat": "https://able.ibm.com/tools/dist/aat.tgz",
+    "@storybook/addon-a11y": "^5.3.9",
+    "@storybook/addon-actions": "^5.3.9",
+    "@storybook/addon-centered": "^5.2.8",
+    "@storybook/addon-info": "^5.3.18",
+    "@storybook/addon-knobs": "^5.3.9",
+    "@storybook/addon-links": "^5.3.9",
+    "@storybook/addon-options": "^5.3.9",
+    "@storybook/addon-storyshots": "^5.3.9",
+    "@storybook/addon-storysource": "^5.3.9",
+    "@storybook/addons": "^5.3.9",
+    "@storybook/preset-create-react-app": "^2.1.1",
+    "@storybook/react": "^5.3.9",
+    "@storybook/theming": "^5.3.18",
+    "@testing-library/dom": "^6.10.1",
+    "@testing-library/jest-dom": "^5.7.0",
+    "@testing-library/react": "^9.5.0",
+    "autoprefixer": "^9.4.4",
+    "axios": "^0.19.2",
+    "axios-mock-adapter": "^1.17.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "carbon-components": "^10.11.2",
+    "carbon-components-react": "^7.11.3",
+    "core-js": "^3.6.4",
+    "coveralls": "^3.0.2",
+    "cross-env": "^6.0.3",
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "enzyme-to-json": "^3.3.5",
+    "faker": "^4.1.0",
+    "formik": "^2.1.4",
+    "jest-axe": "^3.4.0",
+    "lint-staged": "^8.1.0",
+    "mock-socket": "^9.0.3",
+    "moment-timezone": "^0.5.26",
+    "node-sass": "^4.13.1",
+    "object-assign": "^4.1.1",
+    "prettier": "2.0.5",
+    "promise": "^8.0.2",
+    "prop-types": "^15.7.2",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "^3.4.1",
+    "react-test-renderer": "^16.8.3",
+    "rimraf": "^3.0.0",
+    "rollup": "^1.1.0",
+    "rollup-plugin-babel": "^4.3.0",
+    "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-copy": "^3.2.0",
+    "rollup-plugin-filesize": "^6.0.0",
+    "rollup-plugin-json": "^4.0.0",
+    "rollup-plugin-node-resolve": "^4.0.0",
+    "rollup-plugin-peer-deps-external": "^2.2.2",
+    "rollup-plugin-postcss": "^2.0.3",
+    "rollup-plugin-replace": "^2.1.0",
+    "rollup-plugin-strip-banner": "^1.0.0",
+    "rollup-plugin-terser": "^5.3.0",
+    "semantic-release": "^17.0.0",
+    "storybook-addon-rtl": "^0.2.2",
+    "storybook-readme": "^5.0.5",
+    "stylelint": "^10.1.0",
+    "stylelint-config-recommended-scss": "^3.3.0",
+    "stylelint-scss": "^3.10.0",
+    "whatwg-fetch": "^3.0.0",
+    "yup": "^0.27.0"
+  },
+  "browserslist": {
+    "development": [
+      "last 2 chrome versions",
+      "last 2 firefox versions",
+      "last 2 edge versions"
+    ],
+    "production": [
+      "last 1 version",
+      "> 1%",
+      "ie 11"
+    ]
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx}": [
+      "npm run-script lint",
+      "npm run-script test:staged"
+    ],
+    "*.{scss,css}": [
+      "yarn lint:stylelint"
+    ],
+    "*.{scss,css,js,md,jsx,json}": [
+      "yarn format",
+      "git add"
+    ]
+  },
+  "sideEffects": false,
+  "stylelint": {
+    "extends": "stylelint-config-recommended-scss",
+    "plugins": [
+      "stylelint-scss"
+    ],
+    "ignoreFiles": [
+      "**/*.js"
+    ]
+  }
+}

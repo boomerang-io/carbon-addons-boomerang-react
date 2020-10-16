@@ -1,0 +1,36 @@
+@include exports('addons-bmrg-creatable') {
+  .#{$prefix}--bmrg-creatable {
+    position: relative;
+  }
+
+  .#{$prefix}--bmrg-creatable__input {
+    align-items: flex-end;
+    display: flex;
+  }
+
+  .#{$prefix}--bmrg-creatable__key-value-inputs {
+    display: flex;
+    align-items: flex-end;
+    width: 20rem;
+  }
+
+  .#{$prefix}--bmrg-creatable__colon {
+    margin: 0 0.5rem 0.75rem 0.5rem;
+  }
+
+  .#{$prefix}--bmrg-creatable__button {
+    margin-left: 1rem !important;
+  }
+
+  .#{$prefix}--bmrg-creatable__tags {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+    width: 100%;
+  }
+
+  .#{$prefix}--bmrg-creatable__tooltip {
+    line-height: 0;
+    margin-left: 0.5rem;
+  }
+}

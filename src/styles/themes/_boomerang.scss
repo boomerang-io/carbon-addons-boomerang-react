@@ -1,0 +1,90 @@
+@import '~@carbon/themes/scss/themes';
+
+// Create global css properties
+$carbon-addons-bmrg--create-properties: true;
+
+// Include Boomerang overrides to Carbon styles
+$carbon-addons-bmrg--include-carbon-overrides: true;
+
+// Set the prefix for the global css properties
+// e.g. --cds-interactive-01: #0072c3;
+$carbon-addons-bmrg--property-prefix: --cds- !default;
+
+// Global overrides
+// https://www.carbondesignsystem.com/guidelines/themes#global
+$edited: false;
+$use-layer: false;
+$input-border: 1px solid transparent;
+$accordion-flex-direction: row;
+$accordion-justify-content: flex-start;
+$accordion-arrow-margin: 0 0 0 0.25rem;
+$accordion-title-margin: 0 0 0 1rem;
+$accordion-content-padding: 0 1rem 0 1.75rem;
+$button-border-radius: 0.25rem;
+
+/// Boomerang's default color theme
+/// @type Map
+/// @access public
+/// @group @boomerang/carbon-addons-boomerang
+$carbon--theme--boomerang: map-merge(
+  $carbon--theme--g10,
+  (
+    field-01: #ffffff,
+    field-02: #f2f4f8,
+    icon-01: #121619,
+    icon-02: #4d5358,
+    icon-03: #ffffff,
+    interactive-01: #0072c3,
+    interactive-02: #343a3f,
+    interactive-03: #0072c3,
+    interactive-04: #0072c3,
+    inverse-01: #ffffff,
+    inverse-02: #343a3f,
+    inverse-support-01: #fa4d56,
+    inverse-support-02: #08bdba,
+    inverse-support-03: #ffa0c2,
+    inverse-support-04: #1192e8,
+    link-01: #0072c3,
+    overlay-01: rgba(18, 22, 25, 0.5),
+    support-01: #da1e28,
+    support-02: #009d9a,
+    support-03: #f1c21b,
+    support-04: #00539a,
+    text-01: #121619,
+    text-02: #4d5358,
+    text-03: #878d96,
+    text-04: #ffffff,
+    ui-01: #ffffff,
+    ui-02: #f2f4f8,
+    ui-03: #dde1e6,
+    ui-04: #878d96,
+    ui-05: #121619,
+    ui-background: #f2f4f8,
+    active-01: #bebebe,
+    active-danger: #750e13,
+    active-primary: #003a6d,
+    active-secondary: #697077,
+    active-tertiary: #003a6d,
+    active-ui: #c1c7cd,
+    disabled-01: #ffffff,
+    disabled-02: #c1c7cd,
+    disabled-03: #878d96,
+    focus: #0072c3,
+    highlight: #e5f6ff,
+    hover-danger: #da1e28,
+    hover-primary: #0072c3,
+    hover-primary-text: #00539a,
+    hover-field: #f3f3f3,
+    hover-row: #dde1e6,
+    hover-secondary: #4d5358,
+    hover-selected-ui: #c1c7cd,
+    hover-tertiary: #0072c3,
+    hover-ui: #dde1e6,
+    inverse-focus-ui: #ffffff,
+    inverse-hover-ui: #4d5358,
+    selected-ui: #dde1e6,
+    skeleton-01: #f2f4f8,
+    skeleton-02: #c1c7cd,
+    visited-link: #8a3ffc,
+  )
+);

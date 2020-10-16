@@ -1,0 +1,23 @@
+@include exports('addons-bmrg-gdprRedirect') {
+  .#{$prefix}--bmrg-redirect__img {
+    width: 100%;
+    height: 10rem;
+    margin-top: 1.5rem;
+  }
+
+  .#{$prefix}--bmrg-redirect__body {
+    height: 1.25rem;
+    color: #9fa5ad;
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 1.25rem;
+    text-transform: initial;
+    margin-bottom: 1.45rem;
+  }
+
+  .#{$prefix}--bmrg-redirect-container {
+    .#{$prefix}--modal-container {
+      height: 28rem;
+    }
+  }
+}

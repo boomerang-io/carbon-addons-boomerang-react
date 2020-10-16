@@ -1,0 +1,20 @@
+@include exports('addons-bmrg-checkboxList') {
+  .#{$prefix}--bmrg-checkbox-list {
+    position: relative;
+    width: 100%;
+  }
+
+  .#{$prefix}--bmrg-checkbox-list__info {
+    align-items: center;
+    display: flex;
+    position: relative;
+  }
+
+  .#{$prefix}--bmrg-checkbox-list__title {
+    display: flex;
+  }
+
+  .#{$prefix}--bmrg-checkbox-list__tooltip {
+    margin-left: 0.5rem;
+  }
+}

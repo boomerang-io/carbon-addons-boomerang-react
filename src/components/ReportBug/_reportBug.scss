@@ -1,0 +1,299 @@
+@include exports('addons-bmrg-reportBug') {
+  .#{$prefix}--bmrg-report-bug-container {
+    .#{$prefix}--modal-container {
+      height: rem(664px);
+      width: rem(716px);
+    }
+
+    .#{$prefix}--bmrg-report-bug-form {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+      overflow-x: hidden;
+      overflow-y: unset;
+
+      .#{$prefix}--modal-content {
+        max-height: rem(442px);
+      }
+    }
+
+    .#{$prefix}--bmrg-report-bug {
+      margin-top: 1rem;
+      overflow-y: auto;
+      textarea {
+        color: #242a2e;
+        font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+        font-size: rem(14px);
+        line-height: rem(18px);
+        height: rem(74px);
+        width: rem(620px);
+        border-radius: rem(4px);
+        padding: rem(8px);
+        background-color: $bmrg-brand-white;
+      }
+      .#{$prefix}--btn--primary {
+        background-color: $bmrg-secondary-color;
+        color: #272727;
+        border-radius: rem(4px);
+        &:hover {
+          background-color: $bmrg-secondary-color;
+        }
+      }
+
+      &__post-error {
+        color: #fb4b53;
+        font-size: 0.875rem;
+        font-weight: 400;
+        line-height: 1.125rem;
+        margin-top: rem(4px);
+        height: rem(23px);
+        position: absolute;
+      }
+
+      &__upload-error {
+        color: #fb4b53;
+        font-size: 0.875rem;
+        font-weight: 400;
+        line-height: 1.125rem;
+        margin-top: rem(72px);
+        height: rem(23px);
+        position: absolute;
+      }
+
+      .#{$prefix}--checkbox-wrapper {
+        color: $bmrg-brand-white;
+        font-size: rem(14px);
+        font-weight: 600;
+        line-height: rem(18px);
+      }
+      .#{$prefix}--label {
+        color: #f2f4f8;
+        font-size: rem(14px);
+        font-weight: 600;
+        line-height: rem(18px);
+      }
+      .#{$prefix}--tooltip__label {
+        color: $bmrg-secondary-color;
+        font-size: rem(12px);
+        line-height: rem(18px);
+        margin: rem(2px);
+        margin-top: rem(6px);
+        margin-left: rem(22px);
+        padding: rem(2px);
+        width: max-content;
+      }
+
+      .#{$prefix}--bmrg-report-bug__label-text-area {
+        color: $bmrg-brand-white;
+        font-size: rem(14px);
+        font-weight: 500;
+        line-height: rem(18px);
+        margin-bottom: rem(8px);
+      }
+
+      .#{$prefix}--bmrg-report-bug__label-attachment {
+        color: $bmrg-brand-white;
+        font-size: rem(14px);
+        font-weight: 500;
+        line-height: rem(18px);
+        margin-top: rem(32px);
+        margin-bottom: rem(8px);
+      }
+
+      .#{$prefix}--bmrg-report-bug__attachment-desc {
+        color: #9fa5ad;
+        font-size: rem(14px);
+        line-height: rem(18px);
+        margin-bottom: rem(8px);
+      }
+
+      .#{$prefix}--bmrg-report-bug__env-desc {
+        color: #9fa5ad;
+        font-size: rem(14px);
+        line-height: rem(18px);
+        margin-top: rem(8px);
+        margin-left: rem(24px);
+      }
+    }
+
+    .#{$prefix}--checkbox:checked + .#{$prefix}--checkbox-label::before,
+    .#{$prefix}--checkbox:indeterminate + .#{$prefix}--checkbox-label::before,
+    .#{$prefix}--checkbox-label[data-contained-checkbox-state='true']::before,
+    .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed']::before {
+      background-color: $bmrg-secondary-color;
+    }
+    .bx--checkbox-label::after {
+      border-left: 1px solid black;
+      border-bottom: 1px solid black;
+    }
+    .bx--checkbox-label::before {
+      background-color: #ffffff;
+    }
+  }
+
+  .#{$prefix}--bmrg-reportbug-env-tooltip-trigger {
+    color: #f2f4f8;
+    cursor: help;
+    margin-top: 0.5rem;
+    margin-left: 1.5rem;
+    width: fit-content;
+  }
+
+  .#{$prefix}--bmrg-reportbug-env-tooltip-container {
+    padding: 0rem;
+    background-color: $bmrg-primary-color !important;
+    border: 1px solid #f2f4f8;
+
+    .tippy-svg-arrow {
+      fill: transparent !important;
+    }
+  }
+
+  // Is not descendant of report bug container
+  .#{$prefix}--bmrg-reportbug-env-tooltip {
+    border: none;
+    border-radius: rem(4px);
+    background-color: $bmrg-primary-color;
+    padding: rem(10px);
+    &.#{$prefix}--tooltip {
+      max-width: initial;
+    }
+    .#{$prefix}--tooltip__caret {
+      border: none;
+      background-color: $bmrg-primary-color;
+    }
+  }
+
+  .#{$prefix}--bmrg-report-bug-tooltip {
+    margin-right: rem(3px);
+    margin-bottom: rem(8px);
+    width: rem(286px);
+  }
+
+  .#{$prefix}--bmrg-report-bug-tooltip__header {
+    color: #f2f4f8;
+    font-size: rem(12px);
+    font-weight: 500;
+    line-height: rem(18px);
+    margin-bottom: rem(4px);
+  }
+
+  .#{$prefix}--bmrg-report-bug-tooltip__divider {
+    height: rem(1px);
+    width: 100%;
+    background-color: rgba(251, 252, 252, 0.1);
+    margin-bottom: rem(4px);
+  }
+
+  .#{$prefix}--bmrg-report-bug-tooltip__detail {
+    color: #f2f4f8;
+    font-size: rem(12px);
+    font-weight: 200;
+    line-height: rem(18px);
+    margin-bottom: rem(4px);
+  }
+
+  .#{$prefix}--bmrg-report-bug-attachment-container {
+    height: rem(34px);
+    width: rem(320px);
+    border-radius: rem(4px);
+    background-color: $bmrg-header-attachment-background-color;
+    align-items: center;
+    display: flex;
+    padding-right: rem(18px);
+    margin-bottom: rem(8px);
+  }
+
+  .#{$prefix}--bmrg-report-bug-attachment-container__filename {
+    color: #f2f4f8;
+    font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    font-size: rem(12px);
+    line-height: rem(18px);
+    overflow-x: hidden;
+    max-width: rem(250px);
+    max-height: 2.125rem;
+    overflow-y: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: rem(215px);
+    margin-right: rem(16px);
+  }
+
+  .#{$prefix}--bmrg-report-bug-attachment-container__preview {
+    max-height: rem(34px);
+    max-width: rem(34px);
+    min-width: rem(32px);
+    margin-right: rem(16px);
+    font-size: 0.5rem;
+    border-top-left-radius: rem(4px);
+    border-bottom-left-radius: rem(4px);
+  }
+
+  .#{$prefix}--bmrg-report-bug__drop-zone {
+    position: absolute;
+    height: rem(49px);
+    width: 39rem;
+    &.--is-container-dragging {
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      z-index: 1;
+    }
+
+    &.--is-active {
+      background-color: rgba(32, 213, 210, 0.2);
+      box-sizing: border-box;
+      border: 1px solid $bmrg-secondary-color;
+      border-radius: 4px;
+    }
+  }
+  .#{$prefix}--bmrg-report-bug-attachment-list {
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .#{$prefix}--bmrg-report-bug__file-drop {
+    font-weight: 400;
+    box-sizing: border-box;
+    height: rem(49px);
+    width: 39rem;
+    border: 1px dashed $bmrg-secondary-color;
+    border-radius: 4px;
+    background-color: $bmrg-primary-color;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $bmrg-secondary-color;
+    cursor: pointer;
+
+    svg {
+      fill: $bmrg-secondary-color;
+    }
+
+    &.--is-active {
+      background-color: rgba(32, 213, 210, 0.2);
+      cursor: default;
+    }
+  }
+
+  .#{$prefix}--bmrg-report-bug__drop-it {
+    $height: rem(56px);
+    $width: rem(154px);
+    position: absolute;
+    top: calc(50% - #{$height} / 2);
+    left: calc(50% - #{$width} / 2);
+    box-sizing: border-box;
+    height: $height;
+    width: $width;
+    border: 1px solid #f2f4f8;
+    border-radius: rem(4px);
+    background-color: rgba(7, 25, 43, 0.8);
+    color: #f2f4f8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+  }
+}

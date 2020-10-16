@@ -1,0 +1,18 @@
+@include exports('addons-bmrg-headerMenuUser') {
+  .#{$prefix}--bmrg-header-menu-user {
+    align-items: center;
+    border-bottom: rem(1px) solid rgba(251, 252, 252, 0.1);
+    display: flex;
+    min-height: rem(57px);
+    padding: rem(8px);
+  }
+
+  .#{$prefix}--bmrg-header-menu-user__name {
+    color: #fbfcfc;
+    font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    font-size: rem(14px);
+    font-weight: 300;
+    line-height: rem(18px);
+    margin-left: rem(8px);
+  }
+}

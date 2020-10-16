@@ -1,0 +1,37 @@
+// https://www.carbondesignsystem.com/guidelines/themes#global
+@import '~@carbon/themes/scss/themes';
+@import 'addons';
+@import 'mixins';
+
+// used to locally test out the boomerang theme
+// should be commented out when publishing
+// TODO: fix this so it works w/ storybook
+@import 'boomerang';
+$carbon--theme: $carbon--theme--boomerang;
+$carbon-addons-bmrg--theme: boomerang;
+
+// False by default. Set true by carbon--theme--boomerang
+$carbon-addons-bmrg--include-carbon-overrides: false !default;
+$carbon-addons-bmrg--create-properties: false !default;
+
+// Addons Theme, included by default
+$carbon-addons-bmrg--theme: iap-dark !default;
+@include carbon-addons-bmrg--theme-mixin($carbon-addons-bmrg--theme);
+
+// Include carbon theme, defaults to white
+@include carbon--theme() {
+  // Only include the Carbon overrides when set. Set true by carbon--theme--boomerang
+  @if ($carbon-addons-bmrg--include-carbon-overrides == true) {
+    @include carbon-addons-bmrg--carbon-overrides();
+  }
+}
+
+// Create global css properties
+@if ($carbon-addons-bmrg--create-properties == true) {
+  // Pass variable if it is set. Set by carbon--theme--boomerang that can be changed at the app level
+  @if (global-variable-exists(carbon-addons-bmrg--property-prefix)) {
+    @include carbon-addons-bmrg--create-properties($carbon-addons-bmrg--property-prefix);
+  } @else {
+    @include carbon-addons-bmrg--create-properties();
+  }
+}
