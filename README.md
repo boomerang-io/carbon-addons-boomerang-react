@@ -7,7 +7,7 @@
 Run the following command using [npm](https://www.npmjs.com/):
 
 ```bash
-npm install -S @boomerang/carbon-addons-boomerang-react
+npm install @boomerang/carbon-addons-boomerang-react
 ```
 
 If you prefer [Yarn](https://yarnpkg.com/en/), use the following command instead:
@@ -15,34 +15,6 @@ If you prefer [Yarn](https://yarnpkg.com/en/), use the following command instead
 ```bash
 yarn add @boomerang/carbon-addons-boomerang-react
 ```
-
-## 3.0 Release
-
-As of version 3.0, the team has decided to make major changes to our boomerang carbon add-ons. We have decided to follow a design change that is similar to that of the IOT team. With version 3.0, the styles and react components will be included in one package `@boomerang-io/carbon-addons-boomerang-react`. Also for added ease, we will now export our custom components along with the unmodified components from carbon-components-react.
-
-- add ES Modules, CommonJS and UMD module formats to support wider range of component use cases
-- include component styles with components to improve authoring and consuming DX
-- export all Carbon components in addition to our custom components to improve consuming DX
-- upgrade Storybook to latest major version and add additional addons
-- add new custom components and rename exports for naming consistency
-- include required Carbon packages as dependencies to simplify installation and prevent version mismatches
-
-**Upgrading**
-
-1. Remove `@boomerang/carbon-addons-boomerang`dependency
-
-```bash
-npm uninstall @boomerang/carbon-addons-boomerang
-```
-
-2. Update scss styles import statement
-
-```diff
-- @import '~@boomerang/carbon-addons-boomerang/scss/styles';
-+ @import '~@boomerang/carbon-addons-boomerang-react/styles/scss/styles';
-```
-
-3. You're done!
 
 ## Using
 
@@ -55,7 +27,7 @@ You need to import the `.scss` styles. If you are using SASS and webpack, perfor
 You can then import components by the following:
 
 ```js
-import { Header } from '@boomerang/carbon-addons-boomerang-react';
+import { UIShell } from '@boomerang/carbon-addons-boomerang-react';
 ```
 
 ## Testing a version
