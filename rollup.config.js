@@ -20,7 +20,7 @@ const baseConfig = {
     babel({
       babelrc: false,
       runtimeHelpers: true,
-      exclude: ['../../node_modules/**'],
+      exclude: ['./node_modules/**'],
       presets: ['@babel/preset-env', '@babel/preset-react', 'react-app'],
     }),
     external(),
@@ -30,7 +30,7 @@ const baseConfig = {
     }),
 
     commonjs({
-      include: '../../node_modules/**',
+      include: './node_modules/**',
       namedExports: {
         '@stomp/stompjs/bundles/stomp.umd.js': ['Client'],
         'carbon-components-react/lib/components/ComposedModal/index.js': [
@@ -88,7 +88,7 @@ const baseConfig = {
     json({
       // All JSON files will be parsed by default,
       // but you can also specifically include/exclude files
-      exclude: ['../../node_modules'],
+      exclude: ['./node_modules'],
 
       // for tree-shaking, properties will be declared as
       // variables, using either `var` or `const`
