@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 
-import ErrorBoundaryPoc from './ErrorBoundaryPoc';
+import ErrorBoundaryPoc from './RecoverErrorBoundary';
 
 const ErrorComponent = () => {
   throw new Error('test');

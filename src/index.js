@@ -23,7 +23,6 @@ export { default as Error } from './components/ErrorMessage'; //legacy export su
 export { default as Error403 } from './components/Error403';
 export { default as Error404 } from './components/Error404';
 export { default as ErrorBoundary } from './components/ErrorBoundary';
-export { default as ErrorBoundaryPoc } from './components/ErrorBoundaryPoc';
 export { default as ErrorDragon } from './components/ErrorDragon';
 export { default as ErrorMessage } from './components/ErrorMessage';
 export { default as ErrorPage } from './components/ErrorPage';
@@ -61,6 +60,7 @@ export { default as Portal } from './components/Portal';
 export { default as PrivacyStatement } from './components/PrivacyStatement';
 export { default as ProtectedRoute } from './components/ProtectedRoute';
 export { default as RadioGroup } from './components/RadioGroup';
+export { default as RecoverErrorBoundary } from './components/recoverErrorBoundary';
 export { default as Sidenav } from './components/Sidenav';
 export { default as TextArea } from './components/TextArea';
 export { default as TextInput } from './components/TextInput';

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import cx from "classnames";
 import { settings } from 'carbon-components';
-import { ErrorBoundary } from 'react-error-boundary';
+import { default as ErrorBoundary } from 'react-error-boundary';
 import { Button } from 'carbon-components-react';
 import ErrorMessage from '../ErrorMessage';
 
@@ -13,7 +13,7 @@ const { prefix } = settings;
  * As of now getDerivedStateFromError not available via hooks
  */
 
-function ErrorBoundaryPoc(props) {
+function RecoverErrorBoundary(props) {
   const { children, className, style, errorProps, errorComponent, resetButtonText, resetButtonProps } = props;
   const containerClassName = cx(`${prefix}--bmrg-error-boundary-poc`, className);
   const buttonClassName = cx(`${prefix}--bmrg-error-boundary-poc-restore`, resetButtonProps?.className);
@@ -46,13 +46,13 @@ function ErrorBoundaryPoc(props) {
   );
 }
 
-ErrorBoundaryPoc.defaultProps = {
+RecoverErrorBoundary.defaultProps = {
   errorComponent: ErrorMessage,
   resetButtonText: "Restore page",
   resetButtonProps: {},
 };
 
-ErrorBoundaryPoc.propTypes = {
+RecoverErrorBoundary.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
   style: PropTypes.string,
@@ -62,4 +62,4 @@ ErrorBoundaryPoc.propTypes = {
   resetButtonProps: PropTypes.object,
 };
 
-export default ErrorBoundaryPoc;
+export default RecoverErrorBoundary;
