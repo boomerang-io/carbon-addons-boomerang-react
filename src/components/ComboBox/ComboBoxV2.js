@@ -227,6 +227,7 @@ export default class ComboBox extends React.Component {
         doneInitialSelectedItem: true,
         prevSelectedItem: selectedItem,
         inputValue: getInputValue(nextProps, state),
+        hasEnteredSearchValue: false
       };
     }
     return null;
@@ -247,9 +248,10 @@ export default class ComboBox extends React.Component {
   // TB: added here only use the filter if the user has entered a value
   // removed default prop for filter so component can easily know when to filter or not
   filterItems = (items, itemToString, inputValue) => {
+    const { hasEnteredSearchValue } = this.state;
     const { shouldFilterItem } = this.props;
 
-    return shouldFilterItem
+    return shouldFilterItem && hasEnteredSearchValue
       ? items.filter((item) =>
           shouldFilterItem({
             item,
@@ -269,19 +271,27 @@ export default class ComboBox extends React.Component {
   // TB: Set has entered value to true so the filter is used
   // clear out the input value so they are typing a new word. The selected item remains as is.
   // Adding in the selectedItem here just to show that it isn't changing
-  // handleOnInputKeyDown = (event) => {
-  //   const { onInputChange, shouldFilterItem } = this.props;
-  //   if (onInputChange || shouldFilterItem) {
-  //     if (this.state.isFirstKeyDownEvent) {
-  //       this.setState(() => ({
-  //         hasEnteredSearchValue: true,
-  //         isFirstKeyDownEvent: false,
-  //       }));
-  //     } else {
-  //       this.setState(() => ({ hasEnteredSearchValue: true }));
-  //     }
-  //   }
-  // };
+  handleOnInputKeyDown = (event, toggleMenu) => {
+    if (match(event, keys.Space)) {
+      event.stopPropagation();
+    }
+
+    if (match(event, keys.Enter)) {
+      toggleMenu();
+    }
+
+    const { onInputChange, shouldFilterItem } = this.props;
+    if (onInputChange || shouldFilterItem) {
+      if (this.state.isFirstKeyDownEvent) {
+        this.setState(() => ({
+          hasEnteredSearchValue: true,
+          isFirstKeyDownEvent: false,
+        }));
+      } else {
+        this.setState(() => ({ hasEnteredSearchValue: true }));
+      }
+    }
+  };
 
   handleOnInputValueChange = (inputValue, { setHighlightedIndex }) => {
     const { onInputChange, shouldFilterItem } = this.props;
@@ -340,28 +350,28 @@ export default class ComboBox extends React.Component {
       event.preventDownshiftDefault = true;
       event.persist();
     }
-    //const { hasEnteredSearchValue } = this.state;
+    const { hasEnteredSearchValue } = this.state;
 
     // TB: need to emit event for a controlled component to update if they are
     // filtering the options based on the input
-    // const { onInputChange, shouldFilterItem } = this.props;
-    // if (onInputChange) {
-    //   onInputChange(''); // Could move this to the keydown if you don't want to clear until typing starts or remove if we don't want to support
-    // }
+    const { onInputChange, shouldFilterItem } = this.props;
+    if (onInputChange) {
+      onInputChange(''); // Could move this to the keydown if you don't want to clear until typing starts or remove if we don't want to support
+    }
 
     // TB: added here. If they did start typing to filter, reset things when toggling menu
-    // if (onInputChange || shouldFilterItem) {
-    //   if (hasEnteredSearchValue) {
-    //     this.setState(() => ({
-    //       hasEnteredSearchValue: false,
-    //       isFirstKeyDownEvent: true,
-    //     }));
-    //   } else {
-    //     this.setState(() => ({
-    //       inputValue: '', // Could move this to the keydown if you don't want to clear until typing starts
-    //     }));
-    //   }
-    // }
+    if (onInputChange || shouldFilterItem) {
+      if (hasEnteredSearchValue) {
+        this.setState(() => ({
+          hasEnteredSearchValue: false,
+          isFirstKeyDownEvent: true,
+        }));
+      } else {
+        this.setState(() => ({
+          inputValue: '', // Could move this to the keydown if you don't want to clear until typing starts
+        }));
+      }
+    }
   };
 
   render() {
@@ -470,15 +480,7 @@ export default class ComboBox extends React.Component {
                   {...getInputProps({
                     disabled,
                     placeholder,
-                    onKeyDown: (event) => {
-                      if (match(event, keys.Space)) {
-                        event.stopPropagation();
-                      }
-
-                      if (match(event, keys.Enter)) {
-                        toggleMenu();
-                      }
-                    },
+                    onKeyDown: (e) => this.handleOnInputKeyDown(e, toggleMenu),
                   })}
                 />
                 {invalid && (
