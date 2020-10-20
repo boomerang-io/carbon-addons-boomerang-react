@@ -1,18 +1,18 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 
-import ErrorBoundaryPoc from './RecoverErrorBoundary';
+import RecoverErrorBoundary from './RecoverErrorBoundary';
 
 const ErrorComponent = () => {
   throw new Error('test');
 };
 
-test('render ErrorBoundaryPoc with Message', async () => {
+test('render RecoverErrorBoundary with Message', async () => {
   const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
   const { findByText } = render(
-    <ErrorBoundaryPoc>
+    <RecoverErrorBoundary>
       <ErrorComponent />
-    </ErrorBoundaryPoc>
+    </RecoverErrorBoundary>
   );
   const testStatus = await findByText(/Oops, something went wrong/i);
   expect(testStatus).toBeInTheDocument();

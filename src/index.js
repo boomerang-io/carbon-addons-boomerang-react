@@ -60,7 +60,7 @@ export { default as Portal } from './components/Portal';
 export { default as PrivacyStatement } from './components/PrivacyStatement';
 export { default as ProtectedRoute } from './components/ProtectedRoute';
 export { default as RadioGroup } from './components/RadioGroup';
-export { default as RecoverErrorBoundary } from './components/recoverErrorBoundary';
+export { default as RecoverErrorBoundary } from './components/RecoverErrorBoundary';
 export { default as Sidenav } from './components/Sidenav';
 export { default as TextArea } from './components/TextArea';
 export { default as TextInput } from './components/TextInput';
