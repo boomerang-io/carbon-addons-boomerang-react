@@ -10,7 +10,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Downshift from 'downshift';
 import { settings } from 'carbon-components';
-// import WarningFilled16 from '@carbon/icons-react/lib/warning--filled/16';
 import { Checkmark16, WarningFilled16 } from '@carbon/icons-react';
 import { match, keys } from '../../internal/keyboard';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
@@ -271,16 +270,21 @@ export default class ComboBox extends React.Component {
   // TB: Set has entered value to true so the filter is used
   // clear out the input value so they are typing a new word. The selected item remains as is.
   // Adding in the selectedItem here just to show that it isn't changing
-  handleOnInputKeyDown = (event, toggleMenu) => {
+  handleOnInputKeyDown = (event, toggleMenu, items, reset) => {
+    const { onInputChange, shouldFilterItem } = this.props;
+
     if (match(event, keys.Space)) {
       event.stopPropagation();
     }
 
     if (match(event, keys.Enter)) {
       toggleMenu();
+
+      if(shouldFilterItem && !items.length) {
+        reset();
+      }
     }
 
-    const { onInputChange, shouldFilterItem } = this.props;
     if (onInputChange || shouldFilterItem) {
       if (this.state.isFirstKeyDownEvent) {
         this.setState(() => ({
@@ -445,7 +449,12 @@ export default class ComboBox extends React.Component {
           clearSelection,
           toggleMenu,
           getMenuProps,
-        }) => (
+          reset
+        }) => {
+
+          const filteredItems = this.filterItems(items, itemToString, inputValue);
+
+          return (
           <div className={wrapperClasses}>
             {titleText && (
               <label className={titleClasses} {...getLabelProps()}>
@@ -480,7 +489,7 @@ export default class ComboBox extends React.Component {
                   {...getInputProps({
                     disabled,
                     placeholder,
-                    onKeyDown: (e) => this.handleOnInputKeyDown(e, toggleMenu),
+                    onKeyDown: (e) => this.handleOnInputKeyDown(e, toggleMenu, filteredItems, reset),
                   })}
                 />
                 {invalid && (
@@ -500,7 +509,7 @@ export default class ComboBox extends React.Component {
               </ListBox.Field>
               {isOpen && (
                 <ListBox.Menu {...getMenuProps({ 'aria-label': ariaLabel })}>
-                  {this.filterItems(items, itemToString, inputValue).map((item, index) => {
+                  {filteredItems.map((item, index) => {
                     const itemProps = getItemProps({ item, index });
                     return (
                       <ListBox.MenuItem
@@ -533,7 +542,8 @@ export default class ComboBox extends React.Component {
               </div>
             )}
           </div>
-        )}
+        )
+      }}
       </Downshift>
     );
   }
