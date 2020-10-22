@@ -272,93 +272,92 @@ class Header extends React.Component {
           </HeaderWrapper>
           <HeaderWrapper>
             <div ref={this.navRef}>
-            <HeaderList className={`${prefix}--bmrg-header-list--icon\\`}>
-              {this.props.enableNotifications && this.props.notificationsConfig && (
-                <li>
-                  <HeaderListItem
-                    isIcon
-                    ariaExpanded={this.state.isNotificationActive}
-                    id="notification-icon"
-                    onClick={this.handleIconClick('Notification')}
-                    onKeyDown={this.handleIconKeypress('Notification')}
-                  >
-                    {this.state.hasNewNotifications ? <NotificationNew24 /> : <Notification24 />}
-                    <PlatformNotificationsContainer
-                      baseLaunchEnvUrl={baseLaunchEnvUrl}
-                      config={this.props.notificationsConfig}
-                      isNotificationActive={this.state.isNotificationActive}
-                      setHasNewNotifications={this.handleUpdateStateKey('hasNewNotifications')}
-                    />
-                  </HeaderListItem>
-                </li>
-              )}
-              {Array.isArray(this.props.onHelpClick) && this.props.onHelpClick.length > 0 && (
-                <li>
-                  <HeaderListItem
-                    ariaExpanded={this.state.isHelpActive}
-                    isIcon
-                    id="bmrg-header-help-icon"
-                    onClick={this.handleIconClick('Help')}
-                    onKeyDown={this.handleIconKeypress('Help')}
-                  >
-                    <Help24 />
-                  </HeaderListItem>
-                  {this.state.isHelpActive && <HeaderMenu>{this.props.onHelpClick}</HeaderMenu>}
-                </li>
-              )}
-              <li>
-                {Array.isArray(this.props.profileChildren) &&
-                  this.props.profileChildren.length > 0 && (
+              <HeaderList className={`${prefix}--bmrg-header-list--icon\\`}>
+                {this.props.enableNotifications && this.props.notificationsConfig && (
+                  <li>
                     <HeaderListItem
-                      ariaExpanded={this.state.isProfileActive}
                       isIcon
-                      id="bmrg-header-profile-icon"
-                      onClick={this.handleIconClick('Profile')}
-                      onKeyDown={this.handleIconKeypress('Profile')}
+                      ariaExpanded={this.state.isNotificationActive}
+                      id="notification-icon"
+                      onClick={this.handleIconClick('Notification')}
+                      onKeyDown={this.handleIconKeypress('Notification')}
                     >
-                      <User24 />
+                      {this.state.hasNewNotifications ? <NotificationNew24 /> : <Notification24 />}
+                      <PlatformNotificationsContainer
+                        baseLaunchEnvUrl={baseLaunchEnvUrl}
+                        config={this.props.notificationsConfig}
+                        isNotificationActive={this.state.isNotificationActive}
+                        setHasNewNotifications={this.handleUpdateStateKey('hasNewNotifications')}
+                      />
                     </HeaderListItem>
-                  )}
-                {this.state.isProfileActive && (
-                  <HeaderMenu>{this.props.profileChildren}</HeaderMenu>
+                  </li>
                 )}
-              </li>
-              {renderGlobalSwitcher && (
-                <HeaderListItem
-                  ariaExpanded={this.state.isGlobalActive}
-                  isIcon
-                  id="bmrg-header-global-switcher"
-                  className={`${prefix}--bmrg-header-list__item-Globalicon`}
-                  onClick={this.handleIconClick('Global')}
-                  onKeyDown={this.handleIconKeypress('Global')}
-                >
-                  <AppSwitcher20 />
-                </HeaderListItem>
-              )}
-              {renderRightPanel && Object.keys(renderRightPanel).length ? (
+                {Array.isArray(this.props.onHelpClick) && this.props.onHelpClick.length > 0 && (
+                  <li>
+                    <HeaderListItem
+                      ariaExpanded={this.state.isHelpActive}
+                      isIcon
+                      id="bmrg-header-help-icon"
+                      onClick={this.handleIconClick('Help')}
+                      onKeyDown={this.handleIconKeypress('Help')}
+                    >
+                      <Help24 />
+                    </HeaderListItem>
+                    {this.state.isHelpActive && <HeaderMenu>{this.props.onHelpClick}</HeaderMenu>}
+                  </li>
+                )}
                 <li>
-                  <HeaderListItem
-                    ariaExpanded={this.state.isRightPanelActive}
-                    isIcon
-                    id="bmrg-header-right-panel-icon"
-                    onClick={this.handleIconClick('RightPanel')}
-                    onKeyDown={this.handleIconKeypress('RightPanel')}
-                  >
-                    {renderRightPanel.icon}
-                  </HeaderListItem>
-                  <HeaderRightPanel
-                    content={renderRightPanel.component}
-                    className={cx({
-                      '--is-hidden': !this.state.isRightPanelActive,
-                    })}
-                  />
+                  {Array.isArray(this.props.profileChildren) &&
+                    this.props.profileChildren.length > 0 && (
+                      <HeaderListItem
+                        ariaExpanded={this.state.isProfileActive}
+                        isIcon
+                        id="bmrg-header-profile-icon"
+                        onClick={this.handleIconClick('Profile')}
+                        onKeyDown={this.handleIconKeypress('Profile')}
+                      >
+                        <User24 />
+                      </HeaderListItem>
+                    )}
+                  {this.state.isProfileActive && (
+                    <HeaderMenu>{this.props.profileChildren}</HeaderMenu>
+                  )}
                 </li>
-              ) : (
-                ''
-              )}
-            </HeaderList>
+                {renderGlobalSwitcher && (
+                  <HeaderListItem
+                    ariaExpanded={this.state.isGlobalActive}
+                    isIcon
+                    id="bmrg-header-global-switcher"
+                    className={`${prefix}--bmrg-header-list__item-Globalicon`}
+                    onClick={this.handleIconClick('Global')}
+                    onKeyDown={this.handleIconKeypress('Global')}
+                  >
+                    <AppSwitcher20 />
+                  </HeaderListItem>
+                )}
+                {renderRightPanel && Object.keys(renderRightPanel).length ? (
+                  <li>
+                    <HeaderListItem
+                      ariaExpanded={this.state.isRightPanelActive}
+                      isIcon
+                      id="bmrg-header-right-panel-icon"
+                      onClick={this.handleIconClick('RightPanel')}
+                      onKeyDown={this.handleIconKeypress('RightPanel')}
+                    >
+                      {renderRightPanel.icon}
+                    </HeaderListItem>
+                    <HeaderRightPanel
+                      content={renderRightPanel.component}
+                      className={cx({
+                        '--is-hidden': !this.state.isRightPanelActive,
+                      })}
+                    />
+                  </li>
+                ) : (
+                  ''
+                )}
+              </HeaderList>
             </div>
-            
           </HeaderWrapper>
           {this.props.renderSidenav && (
             <div
