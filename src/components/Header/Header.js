@@ -106,6 +106,9 @@ class Header extends React.Component {
   }
 
   handleClickOutside = (event) => {
+    console.log("this.navRef", this.navRef)
+    console.log("this.navRef.current.contains(event.target)", this.navRef.current.contains(event.target))
+    console.log("this.navRef && !this.navRef.current.contains", this.navRef && !this.navRef.current.contains(event.target))
     if (this.navRef && !this.navRef.current.contains(event.target)) {
       this.handleClickOutsideState();
     }
@@ -195,7 +198,7 @@ class Header extends React.Component {
     } = this.props;
 
     return (
-      <header ref={this.navRef} className={`${prefix}--bmrg-header-container`}>
+      <header className={`${prefix}--bmrg-header-container`}>
         <div className={cx(`${prefix}--bmrg-header`, className)}>
           <HeaderWrapper>
             <div className={`${prefix}--bmrg-header-brand-container`}>
@@ -268,6 +271,7 @@ class Header extends React.Component {
             </HeaderList>
           </HeaderWrapper>
           <HeaderWrapper>
+            <div ref={this.navRef}>
             <HeaderList className={`${prefix}--bmrg-header-list--icon\\`}>
               {this.props.enableNotifications && this.props.notificationsConfig && (
                 <li>
@@ -353,6 +357,8 @@ class Header extends React.Component {
                 ''
               )}
             </HeaderList>
+            </div>
+            
           </HeaderWrapper>
           {this.props.renderSidenav && (
             <div
