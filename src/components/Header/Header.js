@@ -6,7 +6,7 @@ import {
   ChevronDown16,
   ChevronUp16,
   Help24,
-  User24,
+  UserAvatar24,
   Notification24,
   NotificationNew24,
 } from '@carbon/icons-react';
@@ -313,7 +313,7 @@ class Header extends React.Component {
                         onClick={this.handleIconClick('Profile')}
                         onKeyDown={this.handleIconKeypress('Profile')}
                       >
-                        <User24 />
+                        <UserAvatar24 />
                       </HeaderListItem>
                     )}
                   {this.state.isProfileActive && (
