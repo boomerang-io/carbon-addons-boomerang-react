@@ -74,7 +74,6 @@ function ToggleComponent({
           )}
         </>
       )}
-
       <Toggle id={id} aria-labelledby={labelTextId} labelA="" labelB="" {...toggleProps} />
     </div>
   );
