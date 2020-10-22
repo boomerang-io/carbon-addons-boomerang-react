@@ -106,9 +106,6 @@ class Header extends React.Component {
   }
 
   handleClickOutside = (event) => {
-    console.log("this.navRef", this.navRef)
-    console.log("this.navRef.current.contains(event.target)", this.navRef.current.contains(event.target))
-    console.log("this.navRef && !this.navRef.current.contains", this.navRef && !this.navRef.current.contains(event.target))
     if (this.navRef && !this.navRef.current.contains(event.target)) {
       this.handleClickOutsideState();
     }
