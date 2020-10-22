@@ -22,11 +22,6 @@ FeatureSideNavLink.defaultProps = {
 };
 const { prefix } = settings;
 
-const defaultStyles = {
-  height: '1rem',
-  width: '1rem',
-};
-
 function FeatureSideNavLink(props) {
   const {
     children,
@@ -44,7 +39,7 @@ function FeatureSideNavLink(props) {
         activeClassName={cx(`${prefix}--bmrg-feature-sidenav-active-link`, activeClassName)}
         {...rest}
       >
-        {Icon && <Icon style={{ ...defaultStyles }} {...iconProps} />}
+        {Icon && <Icon {...iconProps} />}
         <div className={`${prefix}--bmrg-feature-sidenav-link-content`}>{children}</div>
       </NavLink>
       {hasDivider && <hr className={`${prefix}--bmrg-feature-sidenav-link-divider`} />}

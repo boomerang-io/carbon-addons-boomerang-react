@@ -19,6 +19,8 @@
       color: $text-01;
       svg {
         fill: initial;
+        min-width: 1rem;
+        min-height: 1rem;
       }
     }
     svg {
