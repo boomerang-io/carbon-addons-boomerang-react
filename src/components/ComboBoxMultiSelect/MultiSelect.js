@@ -9,8 +9,9 @@ import { Tag } from 'carbon-components-react';
 import ListBox, {
   PropTypes as ListBoxPropTypes,
 } from 'carbon-components-react/lib/components/ListBox';
-
 import { isAccessibleKeyDownEvent } from '../../tools/accessibility';
+import { mapDownshiftProps } from '../../tools/createPropAdapter';
+import setupGetInstanceId from '../../tools/setupGetInstanceId';
 
 const { prefix } = settings;
 
@@ -35,13 +36,11 @@ const defaultShouldFilterItem = ({ item, selectedItems, itemToString, inputValue
   return keepItem;
 };
 
-const getInputValue = (props, state) => {
-  if (props.initialSelectedItem) {
-    return props.itemToString(props.initialSelectedItem);
-  }
-
+const getInputValue = (state) => {
   return state.inputValue || '';
 };
+
+const getInstanceId = setupGetInstanceId();
 
 export default class MultiSelectComboBox extends React.Component {
   static propTypes = {
@@ -86,42 +85,45 @@ export default class MultiSelectComboBox extends React.Component {
 
     this.textInput = React.createRef();
 
+    this.comboBoxInstanceId = getInstanceId();
+
     this.state = {
-      inputValue: getInputValue(props, {}),
+      inputValue: getInputValue({}),
       isOpen: props.open,
       stateSelectedItems: props.initialSelectedItems || props.selectedItems,
     };
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    this.setState((state) => ({
-      inputValue: getInputValue(nextProps, state),
-    }));
-  }
-
   //eslint disable-next-line
-  static getDerivedStateFromProps({ open }, state) {
+  static getDerivedStateFromProps(nextProps, state) {
     /**
      * programmatically control this `open` prop
      */
+    const { open } = nextProps;
     const { prevOpen } = state;
     return prevOpen === open
-      ? null
+      ? { inputValue: getInputValue(state) }
       : {
           isOpen: open,
           prevOpen: open,
+          inputValue: getInputValue(state)
         };
   }
 
-  filterItems = (items, selectedItems, itemToString, inputValue) =>
-    items.filter((item) =>
-      this.props.shouldFilterItem({
-        item,
-        selectedItems,
-        itemToString,
-        inputValue,
-      })
-    );
+  filterItems = (items, selectedItems, itemToString, inputValue) => {
+    const { shouldFilterItem } = this.props;
+
+    return shouldFilterItem
+      ? items.filter((item) =>
+          shouldFilterItem({
+            item,
+            selectedItems,
+            itemToString,
+            inputValue,
+          })
+        )
+      : items;
+  }
 
   handleOnInputKeyDown = (event) => {
     event.stopPropagation();
@@ -143,7 +145,7 @@ export default class MultiSelectComboBox extends React.Component {
   };
 
   handleOnChange = (item) => {
-    if (this.props.disabled) {
+    if(!item) {
       return;
     }
 
@@ -170,27 +172,30 @@ export default class MultiSelectComboBox extends React.Component {
   };
 
   onToggleClick = (isOpen) => (event) => {
+    if (this.props.onToggleClick) {
+      this.props.onToggleClick(event);
+    }
+
     if (event.target === this.textInput.current && isOpen) {
       event.preventDownshiftDefault = true;
       event.persist();
     }
   };
 
+  openMenu = () => {
+    this.setState({ isOpen: true });
+  }
+
+  closeMenu = () => {
+    this.setState({ isOpen: false });
+  }
+
   handleClearSelection = () => {
-    if (this.props.disabled) {
-      return;
-    }
     this.setState({ stateSelectedItems: [] });
 
     if (typeof this.props.onChange === 'function') {
       this.props.onChange({ selectedItems: [] });
     }
-  };
-
-  handleOnOuterClick = () => {
-    this.setState({
-      isOpen: false,
-    });
   };
 
   handleOnStateChange = (changes) => {
@@ -245,11 +250,13 @@ export default class MultiSelectComboBox extends React.Component {
       light,
       initialSelectedItems, // eslint-disable-line no-unused-vars
       type, // eslint-disable-line no-unused-vars
+      size,
       shouldFilterItem, // eslint-disable-line no-unused-vars
       onChange, // eslint-disable-line no-unused-vars
       onInputChange, // eslint-disable-line no-unused-vars
       downshiftProps,
       tagProps,
+      direction,
       ...rest
     } = this.props;
     const { stateSelectedItems, isOpen } = this.state;
@@ -257,133 +264,152 @@ export default class MultiSelectComboBox extends React.Component {
 
     const selectedItems = propsSelectedItems || stateSelectedItems; // externally controlled if selectedItems props exist
 
-    const className = cx(`${prefix}--combo-box`, containerClassName);
+    const className = cx(`${prefix}--combo-box`, containerClassName, {
+      [`${prefix}--list-box--up`]: direction === 'top',
+    });
     const titleClasses = cx(`${prefix}--label`, {
       [`${prefix}--label--disabled`]: disabled,
     });
-    const title = titleText ? (
-      <label htmlFor={id} className={titleClasses}>
-        {titleText}
-      </label>
-    ) : null;
+    const comboBoxHelperId = !helperText
+      ? undefined
+      : `combobox-helper-text-${this.comboBoxInstanceId}`;
     const helperClasses = cx(`${prefix}--form__helper-text`, {
       [`${prefix}--form__helper-text--disabled`]: disabled,
     });
-    const helper = helperText ? <div className={helperClasses}>{helperText}</div> : null;
     const wrapperClasses = cx(`${prefix}--list-box__wrapper`);
+    const inputClasses = cx(`${prefix}--text-input`, {
+      [`${prefix}--text-input--empty`]: !this.state.inputValue,
+    });
     const ItemToElement = itemToElement; // Capitalize
 
-    const input = (
+    return (
       <Downshift
-        {...downshiftProps}
+        {...mapDownshiftProps(downshiftProps)}
         onChange={this.handleOnChange}
         onInputValueChange={this.handleOnInputValueChange}
         inputValue={this.state.inputValue || ''}
         isOpen={isOpen}
         itemToString={itemToString}
         onStateChange={this.handleOnStateChange}
-        onOuterClick={this.handleOnOuterClick}
+        onOuterClick={this.closeMenu}
         selectedItem={selectedItems}
       >
         {({
-          getToggleButtonProps,
           getInputProps,
           getItemProps,
-          getRootProps,
+          getLabelProps,
+          getMenuProps,
+          getToggleButtonProps,
           isOpen,
           inputValue,
           selectedItem,
           highlightedIndex,
+          clearSelection,
         }) => (
-          <ListBox
-            className={className}
-            disabled={disabled}
-            invalid={invalid}
-            invalidText={invalidText}
-            isOpen={isOpen}
-            light={light}
-            {...getRootProps({ refKey: 'innerRef' })}
-          >
-            <div className={`${prefix}--bmrg-multi-select-selected`}>
-              {Array.isArray(selectedItems) &&
-                selectedItems.map((item, index) => {
-                  const itemString = itemToString(item);
-                  return (
-                    <Tag
-                      key={`${itemString}-${index}`}
-                      disabled={disabled}
-                      type="teal"
-                      onClick={() => this.handleOnChange(item)}
-                      onKeyDown={(e) => isAccessibleKeyDownEvent(e) && this.handleOnChange(item)}
-                      filter
-                      {...tagProps}
-                    >
-                      {itemString}
-                    </Tag>
-                  );
-                })}
-            </div>
-            <Field
-              id={id}
-              disabled={disabled}
-              translateWithId={translateWithId}
-              {...getToggleButtonProps({
-                disabled,
-              })}
-            >
-              <input
-                className={`${prefix}--text-input`}
-                aria-label={ariaLabel}
-                aria-controls={`${id}__menu`}
-                aria-autocomplete="list"
-                ref={this.textInput}
-                {...rest}
-                {...getInputProps({
-                  disabled,
-                  id,
-                  placeholder,
-                  onKeyDown: this.handleOnInputKeyDown,
-                })}
-              />
-              {invalid && <WarningFilled16 className={`${prefix}--list-box__invalid-icon`} />}
-              {(inputValue || selectedItems.length > 0) && (
-                <Selection
-                  clearSelection={this.handleClearSelection}
-                  translateWithId={translateWithId}
-                />
-              )}
-              <MenuIcon isOpen={isOpen} translateWithId={translateWithId} />
-            </Field>
-            {isOpen && (
-              <Menu aria-label={ariaLabel} id={id}>
-                {this.filterItems(items, selectedItem, itemToString, inputValue).map(
-                  (item, index) => (
-                    <MenuItem
-                      key={itemToString(item)}
-                      isHighlighted={highlightedIndex === index}
-                      {...getItemProps({ item, index })}
-                    >
-                      {itemToElement ? (
-                        <ItemToElement key={itemToString(item)} {...item} />
-                      ) : (
-                        itemToString(item)
-                      )}
-                    </MenuItem>
-                  )
-                )}
-              </Menu>
+          <div className={wrapperClasses}>
+            {titleText && (
+              <label htmlFor={id} className={titleClasses} {...getLabelProps()}>
+                {titleText}
+              </label>
             )}
-          </ListBox>
+            <ListBox
+              className={className}
+              disabled={disabled}
+              invalid={invalid}
+              aria-label={ariaLabel}
+              invalidText={invalidText}
+              isOpen={isOpen}
+              light={light}
+              size={size}
+            >
+              <div className={`${prefix}--bmrg-multi-select-selected`}>
+                {Array.isArray(selectedItems) &&
+                  selectedItems.map((item, index) => {
+                    const itemString = itemToString(item);
+                    return (
+                      <Tag
+                        key={`${itemString}-${index}`}
+                        disabled={disabled}
+                        type="teal"
+                        onClick={() => this.handleOnChange(item)}
+                        onKeyDown={(e) => isAccessibleKeyDownEvent(e) && this.handleOnChange(item)}
+                        filter
+                        {...tagProps}
+                      >
+                        {itemString}
+                      </Tag>
+                    );
+                  })}
+              </div>
+              <Field
+                id={id}
+                disabled={disabled}
+                translateWithId={translateWithId}
+                {...getToggleButtonProps({
+                  disabled,
+                  onClick: this.onToggleClick(isOpen)
+                })}
+              >
+                <input
+                  className={inputClasses}
+                  aria-label={ariaLabel}
+                  aria-controls={`${id}__menu`}
+                  aria-autocomplete="list"
+                  tabIndex="0"
+                  ref={this.textInput}
+                  {...rest}
+                  {...getInputProps({
+                    disabled,
+                    id,
+                    placeholder,
+                    onKeyDown: this.handleOnInputKeyDown,
+                    onFocus: this.openMenu,
+                    onBlur: this.closeMenu
+                  })}
+                />
+                {invalid && <WarningFilled16 className={`${prefix}--list-box__invalid-icon`} />}
+                {(inputValue || selectedItems.length > 0) && (
+                  <Selection
+                    clearSelection={clearSelection}
+                    onClearSelection={this.handleClearSelection}
+                    disabled={disabled}
+                    translateWithId={translateWithId}
+                  />
+                )}
+                <MenuIcon isOpen={isOpen} translateWithId={translateWithId} />
+              </Field>
+              {isOpen && (
+                <Menu id={id} {...getMenuProps({ 'aria-label': ariaLabel })}>
+                  {this.filterItems(items, selectedItem, itemToString, inputValue).map(
+                    (item, index) => {
+                      const itemProps = getItemProps({ item, index });
+                      return (
+                        <MenuItem
+                          key={itemProps.id}
+                          isHighlighted={highlightedIndex === index}
+                          title={itemToElement ? item.text : itemToString(item)}
+                          {...itemProps}
+                        >
+                          {itemToElement ? (
+                            <ItemToElement key={itemToString(item)} {...item} />
+                          ) : (
+                            itemToString(item)
+                          )}
+                        </MenuItem>
+                      )
+                    }
+                  )}
+                </Menu>
+              )}
+            </ListBox>
+            {helperText && !invalid && (
+              <div id={comboBoxHelperId} className={helperClasses}>
+                {helperText}
+              </div>
+            )}
+          </div>
         )}
       </Downshift>
-    );
-
-    return (
-      <div className={wrapperClasses}>
-        {title}
-        {helper}
-        {input}
-      </div>
     );
   }
 }
