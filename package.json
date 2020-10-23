@@ -20,7 +20,6 @@
   "files": [
     "lib/**/*",
     "es/**/*",
-    "umd/**/*",
     "styles/**/*"
   ],
   "keywords": [
@@ -32,7 +31,7 @@
   ],
   "scripts": {
     "build": "cross-env NODE_ENV=production yarn build:pre && rollup -c",
-    "build:pre": "rimraf lib styles es umd docs",
+    "build:pre": "rimraf lib styles es docs",
     "build:storybook": "build-storybook -s public/production -c .storybook -o docs",
     "format": "prettier --write \"**/*.{scss,css,js,jsx,md,ts}\"",
     "format:diff": "prettier --list-different \"**/*.{scss,css,js,jsx,md,ts}\"",
@@ -61,7 +60,7 @@
     "invariant": "^2.2.3",
     "js-file-download": "^0.4.7",
     "lodash.isequal": "^4.5.0",
-    "match-sorter": "^4.0.1",
+    "match-sorter": "^4.2.1",
     "react-autosuggest": "^9.4.3",
     "react-dropzone": "^10.0.6",
     "react-focus-trap": "^2.7.1",
@@ -119,6 +118,7 @@
     "mock-socket": "^9.0.3",
     "moment-timezone": "^0.5.26",
     "node-sass": "^4.13.1",
+    "npm-run-all": "^4.1.5",
     "object-assign": "^4.1.1",
     "prettier": "2.0.5",
     "promise": "^8.0.2",
@@ -128,7 +128,7 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.4.1",
     "react-test-renderer": "^16.8.3",
-    "rimraf": "^3.0.0",
+    "rimraf": "^3.0.2",
     "rollup": "^1.1.0",
     "rollup-plugin-babel": "^4.3.0",
     "rollup-plugin-commonjs": "^9.2.0",
