@@ -33,6 +33,7 @@ const baseConfig = {
       include: './node_modules/**',
       namedExports: {
         '@stomp/stompjs/bundles/stomp.umd.js': ['Client'],
+        'react-is/index.js': ['isForwardRef'],
         'carbon-components-react/lib/components/ComposedModal/index.js': [
           'ModalHeader',
           'ModalBody',
