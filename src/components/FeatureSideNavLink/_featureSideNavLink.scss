@@ -19,12 +19,12 @@
       color: $text-01;
       svg {
         fill: initial;
-        min-width: 1rem;
-        min-height: 1rem;
       }
     }
     svg {
       fill: $text-02;
+      min-width: 1rem;
+      min-height: 1rem;
     }
   }
   .#{$prefix}--bmrg-feature-sidenav-link-content {
