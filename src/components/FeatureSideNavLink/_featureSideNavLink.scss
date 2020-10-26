@@ -23,6 +23,8 @@
     }
     svg {
       fill: $text-02;
+      min-width: 1rem;
+      min-height: 1rem;
     }
   }
   .#{$prefix}--bmrg-feature-sidenav-link-content {
