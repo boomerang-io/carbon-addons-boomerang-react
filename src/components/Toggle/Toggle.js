@@ -41,40 +41,46 @@ function ToggleComponent({
   const labelValue = label || labelText;
   const labelTextId = !labelValue ? undefined : `${id}-label`;
   return (
-    <div
-      key={id}
-      className={cx(`${prefix}--bmrg-toggle`, {
-        '--reversed': reversed,
-        '--vertical': orientation === 'vertical',
-      })}
-    >
-      {labelValue && (
-        <>
-          <div className={`${prefix}--bmrg-toggle__title`}>
-            <label
-              id={labelTextId}
-              className={`${prefix}--label`}
-              htmlFor={id}
-              style={{ marginBottom: '0' }}
-            >
-              {labelValue}
-            </label>
-            {tooltipContent && (
-              <div className={tooltipClassName}>
-                <TooltipHover {...tooltipProps} tooltipText={tooltipContent}>
-                  <Information16 fill="#4d5358" />
-                </TooltipHover>
-              </div>
-            )}
-          </div>
-          {helperText && (
-            <div className={`${prefix}--form__helper-text`} style={{ marginBottom: '0' }}>
-              {helperText}
+    <div className={`${prefix}--bmrg-toggle__container`}>
+      <div
+        key={id}
+        className={cx(`${prefix}--bmrg-toggle`, {
+          '--reversed': reversed,
+          '--vertical': orientation === 'vertical',
+        })}
+      >
+        {labelValue && (
+          <>
+            <div className={`${prefix}--bmrg-toggle__title`}>
+              <label
+                id={labelTextId}
+                className={`${prefix}--label`}
+                htmlFor={id}
+                style={{ marginBottom: '0' }}
+              >
+                {labelValue}
+              </label>
+              {tooltipContent && (
+                <div className={tooltipClassName}>
+                  <TooltipHover {...tooltipProps} tooltipText={tooltipContent}>
+                    <Information16 fill="#4d5358" />
+                  </TooltipHover>
+                </div>
+              )}
             </div>
-          )}
-        </>
+          </>
+        )}
+
+        <Toggle id={id} aria-labelledby={labelTextId} labelA="" labelB="" {...toggleProps} />
+
+        
+      </div>
+
+      {helperText && (
+        <div className={`${prefix}--form__helper-text`} style={{ marginBottom: '0' }}>
+          {helperText}
+        </div>
       )}
-      <Toggle id={id} aria-labelledby={labelTextId} labelA="" labelB="" {...toggleProps} />
     </div>
   );
 }
