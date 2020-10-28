@@ -89,7 +89,7 @@ storiesOf('FlowModal', module)
         appElement="#root"
         progressSteps={[
           { label: 'Source' },
-          { label: 'Repoaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' },
+          { label: 'Repo' },
           { label: 'App Type' },
           { label: 'Name' },
           { label: 'Confirm' },
