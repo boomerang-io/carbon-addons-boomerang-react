@@ -94,6 +94,7 @@ class Header extends React.Component {
   };
 
   navRef = React.createRef();
+  sideNavRef = React.createRef();
 
   componentDidMount() {
     document.addEventListener('mousedown', this.handleClickOutside);
@@ -107,19 +108,28 @@ class Header extends React.Component {
 
   handleClickOutside = (event) => {
     if (this.navRef && !this.navRef.current.contains(event.target)) {
-      this.handleClickOutsideState();
+      this.handleClickOutsideHeaderState();
+    }
+
+    if (this.sideNavRef && !this.sideNavRef.current.contains(event.target)) {
+      this.handleClickOutsideSidenavState();
     }
   };
 
-  handleClickOutsideState = () => {
+  handleClickOutsideHeaderState = () => {
     this.setState({
       isMobileNavActive: false,
       isHelpActive: false,
-      isMenuActive: false,
       isNotificationActive: false,
       isProfileActive: false,
       isGlobalActive: false,
       isRightPanelActive: false,
+    });
+  };
+
+  handleClickOutsideSidenavState = () => {
+    this.setState({
+      isMenuActive: false,
     });
   };
 
@@ -361,6 +371,7 @@ class Header extends React.Component {
               className={cx(`${prefix}--bmrg-header__app-menu-wrapper`, {
                 '--is-hidden': !this.state.isMenuActive,
               })}
+              ref={this.sideNavRef}
             >
               {this.props.renderSidenav({
                 isOpen: this.state.isMenuActive,
