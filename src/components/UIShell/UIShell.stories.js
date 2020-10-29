@@ -167,6 +167,22 @@ storiesOf('UIShell', module)
             name: 'test user',
             email: 'test.user@ibm.com',
           }}
+          renderRightPanel={{
+            icon: <Help24 />,
+            component: (
+              <div
+                style={{
+                  color: 'white',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  marginTop: '4rem',
+                  width: '25rem',
+                }}
+              >
+                Custom content behaviour
+              </div>
+            ),
+          }}
         />
       </Router>
     );
