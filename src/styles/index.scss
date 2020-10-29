@@ -112,6 +112,9 @@ $css--plex: true !default;
 .#{$prefix}--bmrg-privacy-statement-container,
 .#{$prefix}--bmrg-report-bug-container,
 .#{$prefix}--bmrg-signout-container,
+.#{$prefix}--tooltip {
+  z-index: 9999;
+}
 .#{$prefix}--bmrg-redirect-container {
   .#{$prefix}--modal-container {
     background-color: $bmrg-header-modal-background-color;

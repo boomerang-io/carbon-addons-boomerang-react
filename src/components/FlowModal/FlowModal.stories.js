@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { Button, TextInput, ModalBody, ModalFooter } from 'carbon-components-react';
+import { Button, TextInput, ModalBody, ModalFooter, Tooltip } from 'carbon-components-react';
 import FlowModal from './FlowModal';
 import FlowModalForm from './FlowModalForm';
 
@@ -12,6 +12,14 @@ const Component1 = (props) => (
         onChange={(e) => props.saveValues({ text: e.target.value })}
         placeholder="The second component will know what you write here"
       />
+      <Tooltip
+        triggerId="test-tooltip"
+        direction="top"
+        tabIndex={0}
+        triggerText=""
+      >
+        Test Tooltip
+      </Tooltip>
     </ModalBody>
     <ModalFooter>
       <Button kind="secondary" onClick={props.closeModal}>
