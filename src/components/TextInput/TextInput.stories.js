@@ -18,7 +18,7 @@ storiesOf('TextInput', module)
   })
   .add('with tooltip, label and helper text', () => {
     return (
-      <div style={{ overflow: 'hidden', height: '5rem' }}>
+      <div style={{ height: '5rem' }}>
         <TextInput
           id="tooltip-label-text-input"
           onChange={action('text input change')}
