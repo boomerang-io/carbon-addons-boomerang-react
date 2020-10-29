@@ -20,9 +20,6 @@
     &.--is-open {
       background-color: rgba(23, 23, 23, 0.5);
       z-index: 9999;
-      &.#{$prefix}--tooltip {
-        z-index: 9999;
-      }
     }
 
     &.--is-closed {

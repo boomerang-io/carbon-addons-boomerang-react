@@ -156,7 +156,6 @@ function CreatableComponent({
               placeholder={keyPlaceholder}
               type={type}
               value={keyValue}
-              className={"testing-a"}
               style={{
                 marginBottom: hasBothHelperText || keyHelperText ? "0" : valueHelperText ? "1.5rem" : "0rem",
                 marginTop: hasBothLabelText || keyLabelText ? "0" : valueLabelText ? "1.5rem":"0.5rem",
