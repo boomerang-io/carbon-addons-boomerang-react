@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 import { Button, Tag, TextInput } from 'carbon-components-react';
 import TooltipHover from '../TooltipHover';
 import { Add16, Information16 } from '@carbon/icons-react';
@@ -50,6 +51,7 @@ CreatableComponent.defaultProps = {
   buttonClassName: `${prefix}--bmrg-creatable__button`,
   buttonContent: 'Add',
   createKeyValuePair: false,
+  labelText: '',
   tagType: 'teal',
   tooltipClassName: `${prefix}--bmrg-creatable__tooltip`,
   tooltipProps: { direction: 'top' },
@@ -96,9 +98,12 @@ function CreatableComponent({
   const [value, setValue] = useState('');
   const [input, setInput] = useState('');
   const [createdItems, setCreatedItems] = useState([]);
-
+  const createButtonClassName = cx(buttonClassName, {"--no-label": (!createKeyValuePair && !labelText && !tooltipContent) || (createKeyValuePair && !keyLabelText && !valueLabelText)});
   const tagItems = values || externalValues ? values || externalValues : createdItems; // Externally controlled if values props exists
   const existValue = (keyValue && value) || input;
+
+  const hasBothHelperText = keyHelperText && valueHelperText;
+  const hasBothLabelText = keyLabelText && valueLabelText;
 
   const onInputChange = (e) => {
     setInput(e.target.value);
@@ -151,9 +156,19 @@ function CreatableComponent({
               placeholder={keyPlaceholder}
               type={type}
               value={keyValue}
+              className={"testing-a"}
+              style={{
+                marginBottom: hasBothHelperText || keyHelperText ? "0" : valueHelperText ? "1.5rem" : "0rem",
+                marginTop: hasBothLabelText || keyLabelText ? "0" : valueLabelText ? "1.5rem":"0.5rem",
+              }}
               {...textInputProps}
             />
-            <p className={`${prefix}--bmrg-creatable__colon`}>:</p>
+            <p 
+              className={`${prefix}--bmrg-creatable__colon`}
+              style={{
+                marginTop: keyLabelText || valueLabelText ? "1.75rem" : "0.75rem",
+              }}
+            >:</p>
             <TextInput
               disabled={disabled}
               id={`${id}-value`}
@@ -166,6 +181,10 @@ function CreatableComponent({
               placeholder={valuePlaceholder}
               type={type}
               value={value}
+              style={{
+                marginBottom: hasBothHelperText || valueHelperText ? "0" : keyHelperText ? "1.5rem" : "0rem",
+                marginTop: hasBothLabelText || valueLabelText ? "0" : keyLabelText ? "1.5rem":"0.5rem",
+              }}
               {...textInputProps}
             />
           </div>
@@ -197,7 +216,7 @@ function CreatableComponent({
           />
         )}
         <Button
-          className={buttonClassName}
+          className={createButtonClassName}
           disabled={disabled || !existValue}
           onClick={addValue}
           iconDescription="Add"

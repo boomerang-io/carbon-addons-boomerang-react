@@ -29,8 +29,8 @@ storiesOf('Creatable', module)
           valueLabelText={text('valueLabelText', 'Creatable Value')}
           onChange={action('creatable change')}
           keyPlaceholder={text('keyPlaceholder', 'Key')}
-          keyHelperText={text('keyHelperText', 'Key Helper')}
           valuePlaceholder={text('valuePlaceholder', 'Value')}
+          keyHelperText={text('keyHelperText', 'Key Helper')}
           valueHelperText={text('valueHelperText', 'Value Helper')}
           type="text"
         />
