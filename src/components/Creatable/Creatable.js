@@ -97,13 +97,18 @@ function CreatableComponent({
   const [keyValue, setKeyValue] = useState('');
   const [value, setValue] = useState('');
   const [input, setInput] = useState('');
+
+  const inputLabel = labelText || label;
+  const inputKeyLabel = keyLabelText || keyLabel;
+  const inputValueLabel = valueLabelText || valueLabel;
+
   const [createdItems, setCreatedItems] = useState([]);
-  const createButtonClassName = cx(buttonClassName, {"--no-label": (!createKeyValuePair && !labelText && !tooltipContent) || (createKeyValuePair && !keyLabelText && !valueLabelText)});
+  const createButtonClassName = cx(buttonClassName, {"--no-label": (!createKeyValuePair && !inputLabel && !tooltipContent) || (createKeyValuePair && !inputKeyLabel && !inputValueLabel)});
   const tagItems = values || externalValues ? values || externalValues : createdItems; // Externally controlled if values props exists
   const existValue = (keyValue && value) || input;
 
   const hasBothHelperText = keyHelperText && valueHelperText;
-  const hasBothLabelText = keyLabelText && valueLabelText;
+  const hasBothLabelText = inputKeyLabel && inputValueLabel;
 
   const onInputChange = (e) => {
     setInput(e.target.value);
@@ -150,7 +155,7 @@ function CreatableComponent({
               invalid={invalid}
               invalidText={invalidText}
               helperText={keyHelperText}
-              labelText={keyLabel || keyLabelText}
+              labelText={inputKeyLabel}
               onBlur={onKeyBlur}
               onChange={onKeyChange}
               placeholder={keyPlaceholder}
@@ -158,14 +163,14 @@ function CreatableComponent({
               value={keyValue}
               style={{
                 marginBottom: hasBothHelperText || keyHelperText ? "0" : valueHelperText ? "1.5rem" : "0rem",
-                marginTop: hasBothLabelText || keyLabelText ? "0" : valueLabelText ? "1.5rem":"0.5rem",
+                marginTop: hasBothLabelText || inputKeyLabel ? "0" : inputValueLabel ? "1.5rem":"0.5rem",
               }}
               {...textInputProps}
             />
             <p 
               className={`${prefix}--bmrg-creatable__colon`}
               style={{
-                marginTop: keyLabelText || valueLabelText ? "1.75rem" : "0.75rem",
+                marginTop: inputKeyLabel || inputValueLabel ? "1.75rem" : "0.75rem",
               }}
             >:</p>
             <TextInput
@@ -174,7 +179,7 @@ function CreatableComponent({
               invalid={invalid}
               invalidText={invalidText}
               helperText={valueHelperText}
-              labelText={valueLabel || valueLabelText}
+              labelText={inputValueLabel}
               onBlur={onValueBlur}
               onChange={onValueChange}
               placeholder={valuePlaceholder}
@@ -182,7 +187,7 @@ function CreatableComponent({
               value={value}
               style={{
                 marginBottom: hasBothHelperText || valueHelperText ? "0" : keyHelperText ? "1.5rem" : "0rem",
-                marginTop: hasBothLabelText || valueLabelText ? "0" : keyLabelText ? "1.5rem":"0.5rem",
+                marginTop: hasBothLabelText || inputValueLabel ? "0" : inputKeyLabel ? "1.5rem":"0.5rem",
               }}
               {...textInputProps}
             />
@@ -196,7 +201,7 @@ function CreatableComponent({
             helperText={helperText}
             labelText={
               <div style={{ display: 'flex' }}>
-                <div>{label || labelText}</div>
+                <div>{inputLabel}</div>
                 {tooltipContent && (
                   <div className={tooltipClassName}>
                     <TooltipHover {...tooltipProps} tooltipText={tooltipContent}>

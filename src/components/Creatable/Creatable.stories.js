@@ -13,6 +13,7 @@ storiesOf('Creatable', module)
           id="text-input-creatable"
           labelText={text('labelText', 'Creatable')}
           onChange={action('creatable change')}
+          helperText="Test helperText"
           placeholder={text('placeholder', 'Create some values')}
           type="text"
         />
