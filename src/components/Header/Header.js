@@ -94,6 +94,7 @@ class Header extends React.Component {
   };
 
   navRef = React.createRef();
+  mobileNavRef = React.createRef();
   sideNavRef = React.createRef();
 
   componentDidMount() {
@@ -111,6 +112,10 @@ class Header extends React.Component {
       this.handleClickOutsideHeaderState();
     }
 
+    if (this.mobileNavRef && !this.mobileNavRef.current.contains(event.target)) {
+      this.handleClickOutsideMobileNavState();
+    }
+
     if (this.sideNavRef && !this.sideNavRef.current.contains(event.target)) {
       this.handleClickOutsideSidenavState();
     }
@@ -118,12 +123,17 @@ class Header extends React.Component {
 
   handleClickOutsideHeaderState = () => {
     this.setState({
-      isMobileNavActive: false,
       isHelpActive: false,
       isNotificationActive: false,
       isProfileActive: false,
       isGlobalActive: false,
       isRightPanelActive: false,
+    });
+  };
+
+  handleClickOutsideMobileNavState = () => {
+    this.setState({
+      isMobileNavActive: false,
     });
   };
 
@@ -243,43 +253,45 @@ class Header extends React.Component {
                   ))}
               </HeaderList>
             </nav>
-            <HeaderList className={`${prefix}--bmrg-header-list--mobile-nav`}>
-              <li>
-                <HeaderListItem
-                  isIcon
-                  id="navigation-mobile-menu"
-                  ariaExpanded={this.state.isMobileNavActive}
-                  onClick={this.handleIconClick('MobileNav')}
-                  onKeyDown={this.handleIconKeypress('MobileNav')}
-                >
-                  <span
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      color: this.state.isMobileNavActive ? '#343a3f' : 'inherit',
-                      fontSize: '0.875rem',
-                    }}
+            <div ref={this.mobileNavRef}>
+              <HeaderList className={`${prefix}--bmrg-header-list--mobile-nav`}>
+                <li>
+                  <HeaderListItem
+                    isIcon
+                    id="navigation-mobile-menu"
+                    ariaExpanded={this.state.isMobileNavActive}
+                    onClick={this.handleIconClick('MobileNav')}
+                    onKeyDown={this.handleIconKeypress('MobileNav')}
                   >
-                    Navigation {this.state.isMobileNavActive ? <ChevronUp16 /> : <ChevronDown16 />}
-                  </span>
-                </HeaderListItem>
-
-                {this.state.isMobileNavActive && (
-                  <HeaderMenu>
-                    {Array.isArray(navLinks) &&
-                      navLinks.map((link, i) => (
-                        <li key={`${link.url}-${i}`}>
-                          <HeaderMenuLink external={false} href={link.url} text={link.name} />
-                        </li>
-                      ))}
-                  </HeaderMenu>
-                )}
-              </li>
-            </HeaderList>
+                    <span
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        color: this.state.isMobileNavActive ? '#343a3f' : 'inherit',
+                        fontSize: '0.875rem',
+                      }}
+                    >
+                      Navigation{' '}
+                      {this.state.isMobileNavActive ? <ChevronUp16 /> : <ChevronDown16 />}
+                    </span>
+                  </HeaderListItem>
+                  {this.state.isMobileNavActive && (
+                    <HeaderMenu>
+                      {Array.isArray(navLinks) &&
+                        navLinks.map((link, i) => (
+                          <li key={`${link.url}-${i}`}>
+                            <HeaderMenuLink external={false} href={link.url} text={link.name} />
+                          </li>
+                        ))}
+                    </HeaderMenu>
+                  )}
+                </li>
+              </HeaderList>
+            </div>
           </HeaderWrapper>
           <HeaderWrapper>
             <div ref={this.navRef}>
-              <HeaderList className={`${prefix}--bmrg-header-list--icon\\`}>
+              <HeaderList className={`${prefix}--bmrg-header-list--icon`}>
                 {this.props.enableNotifications && this.props.notificationsConfig && (
                   <li>
                     <HeaderListItem
