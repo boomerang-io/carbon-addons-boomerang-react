@@ -52,6 +52,11 @@ function RadioGroupComponent({
 }) {
   const labelValue = label || labelText;
   const labelTextId = !labelValue ? undefined : `${id}-label`;
+
+  const isVertical = orientation === 'vertical';
+  const hasVerticalHelperText = isVertical && helperText;
+  const hasHorizontalHelperText = !isVertical && helperText;
+
   return (
     <div key={id} className={`${prefix}--bmrg-radio-group`}>
       {labelValue && (
@@ -68,7 +73,7 @@ function RadioGroupComponent({
           )}
         </div>
       )}
-      {helperText && <div className={`${prefix}--form__helper-text`}>{helperText}</div>}
+      {hasVerticalHelperText && <div className={`${prefix}--form__helper-text`}>{helperText}</div>}
       <RadioButtonGroup
         defaultSelected={defaultSelected}
         disabled={disabled}
@@ -89,6 +94,7 @@ function RadioGroupComponent({
           />
         ))}
       </RadioButtonGroup>
+      {hasHorizontalHelperText && <div className={`${prefix}--form__helper-text`}>{helperText}</div>}
     </div>
   );
 }

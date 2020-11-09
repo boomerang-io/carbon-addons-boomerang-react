@@ -107,6 +107,12 @@ $css--plex: true !default;
 
 // Carbon overrides for the Platform theme
 // Scope to modal styles so they don't overwrite other carbon styles
+.#{$prefix}--loading-overlay {
+  background-color: rgba(var(--cds-ui-background), 0.5);
+}
+.#{$prefix}--tooltip {
+  z-index: 9999;
+}
 .#{$prefix}--bmrg-aboutPlatform-container,
 .#{$prefix}--bmrg-contact-us-container,
 .#{$prefix}--bmrg-privacy-statement-container,

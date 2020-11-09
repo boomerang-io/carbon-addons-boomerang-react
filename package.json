@@ -1,7 +1,7 @@
 {
   "name": "@boomerang-io/carbon-addons-boomerang-react",
   "description": "Carbon Addons for Boomerang apps",
-  "version": "0.0.22",
+  "version": "0.0.22-beta.5",
   "author": {
     "name": "Tim Bula",
     "email": "timrbula@gmail.com"
@@ -48,11 +48,11 @@
     "test:staged": "cross-env CI=true react-scripts test --passWithNoTests --findRelatedTests --bail"
   },
   "dependencies": {
-    "@carbon/elements": "10.12.0",
-    "@carbon/themes": "10.12.0",
+    "@carbon/elements": "^10.21.0",
+    "@carbon/themes": "^10.21.0",
     "@stomp/stompjs": "^5.4.2",
     "@tippyjs/react": "^4.0.2",
-    "carbon-icons": "7.0.7",
+    "carbon-icons": "^7.0.7",
     "classnames": "^2.2.5",
     "date-fns": "^1.30.1",
     "dompurify": "^2.0.6",
@@ -63,6 +63,7 @@
     "match-sorter": "^4.2.1",
     "react-autosuggest": "^9.4.3",
     "react-dropzone": "^10.0.6",
+    "react-error-boundary": "^3.0.2",
     "react-focus-trap": "^2.7.1",
     "react-modal": "^3.10.1",
     "react-toastify": "^5.3.2",
@@ -70,8 +71,8 @@
     "window-or-global": "^1.0.1"
   },
   "peerDependencies": {
-    "carbon-components": "10.12.0",
-    "carbon-components-react": "7.12.0",
+    "carbon-components": "10.22.0",
+    "carbon-components-react": "7.22.0",
     "formik": "^2.1.4",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
@@ -81,7 +82,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
-    "@carbon/icons-react": "^10.15.0",
+    "@carbon/icons-react": "^10.19.0",
     "@ibma/aat": "https://able.ibm.com/tools/dist/aat.tgz",
     "@storybook/addon-a11y": "^5.3.9",
     "@storybook/addon-actions": "^5.3.9",
@@ -103,8 +104,8 @@
     "axios": "^0.19.2",
     "axios-mock-adapter": "^1.17.0",
     "babel-core": "^7.0.0-bridge.0",
-    "carbon-components": "^10.11.2",
-    "carbon-components-react": "^7.11.3",
+    "carbon-components": "^10.22.0",
+    "carbon-components-react": "^7.22.0",
     "core-js": "^3.6.4",
     "coveralls": "^3.0.2",
     "cross-env": "^6.0.3",
@@ -123,11 +124,11 @@
     "prettier": "2.0.5",
     "promise": "^8.0.2",
     "prop-types": "^15.7.2",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.4.1",
-    "react-test-renderer": "^16.8.3",
+    "react-test-renderer": "16.13.1",
     "rimraf": "^3.0.2",
     "rollup": "^1.1.0",
     "rollup-plugin-babel": "^4.3.0",

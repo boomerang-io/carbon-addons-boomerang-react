@@ -1,4 +1,7 @@
 @include exports('addons-bmrg-toggle') {
+  .#{$prefix}--bmrg-toggle__container {
+    width: 100%;
+  }
   .#{$prefix}--bmrg-toggle {
     display: flex;
     justify-content: space-between;

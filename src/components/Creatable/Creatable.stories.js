@@ -13,6 +13,7 @@ storiesOf('Creatable', module)
           id="text-input-creatable"
           labelText={text('labelText', 'Creatable')}
           onChange={action('creatable change')}
+          helperText="Test helperText"
           placeholder={text('placeholder', 'Create some values')}
           type="text"
         />
@@ -30,15 +31,18 @@ storiesOf('Creatable', module)
           onChange={action('creatable change')}
           keyPlaceholder={text('keyPlaceholder', 'Key')}
           valuePlaceholder={text('valuePlaceholder', 'Value')}
+          keyHelperText={text('keyHelperText', 'Key Helper')}
+          valueHelperText={text('valueHelperText', 'Value Helper')}
           type="text"
         />
       </div>
     );
   })
-  .add('with tooltip', () => {
+  .add('with tooltip and helper text', () => {
     return (
       <Creatable
         id="tooltip-creatable"
+        helperText="Example helper text for creatable"
         labelText={text('labelText', 'Controlled Creatable')}
         placeholder={text('placeholder', 'Create some values')}
         onChange={action('creatable change')}
