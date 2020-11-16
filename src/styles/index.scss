@@ -108,7 +108,8 @@ $css--plex: true !default;
 // Carbon overrides for the Platform theme
 // Scope to modal styles so they don't overwrite other carbon styles
 .#{$prefix}--loading-overlay {
-  background-color: rgba(var(--cds-ui-background), 0.5);
+  //harcoded to the RGBA value of the ui-background variable
+  background-color: rgba(242,244,248,0.5); 
 }
 .#{$prefix}--tooltip {
   z-index: 9999;
