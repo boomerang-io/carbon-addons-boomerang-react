@@ -11,14 +11,15 @@ function MemberBar({
   addUser,
   avatarProps = {},
   avatarSrc,
-  buttonClassName = "",
+  buttonClassName = '',
   buttonProps = {},
-  email, 
+  email,
   id,
   isDetail = false,
+  isPartner = false,
   liProps = {},
-  name, 
-  removeUser, 
+  name,
+  removeUser,
 }) {
   return (
     <li {...liProps}>
@@ -31,18 +32,25 @@ function MemberBar({
         {...buttonProps}
       >
         <div className={`${prefix}--bmrg-member-bar__user`}>
-          <Avatar src={avatarSrc} {...avatarProps}/>
+          <Avatar src={avatarSrc} {...avatarProps} />
           <div className={`${prefix}--bmrg-member-bar__data`}>
             <p className={`${prefix}--bmrg-member-bar__name`}>{name}</p>
             <p className={`${prefix}--bmrg-member-bar__email`}>{email}</p>
           </div>
         </div>
-        {removeUser && (
-          <CloseOutline32
-            className={`${prefix}--bmrg-member-bar__close-icon`}
-            alt="remove user"
-            data-testid="remove-user-button"
-          />
+        {(isPartner || removeUser) && (
+          <div className={`${prefix}--bmrg-member-bar__right-section`}>
+            {isPartner && (
+              <p className={`${prefix}--bmrg-member-bar__partner-text`}>Partner User</p>
+            )}
+            {removeUser && (
+              <CloseOutline32
+                className={`${prefix}--bmrg-member-bar__close-icon`}
+                alt="remove user"
+                data-testid="remove-user-button"
+              />
+            )}
+          </div>
         )}
       </button>
     </li>
