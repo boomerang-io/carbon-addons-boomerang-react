@@ -372,7 +372,7 @@ const TYPE_PROPS = {
   }),
 
   [INPUT_GROUPS.BOOLEAN]: (formikProps, key) => ({
-    onChange: (value) => {console.log(key, value); return formikProps.setFieldValue(`['${key}']`, value)},
+    onChange: (value) => formikProps.setFieldValue(`['${key}']`, value),
   }),
 };
 
