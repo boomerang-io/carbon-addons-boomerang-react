@@ -588,7 +588,7 @@ export default function DynamicFormik({
           );
           return (
             <DataDrivenInput
-              key={`['${key}']`}
+              key={key}
               customComponent={input.customComponent}
               formikProps={formikProps}
               id={`['${key}']`}
