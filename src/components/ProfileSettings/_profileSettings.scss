@@ -1,0 +1,68 @@
+@include exports('addons-bmrg-profileSettings') {
+  .#{$prefix}--bmrg-profile-settings-container {
+    .#{$prefix}--modal-container {
+      height: rem(640px);
+      width: rem(600px);
+    }
+
+    .#{$prefix}--modal-content {
+      color: #F2F4F8;
+      .#{$prefix}--bmrg-profile-settings__title {
+          color: #F2F4F8;
+          font-size: rem(14px);
+          letter-spacing: rem(0.16px);
+          line-height: rem(18px);
+          margin-top: rem(16px);
+      }
+
+      .#{$prefix}--bmrg-profile-settings__subtitle {
+          color: #F2F4F8;
+          font-size: rem(16px);
+          letter-spacing: rem(0.18px);
+          line-height: rem(20px); 
+          margin-top: rem(24px);
+      }
+
+    .#{$prefix}--bmrg-profile-settings__description {
+        color: #C1C7CD;
+        font-size: rem(12px);
+        letter-spacing: rem(0.32px);
+        line-height: rem(15px);
+        margin-top: rem(8px);
+      }
+
+      .#{$prefix}--bmrg-profile-settings-list {
+
+        .#{$prefix}--checkbox:checked + .#{$prefix}--checkbox-label::before, .#{$prefix}--checkbox:indeterminate + .#{$prefix}--checkbox-label::before {
+          background-color: #F2F4F8;
+          border-color: #F2F4F8;
+        }
+
+        .#{$prefix}--checkbox:checked + .#{$prefix}--checkbox-label::after {
+          border-bottom: 2px solid black;
+          border-left: 2px solid black;
+        }
+
+        .#{$prefix}--checkbox:indeterminate + .#{$prefix}--checkbox-label::after {
+          border-bottom: 2px solid black;
+        }
+
+      }
+
+      .#{$prefix}--bmrg-profile-setting-list__button {
+        background: none;
+        border: none;
+      }
+
+
+      .#{$prefix}--structured-list-th, .#{$prefix}--checkbox-label-text {
+        color: #F2F4F8;
+      }
+
+      .#{$prefix}--structured-list-td {
+        padding-top: rem(9px);
+        padding-bottom: rem(9px);
+      }
+    }
+  }
+}

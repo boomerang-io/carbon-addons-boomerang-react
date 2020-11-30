@@ -228,12 +228,10 @@ class Header extends React.Component {
                 />
               )}
               <HeaderLogo
-                className={cx({
-                  [`${prefix}--bmrg-header-brand--no-menu`]: !this.props.renderSidenav,
-                })}
                 appName={appName}
-                platformName={platformName}
+                href={baseLaunchEnvUrl}
                 navLinks={navLinks}
+                platformName={platformName}
               >
                 {renderLogo && (
                   <BoomerangLogo

@@ -109,7 +109,7 @@ class ContactUs extends Component {
                   type="submit"
                   disabled={!this.state.description || this.state.isPosting}
                 >
-                  {this.state.isPosting ? 'Sending' : 'Send'}
+                  {this.state.error ? 'Try again' : this.state.isPosting ? 'Sending...' : 'Send'}
                 </Button>
               </ModalFooter>
             </form>

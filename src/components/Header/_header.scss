@@ -27,7 +27,6 @@ $breakpoints: (
     background-color: $bmrg-header-nav-color;
     color: $bmrg-secondary-color;
     height: rem(48px);
-    padding: 0 rem(2px);
     width: 100%;
     position: fixed;
     top: 0;
@@ -57,6 +56,7 @@ $breakpoints: (
   }
 
   .#{$prefix}--bmrg-header__wrapper,
+  .#{$prefix}--bmrg-header-brand__link,
   .#{$prefix}--bmrg-header-brand,
   .#{$prefix}--bmrg-header-brand-container {
     color: $bmrg-brand-white;
@@ -71,19 +71,33 @@ $breakpoints: (
     transition: color $carbon-motion--timing--productive $carbon-motion--easing--productive;
   }
 
-  .#{$prefix}--bmrg-header-brand--no-menu {
-    padding-left: rem(20px);
-  }
-
   .#{$prefix}--bmrg-header-brand__icon {
     height: rem(32px);
     width: 7rem;
     margin-right: -0.375rem;
   }
 
+  .#{$prefix}--bmrg-header-brand__link {
+    padding-left: rem(16px);
+    padding-right: rem(16px);
+    text-decoration: none;
+    &:hover {
+      background-color: $bmrg-header-hover-background-color;
+      color: $bmrg-header-active-text-color;
+    }
+
+    &:focus {
+      outline: rem(2px) solid $bmrg-header-active-text-color;
+      outline-offset: rem(-2px);
+
+      &:active {
+        color: $bmrg-header-active-text-color;
+      }
+    }
+  }
+
   .#{$prefix}--bmrg-header-brand__wrapper {
     display: flex;
-    margin-right: rem(32px);
   }
 
   .#{$prefix}--bmrg-header-brand__title {
@@ -105,6 +119,7 @@ $breakpoints: (
   .#{$prefix}--bmrg-header-brand__divider {
     height: rem(24px);
     border-left: 1px solid #4d5358;
+    margin-left: rem(16px);
   }
 
   .#{$prefix}--bmrg-header-list {
@@ -303,7 +318,7 @@ $breakpoints: (
     transition: all $carbon-motion--timing--productive $carbon-motion--easing--productive;
     transform: scale(0.5);
     margin-left: rem(19px);
-    margin-right: 1.3rem;
+    margin-right: rem(4px);
 
     svg {
       fill: $bmrg-header-active-text-color;

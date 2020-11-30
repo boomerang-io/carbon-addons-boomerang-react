@@ -47,6 +47,7 @@ $css--plex: true !default;
 @import '~carbon-components/scss/components/progress-indicator/progress-indicator';
 @import '~carbon-components/scss/components/radio-button/radio-button';
 @import '~carbon-components/scss/components/skeleton/skeleton-placeholder';
+@import '~carbon-components/scss/components/structured-list/structured-list';
 @import '~carbon-components/scss/components/tag/tag';
 @import '~carbon-components/scss/components/text-area/text-area';
 @import '~carbon-components/scss/components/text-input/text-input';
@@ -95,6 +96,7 @@ $css--plex: true !default;
 @import '../components/PlatformBanner/platformBanner';
 @import '../components/PlatformNotifications/platformNotifications';
 @import '../components/PrivacyStatement/privacyStatement';
+@import '../components/ProfileSettings/profileSettings';
 @import '../components/ProtectedRoute/protectedRoute';
 @import '../components/RadioGroup/radioGroup';
 @import '../components/ReportBug/reportBug';
@@ -117,6 +119,7 @@ $css--plex: true !default;
 .#{$prefix}--bmrg-aboutPlatform-container,
 .#{$prefix}--bmrg-contact-us-container,
 .#{$prefix}--bmrg-privacy-statement-container,
+.#{$prefix}--bmrg-profile-settings-container,
 .#{$prefix}--bmrg-report-bug-container,
 .#{$prefix}--bmrg-signout-container,
 .#{$prefix}--bmrg-redirect-container {

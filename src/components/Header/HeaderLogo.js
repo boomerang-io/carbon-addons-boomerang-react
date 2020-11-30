@@ -1,24 +1,23 @@
-import PropTypes from 'prop-types';
 import React from 'react';
-import classNames from 'classnames';
+import PropTypes from 'prop-types';
 import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
 const HeaderLogo = (props) => {
-  const { appName, children, className, navLinks, platformName, ...other } = props;
-
-  const HeaderLogoClasses = classNames(`${prefix}--bmrg-header-brand`, className);
+  const { appName, children, href, navLinks, platformName } = props;
 
   return (
-    <div className={HeaderLogoClasses} {...other}>
-      {children}
-      <div className={`${prefix}--bmrg-header-brand__wrapper`}>
-        {(platformName || appName) && (
-          <h1 className={`${prefix}--bmrg-header-brand__title`}>{platformName}</h1>
-        )}
-        {appName && <span className={`${prefix}--bmrg-header-brand__text`}>{appName}</span>}
-      </div>
+    <div className={`${prefix}--bmrg-header-brand`}>
+      <a className={`${prefix}--bmrg-header-brand__link`} href={href}>
+        {children}
+        <div className={`${prefix}--bmrg-header-brand__wrapper`}>
+          {(platformName || appName) && (
+            <h1 className={`${prefix}--bmrg-header-brand__title`}>{platformName}</h1>
+          )}
+          {appName && <span className={`${prefix}--bmrg-header-brand__text`}>{appName}</span>}
+        </div>
+      </a>
       {Array.isArray(navLinks) && navLinks.length > 0 ? (
         <div className={`${prefix}--bmrg-header-brand__divider`} />
       ) : null}
@@ -35,6 +34,8 @@ HeaderLogo.propTypes = {
   platformName: PropTypes.string,
 };
 
-HeaderLogo.defaultProps = {};
+HeaderLogo.defaultProps = {
+  href: '/',
+};
 
 export default HeaderLogo;
