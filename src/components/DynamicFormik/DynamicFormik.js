@@ -372,7 +372,7 @@ const TYPE_PROPS = {
   }),
 
   [INPUT_GROUPS.BOOLEAN]: (formikProps, key) => ({
-    onChange: (value) => formikProps.setFieldValue(key, value),
+    onChange: (value) => {console.log(key, value); return formikProps.setFieldValue(`['${key}']`, value)},
   }),
 };
 
@@ -524,49 +524,49 @@ export default function DynamicFormik({
    * Get values from formik and normalize keys
    */
 
-  const normalizedInputs = inputs.map((input) => ({
-    ...input,
-    key: input.key.replace(/\./g, '||'),
-    requiredForKey:
-      typeof input.requiredForKey === 'string' ? input.requiredForKey.replace(/\./g, '||') : null,
-  }));
+  // const normalizedInputs = inputs.map((input) => ({
+  //   ...input,
+  //   key: input.key.replace(/\./g, '||'),
+  //   requiredForKey:
+  //     typeof input.requiredForKey === 'string' ? input.requiredForKey.replace(/\./g, '||') : null,
+  // }));
 
-  const normalizeValues = (values) => {
-    if (!Boolean(values)) return {};
-    let inputKeys = Object.entries(values);
-    let newValues = {};
-    inputKeys.forEach((value) => (newValues[value[0].replace(/\./g, '||')] = value[1]));
-    return newValues;
-  };
+  // const normalizeValues = (values) => {
+  //   if (!Boolean(values)) return {};
+  //   let inputKeys = Object.entries(values);
+  //   let newValues = {};
+  //   inputKeys.forEach((value) => (newValues[value[0].replace(/\./g, '||')] = value[1]));
+  //   return newValues;
+  // };
 
   return (
     <Formik
       initialValues={
-        (Boolean(initialValues) && normalizeValues(initialValues)) || {
-          ...determineInitialValues(normalizedInputs),
-          ...normalizeValues(additionalInitialValues),
+        (Boolean(initialValues) && initialValues) || {
+          ...determineInitialValues(inputs),
+          ...additionalInitialValues,
         }
       }
       validationSchema={
         validationSchema ||
         generateYupSchema({
-          inputs: normalizedInputs,
+          inputs,
           validationSchemaExtension,
           allowCustomPropertySyntax,
           customPropertySyntaxPattern,
         })
       }
       onSubmit={(values, actions) => {
-        let inputKeys = Object.entries(values);
-        let newValues = {};
-        inputKeys.forEach((value) => (newValues[value[0].replace(/\|\|/g, '.')] = value[1]));
-        onSubmit(newValues, actions);
+        // let inputKeys = Object.entries(values);
+        // let newValues = {};
+        // inputKeys.forEach((value) => (newValues[value[0].replace(/\|\|/g, '.')] = value[1]));
+        onSubmit(values, actions);
       }}
       {...otherProps}
     >
       {(formikProps) => {
         const { values, touched, errors, handleBlur } = formikProps;
-        const finalInputs = normalizedInputs.filter((input) =>
+        const finalInputs = inputs.filter((input) =>
           conditionallyRenderInput(input, values)
         );
 
@@ -586,16 +586,15 @@ export default function DynamicFormik({
             type,
             otherProps
           );
-
           return (
             <DataDrivenInput
-              key={key}
+              key={`['${key}']`}
               customComponent={input.customComponent}
               formikProps={formikProps}
-              id={key}
+              id={`['${key}']`}
               invalid={invalid}
               invalidText={invalidText}
-              name={key}
+              name={`['${key}']`}
               onBlur={handleBlur}
               type={type}
               value={inputValue}
