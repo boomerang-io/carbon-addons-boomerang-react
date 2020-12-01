@@ -62,5 +62,18 @@
     fill: $inverse-support-01;
     height: 1.25rem;
     width: 1.25rem;
+    margin-left: 1rem;
+  }
+
+  .#{$prefix}--bmrg-member-bar__partner-text {
+    color: var(--cds-text-02);
+    font-size: 0.75rem;
+    letter-spacing: 0.02rem;
+    line-height: 0.9375rem;
+  }
+
+  .#{$prefix}--bmrg-member-bar__right-section {
+    align-items: center;
+    display: flex;
   }
 }
