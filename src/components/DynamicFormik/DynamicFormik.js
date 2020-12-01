@@ -520,24 +520,6 @@ export default function DynamicFormik({
   validationSchemaExtension,
   ...otherProps
 }) {
-  /**
-   * Get values from formik and normalize keys
-   */
-
-  // const normalizedInputs = inputs.map((input) => ({
-  //   ...input,
-  //   key: input.key.replace(/\./g, '||'),
-  //   requiredForKey:
-  //     typeof input.requiredForKey === 'string' ? input.requiredForKey.replace(/\./g, '||') : null,
-  // }));
-
-  // const normalizeValues = (values) => {
-  //   if (!Boolean(values)) return {};
-  //   let inputKeys = Object.entries(values);
-  //   let newValues = {};
-  //   inputKeys.forEach((value) => (newValues[value[0].replace(/\./g, '||')] = value[1]));
-  //   return newValues;
-  // };
 
   return (
     <Formik
@@ -556,12 +538,7 @@ export default function DynamicFormik({
           customPropertySyntaxPattern,
         })
       }
-      onSubmit={(values, actions) => {
-        // let inputKeys = Object.entries(values);
-        // let newValues = {};
-        // inputKeys.forEach((value) => (newValues[value[0].replace(/\|\|/g, '.')] = value[1]));
-        onSubmit(values, actions);
-      }}
+      onSubmit={(values, actions) => onSubmit(values, actions)}
       {...otherProps}
     >
       {(formikProps) => {
