@@ -5,8 +5,8 @@ import AboutPlatform from './AboutPlatform.js';
 
 test('correct version rendered', () => {
   // Render new instance in every test to prevent leaking state
-  const { getByText } = render(<AboutPlatform version="1.2.1" />);
-  const btn = getByText(/About the Platform/i);
+  const { getByText, getByRole } = render(<AboutPlatform version="1.2.1" />);
+  const btn = getByRole('button', { name: /About the Platform/i });
 
   fireEvent.click(btn);
 
@@ -14,10 +14,10 @@ test('correct version rendered', () => {
   expect(version).toBeInTheDocument();
 });
 
-test('correct orginization rendered', () => {
+test('correct organization rendered', () => {
   // Render new instance in every test to prevent leaking state
-  const { getByText } = render(<AboutPlatform organization="Boomerang" />);
-  const btn = getByText(/About the Platform/i);
+  const { getByText, getByRole } = render(<AboutPlatform organization="Boomerang" />);
+  const btn = getByRole('button', { name: /About the Platform/i });
 
   fireEvent.click(btn);
 

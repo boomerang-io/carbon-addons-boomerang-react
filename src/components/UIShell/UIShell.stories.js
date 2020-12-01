@@ -20,16 +20,19 @@ import UIShell from './UIShell';
 
 const mock = new MockAdapter(axios);
 
+const BASE_URL = 'https://www.ibm.com/services';
+
 storiesOf('UIShell', module)
   .add('default', () => {
-    mock.onGet('https://www.ibm.com/users/consents').reply(200, PRIVACY_DATA);
-    mock.onGet('https://www.ibm.com/launchpad/users').reply(200, PROFILE_SETTINGS_DATA);
+    mock.onGet(`${BASE_URL}/users/consents`).reply(200, PRIVACY_DATA);
+    mock.onGet(`${BASE_URL}/launchpad/users`).reply(200, PROFILE_SETTINGS_DATA);
+    mock.onPost(`${BASE_URL}/support/contact`).reply(200);
     return (
       <UIShell
         renderLogo={boolean('renderLogo', true)}
         appName={text('appName', 'Flow')}
         platformName={text('platformName', 'Boomerang')}
-        baseServiceUrl="https://www.ibm.com"
+        baseServiceUrl={BASE_URL}
         headerConfig={{
           features: {
             'community.enabled': boolean('community.enabled', true),
@@ -74,16 +77,17 @@ storiesOf('UIShell', module)
     );
   })
   .add('with Carbon sidenav and React Router ', () => {
-    mock.onGet('https://www.ibm.com/users/consents').reply(200, PRIVACY_DATA);
-    mock.onGet('https://www.ibm.com/launchpad/users').reply(200, PROFILE_SETTINGS_DATA);
-    mock.onPatch('https://www.ibm.com/users/profile').reply(200);
+    mock.onGet(`${BASE_URL}/users/consents`).reply(200, PRIVACY_DATA);
+    mock.onGet(`${BASE_URL}/launchpad/users`).reply(200, PROFILE_SETTINGS_DATA);
+    mock.onPatch(`${BASE_URL}/users/profile`).reply(200);
+    mock.onPost(`${BASE_URL}/support/contact`).reply(200);
     return (
       <Router>
         <UIShell
           renderLogo={boolean('renderLogo', true)}
           platformName={text('platformName', 'Boomerang')}
           appName={text('appName', '')}
-          baseServiceUrl="https://www.ibm.com"
+          baseServiceUrl={BASE_URL}
           headerConfig={{
             features: {
               'community.enabled': boolean('community.enabled', true),
@@ -192,14 +196,15 @@ storiesOf('UIShell', module)
     );
   })
   .add('with right panel', () => {
-    mock.onGet('https://www.ibm.com/users/consents').reply(200, PRIVACY_DATA);
-    mock.onGet('https://www.ibm.com/launchpad/users').reply(200, PROFILE_SETTINGS_DATA);
+    mock.onGet(`${BASE_URL}/users/consents`).reply(200, PRIVACY_DATA);
+    mock.onGet(`${BASE_URL}/launchpad/users`).reply(200, PROFILE_SETTINGS_DATA);
+    mock.onPost(`${BASE_URL}/support/contact`).reply(200);
     return (
       <UIShell
         renderLogo={boolean('renderLogo', true)}
         appName={text('appName', '')}
         platformName={text('platformName', 'Boomerang')}
-        baseServiceUrl="https://www.ibm.com"
+        baseServiceUrl={BASE_URL}
         headerConfig={{
           features: {
             'community.enabled': boolean('community.enabled', true),
@@ -260,13 +265,13 @@ storiesOf('UIShell', module)
     );
   })
   .add('user not consented', () => {
-    mock.onGet('https://www.ibm.com/users/consents').reply(200, PRIVACY_DATA);
-    mock.onGet('https://www.ibm.com/launchpad/users').reply(200, PROFILE_SETTINGS_DATA);
+    mock.onGet(`${BASE_URL}/users/consents`).reply(200, PRIVACY_DATA);
+    mock.onGet(`${BASE_URL}/launchpad/users`).reply(200, PROFILE_SETTINGS_DATA);
     return (
       <UIShell
         renderLogo={boolean('renderLogo', true)}
         appName={text('appName', '')}
-        baseServiceUrl="https://www.ibm.com"
+        baseServiceUrl={BASE_URL}
         platformName={text('platformName', 'Boomerang')}
         headerConfig={{
           features: {
@@ -312,13 +317,13 @@ storiesOf('UIShell', module)
     );
   })
   .add('user pending deletion', () => {
-    mock.onGet('https://www.ibm.com/users/consents').reply(200, PRIVACY_DATA);
+    mock.onGet(`${BASE_URL}/users/consents`).reply(200, PRIVACY_DATA);
     return (
       <UIShell
         renderLogo={boolean('renderLogo', true)}
         platformName={text('platformName', 'Boomerang')}
         appName={text('appName', '')}
-        baseServiceUrl="https://www.ibm.com"
+        baseServiceUrl={BASE_URL}
         headerConfig={{
           features: {
             'community.enabled': boolean('community.enabled', true),
@@ -363,6 +368,6 @@ storiesOf('UIShell', module)
     );
   })
   .add('without props', () => {
-    mock.onGet('https://www.ibm.com/users/consents').reply(200, PRIVACY_DATA);
+    mock.onGet(`${BASE_URL}/users/consents`).reply(200, PRIVACY_DATA);
     return <UIShell />;
   });

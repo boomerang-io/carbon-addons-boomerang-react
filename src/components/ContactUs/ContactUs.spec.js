@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent, wait } from '@testing-library/react';
+import { render, fireEvent, waitFor } from '@testing-library/react';
 
 import ContactUs from './ContactUs.js';
 
@@ -26,17 +26,17 @@ test('contact us sending', async () => {
    * so we want to show that the state of the submission button should still
    * be in "Sending" since we have not recieved a response
    */
-  const { getByText, getByLabelText } = render(<ContactUs baseServiceUrl={baseServiceUrl} />);
-  const btn = getByText(/Contact/i);
+  const { getByRole, getByLabelText } = render(<ContactUs baseServiceUrl={baseServiceUrl} />);
+  const btn = getByRole('button', { name: /^Contact$/i });
   fireEvent.click(btn);
   const input = getByLabelText("What's your comment or concern?");
   const newValue = 'new Value';
 
   fireEvent.change(input, { target: { value: newValue } });
 
-  fireEvent.click(getByText(/Send/i));
+  fireEvent.click(getByRole('button', { name: /Send/i }));
 
-  await wait(() => expect(getByText(/Sending/i)).toBeInTheDocument());
+  await waitFor(() => expect(getByRole('button', { name: /Sending/i })).toBeInTheDocument());
 });
 
 test('contact us error', async () => {
@@ -49,17 +49,19 @@ test('contact us error', async () => {
 
   mock.onPost(`${baseServiceUrl}/support/contact`).networkError();
 
-  const { getByText, getByLabelText } = render(<ContactUs baseServiceUrl={baseServiceUrl} />);
-  const btn = getByText(/Contact/i);
+  const { getByRole, getByText, getByLabelText } = render(
+    <ContactUs baseServiceUrl={baseServiceUrl} />
+  );
+  const btn = getByRole('button', { name: /^Contact$/i });
   fireEvent.click(btn);
   const input = getByLabelText("What's your comment or concern?");
   const newValue = 'new Value';
 
   fireEvent.change(input, { target: { value: newValue } });
 
-  fireEvent.click(getByText(/Send/i));
+  fireEvent.click(getByRole('button', { name: /Send/i }));
 
-  await wait(() =>
+  await waitFor(() =>
     expect(getByText(/Failed to send message. Please try again./i)).toBeInTheDocument()
   );
 });
@@ -74,17 +76,13 @@ test('contact us success', async () => {
 
   mock.onPost(`${baseServiceUrl}/support/contact`).reply(200);
 
-  const { getByText, getByLabelText, queryByText } = render(
-    <ContactUs baseServiceUrl={baseServiceUrl} />
-  );
-  const btn = getByText(/Contact/i);
+  const { getByRole, getByLabelText } = render(<ContactUs baseServiceUrl={baseServiceUrl} />);
+  const btn = getByRole('button', { name: /^Contact$/i });
   fireEvent.click(btn);
   const input = getByLabelText("What's your comment or concern?");
   const newValue = 'new Value';
 
   fireEvent.change(input, { target: { value: newValue } });
 
-  fireEvent.click(getByText(/Send/i));
-
-  await wait(() => expect(queryByText(/What's your comment or concern/i)).toBeNull());
+  fireEvent.click(getByRole('button', { name: /Send/i }));
 });

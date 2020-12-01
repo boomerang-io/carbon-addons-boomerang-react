@@ -9,7 +9,7 @@ const HeaderLogo = (props) => {
 
   return (
     <div className={`${prefix}--bmrg-header-brand`}>
-      <a className={`${prefix}--bmrg-header-brand__link`} href={href}>
+      <a alt="Home" aria-label="Home" className={`${prefix}--bmrg-header-brand__link`} href={href}>
         {children}
         <div className={`${prefix}--bmrg-header-brand__wrapper`}>
           {(platformName || appName) && (

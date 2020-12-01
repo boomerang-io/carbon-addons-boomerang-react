@@ -18,7 +18,7 @@ const UserHeaderMenuItem = ({ children, className, forwardRef, src, style, userN
         buttonTriggerClassName={`${prefix}--bmrg-header-menu-item`}
         buttonTriggerText={
           <div className={`${prefix}--bmrg-header-menu-user`}>
-            <Avatar size="medium" src={src} username={userName} />
+            <Avatar size="medium" src={src} userName={userName} />
             <p className={`${prefix}--bmrg-header-menu-user__name`}> {userName ? userName : ''} </p>
           </div>
         }

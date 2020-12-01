@@ -8,7 +8,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, ComposedModal } from 'carbon-components-react';
-import FocusTrap from 'react-focus-trap';
+//import FocusTrap from 'react-focus-trap';
 
 export default class HeaderMenuModalWrapper extends React.Component {
   static propTypes = {
@@ -96,9 +96,7 @@ export default class HeaderMenuModalWrapper extends React.Component {
         >
           {buttonTriggerText}
         </Button>
-        <FocusTrap onExit={this.handleClose} active={this.state.isOpen}>
-          <ComposedModal {...props}>{children({ closeModal: this.handleClose })}</ComposedModal>
-        </FocusTrap>
+        <ComposedModal {...props}>{children({ closeModal: this.handleClose })}</ComposedModal>
       </div>
     );
   }

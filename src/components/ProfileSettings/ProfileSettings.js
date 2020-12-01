@@ -16,17 +16,19 @@ import {
   ModalBody,
   ModalFooter,
 } from 'carbon-components-react/lib/components/ComposedModal';
-import { settings } from 'carbon-components';
 import ErrorMessage from '../ErrorMessage';
 import HeaderMenuUser from '../HeaderMenuUser';
 import notify from '../Notifications/notify';
 import ToastNotification from '../Notifications/ToastNotification';
+import { settings } from 'carbon-components';
 import sortBy from 'lodash/sortBy';
 
 const { prefix } = settings;
 
 ProfileSettings.propTypes = {
   baseServiceUrl: PropTypes.string.isRequired,
+  src: PropTypes.string.isRequired,
+  userName: PropTypes.string.isRequired,
 };
 
 function ProfileSettings({ baseServiceUrl, src, userName }) {
@@ -48,7 +50,6 @@ function ProfileSettings({ baseServiceUrl, src, userName }) {
 
   function handleSubmit({ closeModal }) {
     setIsSubmitting(true);
-    console.log(teams);
     axios
       .patch(`${baseServiceUrl}/users/profile`, {
         lowerLevelGroups: teams,
@@ -57,7 +58,7 @@ function ProfileSettings({ baseServiceUrl, src, userName }) {
         setIsSubmitting(false);
         notify(
           <ToastNotification
-            subtitle="Successfully update user settings"
+            subtitle="Successfully updated user settings"
             title="Update Settings"
             kind="success"
           />,
@@ -109,72 +110,72 @@ function ProfileSettings({ baseServiceUrl, src, userName }) {
               }}
               title="User profile"
             />
-            <ModalBody style={{ position: 'relative' }}>
-              <p className={`${prefix}--bmrg-profile-settings__title`}>
-                More user profile settings will be here eventually, but for now you can choose which
-                Teams are shown in your sidebar in Launchpad.
-              </p>
-              <h2 className={`${prefix}--bmrg-profile-settings__subtitle`}>
-                Teams visible in Launchpad sidebar
-              </h2>
-              <p className={`${prefix}--bmrg-profile-settings__description`}>
-                Choose Teams to show or hide in your Launchpad sidebar and Catalog (useful for
-                sensitive demos). You will not be able to access or view unchecked Teams from the
-                sidebar, and cannot add items to them from Catalog.
-              </p>
-              {isLoading ? (
-                <StructuredListSkeleton />
-              ) : isLoadingError ? (
-                <ErrorMessage style={{ color: '#F2F4F8' }} />
-              ) : (
-                <StructuredListWrapper className={`${prefix}--bmrg-profile-settings-list`}>
-                  <StructuredListHead>
-                    <StructuredListRow head>
-                      <StructuredListCell head>
-                        <Checkbox
-                          checked={allTeamsAreChecked}
-                          labelText={'Team Name'}
-                          id={'team-name-batch-toggle'}
-                          indeterminate={someTeamsAreChecked}
-                          onChange={batchChangeTeamVisibility}
-                        />
-                      </StructuredListCell>
-                    </StructuredListRow>
-                  </StructuredListHead>
-                  <StructuredListBody>
-                    {sortBy(teams, 'name').map(({ name, id, visible }) => (
-                      <StructuredListRow key={id}>
-                        <StructuredListCell>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleSubmit({ closeModal });
+              }}
+            >
+              <ModalBody style={{ height: '30rem' }}>
+                <p className={`${prefix}--bmrg-profile-settings__title`}>
+                  More user profile settings will be here eventually, but for now you can choose
+                  which Teams are shown in your sidebar in Launchpad.
+                </p>
+                <h2 className={`${prefix}--bmrg-profile-settings__subtitle`}>
+                  Teams visible in Launchpad sidebar
+                </h2>
+                <p className={`${prefix}--bmrg-profile-settings__description`}>
+                  Choose Teams to show or hide in your Launchpad sidebar and Catalog (useful for
+                  sensitive demos). You will not be able to access or view unchecked Teams from the
+                  sidebar, and cannot add items to them from Catalog.
+                </p>
+                {isLoading ? (
+                  <StructuredListSkeleton />
+                ) : isLoadingError ? (
+                  <ErrorMessage style={{ color: '#F2F4F8' }} />
+                ) : (
+                  <StructuredListWrapper className={`${prefix}--bmrg-profile-settings-list`}>
+                    <StructuredListHead>
+                      <StructuredListRow head>
+                        <StructuredListCell head>
                           <Checkbox
-                            checked={visible}
-                            labelText={name}
-                            id={id}
-                            onChange={(isChecked, id) => {
-                              return handleUpdateTeamVisibility(id, isChecked);
-                            }}
+                            checked={allTeamsAreChecked}
+                            labelText={'Team Name'}
+                            id={'team-name-batch-toggle'}
+                            indeterminate={someTeamsAreChecked}
+                            onChange={batchChangeTeamVisibility}
                           />
                         </StructuredListCell>
                       </StructuredListRow>
-                    ))}
-                  </StructuredListBody>
-                </StructuredListWrapper>
-              )}
-            </ModalBody>
-            <ModalFooter>
-              <Button kind="secondary" onClick={closeModal}>
-                Cancel
-              </Button>
-              <Button
-                kind="primary"
-                type="submit"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleSubmit({ closeModal });
-                }}
-              >
-                {isSubmitError ? 'Try Again' : isSubmitting ? 'Saving...' : 'Save'}
-              </Button>
-            </ModalFooter>
+                    </StructuredListHead>
+                    <StructuredListBody>
+                      {sortBy(teams, 'name').map(({ name, id, visible }) => (
+                        <StructuredListRow key={id}>
+                          <StructuredListCell>
+                            <Checkbox
+                              checked={visible}
+                              labelText={name}
+                              id={id}
+                              onChange={(isChecked, id) => {
+                                return handleUpdateTeamVisibility(id, isChecked);
+                              }}
+                            />
+                          </StructuredListCell>
+                        </StructuredListRow>
+                      ))}
+                    </StructuredListBody>
+                  </StructuredListWrapper>
+                )}
+              </ModalBody>
+              <ModalFooter>
+                <Button kind="secondary" onClick={closeModal}>
+                  Cancel
+                </Button>
+                <Button kind="primary" type="submit">
+                  {isSubmitError ? 'Try Again' : isSubmitting ? 'Saving...' : 'Save changes'}
+                </Button>
+              </ModalFooter>
+            </form>
           </>
         );
       }}

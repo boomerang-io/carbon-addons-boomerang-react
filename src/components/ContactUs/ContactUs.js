@@ -122,6 +122,4 @@ class ContactUs extends Component {
 
 ContactUs.propTypes = { baseServiceUrl: PropTypes.string };
 
-ContactUs.defaultProps = {};
-
 export default ContactUs;

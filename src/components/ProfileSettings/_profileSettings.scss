@@ -32,6 +32,7 @@
       }
 
       .#{$prefix}--bmrg-profile-settings-list {
+        margin-bottom: 3rem;
 
         .#{$prefix}--checkbox:checked + .#{$prefix}--checkbox-label::before, .#{$prefix}--checkbox:indeterminate + .#{$prefix}--checkbox-label::before {
           background-color: #F2F4F8;
