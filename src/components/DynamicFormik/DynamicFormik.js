@@ -335,28 +335,28 @@ const conditionallyRenderInput = (input, values) => {
  */
 const TYPE_PROPS = {
   [INPUT_GROUPS.CHECKBOX]: (formikProps, key) => ({
-    onChange: (value, id, event, selectedItems) => formikProps.setFieldValue(key, selectedItems),
+    onChange: (value, id, event, selectedItems) => formikProps.setFieldValue(`['${key}']`, selectedItems),
   }),
 
   [INPUT_GROUPS.CREATABLE]: (formikProps, key) => ({
-    onChange: (createdItems) => formikProps.setFieldValue(key, createdItems),
+    onChange: (createdItems) => formikProps.setFieldValue(`['${key}']`, createdItems),
   }),
 
   [INPUT_GROUPS.MULTI_SELECT]: (formikProps, key) => ({
     onChange: ({ selectedItems }) =>
       formikProps.setFieldValue(
-        key,
+        `['${key}']`,
         selectedItems.map((item) => item && item.value)
       ),
   }),
 
   [INPUT_GROUPS.RADIO]: (formikProps, key) => ({
-    onChange: (value) => formikProps.setFieldValue(key, value),
+    onChange: (value) => formikProps.setFieldValue(`['${key}']`, value),
   }),
 
   [INPUT_GROUPS.SELECT]: (formikProps, key) => ({
     onChange: ({ selectedItem }) =>
-      formikProps.setFieldValue(key, selectedItem ? selectedItem.value : ''),
+      formikProps.setFieldValue(`['${key}']`, selectedItem ? selectedItem.value : ''),
   }),
 
   [INPUT_GROUPS.TEXT_AREA]: (formikProps) => ({
