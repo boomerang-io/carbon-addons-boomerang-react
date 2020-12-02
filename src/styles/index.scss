@@ -131,8 +131,8 @@ $css--plex: true !default;
     * {
       &:focus,
       &::before {
-        outline-color: $bmrg-secondary-color;
-        border-color: $bmrg-secondary-color;
+        outline-color: $bmrg-secondary-color !important;
+        border-color: $bmrg-secondary-color !important;
       }
     }
 

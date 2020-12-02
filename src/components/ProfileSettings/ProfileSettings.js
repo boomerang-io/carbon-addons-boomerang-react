@@ -40,29 +40,34 @@ function ProfileSettings({ baseServiceUrl, src, userName }) {
   const [isLoadingError, setIsLoadingError] = useState();
   const [isSubmitError, setIsSubmitError] = useState();
 
-  const fetchTeams = useCallback(() => {
-    setIsLoading(true);
-    axios(`${baseServiceUrl}/launchpad/users`)
-      .then((response) => {
-        const teams = response.data.lowerLevelGroups;
-        setTeams(teams);
-        setInitialTeams(teams);
-      })
-      .catch((err) => setIsLoadingError(err))
-      .then(() => {
-        setIsLoading(false);
-      });
-  }, [baseServiceUrl]);
+  const fetchTeams = useCallback(
+    ({ showLoading }) => {
+      if (showLoading) {
+        setIsLoading(true);
+      }
+      axios(`${baseServiceUrl}/launchpad/users`)
+        .then((response) => {
+          const teams = response.data.lowerLevelGroups;
+          setTeams(teams);
+          setInitialTeams(teams);
+        })
+        .catch((err) => setIsLoadingError(err))
+        .then(() => {
+          setIsLoading(false);
+        });
+    },
+    [baseServiceUrl]
+  );
 
   useEffect(() => {
-    fetchTeams();
+    fetchTeams({ showLoading: true });
   }, [fetchTeams]);
 
   function handleCloseModal({ closeModal }) {
     setIsLoadingError(false);
     setIsSubmitError(false);
     closeModal();
-    fetchTeams();
+    fetchTeams({ showLoading: false });
   }
 
   function handleSubmit({ closeModal }) {
@@ -90,8 +95,8 @@ function ProfileSettings({ baseServiceUrl, src, userName }) {
       });
   }
 
-  const visibleTeamCount = teams.filter((team) => team.visible).length;
-  const allTeamsAreChecked = teams.length === visibleTeamCount;
+  const visibleTeamCount = teams?.filter((team) => team?.visible)?.length ?? 0;
+  const allTeamsAreChecked = teams?.length === visibleTeamCount;
   const someTeamsAreChecked = visibleTeamCount > 0 && !allTeamsAreChecked;
   const isConfigDifferent = determineIfConfigIsDifferent(teams, initialTeams);
 
