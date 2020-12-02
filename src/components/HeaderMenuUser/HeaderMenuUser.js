@@ -15,6 +15,7 @@ const UserHeaderMenuItem = ({ children, className, forwardRef, src, style, userN
   return (
     <div className={wrapperClassNames} style={style} role="presentation" ref={forwardRef}>
       <HeaderMenuModalWrapper
+        preventCloseOnClickOutside
         buttonTriggerClassName={`${prefix}--bmrg-header-menu-item`}
         buttonTriggerText={
           <div className={`${prefix}--bmrg-header-menu-user`}>

@@ -63,12 +63,14 @@ export default class HeaderMenuModalWrapper extends React.Component {
       triggerButtonIconDescription,
       triggerButtonKind,
       disabled,
+      preventCloseOnClickOutside,
       selectorPrimaryFocus,
       ...other
     } = this.props;
 
     const props = {
       ...other,
+      preventCloseOnClickOutside,
       selectorPrimaryFocus,
       onClose: this.handleClose,
       open: this.state.isOpen,

@@ -70,6 +70,7 @@ class ContactUs extends Component {
   render() {
     return (
       <HeaderMenuItem
+        preventCloseOnClickOutside
         text="Contact"
         iconName="chat"
         className={`${prefix}--bmrg-contact-us-container`}
