@@ -133,7 +133,7 @@ function ProfileSettings({ baseServiceUrl, src, userName }) {
                   <StructuredListSkeleton />
                 ) : isLoadingError ? (
                   <ErrorMessage style={{ color: '#F2F4F8' }} />
-                ) : (
+                ) : teams?.length > 0 ? (
                   <StructuredListWrapper className={`${prefix}--bmrg-profile-settings-list`}>
                     <StructuredListHead>
                       <StructuredListRow head>
@@ -165,6 +165,10 @@ function ProfileSettings({ baseServiceUrl, src, userName }) {
                       ))}
                     </StructuredListBody>
                   </StructuredListWrapper>
+                ) : (
+                  <p style={{ marginTop: '3rem', color: '#F2F4F8' }}>
+                    No teams to configure. Add or join teams in Launchpad!
+                  </p>
                 )}
               </ModalBody>
               <ModalFooter>
