@@ -108,15 +108,15 @@ class Header extends React.Component {
   }
 
   handleClickOutside = (event) => {
-    if (this.navRef && !this.navRef.current.contains(event.target)) {
+    if (this.navRef && !this.navRef.current?.contains(event.target)) {
       this.handleClickOutsideHeaderState();
     }
 
-    if (this.mobileNavRef && !this.mobileNavRef.current.contains(event.target)) {
+    if (this.mobileNavRef && !this.mobileNavRef.current?.contains(event.target)) {
       this.handleClickOutsideMobileNavState();
     }
 
-    if (this.sideNavRef && !this.sideNavRef.current.contains(event.target)) {
+    if (this.sideNavRef && !this.sideNavRef.current?.contains(event.target)) {
       this.handleClickOutsideSidenavState();
     }
   };
@@ -228,12 +228,10 @@ class Header extends React.Component {
                 />
               )}
               <HeaderLogo
-                className={cx({
-                  [`${prefix}--bmrg-header-brand--no-menu`]: !this.props.renderSidenav,
-                })}
                 appName={appName}
-                platformName={platformName}
+                href={baseLaunchEnvUrl}
                 navLinks={navLinks}
+                platformName={platformName}
               >
                 {renderLogo && (
                   <BoomerangLogo

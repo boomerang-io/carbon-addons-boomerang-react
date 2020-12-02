@@ -172,6 +172,7 @@ class ReportBug extends Component {
   render() {
     return (
       <HeaderMenuItem
+        preventCloseOnClickOutside
         text="Report issue"
         iconName="debug"
         className={`${prefix}--bmrg-report-bug-container`}

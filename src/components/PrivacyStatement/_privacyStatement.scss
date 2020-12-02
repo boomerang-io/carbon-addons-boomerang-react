@@ -8,6 +8,11 @@
     .#{$prefix}--bmrg-privacy-statement-delete {
       width: 100%;
 
+      .#{$prefix}--modal {
+        width: 100%;
+        height: 100%;
+      }
+
       .#{$prefix}--modal-container {
         height: rem(476px);
         width: rem(500px);
@@ -28,6 +33,10 @@
       }
 
       .#{$prefix}--btn--danger {
+        width: 100%;
+      }
+
+      .#{$prefix}--bmrg-privacy-statement-delete__castle {
         width: 100%;
       }
 
