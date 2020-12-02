@@ -39,17 +39,6 @@ test('Privacy Statement success', async () => {
 });
 
 test('Privacy Statement error', async () => {
-  /**
-   * Simulate deleting account
-   * -pulls in mocked out data
-   * -ends in failure based on
-   *
-   * NOTE: there is a conole warning here stating that when updating the state
-   * of a component, you should use the act() function. Bug in React Hooks:
-   * https://github.com/kentcdodds/@testing-library/react/issues/285
-   *
-   */
-
   const mock = new MockAdapter(axios);
   mock.onGet(`${baseServiceUrl}/launchpad/users`).reply(200, PROFILE_SETTINGS_DATA);
   mock.onPatch(`${baseServiceUrl}/users/profile`).reply(500);
