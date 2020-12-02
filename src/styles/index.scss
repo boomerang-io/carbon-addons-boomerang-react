@@ -172,21 +172,15 @@ $css--plex: true !default;
   }
 
   .#{$prefix}--modal-header__label {
-    height: rem(20px);
     color: #9fa5ad;
-    font-size: rem(14px);
-    font-weight: 600;
-    line-height: rem(20px);
     text-transform: initial;
-    margin-bottom: rem(2px);
   }
 
   .#{$prefix}--modal-header__heading {
     height: rem(26px);
     color: $bmrg-brand-white;
-    font-size: rem(28px);
+    font-size: rem(20px);
     font-weight: 300;
-    line-height: rem(26px);
   }
 
   .#{$prefix}--modal-close__icon {

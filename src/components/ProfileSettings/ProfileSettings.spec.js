@@ -7,8 +7,9 @@ import ProfileSettings from './ProfileSettings';
 import { PROFILE_SETTINGS_DATA } from './constants';
 
 const baseServiceUrl = 'http://boomerang.com';
-const mock = new MockAdapter(axios);
-test('Privacy Statement success', async () => {
+
+test('Profile Settings success', async () => {
+  const mock = new MockAdapter(axios);
   mock.onGet(`${baseServiceUrl}/launchpad/users`).reply(200, PROFILE_SETTINGS_DATA);
   mock.onPatch(`${baseServiceUrl}/users/profile`).networkError();
 
@@ -20,7 +21,7 @@ test('Privacy Statement success', async () => {
   fireEvent.click(userBtn);
 
   const btn = await findByText(/Save changes/i);
-
+  expect(btn).toBeDisabled();
   const allToggle = getByLabelText('Team Name');
   const team1Toggle = getByLabelText('Team 1');
   const team2Toggle = getByLabelText('Team 2');
@@ -28,6 +29,7 @@ test('Privacy Statement success', async () => {
   fireEvent.click(allToggle);
   expect(team1Toggle).toBeEnabled();
   expect(team2Toggle).toBeEnabled();
+  expect(btn).toBeEnabled();
 
   fireEvent.click(btn);
 
@@ -38,17 +40,20 @@ test('Privacy Statement success', async () => {
   );
 });
 
-test('Privacy Statement error', async () => {
-  const mock = new MockAdapter(axios);
-  mock.onGet(`${baseServiceUrl}/launchpad/users`).reply(200, PROFILE_SETTINGS_DATA);
-  mock.onPatch(`${baseServiceUrl}/users/profile`).reply(500);
+const mock = new MockAdapter(axios);
+mock.onGet(`${baseServiceUrl}/launchpad/users`).reply(200, PROFILE_SETTINGS_DATA);
+mock.onPatch(`${baseServiceUrl}/users/profile`).reply(500);
 
-  const { findByText, getByText } = render(
+test('Profile Settings error', async () => {
+  const { findByText, findByLabelText, getByText } = render(
     <ProfileSettings baseServiceUrl={baseServiceUrl} userName="Boomerang Joe" src="joe@ibm.com" />
   );
 
   const userBtn = getByText('Boomerang Joe');
   fireEvent.click(userBtn);
+
+  const allToggle = await findByLabelText(/Team Name/i);
+  fireEvent.click(allToggle);
 
   const btn = await findByText(/Save changes/i);
   fireEvent.click(btn);
@@ -56,7 +61,7 @@ test('Privacy Statement error', async () => {
   await waitFor(() => expect(getByText(/try again/i)).toBeInTheDocument());
 });
 
-test('Privacy Statement accessibility', async () => {
+test('Profile Settings accessibility', async () => {
   const { container } = render(
     <ProfileSettings baseServiceUrl={baseServiceUrl} userName="Boomerang Joe" src="joe@ibm.com" />
   );

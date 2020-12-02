@@ -1,7 +1,8 @@
 @include exports('addons-bmrg-headerMenuItem') {
   .#{$prefix}--bmrg-header-menu-item {
-    height: rem(40px);
-    width: rem(210px);
+    min-height: rem(48px);
+    height: 100%;
+    width: rem(240px);
     background-color: $bmrg-tertiary-color;
     border: rem(1px) solid transparent;
     border-radius: 0;
@@ -29,24 +30,23 @@
   .#{$prefix}--bmrg-header-menu-item__content {
     display: flex;
     align-items: center;
-    margin-left: 0.5rem;
+    margin-left: rem(16px);
   }
 
   .#{$prefix}--bmrg-header-menu-item__img {
     line-height: 0;
-    width: 1.5rem;
     svg {
-      fill: $bmrg-secondary-color;
+      fill: $bmrg-header-active-text-color;
     }
   }
 
   .#{$prefix}--bmrg-header-menu-item__text {
     align-items: center;
-    color: $bmrg-secondary-color;
+    color: $bmrg-header-active-text-color;
     display: flex;
     font-size: rem(14px);
     font-weight: 500;
     line-height: rem(18px);
-    margin-left: rem(8px);
+    margin-left: rem(16px);
   }
 }

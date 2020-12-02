@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import {
   Button,
   Checkbox,
+  InlineNotification,
   StructuredListWrapper,
   StructuredListHead,
   StructuredListBody,
@@ -32,24 +33,41 @@ ProfileSettings.propTypes = {
 };
 
 function ProfileSettings({ baseServiceUrl, src, userName }) {
+  const [initialTeams, setInitialTeams] = useState([]);
   const [teams, setTeams] = useState([]);
   const [isLoading, setIsLoading] = useState();
   const [isSubmitting, setIsSubmitting] = useState();
   const [isLoadingError, setIsLoadingError] = useState();
   const [isSubmitError, setIsSubmitError] = useState();
 
-  useEffect(() => {
+  const fetchTeams = useCallback(() => {
     setIsLoading(true);
     axios(`${baseServiceUrl}/launchpad/users`)
-      .then((response) => setTeams(response.data.lowerLevelGroups))
+      .then((response) => {
+        const teams = response.data.lowerLevelGroups;
+        setTeams(teams);
+        setInitialTeams(teams);
+      })
       .catch((err) => setIsLoadingError(err))
       .then(() => {
         setIsLoading(false);
       });
   }, [baseServiceUrl]);
 
+  useEffect(() => {
+    fetchTeams();
+  }, [fetchTeams]);
+
+  function handleCloseModal({ closeModal }) {
+    setIsLoadingError(false);
+    setIsSubmitError(false);
+    closeModal();
+    fetchTeams();
+  }
+
   function handleSubmit({ closeModal }) {
     setIsSubmitting(true);
+    setIsSubmitError(false);
     axios
       .patch(`${baseServiceUrl}/users/profile`, {
         lowerLevelGroups: teams,
@@ -64,9 +82,7 @@ function ProfileSettings({ baseServiceUrl, src, userName }) {
           />,
           { containerId: `${prefix}--bmrg-header-notifications` }
         );
-        // want to clear out any error state
-        setIsSubmitError(false);
-        closeModal();
+        handleCloseModal({ closeModal });
       })
       .catch((err) => {
         setIsSubmitting(false);
@@ -77,20 +93,34 @@ function ProfileSettings({ baseServiceUrl, src, userName }) {
   const visibleTeamCount = teams.filter((team) => team.visible).length;
   const allTeamsAreChecked = teams.length === visibleTeamCount;
   const someTeamsAreChecked = visibleTeamCount > 0 && !allTeamsAreChecked;
+  const isConfigDifferent = determineIfConfigIsDifferent(teams, initialTeams);
 
   function batchChangeTeamVisibility(action) {
     const updatedTeams = teams.map((team) => ({ ...team, visible: !allTeamsAreChecked }));
     setTeams(updatedTeams);
   }
 
-  function handleUpdateTeamVisibility(id, isVisible) {
-    const newTeams = [...teams];
-    for (let team of newTeams) {
-      if (team.id === id) {
-        team.visible = isVisible;
+  function determineIfConfigIsDifferent(teams, initialTeams) {
+    let isConfigDifferent = false;
+    for (let idx = 0; idx < teams.length; idx++) {
+      if (teams[idx]?.visible !== initialTeams[idx]?.visible) {
+        isConfigDifferent = true;
+        break;
       }
     }
-    setTeams(newTeams);
+    return isConfigDifferent;
+  }
+
+  function handleUpdateTeamVisibility(id, isChecked) {
+    const updatedTeams = [];
+    for (let team of teams) {
+      const newTeam = { ...team };
+      if (newTeam.id === id) {
+        newTeam.visible = isChecked;
+      }
+      updatedTeams.push(newTeam);
+    }
+    setTeams(updatedTeams);
   }
 
   return (
@@ -103,12 +133,8 @@ function ProfileSettings({ baseServiceUrl, src, userName }) {
         return (
           <>
             <ModalHeader
-              closeModal={() => {
-                closeModal();
-                setIsLoadingError(false);
-                setIsSubmitError(false);
-              }}
-              title="User profile"
+              closeModal={() => handleCloseModal({ closeModal })}
+              title={`User profile - ${userName}`}
             />
             <form
               onSubmit={(e) => {
@@ -116,7 +142,7 @@ function ProfileSettings({ baseServiceUrl, src, userName }) {
                 handleSubmit({ closeModal });
               }}
             >
-              <ModalBody style={{ height: '30rem' }}>
+              <ModalBody style={{ position: 'relative', height: '30rem' }}>
                 <p className={`${prefix}--bmrg-profile-settings__title`}>
                   More user profile settings will be here eventually, but for now you can choose
                   which Teams are shown in your sidebar in Launchpad.
@@ -172,10 +198,26 @@ function ProfileSettings({ baseServiceUrl, src, userName }) {
                 )}
               </ModalBody>
               <ModalFooter>
-                <Button kind="secondary" onClick={closeModal}>
+                {isSubmitError && (
+                  <div
+                    style={{
+                      position: 'absolute',
+                      top: '-5rem',
+                      left: '2rem',
+                      width: '90%',
+                    }}
+                  >
+                    <InlineNotification
+                      kind="error"
+                      title="Something's Wrong"
+                      subtitle="Failed to update user profile"
+                    />
+                  </div>
+                )}
+                <Button kind="secondary" onClick={() => handleCloseModal({ closeModal })}>
                   Cancel
                 </Button>
-                <Button kind="primary" type="submit">
+                <Button disabled={!isConfigDifferent} kind="primary" type="submit">
                   {isSubmitError ? 'Try Again' : isSubmitting ? 'Saving...' : 'Save changes'}
                 </Button>
               </ModalFooter>

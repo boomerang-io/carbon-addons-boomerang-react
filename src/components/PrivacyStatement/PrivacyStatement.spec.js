@@ -55,9 +55,7 @@ test('Privacy Statement success', async () => {
   mock.onGet(`${baseServiceUrl}/users/consents`).reply(200, PRIVACY_DATA);
   mock.onPut(`${baseServiceUrl}/users/consent`).reply(200);
 
-  const { queryByText, getByRole, findByRole } = render(
-    <PrivacyStatement baseServiceUrl={baseServiceUrl} />
-  );
+  const { getByRole, findByRole } = render(<PrivacyStatement baseServiceUrl={baseServiceUrl} />);
 
   const btn = getByRole('button', { name: /Privacy Statement/i });
   fireEvent.click(btn);

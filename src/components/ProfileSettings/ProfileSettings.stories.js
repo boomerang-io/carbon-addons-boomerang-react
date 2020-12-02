@@ -6,10 +6,10 @@ import MockAdapter from 'axios-mock-adapter';
 import { PROFILE_SETTINGS_DATA } from './constants';
 
 const mock = new MockAdapter(axios);
+mock.onGet('https://ibm.com/launchpad/users').reply(200, PROFILE_SETTINGS_DATA);
+mock.onPatch('https://ibm.com/users/profile').reply(200);
 
 storiesOf('ProfileSettings', module).add('default', () => {
-  mock.onGet('https://ibm.com/launchpad/users').reply(200, PROFILE_SETTINGS_DATA);
-  mock.onPatch('https://ibm.com/users/profile').reply(200);
   return (
     <div style={{ width: '16rem' }}>
       <ProfileSettings

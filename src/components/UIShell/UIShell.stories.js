@@ -197,7 +197,6 @@ storiesOf('UIShell', module)
   })
   .add('with right panel', () => {
     mock.onGet(`${BASE_URL}/users/consents`).reply(200, PRIVACY_DATA);
-    mock.onGet(`${BASE_URL}/launchpad/users`).reply(200, PROFILE_SETTINGS_DATA);
     mock.onPost(`${BASE_URL}/support/contact`).reply(200);
     return (
       <UIShell
@@ -266,7 +265,6 @@ storiesOf('UIShell', module)
   })
   .add('user not consented', () => {
     mock.onGet(`${BASE_URL}/users/consents`).reply(200, PRIVACY_DATA);
-    mock.onGet(`${BASE_URL}/launchpad/users`).reply(200, PROFILE_SETTINGS_DATA);
     return (
       <UIShell
         renderLogo={boolean('renderLogo', true)}

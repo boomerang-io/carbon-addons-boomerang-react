@@ -5,6 +5,16 @@
       width: rem(600px);
     }
 
+    .#{$prefix}--modal-header {
+      overflow: hidden;
+    }
+
+    .#{$prefix}--modal-header__heading {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
     .#{$prefix}--modal-content {
       color: #F2F4F8;
       .#{$prefix}--bmrg-profile-settings__title {
@@ -50,19 +60,28 @@
 
       }
 
+      .#{$prefix}--structured-list-th .#{$prefix}--checkbox-label-text {
+        font-weight: bold;
+      }
+
       .#{$prefix}--bmrg-profile-setting-list__button {
         background: none;
         border: none;
       }
 
+      .#{$prefix}--structured-list-row {
+        border-bottom-color: #697077;
+      }
+
 
       .#{$prefix}--structured-list-th, .#{$prefix}--checkbox-label-text {
         color: #F2F4F8;
+        padding-left: 1rem;
       }
 
       .#{$prefix}--structured-list-td {
-        padding-top: rem(9px);
-        padding-bottom: rem(9px);
+        padding-top: rem(6px);
+        padding-bottom: rem(6px);
       }
     }
   }
