@@ -73,6 +73,10 @@
         border-bottom-color: #697077;
       }
 
+      .#{$prefix}--bmrg-profile-settings-list__row--disabled .#{$prefix}--checkbox-label-text {
+        color: #A2A9B0;
+        
+      }
 
       .#{$prefix}--structured-list-th, .#{$prefix}--checkbox-label-text {
         color: #F2F4F8;

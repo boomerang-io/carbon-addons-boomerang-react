@@ -181,7 +181,12 @@ function ProfileSettings({ baseServiceUrl, src, userName }) {
                     </StructuredListHead>
                     <StructuredListBody>
                       {sortBy(teams, 'name').map(({ name, id, visible }) => (
-                        <StructuredListRow key={id}>
+                        <StructuredListRow
+                          key={id}
+                          className={
+                            !visible && `${prefix}--bmrg-profile-settings-list__row--disabled`
+                          }
+                        >
                           <StructuredListCell>
                             <Checkbox
                               checked={visible}
