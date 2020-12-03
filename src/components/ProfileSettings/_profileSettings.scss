@@ -1,8 +1,8 @@
 @include exports('addons-bmrg-profileSettings') {
   .#{$prefix}--bmrg-profile-settings-container {
     .#{$prefix}--modal-container {
-      height: rem(640px);
-      width: rem(600px);
+      min-height: rem(448px);
+      max-width: rem(600px);
     }
 
     .#{$prefix}--modal-header {
@@ -42,8 +42,6 @@
       }
 
       .#{$prefix}--bmrg-profile-settings-list {
-        margin-bottom: 3rem;
-
         .#{$prefix}--checkbox:checked + .#{$prefix}--checkbox-label::before, .#{$prefix}--checkbox:indeterminate + .#{$prefix}--checkbox-label::before {
           background-color: #F2F4F8;
           border-color: #F2F4F8;

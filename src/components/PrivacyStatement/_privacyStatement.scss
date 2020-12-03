@@ -2,7 +2,7 @@
   .#{$prefix}--bmrg-privacy-statement-container {
     .#{$prefix}--modal-container {
       height: rem(598px);
-      width: rem(700px);
+      max-width: rem(700px);
     }
 
     .#{$prefix}--bmrg-privacy-statement-delete {
@@ -79,6 +79,7 @@
           font-size: rem(14px);
           line-height: rem(18px);
           margin-top: rem(24px);
+          margin-bottom: rem(24px);
 
           a {
             color: $bmrg-secondary-color;

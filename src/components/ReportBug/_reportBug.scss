@@ -2,7 +2,7 @@
   .#{$prefix}--bmrg-report-bug-container {
     .#{$prefix}--modal-container {
       height: rem(664px);
-      width: rem(716px);
+      max-width: rem(716px);
     }
 
     .#{$prefix}--bmrg-report-bug-form {
@@ -117,18 +117,18 @@
       }
     }
 
-    .#{$prefix}--checkbox:checked + .#{$prefix}--checkbox-label::before,
-    .#{$prefix}--checkbox:indeterminate + .#{$prefix}--checkbox-label::before,
-    .#{$prefix}--checkbox-label[data-contained-checkbox-state='true']::before,
-    .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed']::before {
-      background-color: $bmrg-secondary-color;
+    .#{$prefix}--checkbox:checked + .#{$prefix}--checkbox-label::before, .#{$prefix}--checkbox:indeterminate + .#{$prefix}--checkbox-label::before {
+      background-color: #F2F4F8;
+      border-color: #F2F4F8;
     }
-    .bx--checkbox-label::after {
-      border-left: 1px solid black;
-      border-bottom: 1px solid black;
+
+    .#{$prefix}--checkbox:checked + .#{$prefix}--checkbox-label::after {
+      border-bottom: 2px solid black;
+      border-left: 2px solid black;
     }
-    .bx--checkbox-label::before {
-      background-color: #ffffff;
+
+    .#{$prefix}--checkbox:indeterminate + .#{$prefix}--checkbox-label::after {
+      border-bottom: 2px solid black;
     }
   }
 

@@ -126,7 +126,6 @@ $css--plex: true !default;
   .#{$prefix}--modal-container {
     background-color: $bmrg-header-modal-background-color;
     border-radius: rem(4px);
-    margin-bottom: 0;
 
     * {
       &:focus,
@@ -140,12 +139,8 @@ $css--plex: true !default;
       outline-color: $bmrg-primary-color;
     }
 
-    .#{$prefix}--modal-header {
-      padding: 2rem 2rem 0 2rem;
-    }
-
     .#{$prefix}--modal-content {
-      padding: 0 2rem;
+      padding: 0 1rem;
     }
   }
 
@@ -161,13 +156,7 @@ $css--plex: true !default;
     }
   }
 
-  .#{$prefix}--modal-header,
   .#{$prefix}--modal-content {
-    padding: 0.5rem;
-  }
-
-  .#{$prefix}--modal-content {
-    margin-bottom: 0rem;
     width: 100%;
   }
 
