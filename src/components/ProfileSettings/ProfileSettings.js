@@ -222,7 +222,7 @@ function ProfileSettings({ baseServiceUrl, src, userName }) {
                 Cancel
               </Button>
               <Button
-                disabled={!isConfigDifferent}
+                disabled={!isConfigDifferent || isSubmitting}
                 kind="primary"
                 type="submit"
                 onClick={(e) => {
