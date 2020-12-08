@@ -2,6 +2,7 @@
   .#{$prefix}--bmrg-profile-settings-container {
     .#{$prefix}--modal-container {
       min-height: rem(448px);
+      max-height: rem(570px);
       max-width: rem(600px);
     }
 
