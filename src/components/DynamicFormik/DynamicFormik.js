@@ -9,6 +9,7 @@ import { settings } from 'carbon-components';
 import {
   CHECKBOX_TYPES,
   CREATABLE_TYPES,
+  DATE_TYPES,
   MULTI_SELECT_TYPES,
   RADIO_TYPES,
   SELECT_TYPES,
@@ -342,6 +343,10 @@ const TYPE_PROPS = {
     onChange: (createdItems) => formikProps.setFieldValue(`['${key}']`, createdItems),
   }),
 
+  [INPUT_GROUPS.DATE]: (formikProps) => ({
+    onChange: formikProps.handleChange,
+  }),
+
   [INPUT_GROUPS.MULTI_SELECT]: (formikProps, key) => ({
     onChange: ({ selectedItems }) =>
       formikProps.setFieldValue(
@@ -386,6 +391,7 @@ function determineTypeProps(type, otherProps) {
   const {
     checkboxListProps,
     creatableProps,
+    dateProps,
     multiSelectProps,
     radioProps,
     selectProps,
@@ -406,6 +412,13 @@ function determineTypeProps(type, otherProps) {
     return {
       typeProps: TYPE_PROPS[INPUT_GROUPS.CREATABLE],
       additionalTypeProps: creatableProps,
+    };
+  }
+
+  if (Object.values(DATE_TYPES).includes(type)) {
+    return {
+      typeProps: TYPE_PROPS[INPUT_GROUPS.DATE],
+      additionalTypeProps: dateProps,
     };
   }
 

@@ -53,6 +53,7 @@ const inputs = [
     value: '2020-01-01',
     type: 'date',
     placeholder: 'yyyy-mm-dd',
+    helperText: 'date',
     pattern: 'Y-m-d',
     min: '2020-01-01',
     max: '2020-01-31'

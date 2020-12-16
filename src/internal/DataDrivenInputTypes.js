@@ -49,6 +49,7 @@ export const BOOLEAN_TYPES = {
 export const INPUT_GROUPS = {
   CHECKBOX: 'checkbox',
   CREATABLE: 'creatable',
+  DATE: 'date',
   MULTI_SELECT: 'multiselect',
   RADIO: 'radio',
   SELECT: 'select',

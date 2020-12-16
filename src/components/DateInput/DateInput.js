@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 import TooltipHover from '../TooltipHover';
 import { DatePicker, DatePickerInput } from 'carbon-components-react';
 import { Information16 } from '@carbon/icons-react';
@@ -11,6 +12,9 @@ const DateInputComponent = React.forwardRef(function DateInputComponent(
   { 
     id,
     datePickerProps,
+    disabled,
+    helperText,
+    invalid,
     label, 
     labelText, 
     max,
@@ -25,38 +29,55 @@ const DateInputComponent = React.forwardRef(function DateInputComponent(
   ref
 ) {
   const labelValue = label || labelText;
+
+  const dateInputHelperId = !helperText
+    ? undefined
+    : `date-input-helper-text-${id}`;
+  const helperClasses = cx(`${prefix}--form__helper-text`, {
+    [`${prefix}--form__helper-text--disabled`]: disabled,
+  });
+
   return (
-    <DatePicker 
-      key={id}
-      className={`${prefix}--bmrg-date-input`}
-      dateFormat={pattern}
-      datePickerType="single"
-      maxDate={max}
-      minDate={min}
-      value={value}
-      {...datePickerProps}
-    >
-      <DatePickerInput
-        id={id}
-        style={{ width: "100%" }}
-        labelText={
-          labelValue && (
-            <div className={`${prefix}--bmrg-date-input__label`}>
-              <div>{labelValue}</div>
-              {tooltipContent && (
-                <div className={tooltipClassName}>
-                  <TooltipHover tooltipContent={tooltipContent} {...tooltipProps}>
-                    <Information16 fill="#4d5358" />
-                  </TooltipHover>
-                </div>
-              )}
-            </div>
-          )
-        }
-        ref={ref}
-        {...dateInputProps}
-      />
-    </DatePicker>
+    <>
+      <DatePicker 
+        key={id}
+        className={`${prefix}--bmrg-date-input`}
+        dateFormat={pattern}
+        datePickerType="single"
+        maxDate={max}
+        minDate={min}
+        value={value}
+        {...datePickerProps}
+      >
+        <DatePickerInput
+          id={id}
+          disabled={disabled}
+          invalid={invalid}
+          labelText={
+            labelValue && (
+              <div className={`${prefix}--bmrg-date-input__label`}>
+                <div>{labelValue}</div>
+                {tooltipContent && (
+                  <div className={tooltipClassName}>
+                    <TooltipHover tooltipContent={tooltipContent} {...tooltipProps}>
+                      <Information16 fill="#4d5358" />
+                    </TooltipHover>
+                  </div>
+                )}
+              </div>
+            )
+          }
+          ref={ref}
+          style={{ width: "100%" }}
+          {...dateInputProps}
+        />
+      </DatePicker>
+      {helperText && !invalid && (
+        <div id={dateInputHelperId} className={helperClasses}>
+          {helperText}
+        </div>
+      )}
+    </>
   );
 });
 

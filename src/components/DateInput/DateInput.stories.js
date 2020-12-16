@@ -27,6 +27,7 @@ storiesOf('DateInput', module)
           onChange={action('date input change')}
           placeholder={text('placeholder', 'mm/dd/yyyy')}
           autoComplete='off'
+          helperText={text('helperText', 'Some helper text')}
           labelText={text('labelText', 'Label for text input')}
           tooltipContent={text('tooltipContent', 'Tooltip for text input')}
           tooltipProps={object('tooltipProps', { placement: 'top' })}
