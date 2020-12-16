@@ -40,9 +40,32 @@ UIShell.propTypes = {
    * - Message banner to display for all users
    */
   headerConfig: PropTypes.shape({
-    features: PropTypes.object,
-    navigation: PropTypes.array,
-    platform: PropTypes.object,
+    features: PropTypes.shape({
+      'consent.enabled': PropTypes.bool,
+      'docs.enabled': PropTypes.bool,
+      'metering.enabled': PropTypes.bool,
+      'notifications.enabled': PropTypes.bool,
+      'support.enabled': PropTypes.bool,
+      'welcome.enabled': PropTypes.bool,
+    }),
+    navigation: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string,
+        url: PropTypes.string,
+      })
+    ),
+    platform: PropTypes.shape({
+      baseEnvUrl: PropTypes.string,
+      baseServicesUrl: PropTypes.string,
+      communityUrl: PropTypes.string,
+      displayLogo: PropTypes.bool,
+      name: PropTypes.string,
+      platformName: PropTypes.string,
+      privateTeams: PropTypes.bool,
+      sendMail: PropTypes.bool,
+      signOutUrl: PropTypes.string,
+      version: PropTypes.string,
+    }),
     platformMessage: PropTypes.object,
   }),
   /**
@@ -102,8 +125,6 @@ UIShell.propTypes = {
 };
 
 UIShell.defaultProps = {
-  baseLaunchEnvUrl: '',
-  baseWWWEnvUrl: '',
   headerConfig: {},
   requirePlatformConsent: true,
   user: {},
@@ -131,54 +152,71 @@ function UIShell({
 
   const finalPlatformName = platformName || companyName;
   const finalAppName = appName || productName;
-  const isSupportEnabled = Boolean(features) && Boolean(features['support.enabled']);
+
+  /**
+   * Prevent breaking changes. Use the values in the platform response if present
+   * and default to the legacy props
+   */
+  const finalBaseUrl = platform?.baseEnvUrl || baseLaunchEnvUrl;
+  const finalBaseServiceUrl = platform?.baseServicesUrl || baseServiceUrl;
+  const isLogoEnabled = platform?.displayLogo === false || renderLogo;
+  const isSupportEnabled = Boolean(features?.['support.enabled']);
+
+  /**
+   * Checking for conditions when we explicitely set requirePlatformConsent to false OR
+   * its disabled overall for the platform. This lets us have it disabled in a "standalone" mode overall where its
+   * disabled for all applications AND toggle it use of the UIShell e.g. disabled in Launchpad, but have it enabled
+   * by default for other apps
+   */
+  const isConsentDisabled =
+    requirePlatformConsent === false || Boolean(features?.['consent.enabled'] === false);
 
   return (
     <>
       <Header
         appName={finalAppName}
-        baseLaunchEnvUrl={baseLaunchEnvUrl}
-        enableNotifications={features && features['notifications.enabled']}
+        baseLaunchEnvUrl={finalBaseUrl}
+        enableNotifications={Boolean(features?.['notifications.enabled'])}
         platformMessage={platformMessage}
         platformName={!renderLogo && finalPlatformName ? finalPlatformName : null}
-        renderLogo={renderLogo}
+        renderLogo={isLogoEnabled}
         navLinks={navigation}
         notificationsConfig={{
-          wsUrl: `${baseServiceUrl}/notifications/ws`,
+          wsUrl: `${finalBaseServiceUrl}/notifications/ws`,
         }}
         onHelpClick={[
           typeof onTutorialClick === 'function' && (
             <HeaderMenuButton
-              text="Tutorial"
               iconName="workspace"
-              onClick={onTutorialClick}
               key="Tutorial"
+              onClick={onTutorialClick}
+              text="Tutorial"
             />
           ),
-          baseServiceUrl && isSupportEnabled && (
-            <ContactUs baseServiceUrl={baseServiceUrl} key="Contact Us" />
+          Boolean(finalBaseServiceUrl) && isSupportEnabled && (
+            <ContactUs baseServiceUrl={finalBaseServiceUrl} key="Contact Us" />
           ),
-          baseServiceUrl && isSupportEnabled && (
-            <ReportBug baseServiceUrl={baseServiceUrl} key="Report Bug" />
+          Boolean(finalBaseServiceUrl) && isSupportEnabled && (
+            <ReportBug baseServiceUrl={finalBaseServiceUrl} key="Report Bug" />
           ),
-          baseServiceUrl && isSupportEnabled && (
+          Boolean(finalBaseServiceUrl) && isSupportEnabled && (
             <HeaderMenuLink
               external={false}
-              href={`${baseLaunchEnvUrl}/launchpad/support`}
+              href={`${finalBaseUrl}/launchpad/support`}
               iconName="support"
               text="Support Center"
             />
           ),
-          platform && platform.communityUrl && (
+          Boolean(platform?.communityUrl) && (
             <HeaderMenuLink href={platform.communityUrl} iconName="forum" text="Community" />
           ),
         ].filter(Boolean)}
         profileChildren={[
           user?.id && (
             <ProfileSettings
+              baseServiceUrl={finalBaseServiceUrl}
               key="Avatar"
-              baseServiceUrl={baseServiceUrl}
-              src={`${baseServiceUrl}/users/image/${user.email}`}
+              src={`${finalBaseServiceUrl}/users/image/${user.email}`}
               userName={user.name}
             />
           ),
@@ -189,19 +227,19 @@ function UIShell({
               version={platform.version}
             />
           ),
-          baseServiceUrl && (
-            <PrivacyStatement key="Privacy Statement" baseServiceUrl={baseServiceUrl} />
+          baseServiceUrl && isConsentDisabled === false && (
+            <PrivacyStatement key="Privacy Statement" baseServiceUrl={finalBaseServiceUrl} />
           ),
-          platform && platform.signOutUrl && (
-            <SignOut signOutLink={platform.signOutUrl} key="Sign Out" />
+          Boolean(platform?.signOutUrl) && (
+            <SignOut key="Sign Out" signOutLink={platform.signOutUrl} />
           ),
         ].filter(Boolean)}
         renderRightPanel={renderRightPanel}
-        skipToContentProps={skipToContentProps}
         renderSidenav={onMenuClick || renderSidenav}
+        skipToContentProps={skipToContentProps}
       />
-      {requirePlatformConsent && user.hasOwnProperty('hasConsented') && !user.hasConsented ? (
-        <GdprRedirectModal isOpen baseLaunchEnvUrl={baseLaunchEnvUrl} user={user} />
+      {isConsentDisabled === false && user.hasConsented === false ? (
+        <GdprRedirectModal isOpen baseLaunchEnvUrl={finalBaseUrl} user={user} />
       ) : null}
     </>
   );
