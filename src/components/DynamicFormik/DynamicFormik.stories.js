@@ -48,6 +48,16 @@ const inputs = [
     maxValueLength: '20',
   },
   {
+    key: 'date',
+    label: 'Date',
+    value: '2020-01-01',
+    type: 'date',
+    placeholder: 'yyyy-mm-dd',
+    pattern: 'Y-m-d',
+    min: '2020-01-01',
+    max: '2020-01-31'
+  },
+  {
     required: false,
     placeholder: null,
     helperText: null,
