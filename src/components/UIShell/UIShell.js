@@ -91,6 +91,9 @@ UIShell.propTypes = {
    * override for the consumer. When set as true, the launchpad redirect modal will be
    */
   renderLogo: PropTypes.bool,
+  /**
+   * Disable platform consent if user.id is not present
+   */
   requirePlatformConsent: PropTypes.bool,
   /**
    * Pass in whole user object
@@ -148,14 +151,13 @@ function UIShell({
   skipToContentProps,
   user,
 }) {
-  const { features, navigation, platform, platformMessage } = headerConfig;
-
   const finalPlatformName = platformName || companyName;
   const finalAppName = appName || productName;
 
+  const { features, navigation, platform, platformMessage } = headerConfig;
   /**
-   * Prevent breaking changes. Use the values in the platform response if present
-   * and default to the legacy props
+   * Prevent breaking changes. Use the values from the platform object if present.
+   * Default to the legacy props to support backwards compatibility
    */
   const finalBaseUrl = platform?.baseEnvUrl || baseLaunchEnvUrl;
   const finalBaseServiceUrl = platform?.baseServicesUrl || baseServiceUrl;
@@ -163,13 +165,13 @@ function UIShell({
   const isSupportEnabled = Boolean(features?.['support.enabled']);
 
   /**
-   * Checking for conditions when we explicitely set requirePlatformConsent to false OR
-   * its disabled overall for the platform. This lets us have it disabled in a "standalone" mode overall where its
-   * disabled for all applications AND toggle it use of the UIShell e.g. disabled in Launchpad, but have it enabled
-   * by default for other apps
+   * Checking for conditions when we explicitly set "requirePlatformConsent" to false (it defaults to true) OR
+   * it's disabled overall for the platform. This lets us toggle the UIShell consent redirect per app as needed
+   * e.g. disabled in Launchpad, but have it enabled for rest of the platform AND also support
+   * having it disabled in a "standalone" mode via the consent.enaable feature flag. aka its data driven via the service
    */
   const isConsentDisabled =
-    requirePlatformConsent === false || Boolean(features?.['consent.enabled'] === false);
+    requirePlatformConsent === false || features?.['consent.enabled'] === false;
 
   return (
     <>
@@ -177,10 +179,13 @@ function UIShell({
         appName={finalAppName}
         baseLaunchEnvUrl={finalBaseUrl}
         enableNotifications={Boolean(features?.['notifications.enabled'])}
+        navLinks={navigation}
         platformMessage={platformMessage}
         platformName={!renderLogo && finalPlatformName ? finalPlatformName : null}
         renderLogo={isLogoEnabled}
-        navLinks={navigation}
+        renderRightPanel={renderRightPanel}
+        renderSidenav={onMenuClick || renderSidenav}
+        skipToContentProps={skipToContentProps}
         notificationsConfig={{
           wsUrl: `${finalBaseServiceUrl}/notifications/ws`,
         }}
@@ -212,7 +217,7 @@ function UIShell({
           ),
         ].filter(Boolean)}
         profileChildren={[
-          user?.id && (
+          Boolean(user?.id) && (
             <ProfileSettings
               baseServiceUrl={finalBaseServiceUrl}
               key="Avatar"
@@ -234,9 +239,6 @@ function UIShell({
             <SignOut key="Sign Out" signOutLink={platform.signOutUrl} />
           ),
         ].filter(Boolean)}
-        renderRightPanel={renderRightPanel}
-        renderSidenav={onMenuClick || renderSidenav}
-        skipToContentProps={skipToContentProps}
       />
       {isConsentDisabled === false && user.hasConsented === false ? (
         <GdprRedirectModal isOpen baseLaunchEnvUrl={finalBaseUrl} user={user} />

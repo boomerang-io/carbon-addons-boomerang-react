@@ -19,7 +19,7 @@ const HeaderMenuBmrg = React.forwardRef((props, ref) => {
       tabIndex="0"
       {...other}
     >
-      <svg id="bmrg-hamburger-menu-icon" height="32" version="1.1" viewBox="0 0 32 32" width="32">
+      <svg height="32" version="1.1" viewBox="0 0 32 32" width="32">
         <g className="icon">
           <rect className="bar1" x="0" y="0" width="32" height="4" rx="2" />
           <rect className="bar2" x="0" y="12" width="32" height="4" rx="2" />
