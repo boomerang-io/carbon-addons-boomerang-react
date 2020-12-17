@@ -153,7 +153,9 @@ function PrivacyStatement({ baseServiceUrl }) {
                         />
                         <ModalBody>
                           <>
-                            <CastleImg />
+                            <div className={`${prefix}--bmrg-privacy-statement-delete__castle`}>
+                              <CastleImg style={{ width: '100%' }} />
+                            </div>
                             <p className={`${prefix}--bmrg-privacy-statement-delete__desc`}>
                               We will happily delete your account and all corresponding data from
                               our systems. Your account will cease to exist, and we will notify your

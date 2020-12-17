@@ -3,6 +3,10 @@ import { render } from '@testing-library/react';
 
 import HeaderMenuUser from './HeaderMenuUser.js';
 
+function Test() {
+  return <div>test</div>;
+}
+
 test('contact us sending', () => {
   /**
    * In this test we do not mock out the response from the contact server,
@@ -13,7 +17,9 @@ test('contact us sending', () => {
     <HeaderMenuUser
       src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50"
       userName="Gravatar User"
-    />
+    >
+      {() => <Test />}
+    </HeaderMenuUser>
   );
 
   expect(getByText(/Gravatar User/i)).toBeInTheDocument();

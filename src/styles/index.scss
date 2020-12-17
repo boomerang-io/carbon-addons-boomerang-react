@@ -47,6 +47,7 @@ $css--plex: true !default;
 @import '~carbon-components/scss/components/progress-indicator/progress-indicator';
 @import '~carbon-components/scss/components/radio-button/radio-button';
 @import '~carbon-components/scss/components/skeleton/skeleton-placeholder';
+@import '~carbon-components/scss/components/structured-list/structured-list';
 @import '~carbon-components/scss/components/tag/tag';
 @import '~carbon-components/scss/components/text-area/text-area';
 @import '~carbon-components/scss/components/text-input/text-input';
@@ -95,6 +96,7 @@ $css--plex: true !default;
 @import '../components/PlatformBanner/platformBanner';
 @import '../components/PlatformNotifications/platformNotifications';
 @import '../components/PrivacyStatement/privacyStatement';
+@import '../components/ProfileSettings/profileSettings';
 @import '../components/ProtectedRoute/protectedRoute';
 @import '../components/RadioGroup/radioGroup';
 @import '../components/ReportBug/reportBug';
@@ -117,19 +119,19 @@ $css--plex: true !default;
 .#{$prefix}--bmrg-aboutPlatform-container,
 .#{$prefix}--bmrg-contact-us-container,
 .#{$prefix}--bmrg-privacy-statement-container,
+.#{$prefix}--bmrg-profile-settings-container,
 .#{$prefix}--bmrg-report-bug-container,
 .#{$prefix}--bmrg-signout-container,
 .#{$prefix}--bmrg-redirect-container {
   .#{$prefix}--modal-container {
     background-color: $bmrg-header-modal-background-color;
     border-radius: rem(4px);
-    margin-bottom: 0;
 
     * {
       &:focus,
       &::before {
-        outline-color: $bmrg-secondary-color;
-        border-color: $bmrg-secondary-color;
+        outline-color: $bmrg-secondary-color !important;
+        border-color: $bmrg-secondary-color !important;
       }
     }
 
@@ -137,12 +139,8 @@ $css--plex: true !default;
       outline-color: $bmrg-primary-color;
     }
 
-    .#{$prefix}--modal-header {
-      padding: 2rem 2rem 0 2rem;
-    }
-
     .#{$prefix}--modal-content {
-      padding: 0 2rem;
+      padding: 0 1rem;
     }
   }
 
@@ -158,32 +156,20 @@ $css--plex: true !default;
     }
   }
 
-  .#{$prefix}--modal-header,
   .#{$prefix}--modal-content {
-    padding: 0.5rem;
-  }
-
-  .#{$prefix}--modal-content {
-    margin-bottom: 0rem;
     width: 100%;
   }
 
   .#{$prefix}--modal-header__label {
-    height: rem(20px);
     color: #9fa5ad;
-    font-size: rem(14px);
-    font-weight: 600;
-    line-height: rem(20px);
     text-transform: initial;
-    margin-bottom: rem(2px);
   }
 
   .#{$prefix}--modal-header__heading {
     height: rem(26px);
     color: $bmrg-brand-white;
-    font-size: rem(28px);
+    font-size: rem(20px);
     font-weight: 300;
-    line-height: rem(26px);
   }
 
   .#{$prefix}--modal-close__icon {

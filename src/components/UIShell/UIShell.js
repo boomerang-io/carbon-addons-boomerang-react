@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Header from '../Header'; // Using default export
 import HeaderMenuButton from '../HeaderMenuButton';
 import HeaderMenuLink from '../HeaderMenuLink';
-import HeaderMenuUser from '../HeaderMenuUser';
+import ProfileSettings from '../ProfileSettings';
 import AboutPlatform from '../AboutPlatform';
 import ContactUs from '../ContactUs';
 import PrivacyStatement from '../PrivacyStatement';
@@ -175,8 +175,9 @@ function UIShell({
         ].filter(Boolean)}
         profileChildren={[
           user?.id && (
-            <HeaderMenuUser
+            <ProfileSettings
               key="Avatar"
+              baseServiceUrl={baseServiceUrl}
               src={`${baseServiceUrl}/users/image/${user.email}`}
               userName={user.name}
             />

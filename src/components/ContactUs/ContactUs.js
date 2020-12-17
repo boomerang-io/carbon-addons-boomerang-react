@@ -70,6 +70,7 @@ class ContactUs extends Component {
   render() {
     return (
       <HeaderMenuItem
+        preventCloseOnClickOutside
         text="Contact"
         iconName="chat"
         className={`${prefix}--bmrg-contact-us-container`}
@@ -109,7 +110,7 @@ class ContactUs extends Component {
                   type="submit"
                   disabled={!this.state.description || this.state.isPosting}
                 >
-                  {this.state.isPosting ? 'Sending' : 'Send'}
+                  {this.state.error ? 'Try again' : this.state.isPosting ? 'Sending...' : 'Send'}
                 </Button>
               </ModalFooter>
             </form>
@@ -121,7 +122,5 @@ class ContactUs extends Component {
 }
 
 ContactUs.propTypes = { baseServiceUrl: PropTypes.string };
-
-ContactUs.defaultProps = {};
 
 export default ContactUs;
