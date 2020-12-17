@@ -10,6 +10,7 @@ storiesOf('DateInput', module)
     return (
       <DateInput
         id="default-date-input"
+        onCalendarChange={action('date input calendar change')}
         onChange={action('date input change')}
         placeholder={text('placeholder', 'yyyy-mm-dd')}
         autoComplete='off'
@@ -24,6 +25,7 @@ storiesOf('DateInput', module)
       <div style={{ height: '5rem' }}>
         <DateInput
           id="tooltip-label-date-input"
+          onCalendarChange={action('date input calendar change')}
           onChange={action('date input change')}
           placeholder={text('placeholder', 'mm/dd/yyyy')}
           autoComplete='off'

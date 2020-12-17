@@ -90,6 +90,10 @@ function generateYupAst({ inputs, allowCustomPropertySyntax, customPropertySynta
       return;
     }
 
+    if(inputType === DATE_TYPES.DATE) {
+      yupValidationArray.push(['yup.date', 'Enter a valid date']);
+    }
+
     if (
       inputType === TEXT_AREA_TYPES.TEXT_AREA ||
       inputType === TEXT_INPUT_TYPES.EMAIL ||
@@ -184,35 +188,35 @@ function generateYupAst({ inputs, allowCustomPropertySyntax, customPropertySynta
       inputType === TEXT_EDITOR_TYPES.TEXT_EDITOR
     ) {
       if (inputType === TEXT_INPUT_TYPES.NUMBER) {
-        if (input.minValueLength) {
+        if (input.min) {
           yupValidationArray.push([
             'yup.min',
-            input.minValueLength,
-            `Enter value greater than ${input.minValueLength}`,
+            input.min,
+            `Enter value greater than ${input.min}`,
           ]);
         }
 
-        if (input.maxValueLength) {
+        if (input.max) {
           yupValidationArray.push([
             'yup.max',
-            input.maxValueLength,
-            `Enter value less than ${input.maxValueLength}`,
+            input.max,
+            `Enter value less than ${input.max}`,
           ]);
         }
       } else {
-        if (input.minValueLength) {
+        if (input.min) {
           yupValidationArray.push([
             'yup.min',
-            input.minValueLength,
-            `Enter at least ${input.minValueLength} characters`,
+            input.min,
+            `Enter at least ${input.min} characters`,
           ]);
         }
 
-        if (input.maxValueLength) {
+        if (input.max) {
           yupValidationArray.push([
             'yup.max',
-            input.maxValueLength,
-            `Enter at most ${input.maxValueLength} characters`,
+            input.max,
+            `Enter at most ${input.max} characters`,
           ]);
         }
       }
@@ -343,8 +347,9 @@ const TYPE_PROPS = {
     onChange: (createdItems) => formikProps.setFieldValue(`['${key}']`, createdItems),
   }),
 
-  [INPUT_GROUPS.DATE]: (formikProps) => ({
+  [INPUT_GROUPS.DATE]: (formikProps, key) => ({
     onChange: formikProps.handleChange,
+    onCalendarChange: (dateArray) => formikProps.setFieldValue(`['${key}']`, dateArray[0]?.toISOString()),
   }),
 
   [INPUT_GROUPS.MULTI_SELECT]: (formikProps, key) => ({

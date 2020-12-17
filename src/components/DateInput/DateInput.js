@@ -19,6 +19,8 @@ const DateInputComponent = React.forwardRef(function DateInputComponent(
     labelText, 
     max,
     min,
+    onCalendarChange,
+    onChange,
     pattern,
     tooltipClassName, 
     tooltipContent, 
@@ -46,6 +48,7 @@ const DateInputComponent = React.forwardRef(function DateInputComponent(
         datePickerType="single"
         maxDate={max}
         minDate={min}
+        onChange={onCalendarChange}
         value={value}
         {...datePickerProps}
       >
@@ -53,6 +56,7 @@ const DateInputComponent = React.forwardRef(function DateInputComponent(
           id={id}
           disabled={disabled}
           invalid={invalid}
+          onChange={onChange}
           labelText={
             labelValue && (
               <div className={`${prefix}--bmrg-date-input__label`}>
@@ -84,8 +88,16 @@ const DateInputComponent = React.forwardRef(function DateInputComponent(
 DateInputComponent.propTypes = {
   id: PropTypes.string.isRequired,
   datePickerProps: PropTypes.object,
+  disabled: PropTypes.bool,
+  helperText: PropTypes.string,
+  invalid: PropTypes.bool,
+  max: PropTypes.string,
+  min: PropTypes.string,
+  pattern: PropTypes.string,
   label: PropTypes.string,
   labelText: PropTypes.string,
+  onCalendarChange: PropTypes.func,
+  onChange: PropTypes.func,
   tooltipClassName: PropTypes.string,
   tooltipContent: PropTypes.any,
   tooltipProps: PropTypes.object,
