@@ -335,28 +335,28 @@ const conditionallyRenderInput = (input, values) => {
  */
 const TYPE_PROPS = {
   [INPUT_GROUPS.CHECKBOX]: (formikProps, key) => ({
-    onChange: (value, id, event, selectedItems) => formikProps.setFieldValue(key, selectedItems),
+    onChange: (value, id, event, selectedItems) => formikProps.setFieldValue(`['${key}']`, selectedItems),
   }),
 
   [INPUT_GROUPS.CREATABLE]: (formikProps, key) => ({
-    onChange: (createdItems) => formikProps.setFieldValue(key, createdItems),
+    onChange: (createdItems) => formikProps.setFieldValue(`['${key}']`, createdItems),
   }),
 
   [INPUT_GROUPS.MULTI_SELECT]: (formikProps, key) => ({
     onChange: ({ selectedItems }) =>
       formikProps.setFieldValue(
-        key,
+        `['${key}']`,
         selectedItems.map((item) => item && item.value)
       ),
   }),
 
   [INPUT_GROUPS.RADIO]: (formikProps, key) => ({
-    onChange: (value) => formikProps.setFieldValue(key, value),
+    onChange: (value) => formikProps.setFieldValue(`['${key}']`, value),
   }),
 
   [INPUT_GROUPS.SELECT]: (formikProps, key) => ({
     onChange: ({ selectedItem }) =>
-      formikProps.setFieldValue(key, selectedItem ? selectedItem.value : ''),
+      formikProps.setFieldValue(`['${key}']`, selectedItem ? selectedItem.value : ''),
   }),
 
   [INPUT_GROUPS.TEXT_AREA]: (formikProps) => ({
@@ -372,7 +372,7 @@ const TYPE_PROPS = {
   }),
 
   [INPUT_GROUPS.BOOLEAN]: (formikProps, key) => ({
-    onChange: (value) => formikProps.setFieldValue(key, value),
+    onChange: (value) => formikProps.setFieldValue(`['${key}']`, value),
   }),
 };
 
@@ -520,53 +520,30 @@ export default function DynamicFormik({
   validationSchemaExtension,
   ...otherProps
 }) {
-  /**
-   * Get values from formik and normalize keys
-   */
-
-  const normalizedInputs = inputs.map((input) => ({
-    ...input,
-    key: input.key.replace(/\./g, '||'),
-    requiredForKey:
-      typeof input.requiredForKey === 'string' ? input.requiredForKey.replace(/\./g, '||') : null,
-  }));
-
-  const normalizeValues = (values) => {
-    if (!Boolean(values)) return {};
-    let inputKeys = Object.entries(values);
-    let newValues = {};
-    inputKeys.forEach((value) => (newValues[value[0].replace(/\./g, '||')] = value[1]));
-    return newValues;
-  };
 
   return (
     <Formik
       initialValues={
-        (Boolean(initialValues) && normalizeValues(initialValues)) || {
-          ...determineInitialValues(normalizedInputs),
-          ...normalizeValues(additionalInitialValues),
+        (Boolean(initialValues) && initialValues) || {
+          ...determineInitialValues(inputs),
+          ...additionalInitialValues,
         }
       }
       validationSchema={
         validationSchema ||
         generateYupSchema({
-          inputs: normalizedInputs,
+          inputs,
           validationSchemaExtension,
           allowCustomPropertySyntax,
           customPropertySyntaxPattern,
         })
       }
-      onSubmit={(values, actions) => {
-        let inputKeys = Object.entries(values);
-        let newValues = {};
-        inputKeys.forEach((value) => (newValues[value[0].replace(/\|\|/g, '.')] = value[1]));
-        onSubmit(newValues, actions);
-      }}
+      onSubmit={(values, actions) => onSubmit(values, actions)}
       {...otherProps}
     >
       {(formikProps) => {
         const { values, touched, errors, handleBlur } = formikProps;
-        const finalInputs = normalizedInputs.filter((input) =>
+        const finalInputs = inputs.filter((input) =>
           conditionallyRenderInput(input, values)
         );
 
@@ -586,16 +563,15 @@ export default function DynamicFormik({
             type,
             otherProps
           );
-
           return (
             <DataDrivenInput
               key={key}
               customComponent={input.customComponent}
               formikProps={formikProps}
-              id={key}
+              id={`['${key}']`}
               invalid={invalid}
               invalidText={invalidText}
-              name={key}
+              name={`['${key}']`}
               onBlur={handleBlur}
               type={type}
               value={inputValue}
