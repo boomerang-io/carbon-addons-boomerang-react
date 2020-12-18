@@ -197,7 +197,7 @@ function ProfileSettings({ baseServiceUrl, src, userName }) {
                 </StructuredListWrapper>
               ) : (
                 <p style={{ marginTop: '3rem', color: '#F2F4F8' }}>
-                  No teams to configure. Add or join teams in Launchpad!
+                  No teams to configure. Join or create teams in Launchpad!
                 </p>
               )}
             </ModalBody>
