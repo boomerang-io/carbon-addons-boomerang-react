@@ -70,7 +70,7 @@ class Header extends React.Component {
      */
     renderSidenav: PropTypes.func,
     /**
-     * base launch url, used to redirect to Launchpad
+     * base url, used to redirect to the platform
      */
     baseLaunchEnvUrl: PropTypes.string,
 
@@ -96,6 +96,7 @@ class Header extends React.Component {
   navRef = React.createRef();
   mobileNavRef = React.createRef();
   sideNavRef = React.createRef();
+  sideNavButtonRef = React.createRef();
 
   componentDidMount() {
     document.addEventListener('mousedown', this.handleClickOutside);
@@ -116,7 +117,11 @@ class Header extends React.Component {
       this.handleClickOutsideMobileNavState();
     }
 
-    if (this.sideNavRef && !this.sideNavRef.current?.contains(event.target)) {
+    if (
+      this.sideNavRef &&
+      !this.sideNavRef.current?.contains(event.target) &&
+      !this.sideNavButtonRef.current?.contains(event.target)
+    ) {
       this.handleClickOutsideSidenavState();
     }
   };
@@ -222,6 +227,7 @@ class Header extends React.Component {
               {skipToContentProps ? <SkipToContent {...skipToContentProps} /> : null}
               {this.props.renderSidenav && (
                 <HeaderMenuBmrg
+                  ref={this.sideNavButtonRef}
                   isOpen={this.state.isMenuActive}
                   onClick={this.handleIconClick('Menu')}
                   onKeyDown={this.handleIconKeypress('Menu')}

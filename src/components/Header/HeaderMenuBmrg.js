@@ -5,20 +5,21 @@ import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
-const HeaderMenuBmrg = (props) => {
+const HeaderMenuBmrg = React.forwardRef((props, ref) => {
   const { isOpen, ...other } = props;
   return (
     <div
+      aria-expanded={isOpen}
+      aria-label="header menu button"
       className={classNames(`${prefix}--bmrg-header__app-menu`, {
         '--is-open': isOpen,
       })}
+      ref={ref}
       role="button"
       tabIndex="0"
-      aria-expanded={isOpen}
-      aria-label="header menu button"
       {...other}
     >
-      <svg height="32" id="Layer_1" version="1.1" viewBox="0 0 32 32" width="32">
+      <svg height="32" version="1.1" viewBox="0 0 32 32" width="32">
         <g className="icon">
           <rect className="bar1" x="0" y="0" width="32" height="4" rx="2" />
           <rect className="bar2" x="0" y="12" width="32" height="4" rx="2" />
@@ -27,7 +28,7 @@ const HeaderMenuBmrg = (props) => {
       </svg>
     </div>
   );
-};
+});
 
 HeaderMenuBmrg.propTypes = {
   isOpen: PropTypes.bool,
