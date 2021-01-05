@@ -6,10 +6,8 @@ import NotificationsContainer from './NotificationsContainer';
 import ToastNotification from './ToastNotification';
 import notify from './notify';
 
-jest.useFakeTimers();
-
-test('toast notification displays correctly when triggered', () => {
-  const { getByText } = render(
+test('toast notification displays correctly when triggered', async () => {
+  const { getByText, findByText } = render(
     <div>
       <Button
         onClick={() =>
@@ -26,6 +24,5 @@ test('toast notification displays correctly when triggered', () => {
 
   const notificationButton = getByText(/Try Me/);
   fireEvent.click(notificationButton);
-  jest.runAllTimers();
-  expect(getByText(/something happened/i)).toBeInTheDocument();
+  expect(await findByText(/something happened/i)).toBeInTheDocument();
 });

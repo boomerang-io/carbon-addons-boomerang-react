@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { settings } from 'carbon-components';
-import { Button, TextArea } from 'carbon-components-react';
+import { Button, Checkbox, TextArea } from 'carbon-components-react';
 import {
   ModalHeader,
   ModalBody,
@@ -172,6 +172,7 @@ class ReportBug extends Component {
   render() {
     return (
       <HeaderMenuItem
+        preventCloseOnClickOutside
         text="Report issue"
         iconName="debug"
         className={`${prefix}--bmrg-report-bug-container`}
@@ -189,106 +190,91 @@ class ReportBug extends Component {
                 className={`${prefix}--bmrg-report-bug-form`}
                 onSubmit={(event) => this.handleSubmit(event, closeModal)}
               >
-                <ModalBody>
-                  <div className={`${prefix}--bmrg-report-bug`}>
-                    <TextArea
-                      id="bmrg-report-bug-textarea"
-                      labelText="Describe your experience"
-                      placeholder="Every time I click on my profile picture I see a horde of wombats!"
-                      maxLength="1000"
-                      onChange={this.handleOnDescriptionChange}
-                      value={this.state.description}
-                    />
-                    {this.state.postError && (
-                      <p className={`${prefix}--bmrg-report-bug__post-error`}>
-                        Failed to send message. Please try again.
-                      </p>
-                    )}
-                    <h2 className={`${prefix}--bmrg-report-bug__label-attachment`}>
-                      Add an attachment
-                    </h2>
-                    {this.state.uploadError && (
-                      <p className={`${prefix}--bmrg-report-bug__upload-error`}>
-                        Please upload a file under 50mb
-                      </p>
-                    )}
-                    <p className={`${prefix}--bmrg-report-bug__attachment-desc`}>
-                      A screenshot would be nice. A video would be even more helpful if you have
-                      nothing better to do.
+                <ModalBody className={`${prefix}--bmrg-report-bug`}>
+                  <TextArea
+                    id="bmrg-report-bug-textarea"
+                    labelText="Describe your experience"
+                    placeholder="Every time I click on my profile picture I see a horde of wombats!"
+                    maxLength="1000"
+                    onChange={this.handleOnDescriptionChange}
+                    value={this.state.description}
+                  />
+                  {this.state.postError && (
+                    <p className={`${prefix}--bmrg-report-bug__post-error`}>
+                      Failed to send message. Please try again.
                     </p>
-                    <FileUploader
-                      onFileFailure={this.handleFileFailure}
-                      onFileUpload={this.handleOnFileUpload}
-                      removeFile={this.handleOnRemoveFile}
-                      reportBugState={this.state}
-                    />
-                    <div className={`${prefix}--checkbox-wrapper`}>
-                      <input
-                        id="bmrg-report-bug-checkbox-env"
-                        className={`${prefix}--checkbox`}
-                        checked={this.state.inludeUserEnvData}
-                        onChange={this.handleOnIncludeEnvDataChange}
-                        type="checkbox"
-                      />
-                      <label
-                        htmlFor="bmrg-report-bug-checkbox-env"
-                        className={`${prefix}--checkbox-label`}
-                      >
-                        Include data about your current environment
-                      </label>
-                    </div>
-                    <p className={`${prefix}--bmrg-report-bug__env-desc`}>
-                      Like the browser page, URL, your children's names, and your social security
-                      number
+                  )}
+                  <h2 className={`${prefix}--bmrg-report-bug__label-attachment`}>
+                    Add an attachment
+                  </h2>
+                  {this.state.uploadError && (
+                    <p className={`${prefix}--bmrg-report-bug__upload-error`}>
+                      Please upload a file under 50mb
                     </p>
+                  )}
+                  <p className={`${prefix}--bmrg-report-bug__attachment-desc`}>
+                    A screenshot would be nice. A video would be even more helpful if you have
+                    nothing better to do.
+                  </p>
+                  <FileUploader
+                    onFileFailure={this.handleFileFailure}
+                    onFileUpload={this.handleOnFileUpload}
+                    removeFile={this.handleOnRemoveFile}
+                    reportBugState={this.state}
+                  />
+                  <Checkbox
+                    checked={this.state.inludeUserEnvData}
+                    labelText={'Include data about your current environment'}
+                    id={'bmrg-report-bug-checkbox-env'}
+                    onChange={this.handleOnIncludeEnvDataChange}
+                  />
+                  <p className={`${prefix}--bmrg-report-bug__env-desc`}>
+                    Like the browser page, URL, your children's names, and your social security
+                    number
+                  </p>
 
-                    <TooltipHover
-                      className={`${prefix}--bmrg-reportbug-env-tooltip-container`}
-                      align="start"
-                      direction="top"
-                      tooltipContent={
-                        <div className={`${prefix}--bmrg-reportbug-env-tooltip`}>
-                          <ul className={`${prefix}--bmrg-report-bug-tooltip`}>
-                            <li className={`${prefix}--bmrg-report-bug-tooltip__header`}>
-                              Information collected about you
-                            </li>
-                            <li className={`${prefix}--bmrg-report-bug-tooltip__divider`} />
-                            <li className={`${prefix}--bmrg-report-bug-tooltip__header`}>
-                              Location
-                            </li>
-                            <li className={`${prefix}--bmrg-report-bug-tooltip__detail`}>
-                              {userEnvironment.location}
-                            </li>
-                            <li className={`${prefix}--bmrg-report-bug-tooltip__divider`} />
-                            <li className={`${prefix}--bmrg-report-bug-tooltip__header`}>
-                              Referrer
-                            </li>
-                            <li className={`${prefix}--bmrg-report-bug-tooltip__detail`}>
-                              {userEnvironment.referer}
-                            </li>
-                            <li className={`${prefix}--bmrg-report-bug-tooltip__divider`} />
-                            <li className={`${prefix}--bmrg-report-bug-tooltip__header`}>
-                              User-agent
-                            </li>
-                            <li className={`${prefix}--bmrg-report-bug-tooltip__detail`}>
-                              {userEnvironment.userAgent}
-                            </li>
-                            <li className={`${prefix}--bmrg-report-bug-tooltip__divider`} />
-                            <li className={`${prefix}--bmrg-report-bug-tooltip__header`}>
-                              Screen resolution
-                            </li>
-                            <li className={`${prefix}--bmrg-report-bug-tooltip__detail`}>
-                              {userEnvironment.screenResolution}
-                            </li>
-                          </ul>
-                        </div>
-                      }
-                    >
-                      <div className={`${prefix}--bmrg-reportbug-env-tooltip-trigger`}>
-                        What are we really collecting?
+                  <TooltipHover
+                    className={`${prefix}--bmrg-reportbug-env-tooltip-container`}
+                    align="start"
+                    direction="top"
+                    tooltipContent={
+                      <div className={`${prefix}--bmrg-reportbug-env-tooltip`}>
+                        <ul className={`${prefix}--bmrg-report-bug-tooltip`}>
+                          <li className={`${prefix}--bmrg-report-bug-tooltip__header`}>
+                            Information collected about you
+                          </li>
+                          <li className={`${prefix}--bmrg-report-bug-tooltip__divider`} />
+                          <li className={`${prefix}--bmrg-report-bug-tooltip__header`}>Location</li>
+                          <li className={`${prefix}--bmrg-report-bug-tooltip__detail`}>
+                            {userEnvironment.location}
+                          </li>
+                          <li className={`${prefix}--bmrg-report-bug-tooltip__divider`} />
+                          <li className={`${prefix}--bmrg-report-bug-tooltip__header`}>Referrer</li>
+                          <li className={`${prefix}--bmrg-report-bug-tooltip__detail`}>
+                            {userEnvironment.referer}
+                          </li>
+                          <li className={`${prefix}--bmrg-report-bug-tooltip__divider`} />
+                          <li className={`${prefix}--bmrg-report-bug-tooltip__header`}>
+                            User-agent
+                          </li>
+                          <li className={`${prefix}--bmrg-report-bug-tooltip__detail`}>
+                            {userEnvironment.userAgent}
+                          </li>
+                          <li className={`${prefix}--bmrg-report-bug-tooltip__divider`} />
+                          <li className={`${prefix}--bmrg-report-bug-tooltip__header`}>
+                            Screen resolution
+                          </li>
+                          <li className={`${prefix}--bmrg-report-bug-tooltip__detail`}>
+                            {userEnvironment.screenResolution}
+                          </li>
+                        </ul>
                       </div>
-                    </TooltipHover>
-                  </div>
+                    }
+                  >
+                    <div className={`${prefix}--bmrg-reportbug-env-tooltip-trigger`}>
+                      What are we really collecting?
+                    </div>
+                  </TooltipHover>
                 </ModalBody>
                 <ModalFooter>
                   <Button kind="secondary" onClick={() => this.handleCloseModal(closeModal)}>

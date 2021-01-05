@@ -77,7 +77,16 @@ HeaderMenuItem.defaultProps = {
   iconName: 'launch',
 };
 
-function HeaderMenuItem({ children, className, forwardRef, iconName, style, text, ...rest }) {
+function HeaderMenuItem({
+  children,
+  className,
+  forwardRef,
+  iconName,
+  preventCloseOnClickOutside,
+  style,
+  text,
+  ...rest
+}) {
   const wrapperClassNames = cx(`${prefix}--bmrg-header-menu-item-wrapper`, {
     [className]: !!className,
   });
@@ -85,6 +94,7 @@ function HeaderMenuItem({ children, className, forwardRef, iconName, style, text
   return (
     <div className={wrapperClassNames} style={style} role="presentation" ref={forwardRef}>
       <HeaderMenuModalWrapper
+        preventCloseOnClickOutside={preventCloseOnClickOutside}
         buttonTriggerClassName={`${prefix}--bmrg-header-menu-item`}
         buttonTriggerText={
           <div className={`${prefix}--bmrg-header-menu-item__content`}>

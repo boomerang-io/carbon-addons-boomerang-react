@@ -24,14 +24,12 @@ const Error = ({ status, statusText, className, style, ...rest }) => {
 
   return (
     <div className={classNames} style={style} {...rest}>
-      <div className={`${prefix}--bmrg-error-message`}>
-        <Warning16 className={`${prefix}--bmrg-error-message__img`} alt="Warning" />
-        <h2 className={`${prefix}--bmrg-error-message__text`}>Oops, something went wrong.</h2>
-        {message}
-        <p className={`${prefix}--bmrg-error-message__subtext`}>
-          Try reloading the page. And if you could be so kind, please send us an issue report.
-        </p>
-      </div>
+      <Warning16 className={`${prefix}--bmrg-error-message__img`} alt="Warning" />
+      <h2 className={`${prefix}--bmrg-error-message__text`}>Oops, something went wrong.</h2>
+      {message}
+      <p className={`${prefix}--bmrg-error-message__subtext`}>
+        Try reloading the page. And if you could be so kind, please send us an issue report.
+      </p>
     </div>
   );
 };
