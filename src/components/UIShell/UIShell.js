@@ -161,7 +161,7 @@ function UIShell({
    */
   const finalBaseUrl = platform?.baseEnvUrl || baseLaunchEnvUrl;
   const finalBaseServiceUrl = platform?.baseServicesUrl || baseServiceUrl;
-  const isLogoEnabled = platform?.displayLogo === false || renderLogo;
+  const isLogoEnabled = platform?.displayLogo || renderLogo;
   const isSupportEnabled = Boolean(features?.['support.enabled']);
 
   /**
@@ -181,7 +181,7 @@ function UIShell({
         enableNotifications={Boolean(features?.['notifications.enabled'])}
         navLinks={navigation}
         platformMessage={platformMessage}
-        platformName={!renderLogo && finalPlatformName ? finalPlatformName : null}
+        platformName={!isLogoEnabled && finalPlatformName ? finalPlatformName : null}
         renderLogo={isLogoEnabled}
         renderRightPanel={renderRightPanel}
         renderSidenav={onMenuClick || renderSidenav}
