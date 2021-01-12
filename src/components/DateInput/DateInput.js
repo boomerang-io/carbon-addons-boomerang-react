@@ -11,6 +11,7 @@ const { prefix } = settings;
 const DateInputComponent = React.forwardRef(function DateInputComponent(
   { 
     id,
+    dateFormat,
     datePickerProps,
     disabled,
     helperText,
@@ -21,7 +22,6 @@ const DateInputComponent = React.forwardRef(function DateInputComponent(
     min,
     onCalendarChange,
     onChange,
-    pattern,
     tooltipClassName, 
     tooltipContent, 
     tooltipProps,
@@ -44,7 +44,7 @@ const DateInputComponent = React.forwardRef(function DateInputComponent(
       <DatePicker 
         key={id}
         className={`${prefix}--bmrg-date-input`}
-        dateFormat={pattern}
+        dateFormat={dateFormat}
         datePickerType="single"
         maxDate={max}
         minDate={min}
@@ -87,13 +87,13 @@ const DateInputComponent = React.forwardRef(function DateInputComponent(
 
 DateInputComponent.propTypes = {
   id: PropTypes.string.isRequired,
+  dateFormat: PropTypes.string,
   datePickerProps: PropTypes.object,
   disabled: PropTypes.bool,
   helperText: PropTypes.string,
   invalid: PropTypes.bool,
   max: PropTypes.string,
   min: PropTypes.string,
-  pattern: PropTypes.string,
   label: PropTypes.string,
   labelText: PropTypes.string,
   onCalendarChange: PropTypes.func,

@@ -14,9 +14,9 @@ storiesOf('DateInput', module)
         onChange={action('date input change')}
         placeholder={text('placeholder', 'yyyy-mm-dd')}
         autoComplete='off'
-        pattern='Y-m-d'
-        max='2020-01-31'
-        min='2020-01-01'
+        dateFormat='Y-m-d'
+        max='2020-01-31T13:10:20.219+00:00'
+        min='2020-01-01T13:10:20.219+00:00'
       />
     );
   })
