@@ -73,6 +73,7 @@ const DateInputComponent = React.forwardRef(function DateInputComponent(
           }
           ref={ref}
           style={{ width: "100%" }}
+          pattern=".*"
           {...dateInputProps}
         />
       </DatePicker>
