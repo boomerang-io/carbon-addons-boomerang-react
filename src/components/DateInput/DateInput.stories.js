@@ -36,4 +36,19 @@ storiesOf('DateInput', module)
         />
       </div>
     );
+  }).add('read only', () => {
+    return (
+      <DateInput
+        id="read-only-date-input"
+        onCalendarChange={action('date input calendar change')}
+        onChange={action('date input change')}
+        placeholder={text('placeholder', 'yyyy-mm-dd')}
+        autoComplete='off'
+        dateFormat='Y-m-d'
+        max='2020-01-31T13:10:20.219+00:00'
+        min='2020-01-01T13:10:20.219+00:00'
+        value='2020-01-15T13:10:20.219+00:00'
+        readOnly
+      />
+    );
   });

@@ -22,6 +22,7 @@ const DateInputComponent = React.forwardRef(function DateInputComponent(
     min,
     onCalendarChange,
     onChange,
+    readOnly,
     tooltipClassName, 
     tooltipContent, 
     tooltipProps,
@@ -43,6 +44,7 @@ const DateInputComponent = React.forwardRef(function DateInputComponent(
     <>
       <DatePicker 
         key={id}
+        allowInput={!readOnly}
         className={`${prefix}--bmrg-date-input`}
         dateFormat={dateFormat}
         datePickerType="single"
@@ -54,7 +56,7 @@ const DateInputComponent = React.forwardRef(function DateInputComponent(
       >
         <DatePickerInput
           id={id}
-          disabled={disabled}
+          disabled={disabled || readOnly}
           invalid={invalid}
           onChange={onChange}
           labelText={
@@ -71,6 +73,7 @@ const DateInputComponent = React.forwardRef(function DateInputComponent(
               </div>
             )
           }
+          readOnly={readOnly}
           ref={ref}
           style={{ width: "100%" }}
           pattern=".*"
@@ -99,6 +102,7 @@ DateInputComponent.propTypes = {
   labelText: PropTypes.string,
   onCalendarChange: PropTypes.func,
   onChange: PropTypes.func,
+  readOnly: PropTypes.bool,
   tooltipClassName: PropTypes.string,
   tooltipContent: PropTypes.any,
   tooltipProps: PropTypes.object,
