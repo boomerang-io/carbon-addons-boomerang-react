@@ -307,6 +307,10 @@ $breakpoints: (
 
   .#{$prefix}--bmrg-header__app-menu-wrapper {
     display: contents;
+    
+    .bx--side-nav__navigation {
+      height: calc(100vh - 3rem);
+    }
   }
 
   .#{$prefix}--bmrg-header__app-menu {

@@ -16,6 +16,7 @@ export { default as ComposedModal } from './components/ComposedModal';
 export { default as ConfirmModal } from './components/ConfirmModal';
 export { default as Creatable } from './components/Creatable';
 export { default as DataDrivenInput } from './components/DataDrivenInput';
+export { default as DateInput } from './components/DateInput';
 export { default as DecisionButtons } from './components/DecisionButtons';
 export { default as DelayedRender } from './components/DelayedRender';
 export { default as DynamicFormik } from './components/DynamicFormik';

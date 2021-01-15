@@ -9,6 +9,7 @@ import { settings } from 'carbon-components';
 import {
   CHECKBOX_TYPES,
   CREATABLE_TYPES,
+  DATE_TYPES,
   MULTI_SELECT_TYPES,
   RADIO_TYPES,
   SELECT_TYPES,
@@ -87,6 +88,10 @@ function generateYupAst({ inputs, allowCustomPropertySyntax, customPropertySynta
 
     if (!INPUT_TYPES_ARRAY.includes(inputType)) {
       return;
+    }
+
+    if(inputType === DATE_TYPES.DATE) {
+      yupValidationArray.push(['yup.date', 'Enter a valid date']);
     }
 
     if (
@@ -183,35 +188,35 @@ function generateYupAst({ inputs, allowCustomPropertySyntax, customPropertySynta
       inputType === TEXT_EDITOR_TYPES.TEXT_EDITOR
     ) {
       if (inputType === TEXT_INPUT_TYPES.NUMBER) {
-        if (input.minValueLength) {
+        if (input.min) {
           yupValidationArray.push([
             'yup.min',
-            input.minValueLength,
-            `Enter value greater than ${input.minValueLength}`,
+            input.min,
+            `Enter value greater than ${input.min}`,
           ]);
         }
 
-        if (input.maxValueLength) {
+        if (input.max) {
           yupValidationArray.push([
             'yup.max',
-            input.maxValueLength,
-            `Enter value less than ${input.maxValueLength}`,
+            input.max,
+            `Enter value less than ${input.max}`,
           ]);
         }
       } else {
-        if (input.minValueLength) {
+        if (input.min) {
           yupValidationArray.push([
             'yup.min',
-            input.minValueLength,
-            `Enter at least ${input.minValueLength} characters`,
+            input.min,
+            `Enter at least ${input.min} characters`,
           ]);
         }
 
-        if (input.maxValueLength) {
+        if (input.max) {
           yupValidationArray.push([
             'yup.max',
-            input.maxValueLength,
-            `Enter at most ${input.maxValueLength} characters`,
+            input.max,
+            `Enter at most ${input.max} characters`,
           ]);
         }
       }
@@ -342,6 +347,11 @@ const TYPE_PROPS = {
     onChange: (createdItems) => formikProps.setFieldValue(`['${key}']`, createdItems),
   }),
 
+  [INPUT_GROUPS.DATE]: (formikProps, key) => ({
+    onChange: formikProps.handleChange,
+    onCalendarChange: (dateArray) => formikProps.setFieldValue(`['${key}']`, dateArray[0]?.toISOString()),
+  }),
+
   [INPUT_GROUPS.MULTI_SELECT]: (formikProps, key) => ({
     onChange: ({ selectedItems }) =>
       formikProps.setFieldValue(
@@ -386,6 +396,7 @@ function determineTypeProps(type, otherProps) {
   const {
     checkboxListProps,
     creatableProps,
+    dateProps,
     multiSelectProps,
     radioProps,
     selectProps,
@@ -406,6 +417,13 @@ function determineTypeProps(type, otherProps) {
     return {
       typeProps: TYPE_PROPS[INPUT_GROUPS.CREATABLE],
       additionalTypeProps: creatableProps,
+    };
+  }
+
+  if (Object.values(DATE_TYPES).includes(type)) {
+    return {
+      typeProps: TYPE_PROPS[INPUT_GROUPS.DATE],
+      additionalTypeProps: dateProps,
     };
   }
 
@@ -481,6 +499,7 @@ DynamicFormik.propTypes = {
   allProps: PropTypes.func,
   checkboxListProps: PropTypes.func,
   creatableProps: PropTypes.func,
+  dateProps: PropTypes.func,
   multiSelectProps: PropTypes.func,
   radioProps: PropTypes.func,
   selectProps: PropTypes.func,
@@ -497,6 +516,7 @@ DynamicFormik.defaultProps = {
   children: () => ({}),
   checkboxListProps: () => ({}),
   creatableProps: () => ({}),
+  dateProps: () => ({}),
   multiSelectProps: () => ({}),
   radioProps: () => ({}),
   selectProps: () => ({}),

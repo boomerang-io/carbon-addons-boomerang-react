@@ -24,7 +24,7 @@ ModalForm.propTypes = {
 };
 
 ModalForm.defaultProps = {
-  element: 'form',
+  element: 'form'
 };
 
 export default ModalForm;

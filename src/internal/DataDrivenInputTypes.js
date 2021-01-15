@@ -7,6 +7,10 @@ export const CREATABLE_TYPES = {
   CREATABLE_PAIR: 'creatable-pair',
 };
 
+export const DATE_TYPES = {
+  DATE: 'date',
+};
+
 export const MULTI_SELECT_TYPES = {
   MULTI_SELECT: 'multiselect',
 };
@@ -45,6 +49,7 @@ export const BOOLEAN_TYPES = {
 export const INPUT_GROUPS = {
   CHECKBOX: 'checkbox',
   CREATABLE: 'creatable',
+  DATE: 'date',
   MULTI_SELECT: 'multiselect',
   RADIO: 'radio',
   SELECT: 'select',
@@ -57,6 +62,7 @@ export const INPUT_GROUPS = {
 export const INPUT_TYPES_ARRAY = Object.values({
   ...CHECKBOX_TYPES,
   ...CREATABLE_TYPES,
+  ...DATE_TYPES,
   ...MULTI_SELECT_TYPES,
   ...RADIO_TYPES,
   ...SELECT_TYPES,
