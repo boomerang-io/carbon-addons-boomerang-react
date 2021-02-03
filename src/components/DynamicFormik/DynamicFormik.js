@@ -576,6 +576,7 @@ export default function DynamicFormik({
           } = input;
 
           const inputValue = Object.values(TEXT_INPUT_TYPES).includes(type) || type === TEXT_AREA_TYPES.TEXT_AREA || type === TEXT_EDITOR_TYPES.TEXT_EDITOR ? values[key].toString() : values[key];
+          console.log(Object.values(TEXT_INPUT_TYPES).includes(type) , type === TEXT_AREA_TYPES.TEXT_AREA , type === TEXT_EDITOR_TYPES.TEXT_EDITOR, values[key].toString(), inputValue, "testing values");
           const invalidText = errors[key];
           const invalid = invalidText && touched[key];
 
