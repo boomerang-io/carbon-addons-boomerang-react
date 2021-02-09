@@ -72,6 +72,13 @@
     line-height: 0.9375rem;
   }
 
+  .#{$prefix}--bmrg-member-bar__partner-not-allowed-text {
+    color: var(--cds-support-01);
+    font-size: 0.75rem;
+    letter-spacing: 0.02rem;
+    line-height: 0.9375rem;
+  }
+
   .#{$prefix}--bmrg-member-bar__right-section {
     align-items: center;
     display: flex;
