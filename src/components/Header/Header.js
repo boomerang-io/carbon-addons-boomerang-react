@@ -13,7 +13,7 @@ import {
 import { settings } from 'carbon-components';
 import { SkipToContent } from 'carbon-components-react/lib/components/UIShell';
 
-import PlatformBanner from '../PlatformBanner';
+// import PlatformBanner from '../PlatformBanner';
 import PlatformNotificationsContainer from '../PlatformNotifications';
 import HeaderMenu from '../HeaderMenu';
 import NotificationsContainer from '../Notifications/NotificationsContainer';
@@ -210,7 +210,7 @@ class Header extends React.Component {
       className,
       platformName,
       navLinks,
-      platformMessage,
+      // platformMessage,
       appName,
       renderGlobalSwitcher,
       renderLogo,
@@ -396,13 +396,13 @@ class Header extends React.Component {
             </div>
           )}
         </div>
-        {platformMessage && (
+        {/*platformMessage && (
           <PlatformBanner
             kind={platformMessage.kind}
             message={platformMessage.message}
             title={platformMessage.title}
           />
-        )}
+        )*/}
         <NotificationsContainer
           enableMultiContainer
           containerId={`${prefix}--bmrg-header-notifications`}
