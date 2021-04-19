@@ -575,7 +575,7 @@ export default function DynamicFormik({
             ...otherInputsProps
           } = input;
 
-          const inputValue = values[key];
+          const inputValue = values[key] !== undefined && values[key] !== null && (Object.values(TEXT_INPUT_TYPES).includes(type) || type === TEXT_AREA_TYPES.TEXT_AREA || type === TEXT_EDITOR_TYPES.TEXT_EDITOR) ? values[key].toString() : values[key];
           const invalidText = errors[key];
           const invalid = invalidText && touched[key];
 

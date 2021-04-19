@@ -17,6 +17,7 @@ import {
   ModalBody,
   ModalFooter,
 } from 'carbon-components-react/lib/components/ComposedModal';
+import Avatar from '../Avatar';
 import ErrorMessage from '../ErrorMessage';
 import HeaderMenuUser from '../HeaderMenuUser';
 import notify from '../Notifications/notify';
@@ -35,6 +36,7 @@ ProfileSettings.propTypes = {
 function ProfileSettings({ baseServiceUrl, src, userName }) {
   const [initialTeams, setInitialTeams] = useState([]);
   const [teams, setTeams] = useState([]);
+  const [disableModal, setDisableModal] = useState([]);
   const [isLoading, setIsLoading] = useState();
   const [isSubmitting, setIsSubmitting] = useState();
   const [isLoadingError, setIsLoadingError] = useState();
@@ -49,6 +51,7 @@ function ProfileSettings({ baseServiceUrl, src, userName }) {
         .then((response) => {
           const teams = response.data.lowerLevelGroups;
           setTeams(teams);
+          setDisableModal(response.data.lowerLevelGroups === undefined);
           setInitialTeams(teams);
         })
         .catch((err) => setIsLoadingError(err))
@@ -107,7 +110,7 @@ function ProfileSettings({ baseServiceUrl, src, userName }) {
 
   function determineIfConfigIsDifferent(teams, initialTeams) {
     let isConfigDifferent = false;
-    for (let idx = 0; idx < teams.length; idx++) {
+    for (let idx = 0; idx < teams?.length; idx++) {
       if (teams[idx]?.visible !== initialTeams[idx]?.visible) {
         isConfigDifferent = true;
         break;
@@ -127,6 +130,14 @@ function ProfileSettings({ baseServiceUrl, src, userName }) {
     }
     setTeams(updatedTeams);
   }
+
+  if(disableModal)
+    return (
+      <div className={`${prefix}--bmrg-profile-menu-user`}>
+        <Avatar size="medium" src={src} userName={userName} />
+        <p className={`${prefix}--bmrg-profile-menu-user__name`}> {userName ? userName : ''} </p>
+      </div>
+    );
 
   return (
     <HeaderMenuUser
