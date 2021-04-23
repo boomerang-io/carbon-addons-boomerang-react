@@ -14,7 +14,7 @@ const { prefix } = settings;
  */
 
 export function RecoverErrorBoundary(props) {
-  const { children, className, style, errorProps, errorComponent, resetButtonText, resetButtonProps } = props;
+  const { children, className, style, errorProps, errorComponent, onResetError, resetButtonText, resetButtonProps } = props;
   const containerClassName = cx(`${prefix}--bmrg-error-boundary-poc`, className);
   const buttonClassName = cx(`${prefix}--bmrg-error-boundary-poc-restore`, resetButtonProps?.className);
 
@@ -27,10 +27,14 @@ export function RecoverErrorBoundary(props) {
   }
 
   const ErrorFallback = ({error, resetErrorBoundary}) => {
+    const handleResetError = () => {
+      onResetError && onResetError();
+      resetErrorBoundary();
+    }
     return (
       <div className={containerClassName} role="alert" style={style} {...props}>
         <ErrorComponent {...errorProps} />
-        <Button onClick={resetErrorBoundary} {...resetButtonProps}>
+        <Button onClick={handleResetError} {...resetButtonProps}>
           {resetButtonText}
         </Button>
       </div>
@@ -57,6 +61,7 @@ RecoverErrorBoundary.propTypes = {
   style: PropTypes.string,
   errorProps: PropTypes.object,
   errorComponent: PropTypes.func,
+  onResetError: PropTypes.func,
   resetButtonText: PropTypes.string,
   resetButtonProps: PropTypes.object,
 };
