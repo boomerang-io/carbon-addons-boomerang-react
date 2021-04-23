@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Header from '../Header'; // Using default export
 import HeaderMenuButton from '../HeaderMenuButton';
 import HeaderMenuLink from '../HeaderMenuLink';
-import HeaderMenuUser from '../HeaderMenuUser';
+import ProfileSettings from '../ProfileSettings';
 import AboutPlatform from '../AboutPlatform';
 import ContactUs from '../ContactUs';
 import PrivacyStatement from '../PrivacyStatement';
@@ -40,9 +40,32 @@ UIShell.propTypes = {
    * - Message banner to display for all users
    */
   headerConfig: PropTypes.shape({
-    features: PropTypes.object,
-    navigation: PropTypes.array,
-    platform: PropTypes.object,
+    features: PropTypes.shape({
+      'consent.enabled': PropTypes.bool,
+      'docs.enabled': PropTypes.bool,
+      'metering.enabled': PropTypes.bool,
+      'notifications.enabled': PropTypes.bool,
+      'support.enabled': PropTypes.bool,
+      'welcome.enabled': PropTypes.bool,
+    }),
+    navigation: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string,
+        url: PropTypes.string,
+      })
+    ),
+    platform: PropTypes.shape({
+      baseEnvUrl: PropTypes.string,
+      baseServicesUrl: PropTypes.string,
+      communityUrl: PropTypes.string,
+      displayLogo: PropTypes.bool,
+      name: PropTypes.string,
+      platformName: PropTypes.string,
+      privateTeams: PropTypes.bool,
+      sendMail: PropTypes.bool,
+      signOutUrl: PropTypes.string,
+      version: PropTypes.string,
+    }),
     platformMessage: PropTypes.object,
   }),
   /**
@@ -68,6 +91,9 @@ UIShell.propTypes = {
    * override for the consumer. When set as true, the launchpad redirect modal will be
    */
   renderLogo: PropTypes.bool,
+  /**
+   * Disable platform consent if user.id is not present
+   */
   requirePlatformConsent: PropTypes.bool,
   /**
    * Pass in whole user object
@@ -102,8 +128,6 @@ UIShell.propTypes = {
 };
 
 UIShell.defaultProps = {
-  baseLaunchEnvUrl: '',
-  baseWWWEnvUrl: '',
   headerConfig: {},
   requirePlatformConsent: true,
   user: {},
@@ -127,57 +151,77 @@ function UIShell({
   skipToContentProps,
   user,
 }) {
-  const { features, navigation, platform, platformMessage } = headerConfig;
-
   const finalPlatformName = platformName || companyName;
   const finalAppName = appName || productName;
-  const isSupportEnabled = Boolean(features) && Boolean(features['support.enabled']);
+
+  const { features, navigation, platform, platformMessage } = headerConfig;
+  /**
+   * Prevent breaking changes. Use the values from the platform object if present.
+   * Default to the legacy props to support backwards compatibility
+   */
+  const finalBaseUrl = platform?.baseEnvUrl || baseLaunchEnvUrl;
+  const finalBaseServiceUrl = platform?.baseServicesUrl || baseServiceUrl;
+  const isLogoEnabled = platform?.displayLogo || renderLogo;
+  const isSupportEnabled = Boolean(features?.['support.enabled']);
+
+  /**
+   * Checking for conditions when we explicitly set "requirePlatformConsent" to false (it defaults to true) OR
+   * it's disabled overall for the platform. This lets us toggle the UIShell consent redirect per app as needed
+   * e.g. disabled in Launchpad, but have it enabled for rest of the platform AND also support
+   * having it disabled in a "standalone" mode via the consent.enaable feature flag. aka its data driven via the service
+   */
+  const isConsentDisabled =
+    requirePlatformConsent === false || features?.['consent.enabled'] === false;
 
   return (
     <>
       <Header
         appName={finalAppName}
-        baseLaunchEnvUrl={baseLaunchEnvUrl}
-        enableNotifications={features && features['notifications.enabled']}
-        platformMessage={platformMessage}
-        platformName={!renderLogo && finalPlatformName ? finalPlatformName : null}
-        renderLogo={renderLogo}
+        baseLaunchEnvUrl={finalBaseUrl}
+        enableNotifications={Boolean(features?.['notifications.enabled'])}
         navLinks={navigation}
+        platformMessage={platformMessage}
+        platformName={!isLogoEnabled && finalPlatformName ? finalPlatformName : null}
+        renderLogo={isLogoEnabled}
+        renderRightPanel={renderRightPanel}
+        renderSidenav={onMenuClick || renderSidenav}
+        skipToContentProps={skipToContentProps}
         notificationsConfig={{
-          wsUrl: `${baseServiceUrl}/notifications/ws`,
+          wsUrl: `${finalBaseServiceUrl}/notifications/ws`,
         }}
         onHelpClick={[
           typeof onTutorialClick === 'function' && (
             <HeaderMenuButton
-              text="Tutorial"
               iconName="workspace"
-              onClick={onTutorialClick}
               key="Tutorial"
+              onClick={onTutorialClick}
+              text="Tutorial"
             />
           ),
-          baseServiceUrl && isSupportEnabled && (
-            <ContactUs baseServiceUrl={baseServiceUrl} key="Contact Us" />
+          Boolean(finalBaseServiceUrl) && isSupportEnabled && (
+            <ContactUs baseServiceUrl={finalBaseServiceUrl} key="Contact Us" />
           ),
-          baseServiceUrl && isSupportEnabled && (
-            <ReportBug baseServiceUrl={baseServiceUrl} key="Report Bug" />
+          Boolean(finalBaseServiceUrl) && isSupportEnabled && (
+            <ReportBug baseServiceUrl={finalBaseServiceUrl} key="Report Bug" />
           ),
-          baseServiceUrl && isSupportEnabled && (
+          Boolean(finalBaseServiceUrl) && isSupportEnabled && (
             <HeaderMenuLink
               external={false}
-              href={`${baseLaunchEnvUrl}/launchpad/support`}
+              href={`${finalBaseUrl}/launchpad/support`}
               iconName="support"
               text="Support Center"
             />
           ),
-          platform && platform.communityUrl && (
+          Boolean(platform?.communityUrl) && (
             <HeaderMenuLink href={platform.communityUrl} iconName="forum" text="Community" />
           ),
         ].filter(Boolean)}
         profileChildren={[
-          user?.id && (
-            <HeaderMenuUser
+          Boolean(user?.id) && (
+            <ProfileSettings
+              baseServiceUrl={finalBaseServiceUrl}
               key="Avatar"
-              src={`${baseServiceUrl}/users/image/${user.email}`}
+              src={`${finalBaseServiceUrl}/users/image/${user.email}`}
               userName={user.name}
             />
           ),
@@ -188,19 +232,16 @@ function UIShell({
               version={platform.version}
             />
           ),
-          baseServiceUrl && (
-            <PrivacyStatement key="Privacy Statement" baseServiceUrl={baseServiceUrl} />
+          baseServiceUrl && isConsentDisabled === false && (
+            <PrivacyStatement key="Privacy Statement" baseServiceUrl={finalBaseServiceUrl} />
           ),
-          platform && platform.signOutUrl && (
-            <SignOut signOutLink={platform.signOutUrl} key="Sign Out" />
+          Boolean(platform?.signOutUrl) && (
+            <SignOut key="Sign Out" signOutLink={platform.signOutUrl} />
           ),
         ].filter(Boolean)}
-        renderRightPanel={renderRightPanel}
-        skipToContentProps={skipToContentProps}
-        renderSidenav={onMenuClick || renderSidenav}
       />
-      {requirePlatformConsent && user.hasOwnProperty('hasConsented') && !user.hasConsented ? (
-        <GdprRedirectModal isOpen baseLaunchEnvUrl={baseLaunchEnvUrl} user={user} />
+      {isConsentDisabled === false && user.hasConsented === false ? (
+        <GdprRedirectModal isOpen baseLaunchEnvUrl={finalBaseUrl} user={user} />
       ) : null}
     </>
   );

@@ -9,6 +9,7 @@ import { settings } from 'carbon-components';
 import {
   CHECKBOX_TYPES,
   CREATABLE_TYPES,
+  DATE_TYPES,
   MULTI_SELECT_TYPES,
   RADIO_TYPES,
   SELECT_TYPES,
@@ -87,6 +88,10 @@ function generateYupAst({ inputs, allowCustomPropertySyntax, customPropertySynta
 
     if (!INPUT_TYPES_ARRAY.includes(inputType)) {
       return;
+    }
+
+    if(inputType === DATE_TYPES.DATE) {
+      yupValidationArray.push(['yup.date', 'Enter a valid date']);
     }
 
     if (
@@ -183,35 +188,35 @@ function generateYupAst({ inputs, allowCustomPropertySyntax, customPropertySynta
       inputType === TEXT_EDITOR_TYPES.TEXT_EDITOR
     ) {
       if (inputType === TEXT_INPUT_TYPES.NUMBER) {
-        if (input.minValueLength) {
+        if (input.min) {
           yupValidationArray.push([
             'yup.min',
-            input.minValueLength,
-            `Enter value greater than ${input.minValueLength}`,
+            input.min,
+            `Enter value greater than ${input.min}`,
           ]);
         }
 
-        if (input.maxValueLength) {
+        if (input.max) {
           yupValidationArray.push([
             'yup.max',
-            input.maxValueLength,
-            `Enter value less than ${input.maxValueLength}`,
+            input.max,
+            `Enter value less than ${input.max}`,
           ]);
         }
       } else {
-        if (input.minValueLength) {
+        if (input.min) {
           yupValidationArray.push([
             'yup.min',
-            input.minValueLength,
-            `Enter at least ${input.minValueLength} characters`,
+            input.min,
+            `Enter at least ${input.min} characters`,
           ]);
         }
 
-        if (input.maxValueLength) {
+        if (input.max) {
           yupValidationArray.push([
             'yup.max',
-            input.maxValueLength,
-            `Enter at most ${input.maxValueLength} characters`,
+            input.max,
+            `Enter at most ${input.max} characters`,
           ]);
         }
       }
@@ -335,28 +340,33 @@ const conditionallyRenderInput = (input, values) => {
  */
 const TYPE_PROPS = {
   [INPUT_GROUPS.CHECKBOX]: (formikProps, key) => ({
-    onChange: (value, id, event, selectedItems) => formikProps.setFieldValue(key, selectedItems),
+    onChange: (value, id, event, selectedItems) => formikProps.setFieldValue(`['${key}']`, selectedItems),
   }),
 
   [INPUT_GROUPS.CREATABLE]: (formikProps, key) => ({
-    onChange: (createdItems) => formikProps.setFieldValue(key, createdItems),
+    onChange: (createdItems) => formikProps.setFieldValue(`['${key}']`, createdItems),
+  }),
+
+  [INPUT_GROUPS.DATE]: (formikProps, key) => ({
+    onChange: formikProps.handleChange,
+    onCalendarChange: (dateArray) => formikProps.setFieldValue(`['${key}']`, dateArray[0]?.toISOString()),
   }),
 
   [INPUT_GROUPS.MULTI_SELECT]: (formikProps, key) => ({
     onChange: ({ selectedItems }) =>
       formikProps.setFieldValue(
-        key,
+        `['${key}']`,
         selectedItems.map((item) => item && item.value)
       ),
   }),
 
   [INPUT_GROUPS.RADIO]: (formikProps, key) => ({
-    onChange: (value) => formikProps.setFieldValue(key, value),
+    onChange: (value) => formikProps.setFieldValue(`['${key}']`, value),
   }),
 
   [INPUT_GROUPS.SELECT]: (formikProps, key) => ({
     onChange: ({ selectedItem }) =>
-      formikProps.setFieldValue(key, selectedItem ? selectedItem.value : ''),
+      formikProps.setFieldValue(`['${key}']`, selectedItem ? selectedItem.value : ''),
   }),
 
   [INPUT_GROUPS.TEXT_AREA]: (formikProps) => ({
@@ -372,7 +382,7 @@ const TYPE_PROPS = {
   }),
 
   [INPUT_GROUPS.BOOLEAN]: (formikProps, key) => ({
-    onChange: (value) => formikProps.setFieldValue(key, value),
+    onChange: (value) => formikProps.setFieldValue(`['${key}']`, value),
   }),
 };
 
@@ -386,6 +396,7 @@ function determineTypeProps(type, otherProps) {
   const {
     checkboxListProps,
     creatableProps,
+    dateProps,
     multiSelectProps,
     radioProps,
     selectProps,
@@ -406,6 +417,13 @@ function determineTypeProps(type, otherProps) {
     return {
       typeProps: TYPE_PROPS[INPUT_GROUPS.CREATABLE],
       additionalTypeProps: creatableProps,
+    };
+  }
+
+  if (Object.values(DATE_TYPES).includes(type)) {
+    return {
+      typeProps: TYPE_PROPS[INPUT_GROUPS.DATE],
+      additionalTypeProps: dateProps,
     };
   }
 
@@ -481,6 +499,7 @@ DynamicFormik.propTypes = {
   allProps: PropTypes.func,
   checkboxListProps: PropTypes.func,
   creatableProps: PropTypes.func,
+  dateProps: PropTypes.func,
   multiSelectProps: PropTypes.func,
   radioProps: PropTypes.func,
   selectProps: PropTypes.func,
@@ -497,6 +516,7 @@ DynamicFormik.defaultProps = {
   children: () => ({}),
   checkboxListProps: () => ({}),
   creatableProps: () => ({}),
+  dateProps: () => ({}),
   multiSelectProps: () => ({}),
   radioProps: () => ({}),
   selectProps: () => ({}),
@@ -520,53 +540,30 @@ export default function DynamicFormik({
   validationSchemaExtension,
   ...otherProps
 }) {
-  /**
-   * Get values from formik and normalize keys
-   */
-
-  const normalizedInputs = inputs.map((input) => ({
-    ...input,
-    key: input.key.replace(/\./g, '||'),
-    requiredForKey:
-      typeof input.requiredForKey === 'string' ? input.requiredForKey.replace(/\./g, '||') : null,
-  }));
-
-  const normalizeValues = (values) => {
-    if (!Boolean(values)) return {};
-    let inputKeys = Object.entries(values);
-    let newValues = {};
-    inputKeys.forEach((value) => (newValues[value[0].replace(/\./g, '||')] = value[1]));
-    return newValues;
-  };
 
   return (
     <Formik
       initialValues={
-        (Boolean(initialValues) && normalizeValues(initialValues)) || {
-          ...determineInitialValues(normalizedInputs),
-          ...normalizeValues(additionalInitialValues),
+        (Boolean(initialValues) && initialValues) || {
+          ...determineInitialValues(inputs),
+          ...additionalInitialValues,
         }
       }
       validationSchema={
         validationSchema ||
         generateYupSchema({
-          inputs: normalizedInputs,
+          inputs,
           validationSchemaExtension,
           allowCustomPropertySyntax,
           customPropertySyntaxPattern,
         })
       }
-      onSubmit={(values, actions) => {
-        let inputKeys = Object.entries(values);
-        let newValues = {};
-        inputKeys.forEach((value) => (newValues[value[0].replace(/\|\|/g, '.')] = value[1]));
-        onSubmit(newValues, actions);
-      }}
+      onSubmit={(values, actions) => onSubmit(values, actions)}
       {...otherProps}
     >
       {(formikProps) => {
         const { values, touched, errors, handleBlur } = formikProps;
-        const finalInputs = normalizedInputs.filter((input) =>
+        const finalInputs = inputs.filter((input) =>
           conditionallyRenderInput(input, values)
         );
 
@@ -578,7 +575,7 @@ export default function DynamicFormik({
             ...otherInputsProps
           } = input;
 
-          const inputValue = values[key];
+          const inputValue = values[key] !== undefined && values[key] !== null && (Object.values(TEXT_INPUT_TYPES).includes(type) || type === TEXT_AREA_TYPES.TEXT_AREA || type === TEXT_EDITOR_TYPES.TEXT_EDITOR) ? values[key].toString() : values[key];
           const invalidText = errors[key];
           const invalid = invalidText && touched[key];
 
@@ -586,16 +583,15 @@ export default function DynamicFormik({
             type,
             otherProps
           );
-
           return (
             <DataDrivenInput
               key={key}
               customComponent={input.customComponent}
               formikProps={formikProps}
-              id={key}
+              id={`['${key}']`}
               invalid={invalid}
               invalidText={invalidText}
-              name={key}
+              name={`['${key}']`}
               onBlur={handleBlur}
               type={type}
               value={inputValue}

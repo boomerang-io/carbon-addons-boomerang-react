@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent, wait, waitForElement } from '@testing-library/react';
+import { render, fireEvent, waitFor } from '@testing-library/react';
 
 import PrivacyStatement from './PrivacyStatement.js';
 
@@ -28,18 +28,20 @@ test('Privacy Statement error', async () => {
 
   mock.onPut(`${baseServiceUrl}/users/consent`).networkError();
 
-  const { getByText } = render(<PrivacyStatement baseServiceUrl={baseServiceUrl} />);
+  const { getByText, getByRole, findByRole } = render(
+    <PrivacyStatement baseServiceUrl={baseServiceUrl} />
+  );
 
-  const btn = getByText(/Privacy Statement/i);
+  const btn = getByRole('button', { name: /Privacy Statement/i });
   fireEvent.click(btn);
 
-  const deleteButton = await waitForElement(() => getByText(/Request account deletion/i));
+  const deleteButton = await findByRole('button', { name: /Request account deletion/i });
   fireEvent.click(deleteButton);
 
   const confirmButton = getByText(/Delete my account/i);
   fireEvent.click(confirmButton);
 
-  await wait(() =>
+  await waitFor(() =>
     expect(getByText(/Failed to recieve deletion request. Please try again./i)).toBeInTheDocument()
   );
 });
@@ -51,23 +53,16 @@ test('Privacy Statement success', async () => {
   const mock = new MockAdapter(axios);
 
   mock.onGet(`${baseServiceUrl}/users/consents`).reply(200, PRIVACY_DATA);
-
   mock.onPut(`${baseServiceUrl}/users/consent`).reply(200);
 
-  const { getByText, queryByText } = render(<PrivacyStatement baseServiceUrl={baseServiceUrl} />);
+  const { getByRole, findByRole } = render(<PrivacyStatement baseServiceUrl={baseServiceUrl} />);
 
-  const btn = getByText(/Privacy Statement/i);
+  const btn = getByRole('button', { name: /Privacy Statement/i });
   fireEvent.click(btn);
 
-  const deleteButton = await waitForElement(() => getByText(/Request account deletion/i));
+  const deleteButton = await findByRole('button', { name: /Request account deletion/i });
   fireEvent.click(deleteButton);
 
-  const confirmButton = getByText(/Delete my account/i);
+  const confirmButton = getByRole('button', { name: /Delete my account/i });
   fireEvent.click(confirmButton);
-
-  await wait(() =>
-    expect(
-      queryByText(/For any questions or concerns about business personal information/i)
-    ).toBeNull()
-  );
 });

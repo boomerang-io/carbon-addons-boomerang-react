@@ -1,3 +1,4 @@
+/* eslint-disable no-template-curly-in-string */
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
@@ -19,8 +20,8 @@ const inputs = [
     helperText: 'text',
     description: 'text',
     required: false,
-    minValueLength: '2',
-    maxValueLength: '20',
+    min: '2',
+    max: '20',
     pattern: '(boomerang|carbon)',
   },
   {
@@ -32,8 +33,8 @@ const inputs = [
     helperText: 'password',
     description: 'password',
     required: false,
-    minValueLength: '2',
-    maxValueLength: '20',
+    min: '2',
+    max: '20',
   },
   {
     key: 'secured',
@@ -44,8 +45,19 @@ const inputs = [
     helperText: 'secured',
     description: 'secured',
     required: false,
-    minValueLength: '2',
-    maxValueLength: '20',
+    min: '2',
+    max: '20',
+  },
+  {
+    key: 'date',
+    label: 'Date',
+    value: '2020-01-01T13:10:20.219+00:00',
+    type: 'date',
+    placeholder: 'yyyy-mm-dd',
+    helperText: 'date',
+    dateFormat: 'Y-m-d',
+    min: '2020-01-01T13:10:20.219+00:00',
+    max: '2020-01-31T13:10:20.219+00:00'
   },
   {
     required: false,
@@ -62,8 +74,8 @@ const inputs = [
     key: 'kafka.bot-failure.notifications-enabled',
     label: 'kafka',
     type: 'text',
-    minValueLength: null,
-    maxValueLength: null,
+    min: null,
+    max: null,
     options: null,
   },
   {
@@ -97,8 +109,8 @@ const inputs = [
     type: 'number',
     required: true,
     placeholder: '0',
-    maxValueLength: 100,
-    minValueLength: -1,
+    max: 100,
+    min: -1,
     helperText: 'text',
     description: 'text',
   },
@@ -214,8 +226,8 @@ const inputs = [
   {
     key: 'general.worker.nextgen.enable',
     label: 'Enable Generation 3 Worker Integration',
-    maxValueLength: null,
-    minValueLength: null,
+    max: null,
+    min: null,
     type: 'boolean',
     defaultValue: 'false',
     required: false,
@@ -229,8 +241,8 @@ const inputs = [
   {
     key: 'general.worker.token.deploy',
     label: 'Next Gen Worker Deploy Token',
-    maxValueLength: null,
-    minValueLength: null,
+    max: null,
+    min: null,
     type: 'text',
     defaultValue: '',
     required: false,

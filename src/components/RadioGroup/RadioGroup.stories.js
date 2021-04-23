@@ -20,6 +20,7 @@ storiesOf('RadioGroup', module)
       <RadioGroup
         id="test"
         defaultSelected={text('defaultSelected', 'default value')}
+        helperText={text('helperText', 'Test helper text')}
         name={text('name', 'Radio group 1')}
         onChange={action('radio changed')}
         options={options1}
@@ -33,7 +34,7 @@ storiesOf('RadioGroup', module)
         id="test"
         defaultSelected={text('defaultSelected', 'default value')}
         labelText={text('labelText', 'Select a value')}
-        helperText="test"
+        helperText={text('helperText', 'Test helper text')}
         name={text('name', 'Radio group 2')}
         onChange={() => {}}
         options={options2}

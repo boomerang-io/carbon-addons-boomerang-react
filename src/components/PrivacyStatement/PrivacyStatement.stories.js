@@ -18,13 +18,13 @@ import { PRIVACY_DATA } from './constants';
 const mock = new MockAdapter(axios);
 
 const props = () => ({
-  baseServiceUrl: 'http://localhost:8080',
+  baseServiceUrl: 'http://ibm.com',
 });
 
 storiesOf('PrivacyStatement', module).add(
   'default',
   () => {
-    mock.onGet('http://localhost:8080/users/consents').reply(200, PRIVACY_DATA);
+    mock.onGet('http://ibm.com/users/consents').reply(200, PRIVACY_DATA);
     return <PrivacyStatement {...props()} />;
   },
   {

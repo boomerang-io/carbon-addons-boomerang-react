@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import CheckboxList from '../CheckboxList';
 import Creatable from '../Creatable';
 import MultiSelect from '../ComboBoxMultiSelect';
+import DateInput from '../DateInput';
 import RadioGroup from '../RadioGroup';
 import Select from '../ComboBox';
 import TextArea from '../TextArea';
@@ -11,6 +12,7 @@ import Toggle from '../Toggle';
 import {
   CHECKBOX_TYPES,
   CREATABLE_TYPES,
+  DATE_TYPES,
   MULTI_SELECT_TYPES,
   RADIO_TYPES,
   SELECT_TYPES,
@@ -24,6 +26,7 @@ DataDrivenInput.propTypes = {
   CheckboxList: PropTypes.elementType,
   Creatable: PropTypes.elementType,
   CustomComponent: PropTypes.elementType,
+  DateInput: PropTypes.elementType,
   MultiSelect: PropTypes.elementType,
   RadioGroup: PropTypes.elementType,
   Select: PropTypes.elementType,
@@ -37,6 +40,7 @@ DataDrivenInput.propTypes = {
 DataDrivenInput.defaultProps = {
   CheckboxList: CheckboxList,
   Creatable: Creatable,
+  DateInput: DateInput,
   MultiSelect: MultiSelect,
   RadioGroup: RadioGroup,
   Select: Select,
@@ -86,6 +90,7 @@ function DataDrivenInput(props) {
   const {
     CheckboxList,
     Creatable,
+    DateInput,
     MultiSelect,
     RadioGroup,
     Select,
@@ -173,6 +178,16 @@ function DataDrivenInput(props) {
     componentProps = {
       ...allInputProps,
       createKeyValuePair: type === CREATABLE_TYPES.CREATABLE_PAIR,
+      invalid,
+      invalidText,
+      placeholder,
+      value: inputValue,
+      ...restInputProps,
+    };
+  } else if (Object.values(DATE_TYPES).includes(type)) {
+    Component = DateInput;
+    componentProps = {
+      ...allInputProps,
       invalid,
       invalidText,
       placeholder,

@@ -11,6 +11,7 @@ const input = {
   value: 'custom',
   type: 'text',
   placeholder: 'custom',
+  helperText: 'custom',
   required: true,
   // eslint-disable-next-line
   customComponent: ({ formikProps, ...rest }) => <TextInput {...rest} />,

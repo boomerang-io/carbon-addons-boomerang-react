@@ -28,4 +28,11 @@ storiesOf('Toggle', module)
         />
       </div>
     );
+  })
+  .add('horizontal toggle', () => {
+    return (
+      <div style={{ width: '16rem' }}>
+        <Toggle id="default-toggle" defaultToggled onToggle={action('Toggle clicked')} labelText="Label for toggle" helperText={text('helperText', 'helperText')} />
+      </div>
+    );
   });

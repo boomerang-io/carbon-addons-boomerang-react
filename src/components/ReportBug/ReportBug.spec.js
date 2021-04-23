@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent, wait } from '@testing-library/react';
+import { render, fireEvent, waitFor } from '@testing-library/react';
 
 import ReportBug from './ReportBug.js';
 
@@ -24,7 +24,7 @@ test('Report Issue sending', async () => {
 
   fireEvent.click(getByText(/Send/i));
 
-  await wait(() => expect(getByText(/Sending/i)).toBeInTheDocument());
+  await waitFor(() => expect(getByText(/Sending/i)).toBeInTheDocument());
 });
 
 test('contact us error', async () => {
@@ -47,7 +47,7 @@ test('contact us error', async () => {
 
   fireEvent.click(getByText(/Send/i));
 
-  await wait(() =>
+  await waitFor(() =>
     expect(getByText(/Failed to send message. Please try again./i)).toBeInTheDocument()
   );
 });

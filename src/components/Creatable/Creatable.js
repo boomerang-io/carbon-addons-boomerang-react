@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 import { Button, Tag, TextInput } from 'carbon-components-react';
 import TooltipHover from '../TooltipHover';
 import { Add16, Information16 } from '@carbon/icons-react';
@@ -50,6 +51,7 @@ CreatableComponent.defaultProps = {
   buttonClassName: `${prefix}--bmrg-creatable__button`,
   buttonContent: 'Add',
   createKeyValuePair: false,
+  labelText: '',
   tagType: 'teal',
   tooltipClassName: `${prefix}--bmrg-creatable__tooltip`,
   tooltipProps: { direction: 'top' },
@@ -95,10 +97,18 @@ function CreatableComponent({
   const [keyValue, setKeyValue] = useState('');
   const [value, setValue] = useState('');
   const [input, setInput] = useState('');
-  const [createdItems, setCreatedItems] = useState([]);
 
+  const inputLabel = labelText || label;
+  const inputKeyLabel = keyLabelText || keyLabel;
+  const inputValueLabel = valueLabelText || valueLabel;
+
+  const [createdItems, setCreatedItems] = useState([]);
+  const createButtonClassName = cx(buttonClassName, {"--no-label": (!createKeyValuePair && !inputLabel && !tooltipContent) || (createKeyValuePair && !inputKeyLabel && !inputValueLabel)});
   const tagItems = values || externalValues ? values || externalValues : createdItems; // Externally controlled if values props exists
   const existValue = (keyValue && value) || input;
+
+  const hasBothHelperText = keyHelperText && valueHelperText;
+  const hasBothLabelText = inputKeyLabel && inputValueLabel;
 
   const onInputChange = (e) => {
     setInput(e.target.value);
@@ -145,27 +155,40 @@ function CreatableComponent({
               invalid={invalid}
               invalidText={invalidText}
               helperText={keyHelperText}
-              labelText={keyLabel || keyLabelText}
+              labelText={inputKeyLabel}
               onBlur={onKeyBlur}
               onChange={onKeyChange}
               placeholder={keyPlaceholder}
               type={type}
               value={keyValue}
+              style={{
+                marginBottom: hasBothHelperText || keyHelperText ? "0" : valueHelperText ? "1.5rem" : "0rem",
+                marginTop: hasBothLabelText || inputKeyLabel ? "0" : inputValueLabel ? "1.5rem":"0.5rem",
+              }}
               {...textInputProps}
             />
-            <p className={`${prefix}--bmrg-creatable__colon`}>:</p>
+            <p 
+              className={`${prefix}--bmrg-creatable__colon`}
+              style={{
+                marginTop: inputKeyLabel || inputValueLabel ? "1.75rem" : "0.75rem",
+              }}
+            >:</p>
             <TextInput
               disabled={disabled}
               id={`${id}-value`}
               invalid={invalid}
               invalidText={invalidText}
               helperText={valueHelperText}
-              labelText={valueLabel || valueLabelText}
+              labelText={inputValueLabel}
               onBlur={onValueBlur}
               onChange={onValueChange}
               placeholder={valuePlaceholder}
               type={type}
               value={value}
+              style={{
+                marginBottom: hasBothHelperText || valueHelperText ? "0" : keyHelperText ? "1.5rem" : "0rem",
+                marginTop: hasBothLabelText || inputValueLabel ? "0" : inputKeyLabel ? "1.5rem":"0.5rem",
+              }}
               {...textInputProps}
             />
           </div>
@@ -178,7 +201,7 @@ function CreatableComponent({
             helperText={helperText}
             labelText={
               <div style={{ display: 'flex' }}>
-                <div>{label || labelText}</div>
+                <div>{inputLabel}</div>
                 {tooltipContent && (
                   <div className={tooltipClassName}>
                     <TooltipHover {...tooltipProps} tooltipText={tooltipContent}>
@@ -197,7 +220,7 @@ function CreatableComponent({
           />
         )}
         <Button
-          className={buttonClassName}
+          className={createButtonClassName}
           disabled={disabled || !existValue}
           onClick={addValue}
           iconDescription="Add"

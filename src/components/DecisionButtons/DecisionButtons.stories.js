@@ -57,6 +57,7 @@ storiesOf('DecisionButtons', module)
       <DecisionButtons
         defaultSelected="no"
         name="radio buttons 2"
+        helperText={text('helperText', 'Example helper text')}
         onChange={action('Change radio button')}
         orientation="horizontal"
         items={items2}

@@ -17,7 +17,7 @@
 
   .#{$prefix}--bmrg-redirect-container {
     .#{$prefix}--modal-container {
-      height: 28rem;
+      max-height: 28rem;
     }
   }
 }

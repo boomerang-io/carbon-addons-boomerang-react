@@ -112,9 +112,12 @@ function DecisionButtons({
       onChange && onChange('', name, evt);
     }
   };
+  const isVertical = orientation === 'vertical';
+  const hasVerticalHelperText = isVertical && helperText;
+  const hasHorizontalHelperText = !isVertical && helperText;
 
   const wrapperClasses = cx(`${prefix}--radio-button-group`, className, {
-    [`${prefix}--radio-button-group--${orientation}`]: orientation === 'vertical',
+    [`${prefix}--radio-button-group--${orientation}`]: isVertical,
   });
 
   const labelValue = label || labelText;
@@ -140,12 +143,13 @@ function DecisionButtons({
           )}
         </div>
       )}
-      {helperText && <div className={`${prefix}--form__helper-text`}>{helperText}</div>}
+      {hasVerticalHelperText && <div className={`${prefix}--form__helper-text`}>{helperText}</div>}
       <div className={`${prefix}--form-item`}>
         <div className={wrapperClasses} disabled={disabled}>
           {getDecisionButtons()}
         </div>
       </div>
+      {hasHorizontalHelperText && <div className={`${prefix}--form__helper-text`}>{helperText}</div>}
     </div>
   );
 }
