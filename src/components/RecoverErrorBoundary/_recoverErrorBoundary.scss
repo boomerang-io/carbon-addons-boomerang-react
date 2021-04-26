@@ -11,9 +11,13 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    .#{$prefix}--bmrg-error-dragon {
+      margin-bottom: 2rem;
+    }
   }
   .#{$prefix}--bmrg-error-boundary-poc-restore {
-    
+    margin-bottom: auto;
     margin-top: 2rem;
   }
 }
