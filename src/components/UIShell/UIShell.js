@@ -92,9 +92,13 @@ UIShell.propTypes = {
    */
   renderLogo: PropTypes.bool,
   /**
-   * Disable platform consent if user.id is not present
+   * enable/disable Gdpr redirect modal
    */
-  requirePlatformConsent: PropTypes.bool,
+   renderGdprRedirect: PropTypes.bool,
+   /**
+   * enable/disable Privacy Statement
+   */
+   renderPrivacyStatement: PropTypes.bool,
   /**
    * Pass in whole user object
    */
@@ -129,7 +133,8 @@ UIShell.propTypes = {
 
 UIShell.defaultProps = {
   headerConfig: {},
-  requirePlatformConsent: true,
+  renderGdprRedirect: true,
+  renderPrivacyStatement: true,
   user: {},
   renderRightPanel: {},
 };
@@ -145,7 +150,8 @@ function UIShell({
   platformName,
   productName,
   renderLogo,
-  requirePlatformConsent,
+  renderGdprRedirect,
+  renderPrivacyStatement,
   renderRightPanel,
   renderSidenav,
   skipToContentProps,
@@ -165,13 +171,19 @@ function UIShell({
   const isSupportEnabled = Boolean(features?.['support.enabled']);
 
   /**
-   * Checking for conditions when we explicitly set "requirePlatformConsent" to false (it defaults to true) OR
+   * Checking for conditions when we explicitly set "renderGdprRedirect" to false (it defaults to true) OR
    * it's disabled overall for the platform. This lets us toggle the UIShell consent redirect per app as needed
    * e.g. disabled in Launchpad, but have it enabled for rest of the platform AND also support
    * having it disabled in a "standalone" mode via the consent.enaable feature flag. aka its data driven via the service
    */
-  const isConsentDisabled =
-    requirePlatformConsent === false || features?.['consent.enabled'] === false;
+  const isGdprRedirectDisabled =
+    renderGdprRedirect === false || features?.['consent.enabled'] === false;
+  
+  /**
+   * Also enable/disable privacy statement via the consent.enaable feature flag
+   */
+  const isPrivacyStatementDisabled =
+    renderPrivacyStatement === false || features?.['consent.enabled'] === false;
 
   return (
     <>
@@ -232,7 +244,7 @@ function UIShell({
               version={platform.version}
             />
           ),
-          baseServiceUrl && isConsentDisabled === false && (
+          baseServiceUrl && isPrivacyStatementDisabled === false && (
             <PrivacyStatement key="Privacy Statement" baseServiceUrl={finalBaseServiceUrl} />
           ),
           Boolean(platform?.signOutUrl) && (
@@ -240,7 +252,7 @@ function UIShell({
           ),
         ].filter(Boolean)}
       />
-      {isConsentDisabled === false && user.hasConsented === false ? (
+      {isGdprRedirectDisabled === false && user.hasConsented === false ? (
         <GdprRedirectModal isOpen baseLaunchEnvUrl={finalBaseUrl} user={user} />
       ) : null}
     </>
