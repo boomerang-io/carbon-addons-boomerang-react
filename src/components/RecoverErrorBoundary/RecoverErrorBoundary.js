@@ -33,7 +33,9 @@ export function RecoverErrorBoundary(props) {
     }
     return (
       <div className={containerClassName} role="alert" style={style} {...props}>
-        <ErrorComponent {...errorProps} />
+        <div className={`${prefix}--bmrg-error-component-boundary`}>
+          <ErrorComponent {...errorProps} />
+        </div>
         <Button onClick={handleResetError} {...resetButtonProps}>
           {resetButtonText}
         </Button>
