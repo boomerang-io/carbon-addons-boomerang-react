@@ -48,6 +48,7 @@ export default class PlatformNotificationsContainer extends React.Component {
   state = {
     currentNotifications: this.props.initialNotifications,
     numNotifications: this.props.initialNotifications.length,
+    webSocketConnectionsClosed: 0,
   };
 
   componentDidMount() {
@@ -57,6 +58,7 @@ export default class PlatformNotificationsContainer extends React.Component {
     };
     this.ws.activate();
     this.ws.onConnect = this.connect;
+    this.ws.onWebSocketClose = this.onConnectionClose;
   }
 
   connect = () => {
@@ -65,6 +67,14 @@ export default class PlatformNotificationsContainer extends React.Component {
     this.ws.subscribe('/user/queue/all', this.recieveAllUnreadNotifications);
     this.ws.publish({ destination: '/app/all', body: {} });
   };
+
+  onConnectionClose = (e) => {
+    if(this.state.webSocketConnectionsClosed > 1) {
+      this.ws.deactivate();
+    } else {
+      this.setState((state) => ({ webSocketConnectionsClosed: state.webSocketConnectionsClosed + 1 }));
+    }
+  }
 
   componentWillUnmount() {
     this.ws.deactivate();
