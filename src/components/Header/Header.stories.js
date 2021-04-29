@@ -50,6 +50,24 @@ storiesOf('Header', module)
           name: 'Admin',
           url: 'https://launch.boomerangplatform.net/admin/',
         },
+        {
+          name: 'Dropdown',
+          isDropdown: true,
+          options: [
+            {
+              name: "Option 1",
+              url: "http://localhost:3000/"
+            },
+            {
+              name: "Option 2",
+              url: "#",
+            },
+            {
+              name: "Option 3",
+              url: "#",
+            }                
+          ]
+        }
       ])}
       notificationsConfig={{
         wsUrl: mockSocketUrl,

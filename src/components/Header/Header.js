@@ -20,7 +20,9 @@ import NotificationsContainer from '../Notifications/NotificationsContainer';
 
 import HeaderList from './HeaderList';
 import HeaderListItem from './HeaderListItem';
+import HeaderSubmenu from './HeaderSubmenu';
 import HeaderMenuLink from '../HeaderMenuLink';
+import HeaderMenuSubmenu from '../HeaderMenuSubmenu';
 import HeaderLogo from './HeaderLogo';
 import HeaderMenuBmrg from './HeaderMenuBmrg';
 import HeaderWrapper from './HeaderWrapper';
@@ -252,7 +254,11 @@ class Header extends React.Component {
                 {Array.isArray(navLinks) &&
                   navLinks.map((link, i) => (
                     <li key={`${link.url}-${i}`}>
-                      <HeaderListItem href={link.url}>{link.name}</HeaderListItem>
+                      {link.isDropdown ? (
+                        <HeaderSubmenu {...link}/>
+                      ) : (
+                        <HeaderListItem href={link.url}>{link.name}</HeaderListItem>  
+                      )}
                     </li>
                   ))}
               </HeaderList>
@@ -284,7 +290,11 @@ class Header extends React.Component {
                       {Array.isArray(navLinks) &&
                         navLinks.map((link, i) => (
                           <li key={`${link.url}-${i}`}>
-                            <HeaderMenuLink external={false} href={link.url} text={link.name} />
+                            {link.isDropdown ? (
+                              <HeaderMenuSubmenu {...link}/>
+                            ) : (
+                              <HeaderMenuLink external={false} href={link.url} text={link.name} /> 
+                            )}
                           </li>
                         ))}
                     </HeaderMenu>
