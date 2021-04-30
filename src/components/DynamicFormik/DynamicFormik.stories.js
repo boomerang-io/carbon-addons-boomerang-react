@@ -149,8 +149,17 @@ const inputs = [
     type: 'radio',
     orientation: 'vertical',
     options: [
+      { key: 'test', value: 'Test' },
+      { key: 'one', value: 'One' },
+      { key: 'two', value: 'Two' },
+      { key: 'three', value: 'Three' },
       { key: 'four', value: 'Four' },
       { key: 'five', value: 'Five' },
+      { key: 'six', value: 'Six' },
+      { key: 'seven', value: 'Seven' },
+      { key: 'eight', value: 'Eight' },
+      { key: 'nine', value: 'Nine' },
+      { key: 'ten', value: 'Ten' },
     ],
     placeholder: 'placeholder',
     helperText: 'text',
@@ -272,6 +281,7 @@ storiesOf('DynamicFormik', module)
           onSubmit={() => {
             action('submit clicked');
           }}
+          radioProps={({input}) => ({...input, verticalWrapped: true, verticalLines: 4})}
           validationSchemaExtension={additionalSchema}
         >
           {({ inputs, formikProps }) => {

@@ -1,12 +1,14 @@
-@include exports('addons-bmrg-radio') {
+@include exports('addons-bmrg-radioGroup') {
   .#{$prefix}--bmrg-radio-group {
     position: relative;
     width: 100%;
   }
 
-  .#{$prefix}--bmrg-radio-group__info {
-    align-items: center;
-    display: flex;
+  .#{$prefix}--bmrg-radio-group__container {
+    flex-wrap: wrap;
+    //var defined at the component container div
+    height: var(--height);
+    width: 100%;
   }
 
   .#{$prefix}--bmrg-radio-group__title {
