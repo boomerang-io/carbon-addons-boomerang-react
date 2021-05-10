@@ -5,10 +5,17 @@
   }
 
   .#{$prefix}--bmrg-radio-group__container {
-    flex-wrap: wrap;
+    display: grid;
+    grid-column-gap: 1rem;
     //var defined at the component container div
-    height: var(--height);
+    grid-template-columns: repeat(auto-fill, var(--height));
+    margin-top: 1rem;
     width: 100%;
+  }
+
+  .#{$prefix}--radio-button-wrapper {
+    align-items: flex-start;
+    display: flex;
   }
 
   .#{$prefix}--bmrg-radio-group__title {
