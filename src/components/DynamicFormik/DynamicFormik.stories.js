@@ -281,7 +281,7 @@ storiesOf('DynamicFormik', module)
           onSubmit={() => {
             action('submit clicked');
           }}
-          radioProps={({input}) => ({...input, verticalWrapped: true, verticalLines: 4})}
+          radioProps={({input}) => ({...input, verticalWrapped: true, columnHeight: "12rem"})}
           validationSchemaExtension={additionalSchema}
         >
           {({ inputs, formikProps }) => {

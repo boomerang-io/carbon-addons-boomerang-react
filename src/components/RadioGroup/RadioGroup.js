@@ -8,6 +8,7 @@ import { settings } from 'carbon-components';
 const { prefix } = settings;
 
 RadioGroupComponent.propTypes = {
+  columnHeight: PropTypes.string,
   defaultSelected: PropTypes.string,
   disabled: PropTypes.string,
   helperText: PropTypes.string,
@@ -25,12 +26,13 @@ RadioGroupComponent.propTypes = {
   tooltipContent: PropTypes.any,
   tooltipProps: PropTypes.object,
   value: PropTypes.string,
+  verticalWrapped: PropTypes.bool,
 };
 
 RadioGroupComponent.defaultProps = {
+  columnHeight: "10rem",
   tooltipClassName: `${prefix}--bmrg-radio-group__tooltip`,
   tooltipProps: { direction: 'top' },
-  verticalLines: 3,
   verticalWrapped: false,
 };
 
@@ -51,7 +53,7 @@ function RadioGroupComponent({
   tooltipContent,
   tooltipProps,
   value,
-  verticalLines,
+  columnHeight,
   verticalWrapped,
 }) {
   const labelValue = label || labelText;
@@ -60,7 +62,6 @@ function RadioGroupComponent({
   const isVertical = orientation === 'vertical';
   const hasVerticalHelperText = isVertical && helperText;
   const hasHorizontalHelperText = !isVertical && helperText;
-  const columnHeight = `${verticalLines * 1.75}rem`;
 
   return (
     //Defined a css var --height to be used on the wrapped container to determine the number of radios displayed in each column
