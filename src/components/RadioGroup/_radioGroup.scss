@@ -18,6 +18,14 @@
     display: flex;
   }
 
+  .#{$prefix}--radio-button__label {
+    >span+span {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+
   .#{$prefix}--bmrg-radio-group__title {
     display: flex;
     .#{$prefix}--label {

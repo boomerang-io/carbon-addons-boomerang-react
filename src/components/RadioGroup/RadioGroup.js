@@ -30,7 +30,7 @@ RadioGroupComponent.propTypes = {
 };
 
 RadioGroupComponent.defaultProps = {
-  columnHeight: "10rem",
+  columnHeight: "6rem",
   tooltipClassName: `${prefix}--bmrg-radio-group__tooltip`,
   tooltipProps: { direction: 'top' },
   verticalWrapped: false,
