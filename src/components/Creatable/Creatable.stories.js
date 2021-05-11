@@ -20,6 +20,21 @@ storiesOf('Creatable', module)
       </div>
     );
   })
+  .add('Non delatable', () => {
+    return (
+      <div style={{ width: '25rem' }}>
+        <Creatable
+          id="text-input-creatable"
+          labelText={text('labelText', 'Creatable')}
+          onChange={action('creatable change')}
+          helperText="Test helperText"
+          placeholder={text('placeholder', 'Create some values')}
+          nonDeletable={true}
+          type="text"
+        />
+      </div>
+    );
+  })
   .add('key value pair', () => {
     return (
       <div style={{ width: '25rem' }}>

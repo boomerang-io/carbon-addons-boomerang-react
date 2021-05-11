@@ -211,7 +211,7 @@ const inputs = [
   {
     key: 'creatable',
     label: 'Creatable',
-    type: 'creatable-single',
+    type: 'creatable-single-non-deletable',
     values: ['one'],
     placeholder: 'placeholder',
     conditionallyRender: true,

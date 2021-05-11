@@ -27,6 +27,7 @@ CreatableComponent.propTypes = {
   keyPlaceholder: PropTypes.string,
   label: PropTypes.string,
   labelText: PropTypes.string,
+  nonDeletable: PropTypes.bool,
   onKeyBlur: PropTypes.func,
   onValueBlur: PropTypes.func,
   onInputBlur: PropTypes.func,
@@ -52,6 +53,7 @@ CreatableComponent.defaultProps = {
   buttonContent: 'Add',
   createKeyValuePair: false,
   labelText: '',
+  nonDeletable: false,
   tagType: 'teal',
   tooltipClassName: `${prefix}--bmrg-creatable__tooltip`,
   tooltipProps: { direction: 'top' },
@@ -75,6 +77,7 @@ function CreatableComponent({
   keyPlaceholder,
   label,
   labelText,
+  nonDeletable,
   onKeyBlur,
   onValueBlur,
   onInputBlur,
@@ -238,9 +241,9 @@ function CreatableComponent({
             key={`${item}-${index}`}
             disabled={disabled}
             type={tagType}
-            onClick={() => removeValue(item)}
-            onKeyDown={(e) => isAccessibleKeyDownEvent(e) && removeValue(item)}
-            filter
+            onClick={nonDeletable ? undefined : () => removeValue(item)}
+            onKeyDown={nonDeletable ? undefined : (e) => isAccessibleKeyDownEvent(e) && removeValue(item)}
+            filter={!nonDeletable}
             {...tagProps}
           >
             {item}
