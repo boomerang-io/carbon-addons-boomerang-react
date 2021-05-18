@@ -5,6 +5,7 @@ import sock from 'sockjs-client';
 import { Client } from '@stomp/stompjs';
 import { settings } from 'carbon-components';
 import Notification from './PlatformNotifications';
+import { console } from 'window-or-global';
 
 const { prefix } = settings;
 
@@ -59,6 +60,8 @@ export default class PlatformNotificationsContainer extends React.Component {
     this.ws.activate();
     this.ws.onConnect = this.connect;
     this.ws.onWebSocketClose = this.onConnectionClose;
+    this.ws.onWebSocketError = this.onNotificationError;
+    this.ws.onStompError = this.onStompError;
   }
 
   connect = () => {
@@ -69,6 +72,7 @@ export default class PlatformNotificationsContainer extends React.Component {
   };
 
   onConnectionClose = (e) => {
+    console.log(e,"on close error");
     if(this.state.webSocketConnectionsClosed > 1) {
       this.ws.deactivate();
     } else {
@@ -76,6 +80,12 @@ export default class PlatformNotificationsContainer extends React.Component {
     }
   }
 
+  onNotificationError = (e) => {
+    console.log(e, "websocket error");
+  }
+  onStompError = (e) => {
+    console.log(e, "stomp error");
+  }
   componentWillUnmount() {
     this.ws.deactivate();
   }
