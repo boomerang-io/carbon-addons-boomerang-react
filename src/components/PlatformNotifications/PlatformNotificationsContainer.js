@@ -5,7 +5,6 @@ import sock from 'sockjs-client';
 import { Client } from '@stomp/stompjs';
 import { settings } from 'carbon-components';
 import Notification from './PlatformNotifications';
-import { console } from 'window-or-global';
 
 const { prefix } = settings;
 
