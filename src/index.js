@@ -43,8 +43,6 @@ export {
   FeatureSideNavLinks,
 } from './components/FeatureSideNav';
 export { default as FeatureSideNavLink } from './components/FeatureSideNavLink';
-export { default as GraphicLoch } from './components/GraphicLoch';
-export { default as GraphicWrangler } from './components/GraphicWrangler';
 export { default as LeftSideNav } from './components/LeftSideNav';
 export { default as Loading } from './components/Loading';
 export { default as LoadingAnimation } from './components/LoadingAnimation';
