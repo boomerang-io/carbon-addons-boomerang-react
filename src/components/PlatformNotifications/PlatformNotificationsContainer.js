@@ -28,6 +28,11 @@ export default class PlatformNotificationsContainer extends React.Component {
      */
     isNotificationActive: PropTypes.bool.isRequired,
 
+    /**
+     * Function that executes when notifications websocket fails to connect three times
+     */
+    onNotificationsConnectionError: PropTypes.func,
+
     /** function that is intended for the consumer to recieve a boolean
      * value indicating whether there are currently any new notifications
      * In the Header component, this information is used to determine whether
@@ -59,8 +64,6 @@ export default class PlatformNotificationsContainer extends React.Component {
     this.ws.activate();
     this.ws.onConnect = this.connect;
     this.ws.onWebSocketClose = this.onConnectionClose;
-    this.ws.onWebSocketError = this.onNotificationError;
-    this.ws.onStompError = this.onStompError;
   }
 
   connect = () => {
@@ -71,20 +74,14 @@ export default class PlatformNotificationsContainer extends React.Component {
   };
 
   onConnectionClose = (e) => {
-    console.log(e,"on close error");
     if(this.state.webSocketConnectionsClosed > 1) {
+      if(typeof this.props.onNotificationsConnectionError === 'function') this.props.onNotificationsConnectionError();
       this.ws.deactivate();
     } else {
       this.setState((state) => ({ webSocketConnectionsClosed: state.webSocketConnectionsClosed + 1 }));
     }
   }
 
-  onNotificationError = (e) => {
-    console.log(e, "websocket error");
-  }
-  onStompError = (e) => {
-    console.log(e, "stomp error");
-  }
   componentWillUnmount() {
     this.ws.deactivate();
   }

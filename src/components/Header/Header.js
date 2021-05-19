@@ -50,6 +50,11 @@ class Header extends React.Component {
      * Function passed in by the consumer, what to render when the help icon is clicked
      */
     onHelpClick: PropTypes.array,
+    
+    /**
+     * Function that executes when notifications websocket fails to connect three times
+     */
+    onNotificationsConnectionError: PropTypes.func,
     platformName: PropTypes.string,
 
     /**
@@ -309,6 +314,7 @@ class Header extends React.Component {
                       <PlatformNotificationsContainer
                         baseLaunchEnvUrl={baseLaunchEnvUrl}
                         config={this.props.notificationsConfig}
+                        onNotificationsConnectionError={this.props.onNotificationsConnectionError}
                         isNotificationActive={this.state.isNotificationActive}
                         setHasNewNotifications={this.handleUpdateStateKey('hasNewNotifications')}
                       />

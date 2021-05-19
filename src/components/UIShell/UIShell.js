@@ -75,6 +75,11 @@ UIShell.propTypes = {
   onMenuClick: PropTypes.func,
 
   /**
+   * Function that executes when notifications websocket fails to connect three times
+   */
+   onNotificationsConnectionError: PropTypes.func,
+
+  /**
    * Used to trigger tutorial or any arbitrary function passed
    * in on click of "Tutorial" header menu item
    */
@@ -146,6 +151,7 @@ function UIShell({
   companyName,
   headerConfig,
   onMenuClick,
+  onNotificationsConnectionError,
   onTutorialClick,
   platformName,
   productName,
@@ -201,6 +207,7 @@ function UIShell({
         notificationsConfig={{
           wsUrl: `${finalBaseServiceUrl}/notifications/ws`,
         }}
+        onNotificationsConnectionError={onNotificationsConnectionError}
         onHelpClick={[
           typeof onTutorialClick === 'function' && (
             <HeaderMenuButton
