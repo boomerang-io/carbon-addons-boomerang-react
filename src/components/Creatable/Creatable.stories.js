@@ -19,7 +19,7 @@ storiesOf('Creatable', module)
         />
       </div>
     );
-  })
+  }) 
   .add('key value pair', () => {
     return (
       <div style={{ width: '25rem' }}>
@@ -38,6 +38,21 @@ storiesOf('Creatable', module)
       </div>
     );
   })
+  .add('limit the number of added values', () => {
+    return (
+      <div style={{ width: '25rem' }}>
+        <Creatable
+          id="limit-values-creatable"
+          labelText={text('labelText', 'Creatable with added items limited')}
+          onChange={action('creatable change')}
+          helperText="Items added limited by 3"
+          placeholder={text('placeholder', 'Create some values')}
+          type="text"
+          maxItems="3"
+        />
+      </div>
+    );
+  }) 
   .add('with tooltip and helper text', () => {
     return (
       <Creatable

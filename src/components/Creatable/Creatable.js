@@ -138,7 +138,6 @@ function CreatableComponent({
 
     setCreatedItems(items);
     onChange(items);
-    console.log("maxItems: ", maxItems)
   };
 
   const removeValue = (value) => {
@@ -153,7 +152,7 @@ function CreatableComponent({
         {createKeyValuePair ? (
           <div className={`${prefix}--bmrg-creatable__key-value-inputs`}>
             <TextInput
-              disabled={disabled || tagItems.length > maxItems}
+              disabled={disabled || tagItems.length >= maxItems}
               id={`${id}-key`}
               invalid={invalid}
               invalidText={invalidText}
@@ -177,7 +176,7 @@ function CreatableComponent({
               }}
             >:</p>
             <TextInput
-              disabled={disabled || tagItems.length > maxItems}
+              disabled={disabled || tagItems.length >= maxItems}
               id={`${id}-value`}
               invalid={invalid}
               invalidText={invalidText}
@@ -197,7 +196,7 @@ function CreatableComponent({
           </div>
         ) : (
           <TextInput
-            disabled={disabled || tagItems.length > maxItems}
+            disabled={disabled || tagItems.length >= maxItems}            
             id={id}
             invalid={invalid}
             invalidText={invalidText}
