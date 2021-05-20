@@ -7,6 +7,7 @@ import { Add16, Information16 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
 
 import { isAccessibleKeyDownEvent } from '../../tools/accessibility';
+import { console } from 'window-or-global';
 
 const { prefix } = settings;
 
@@ -27,6 +28,7 @@ CreatableComponent.propTypes = {
   keyPlaceholder: PropTypes.string,
   label: PropTypes.string,
   labelText: PropTypes.string,
+  maxItems: PropTypes.number,
   onKeyBlur: PropTypes.func,
   onValueBlur: PropTypes.func,
   onInputBlur: PropTypes.func,
@@ -137,6 +139,7 @@ function CreatableComponent({
 
     setCreatedItems(items);
     onChange(items);
+    console.log("maxItems: ", maxItems)
   };
 
   const removeValue = (value) => {
