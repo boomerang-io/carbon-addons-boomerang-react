@@ -75,6 +75,7 @@ function CreatableComponent({
   keyPlaceholder,
   label,
   labelText,
+  maxItems,
   onKeyBlur,
   onValueBlur,
   onInputBlur,
@@ -150,7 +151,7 @@ function CreatableComponent({
         {createKeyValuePair ? (
           <div className={`${prefix}--bmrg-creatable__key-value-inputs`}>
             <TextInput
-              disabled={disabled}
+              disabled={disabled || tagItems.length > maxItems}
               id={`${id}-key`}
               invalid={invalid}
               invalidText={invalidText}
@@ -174,7 +175,7 @@ function CreatableComponent({
               }}
             >:</p>
             <TextInput
-              disabled={disabled}
+              disabled={disabled || tagItems.length > maxItems}
               id={`${id}-value`}
               invalid={invalid}
               invalidText={invalidText}
@@ -194,7 +195,7 @@ function CreatableComponent({
           </div>
         ) : (
           <TextInput
-            disabled={disabled}
+            disabled={disabled || tagItems.length > maxItems}
             id={id}
             invalid={invalid}
             invalidText={invalidText}
