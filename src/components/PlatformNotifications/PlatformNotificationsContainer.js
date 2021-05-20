@@ -28,6 +28,11 @@ export default class PlatformNotificationsContainer extends React.Component {
      */
     isNotificationActive: PropTypes.bool.isRequired,
 
+    /**
+     * Function that executes when notifications websocket fails to connect three times
+     */
+    onNotificationsConnectionError: PropTypes.func,
+
     /** function that is intended for the consumer to recieve a boolean
      * value indicating whether there are currently any new notifications
      * In the Header component, this information is used to determine whether
@@ -48,6 +53,7 @@ export default class PlatformNotificationsContainer extends React.Component {
   state = {
     currentNotifications: this.props.initialNotifications,
     numNotifications: this.props.initialNotifications.length,
+    webSocketConnectionsClosed: 0,
   };
 
   componentDidMount() {
@@ -57,6 +63,7 @@ export default class PlatformNotificationsContainer extends React.Component {
     };
     this.ws.activate();
     this.ws.onConnect = this.connect;
+    this.ws.onWebSocketClose = this.onConnectionClose;
   }
 
   connect = () => {
@@ -65,6 +72,15 @@ export default class PlatformNotificationsContainer extends React.Component {
     this.ws.subscribe('/user/queue/all', this.recieveAllUnreadNotifications);
     this.ws.publish({ destination: '/app/all', body: {} });
   };
+
+  onConnectionClose = (e) => {
+    if(this.state.webSocketConnectionsClosed > 1) {
+      if(typeof this.props.onNotificationsConnectionError === 'function') this.props.onNotificationsConnectionError();
+      this.ws.deactivate();
+    } else {
+      this.setState((state) => ({ webSocketConnectionsClosed: state.webSocketConnectionsClosed + 1 }));
+    }
+  }
 
   componentWillUnmount() {
     this.ws.deactivate();
