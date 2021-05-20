@@ -112,6 +112,8 @@ function CreatableComponent({
   const hasBothHelperText = keyHelperText && valueHelperText;
   const hasBothLabelText = inputKeyLabel && inputValueLabel;
 
+  const disableInputs =  disabled || tagItems.length >= maxItems
+
   const onInputChange = (e) => {
     setInput(e.target.value);
   };
@@ -152,7 +154,7 @@ function CreatableComponent({
         {createKeyValuePair ? (
           <div className={`${prefix}--bmrg-creatable__key-value-inputs`}>
             <TextInput
-              disabled={disabled || tagItems.length >= maxItems}
+              disabled={disableInputs}
               id={`${id}-key`}
               invalid={invalid}
               invalidText={invalidText}
@@ -176,7 +178,7 @@ function CreatableComponent({
               }}
             >:</p>
             <TextInput
-              disabled={disabled || tagItems.length >= maxItems}
+              disabled={disableInputs}
               id={`${id}-value`}
               invalid={invalid}
               invalidText={invalidText}
@@ -196,7 +198,7 @@ function CreatableComponent({
           </div>
         ) : (
           <TextInput
-            disabled={disabled || tagItems.length >= maxItems}            
+            disabled={disableInputs}        
             id={id}
             invalid={invalid}
             invalidText={invalidText}

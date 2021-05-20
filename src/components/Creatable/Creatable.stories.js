@@ -48,7 +48,7 @@ storiesOf('Creatable', module)
           helperText="Items added limited by 3"
           placeholder={text('placeholder', 'Create some values')}
           type="text"
-          maxItems="3"
+          maxItems={3}
         />
       </div>
     );
