@@ -1,43 +1,39 @@
 @include exports('addons-bmrg-errorPage') {
   .#{$prefix}--bmrg-error-page {
+    align-items: center;
+    color: $text-02;
+    display: flex;
     font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    flex-direction: column;
     margin: rem(80px) auto;
-    padding: 0 rem(32px);
-    position: relative;
-  }
-
-  .#{$prefix}--bmrg-error-page__background {
-    height: auto;
-    width: rem(1440px);
-    max-width: 100%;
-  }
-  
-  .#{$prefix}--bmrg-error-page__content {
-    position: absolute;
-    top: 0;
+    padding: 0 2rem;
+    width: 100%;
   }
 
   .#{$prefix}--bmrg-error-page__header {
-    color: $danger-01;
-    font-size: rem(36px);
-    line-height: rem(46px);
+    color: $inverse-support-01;
+    font-size: rem(32px);
     font-weight: 600;
     line-height: 42px;
-    margin-bottom: rem(10px);
+    margin-bottom: rem(30px);
+    text-align: center;
   }
 
   .#{$prefix}--bmrg-error-page__title {
-    color: $text-01;
-    font-size: rem(20px);
+    color: inherit;
+    font-size: rem(24px);
     font-weight: 600;
-    line-height: rem(25px);
-    margin-bottom: rem(16px);
+    line-height: rem(32px);
+    text-align: center;
   }
 
   .#{$prefix}--bmrg-error-page__message {
-    color: $text-02;
+    color: inherit;
     font-size: rem(16px);
     line-height: rem(20px);
+    margin-top: rem(12px);
+    max-width: 60ch;
+    text-align: center;
 
     a {
       color: $interactive-01;
@@ -45,15 +41,17 @@
       text-decoration: none;
     }
   }
-  
-  @media (max-width: rem(768px)) {
-    .#{$prefix}--bmrg-error-page__background {
-      display: none;
-    }
-    
-    .#{$prefix}--bmrg-error-page__content {
-      position: relative;
-      width: calc(100vw - 2rem);
+
+  .#{$prefix}--bmrg-error-page__graphic {
+    display: flex;
+    justify-content: center;
+    margin-top: rem(40px);
+    max-width: rem(576px);
+    width: 100%;
+
+    svg {
+      height: 100%;
+      width: 100%;
     }
   }
 }
