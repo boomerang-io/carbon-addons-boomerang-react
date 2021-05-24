@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Button, Tag, TextInput } from 'carbon-components-react';
@@ -17,6 +17,7 @@ CreatableComponent.propTypes = {
   createKeyValuePair: PropTypes.bool,
   disabled: PropTypes.bool,
   id: PropTypes.string,
+  initialValues: PropTypes.array,
   invalid: PropTypes.bool,
   invalidText: PropTypes.string,
   helperText: PropTypes.string,
@@ -67,6 +68,7 @@ function CreatableComponent({
   createKeyValuePair,
   disabled,
   id,
+  initialValues: externalInitialValues,
   invalid,
   invalidText,
   helperText,
@@ -106,8 +108,10 @@ function CreatableComponent({
   const inputValueLabel = valueLabelText || valueLabel;
 
   const [createdItems, setCreatedItems] = useState([]);
+  const [initialItems] = useState(values || externalValues ? values || externalValues : []);
   const createButtonClassName = cx(buttonClassName, {"--no-label": (!createKeyValuePair && !inputLabel && !tooltipContent) || (createKeyValuePair && !inputKeyLabel && !inputValueLabel)});
   const tagItems = values || externalValues ? values || externalValues : createdItems; // Externally controlled if values props exists
+  const initialTagItems = externalInitialValues || initialItems; // Externally controlled if initialValues props exists
   const existValue = (keyValue && value) || input;
 
   const hasBothHelperText = keyHelperText && valueHelperText;
@@ -241,9 +245,9 @@ function CreatableComponent({
             key={`${item}-${index}`}
             disabled={disabled}
             type={tagType}
-            onClick={nonDeletable ? undefined : () => removeValue(item)}
-            onKeyDown={nonDeletable ? undefined : (e) => isAccessibleKeyDownEvent(e) && removeValue(item)}
-            filter={!nonDeletable}
+            onClick={nonDeletable && initialTagItems.includes(item) ? undefined : () => removeValue(item)}
+            onKeyDown={nonDeletable && initialTagItems.includes(item) ? undefined : (e) => isAccessibleKeyDownEvent(e) && removeValue(item)}
+            filter={!nonDeletable || (nonDeletable && !initialTagItems.includes(item))}
             {...tagProps}
           >
             {item}
