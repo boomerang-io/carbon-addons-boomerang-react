@@ -112,7 +112,7 @@ function CreatableComponent({
   const hasBothHelperText = keyHelperText && valueHelperText;
   const hasBothLabelText = inputKeyLabel && inputValueLabel;
 
-  const disableInputs =  disabled || tagItems.length >= maxItems
+  const disableInputs = disabled || (tagItems.length >= maxItems && maxItems > 0);
 
   const onInputChange = (e) => {
     setInput(e.target.value);
