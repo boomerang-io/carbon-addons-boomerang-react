@@ -34,13 +34,13 @@
     flex-direction: column;
     height: 100%;
     max-height: 36.5rem;
-    max-width: 43.125rem;
+    //max-width: 43.125rem;
     outline: none;
     position: relative;
     transform-origin: top center;
     transform: translate3d(0, -24px, 0);
     transition: opacity 240ms cubic-bezier(0, 0, 0.3, 1), transform 240ms cubic-bezier(0, 0, 0.3, 1);
-    width: 100%;
+    //width: 100%;
 
     &.--is-open {
       opacity: 1;
