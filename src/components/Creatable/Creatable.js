@@ -27,7 +27,7 @@ CreatableComponent.propTypes = {
   keyPlaceholder: PropTypes.string,
   label: PropTypes.string,
   labelText: PropTypes.string,
-  maxItems: PropTypes.number,
+  max: PropTypes.number,
   onKeyBlur: PropTypes.func,
   onValueBlur: PropTypes.func,
   onInputBlur: PropTypes.func,
@@ -76,7 +76,7 @@ function CreatableComponent({
   keyPlaceholder,
   label,
   labelText,
-  maxItems,
+  max,
   onKeyBlur,
   onValueBlur,
   onInputBlur,
@@ -112,7 +112,7 @@ function CreatableComponent({
   const hasBothHelperText = keyHelperText && valueHelperText;
   const hasBothLabelText = inputKeyLabel && inputValueLabel;
 
-  const disableInputs = disabled || (tagItems.length >= maxItems && maxItems > 0);
+  const disableInputs = disabled || (tagItems.length >= max && max > 0);
 
   const onInputChange = (e) => {
     setInput(e.target.value);

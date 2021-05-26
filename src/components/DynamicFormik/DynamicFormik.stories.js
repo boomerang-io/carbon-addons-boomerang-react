@@ -222,7 +222,7 @@ const inputs = [
     requiredValueOf: ['one'],
     helperText: 'limited by 3 values',
     description: 'limited by 3 values',
-    maxItems: 3,
+    max: 3,
   },
   {
     key: 'custom',
