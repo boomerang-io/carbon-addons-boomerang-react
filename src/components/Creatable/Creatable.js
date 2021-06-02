@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Button, Tag, TextInput } from 'carbon-components-react';
@@ -117,6 +117,7 @@ function CreatableComponent({
   const hasBothHelperText = keyHelperText && valueHelperText;
   const hasBothLabelText = inputKeyLabel && inputValueLabel;
 
+  const tagsToShow = [...initialTagItems, ...tagItems];
   const onInputChange = (e) => {
     setInput(e.target.value);
   };
@@ -240,7 +241,7 @@ function CreatableComponent({
         </Button>
       </div>
       <div className={`${prefix}--bmrg-creatable__tags`}>
-        {tagItems.map((item, index) => (
+        {tagsToShow.map((item, index) => (
           <Tag
             key={`${item}-${index}`}
             disabled={disabled}
