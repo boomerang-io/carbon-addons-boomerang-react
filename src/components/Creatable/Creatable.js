@@ -113,13 +113,14 @@ function CreatableComponent({
   const [initialItems] = useState(values || externalValues ? values || externalValues : []);
   const createButtonClassName = cx(buttonClassName, {"--no-label": (!createKeyValuePair && !inputLabel && !tooltipContent) || (createKeyValuePair && !inputKeyLabel && !inputValueLabel)});
   const tagItems = values || externalValues ? values || externalValues : createdItems; // Externally controlled if values props exists
+  
   const initialTagItems = externalInitialValues || initialItems; // Externally controlled if initialValues props exists
   const existValue = (keyValue && value) || input;
 
   const hasBothHelperText = keyHelperText && valueHelperText;
   const hasBothLabelText = inputKeyLabel && inputValueLabel;
 
-  const tagsToShow = [...initialTagItems, ...tagItems];
+  const tagsToShow = externalInitialValues ? [...initialTagItems, ...tagItems] : [...tagItems];
   const disableInputs = disabled || (tagsToShow.length >= max && max > 0);
 
   const onInputChange = (e) => {
