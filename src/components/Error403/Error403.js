@@ -1,10 +1,13 @@
 import React from 'react';
 
-import forbidden from "./static/forbidden.svg";
+import ForbiddenErrorBackground from './ForbiddenErrorBackground';
 import GraphicWrangler from '../GraphicWrangler';
 
 import ErrorPage from '../ErrorPage';
 import ErrorPageCore from '../ErrorPageCore';
+
+import { settings } from 'carbon-components';
+const { prefix } = settings;
 
 export default function Error403(props) {
   return props?.theme === "boomerang" ? (
@@ -20,7 +23,7 @@ export default function Error403(props) {
       header="403 - Access Forbidden"
       title="You’ve found yourself in deep water."
       message="You shouldn’t be here - contact the local authorities if you disagree."
-      graphic={forbidden}
+      graphic={<ForbiddenErrorBackground className={`${prefix}--bmrg-error-page-core__background`} />}
       {...props}
     />
   );
