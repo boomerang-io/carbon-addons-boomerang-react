@@ -29,6 +29,7 @@ CreatableComponent.propTypes = {
   label: PropTypes.string,
   labelText: PropTypes.string,
   nonDeletable: PropTypes.bool,
+  max: PropTypes.number,
   onKeyBlur: PropTypes.func,
   onValueBlur: PropTypes.func,
   onInputBlur: PropTypes.func,
@@ -80,6 +81,7 @@ function CreatableComponent({
   label,
   labelText,
   nonDeletable,
+  max,
   onKeyBlur,
   onValueBlur,
   onInputBlur,
@@ -118,6 +120,8 @@ function CreatableComponent({
   const hasBothLabelText = inputKeyLabel && inputValueLabel;
 
   const tagsToShow = [...initialTagItems, ...tagItems];
+  const disableInputs = disabled || (tagsToShow.length >= max && max > 0);
+
   const onInputChange = (e) => {
     setInput(e.target.value);
   };
@@ -158,7 +162,7 @@ function CreatableComponent({
         {createKeyValuePair ? (
           <div className={`${prefix}--bmrg-creatable__key-value-inputs`}>
             <TextInput
-              disabled={disabled}
+              disabled={disableInputs}
               id={`${id}-key`}
               invalid={invalid}
               invalidText={invalidText}
@@ -182,7 +186,7 @@ function CreatableComponent({
               }}
             >:</p>
             <TextInput
-              disabled={disabled}
+              disabled={disableInputs}
               id={`${id}-value`}
               invalid={invalid}
               invalidText={invalidText}
@@ -202,7 +206,7 @@ function CreatableComponent({
           </div>
         ) : (
           <TextInput
-            disabled={disabled}
+            disabled={disableInputs}        
             id={id}
             invalid={invalid}
             invalidText={invalidText}
