@@ -1,7 +1,7 @@
 @include exports('addons-bmrg-errorPageCore') {
   .#{$prefix}--bmrg-error-page-core {
     font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, Helvetica, sans-serif;
-    margin: rem(80px) auto;
+    // margin: rem(80px) auto;
     padding: 0 rem(32px);
     position: relative;
   }
@@ -11,8 +11,9 @@
     width: rem(1440px);
     max-width: 100%;
   }
-  
+
   .#{$prefix}--bmrg-error-page-core__content {
+    margin-top: rem(80px);
     position: absolute;
     top: 0;
   }
@@ -45,12 +46,12 @@
       text-decoration: none;
     }
   }
-  
+
   @media (max-width: rem(768px)) {
     .#{$prefix}--bmrg-error-page-core__background {
       display: none;
     }
-    
+
     .#{$prefix}--bmrg-error-page-core__content {
       position: relative;
       width: calc(100vw - 2rem);

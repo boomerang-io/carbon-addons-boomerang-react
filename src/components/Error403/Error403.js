@@ -10,7 +10,7 @@ import { settings } from 'carbon-components';
 const { prefix } = settings;
 
 export default function Error403(props) {
-  return props?.theme === "boomerang" ? (
+  return props?.theme === 'boomerang' ? (
     <ErrorPage
       header="403 - Access Forbidden"
       title="You’ve found yourself in deep water."
@@ -20,10 +20,12 @@ export default function Error403(props) {
     />
   ) : (
     <ErrorPageCore
-      header="403 - Access Forbidden"
-      title="You’ve found yourself in deep water."
+      header="403 Access Forbidden"
+      title="Looks like you've taken a wrong turn."
       message="You shouldn’t be here - contact the local authorities if you disagree."
-      graphic={<ForbiddenErrorBackground className={`${prefix}--bmrg-error-page-core__background`} />}
+      graphic={
+        <ForbiddenErrorBackground className={`${prefix}--bmrg-error-page-core__background`} />
+      }
       {...props}
     />
   );

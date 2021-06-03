@@ -1,21 +1,61 @@
-import * as React from "react"
+import * as React from 'react';
 
 function NotFoundErrorBackground(props) {
   return (
     <svg
-      id="not_found_error_background__Isometric_Graphics"
+      id="prefix__Isometric_Graphics"
       data-name="Isometric Graphics"
       xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 1488.56 1039.92"
+      viewBox="0 0 1440 900"
       {...props}
     >
       <defs>
         <linearGradient
-          id="not_found_error_background__linear-gradient"
-          x1={782.16}
-          y1={912.72}
-          x2={937.15}
-          y2={656.55}
+          id="prefix__linear-gradient"
+          x1={664.05}
+          y1={687.11}
+          x2={1398.59}
+          y2={687.11}
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop offset={0} stopColor="#c1c7cd" />
+          <stop offset={0.39} stopColor="#c2c8cd" stopOpacity={0.99} />
+          <stop offset={0.53} stopColor="#c4c9cf" stopOpacity={0.96} />
+          <stop offset={0.63} stopColor="#c7cdd2" stopOpacity={0.9} />
+          <stop offset={0.71} stopColor="#ccd1d6" stopOpacity={0.82} />
+          <stop offset={0.78} stopColor="#d3d7db" stopOpacity={0.71} />
+          <stop offset={0.84} stopColor="#dbdfe2" stopOpacity={0.58} />
+          <stop offset={0.9} stopColor="#e5e8ea" stopOpacity={0.42} />
+          <stop offset={0.95} stopColor="#f0f2f3" stopOpacity={0.24} />
+          <stop offset={0.99} stopColor="#fdfdfd" stopOpacity={0.03} />
+          <stop offset={1} stopColor="#fff" stopOpacity={0} />
+        </linearGradient>
+        <linearGradient
+          id="prefix__linear-gradient-2"
+          x1={0.39}
+          y1={666.85}
+          x2={664.71}
+          y2={666.85}
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop offset={0} stopColor="#fff" stopOpacity={0} />
+          <stop offset={0.01} stopColor="#fdfdfd" stopOpacity={0.03} />
+          <stop offset={0.05} stopColor="#f0f2f3" stopOpacity={0.24} />
+          <stop offset={0.1} stopColor="#e5e8ea" stopOpacity={0.42} />
+          <stop offset={0.16} stopColor="#dbdfe2" stopOpacity={0.58} />
+          <stop offset={0.22} stopColor="#d3d7db" stopOpacity={0.71} />
+          <stop offset={0.29} stopColor="#ccd1d6" stopOpacity={0.82} />
+          <stop offset={0.37} stopColor="#c7cdd2" stopOpacity={0.9} />
+          <stop offset={0.47} stopColor="#c4c9cf" stopOpacity={0.96} />
+          <stop offset={0.61} stopColor="#c2c8cd" stopOpacity={0.99} />
+          <stop offset={1} stopColor="#c1c7cd" />
+        </linearGradient>
+        <linearGradient
+          id="prefix__linear-gradient-3"
+          x1={812.26}
+          y1={821.84}
+          x2={934.73}
+          y2={619.43}
           gradientUnits="userSpaceOnUse"
         >
           <stop offset={0} stopColor="#fff" stopOpacity={0} />
@@ -29,349 +69,361 @@ function NotFoundErrorBackground(props) {
         </linearGradient>
         <style>
           {
-            ".not_found_error_background__cls-1{fill:none;stroke-miterlimit:10;stroke:#c1c7cd;stroke-width:1.41px}.not_found_error_background__cls-2{fill:#dde1e6}.not_found_error_background__cls-3{fill:#878d96}.not_found_error_background__cls-4{fill:#4d5358}.not_found_error_background__cls-5{fill:#fff}.not_found_error_background__cls-6{fill:#c1c7cd}.not_found_error_background__cls-7{fill:#f2f4f8}.not_found_error_background__cls-9{opacity:.25}.not_found_error_background__cls-11{fill:#012749}.not_found_error_background__cls-12{fill:#08bdba}.not_found_error_background__cls-14{fill:#33b1ff}.not_found_error_background__cls-15{fill:#e5f6ff}.not_found_error_background__cls-16{fill:#82cfff}.not_found_error_background__cls-18{fill:#00539a}.not_found_error_background__cls-19{fill:#007d79}.not_found_error_background__cls-21{fill:#005d5d}.not_found_error_background__cls-22{fill:#a2191f}"
+            '.prefix__cls-4{fill:#dde1e6}.prefix__cls-5{fill:#878d96}.prefix__cls-6{fill:#4d5358}.prefix__cls-7{fill:#fff}.prefix__cls-8{fill:#c1c7cd}.prefix__cls-9{fill:#f2f4f8}.prefix__cls-11{opacity:.25}.prefix__cls-13{fill:#012749}.prefix__cls-14{fill:#33b1ff}.prefix__cls-15{fill:#e5f6ff}.prefix__cls-16{fill:#82cfff}.prefix__cls-18{fill:#00539a}.prefix__cls-20{fill:#08bdba}.prefix__cls-22{fill:#007d79}.prefix__cls-23{fill:#005d5d}.prefix__cls-24{fill:#a2191f}'
           }
         </style>
       </defs>
-      <path className="not_found_error_background__cls-1" d="M657.69 511.55l830.12 479.35" />
       <path
-        id="not_found_error_background__Do_Not_Sign"
-        data-name="Do Not Sign"
-        className="not_found_error_background__cls-1"
-        d="M-.04 891.38l657.73-379.83"
+        stroke="url(#prefix__linear-gradient)"
+        strokeWidth={1.31}
+        fill="none"
+        strokeMiterlimit={10}
+        d="M664.38 475.22L1398.26 899"
       />
-      <path className="not_found_error_background__cls-1" d="M657.69 511.55l-.47-510.33" />
-      <g id="not_found_error_background__Sign">
+      <path
+        id="prefix__Do_Not_Sign"
+        data-name="Do Not Sign"
+        stroke="url(#prefix__linear-gradient-2)"
+        strokeWidth={1.31}
+        fill="none"
+        strokeMiterlimit={10}
+        d="M.72 858.48l663.66-383.26"
+      />
+      <path
+        stroke="#c1c7cd"
+        strokeWidth={1.31}
+        fill="none"
+        strokeMiterlimit={10}
+        d="M664.38 475.22L663.95.25"
+      />
+      <g id="prefix__Sign">
+        <path className="prefix__cls-4" d="M928.36 55.17v64.59l126 72.69-.04-64.51-125.96-72.77z" />
         <path
-          className="not_found_error_background__cls-2"
-          d="M941.32 60.23v69.4l135.37 78.1-.04-69.31-135.33-78.19z"
+          className="prefix__cls-5"
+          d="M928.36 55.17l6.17-3.65 126.24 73.17-6.45 3.25-125.96-72.77z"
+        />
+        <path className="prefix__cls-6" d="M1054.32 127.94l6.45-3.25v62.44l-6.41 5.32-.04-64.51z" />
+        <path
+          className="prefix__cls-7"
+          d="M933.33 64.35v52.21l115.8 66.84-.03-52.41-115.77-66.64z"
         />
         <path
-          className="not_found_error_background__cls-3"
-          d="M941.32 60.23l6.62-3.93 135.64 78.62-6.93 3.5-135.33-78.19z"
-        />
-        <path
-          className="not_found_error_background__cls-4"
-          d="M1076.65 138.42l6.93-3.5v67.09l-6.89 5.72-.04-69.31z"
-        />
-        <path
-          className="not_found_error_background__cls-5"
-          d="M946.66 70.09v56.1l124.42 71.82-.04-56.32-124.38-71.6z"
-        />
-        <path
-          className="not_found_error_background__cls-4"
-          d="M978.12 136.38v-5.84L964 122.1v-4.26l11.84-23.16 9.59 5.56v27.47l4.47 2.58v7l-4.47-2.58v5.85zm-7.29-17.08l7.29 4.22v-18.86l-.25-.15zM1035.63 169.74v-5.83l-14.17-8.44v-4.27l11.84-23.2 9.6 5.57v27.47l4.47 2.58v7l-4.47-2.58v5.84zm-7.28-17.08l7.28 4.23V138l-.25-.14zM994.08 105.49v40l22.18 13v-40.24zm14.92 40.14l-7.67-4.43v-23l7.66 4.42z"
+          className="prefix__cls-6"
+          d="M962.61 126v-5.43l-13.19-7.85v-4l11-21.56 8.93 5.18V118l4.16 2.4v6.53l-4.16-2.4V130zm-6.78-15.9l6.78 3.94V96.52l-.23-.14zM1016.14 157.1v-5.44l-13.14-7.85v-4l11-21.55 8.93 5.17V149l4.16 2.4v6.6l-4.16-2.4v5.4zm-6.78-15.9l6.78 3.93v-17.55l-.23-.14zM977.47 97.3v37.26l20.64 12.14v-37.53zm13.88 37.35l-7.14-4.12v-21.45l7.13 4.11z"
         />
       </g>
       <path
-        className="not_found_error_background__cls-6"
-        d="M395.26 701.5c18.24 10.53 18.32 27.59.22 38.11-9.76 5.67-39.46 15.56-52.27 15.11-11-.37-5.09-10.26-13.51-15.12-18.22-10.52-18.31-27.57-.21-38.09S377 691 395.26 701.5z"
-        id="not_found_error_background__Shadow"
+        className="prefix__cls-8"
+        d="M420.14 652c17 9.8 17 25.67.2 35.47-9.08 5.27-36.73 14.47-48.65 14.06-10.2-.35-4.74-9.55-12.57-14.08-17-9.79-17.05-25.65-.2-35.44s44.26-9.79 61.22-.01z"
+        id="prefix__Shadow"
       />
-      <g id="not_found_error_background__Pot">
+      <g id="prefix__Pot">
         <path
-          className="not_found_error_background__cls-2"
-          d="M386.17 669.1l-.74 59.44c0 6.8-4.49 13.59-13.41 18.77-18 10.44-47.15 10.44-65.24 0-9.1-5.25-13.64-12.14-13.62-19l.17-58c1.19 6.1 4.57 10.41 13.66 15.66 18.09 10.45 47.29 10.45 65.24 0 8.92-5.17 11.94-10.73 13.94-16.87z"
-          id="not_found_error_background__Pot-2"
+          className="prefix__cls-4"
+          d="M411.68 621.86l-.7 55.32c0 6.33-4.18 12.65-12.48 17.47-16.71 9.71-43.88 9.71-60.72 0-8.46-4.89-12.69-11.3-12.67-17.7l.15-54c1.11 5.67 4.26 9.69 12.72 14.57 16.84 9.73 44 9.73 60.72 0 8.3-4.77 11.12-9.95 12.98-15.66z"
+          id="prefix__Pot-2"
           data-name="Pot"
         />
         <path
-          className="not_found_error_background__cls-7"
-          d="M372.56 651.62c18.24 10.53 18.32 27.59.22 38.11s-47.53 10.52-65.78 0-18.31-27.57-.21-38.09 47.55-10.54 65.77-.02z"
-          id="not_found_error_background__Pot_Top"
+          className="prefix__cls-9"
+          d="M399 605.59c17 9.8 17.05 25.68.2 35.47s-44.24 9.79-61.22 0-17.05-25.66-.2-35.45 44.27-9.81 61.22-.02z"
+          id="prefix__Pot_Top"
           data-name="Pot Top"
         />
         <path
-          className="not_found_error_background__cls-2"
-          d="M369.53 654.45c16.55 9 16.61 23.49.19 32.45s-43.13 9-59.68 0-16.62-23.47-.19-32.43 43.15-8.98 59.68-.02z"
-          id="not_found_error_background__Pot_Interior"
+          className="prefix__cls-4"
+          d="M396.18 608.22c15.41 8.35 15.47 21.87.18 30.21s-40.14 8.33-55.54 0-15.47-21.85-.18-30.19 40.16-8.35 55.54-.02z"
+          id="prefix__Pot_Interior"
           data-name="Pot Interior"
         />
         <path
-          className="not_found_error_background__cls-3"
-          d="M369 666.84c5 2.71 9.39 6.4 11.42 10.1 0 0-2.14 5.5-11.45 10.36-16 8.38-42.15 8.34-58.27-.06-8.1-4.21-10.68-8.93-10.68-8.93 1.59-4 5.66-8.36 11.35-11.46 15.87-8.65 41.68-8.66 57.63-.01z"
-          id="not_found_error_background__Dirt"
+          className="prefix__cls-5"
+          d="M395.71 619.75c4.65 2.52 8.73 6 10.62 9.41 0 0-2 5.11-10.66 9.64-14.9 7.79-39.22 7.76-54.23-.06-7.54-3.92-9.94-8.31-9.94-8.31 1.48-3.71 5.27-7.78 10.57-10.67 14.76-8.05 38.78-8.06 53.64-.01z"
+          id="prefix__Dirt"
         />
       </g>
-      <g id="not_found_error_background__Plant">
+      <g id="prefix__Plant">
         <path
-          d="M341.45 557.3a29.17 29.17 0 018.28-4l-9.9 14.12"
+          d="M370.05 517.81a27.16 27.16 0 017.71-3.71l-9.22 13.14"
           stroke="#0041f4"
-          strokeWidth={0.29}
+          strokeWidth={0.27}
           fill="none"
           strokeMiterlimit={10}
         />
         <path
-          className="not_found_error_background__cls-2"
-          d="M326.26 681.23l9.55-41.41s-.15-12.79-6.27-29.92c-7.82-20.95-19.79-28.4-19.79-28.4l14.79 6 6.62-16.12s-2.34-17.15-5-24.69a49.39 49.39 0 00-8.31-14s5.28.85 11.56 10.7a49.19 49.19 0 017.24 19.61 19.26 19.26 0 014.8-5.68 29.17 29.17 0 018.28-4 105.09 105.09 0 00-9.9 14.12c-4.53 7.84-6.58 27.79-6.58 27.79l13.25 24.71a70 70 0 0113.3-15.32c7.88-6.49 18.34-9.55 18.34-9.55a108.86 108.86 0 00-13.22 18.38 87.79 87.79 0 00-9 24.72c-1.57 7-5.93 42.74-5.93 42.74s-2.48 3.32-12.31 5.77-11.42-5.45-11.42-5.45z"
-          id="not_found_error_background__Stem"
+          className="prefix__cls-4"
+          d="M355.92 633.15l8.88-38.54s-.14-11.91-5.83-27.85c-7.28-19.49-18.42-26.43-18.42-26.43l13.76 5.56 6.16-15s-2.17-16-4.62-23a45.89 45.89 0 00-7.73-13.06s4.91.79 10.76 9.95a45.76 45.76 0 016.7 18.28 18 18 0 014.47-5.28 27.16 27.16 0 017.71-3.71 98.31 98.31 0 00-9.22 13.14c-4.21 7.3-6.12 25.86-6.12 25.86l12.33 23a65.33 65.33 0 0112.38-14.26c7.34-6.05 17.07-8.89 17.07-8.89a100.77 100.77 0 00-12.3 17.1 82.11 82.11 0 00-8.4 23c-1.5 6.6-5.5 39.83-5.5 39.83s-2.31 3.09-11.45 5.37-10.63-5.07-10.63-5.07z"
+          id="prefix__Stem"
         />
         <path
-          className="not_found_error_background__cls-6"
-          d="M326.26 681.23l9.55-41.41s-.15-12.79-6.27-29.92c-7.82-20.95-19.79-28.4-19.79-28.4l14.79 6 6.62-16.12s-2.34-17.15-5-24.69a49.39 49.39 0 00-8.31-14s5.49.76 11.09 11c3.39 6.18 5.48 24.64 5.48 24.64a20.39 20.39 0 017-11 31.88 31.88 0 018.28-4s-7.17 3.09-12.83 14.6c-4 8.12-8.28 27.31-8.28 27.31s5.09 4.09 9.63 19.58c2.08 7.09 5.69 23.51 4.33 31.89-1.64 10.09-7.56 29.13-6.08 33.83s4.43 4.89 4.43 4.89a10.26 10.26 0 01-3.27 1.26c-9.8 2.44-11.37-5.46-11.37-5.46z"
-          id="not_found_error_background__Stem_Shadow"
+          className="prefix__cls-8"
+          d="M355.92 633.15l8.88-38.54s-.14-11.91-5.83-27.85c-7.28-19.49-18.42-26.43-18.42-26.43l13.76 5.56 6.16-15s-2.17-16-4.62-23a45.89 45.89 0 00-7.73-13.06s5.1.7 10.32 10.2c3.16 5.76 5.1 22.94 5.1 22.94a18.94 18.94 0 016.51-10.19 29.36 29.36 0 017.71-3.71s-6.67 2.88-11.94 13.59c-3.71 7.56-7.71 25.41-7.71 25.41s4.74 3.81 9 18.23c1.94 6.6 5.3 21.88 4 29.68-1.53 9.39-7 27.11-5.65 31.49s4.12 4.55 4.12 4.55a9.84 9.84 0 01-3 1.17c-9.2 2.31-10.66-5.04-10.66-5.04z"
+          id="prefix__Stem_Shadow"
           data-name="Stem Shadow"
         />
         <path
-          className="not_found_error_background__cls-6"
-          d="M350.13 632l-3.89-11.11a49.27 49.27 0 0113.56-16.22c9.41-7.28 17.55-9.3 17.55-9.3A98.37 98.37 0 00360 613.54c-8.06 11.13-9.87 18.46-9.87 18.46z"
-          id="not_found_error_background__Stem_Shadow-2"
+          className="prefix__cls-8"
+          d="M378.13 587.28l-3.62-10.34a45.78 45.78 0 0112.62-15.09c8.76-6.78 16.33-8.66 16.33-8.66a91.63 91.63 0 00-16.11 17c-7.54 10.32-9.22 17.09-9.22 17.09z"
+          id="prefix__Stem_Shadow-2"
           data-name="Stem Shadow"
         />
         <path
-          className="not_found_error_background__cls-6"
-          d="M321.66 533.41s-2.5-17.35-16.09-25.2c-17.18-9.92-42.2 4.32-42.2 4.32s10 18.45 25.32 24.92 32.97-4.04 32.97-4.04z"
-          id="not_found_error_background__Leaf"
+          className="prefix__cls-8"
+          d="M351.63 495.57s-2.32-16.15-15-23.46c-16-9.23-39.27 4-39.27 4s9.31 17.17 23.56 23.2 30.71-3.74 30.71-3.74z"
+          id="prefix__Leaf"
         />
         <path
-          className="not_found_error_background__cls-6"
-          d="M313.83 585.3s-11.61-20.65-32.58-23.91c-26.49-4.12-51.07 26-51.07 26s21.62 18.37 44.07 19.06 39.58-21.15 39.58-21.15z"
-          id="not_found_error_background__Leaf-2"
+          className="prefix__cls-8"
+          d="M344.35 543.87s-10.81-19.23-30.35-22.26c-24.66-3.83-47.53 24.23-47.53 24.23s20.12 17.09 41 17.74 36.88-19.71 36.88-19.71z"
+          id="prefix__Leaf-2"
           data-name="Leaf"
         />
         <path
-          className="not_found_error_background__cls-6"
-          d="M344.78 552.67s2.92-20.32 18.85-29.51c20.12-11.62 49.41 5.05 49.41 5.05s-11.72 21.61-29.65 29.19-38.61-4.73-38.61-4.73z"
-          id="not_found_error_background__Leaf-3"
+          className="prefix__cls-8"
+          d="M373.15 513.5s2.72-18.92 17.54-27.48c18.73-10.81 46 4.71 46 4.71s-10.91 20.11-27.6 27.17-35.94-4.4-35.94-4.4z"
+          id="prefix__Leaf-3"
           data-name="Leaf"
         />
-        <g id="not_found_error_background__Shadow-2" data-name="Shadow" className="not_found_error_background__cls-9">
+        <g id="prefix__Shadow-2" data-name="Shadow" className="prefix__cls-11">
           <path
-            className="not_found_error_background__cls-4"
-            d="M321.09 532.66s-8.77-12.65-19.4-13.1c-9-.37-19 6.29-24.13 10.34a41.58 41.58 0 0011.44 7.55c13.3 5.63 28.37-2.15 32.1-4.29a4.16 4.16 0 00-.01-.5z"
+            className="prefix__cls-6"
+            d="M351.1 494.87s-8.16-11.78-18.05-12.19c-8.4-.35-17.65 5.85-22.46 9.62a38.9 38.9 0 0010.67 7c12.38 5.24 26.4-2 29.88-4a3.71 3.71 0 00-.04-.43z"
           />
         </g>
-        <g id="not_found_error_background__Shadow-3" data-name="Shadow" className="not_found_error_background__cls-9">
+        <g id="prefix__Shadow-3" data-name="Shadow" className="prefix__cls-11">
           <path
-            className="not_found_error_background__cls-4"
-            d="M312.63 583.75s-12.61 1.65-19.24 6.6c-5.44 4.06-9.94 9.89-11.25 14.77 16.23-3 28.5-16.31 31.45-19.76.09-.19.18-.38.24-.53-.16-.18-1.2-1.08-1.2-1.08z"
+            className="prefix__cls-6"
+            d="M343.23 542.42s-11.74 1.54-17.91 6.14c-5.06 3.78-9.25 9.21-10.47 13.75 15.11-2.77 26.53-15.18 29.27-18.39.09-.18.17-.35.23-.49-.15-.17-1.12-1.01-1.12-1.01z"
           />
         </g>
         <path
-          className="not_found_error_background__cls-2"
-          d="M321.58 533.28s-11.11-10.67-21.61-9c-12.77 2-24.51 18.56-24.51 18.56s15.47 8.81 29.58 6.82c21.15-2.99 16.54-16.38 16.54-16.38z"
-          id="not_found_error_background__Leaf-4"
+          className="prefix__cls-4"
+          d="M351.56 495.45s-10.34-9.93-20.12-8.37c-11.88 1.89-22.81 17.28-22.81 17.28s14.41 8.2 27.54 6.34c19.68-2.78 15.39-15.25 15.39-15.25z"
+          id="prefix__Leaf-4"
           data-name="Leaf"
         />
         <path
-          className="not_found_error_background__cls-2"
-          d="M314.49 584.68s-18.08 3.21-23.86 14.51c-7 13.73.67 36.68.67 36.68s19.38-8.73 27.37-23.73c11.98-22.49-4.18-27.46-4.18-27.46z"
-          id="not_found_error_background__Leaf-5"
+          className="prefix__cls-4"
+          d="M345 543.29s-16.83 3-22.21 13.5c-6.52 12.78.63 34.14.63 34.14s18-8.12 25.47-22.09C360 547.91 345 543.29 345 543.29z"
+          id="prefix__Leaf-5"
           data-name="Leaf"
         />
         <path
-          className="not_found_error_background__cls-2"
-          d="M344.6 552.61s13.65-7.12 23.27-2.57c11.68 5.52 18.33 24.68 18.33 24.68s-17.33 4.13-30.32-1.74c-19.46-8.8-11.28-20.37-11.28-20.37z"
-          id="not_found_error_background__Leaf-6"
+          className="prefix__cls-4"
+          d="M373 513.44s12.7-6.63 21.65-2.4c10.87 5.14 17.06 23 17.06 23s-16.13 3.84-28.22-1.62c-18.12-8.21-10.49-18.98-10.49-18.98z"
+          id="prefix__Leaf-6"
           data-name="Leaf"
         />
         <path
-          className="not_found_error_background__cls-6"
-          d="M375 595.15s11-16.19 24.53-16.87c16.42-.83 35.39 16.65 35.39 16.65S418 610 399.89 611.2C372.78 613 375 595.15 375 595.15z"
-          id="not_found_error_background__Leaf-7"
+          className="prefix__cls-8"
+          d="M401.28 553s10.25-15.07 22.83-15.7c15.28-.78 32.94 15.5 32.94 15.5s-15.77 14-32.61 15.14c-25.23 1.74-23.16-14.94-23.16-14.94z"
+          id="prefix__Leaf-7"
           data-name="Leaf"
         />
         <path
-          className="not_found_error_background__cls-2"
-          d="M324.38 537s-1.41-10.33 1.91-14.28a17.43 17.43 0 0116.61-6s.08 11.9-5.33 17.32c-7.15 7.14-13.19 2.96-13.19 2.96z"
-          id="not_found_error_background__Leaf-8"
+          className="prefix__cls-4"
+          d="M354.16 498.94s-1.31-9.62 1.78-13.29A16.2 16.2 0 01371.4 480s.08 11.07-5 16.11c-6.61 6.69-12.24 2.83-12.24 2.83z"
+          id="prefix__Leaf-8"
           data-name="Leaf"
         />
         <path
-          className="not_found_error_background__cls-2"
-          d="M339 567.55s11.84 2.65 14.79 7.86a20.21 20.21 0 01-.15 20.53s-13-4.71-16.71-12.81c-4.85-10.67 2.07-15.58 2.07-15.58z"
-          id="not_found_error_background__Leaf-9"
+          className="prefix__cls-4"
+          d="M367.81 527.35s11 2.46 13.76 7.31a18.82 18.82 0 01-.13 19.11s-12.1-4.39-15.55-11.92c-4.56-9.94 1.92-14.5 1.92-14.5z"
+          id="prefix__Leaf-9"
           data-name="Leaf"
         />
         <path
-          className="not_found_error_background__cls-2"
-          d="M373.64 598s-2.53-9-.09-12.87a15.57 15.57 0 0113.95-7.41s1.56 10.52-2.56 16c-5.44 7.28-11.3 4.28-11.3 4.28z"
-          id="not_found_error_background__Leaf-10"
+          className="prefix__cls-4"
+          d="M400 555.72s-2.35-8.35-.08-12a14.47 14.47 0 0113-6.89s1.45 9.79-2.38 14.88c-5.07 6.73-10.54 4.01-10.54 4.01z"
+          id="prefix__Leaf-10"
           data-name="Leaf"
         />
         <path
-          className="not_found_error_background__cls-2"
-          d="M374.14 598.64s16.39-3.57 23.12 1.24c14.27 10.18 6.74 32.82 6.74 32.82s-14-5.32-23.4-13.31c-12.35-10.54-6.46-20.75-6.46-20.75z"
-          id="not_found_error_background__Leaf-11"
+          className="prefix__cls-4"
+          d="M400.47 556.28s15.26-3.28 21.53 1.15c13.28 9.47 6.28 30.55 6.28 30.55s-13-5-21.77-12.39c-11.51-9.81-6.04-19.31-6.04-19.31z"
+          id="prefix__Leaf-11"
           data-name="Leaf"
         />
       </g>
+      <path fill="#bae6ff" d="M867.15 109.1l.01 492.94 247.99 143.2V252.59l-248-143.49z" />
       <path
-        fill="#bae6ff"
-        d="M875.56 118.17v529.64l266.45 153.86V272.34L875.56 118.17z"
+        className="prefix__cls-13"
+        d="M892.89 149.38V616.9l203.34 117.42.01-470.17-203.35-114.77z"
+        id="prefix__Background"
       />
       <path
-        className="not_found_error_background__cls-11"
-        d="M903.21 161.45v502.32l218.47 126.16.01-505.16-218.48-123.32z"
+        className="prefix__cls-14"
+        d="M890.04 147.76l7.13 4.03v467.58l-7.13-4.11v-467.5zM1115.15 252.62l7.13-4.38v493.01l-7.13 3.99V252.62z"
       />
       <path
-        className="not_found_error_background__cls-12"
-        d="M1121.69 382.87a83.51 83.51 0 11-82.34-145l82.34 46.85z"
+        className="prefix__cls-15"
+        d="M867.15 109.1l6.98-4.02 248.15 143.16-7.13 4.38-248-143.52zM890.04 147.45v467.5L686.7 731.79l-.01-466.08 203.35-118.26z"
       />
       <path
-        d="M1121.69 284.77c0 31.7.11 96.23 0 96.29a83.51 83.51 0 01-84.44-143.95z"
-        fill="#009d9a"
+        className="prefix__cls-5"
+        d="M736.49 454.83v60.48a1.14 1.14 0 01-.57 1l-21.74 12.19a1.1 1.1 0 01-1 0c-.38-.17-2.8-2.78-2.8-3.26v-58.59a2.7 2.7 0 011.51-2.32l20.88-12.09c.8-.38 3.23 1.38 3.57 1.74a1.23 1.23 0 01.15.85z"
       />
       <path
-        className="not_found_error_background__cls-14"
-        d="M900.15 159.72l7.66 4.32v502.39l-7.66-4.42V159.72zM1142.01 272.38l7.66-4.71v529.7l-7.66 4.3V272.38z"
+        className="prefix__cls-9"
+        d="M736.72 454.72v60.48a1.12 1.12 0 01-.57 1l-21.95 12.38a1.14 1.14 0 01-1.7-1v-59.47a2.85 2.85 0 011.42-2.46l20.73-12a1.48 1.48 0 012.07 1.07z"
       />
       <path
-        className="not_found_error_background__cls-15"
-        d="M875.56 118.17l7.48-4.32 266.63 153.82-7.66 4.71-266.45-154.21zM900.15 159.38l-.01 502.3-218.47 125.54-.01-500.78 218.49-127.06z"
+        className="prefix__cls-7"
+        d="M890.04 147.76L686.69 265.71l-12.03-6.68 203.48-117.65 11.9 6.38z"
       />
       <path
-        className="not_found_error_background__cls-3"
-        d="M735.16 489.63v65a1.23 1.23 0 01-.61 1.06l-23.36 13.11a1.21 1.21 0 01-1.12.06c-.41-.19-3-3-3-3.51v-63a2.92 2.92 0 011.62-2.49l22.44-13c.86-.41 3.47 1.48 3.83 1.86a1.31 1.31 0 01.2.91z"
+        className="prefix__cls-16"
+        d="M674.66 258.71l12.03 6.68.01 466.4-10.86-6.27-1.18-466.81z"
       />
       <path
-        className="not_found_error_background__cls-7"
-        d="M735.41 489.52v65a1.21 1.21 0 01-.61 1.06l-23.58 13.31a1.22 1.22 0 01-1.84-1.06v-63.9a3.08 3.08 0 011.53-2.65l22.28-12.9a1.59 1.59 0 012.22 1.14z"
+        fill="url(#prefix__linear-gradient-3)"
+        d="M889.67 615.23L609.78 774.59 810.91 895.7l285.35-161.36-206.59-119.11z"
       />
-      <path
-        className="not_found_error_background__cls-5"
-        d="M900.15 159.72L681.66 286.44l-12.93-7.18 218.63-126.41 12.79 6.87z"
-      />
-      <path
-        className="not_found_error_background__cls-16"
-        d="M668.73 278.92l12.93 7.18.01 501.12-11.67-6.74-1.27-501.56z"
-      />
-      <path
-        fill="url(#not_found_error_background__linear-gradient)"
-        d="M899.75 661.98L545.78 864.95l216.1 130.13 359.84-205.12-221.97-127.98z"
-      />
-      <circle className="not_found_error_background__cls-5" cx={946.66} cy={340.55} r={2.06} />
-      <circle className="not_found_error_background__cls-2" cx={947.18} cy={340.17} r={2.06} />
-      <circle className="not_found_error_background__cls-5" cx={1078.09} cy={444.57} r={2.06} />
-      <circle className="not_found_error_background__cls-5" cx={959.7} cy={526.65} r={2.06} />
-      <circle className="not_found_error_background__cls-18" cx={1086.34} cy={613.65} r={4.12} />
-      <circle className="not_found_error_background__cls-18" cx={985.73} cy={440.45} r={5.77} />
-      <circle className="not_found_error_background__cls-18" cx={963.82} cy={242.24} r={4.95} />
-      <circle className="not_found_error_background__cls-19" cx={1017.45} cy={345.26} r={10.9} />
-      <circle cx={957.7} cy={618.74} r={6.84} fill="#003a6d" />
-      <circle className="not_found_error_background__cls-19" cx={1014.85} cy={310.79} r={8.3} />
-      <circle className="not_found_error_background__cls-19" cx={1043.93} cy={364.46} r={8.3} />
-      <circle className="not_found_error_background__cls-19" cx={1040.18} cy={338.49} r={7.69} />
-      <circle className="not_found_error_background__cls-19" cx={1020.66} cy={284.22} r={7.69} />
-      <circle className="not_found_error_background__cls-19" cx={1042.89} cy={307.47} r={4.98} />
-      <g id="not_found_error_background__Rocket_Group" data-name="Rocket Group">
+      <circle className="prefix__cls-7" cx={933.33} cy={316.07} r={1.92} />
+      <g id="prefix__Space_Dos" data-name="Space Dos">
+        <circle className="prefix__cls-4" cx={933.81} cy={315.72} r={1.92} />
+        <circle className="prefix__cls-7" cx={1055.66} cy={412.88} r={1.92} />
+        <circle className="prefix__cls-7" cx={945.47} cy={489.28} r={1.92} />
+        <circle className="prefix__cls-18" cx={1063.33} cy={570.25} r={3.84} />
+        <circle className="prefix__cls-18" cx={969.7} cy={409.05} r={5.37} />
+        <circle className="prefix__cls-18" cx={949.3} cy={224.57} r={4.6} />
+        <circle cx={943.6} cy={574.99} r={6.36} fill="#003a6d" />
+      </g>
+      <g id="prefix__Planet">
         <path
-          className="not_found_error_background__cls-12"
-          d="M1042.94 510.17l-15.52 8.93 3.63-5.39 10.61-7.53 1.27.72a1.39 1.39 0 01.81 1.2 4.9 4.9 0 01-.8 2.07z"
-          id="not_found_error_background__Jet_2_Edge"
+          className="prefix__cls-20"
+          d="M1096.24 355.46a77.72 77.72 0 11-76.64-134.91l76.64 43.6z"
+        />
+        <path
+          d="M1096.24 264.15c0 29.51.1 89.57 0 89.62a77.72 77.72 0 01-78.59-134z"
+          fill="#009d9a"
+        />
+        <circle className="prefix__cls-22" cx={999.22} cy={320.46} r={10.14} />
+        <circle className="prefix__cls-22" cx={996.8} cy={288.37} r={7.72} />
+        <circle className="prefix__cls-22" cx={1023.87} cy={338.32} r={7.72} />
+        <circle className="prefix__cls-22" cx={1020.38} cy={314.15} r={7.16} />
+        <circle className="prefix__cls-22" cx={1002.21} cy={263.65} r={7.16} />
+        <circle className="prefix__cls-22" cx={1022.9} cy={285.28} r={4.64} />
+      </g>
+      <g id="prefix__Rocket_Group" data-name="Rocket Group">
+        <path
+          className="prefix__cls-20"
+          d="M1023 473.94l-14.45 8.31 3.38-5 9.87-7 1.18.67a1.3 1.3 0 01.76 1.12 4.67 4.67 0 01-.74 1.9z"
+          id="prefix__Jet_2_Edge"
           data-name="Jet 2 Edge"
         />
         <path
-          className="not_found_error_background__cls-21"
-          d="M1041.5 509.35l-12.26 7 3.62-5.39 8.62-4.94a1.43 1.43 0 01.82 1.21 5 5 0 01-.8 2.12z"
-          id="not_found_error_background__Jet_2"
+          className="prefix__cls-23"
+          d="M1021.6 473.18l-11.41 6.56 3.37-5 8-4.59a1.3 1.3 0 01.75 1.12 4.59 4.59 0 01-.71 1.91z"
+          id="prefix__Jet_2"
           data-name="Jet 2"
         />
         <path
-          className="not_found_error_background__cls-12"
-          d="M1042.76 505.39l-15.52 8.92 3.63-5.39 10.61-7.53 1.27.72a1.41 1.41 0 01.81 1.21 5 5 0 01-.8 2.07z"
-          id="not_found_error_background__Jet_1_Edge"
+          className="prefix__cls-20"
+          d="M1022.78 469.49l-14.45 8.3 3.38-5 9.88-7 1.17.67a1.3 1.3 0 01.76 1.12 4.74 4.74 0 01-.74 1.91z"
+          id="prefix__Jet_1_Edge"
           data-name="Jet 1 Edge"
         />
         <path
-          className="not_found_error_background__cls-21"
-          d="M1041.32 504.57l-12.27 7.05 3.63-5.39 8.62-4.94a1.43 1.43 0 01.82 1.21 5 5 0 01-.8 2.07z"
-          id="not_found_error_background__Jet_1"
+          className="prefix__cls-23"
+          d="M1021.43 468.72l-11.43 6.56 3.38-5 8-4.6a1.34 1.34 0 01.76 1.13 4.64 4.64 0 01-.71 1.91z"
+          id="prefix__Jet_1"
           data-name="Jet 1"
         />
         <path
-          className="not_found_error_background__cls-4"
-          d="M1043.56 500l-.71-1.24s-7.27-.73-9.16.36l-15.77 9.06v11.48l-.71.42 1.41.83 15.06-8.65c9.19-5.33 10-8.84 9.88-12.26z"
-          id="not_found_error_background__Rocket_Edge"
+          className="prefix__cls-6"
+          d="M1023.52 464.45l-.66-1.15s-6.77-.69-8.53.32l-14.67 8.44v10.69l-.66.38 1.31.78 14-8.06c8.56-4.92 9.33-8.19 9.21-11.4z"
+          id="prefix__Rocket_Edge"
           data-name="Rocket Edge"
         />
         <path
-          className="not_found_error_background__cls-5"
-          d="M1042.85 498.73a9.67 9.67 0 00-9.9-.92l-15.76 9.06v13.18l15.75-9.06c9.21-5.3 10.06-8.81 9.91-12.26z"
-          id="not_found_error_background__Rocket"
+          className="prefix__cls-7"
+          d="M1022.86 463.3a9 9 0 00-9.21-.86L999 470.87v12.26l14.66-8.43c8.55-4.93 9.34-8.19 9.2-11.4z"
+          id="prefix__Rocket"
         />
         <path
-          className="not_found_error_background__cls-6"
-          d="M1030.12 499.49l-11.44 6.58v-6.66l3.68-2.12a1.29 1.29 0 011.1-.08z"
-          id="not_found_error_background__Wing_Left"
+          className="prefix__cls-8"
+          d="M1011 464l-10.65 6.12v-6.2l3.43-2a1.18 1.18 0 011-.08z"
+          id="prefix__Wing_Left"
           data-name="Wing Left"
         />
         <path
-          id="not_found_error_background__Wing_Righ_Edge"
+          id="prefix__Wing_Righ_Edge"
           data-name="Wing Righ Edge"
-          className="not_found_error_background__cls-4"
-          d="M1023.55 524.63l-3.52 2-1.42-.81.71-.41v-5l9.15-5.22 1.6-2.54 1.38.84-6.78 10.08a3.28 3.28 0 01-1.12 1.06z"
+          className="prefix__cls-6"
+          d="M1004.9 487.39l-3.28 1.89-1.32-.76.66-.38v-4.68l8.52-4.86 1.49-2.36 1.28.78-6.31 9.38a3.08 3.08 0 01-1.04.99z"
         />
         <path
-          className="not_found_error_background__cls-6"
-          d="M1022.85 523.4l-4.24 2.44v-6.67l11.46-6.53-6.11 9.69a3.16 3.16 0 01-1.11 1.07z"
-          id="not_found_error_background__Wing_Right"
+          className="prefix__cls-8"
+          d="M1004.24 486.25l-3.94 2.27v-6.2l10.67-6.08-5.69 9a3 3 0 01-1.04 1.01z"
+          id="prefix__Wing_Right"
           data-name="Wing Right"
         />
         <path
-          className="not_found_error_background__cls-11"
-          d="M1017.19 506.88l-1.4.8-.03 13.19 1.43-.82v-13.17z"
-          id="not_found_error_background__Rocket_Bottom"
+          className="prefix__cls-13"
+          d="M998.98 470.87l-1.31.75-.03 12.28 1.34-.77v-12.26z"
+          id="prefix__Rocket_Bottom"
           data-name="Rocket Bottom"
         />
         <path
-          className="not_found_error_background__cls-18"
-          d="M1017.19 520.05l-1.43.82 1.42.83 1.42-.82-1.41-.83z"
-          id="not_found_error_background__Rocket_Bottom_Edge"
+          className="prefix__cls-18"
+          d="M998.98 483.13l-1.34.77 1.33.77 1.32-.76-1.31-.78z"
+          id="prefix__Rocket_Bottom_Edge"
           data-name="Rocket Bottom Edge"
         />
         <path
-          className="not_found_error_background__cls-18"
-          d="M1038.7 501.16c-.5-2.68-4.32-1-4.32-1v6.66s4.83-2.97 4.32-5.66z"
-          id="not_found_error_background__Rocket_Window_Edge"
+          className="prefix__cls-18"
+          d="M1019 465.56c-.47-2.5-4-.91-4-.91v6.2s4.47-2.79 4-5.29z"
+          id="prefix__Rocket_Window_Edge"
           data-name="Rocket Window Edge"
         />
         <path
-          id="not_found_error_background__Rocket_Window"
+          id="prefix__Rocket_Window"
           data-name="Rocket Window"
-          className="not_found_error_background__cls-11"
-          d="M1038.73 501.73a1.83 1.83 0 00-.22-1.12 5.9 5.9 0 00-2.74.52v4.73s2.93-2.3 2.96-4.13z"
+          className="prefix__cls-13"
+          d="M1019 466.08a1.75 1.75 0 00-.21-1 5.64 5.64 0 00-2.55.48v4.4s2.76-2.17 2.76-3.88z"
         />
-        <g id="not_found_error_background__Flames">
+        <g id="prefix__Flames">
           <path
-            id="not_found_error_background__Flame_Edge_top_Side_"
+            id="prefix__Flame_Edge_top_Side_"
             data-name="Flame Edge (top &amp; Side)"
-            className="not_found_error_background__cls-22"
-            d="M1014.43 511.89l-.81-.48-.01 6.45-5.17 2.97.81.47 5.18-2.98v-6.43z"
+            className="prefix__cls-24"
+            d="M996.41 475.54l-.76-.45-.01 6.01-4.8 2.76.74.44 4.83-2.78v-5.98z"
           />
           <path
-            id="not_found_error_background__Flame_Edge_Bottom_"
+            id="prefix__Flame_Edge_Bottom_"
             data-name="Flame Edge (Bottom)"
-            className="not_found_error_background__cls-22"
-            d="M1002.55 517.68l.95.55 5.73.33.21-.6-6.89-.28z"
+            className="prefix__cls-24"
+            d="M985.35 480.93l.89.51 5.33.31.19-.56-6.41-.26z"
           />
           <path
-            id="not_found_error_background__Flame"
+            id="prefix__Flame"
             fill="#fa4d56"
-            d="M1013.62 511.41l-.01 6.45-5.17 2.98 1-2.88-6.89-.28 11.07-6.27z"
+            d="M995.65 475.09l-.01 6.01-4.81 2.77.93-2.68-6.41-.26 10.3-5.84z"
           />
         </g>
       </g>
       <path
-        className="not_found_error_background__cls-14"
-        d="M1121.71 332.33a424.79 424.79 0 01-59.51 3.86c-56 0-101.4-9.07-101.4-20.26 0-5.88 12.58-11.18 32.63-14.88 0 0 .11-.93.46-2.86s.61-3.09.61-3.09c-32.1 4.83-53.21 13.29-53.21 24.13v3.09c.55 17.25 54.47 31.18 120.91 31.18a415.63 415.63 0 0059.51-4.06z"
+        className="prefix__cls-14"
+        d="M1096.25 308.42a395.41 395.41 0 01-55.38 3.59c-52.12 0-94.38-8.44-94.38-18.85 0-5.48 11.71-10.41 30.37-13.86 0 0 .11-.86.43-2.66s.57-2.87.57-2.87c-29.88 4.49-49.52 12.37-49.52 22.46v2.87c.52 16 50.7 29 112.54 29a385.44 385.44 0 0055.38-3.78z"
         opacity={0.5}
+        id="prefix__Ring"
       />
       <path
-        className="not_found_error_background__cls-16"
-        d="M1121.72 329.21a426 426 0 01-59.49 3.85c-56 0-101.4-9.07-101.4-20.25 0-5.94 12.77-11.27 33.13-15 0 0 .14-.76.54-2.73s.54-2.32.54-2.32c-32.39 5.64-53.72 15.24-53.72 26.15 0 17.36 54.13 31.44 120.91 31.44a415.09 415.09 0 0059.46-4.05v-9.33c0-6.17.03-7.76.03-7.76z"
+        className="prefix__cls-16"
+        d="M1096.27 305.52a397.12 397.12 0 01-55.37 3.58c-52.12 0-94.38-8.44-94.38-18.85 0-5.52 11.89-10.49 30.83-13.94 0 0 .13-.7.51-2.54s.5-2.16.5-2.16c-30.15 5.25-50 14.19-50 24.33 0 16.17 50.39 29.27 112.54 29.27a386.49 386.49 0 0055.34-3.77v-8.68z"
       />
-      <g id="not_found_error_background__Door_Knob" data-name="Door Knob">
+      <g id="prefix__Door_Knob" data-name="Door Knob">
         <path
-          className="not_found_error_background__cls-4"
-          d="M715.83 529.14a8.73 8.73 0 011.19-4.78 8.08 8.08 0 01.67-1 8.78 8.78 0 1111 13.2 8.59 8.59 0 01-1.89.72 9.18 9.18 0 01-1.83.27 8.79 8.79 0 01-9.14-8.41z"
+          className="prefix__cls-6"
+          d="M718.49 491.6a8.18 8.18 0 1112 6.92 8.56 8.56 0 01-1.75.67 8 8 0 01-1.71.25 8.18 8.18 0 01-8.54-7.84z"
         />
-        <circle className="not_found_error_background__cls-6" cx={726.15} cy={528.93} r={8.99} />
-        <circle className="not_found_error_background__cls-5" cx={726.32} cy={528.88} r={8.26} />
-        <circle className="not_found_error_background__cls-6" cx={726.89} cy={528.22} r={7.93} />
+        <circle className="prefix__cls-8" cx={728.1} cy={491.4} r={8.36} />
+        <circle className="prefix__cls-7" cx={728.26} cy={491.36} r={7.68} />
+        <circle className="prefix__cls-8" cx={728.79} cy={490.74} r={7.38} />
       </g>
     </svg>
-  )
+  );
 }
 
-export default NotFoundErrorBackground
+export default NotFoundErrorBackground;

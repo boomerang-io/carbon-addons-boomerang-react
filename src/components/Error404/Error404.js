@@ -1,6 +1,6 @@
 import React from 'react';
 
-import NotFoundErrorBackground from "./NotFoundErrorBackground";
+import NotFoundErrorBackground from './NotFoundErrorBackground';
 import GraphicLoch from '../GraphicLoch';
 
 import ErrorPage from '../ErrorPage';
@@ -10,7 +10,7 @@ import { settings } from 'carbon-components';
 const { prefix } = settings;
 
 export default function Error404(props) {
-  return props?.theme === "boomerang" ? (
+  return props?.theme === 'boomerang' ? (
     <ErrorPage
       header="404 - Page Not Found"
       title="Crikey. Something seems to have swam off with this page."
@@ -20,10 +20,12 @@ export default function Error404(props) {
     />
   ) : (
     <ErrorPageCore
-      header="404 - Page Not Found"
-      title="Crikey. Something seems to have swam off with this page."
+      header="404 Page Not Found"
+      title="We spaced out and couldn’t find your page."
       message="Try refreshing, or contact the local authorities."
-      graphic={<NotFoundErrorBackground className={`${prefix}--bmrg-error-page-core__background`} />}
+      graphic={
+        <NotFoundErrorBackground className={`${prefix}--bmrg-error-page-core__background`} />
+      }
       {...props}
     />
   );
