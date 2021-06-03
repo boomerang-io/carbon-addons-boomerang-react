@@ -8,6 +8,7 @@ import { settings } from 'carbon-components';
 const { prefix } = settings;
 
 RadioGroupComponent.propTypes = {
+  columnHeight: PropTypes.string,
   defaultSelected: PropTypes.string,
   disabled: PropTypes.string,
   helperText: PropTypes.string,
@@ -25,11 +26,14 @@ RadioGroupComponent.propTypes = {
   tooltipContent: PropTypes.any,
   tooltipProps: PropTypes.object,
   value: PropTypes.string,
+  verticalWrapped: PropTypes.bool,
 };
 
 RadioGroupComponent.defaultProps = {
+  columnHeight: "6rem",
   tooltipClassName: `${prefix}--bmrg-radio-group__tooltip`,
   tooltipProps: { direction: 'top' },
+  verticalWrapped: false,
 };
 
 function RadioGroupComponent({
@@ -49,6 +53,8 @@ function RadioGroupComponent({
   tooltipContent,
   tooltipProps,
   value,
+  columnHeight,
+  verticalWrapped,
 }) {
   const labelValue = label || labelText;
   const labelTextId = !labelValue ? undefined : `${id}-label`;
@@ -58,7 +64,8 @@ function RadioGroupComponent({
   const hasHorizontalHelperText = !isVertical && helperText;
 
   return (
-    <div key={id} className={`${prefix}--bmrg-radio-group`}>
+    //Defined a css var --height to be used on the wrapped container to determine the number of radios displayed in each column
+    <div key={id} className={`${prefix}--bmrg-radio-group`} style={{"--height": columnHeight}}>
       {labelValue && (
         <div className={`${prefix}--bmrg-radio-group__title`}>
           <div id={labelTextId} className={`${prefix}--label`}>
@@ -75,6 +82,7 @@ function RadioGroupComponent({
       )}
       {hasVerticalHelperText && <div className={`${prefix}--form__helper-text`}>{helperText}</div>}
       <RadioButtonGroup
+        className={isVertical && verticalWrapped ? `${prefix}--bmrg-radio-group__container` : undefined}
         defaultSelected={defaultSelected}
         disabled={disabled}
         name={name}
