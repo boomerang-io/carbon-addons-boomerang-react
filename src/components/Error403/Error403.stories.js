@@ -19,4 +19,7 @@ storiesOf('Error403', module)
   })
   .add('no text', () => {
     return <Error403Component header={null} title={null} message={null} />;
+  })
+  .add('boomerang', () => {
+    return <Error403Component theme="boomerang" />;
   });
