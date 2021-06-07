@@ -177,7 +177,8 @@ function DataDrivenInput(props) {
     Component = Creatable;
     componentProps = {
       ...allInputProps,
-      createKeyValuePair: type === CREATABLE_TYPES.CREATABLE_PAIR,
+      createKeyValuePair: type === CREATABLE_TYPES.CREATABLE_PAIR || type === CREATABLE_TYPES.CREATABLE_PAIR_NON_DELETABLE,
+      nonDeletable: type === CREATABLE_TYPES.CREATABLE_SINGLE_NON_DELETABLE || type === CREATABLE_TYPES.CREATABLE_PAIR_NON_DELETABLE,
       invalid,
       invalidText,
       placeholder,
