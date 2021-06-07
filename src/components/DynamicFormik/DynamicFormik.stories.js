@@ -149,8 +149,17 @@ const inputs = [
     type: 'radio',
     orientation: 'vertical',
     options: [
+      { key: 'test', value: 'Test' },
+      { key: 'one', value: 'One' },
+      { key: 'two', value: 'Two' },
+      { key: 'three', value: 'Three' },
       { key: 'four', value: 'Four' },
       { key: 'five', value: 'Five' },
+      { key: 'six', value: 'Six' },
+      { key: 'seven', value: 'Seven' },
+      { key: 'eight', value: 'Eight' },
+      { key: 'nine', value: 'Nine' },
+      { key: 'ten', value: 'Ten' },
     ],
     placeholder: 'placeholder',
     helperText: 'text',
@@ -202,7 +211,7 @@ const inputs = [
   {
     key: 'creatable',
     label: 'Creatable',
-    type: 'creatable-single',
+    type: 'creatable-single-non-deletable',
     values: ['one'],
     placeholder: 'placeholder',
     conditionallyRender: true,
@@ -210,6 +219,19 @@ const inputs = [
     requiredValueOf: ['one'],
     helperText: 'text',
     description: 'text',
+  },
+  {
+    key: 'creatableLimited',
+    label: 'Creatable',
+    type: 'creatable-single',
+    values: ['one','two','three'],
+    placeholder: 'placeholder',
+    conditionallyRender: true,
+    requiredForKey: 'select',
+    requiredValueOf: ['one'],
+    helperText: 'limited by 3 values',
+    description: 'limited by 3 values',
+    max: 3,
   },
   {
     key: 'custom',
@@ -272,6 +294,7 @@ storiesOf('DynamicFormik', module)
           onSubmit={() => {
             action('submit clicked');
           }}
+          radioProps={({input}) => ({...input, verticalWrapped: true, columnHeight: "8rem"})}
           validationSchemaExtension={additionalSchema}
         >
           {({ inputs, formikProps }) => {

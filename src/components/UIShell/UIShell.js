@@ -219,7 +219,7 @@ function UIShell({
           Boolean(finalBaseServiceUrl) && isSupportEnabled && (
             <HeaderMenuLink
               external={false}
-              href={`${finalBaseUrl}/launchpad/support`}
+              href={`${finalBaseUrl}/support/center`}
               iconName="support"
               text="Support Center"
             />
