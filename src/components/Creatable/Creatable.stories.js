@@ -20,6 +20,22 @@ storiesOf('Creatable', module)
       </div>
     );
   })
+  .add('Non delatable', () => {
+    return (
+      <div style={{ width: '25rem' }}>
+        <Creatable
+          id="text-input-creatable"
+          labelText={text('labelText', 'Creatable')}
+          onChange={action('creatable change')}
+          helperText="Test helperText"
+          placeholder={text('placeholder', 'Create some values')}
+          initialValues={["test", "test2"]}
+          nonDeletable={true}
+          type="text"
+        />
+      </div>
+    );
+  })
   .add('key value pair', () => {
     return (
       <div style={{ width: '25rem' }}>
@@ -38,6 +54,21 @@ storiesOf('Creatable', module)
       </div>
     );
   })
+  .add('limit the number of added values', () => {
+    return (
+      <div style={{ width: '25rem' }}>
+        <Creatable
+          id="limit-values-creatable"
+          labelText={text('labelText', 'Creatable with added items limited')}
+          onChange={action('creatable change')}
+          helperText="Items added limited by 3"
+          placeholder={text('placeholder', 'Create some values')}
+          type="text"
+          max={3}
+        />
+      </div>
+    );
+  }) 
   .add('with tooltip and helper text', () => {
     return (
       <Creatable

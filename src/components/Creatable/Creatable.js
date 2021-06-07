@@ -17,6 +17,7 @@ CreatableComponent.propTypes = {
   createKeyValuePair: PropTypes.bool,
   disabled: PropTypes.bool,
   id: PropTypes.string,
+  initialValues: PropTypes.array,
   invalid: PropTypes.bool,
   invalidText: PropTypes.string,
   helperText: PropTypes.string,
@@ -27,6 +28,8 @@ CreatableComponent.propTypes = {
   keyPlaceholder: PropTypes.string,
   label: PropTypes.string,
   labelText: PropTypes.string,
+  nonDeletable: PropTypes.bool,
+  max: PropTypes.number,
   onKeyBlur: PropTypes.func,
   onValueBlur: PropTypes.func,
   onInputBlur: PropTypes.func,
@@ -52,6 +55,7 @@ CreatableComponent.defaultProps = {
   buttonContent: 'Add',
   createKeyValuePair: false,
   labelText: '',
+  nonDeletable: false,
   tagType: 'teal',
   tooltipClassName: `${prefix}--bmrg-creatable__tooltip`,
   tooltipProps: { direction: 'top' },
@@ -65,6 +69,7 @@ function CreatableComponent({
   createKeyValuePair,
   disabled,
   id,
+  initialValues: externalInitialValues,
   invalid,
   invalidText,
   helperText,
@@ -75,6 +80,8 @@ function CreatableComponent({
   keyPlaceholder,
   label,
   labelText,
+  nonDeletable,
+  max,
   onKeyBlur,
   onValueBlur,
   onInputBlur,
@@ -103,12 +110,18 @@ function CreatableComponent({
   const inputValueLabel = valueLabelText || valueLabel;
 
   const [createdItems, setCreatedItems] = useState([]);
+  const [initialItems] = useState(values || externalValues ? values || externalValues : []);
   const createButtonClassName = cx(buttonClassName, {"--no-label": (!createKeyValuePair && !inputLabel && !tooltipContent) || (createKeyValuePair && !inputKeyLabel && !inputValueLabel)});
   const tagItems = values || externalValues ? values || externalValues : createdItems; // Externally controlled if values props exists
+  
+  const initialTagItems = externalInitialValues || initialItems; // Externally controlled if initialValues props exists
   const existValue = (keyValue && value) || input;
 
   const hasBothHelperText = keyHelperText && valueHelperText;
   const hasBothLabelText = inputKeyLabel && inputValueLabel;
+
+  const tagsToShow = externalInitialValues ? [...initialTagItems, ...tagItems] : [...tagItems];
+  const disableInputs = disabled || (tagsToShow.length >= max && max > 0);
 
   const onInputChange = (e) => {
     setInput(e.target.value);
@@ -150,7 +163,7 @@ function CreatableComponent({
         {createKeyValuePair ? (
           <div className={`${prefix}--bmrg-creatable__key-value-inputs`}>
             <TextInput
-              disabled={disabled}
+              disabled={disableInputs}
               id={`${id}-key`}
               invalid={invalid}
               invalidText={invalidText}
@@ -174,7 +187,7 @@ function CreatableComponent({
               }}
             >:</p>
             <TextInput
-              disabled={disabled}
+              disabled={disableInputs}
               id={`${id}-value`}
               invalid={invalid}
               invalidText={invalidText}
@@ -194,7 +207,7 @@ function CreatableComponent({
           </div>
         ) : (
           <TextInput
-            disabled={disabled}
+            disabled={disableInputs}        
             id={id}
             invalid={invalid}
             invalidText={invalidText}
@@ -233,14 +246,14 @@ function CreatableComponent({
         </Button>
       </div>
       <div className={`${prefix}--bmrg-creatable__tags`}>
-        {tagItems.map((item, index) => (
+        {tagsToShow.map((item, index) => (
           <Tag
             key={`${item}-${index}`}
             disabled={disabled}
             type={tagType}
-            onClick={() => removeValue(item)}
-            onKeyDown={(e) => isAccessibleKeyDownEvent(e) && removeValue(item)}
-            filter
+            onClick={nonDeletable && initialTagItems.includes(item) ? undefined : () => removeValue(item)}
+            onKeyDown={nonDeletable && initialTagItems.includes(item) ? undefined : (e) => isAccessibleKeyDownEvent(e) && removeValue(item)}
+            filter={!nonDeletable || (nonDeletable && !initialTagItems.includes(item))}
             {...tagProps}
           >
             {item}

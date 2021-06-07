@@ -4,7 +4,9 @@ export const CHECKBOX_TYPES = {
 
 export const CREATABLE_TYPES = {
   CREATABLE_SINGLE: 'creatable-single',
+  CREATABLE_SINGLE_NON_DELETABLE: 'creatable-single-non-deletable',
   CREATABLE_PAIR: 'creatable-pair',
+  CREATABLE_PAIR_NON_DELETABLE: 'creatable-pair-non-deletable',
 };
 
 export const DATE_TYPES = {
