@@ -13,6 +13,7 @@ export { default as CheckboxList } from './components/CheckboxList';
 export { default as ComboBox } from './components/ComboBox';
 export { default as ComboBoxMultiSelect } from './components/ComboBoxMultiSelect';
 export { default as ComposedModal } from './components/ComposedModal';
+export { default as ComposedModal2 } from './components/ComposedModal2';
 export { default as ConfirmModal } from './components/ConfirmModal';
 export { default as Creatable } from './components/Creatable';
 export { default as DataDrivenInput } from './components/DataDrivenInput';

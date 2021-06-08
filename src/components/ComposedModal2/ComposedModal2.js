@@ -9,7 +9,7 @@ import ConfirmModal from '../ConfirmModal';
 
 const { prefix } = settings;
 
-ComposedModal.propTypes = {
+ComposedModal2.propTypes = {
   appElement: PropTypes.string,
   children: PropTypes.func,
   composedModalProps: PropTypes.object,
@@ -23,14 +23,14 @@ ComposedModal.propTypes = {
   size: PropTypes.string,
 };
 
-ComposedModal.defaultProps = {
+ComposedModal2.defaultProps = {
   composedModalProps: {},
   isOpen: false,
   modalHeaderProps: {},
   modalTrigger: () => {},
 };
 
-export function ComposedModal(props) {
+export function ComposedModal2(props) {
   const [state, setState] = useSetState({
     isConfirmModalOpen: false,
     isOpen: props.isOpen,
@@ -136,4 +136,4 @@ export function ComposedModal(props) {
   );
 }
 
-export default ComposedModal;
+export default ComposedModal2;

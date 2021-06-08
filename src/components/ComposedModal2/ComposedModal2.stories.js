@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import TextInput from '../TextInput';
 import { Button, ModalBody, ModalFooter } from 'carbon-components-react';
-import ComposedModal from './index';
+import ComposedModal2 from './index';
 import ModalForm from '../ModalForm/ModalForm';
 import RadioGroup from '../RadioGroup';
 
@@ -61,10 +61,10 @@ function Component2(props) {
   );
 }
 
-storiesOf('ComposedModal', module)
+storiesOf('ComposedModal2', module)
   .add('default', () => {
     return (
-      <ComposedModal
+      <ComposedModal2
         appElement="#root"
         composedModalProps={{ selectorPrimaryFocus: 'input[id="testing"]' }}
         confirmModalProps={{
@@ -79,12 +79,12 @@ storiesOf('ComposedModal', module)
         modalTrigger={({ openModal }) => <Button onClick={openModal}>Open modal composed</Button>}
       >
         {({ closeModal }) => <Component1 closeModal={closeModal} />}
-      </ComposedModal>
+      </ComposedModal2>
     );
   })
   .add('initially open', () => {
     return (
-      <ComposedModal
+      <ComposedModal2
         isOpen
         appElement="#root"
         composedModalProps={{ selectorPrimaryFocus: 'input[id="testing"]' }}
@@ -104,7 +104,7 @@ storiesOf('ComposedModal', module)
             setShouldConfirmModalClose={setShouldConfirmModalClose}
           />
         )}
-      </ComposedModal>
+      </ComposedModal2>
     );
   })
   .add('size', () => {
@@ -124,7 +124,7 @@ storiesOf('ComposedModal', module)
       ]}
       orientation="horizontal"
     />
-      <ComposedModal
+      <ComposedModal2
        size={size}
         appElement="#root"
         composedModalProps={{ selectorPrimaryFocus: 'input[id="testing"]' }}
@@ -140,7 +140,7 @@ storiesOf('ComposedModal', module)
         modalTrigger={({ openModal }) => <Button onClick={openModal}>Open modal composed</Button>}
       >
         {({ closeModal }) => <Component1 closeModal={closeModal} />}
-      </ComposedModal>
+      </ComposedModal2>
       </div>
     );
   });
