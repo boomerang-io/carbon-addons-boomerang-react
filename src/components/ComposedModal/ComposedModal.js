@@ -9,7 +9,7 @@ import ConfirmModal from '../ConfirmModal';
 
 const { prefix } = settings;
 
-ComposedModal2.propTypes = {
+ComposedModal.propTypes = {
   appElement: PropTypes.string,
   children: PropTypes.func,
   composedModalProps: PropTypes.object,
@@ -23,14 +23,14 @@ ComposedModal2.propTypes = {
   size: PropTypes.string,
 };
 
-ComposedModal2.defaultProps = {
+ComposedModal.defaultProps = {
   composedModalProps: {},
   isOpen: false,
   modalHeaderProps: {},
   modalTrigger: () => {},
 };
 
-export function ComposedModal2(props) {
+export function ComposedModal(props) {
   const [state, setState] = useSetState({
     isConfirmModalOpen: false,
     isOpen: props.isOpen,
@@ -103,9 +103,9 @@ export function ComposedModal2(props) {
   return (
     <>
       {props.modalTrigger({ openModal: handleOpenModal })}
-      <Modal
+      <Modal         
         appElement={props.appElement}
-        containerClassName={cx(`${prefix}--bmrg-modal-composed-container`, `${prefix}--modal-container`, props.size ? `${prefix}--modal-container--${props.size}`: "", containerClassName)}
+        containerClassName={cx(`${prefix}--bmrg-modal-composed-container`, `${prefix}--modal-container`, props.size ? `${prefix}--modal-container--${props.size}`: "modal-container-fix-width", containerClassName)}
         isOpen={state.isOpen}
         onRequestClose={handleShouldCloseModal}
         shouldCloseOnOverlayClick={false}
@@ -136,4 +136,4 @@ export function ComposedModal2(props) {
   );
 }
 
-export default ComposedModal2;
+export default ComposedModal;

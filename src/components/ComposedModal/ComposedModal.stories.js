@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import TextInput from '../TextInput';
 import { Button, ModalBody, ModalFooter } from 'carbon-components-react';
-import ComposedModal2 from './index';
+import ComposedModal from './index';
 import ModalForm from '../ModalForm/ModalForm';
 import RadioGroup from '../RadioGroup';
 
@@ -61,10 +61,10 @@ function Component2(props) {
   );
 }
 
-storiesOf('ComposedModal2', module)
+storiesOf('ComposedModal', module)
   .add('default', () => {
     return (
-      <ComposedModal2
+      <ComposedModal
         appElement="#root"
         composedModalProps={{ selectorPrimaryFocus: 'input[id="testing"]' }}
         confirmModalProps={{
@@ -79,12 +79,12 @@ storiesOf('ComposedModal2', module)
         modalTrigger={({ openModal }) => <Button onClick={openModal}>Open modal composed</Button>}
       >
         {({ closeModal }) => <Component1 closeModal={closeModal} />}
-      </ComposedModal2>
+      </ComposedModal>
     );
   })
   .add('initially open', () => {
     return (
-      <ComposedModal2
+      <ComposedModal
         isOpen
         appElement="#root"
         composedModalProps={{ selectorPrimaryFocus: 'input[id="testing"]' }}
@@ -104,16 +104,16 @@ storiesOf('ComposedModal2', module)
             setShouldConfirmModalClose={setShouldConfirmModalClose}
           />
         )}
-      </ComposedModal2>
+      </ComposedModal>
     );
   })
   .add('size', () => {
-    const [size, setSize] = React.useState("md");
+    const [size, setSize] = React.useState("");
     return (
       <div>
       <RadioGroup
       id="testSize"
-      defaultSelected={"md"}
+      //defaultSelected={"md"}
       labelText={"Size"}
       onChange={(value) => setSize(value)}
       options={[
@@ -124,7 +124,7 @@ storiesOf('ComposedModal2', module)
       ]}
       orientation="horizontal"
     />
-      <ComposedModal2
+      <ComposedModal
        size={size}
         appElement="#root"
         composedModalProps={{ selectorPrimaryFocus: 'input[id="testing"]' }}
@@ -140,7 +140,7 @@ storiesOf('ComposedModal2', module)
         modalTrigger={({ openModal }) => <Button onClick={openModal}>Open modal composed</Button>}
       >
         {({ closeModal }) => <Component1 closeModal={closeModal} />}
-      </ComposedModal2>
+      </ComposedModal>
       </div>
     );
   });
