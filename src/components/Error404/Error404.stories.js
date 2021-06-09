@@ -19,4 +19,7 @@ storiesOf('Error404', module)
   })
   .add('no text', () => {
     return <Error404Component header={null} title={null} message={null} />;
+  })
+  .add('boomerang', () => {
+    return <Error404Component theme="boomerang" />;
   });

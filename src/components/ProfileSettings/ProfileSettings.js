@@ -47,7 +47,7 @@ function ProfileSettings({ baseServiceUrl, src, userName }) {
       if (showLoading) {
         setIsLoading(true);
       }
-      axios(`${baseServiceUrl}/launchpad/users`)
+      axios(`${baseServiceUrl}/launchpad/user`)
         .then((response) => {
           const teams = response.data.lowerLevelGroups;
           setTeams(teams);
