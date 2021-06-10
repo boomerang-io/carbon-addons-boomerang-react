@@ -1,5 +1,5 @@
 import React from 'react';
-
+import PropTypes from 'prop-types';
 import NotFoundErrorBackground from './NotFoundErrorBackground';
 import GraphicLoch from '../GraphicLoch';
 
@@ -30,3 +30,11 @@ export default function Error404(props) {
     />
   );
 }
+
+Error404.defaultProps = {
+  theme: 'core',
+};
+
+Error404.propTypes = {
+  theme: PropTypes.oneOf(['core', 'boomerang'])
+};

@@ -33,12 +33,14 @@
     font-weight: 600;
     line-height: rem(25px);
     margin-bottom: rem(16px);
+    max-width: 30.5rem;
   }
 
   .#{$prefix}--bmrg-error-page-core__message {
     color: $text-02;
     font-size: rem(16px);
     line-height: rem(20px);
+    max-width: 27rem;
 
     a {
       color: $interactive-01;

@@ -25,6 +25,7 @@ export { default as Error403 } from './components/Error403';
 export { default as Error404 } from './components/Error404';
 export { default as ErrorBoundary } from './components/ErrorBoundary';
 export { default as ErrorDragon } from './components/ErrorDragon';
+export { default as ErrorFullPage } from './components/ErrorFullPage';
 export { default as ErrorMessage } from './components/ErrorMessage';
 export { default as ErrorPage } from './components/ErrorPage';
 export { default as ErrorPageCore } from './components/ErrorPageCore';
