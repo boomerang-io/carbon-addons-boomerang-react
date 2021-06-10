@@ -1,5 +1,5 @@
 import React from 'react';
-
+import PropTypes from 'prop-types';
 import ForbiddenErrorBackground from './ForbiddenErrorBackground';
 import GraphicWrangler from '../GraphicWrangler';
 
@@ -30,3 +30,11 @@ export default function Error403(props) {
     />
   );
 }
+
+Error403.defaultProps = {
+  theme: 'core',
+};
+
+Error403.propTypes = {
+  theme: PropTypes.oneOf(['core', 'boomerang'])
+};
