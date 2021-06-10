@@ -20,7 +20,12 @@ ComposedModal.propTypes = {
   modalHeaderProps: PropTypes.object,
   modalTrigger: PropTypes.func,
   onCloseModal: PropTypes.func,
-  size: PropTypes.string,
+  size: PropTypes.oneOf([
+    'xs',
+    'sm',
+    'md',
+    'lg',
+  ])
 };
 
 ComposedModal.defaultProps = {
