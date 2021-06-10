@@ -15,7 +15,6 @@ ErrorPageCore.propTypes = {
 };
 
 export default function ErrorPageCore({ className, graphic, header, message, style, title }) {
-  console.log();
   return (
     <div className={cx(`${prefix}--bmrg-error-page-core`, className)} style={style}>
       {graphic ?? <GenericErrorBackground className={`${prefix}--bmrg-error-page-core__background`} />}
@@ -28,3 +27,9 @@ export default function ErrorPageCore({ className, graphic, header, message, sty
     </div>
   );
 }
+
+ErrorPageCore.defaultProps = {
+  header: "Oops!",
+  title: "Something looks off, but we're getting a handle of it.",
+  message: "Hit the back button to return to your previous page, or if you keep finding yourself here, send us a message for help."
+};
