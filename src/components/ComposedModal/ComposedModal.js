@@ -20,6 +20,12 @@ ComposedModal.propTypes = {
   modalHeaderProps: PropTypes.object,
   modalTrigger: PropTypes.func,
   onCloseModal: PropTypes.func,
+  size: PropTypes.oneOf([
+    'xs',
+    'sm',
+    'md',
+    'lg',
+  ])
 };
 
 ComposedModal.defaultProps = {
@@ -102,9 +108,9 @@ export function ComposedModal(props) {
   return (
     <>
       {props.modalTrigger({ openModal: handleOpenModal })}
-      <Modal
+      <Modal         
         appElement={props.appElement}
-        containerClassName={cx(`${prefix}--bmrg-modal-composed-container`, containerClassName)}
+        containerClassName={cx(`${prefix}--bmrg-modal-composed-container`, `${prefix}--modal-container`, props.size ? `${prefix}--modal-container--${props.size}`: "modal-container-fix-width", containerClassName)}
         isOpen={state.isOpen}
         onRequestClose={handleShouldCloseModal}
         shouldCloseOnOverlayClick={false}
