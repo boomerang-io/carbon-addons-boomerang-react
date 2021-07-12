@@ -80,6 +80,10 @@ UIShell.propTypes = {
    */
   onTutorialClick: PropTypes.func,
   /**
+   * Array of requests that require user's action
+   */
+  ownedRequests: PropTypes.array,
+  /**
    * used in header, only rendered if renderLogo is false
    */
   platformName: PropTypes.string,
@@ -99,6 +103,10 @@ UIShell.propTypes = {
    * enable/disable Privacy Statement
    */
    renderPrivacyStatement: PropTypes.bool,
+   /**
+   * enable/disable Requests
+   */
+  renderRequests: PropTypes.bool,
   /**
    * Pass in whole user object
    */
@@ -107,6 +115,10 @@ UIShell.propTypes = {
     hasConsented: PropTypes.bool,
     name: PropTypes.string,
   }),
+  /**
+   * Array of requests made by the user
+   */
+   userRequests: PropTypes.array,
 
   /**
    * Icon that is added by each team for their custom behaviour
@@ -147,15 +159,18 @@ function UIShell({
   headerConfig,
   onMenuClick,
   onTutorialClick,
+  ownedRequests,
   platformName,
   productName,
   renderLogo,
   renderGdprRedirect,
   renderPrivacyStatement,
+  renderRequests,
   renderRightPanel,
   renderSidenav,
   skipToContentProps,
   user,
+  userRequests,
 }) {
   const finalPlatformName = platformName || companyName;
   const finalAppName = appName || productName;
@@ -198,6 +213,9 @@ function UIShell({
         renderRightPanel={renderRightPanel}
         renderSidenav={onMenuClick || renderSidenav}
         skipToContentProps={skipToContentProps}
+        ownedRequests={ownedRequests}
+        userRequests={userRequests}
+        renderRequests={renderRequests}
         notificationsConfig={{
           wsUrl: `${finalBaseServiceUrl}/notifications/ws`,
         }}

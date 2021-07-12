@@ -5,6 +5,7 @@ import {
   AppSwitcher20,
   ChevronDown16,
   ChevronUp16,
+  Collaborate24,
   Help24,
   UserAvatar24,
   Notification24,
@@ -17,6 +18,7 @@ import { SkipToContent } from 'carbon-components-react/lib/components/UIShell';
 import PlatformNotificationsContainer from '../PlatformNotifications';
 import HeaderMenu from '../HeaderMenu';
 import NotificationsContainer from '../Notifications/NotificationsContainer';
+import UserRequests from '../UserRequests';
 
 import HeaderList from './HeaderList';
 import HeaderListItem from './HeaderListItem';
@@ -50,6 +52,10 @@ class Header extends React.Component {
      * Function passed in by the consumer, what to render when the help icon is clicked
      */
     onHelpClick: PropTypes.array,
+    /**
+     * Array of requests that require user's action
+     */
+    ownedRequests: PropTypes.array,
     platformName: PropTypes.string,
 
     /**
@@ -60,6 +66,10 @@ class Header extends React.Component {
 
     renderGlobalSwitcher: PropTypes.bool,
     renderLogo: PropTypes.bool,
+    /**
+     * enable/disable Requests
+     */
+    renderRequests: PropTypes.bool,
 
     /**
      * Icon to be created with custom content
@@ -78,6 +88,10 @@ class Header extends React.Component {
      * Anchor to skip to content
      */
     skipToContentProps: PropTypes.object,
+    /**
+     * Array of requests made by the user
+     */
+    userRequests: PropTypes.array,
   };
 
   static defaultProps = {};
@@ -89,6 +103,7 @@ class Header extends React.Component {
     isNotificationActive: false,
     isProfileActive: false,
     isGlobalActive: false,
+    isRequestsActive: false,
     isRightPanelActive: false,
     hasNewNotifications: false,
   };
@@ -132,6 +147,7 @@ class Header extends React.Component {
       isNotificationActive: false,
       isProfileActive: false,
       isGlobalActive: false,
+      isRequestsActive: false,
       isRightPanelActive: false,
     });
   };
@@ -207,16 +223,16 @@ class Header extends React.Component {
 
   render() {
     const {
-      className,
-      platformName,
-      navLinks,
-      // platformMessage,
       appName,
+      baseLaunchEnvUrl,
+      className,
+      navLinks,
+      platformName,
+      // platformMessage,
       renderGlobalSwitcher,
       renderLogo,
       renderRightPanel,
       skipToContentProps,
-      baseLaunchEnvUrl,
     } = this.props;
 
     return (
@@ -296,6 +312,28 @@ class Header extends React.Component {
           <HeaderWrapper>
             <div ref={this.navRef}>
               <HeaderList className={`${prefix}--bmrg-header-list--icon`}>
+                {this.props.renderRequests && (
+                  <li>
+                    <HeaderListItem
+                      isIcon
+                      ariaExpanded={this.state.isRequestsActive}
+                      id="requests-icon"
+                      onClick={this.handleIconClick('Requests')}
+                      onKeyDown={this.handleIconKeypress('Requests')}
+                    >
+                      <Collaborate24 />
+                    </HeaderListItem>
+                    {this.state.isRequestsActive && (
+                      <HeaderMenu>
+                        <UserRequests
+                          baseLaunchEnvUrl={baseLaunchEnvUrl}
+                          ownedRequests={this.props.ownedRequests}
+                          userRequests={this.props.userRequests}
+                        />
+                      </HeaderMenu>
+                    )}
+                  </li>
+                )}
                 {this.props.enableNotifications && this.props.notificationsConfig && (
                   <li>
                     <HeaderListItem

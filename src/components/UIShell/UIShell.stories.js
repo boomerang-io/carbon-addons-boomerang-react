@@ -21,6 +21,8 @@ import UIShell from './UIShell';
 const mock = new MockAdapter(axios);
 
 const BASE_URL = 'https://www.ibm.com/services';
+const userRequests = [{ id: "1" }, { id: "2" }];
+const ownedRequests = [{ id: "1" }];
 
 storiesOf('UIShell', module)
   .add('default', () => {
@@ -30,6 +32,9 @@ storiesOf('UIShell', module)
     return (
       <UIShell
         renderLogo={boolean('renderLogo', true)}
+        renderRequests={boolean('renderRequests', true)}
+        userRequests={userRequests}
+        ownedRequests={ownedRequests}
         appName={text('appName', 'Flow')}
         platformName={text('platformName', 'Boomerang')}
         baseServiceUrl={BASE_URL}
