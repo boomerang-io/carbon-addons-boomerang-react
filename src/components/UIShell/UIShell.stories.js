@@ -21,8 +21,6 @@ import UIShell from './UIShell';
 const mock = new MockAdapter(axios);
 
 const BASE_URL = 'https://www.ibm.com/services';
-const userRequests = [{ id: "1" }, { id: "2" }];
-const ownedRequests = [{ id: "1" }];
 
 storiesOf('UIShell', module)
   .add('default', () => {
@@ -33,8 +31,6 @@ storiesOf('UIShell', module)
       <UIShell
         renderLogo={boolean('renderLogo', true)}
         renderRequests={boolean('renderRequests', true)}
-        userRequests={userRequests}
-        ownedRequests={ownedRequests}
         appName={text('appName', 'Flow')}
         platformName={text('platformName', 'Boomerang')}
         baseServiceUrl={BASE_URL}
@@ -77,6 +73,10 @@ storiesOf('UIShell', module)
           email: 'test.user@ibm.com',
           hasConsented: true,
           status: 'active',
+          requestSummary: {
+            requireUserAction: 0,
+            submittedByUser: 17
+          }
         }}
       />
     );
@@ -179,6 +179,10 @@ storiesOf('UIShell', module)
             id: '1',
             name: 'test user',
             email: 'test.user@ibm.com',
+            requestSummary: {
+              requireUserAction: 11,
+              submittedByUser: 17
+            }
           }}
           renderRightPanel={{
             icon: <Help24 />,
@@ -264,6 +268,10 @@ storiesOf('UIShell', module)
           email: 'test.user@ibm.com',
           hasConsented: true,
           status: 'active',
+          requestSummary: {
+            requireUserAction: 11,
+            submittedByUser: 17
+          },
         }}
       />
     );

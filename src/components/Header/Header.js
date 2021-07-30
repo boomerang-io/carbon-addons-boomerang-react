@@ -19,7 +19,6 @@ import PlatformNotificationsContainer from '../PlatformNotifications';
 import HeaderMenu from '../HeaderMenu';
 import NotificationsContainer from '../Notifications/NotificationsContainer';
 import UserRequests from '../UserRequests';
-
 import HeaderList from './HeaderList';
 import HeaderListItem from './HeaderListItem';
 import HeaderMenuLink from '../HeaderMenuLink';
@@ -52,10 +51,6 @@ class Header extends React.Component {
      * Function passed in by the consumer, what to render when the help icon is clicked
      */
     onHelpClick: PropTypes.array,
-    /**
-     * Array of requests that require user's action
-     */
-    ownedRequests: PropTypes.array,
     platformName: PropTypes.string,
 
     /**
@@ -66,10 +61,6 @@ class Header extends React.Component {
 
     renderGlobalSwitcher: PropTypes.bool,
     renderLogo: PropTypes.bool,
-    /**
-     * enable/disable Requests
-     */
-    renderRequests: PropTypes.bool,
 
     /**
      * Icon to be created with custom content
@@ -83,15 +74,14 @@ class Header extends React.Component {
      * base url, used to redirect to the platform
      */
     baseLaunchEnvUrl: PropTypes.string,
-
+    /**
+     * Summary of requests pending and made by user
+     */
+    requestSummary: PropTypes.object,
     /**
      * Anchor to skip to content
      */
     skipToContentProps: PropTypes.object,
-    /**
-     * Array of requests made by the user
-     */
-    userRequests: PropTypes.array,
   };
 
   static defaultProps = {};
@@ -312,7 +302,7 @@ class Header extends React.Component {
           <HeaderWrapper>
             <div ref={this.navRef}>
               <HeaderList className={`${prefix}--bmrg-header-list--icon`}>
-                {this.props.renderRequests && (
+                {Boolean(this.props.requestSummary) && (
                   <li>
                     <HeaderListItem
                       isIcon
@@ -327,8 +317,7 @@ class Header extends React.Component {
                       <HeaderMenu>
                         <UserRequests
                           baseLaunchEnvUrl={baseLaunchEnvUrl}
-                          ownedRequests={this.props.ownedRequests}
-                          userRequests={this.props.userRequests}
+                          requestSummary={this.props.requestSummary}
                         />
                       </HeaderMenu>
                     )}

@@ -13,32 +13,31 @@ UserRequests.propTypes = {
    */
   baseLaunchEnvUrl: PropTypes.string,
   /**
-   * Array of requests that require user's action
-   */
-  ownedRequests: PropTypes.array,
-  /**
-   * Array of requests made by the user
-   */
-  userRequests: PropTypes.array,
+     * Summary of requests pending and made by user
+     */
+   requestSummary: PropTypes.object,
 };
 
 UserRequests.defaultProps = {
-  ownedRequests: [],
-  userRequests: []
+  requestSummary: {
+    requireUserAction: 0, 
+    submittedByUser: 0,
+  }
 }
 
 function UserRequests(props) {
 
-  const { baseLaunchEnvUrl, ownedRequests, userRequests } = props;
-  const existOwnedRequests = ownedRequests?.length > 0;
-  const existUserRequests = userRequests?.length > 0;
+  const { baseLaunchEnvUrl, requestSummary } = props;
+  const { requireUserAction, submittedByUser } = requestSummary;
+  const existOwnedRequests = requireUserAction > 0;
+  const existUserRequests = submittedByUser > 0;
 
   return (
     <>
       <div className={`${prefix}--bmrg-header-menu-item-wrapper`} role="presentation">
         <Button className={`${prefix}--bmrg-header-menu-item`} href={`${baseLaunchEnvUrl}/launchpad/requests/action`} role="link">
           <div>
-            <p className={cx(`${prefix}--bmrg-requests__title`, {[`${prefix}--bmrg-requests-empty__title`]: !existOwnedRequests})}>{existOwnedRequests ? ownedRequests?.length : "No"} Request{ownedRequests?.length > 1 || !existOwnedRequests ? "s": ""}</p>
+            <p className={cx(`${prefix}--bmrg-requests__title`, {[`${prefix}--bmrg-requests-empty__title`]: !existOwnedRequests})}>{existOwnedRequests ? requireUserAction : "No"} Request{requireUserAction > 1 || !existOwnedRequests ? "s": ""}</p>
             <p className={`${prefix}--bmrg-requests__text`}>requiring your action</p>
           </div>
         </Button>
@@ -46,7 +45,7 @@ function UserRequests(props) {
       <div className={`${prefix}--bmrg-header-menu-item-wrapper`} role="presentation">
         <Button className={`${prefix}--bmrg-header-menu-item`} href={`${baseLaunchEnvUrl}/launchpad/requests/mine`} role="link">
           <div>
-            <p className={cx(`${prefix}--bmrg-requests__title`, {[`${prefix}--bmrg-requests-empty__title`]: !existUserRequests})}>{existUserRequests ? userRequests?.length : "No"} Request{userRequests?.length > 1 || !existUserRequests ? "s": ""}</p>
+            <p className={cx(`${prefix}--bmrg-requests__title`, {[`${prefix}--bmrg-requests-empty__title`]: !existUserRequests})}>{existUserRequests ? submittedByUser : "No"} Request{submittedByUser > 1 || !existUserRequests ? "s": ""}</p>
             <p className={`${prefix}--bmrg-requests__text`}>made by you are processing</p>
           </div>
         </Button>

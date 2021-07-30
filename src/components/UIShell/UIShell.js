@@ -159,18 +159,15 @@ function UIShell({
   headerConfig,
   onMenuClick,
   onTutorialClick,
-  ownedRequests,
   platformName,
   productName,
   renderLogo,
   renderGdprRedirect,
   renderPrivacyStatement,
-  renderRequests,
   renderRightPanel,
   renderSidenav,
   skipToContentProps,
   user,
-  userRequests,
 }) {
   const finalPlatformName = platformName || companyName;
   const finalAppName = appName || productName;
@@ -213,9 +210,7 @@ function UIShell({
         renderRightPanel={renderRightPanel}
         renderSidenav={onMenuClick || renderSidenav}
         skipToContentProps={skipToContentProps}
-        ownedRequests={ownedRequests}
-        userRequests={userRequests}
-        renderRequests={renderRequests}
+        requestSummary={user.requestSummary}
         notificationsConfig={{
           wsUrl: `${finalBaseServiceUrl}/notifications/ws`,
         }}
