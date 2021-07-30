@@ -33,43 +33,25 @@ function UserRequests(props) {
   const existOwnedRequests = ownedRequests?.length > 0;
   const existUserRequests = userRequests?.length > 0;
 
-  return existOwnedRequests || existUserRequests ? (
+  return (
     <>
-      {existOwnedRequests && (
-        <div className={`${prefix}--bmrg-header-menu-item-wrapper`} role="presentation">
-          <Button className={`${prefix}--bmrg-header-menu-item`} href={`${baseLaunchEnvUrl}/launchpad/requests/action`} role="link">
-            <div>
-              <p className={`${prefix}--bmrg-requests__title`}>{ownedRequests.length} Request{ownedRequests.length > 1 ? "s": ""}</p>
-              <p className={`${prefix}--bmrg-requests__text`}>requiring your action</p>
-            </div>
-          </Button>
-        </div>
-      )}
-      {existUserRequests && (
-        <div className={`${prefix}--bmrg-header-menu-item-wrapper`} role="presentation">
-          <Button className={`${prefix}--bmrg-header-menu-item`} href={`${baseLaunchEnvUrl}/launchpad/requests/mine`} role="link">
-            <div>
-              <p className={`${prefix}--bmrg-requests__title`}>{userRequests.length} Request{userRequests.length > 1 ? "s": ""}</p>
-              <p className={`${prefix}--bmrg-requests__text`}>made by you are processing</p>
-            </div>
-          </Button>
-        </div>
-      )}
-    </>
-  ) : (
-  <div className={`${prefix}--bmrg-header-menu-item-wrapper`} role="presentation">
-    <div className={`${prefix}--bmrg-requests-empty`}>
-      <p className={`${prefix}--bmrg-requests-empty__title`}>No pending requests</p>
-      <div className={`${prefix}--bmrg-notifications__notifications-footer`}>
-        <a
-          href={`${baseLaunchEnvUrl}/launchpad/requests/action`}
-          className={`${prefix}--bmrg-notifications__notifications-redirect-link`}
-        >
-          Go to Requests
-        </a>
+      <div className={`${prefix}--bmrg-header-menu-item-wrapper`} role="presentation">
+        <Button className={`${prefix}--bmrg-header-menu-item`} href={`${baseLaunchEnvUrl}/launchpad/requests/action`} role="link">
+          <div>
+            <p className={cx(`${prefix}--bmrg-requests__title`, {[`${prefix}--bmrg-requests-empty__title`]: !existOwnedRequests})}>{existOwnedRequests ? ownedRequests?.length : "No"} Request{ownedRequests?.length > 1 || !existOwnedRequests ? "s": ""}</p>
+            <p className={`${prefix}--bmrg-requests__text`}>requiring your action</p>
+          </div>
+        </Button>
       </div>
-    </div>
-  </div>
+      <div className={`${prefix}--bmrg-header-menu-item-wrapper`} role="presentation">
+        <Button className={`${prefix}--bmrg-header-menu-item`} href={`${baseLaunchEnvUrl}/launchpad/requests/mine`} role="link">
+          <div>
+            <p className={cx(`${prefix}--bmrg-requests__title`, {[`${prefix}--bmrg-requests-empty__title`]: !existUserRequests})}>{existUserRequests ? userRequests?.length : "No"} Request{userRequests?.length > 1 || !existUserRequests ? "s": ""}</p>
+            <p className={`${prefix}--bmrg-requests__text`}>made by you are processing</p>
+          </div>
+        </Button>
+      </div>
+    </>
   );
 }
 

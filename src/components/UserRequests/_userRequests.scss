@@ -9,6 +9,11 @@
     letter-spacing: 0.04rem;
     line-height: 1.125rem;
     margin-left: 1rem;
+
+    &.#{$prefix}--bmrg-requests-empty__title {
+      color: $text-03;
+      font-weight: initial;
+    }
   }
 
   .#{$prefix}--bmrg-requests__text {
@@ -17,25 +22,5 @@
     letter-spacing: 0.04rem;
     line-height: 1.125rem;
     margin-left: 1rem;
-  }
-
-  .#{$prefix}--bmrg-requests-empty {
-    background-color: $bmrg-tertiary-color;
-    border: 0.0625rem solid transparent;
-    border-radius: 0;
-    height: 100%;
-    min-height: 3rem;
-    padding: 0;
-    width: 15rem;
-  }
-
-  .#{$prefix}--bmrg-requests-empty__title {
-    color: $text-04;
-    font-size: 0.875rem;
-    font-weight: bold;
-    letter-spacing: 0.04rem;
-    line-height: 1.125rem;
-    margin: 0.5rem 0;
-    text-align: center;
   }
 }
