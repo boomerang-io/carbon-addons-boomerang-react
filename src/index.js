@@ -69,6 +69,7 @@ export { default as TextInput } from './components/TextInput';
 export { default as Toggle } from './components/Toggle';
 export { default as TooltipHover } from './components/TooltipHover';
 export { default as UIShell } from './components/UIShell';
+export { default as UserRequests } from './components/UserRequests';
 
 // Carbon proxy
 export {

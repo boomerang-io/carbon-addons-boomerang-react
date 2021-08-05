@@ -110,6 +110,7 @@ $css--plex: true !default;
 @import '../components/TextInput/textInput';
 @import '../components/Toggle/toggle';
 @import '../components/TooltipHover/tooltip';
+@import '../components/UserRequests/userRequests';
 
 // Carbon overrides for the Platform theme
 // Scope to modal styles so they don't overwrite other carbon styles

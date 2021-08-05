@@ -30,6 +30,7 @@ storiesOf('UIShell', module)
     return (
       <UIShell
         renderLogo={boolean('renderLogo', true)}
+        renderRequests={boolean('renderRequests', true)}
         appName={text('appName', 'Flow')}
         platformName={text('platformName', 'Boomerang')}
         baseServiceUrl={BASE_URL}
@@ -72,6 +73,10 @@ storiesOf('UIShell', module)
           email: 'test.user@ibm.com',
           hasConsented: true,
           status: 'active',
+          requestSummary: {
+            requireUserAction: 0,
+            submittedByUser: 17
+          }
         }}
       />
     );
@@ -174,6 +179,10 @@ storiesOf('UIShell', module)
             id: '1',
             name: 'test user',
             email: 'test.user@ibm.com',
+            requestSummary: {
+              requireUserAction: 11,
+              submittedByUser: 17
+            }
           }}
           renderRightPanel={{
             icon: <Help24 />,
@@ -259,6 +268,10 @@ storiesOf('UIShell', module)
           email: 'test.user@ibm.com',
           hasConsented: true,
           status: 'active',
+          requestSummary: {
+            requireUserAction: 11,
+            submittedByUser: 17
+          },
         }}
       />
     );
