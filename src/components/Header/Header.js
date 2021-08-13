@@ -5,6 +5,7 @@ import {
   AppSwitcher20,
   ChevronDown16,
   ChevronUp16,
+  Collaborate24,
   Help24,
   UserAvatar24,
   Notification24,
@@ -17,7 +18,7 @@ import { SkipToContent } from 'carbon-components-react/lib/components/UIShell';
 import PlatformNotificationsContainer from '../PlatformNotifications';
 import HeaderMenu from '../HeaderMenu';
 import NotificationsContainer from '../Notifications/NotificationsContainer';
-
+import UserRequests from '../UserRequests';
 import HeaderList from './HeaderList';
 import HeaderListItem from './HeaderListItem';
 import HeaderMenuLink from '../HeaderMenuLink';
@@ -73,7 +74,10 @@ class Header extends React.Component {
      * base url, used to redirect to the platform
      */
     baseLaunchEnvUrl: PropTypes.string,
-
+    /**
+     * Summary of requests pending and made by user
+     */
+    requestSummary: PropTypes.object,
     /**
      * Anchor to skip to content
      */
@@ -89,6 +93,7 @@ class Header extends React.Component {
     isNotificationActive: false,
     isProfileActive: false,
     isGlobalActive: false,
+    isRequestsActive: false,
     isRightPanelActive: false,
     hasNewNotifications: false,
   };
@@ -132,6 +137,7 @@ class Header extends React.Component {
       isNotificationActive: false,
       isProfileActive: false,
       isGlobalActive: false,
+      isRequestsActive: false,
       isRightPanelActive: false,
     });
   };
@@ -207,16 +213,16 @@ class Header extends React.Component {
 
   render() {
     const {
-      className,
-      platformName,
-      navLinks,
-      // platformMessage,
       appName,
+      baseLaunchEnvUrl,
+      className,
+      navLinks,
+      platformName,
+      // platformMessage,
       renderGlobalSwitcher,
       renderLogo,
       renderRightPanel,
       skipToContentProps,
-      baseLaunchEnvUrl,
     } = this.props;
 
     return (
@@ -296,6 +302,27 @@ class Header extends React.Component {
           <HeaderWrapper>
             <div ref={this.navRef}>
               <HeaderList className={`${prefix}--bmrg-header-list--icon`}>
+                {Boolean(this.props.requestSummary) && (
+                  <li>
+                    <HeaderListItem
+                      isIcon
+                      ariaExpanded={this.state.isRequestsActive}
+                      id="requests-icon"
+                      onClick={this.handleIconClick('Requests')}
+                      onKeyDown={this.handleIconKeypress('Requests')}
+                    >
+                      <Collaborate24 />
+                    </HeaderListItem>
+                    {this.state.isRequestsActive && (
+                      <HeaderMenu>
+                        <UserRequests
+                          baseLaunchEnvUrl={baseLaunchEnvUrl}
+                          requestSummary={this.props.requestSummary}
+                        />
+                      </HeaderMenu>
+                    )}
+                  </li>
+                )}
                 {this.props.enableNotifications && this.props.notificationsConfig && (
                   <li>
                     <HeaderListItem
