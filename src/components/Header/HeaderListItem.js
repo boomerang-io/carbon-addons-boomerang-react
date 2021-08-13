@@ -35,6 +35,7 @@ const HeaderListItem = (props) => {
               window.location.href.startsWith(href),
           })}
           href={href}
+          tabIndex="0"
           {...other}
         >
           {children}
