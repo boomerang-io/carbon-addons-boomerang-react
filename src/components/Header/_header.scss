@@ -169,6 +169,7 @@ $breakpoints: (
   .#{$prefix}--bmrg-header-list__link {
     align-items: center;
     color: $bmrg-secondary-color;
+    cursor: pointer;
     display: flex;
     font-size: rem(14px);
     height: 100%;

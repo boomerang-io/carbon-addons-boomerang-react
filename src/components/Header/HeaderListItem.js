@@ -26,7 +26,7 @@ const HeaderListItem = (props) => {
           {children}
         </div>
       ) : (
-        <a
+        <div
           className={cx(`${prefix}--bmrg-header-list__link`, {
             '--is-active':
               window.location &&
@@ -35,11 +35,12 @@ const HeaderListItem = (props) => {
               window.location.href.startsWith(href),
           })}
           href={href}
+          role="button"
           tabIndex="0"
           {...other}
         >
           {children}
-        </a>
+        </div>
       )}
     </div>
   );
