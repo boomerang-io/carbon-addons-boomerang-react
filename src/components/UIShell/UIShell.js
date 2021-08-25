@@ -92,6 +92,10 @@ UIShell.propTypes = {
    */
   productName: PropTypes.string,
   /**
+   * enable/disable flow documentation link
+   */
+   renderFlowDocs: PropTypes.bool,
+  /**
    * override for the consumer. When set as true, the launchpad redirect modal will be
    */
   renderLogo: PropTypes.bool,
@@ -163,6 +167,7 @@ function UIShell({
   productName,
   renderLogo,
   renderGdprRedirect,
+  renderFlowDocs,
   renderPrivacyStatement,
   renderRightPanel,
   renderSidenav,
@@ -239,6 +244,16 @@ function UIShell({
           ),
           Boolean(platform?.communityUrl) && (
             <HeaderMenuLink href={platform.communityUrl} iconName="forum" text="Community" />
+          ),
+          renderFlowDocs && (
+            <HeaderMenuLink
+              external
+              target="_blank"
+              rel="noopener noreferrer"
+              href={`https://useboomerang.io/docs/boomerang-flow/introduction/overview/`}
+              iconName="information"
+              text="Flow Documentation"
+            />
           ),
         ].filter(Boolean)}
         profileChildren={[
