@@ -69,6 +69,10 @@ UIShell.propTypes = {
     platformMessage: PropTypes.object,
   }),
   /**
+   * Determine which icons should be renders on about platform
+   */
+   isFlowApp: PropTypes.bool,
+  /**
    * Used to render the hamburger menu icon and the component passed
    * in by the user
    */
@@ -145,6 +149,7 @@ UIShell.propTypes = {
 
 UIShell.defaultProps = {
   headerConfig: {},
+  isFlowApp: false,
   renderGdprRedirect: true,
   renderPrivacyStatement: true,
   user: {},
@@ -157,6 +162,7 @@ function UIShell({
   baseServiceUrl,
   companyName,
   headerConfig,
+  isFlowApp,
   onMenuClick,
   onTutorialClick,
   platformName,
@@ -255,6 +261,7 @@ function UIShell({
               key="About Platform"
               organization={platform.name}
               version={platform.version}
+              isFlowApp={isFlowApp}
             />
           ),
           baseServiceUrl && isPrivacyStatementDisabled === false && (

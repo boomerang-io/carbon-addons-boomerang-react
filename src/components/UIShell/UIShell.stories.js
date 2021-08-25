@@ -209,6 +209,7 @@ storiesOf('UIShell', module)
     mock.onPost(`${BASE_URL}/support/contact`).reply(200);
     return (
       <UIShell
+        isFlowApp
         renderLogo={boolean('renderLogo', true)}
         appName={text('appName', '')}
         platformName={text('platformName', 'Boomerang')}
