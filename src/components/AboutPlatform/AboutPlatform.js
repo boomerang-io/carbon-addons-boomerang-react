@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { settings } from 'carbon-components';
 import { ModalHeader, ModalBody } from 'carbon-components-react/lib/components/ComposedModal';
-import IBMCloudIcon from './assets/IBMCloudIcon';
 import HeaderMenuItem from '../HeaderMenuItem';
 import KubernetesIcon from './assets/KubernetesIcon';
 import MongoDbIcon from './assets/MongoDbIcon';
-import OpenShiftIcon from './assets/OpenShiftIcon';
+import NATSIcon from './assets/NATSIcon';
 import ReactIcon from './assets/ReactIcon';
 import SpringIcon from './assets/SpringIcon';
+import TektonIcon from './assets/TektonIcon';
 
 const { prefix } = settings;
 
@@ -31,18 +31,6 @@ const AboutPlatformContainer = ({ version, organization }) => {
               <footer className={`${prefix}--bmrg-aboutPlatform-footer`}>
                 <h1 className={`${prefix}--bmrg-aboutPlatform-footer__header`}>Powered by</h1>
                 <ul className={`${prefix}--bmrg-aboutPlatform-images`}>
-                  <li key="ibm-cloud-icon">
-                    <IBMCloudIcon
-                      alt="IBM Cloud Icon"
-                      className={`${prefix}--bmrg-aboutPlatform-images__img`}
-                    />
-                  </li>
-                  <li key="openshift-icon">
-                    <OpenShiftIcon
-                      alt="Openshift Icon"
-                      className={`${prefix}--bmrg-aboutPlatform-images__img`}
-                    />
-                  </li>
                   <li key="kubernetes-icon">
                     <KubernetesIcon
                       alt="Kubernetes Icon"
@@ -64,6 +52,18 @@ const AboutPlatformContainer = ({ version, organization }) => {
                   <li key="mongodb-icon">
                     <MongoDbIcon
                       alt="Mongodb Icon"
+                      className={`${prefix}--bmrg-aboutPlatform-images__img`}
+                    />
+                  </li>
+                  <li key="tekton-icon">
+                    <TektonIcon
+                      alt="Tekton Icon"
+                      className={`${prefix}--bmrg-aboutPlatform-images__img`}
+                    />
+                  </li>
+                  <li key="nats-icon">
+                    <NATSIcon
+                      alt="NATS Icon"
                       className={`${prefix}--bmrg-aboutPlatform-images__img`}
                     />
                   </li>
