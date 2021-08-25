@@ -359,11 +359,14 @@ const TYPE_PROPS = {
   }),
 
   [INPUT_GROUPS.MULTI_SELECT]: (formikProps, key) => ({
-    onChange: ({ selectedItems }) =>
+    onChange: ({ selectedItems }) =>{
       formikProps.setFieldValue(
         `['${key}']`,
         selectedItems.map((item) => item && item.value)
-      ),
+      );
+      formikProps.setFieldTouched(`['${key}']`, true);
+    },
+    onInputBlur: () => formikProps.setFieldTouched(`['${key}']`, true)
   }),
 
   [INPUT_GROUPS.RADIO]: (formikProps, key) => ({
@@ -371,8 +374,11 @@ const TYPE_PROPS = {
   }),
 
   [INPUT_GROUPS.SELECT]: (formikProps, key) => ({
-    onChange: ({ selectedItem }) =>
-      formikProps.setFieldValue(`['${key}']`, selectedItem ? selectedItem.value : ''),
+    onChange: ({ selectedItem }) => {
+      formikProps.setFieldValue(`['${key}']`, selectedItem ? selectedItem.value : '');
+      formikProps.setFieldTouched(`['${key}']`, true);      
+    },
+    onInputBlur: () => formikProps.setFieldTouched(`['${key}']`, true)
   }),
 
   [INPUT_GROUPS.TEXT_AREA]: (formikProps) => ({
