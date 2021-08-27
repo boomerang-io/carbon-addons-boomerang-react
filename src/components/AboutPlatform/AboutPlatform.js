@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { settings } from 'carbon-components';
 import { ModalHeader, ModalBody } from 'carbon-components-react/lib/components/ComposedModal';
+import IBMCloudIcon from './assets/IBMCloudIcon';
 import HeaderMenuItem from '../HeaderMenuItem';
 import KubernetesIcon from './assets/KubernetesIcon';
 import MongoDbIcon from './assets/MongoDbIcon';
@@ -33,6 +34,8 @@ const AboutPlatformContainer = ({ version, organization, isFlowApp }) => {
                 <h1 className={`${prefix}--bmrg-aboutPlatform-footer__header`}>Powered by</h1>
                 <ul className={`${prefix}--bmrg-aboutPlatform-images`}>
                   {
+                    isFlowApp ? 
+                    <>
                       <li key="tekton-icon">
                         <TektonIcon
                           alt="Tekton Icon"
