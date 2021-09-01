@@ -29,6 +29,7 @@ storiesOf('UIShell', module)
     mock.onPost(`${BASE_URL}/support/contact`).reply(200);
     return (
       <UIShell
+        renderFlowDocs
         renderLogo={boolean('renderLogo', true)}
         renderRequests={boolean('renderRequests', true)}
         appName={text('appName', 'Flow')}
