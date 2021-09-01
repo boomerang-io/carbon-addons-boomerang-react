@@ -6,13 +6,15 @@ import IBMCloudIcon from './assets/IBMCloudIcon';
 import HeaderMenuItem from '../HeaderMenuItem';
 import KubernetesIcon from './assets/KubernetesIcon';
 import MongoDbIcon from './assets/MongoDbIcon';
+import NATSIcon from './assets/NATSIcon';
 import OpenShiftIcon from './assets/OpenShiftIcon';
 import ReactIcon from './assets/ReactIcon';
 import SpringIcon from './assets/SpringIcon';
+import TektonIcon from './assets/TektonIcon';
 
 const { prefix } = settings;
 
-const AboutPlatformContainer = ({ version, organization }) => {
+const AboutPlatformContainer = ({ version, organization, isFlowApp }) => {
   return (
     <HeaderMenuItem
       text="About the Platform"
@@ -31,21 +33,40 @@ const AboutPlatformContainer = ({ version, organization }) => {
               <footer className={`${prefix}--bmrg-aboutPlatform-footer`}>
                 <h1 className={`${prefix}--bmrg-aboutPlatform-footer__header`}>Powered by</h1>
                 <ul className={`${prefix}--bmrg-aboutPlatform-images`}>
-                  <li key="ibm-cloud-icon">
-                    <IBMCloudIcon
-                      alt="IBM Cloud Icon"
-                      className={`${prefix}--bmrg-aboutPlatform-images__img`}
-                    />
-                  </li>
-                  <li key="openshift-icon">
-                    <OpenShiftIcon
-                      alt="Openshift Icon"
-                      className={`${prefix}--bmrg-aboutPlatform-images__img`}
-                    />
-                  </li>
+                  {
+                    isFlowApp ? 
+                    <>
+                      <li key="tekton-icon">
+                        <TektonIcon
+                          alt="Tekton Icon"
+                          className={`${prefix}--bmrg-aboutPlatform-images__img`}
+                        />
+                      </li>
+                      <li key="nats-icon">
+                        <NATSIcon
+                          alt="NATS Icon"
+                          className={`${prefix}--bmrg-aboutPlatform-images__img`}
+                        />
+                      </li>
+                    </>
+                    :
+                    <>
+                      <li key="ibm-cloud-icon">
+                        <IBMCloudIcon
+                          alt="IBM Cloud Icon"
+                          className={`${prefix}--bmrg-aboutPlatform-images__img`}
+                        />
+                      </li>
+                      <li key="openshift-icon">
+                        <OpenShiftIcon
+                          alt="Openshift Icon"
+                          className={`${prefix}--bmrg-aboutPlatform-images__img`}
+                        />
+                      </li>
+                    </>
+                  }
                   <li key="kubernetes-icon">
                     <KubernetesIcon
-                      alt="Kubernetes Icon"
                       className={`${prefix}--bmrg-aboutPlatform-images__img`}
                     />
                   </li>
@@ -67,6 +88,18 @@ const AboutPlatformContainer = ({ version, organization }) => {
                       className={`${prefix}--bmrg-aboutPlatform-images__img`}
                     />
                   </li>
+                  <li key="tekton-icon">
+                    <TektonIcon
+                      alt="Tekton Icon"
+                      className={`${prefix}--bmrg-aboutPlatform-images__img`}
+                    />
+                  </li>
+                  <li key="nats-icon">
+                    <NATSIcon
+                      alt="NATS Icon"
+                      className={`${prefix}--bmrg-aboutPlatform-images__img`}
+                    />
+                  </li>
                 </ul>
               </footer>
             </ModalBody>
@@ -80,7 +113,7 @@ const AboutPlatformContainer = ({ version, organization }) => {
 AboutPlatformContainer.propTypes = {
   version: PropTypes.string,
   organization: PropTypes.string,
-  closeModal: PropTypes.func,
+  isFlowApp: PropTypes.bool,
 };
 
 AboutPlatformContainer.defaultProps = {
