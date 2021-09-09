@@ -64,6 +64,9 @@ export { default as PrivacyStatement } from './components/PrivacyStatement';
 export { default as ProtectedRoute } from './components/ProtectedRoute';
 export { default as RadioGroup } from './components/RadioGroup';
 export { default as Sidenav } from './components/Sidenav';
+export { default as Tab } from './components/Tab';
+export { default as TabContent } from './components/TabContent';
+export { default as Tabs } from './components/Tabs';
 export { default as TextArea } from './components/TextArea';
 export { default as TextInput } from './components/TextInput';
 export { default as Toggle } from './components/Toggle';
@@ -155,9 +158,9 @@ export {
   StructuredListRow,
   StructuredListInput,
   StructuredListCell,
-  Tab,
-  TabContent,
-  Tabs,
+  Tab as CarbonTab,
+  TabContent as CarbonTabContent,
+  Tabs as CarbonTabs,
   Tag,
   Tile,
   ClickableTile,
@@ -197,7 +200,7 @@ export {
   SelectSkeleton,
   SliderSkeleton,
   StructuredListSkeleton,
-  TabsSkeleton,
+  TabsSkeleton as CarbonTabsSkeleton,
   TagSkeleton,
   TextAreaSkeleton,
   TextInputSkeleton,
