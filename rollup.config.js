@@ -15,6 +15,7 @@ const prodSettings = [terser(), filesize()];
 const stripBanner = require('rollup-plugin-strip-banner');
 
 const baseConfig = {
+  preserveModules: true,
   input: './src/index.js',
   plugins: [
     babel({
@@ -34,12 +35,12 @@ const baseConfig = {
       namedExports: {
         '@stomp/stompjs/bundles/stomp.umd.js': ['Client'],
         'react-is/index.js': ['isForwardRef'],
-        'carbon-components-react/lib/components/ComposedModal/index.js': [
+        'carbon-components-react/es/components/ComposedModal/index.js': [
           'ModalHeader',
           'ModalBody',
           'ModalFooter',
         ],
-        'carbon-components-react/lib/components/UIShell/index.js': [
+        'carbon-components-react/es/components/UIShell/index.js': [
           'Header',
           'HeaderName',
           'HeaderMenu',
@@ -119,11 +120,15 @@ module.exports = [
     output: [
       {
         format: 'esm',
-        file: 'es/index.js',
+        dir: 'es',
+        preserveModulesRoot: 'src',
       },
       {
         format: 'cjs',
-        file: 'lib/index.js',
+        dir: 'lib',
+        preserveModulesRoot: 'src',
+        exports: 'auto',
+        name: 'CarbonAddonsBoomerangReact',
       },
     ],
   },

@@ -8,7 +8,7 @@ import { WarningFilled16 } from '@carbon/icons-react';
 import { Tag } from 'carbon-components-react';
 import ListBox, {
   PropTypes as ListBoxPropTypes,
-} from 'carbon-components-react/lib/components/ListBox';
+} from 'carbon-components-react/es/components/ListBox';
 import { isAccessibleKeyDownEvent } from '../../tools/accessibility';
 import { mapDownshiftProps } from '../../tools/createPropAdapter';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
@@ -106,7 +106,7 @@ export default class MultiSelectComboBox extends React.Component {
       : {
           isOpen: open,
           prevOpen: open,
-          inputValue: getInputValue(state)
+          inputValue: getInputValue(state),
         };
   }
 
@@ -123,7 +123,7 @@ export default class MultiSelectComboBox extends React.Component {
           })
         )
       : items;
-  }
+  };
 
   handleOnInputKeyDown = (event) => {
     event.stopPropagation();
@@ -145,7 +145,7 @@ export default class MultiSelectComboBox extends React.Component {
   };
 
   handleOnChange = (item) => {
-    if(!item) {
+    if (!item) {
       return;
     }
 
@@ -184,11 +184,11 @@ export default class MultiSelectComboBox extends React.Component {
 
   openMenu = () => {
     this.setState({ isOpen: true });
-  }
+  };
 
   closeMenu = () => {
     this.setState({ isOpen: false });
-  }
+  };
 
   handleClearSelection = () => {
     this.setState({ stateSelectedItems: [] });
@@ -347,7 +347,7 @@ export default class MultiSelectComboBox extends React.Component {
                 translateWithId={translateWithId}
                 {...getToggleButtonProps({
                   disabled,
-                  onClick: this.onToggleClick(isOpen)
+                  onClick: this.onToggleClick(isOpen),
                 })}
               >
                 <input
@@ -364,7 +364,7 @@ export default class MultiSelectComboBox extends React.Component {
                     placeholder,
                     onKeyDown: this.handleOnInputKeyDown,
                     onFocus: this.openMenu,
-                    onBlur: this.closeMenu
+                    onBlur: this.closeMenu,
                   })}
                 />
                 {invalid && <WarningFilled16 className={`${prefix}--list-box__invalid-icon`} />}
@@ -396,7 +396,7 @@ export default class MultiSelectComboBox extends React.Component {
                             itemToString(item)
                           )}
                         </MenuItem>
-                      )
+                      );
                     }
                   )}
                 </Menu>

@@ -16,7 +16,7 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
-} from 'carbon-components-react/lib/components/ComposedModal';
+} from 'carbon-components-react/es/components/ComposedModal';
 import Avatar from '../Avatar';
 import ErrorMessage from '../ErrorMessage';
 import HeaderMenuUser from '../HeaderMenuUser';
@@ -131,7 +131,7 @@ function ProfileSettings({ baseServiceUrl, src, userName }) {
     setTeams(updatedTeams);
   }
 
-  if(disableModal)
+  if (disableModal)
     return (
       <div className={`${prefix}--bmrg-profile-menu-user`}>
         <Avatar size="medium" src={src} userName={userName} />

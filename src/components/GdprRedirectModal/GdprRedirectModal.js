@@ -5,7 +5,7 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
-} from 'carbon-components-react/lib/components/ComposedModal';
+} from 'carbon-components-react/es/components/ComposedModal';
 import { settings } from 'carbon-components';
 
 import { USER_STATUS } from './constants';
