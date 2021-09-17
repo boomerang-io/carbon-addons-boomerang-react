@@ -37,68 +37,72 @@ const AboutPlatformContainer = ({ version, organization, isFlowApp }) => {
                     isFlowApp ? 
                     <>
                       <li key="tekton-icon">
-                        <TektonIcon
-                          alt="Tekton Icon"
-                          className={`${prefix}--bmrg-aboutPlatform-images__img`}
-                        />
+                        <a href="https://tekton.dev/" target="_blank" rel="noopener noreferrer">
+                          <TektonIcon
+                            alt="Tekton Icon"
+                            className={`${prefix}--bmrg-aboutPlatform-images__img`}
+                          />
+                        </a>
                       </li>
                       <li key="nats-icon">
-                        <NATSIcon
-                          alt="NATS Icon"
-                          className={`${prefix}--bmrg-aboutPlatform-images__img`}
-                        />
+                        <a href="https://nats.io/" target="_blank" rel="noopener noreferrer">
+                          <NATSIcon
+                            alt="NATS Icon"
+                            className={`${prefix}--bmrg-aboutPlatform-images__img`}
+                          />
+                        </a>
                       </li>
                     </>
                     :
                     <>
                       <li key="ibm-cloud-icon">
-                        <IBMCloudIcon
-                          alt="IBM Cloud Icon"
-                          className={`${prefix}--bmrg-aboutPlatform-images__img`}
-                        />
+                        <a href="https://www.ibm.com/cloud" target="_blank" rel="noopener noreferrer">
+                          <IBMCloudIcon
+                            alt="IBM Cloud Icon"
+                            className={`${prefix}--bmrg-aboutPlatform-images__img`}
+                          />
+                        </a>
                       </li>
                       <li key="openshift-icon">
-                        <OpenShiftIcon
-                          alt="Openshift Icon"
-                          className={`${prefix}--bmrg-aboutPlatform-images__img`}
-                        />
+                        <a href="https://www.redhat.com/en/technologies/cloud-computing/openshift" target="_blank" rel="noopener noreferrer">
+                          <OpenShiftIcon
+                            alt="Openshift Icon"
+                            className={`${prefix}--bmrg-aboutPlatform-images__img`}
+                          />
+                        </a>
                       </li>
                     </>
                   }
                   <li key="kubernetes-icon">
-                    <KubernetesIcon
-                      className={`${prefix}--bmrg-aboutPlatform-images__img`}
-                    />
+                    <a href="https://kubernetes.io/" target="_blank" rel="noopener noreferrer">
+                      <KubernetesIcon
+                        className={`${prefix}--bmrg-aboutPlatform-images__img`}
+                      />
+                    </a>
                   </li>
                   <li key="spring-icon">
-                    <SpringIcon
-                      alt="Spring Icon"
-                      className={`${prefix}--bmrg-aboutPlatform-images__img`}
-                    />
+                    <a href="https://spring.io/" target="_blank" rel="noopener noreferrer">
+                      <SpringIcon
+                        alt="Spring Icon"
+                        className={`${prefix}--bmrg-aboutPlatform-images__img`}
+                      />
+                    </a>
                   </li>
                   <li key="react-icon">
-                    <ReactIcon
-                      alt="React Icon"
-                      className={`${prefix}--bmrg-aboutPlatform-images__img`}
-                    />
+                    <a href="https://reactjs.org/" target="_blank" rel="noopener noreferrer">
+                      <ReactIcon
+                        alt="React Icon"
+                        className={`${prefix}--bmrg-aboutPlatform-images__img`}
+                      />
+                    </a>
                   </li>
                   <li key="mongodb-icon">
-                    <MongoDbIcon
-                      alt="Mongodb Icon"
-                      className={`${prefix}--bmrg-aboutPlatform-images__img`}
-                    />
-                  </li>
-                  <li key="tekton-icon">
-                    <TektonIcon
-                      alt="Tekton Icon"
-                      className={`${prefix}--bmrg-aboutPlatform-images__img`}
-                    />
-                  </li>
-                  <li key="nats-icon">
-                    <NATSIcon
-                      alt="NATS Icon"
-                      className={`${prefix}--bmrg-aboutPlatform-images__img`}
-                    />
+                    <a href="https://www.mongodb.com/" target="_blank" rel="noopener noreferrer">
+                      <MongoDbIcon
+                        alt="Mongodb Icon"
+                        className={`${prefix}--bmrg-aboutPlatform-images__img`}
+                      />
+                    </a>
                   </li>
                 </ul>
               </footer>
