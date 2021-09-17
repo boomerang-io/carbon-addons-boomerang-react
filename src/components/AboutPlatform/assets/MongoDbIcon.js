@@ -9,6 +9,7 @@ function MongoDbIcon(props) {
       viewBox="0 0 75 150"
       {...props}
     >
+      <title>MongoDB</title>
       <g fill="none" fillRule="evenodd">
         <path
           fill="#FFF"

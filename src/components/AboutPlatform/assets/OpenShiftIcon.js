@@ -8,7 +8,7 @@ function OpenShiftIcon(props) {
           {'.prefix__cls-3{fill:#fff}.prefix__cls-4{fill:#c3c3c3}.prefix__cls-5{fill:#d5d5d5}'}
         </style>
       </defs>
-      <title>{'plugin_icons_0918_RGB_openshift_color'}</title>
+      <title>{'Red Hat OpenShift'}</title>
       <circle cx={50} cy={50} r={50} fill="#d71e00" />
       <path d="M85.36 14.64a50 50 0 01-70.72 70.72z" fill="#c21a00" />
       <path
