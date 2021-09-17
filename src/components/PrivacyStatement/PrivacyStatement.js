@@ -35,9 +35,16 @@ function formatDateTimestamp(timestamp) {
 
 PrivacyStatement.propTypes = {
   baseServiceUrl: PropTypes.string.isRequired,
+  organization: PropTypes.string,
+  platformEmail: PropTypes.string,
 };
 
-function PrivacyStatement({ baseServiceUrl }) {
+PrivacyStatement.defaultProps = {
+  organization: 'IBM Services Essentials',
+  platformEmail: 'isesupp@us.ibm.com',
+};
+
+function PrivacyStatement({ baseServiceUrl, organization, platformEmail }) {
   const [statement, setStatement] = useState();
   const [error, setError] = useState();
   const [alertError, setAlertError] = useState();
@@ -123,10 +130,10 @@ function PrivacyStatement({ baseServiceUrl }) {
                   </Accordion>
                 )}
                 <p className={`${prefix}--bmrg-privacy-statement__message`}>
-                  For any questions or concerns about business and personal information captured on
-                  IBM Boomerang, please contact{' '}
-                  <a href="mailto:boomrng@us.ibm.com?subject=Boomerang Privacy Statement">
-                    boomrng@us.ibm.com
+                  {`For any questions or concerns about business and personal information captured on
+                  ${organization}, please contact`}
+                  <a href={`mailto:${platformEmail}?subject=${organization} Privacy Statement`}>
+                    {platformEmail}
                   </a>
                   .
                 </p>
@@ -157,10 +164,10 @@ function PrivacyStatement({ baseServiceUrl }) {
                               <CastleImg style={{ width: '100%' }} />
                             </div>
                             <p className={`${prefix}--bmrg-privacy-statement-delete__desc`}>
-                              We will happily delete your account and all corresponding data from
+                              {`We will happily delete your account and all corresponding data from
                               our systems. Your account will cease to exist, and we will notify your
-                              teams that you are no longer a member of Boomerang. This process can
-                              take up to 1 month, which is in accordance with GDPR.
+                              teams that you are no longer a member of ${organization}. This process can
+                              take up to 1 month, which is in accordance with GDPR.`}
                             </p>
                           </>
                         </ModalBody>

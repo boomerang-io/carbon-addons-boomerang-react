@@ -71,7 +71,7 @@ UIShell.propTypes = {
   /**
    * Determine which icons should be renders on about platform
    */
-   isFlowApp: PropTypes.bool,
+  isFlowApp: PropTypes.bool,
   /**
    * Used to render the hamburger menu icon and the component passed
    * in by the user
@@ -98,7 +98,7 @@ UIShell.propTypes = {
   /**
    * enable/disable flow documentation link
    */
-   renderFlowDocs: PropTypes.bool,
+  renderFlowDocs: PropTypes.bool,
   /**
    * override for the consumer. When set as true, the launchpad redirect modal will be
    */
@@ -106,12 +106,12 @@ UIShell.propTypes = {
   /**
    * enable/disable Gdpr redirect modal
    */
-   renderGdprRedirect: PropTypes.bool,
-   /**
+  renderGdprRedirect: PropTypes.bool,
+  /**
    * enable/disable Privacy Statement
    */
-   renderPrivacyStatement: PropTypes.bool,
-   /**
+  renderPrivacyStatement: PropTypes.bool,
+  /**
    * enable/disable Requests
    */
   renderRequests: PropTypes.bool,
@@ -126,7 +126,7 @@ UIShell.propTypes = {
   /**
    * Array of requests made by the user
    */
-   userRequests: PropTypes.array,
+  userRequests: PropTypes.array,
 
   /**
    * Icon that is added by each team for their custom behaviour
@@ -201,7 +201,7 @@ function UIShell({
    */
   const isGdprRedirectDisabled =
     renderGdprRedirect === false || features?.['consent.enabled'] === false;
-  
+
   /**
    * Also enable/disable privacy statement via the consent.enaable feature flag
    */
@@ -280,7 +280,12 @@ function UIShell({
             />
           ),
           baseServiceUrl && isPrivacyStatementDisabled === false && (
-            <PrivacyStatement key="Privacy Statement" baseServiceUrl={finalBaseServiceUrl} />
+            <PrivacyStatement
+              key="Privacy Statement"
+              baseServiceUrl={finalBaseServiceUrl}
+              organization={platform?.name}
+              platformEmail={platform?.platformEmail}
+            />
           ),
           Boolean(platform?.signOutUrl) && (
             <SignOut key="Sign Out" signOutLink={platform.signOutUrl} />
