@@ -131,7 +131,7 @@ function PrivacyStatement({ baseServiceUrl, organization, platformEmail }) {
                 )}
                 <p className={`${prefix}--bmrg-privacy-statement__message`}>
                   {`For any questions or concerns about business and personal information captured on
-                  ${organization}, please contact{' '}`}
+                  ${organization}, please contact${' '}`}
                   <a href={`mailto:${platformEmail}?subject=${organization} Privacy Statement`}>
                     {platformEmail}
                   </a>
