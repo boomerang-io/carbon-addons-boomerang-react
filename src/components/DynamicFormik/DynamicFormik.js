@@ -347,7 +347,6 @@ const TYPE_PROPS = {
 
   [INPUT_GROUPS.CREATABLE]: (formikProps, key) => ({
     onChange: (createdItems) => {
-      formikProps.setFieldTouched(`['${key}']`, true);
       formikProps.setFieldValue(`['${key}']`, createdItems);
     },
     onInputBlur: () => formikProps.setFieldTouched(`['${key}']`, true)
@@ -360,7 +359,6 @@ const TYPE_PROPS = {
 
   [INPUT_GROUPS.MULTI_SELECT]: (formikProps, key) => ({
     onChange: ({ selectedItems }) =>{
-      formikProps.setFieldTouched(`['${key}']`, true);
       formikProps.setFieldValue(
         `['${key}']`,
         selectedItems.map((item) => item && item.value)
@@ -375,7 +373,6 @@ const TYPE_PROPS = {
 
   [INPUT_GROUPS.SELECT]: (formikProps, key) => ({
     onChange: ({ selectedItem }) => {
-      formikProps.setFieldTouched(`['${key}']`, true);   
       formikProps.setFieldValue(`['${key}']`, selectedItem ? selectedItem.value : '');
     },
     onInputBlur: () => formikProps.setFieldTouched(`['${key}']`, true),
