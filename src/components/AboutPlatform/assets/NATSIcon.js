@@ -2,6 +2,7 @@ import React from 'react';
 
 const NATSIcon = (props) => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 63 65" fill="#fff" filRule="evenodd" stroke="#000" strokeLinecap="round" strokeLinejoin="round" {...props}>
+    <title>NATS</title>
     <use href="#A" x=".5" y=".5"/>
     <symbol id="A" overflow="visible">
       <g stroke="none" fillRule="nonzero">
