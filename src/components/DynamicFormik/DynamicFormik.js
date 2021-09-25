@@ -347,10 +347,10 @@ const TYPE_PROPS = {
 
   [INPUT_GROUPS.CREATABLE]: (formikProps, key) => ({
     onChange: (createdItems) => {
-      formikProps.setFieldValue(`['${key}']`, createdItems);
       formikProps.setFieldTouched(`['${key}']`, true);
+      formikProps.setFieldValue(`['${key}']`, createdItems);
     },
-    onInputBlur: () => formikProps.setFieldTouched(`['${key}']`, true)
+    onInputBlur: () => formikProps.setFieldTouched(`['${key}']`, true, true)
   }),
 
   [INPUT_GROUPS.DATE]: (formikProps, key) => ({
@@ -359,14 +359,14 @@ const TYPE_PROPS = {
   }),
 
   [INPUT_GROUPS.MULTI_SELECT]: (formikProps, key) => ({
-    onChange: ({ selectedItems }) =>{
+    onChange: async({ selectedItems }) =>{
+      await formikProps.setFieldTouched(`['${key}']`, true);
       formikProps.setFieldValue(
         `['${key}']`,
         selectedItems.map((item) => item && item.value)
       );
-      formikProps.setFieldTouched(`['${key}']`, true);
     },
-    onInputBlur: () => formikProps.setFieldTouched(`['${key}']`, true)
+    onInputBlur: () => formikProps.setFieldTouched(`['${key}']`, true, true)
   }),
 
   [INPUT_GROUPS.RADIO]: (formikProps, key) => ({
@@ -374,11 +374,11 @@ const TYPE_PROPS = {
   }),
 
   [INPUT_GROUPS.SELECT]: (formikProps, key) => ({
-    onChange: ({ selectedItem }) => {
+    onChange: async({ selectedItem }) => {
+      await formikProps.setFieldTouched(`['${key}']`, true);   
       formikProps.setFieldValue(`['${key}']`, selectedItem ? selectedItem.value : '');
-      formikProps.setFieldTouched(`['${key}']`, true);      
     },
-    onInputBlur: () => formikProps.setFieldTouched(`['${key}']`, true)
+    onInputBlur: () => formikProps.setFieldTouched(`['${key}']`, true, true),
   }),
 
   [INPUT_GROUPS.TEXT_AREA]: (formikProps) => ({

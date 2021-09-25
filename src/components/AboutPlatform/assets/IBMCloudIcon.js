@@ -2,7 +2,7 @@ import React from 'react';
 
 const SvgComponent = (props) => (
   <svg viewBox="0 0 230 210" {...props}>
-    <title>IBM Cloud logo</title>
+    <title>IBM Cloud</title>
     <style>{'.prefix__st2{fill:#fff}'}</style>
     <g id="prefix__Layer_2">
       <defs>

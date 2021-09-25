@@ -154,6 +154,12 @@ export default class ComboBox extends React.Component {
     onChange: PropTypes.func.isRequired,
 
     /**
+     * Callback function to notify consumer when the text input blur.
+     * @param {string} inputText
+     */
+    onInputBlur: PropTypes.func,
+    
+    /**
      * Callback function to notify consumer when the text input changes.
      * This provides support to change available items based on the text.
      * @param {string} inputText
@@ -397,6 +403,7 @@ export default class ComboBox extends React.Component {
       shouldFilterItem, // eslint-disable-line no-unused-vars
       onChange, // eslint-disable-line no-unused-vars
       onInputChange, // eslint-disable-line no-unused-vars
+      onInputBlur,
       onToggleClick, // eslint-disable-line no-unused-vars
       downshiftProps,
       direction,
@@ -470,7 +477,9 @@ export default class ComboBox extends React.Component {
                   id={id}
                   {...getToggleButtonProps({
                     disabled,
-                    onClick: this.onToggleClick(isOpen),
+                    onBlur: onInputBlur,
+                    placeholder,
+                    onKeyDown: (e) => this.handleOnInputKeyDown(e, toggleMenu, filteredItems, reset),
                   })}
                 >
                   <input

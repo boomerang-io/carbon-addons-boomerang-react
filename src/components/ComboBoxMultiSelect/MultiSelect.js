@@ -56,6 +56,7 @@ export default class MultiSelectComboBox extends React.Component {
     titleText: PropTypes.any,
     helperText: PropTypes.string,
     tagProps: PropTypes.object,
+    onInputBlur: PropTypes.func,
     onChange: PropTypes.func.isRequired,
     open: PropTypes.bool,
     placeholder: PropTypes.string.isRequired,
@@ -198,6 +199,11 @@ export default class MultiSelectComboBox extends React.Component {
     }
   };
 
+  handleInputBlur = (e) => {
+    this.props.onInputBlur && this.props.onInputBlur(e);
+    this.closeMenu();
+  };
+
   handleOnStateChange = (changes) => {
     const { type } = changes;
     switch (type) {
@@ -253,6 +259,7 @@ export default class MultiSelectComboBox extends React.Component {
       size,
       shouldFilterItem, // eslint-disable-line no-unused-vars
       onChange, // eslint-disable-line no-unused-vars
+      onInputBlur,
       onInputChange, // eslint-disable-line no-unused-vars
       downshiftProps,
       tagProps,
@@ -364,7 +371,7 @@ export default class MultiSelectComboBox extends React.Component {
                     placeholder,
                     onKeyDown: this.handleOnInputKeyDown,
                     onFocus: this.openMenu,
-                    onBlur: this.closeMenu,
+                    onBlur: this.handleInputBlur,
                   })}
                 />
                 {invalid && <WarningFilled16 className={`${prefix}--list-box__invalid-icon`} />}

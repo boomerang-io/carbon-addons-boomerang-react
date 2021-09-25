@@ -7,13 +7,13 @@
 Run the following command using [npm](https://www.npmjs.com/):
 
 ```bash
-npm install @boomerang/carbon-addons-boomerang-react
+npm install @boomerang-io/carbon-addons-boomerang-react
 ```
 
 If you prefer [Yarn](https://yarnpkg.com/en/), use the following command instead:
 
 ```bash
-yarn add @boomerang/carbon-addons-boomerang-react
+yarn add @boomerang-io/carbon-addons-boomerang-react
 ```
 
 ## Using
@@ -21,13 +21,13 @@ yarn add @boomerang/carbon-addons-boomerang-react
 You need to import the `.scss` styles. If you are using SASS and webpack, perform the following import.
 
 ```css
-@import '~@boomerang/carbon-addons-boomerang-react/styles/scss/styles';
+@import '~@boomerang-io/carbon-addons-boomerang-react/styles/scss/styles';
 ```
 
 You can then import components by the following:
 
 ```js
-import { UIShell } from '@boomerang/carbon-addons-boomerang-react';
+import { UIShell } from '@boomerang-io/carbon-addons-boomerang-react';
 ```
 
 ## Testing a version

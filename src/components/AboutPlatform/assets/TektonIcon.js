@@ -2,6 +2,7 @@ import React from 'react';
 
 const TektonIcon = () => (
   <svg id="Layer_1" x="0px" y="0px" viewBox="150 0 290 360" style={{enableBackground:"new 0 0 400 245;"}} width="60" height="60">
+    <title>Tekton</title>
     <style type="text/css">
       {'.st0{fill:url(#SVGID_1_);} .st1{fill:url(#SVGID_2_);} .st2{fill-rule:evenodd;clip-rule:evenodd;fill:url(#SVGID_3_);} .st3{fill:url(#SVGID_4_);} .st4{fill-rule:evenodd;clip-rule:evenodd;fill:url(#SVGID_5_);} .st5{fill:url(#SVGID_6_);} .st6{fill:url(#SVGID_7_);}'
       }
