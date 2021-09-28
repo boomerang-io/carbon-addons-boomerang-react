@@ -51,4 +51,23 @@ storiesOf('DateInput', module)
         readOnly
       />
     );
+  }).add('range', () => {
+    return (
+      <div style={{ height: '5rem' }}>
+        <DateInput
+          id="range-date-input"
+          dateFormat='Y-m-d'
+          onChange={action('date input change')}
+          placeholder={text('placeholder', 'mm/dd/yyyy')}
+          helperText={text('helperText', 'Some helper text')}
+          labelText={text('labelText', 'Label for text input')}
+          tooltipContent={text('tooltipContent', 'Tooltip for text input')}
+          tooltipProps={object('tooltipProps', { placement: 'top' })}
+          max='2021-10-31T13:10:20.219+00:00'
+          min='2021-01-01T13:10:20.219+00:00'
+          value={['2021-08-15T13:10:20.219+00:00', '2021-09-21T13:10:20.219+00:00']}
+          type='date-range'
+        />
+      </div>
+    );
   });

@@ -192,6 +192,7 @@ function DataDrivenInput(props) {
       invalid,
       invalidText,
       placeholder,
+      type,
       value: inputValue,
       ...restInputProps,
     };

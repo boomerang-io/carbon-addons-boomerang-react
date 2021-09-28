@@ -11,6 +11,7 @@ export const CREATABLE_TYPES = {
 
 export const DATE_TYPES = {
   DATE: 'date',
+  DATE_RANGE: 'date-range',
 };
 
 export const MULTI_SELECT_TYPES = {

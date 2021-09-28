@@ -353,7 +353,9 @@ const TYPE_PROPS = {
     onInputBlur: () => formikProps.setFieldTouched(`['${key}']`, true, true)
   }),
 
-  [INPUT_GROUPS.DATE]: (formikProps, key) => ({
+  [INPUT_GROUPS.DATE]: (formikProps, key, type) => type === DATE_TYPES.DATE_RANGE ? ({
+    onChange: (dateArray) => formikProps.setFieldValue(`['${key}']`, dateArray?.map((date) => date.toISOString())),
+  }) : ({
     onChange: formikProps.handleChange,
     onCalendarChange: (dateArray) => formikProps.setFieldValue(`['${key}']`, dateArray[0]?.toISOString()),
   }),
@@ -595,6 +597,9 @@ export default function DynamicFormik({
             type,
             otherProps
           );
+
+          console.log(values);
+
           return (
             <DataDrivenInput
               key={key}
@@ -607,7 +612,7 @@ export default function DynamicFormik({
               onBlur={handleBlur}
               type={type}
               value={inputValue}
-              {...typeProps(formikProps, key)}
+              {...typeProps(formikProps, key, type)}
               {...otherInputsProps}
               {...inputProps}
               {...additionalTypeProps({ formikProps, input })}

@@ -60,6 +60,17 @@ const inputs = [
     max: '2020-01-31T13:10:20.219+00:00'
   },
   {
+    key: 'date-range',
+    label: 'Date Range',
+    values: ['2021-08-15T13:10:20.219+00:00', '2021-09-21T13:10:20.219+00:00'],
+    type: 'date-range',
+    placeholder: 'yyyy-mm-dd',
+    helperText: 'Date range',
+    dateFormat: 'Y-m-d',
+    min: '2021-01-01T13:10:20.219+00:00',
+    max: '2021-10-31T13:10:20.219+00:00'
+  },
+  {
     required: false,
     placeholder: null,
     helperText: null,
