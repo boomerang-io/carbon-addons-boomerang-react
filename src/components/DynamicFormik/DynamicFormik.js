@@ -176,7 +176,9 @@ function generateYupAst({ inputs, allowCustomPropertySyntax, customPropertySynta
     if (
       inputType === MULTI_SELECT_TYPES.MULTI_SELECT ||
       inputType === CREATABLE_TYPES.CREATABLE_SINGLE ||
+      inputType === CREATABLE_TYPES.CREATABLE_SINGLE_NON_DELETABLE ||
       inputType === CREATABLE_TYPES.CREATABLE_PAIR ||
+      inputType === CREATABLE_TYPES.CREATABLE_PAIR_NON_DELETABLE ||
       inputType === CHECKBOX_TYPES.CHECKBOX
     ) {
       yupValidationArray.push(['yup.array']);
@@ -344,7 +346,11 @@ const TYPE_PROPS = {
   }),
 
   [INPUT_GROUPS.CREATABLE]: (formikProps, key) => ({
-    onChange: (createdItems) => formikProps.setFieldValue(`['${key}']`, createdItems),
+    onChange: (createdItems) => {
+      formikProps.setFieldTouched(`['${key}']`, true);
+      formikProps.setFieldValue(`['${key}']`, createdItems);
+    },
+    onInputBlur: () => formikProps.setFieldTouched(`['${key}']`, true, true)
   }),
 
   [INPUT_GROUPS.DATE]: (formikProps, key) => ({
@@ -353,11 +359,14 @@ const TYPE_PROPS = {
   }),
 
   [INPUT_GROUPS.MULTI_SELECT]: (formikProps, key) => ({
-    onChange: ({ selectedItems }) =>
+    onChange: async({ selectedItems }) =>{
+      await formikProps.setFieldTouched(`['${key}']`, true);
       formikProps.setFieldValue(
         `['${key}']`,
         selectedItems.map((item) => item && item.value)
-      ),
+      );
+    },
+    onInputBlur: () => formikProps.setFieldTouched(`['${key}']`, true, true)
   }),
 
   [INPUT_GROUPS.RADIO]: (formikProps, key) => ({
@@ -365,8 +374,11 @@ const TYPE_PROPS = {
   }),
 
   [INPUT_GROUPS.SELECT]: (formikProps, key) => ({
-    onChange: ({ selectedItem }) =>
-      formikProps.setFieldValue(`['${key}']`, selectedItem ? selectedItem.value : ''),
+    onChange: async({ selectedItem }) => {
+      await formikProps.setFieldTouched(`['${key}']`, true);   
+      formikProps.setFieldValue(`['${key}']`, selectedItem ? selectedItem.value : '');
+    },
+    onInputBlur: () => formikProps.setFieldTouched(`['${key}']`, true, true),
   }),
 
   [INPUT_GROUPS.TEXT_AREA]: (formikProps) => ({

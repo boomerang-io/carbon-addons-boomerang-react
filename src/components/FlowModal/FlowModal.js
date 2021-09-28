@@ -167,7 +167,7 @@ export function FlowModalContainer(props) {
       {props.modalTrigger({ openModal: handleOpenModal })}
       <Modal
         appElement={props.appElement}
-        containerClassName={cx(`${prefix}--bmrg-modal-flow-container`, containerClassName)}
+        containerClassName={cx(`${prefix}--bmrg-modal-flow-container`, `${prefix}--modal-container`, props.size ? `${prefix}--modal-container--${props.size}`: "modal-container-fix-width", containerClassName)}
         isOpen={state.isOpen}
         onRequestClose={handleShouldCloseModal}
         shouldCloseOnOverlayClick={false}
