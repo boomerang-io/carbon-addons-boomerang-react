@@ -598,8 +598,6 @@ export default function DynamicFormik({
             otherProps
           );
 
-          console.log(values);
-
           return (
             <DataDrivenInput
               key={key}
