@@ -170,7 +170,7 @@ function generateYupAst({ inputs, allowCustomPropertySyntax, customPropertySynta
     }
 
     if (inputType === BOOLEAN_TYPES.BOOLEAN) {
-      yupValidationArray.push(['yup.bool']);
+      yupValidationArray.push(['yup.boolean']);
     }
 
     if (
@@ -229,7 +229,11 @@ function generateYupAst({ inputs, allowCustomPropertySyntax, customPropertySynta
     }
 
     if (input.required) {
-      yupValidationArray.push(['yup.required', `Enter a value for ${input.label}`]);
+      if(inputType === BOOLEAN_TYPES.BOOLEAN) {
+        yupValidationArray.push(['yup.oneOf', [true], 'Toggle must be checked']);
+      } else {
+        yupValidationArray.push(['yup.required', `Enter a value for ${input.label}`]);
+      }
     }
 
     if (yupValidationArray.length > 0) {
@@ -394,7 +398,10 @@ const TYPE_PROPS = {
   }),
 
   [INPUT_GROUPS.BOOLEAN]: (formikProps, key) => ({
-    onChange: (value) => formikProps.setFieldValue(`['${key}']`, value),
+    onChange: (value) => {
+      formikProps.setFieldTouched(`['${key}']`, true, true)
+      formikProps.setFieldValue(`['${key}']`, value)
+    },
   }),
 };
 

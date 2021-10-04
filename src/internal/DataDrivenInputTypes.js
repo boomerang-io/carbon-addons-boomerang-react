@@ -62,6 +62,7 @@ export const INPUT_GROUPS = {
 };
 
 export const INPUT_TYPES_ARRAY = Object.values({
+  ...BOOLEAN_TYPES,
   ...CHECKBOX_TYPES,
   ...CREATABLE_TYPES,
   ...DATE_TYPES,
