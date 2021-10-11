@@ -6,9 +6,9 @@
 // used to locally test out the boomerang theme
 // should be commented out when publishing
 // TODO: fix this so it works w/ storybook
-@import 'boomerang';
-$carbon--theme: $carbon--theme--boomerang;
-$carbon-addons-bmrg--theme: boomerang;
+// @import 'boomerang';
+// $carbon--theme: $carbon--theme--boomerang;
+// $carbon-addons-bmrg--theme: boomerang;
 
 // False by default. Set true by carbon--theme--boomerang
 $carbon-addons-bmrg--include-carbon-overrides: false !default;
