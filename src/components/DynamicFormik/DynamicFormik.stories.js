@@ -134,6 +134,8 @@ const inputs = [
     required: true,
     helperText: 'text',
     description: 'text',
+    max: '150',
+    min: '4',
   },
   {
     key: 'editor',

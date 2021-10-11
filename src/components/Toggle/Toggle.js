@@ -29,6 +29,8 @@ ToggleComponent.defaultProps = {
 function ToggleComponent({
   helperText,
   id,
+  invalid,
+  invalidText,
   reversed,
   label,
   labelText,
@@ -70,13 +72,14 @@ function ToggleComponent({
             </div>
           </>
         )}
-
         <Toggle id={id} aria-labelledby={labelTextId} labelA="" labelB="" {...toggleProps} />
-
-        
       </div>
-
-      {helperText && (
+      {invalid && (
+        <div className={cx(`${prefix}--bmrg-toggle__invalid-text`, `${prefix}--form-requirement`)} style={{ marginBottom: '0' }}>
+          {invalidText}
+        </div>
+      )}
+      {helperText && !invalid && (
         <div className={`${prefix}--form__helper-text`} style={{ marginBottom: '0' }}>
           {helperText}
         </div>

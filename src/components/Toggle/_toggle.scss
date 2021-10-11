@@ -54,4 +54,11 @@
     line-height: 0rem;
     margin-left: 0.5rem;
   }
+
+  .#{$prefix}--bmrg-toggle__invalid-text {
+    display: block;
+    max-height: 12.5rem;
+    overflow: visible;
+    font-weight: 400;
+  }
 }

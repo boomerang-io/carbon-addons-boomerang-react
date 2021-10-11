@@ -272,6 +272,8 @@ function DataDrivenInput(props) {
     Component = Toggle;
     componentProps = {
       ...allInputProps,
+      invalid,
+      invalidText,
       onChange: undefined,
       onToggle: onChange,
       toggled: value === true || value === 'true',
