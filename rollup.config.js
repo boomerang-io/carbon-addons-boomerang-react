@@ -1,13 +1,13 @@
-import babel from 'rollup-plugin-babel';
-import resolve from 'rollup-plugin-node-resolve';
-import commonjs from 'rollup-plugin-commonjs';
+import babel from '@rollup/plugin-babel';
+import resolve from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
 import { terser } from 'rollup-plugin-terser';
 import filesize from 'rollup-plugin-filesize';
 import postcss from 'rollup-plugin-postcss';
 import copy from 'rollup-plugin-copy';
 import external from 'rollup-plugin-peer-deps-external';
 import autoprefixer from 'autoprefixer';
-import json from 'rollup-plugin-json';
+import json from '@rollup/plugin-json';
 
 process.env.NODE_ENV = 'production';
 const prodSettings = [terser(), filesize()];
@@ -19,10 +19,19 @@ const baseConfig = {
   input: './src/index.js',
   plugins: [
     babel({
-      babelrc: false,
-      runtimeHelpers: true,
+      babelHelpers: 'runtime',
       exclude: ['./node_modules/**'],
-      presets: ['@babel/preset-env', '@babel/preset-react', 'react-app'],
+      presets: [
+        [
+          '@babel/preset-env',
+          {
+            loose: true,
+            shippedProposals: true,
+          },
+        ],
+        '@babel/preset-react',
+        'react-app',
+      ],
     }),
     external(),
     resolve({
@@ -32,42 +41,6 @@ const baseConfig = {
 
     commonjs({
       include: './node_modules/**',
-      namedExports: {
-        '@stomp/stompjs/bundles/stomp.umd.js': ['Client'],
-        'react-is/index.js': ['isForwardRef'],
-        'carbon-components-react/es/components/ComposedModal/index.js': [
-          'ModalHeader',
-          'ModalBody',
-          'ModalFooter',
-        ],
-        'carbon-components-react/es/components/UIShell/index.js': [
-          'Header',
-          'HeaderName',
-          'HeaderMenu',
-          'HeaderMenuButton',
-          'HeaderGlobalBar',
-          'HeaderGlobalAction',
-          'SkipToContent',
-          'HeaderMenuItem',
-          'HeaderNavigation',
-          'HeaderPanel',
-          'SideNav',
-          'SideNavItems',
-          'SideNavLink',
-          'SideNavMenu',
-          'SideNavMenuItem',
-          'SideNavFooter',
-        ],
-        'react/index.js': [
-          'Children',
-          'Component',
-          'PureComponent',
-          'Fragment',
-          'PropTypes',
-          'createElement',
-        ],
-        'react-dom/index.js': ['render'],
-      },
     }),
     postcss({
       extract: 'styles/css/carbon-addons-boomerang-react.css',
@@ -123,7 +96,7 @@ module.exports = [
         format: 'cjs',
         dir: 'lib',
         preserveModulesRoot: 'src',
-        exports: 'auto',
+        exports: 'named',
         name: 'CarbonAddonsBoomerangReact',
       },
     ],
