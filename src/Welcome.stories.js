@@ -1,7 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import './welcome-story.css';
-import './styles/index.scss';
 import BoomerangLogo from '../.storybook/assets/boomerang';
 import {
   Accordion,
