@@ -19,8 +19,8 @@ const baseConfig = {
   input: './src/index.js',
   plugins: [
     babel({
+      exclude: /node_modules/,
       babelHelpers: 'runtime',
-      exclude: ['./node_modules/**'],
       presets: [
         [
           '@babel/preset-env',
@@ -33,12 +33,11 @@ const baseConfig = {
         'react-app',
       ],
     }),
-    external(),
+    external,
     resolve({
       browser: true,
       extensions: ['.mjs', '.js', '.jsx', '.json'],
     }),
-
     commonjs({
       include: './node_modules/**',
     }),
@@ -96,7 +95,7 @@ module.exports = [
         format: 'cjs',
         dir: 'lib',
         preserveModulesRoot: 'src',
-        exports: 'named',
+        exports: 'auto',
         name: 'CarbonAddonsBoomerangReact',
       },
     ],
