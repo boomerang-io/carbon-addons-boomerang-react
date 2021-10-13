@@ -1,7 +1,7 @@
 {
   "name": "@boomerang-io/carbon-addons-boomerang-react",
   "description": "Carbon Addons for Boomerang apps",
-  "version": "1.4.0-alpha.1",
+  "version": "1.4.0-beta.0",
   "author": {
     "name": "Tim Bula",
     "email": "timrbula@gmail.com"
@@ -30,7 +30,7 @@
     "storybook"
   ],
   "scripts": {
-    "build": "cross-env NODE_ENV=production yarn build:pre && rollup -c",
+    "build": "yarn build:pre && node scripts/build.js",
     "build:pre": "rimraf lib styles es docs",
     "build:storybook": "build-storybook -s public/production -c .storybook -o docs",
     "format": "prettier --write \"**/*.{scss,css,js,jsx,md,ts}\"",
@@ -48,6 +48,7 @@
     "test:staged": "cross-env CI=true react-scripts test --passWithNoTests --findRelatedTests --bail"
   },
   "dependencies": {
+    "@carbon/elements": "^10.21.0",
     "@stomp/stompjs": "^5.4.2",
     "@tippyjs/react": "^4.0.2",
     "classnames": "^2.2.5",
@@ -79,14 +80,19 @@
     "yup": "^0.27.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.15.7",
     "@babel/core": "^7.15.0",
+    "@babel/plugin-external-helpers": "^7.14.5",
+    "@babel/plugin-proposal-class-properties": "^7.14.5",
+    "@babel/plugin-proposal-export-default-from": "^7.14.5",
+    "@babel/plugin-proposal-export-namespace-from": "^7.14.5",
+    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
+    "@babel/plugin-syntax-import-meta": "^7.10.4",
+    "@babel/plugin-transform-object-assign": "^7.14.5",
+    "@babel/preset-env": "^7.15.8",
+    "@babel/preset-react": "^7.14.5",
     "@carbon/elements": "^10.21.0",
     "@ibma/aat": "https://able.ibm.com/tools/dist/aat.tgz",
-    "@rollup/plugin-babel": "^5.3.0",
-    "@rollup/plugin-commonjs": "^21.0.0",
-    "@rollup/plugin-json": "^4.1.0",
-    "@rollup/plugin-node-resolve": "^13.0.5",
-    "@rollup/plugin-replace": "^3.0.0",
     "@storybook/addon-a11y": "^5.3.9",
     "@storybook/addon-actions": "^5.3.9",
     "@storybook/addon-centered": "^5.2.8",
@@ -107,6 +113,8 @@
     "axios": "^0.19.2",
     "axios-mock-adapter": "^1.17.0",
     "babel-core": "^7.0.0-bridge.0",
+    "babel-plugin-dev-expression": "^0.2.2",
+    "browserslist-config-carbon": "^10.6.1",
     "carbon-components": "^10.22.0",
     "carbon-components-react": "^7.22.0",
     "core-js": "^3.6.4",
@@ -133,13 +141,6 @@
     "react-scripts": "^4.0.3",
     "react-test-renderer": "17.0.2",
     "rimraf": "^3.0.2",
-    "rollup": "^2.56.3",
-    "rollup-plugin-copy": "^3.4.0",
-    "rollup-plugin-filesize": "^9.1.1",
-    "rollup-plugin-peer-deps-external": "^2.2.4",
-    "rollup-plugin-postcss": "4.0.1",
-    "rollup-plugin-strip-banner": "^2.0.0",
-    "rollup-plugin-terser": "^7.0.2",
     "semantic-release": "^17.0.0",
     "storybook-addon-rtl": "^0.2.2",
     "storybook-readme": "^5.0.5",
@@ -182,6 +183,20 @@
     ],
     "ignoreFiles": [
       "**/*.js"
+    ]
+  },
+  "babel": {
+    "presets": [
+      "./scripts/env",
+      "@babel/preset-react"
+    ],
+    "plugins": [
+      "dev-expression",
+      "@babel/plugin-syntax-dynamic-import",
+      "@babel/plugin-syntax-import-meta",
+      "@babel/plugin-proposal-class-properties",
+      "@babel/plugin-proposal-export-namespace-from",
+      "@babel/plugin-proposal-export-default-from"
     ]
   }
 }
