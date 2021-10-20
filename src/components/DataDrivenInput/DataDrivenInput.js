@@ -202,8 +202,10 @@ function DataDrivenInput(props) {
     componentProps = {
       ...allInputProps,
       items,
-      initialSelectedItems: Array.isArray(value)
-        ? items.filter((item) => value.includes(item.value))
+      initialSelectedItems: Array.isArray(inputValue)
+        ? items.filter((item) => inputValue.includes(item.value))
+        : typeof inputValue === 'string'
+        ? inputValue
         : [],
       itemToString: (input) => input && input.label,
       invalid,

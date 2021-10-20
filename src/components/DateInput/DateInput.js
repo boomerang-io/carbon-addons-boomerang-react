@@ -42,112 +42,120 @@ const DateInputComponent = React.forwardRef(function DateInputComponent(
     [`${prefix}--form__helper-text--disabled`]: disabled,
   });
 
-  return type === DATE_TYPES.DATE_RANGE ? (
-    <>
-      {
-        labelValue && (
-          <div className={`${prefix}--label ${prefix}--bmrg-date-input__label`}>
-            <div>{labelValue}</div>
-            {tooltipContent && (
-              <div className={tooltipClassName}>
-                <TooltipHover tooltipContent={tooltipContent} {...tooltipProps}>
-                  <Information16 fill="#4d5358" />
-                </TooltipHover>
-              </div>
-            )}
+  if (type === DATE_TYPES.DATE_RANGE) {
+
+    /** Add support for csv strings */
+    const finalValue = typeof value === 'string' ? value.split(',') : value;
+
+    return (
+      <>
+        {
+          labelValue && (
+            <div className={`${prefix}--label ${prefix}--bmrg-date-input__label`}>
+              <div>{labelValue}</div>
+              {tooltipContent && (
+                <div className={tooltipClassName}>
+                  <TooltipHover tooltipContent={tooltipContent} {...tooltipProps}>
+                    <Information16 fill="#4d5358" />
+                  </TooltipHover>
+                </div>
+              )}
+            </div>
+          )
+        }
+        <DatePicker 
+          key={id}
+          allowInput={!readOnly}
+          className={`${prefix}--bmrg-date-input`}
+          dateFormat={dateFormat}
+          datePickerType="range"
+          maxDate={max}
+          minDate={min}
+          onChange={typeof onCalendarChange === 'function' ? onCalendarChange : onChange}
+          value={finalValue}
+          {...datePickerProps}
+        >
+          <DatePickerInput
+            id={`${id}-start`}
+            autoComplete="off"
+            disabled={disabled || readOnly}
+            invalid={invalid}
+            labelText=""
+            readOnly={readOnly}
+            ref={ref}
+            style={{ width: "100%" }}
+            pattern=".*"
+            {...dateInputProps}
+          />
+          <DatePickerInput
+            id={`${id}-end`}
+            autoComplete="off"
+            disabled={disabled || readOnly}
+            invalid={invalid}
+            labelText=""
+            readOnly={readOnly}
+            ref={ref}
+            style={{ width: "100%" }}
+            pattern=".*"
+            {...dateInputProps}
+          />
+        </DatePicker>
+        {helperText && !invalid && (
+          <div id={dateInputHelperId} className={helperClasses}>
+            {helperText}
           </div>
-        )
-      }
-      <DatePicker 
-        key={id}
-        allowInput={!readOnly}
-        className={`${prefix}--bmrg-date-input`}
-        dateFormat={dateFormat}
-        datePickerType="range"
-        maxDate={max}
-        minDate={min}
-        onChange={onChange}
-        value={value}
-        {...datePickerProps}
-      >
-        <DatePickerInput
-          id={`${id}-start`}
-          autoComplete="off"
-          disabled={disabled || readOnly}
-          invalid={invalid}
-          labelText=""
-          readOnly={readOnly}
-          ref={ref}
-          style={{ width: "100%" }}
-          pattern=".*"
-          {...dateInputProps}
-        />
-        <DatePickerInput
-          id={`${id}-end`}
-          autoComplete="off"
-          disabled={disabled || readOnly}
-          invalid={invalid}
-          labelText=""
-          readOnly={readOnly}
-          ref={ref}
-          style={{ width: "100%" }}
-          pattern=".*"
-          {...dateInputProps}
-        />
-      </DatePicker>
-      {helperText && !invalid && (
-        <div id={dateInputHelperId} className={helperClasses}>
-          {helperText}
-        </div>
-      )}
-    </>
-  ) : (
-    <>
-      <DatePicker 
-        key={id}
-        allowInput={!readOnly}
-        className={`${prefix}--bmrg-date-input`}
-        dateFormat={dateFormat}
-        datePickerType="single"
-        maxDate={max}
-        minDate={min}
-        onChange={onCalendarChange}
-        value={value}
-        {...datePickerProps}
-      >
-        <DatePickerInput
-          id={id}
-          disabled={disabled || readOnly}
-          invalid={invalid}
-          onChange={onChange}
-          labelText={
-            labelValue && (
-              <div className={`${prefix}--bmrg-date-input__label`}>
-                <div>{labelValue}</div>
-                {tooltipContent && (
-                  <div className={tooltipClassName}>
-                    <TooltipHover tooltipContent={tooltipContent} {...tooltipProps}>
-                      <Information16 fill="#4d5358" />
-                    </TooltipHover>
-                  </div>
-                )}
-              </div>
-            )
-          }
-          readOnly={readOnly}
-          ref={ref}
-          style={{ width: "100%" }}
-          pattern=".*"
-          {...dateInputProps}
-        />
-      </DatePicker>
-      {helperText && !invalid && (
-        <div id={dateInputHelperId} className={helperClasses}>
-          {helperText}
-        </div>
-      )}
-    </>
-  );
+        )}
+      </>
+    )
+  } else {
+    return (
+      <>
+        <DatePicker 
+          key={id}
+          allowInput={!readOnly}
+          className={`${prefix}--bmrg-date-input`}
+          dateFormat={dateFormat}
+          datePickerType="single"
+          maxDate={max}
+          minDate={min}
+          onChange={onCalendarChange}
+          value={value}
+          {...datePickerProps}
+        >
+          <DatePickerInput
+            id={id}
+            disabled={disabled || readOnly}
+            invalid={invalid}
+            onChange={onChange}
+            labelText={
+              labelValue && (
+                <div className={`${prefix}--bmrg-date-input__label`}>
+                  <div>{labelValue}</div>
+                  {tooltipContent && (
+                    <div className={tooltipClassName}>
+                      <TooltipHover tooltipContent={tooltipContent} {...tooltipProps}>
+                        <Information16 fill="#4d5358" />
+                      </TooltipHover>
+                    </div>
+                  )}
+                </div>
+              )
+            }
+            readOnly={readOnly}
+            ref={ref}
+            style={{ width: "100%" }}
+            pattern=".*"
+            {...dateInputProps}
+          />
+        </DatePicker>
+        {helperText && !invalid && (
+          <div id={dateInputHelperId} className={helperClasses}>
+            {helperText}
+          </div>
+        )}
+      </>
+    )
+  }
 });
 
 DateInputComponent.propTypes = {
