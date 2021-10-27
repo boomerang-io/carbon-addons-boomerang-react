@@ -1,7 +1,7 @@
 {
   "name": "@boomerang-io/carbon-addons-boomerang-react",
   "description": "Carbon Addons for Boomerang apps",
-  "version": "1.4.0-beta.4",
+  "version": "1.4.0-beta.5",
   "author": {
     "name": "Tim Bula",
     "email": "timrbula@gmail.com"
@@ -48,6 +48,7 @@
     "test:staged": "cross-env CI=true react-scripts test --passWithNoTests --findRelatedTests --bail"
   },
   "dependencies": {
+    "@babel/runtime": "^7.14.6",
     "@carbon/elements": "^10.21.0",
     "@stomp/stompjs": "^5.4.2",
     "@tippyjs/react": "^4.0.2",
@@ -81,8 +82,8 @@
     "yup": "^0.27.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.15.7",
-    "@babel/core": "^7.15.0",
+    "@babel/cli": "^7.14.5",
+    "@babel/core": "^7.14.6",
     "@babel/plugin-external-helpers": "^7.14.5",
     "@babel/plugin-proposal-class-properties": "^7.14.5",
     "@babel/plugin-proposal-export-default-from": "^7.14.5",
@@ -90,7 +91,7 @@
     "@babel/plugin-syntax-dynamic-import": "^7.8.3",
     "@babel/plugin-syntax-import-meta": "^7.10.4",
     "@babel/plugin-transform-object-assign": "^7.14.5",
-    "@babel/preset-env": "^7.15.8",
+    "@babel/preset-env": "^7.14.7",
     "@babel/preset-react": "^7.14.5",
     "@carbon/elements": "^10.21.0",
     "@ibma/aat": "https://able.ibm.com/tools/dist/aat.tgz",
@@ -113,8 +114,10 @@
     "autoprefixer": "^9.4.4",
     "axios": "^0.19.2",
     "axios-mock-adapter": "^1.17.0",
-    "babel-core": "^7.0.0-bridge.0",
+    "babel-loader": "^8.2.2",
     "babel-plugin-dev-expression": "^0.2.2",
+    "babel-plugin-react-docgen": "^4.2.1",
+    "babel-plugin-transform-inline-environment-variables": "^0.4.3",
     "browserslist-config-carbon": "^10.6.1",
     "carbon-components": "^10.22.0",
     "carbon-components-react": "^7.22.0",
