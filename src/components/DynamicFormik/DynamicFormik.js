@@ -27,23 +27,23 @@ const { prefix } = settings;
  *
  * @param {string} value - value to test for valid property syntax
  */
-function isPropertySyntaxValid({ value, customPropertySyntaxPattern }) {
+function isPropertySyntaxValid({ value, customPropertySyntaxPattern, propsSyntaxFound }) {
   // Look property pattern and capture group for the property itself
   let match = value.match(customPropertySyntaxPattern);
-
   // if the first matched group is truthy, then a property has been entered
   // Empty properties are not valid
-  if (Array.isArray(match) && match[1]) {
+  if (Array.isArray(match) && match.length === propsSyntaxFound) {
     return true;
   } else {
     return false;
   }
 }
 
-function validateUrlWithProperties(customPropertySyntaxPattern) {
+function validateUrlWithProperties(customPropertySyntaxPattern, customPropertyStartsWithPattern) {
   return function () {
     return this.transform(function (value, originalValue) {
-      if (isUrl(value) || isPropertySyntaxValid({ value, customPropertySyntaxPattern })) {
+      const propsSyntaxFound = value.match(customPropertyStartsWithPattern)?.length ?? 0;
+      if ((isUrl(value) && !Boolean(propsSyntaxFound)) || isPropertySyntaxValid({ value, customPropertySyntaxPattern, propsSyntaxFound })) {
         return value;
       }
       return false;
@@ -51,13 +51,14 @@ function validateUrlWithProperties(customPropertySyntaxPattern) {
   };
 }
 
-function validateEmailWithProperties(customPropertySyntaxPattern) {
+function validateEmailWithProperties(customPropertySyntaxPattern, customPropertyStartsWithPattern) {
   return function () {
     return this.transform(function (value, originalValue) {
       // Simple pattern for emails
       const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+      const propsSyntaxFound = value.match(customPropertyStartsWithPattern)?.length ?? 0;
 
-      if (isValidEmail || isPropertySyntaxValid({ value, customPropertySyntaxPattern })) {
+      if ((isValidEmail && !Boolean(propsSyntaxFound)) || isPropertySyntaxValid({ value, customPropertySyntaxPattern, propsSyntaxFound })) {
         return value;
       }
       return false;
@@ -65,9 +66,9 @@ function validateEmailWithProperties(customPropertySyntaxPattern) {
   };
 }
 
-function registerCustomPropertyMethods(customPropertySyntaxPattern) {
-  const validateUrl = validateUrlWithProperties(customPropertySyntaxPattern);
-  const validateEmail = validateEmailWithProperties(customPropertySyntaxPattern);
+function registerCustomPropertyMethods(customPropertySyntaxPattern, customPropertyStartsWithPattern) {
+  const validateUrl = validateUrlWithProperties(customPropertySyntaxPattern, customPropertyStartsWithPattern);
+  const validateEmail = validateEmailWithProperties(customPropertySyntaxPattern, customPropertyStartsWithPattern);
   Yup.addMethod(Yup.string, 'urlWithCustomProperty', validateUrl);
   Yup.addMethod(Yup.string, 'emailWithCustomProperty', validateEmail);
 }
@@ -77,9 +78,9 @@ function registerCustomPropertyMethods(customPropertySyntaxPattern) {
  * @param {Array} inputs
  * @returns {Array: Yup AST} validation schema AST
  */
-function generateYupAst({ inputs, allowCustomPropertySyntax, customPropertySyntaxPattern }) {
+function generateYupAst({ inputs, allowCustomPropertySyntax, customPropertySyntaxPattern, customPropertyStartsWithPattern }) {
   if (allowCustomPropertySyntax) {
-    registerCustomPropertyMethods(customPropertySyntaxPattern);
+    registerCustomPropertyMethods(customPropertySyntaxPattern, customPropertyStartsWithPattern);
   }
   let yupShape = {};
   inputs.forEach((input) => {
@@ -252,9 +253,10 @@ function generateYupSchema({
   allowCustomPropertySyntax,
   customPropertySyntaxPattern,
   validationSchemaExtension,
+  customPropertyStartsWithPattern,
 }) {
   let validationSchema = transformAll(
-    generateYupAst({ inputs, allowCustomPropertySyntax, customPropertySyntaxPattern })
+    generateYupAst({ inputs, allowCustomPropertySyntax, customPropertySyntaxPattern, customPropertyStartsWithPattern })
   );
   if (validationSchemaExtension) {
     validationSchema = validationSchema.concat(validationSchemaExtension);
@@ -498,6 +500,7 @@ DynamicFormik.propTypes = {
    * Allow ${p:property} as valid input for some text inputs
    */
   customPropertySyntaxPattern: PropTypes.instanceOf(RegExp),
+  customPropertyStartsWithPattern: PropTypes.instanceOf(RegExp),
   additionalInitialValues: PropTypes.object,
   allowCustomPropertySyntax: PropTypes.object,
   inputProps: PropTypes.object,
@@ -524,7 +527,8 @@ DynamicFormik.propTypes = {
 DynamicFormik.defaultProps = {
   additionalInitialValues: {},
   allowCustomPropertySyntax: false,
-  customPropertySyntaxPattern: /\$\{p:([a-zA-Z0-9_.-]+)\}/,
+  customPropertySyntaxPattern: /\$\{p:([a-zA-Z0-9_.-]+)\}|\$\(([a-zA-Z0-9_.-\s]+)\)/g,
+  customPropertyStartsWithPattern: /\$\{|\$\(/g,
   children: () => ({}),
   checkboxListProps: () => ({}),
   creatableProps: () => ({}),
@@ -542,6 +546,7 @@ export default function DynamicFormik({
   additionalInitialValues,
   allowCustomPropertySyntax,
   customPropertySyntaxPattern,
+  customPropertyStartsWithPattern,
   children,
   dataDrivenInputProps,
   inputProps,
@@ -568,6 +573,7 @@ export default function DynamicFormik({
           validationSchemaExtension,
           allowCustomPropertySyntax,
           customPropertySyntaxPattern,
+          customPropertyStartsWithPattern,
         })
       }
       onSubmit={(values, actions) => onSubmit(values, actions)}
