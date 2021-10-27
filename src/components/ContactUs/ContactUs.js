@@ -7,7 +7,7 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
-} from 'carbon-components-react/es/components/ComposedModal';
+} from 'carbon-components-react/lib/components/ComposedModal';
 
 import notify from '../Notifications/notify';
 import HeaderMenuItem from '../HeaderMenuItem';

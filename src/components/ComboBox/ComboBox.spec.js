@@ -28,7 +28,7 @@ test('render label, helperText and tooltip', () => {
 });
 
 test('select and remove items', () => {
-  const { container, getByPlaceholderText, getByText } = render(<ComboBox {...props} />);
+  const {  getByPlaceholderText, getByText, getByLabelText} = render(<ComboBox {...props} />);
   const input = getByPlaceholderText(/select an animal/i);
 
   expect(input.value).toBe('');
@@ -38,7 +38,7 @@ test('select and remove items', () => {
 
   expect(input.value).toBe('Panda');
 
-  const clearButton = container.querySelector('.bx--list-box__selection');
+  const clearButton = getByLabelText('Clear selected item');
   fireEvent.click(clearButton);
 
   expect(input.value).toBe('');

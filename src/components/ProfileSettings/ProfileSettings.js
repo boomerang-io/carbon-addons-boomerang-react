@@ -16,7 +16,7 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
-} from 'carbon-components-react/es/components/ComposedModal';
+} from 'carbon-components-react/lib/components/ComposedModal';
 import Avatar from '../Avatar';
 import ErrorMessage from '../ErrorMessage';
 import HeaderMenuUser from '../HeaderMenuUser';

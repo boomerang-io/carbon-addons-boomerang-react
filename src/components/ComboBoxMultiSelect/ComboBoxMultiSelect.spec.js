@@ -34,7 +34,7 @@ test('render label, helperText and tooltip', () => {
 });
 
 test('select and remove items', async () => {
-  const { getByRole, getByPlaceholderText, getByText, queryByLabelText } = render(
+  const { getByLabelText, getByPlaceholderText, getByText, queryByLabelText } = render(
     <ComboBoxMultiSelect {...props} />
   );
 
@@ -50,7 +50,7 @@ test('select and remove items', async () => {
     expect(queryByLabelText(/Clear filter cat/i)).toBeInTheDocument();
   });
 
-  const clearButton = getByRole('button', { name: 'Clear Selection' });
+  const clearButton = getByLabelText('Clear selected item');
   fireEvent.click(clearButton);
   await waitFor(() => {
     expect(queryByLabelText(/Clear filter panda/i)).not.toBeInTheDocument();

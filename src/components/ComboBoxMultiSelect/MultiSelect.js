@@ -8,7 +8,7 @@ import { WarningFilled16 } from '@carbon/icons-react';
 import { Tag } from 'carbon-components-react';
 import ListBox, {
   PropTypes as ListBoxPropTypes,
-} from 'carbon-components-react/es/components/ListBox';
+} from 'carbon-components-react/lib/components/ListBox';
 import { isAccessibleKeyDownEvent } from '../../tools/accessibility';
 import { mapDownshiftProps } from '../../tools/createPropAdapter';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';

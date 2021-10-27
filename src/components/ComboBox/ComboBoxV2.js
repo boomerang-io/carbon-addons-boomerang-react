@@ -16,7 +16,7 @@ import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { mapDownshiftProps } from '../../tools/createPropAdapter';
 import ListBox, {
   PropTypes as ListBoxPropTypes,
-} from 'carbon-components-react/es/components/ListBox';
+} from 'carbon-components-react/lib/components/ListBox';
 
 const { prefix } = settings;
 
@@ -478,7 +478,6 @@ export default class ComboBox extends React.Component {
                   {...getToggleButtonProps({
                     disabled,
                     onBlur: onInputBlur,
-                    placeholder,
                     onKeyDown: (e) => this.handleOnInputKeyDown(e, toggleMenu, filteredItems, reset),
                   })}
                 >

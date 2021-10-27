@@ -5,8 +5,8 @@ import Error404 from './Error404';
 
 test('render Error404 with defaults', async () => {
   const { getByText } = render(<Error404 />);
-  expect(getByText('404 - Page Not Found')).toBeInTheDocument();
-  expect(getByText('Crikey. Something seems to have swam off with this page.')).toBeInTheDocument();
+  expect(getByText('404 Page Not Found')).toBeInTheDocument();
+  expect(getByText('We spaced out and couldn’t find your page.')).toBeInTheDocument();
   expect(getByText('Try refreshing, or contact the local authorities.')).toBeInTheDocument();
 });
 

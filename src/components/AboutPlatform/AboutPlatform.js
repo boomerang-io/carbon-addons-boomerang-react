@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { settings } from 'carbon-components';
-import { ModalHeader, ModalBody } from 'carbon-components-react/es/components/ComposedModal';
+import { ModalHeader, ModalBody } from 'carbon-components-react';
 import IBMCloudIcon from './assets/IBMCloudIcon';
 import HeaderMenuItem from '../HeaderMenuItem';
 import KubernetesIcon from './assets/KubernetesIcon';

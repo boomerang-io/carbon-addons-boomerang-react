@@ -12,7 +12,7 @@ import {
   NotificationNew24,
 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
-import { SkipToContent } from 'carbon-components-react/es/components/UIShell';
+import { SkipToContent } from 'carbon-components-react/lib/components/UIShell';
 
 // import PlatformBanner from '../PlatformBanner';
 import PlatformNotificationsContainer from '../PlatformNotifications';
