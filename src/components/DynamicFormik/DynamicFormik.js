@@ -500,6 +500,11 @@ DynamicFormik.propTypes = {
    * Allow ${p:property} as valid input for some text inputs
    */
   customPropertySyntaxPattern: PropTypes.instanceOf(RegExp),
+  /**
+   * Regex to check how a property should start with, that way we can check if
+   * the user intended to create a prop and compare if all of the created ones
+   * matched with the complete property regex and are valid
+   */
   customPropertyStartsWithPattern: PropTypes.instanceOf(RegExp),
   additionalInitialValues: PropTypes.object,
   allowCustomPropertySyntax: PropTypes.object,
