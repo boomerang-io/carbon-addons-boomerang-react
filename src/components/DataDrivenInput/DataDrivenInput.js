@@ -117,6 +117,8 @@ function DataDrivenInput(props) {
     // eslint-disable-next-line no-unused-vars
     invalidValues,
     key,
+    governingOptions,
+    governingDisabled,
     minValueLength,
     maxValueLength,
     onBlur,
@@ -223,13 +225,16 @@ function DataDrivenInput(props) {
       ...restInputProps,
     };
   } else if (Object.values(SELECT_TYPES).includes(type)) {
-    const items = formatSelectOptions(options);
+    const items = governingOptions || formatSelectOptions(options);
+    const selectedItem = items.find((item) => item.value === value) ?? {};
     Component = Select;
     componentProps = {
       ...allInputProps,
+      disabled: governingDisabled || disabled,
       invalid,
       invalidText,
-      initialSelectedItem: items.find((item) => item.value === value),
+      initialSelectedItem: selectedItem,
+      selectedItem,
       itemToString: (input) => input && input.label,
       items,
       placeholder,
