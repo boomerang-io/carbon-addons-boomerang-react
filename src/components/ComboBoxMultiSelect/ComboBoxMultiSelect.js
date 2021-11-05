@@ -26,11 +26,23 @@ MultiSelectComponent.defaultProps = {
   tooltipProps: { direction: 'top' },
 };
 
+/**
+ * For now we expect that if the prop value is a csv string, 
+ * then the items would be either in the key:value or value:label format.
+ * The prop value would contain either the keys in the key:value or values in the value:label.
+ */
+function getFilteredItems({ items, selectedItems }) {
+  return items.filter((item) => selectedItems.some((selectedItem) => selectedItem === item.key || selectedItem === item.value ));
+}
+
 function MultiSelectComponent({
   disableClear,
   id,
+  initialSelectedItems,
+  items,
   label,
   labelText,
+  selectedItems,
   titleText,
   tooltipClassName,
   tooltipContent,
@@ -38,6 +50,20 @@ function MultiSelectComponent({
   ...multiSelectProps
 }) {
   const labelValue = titleText || label || labelText;
+  let finalInitialSelectedItems = initialSelectedItems;
+  let finalSelectedItems = selectedItems;
+
+  /** Add support for csv strings */
+  if (typeof initialSelectedItems === 'string') {
+    const initialSelectedItemsArray = initialSelectedItems.split(',');
+    finalInitialSelectedItems = getFilteredItems({ items, selectedItems: initialSelectedItemsArray })
+  }
+
+  if (typeof selectedItems === 'string') {
+    const selectedItemsArray = selectedItems.split(',');
+    finalSelectedItems = getFilteredItems({ items, selectedItems: selectedItemsArray })
+  }
+
   return (
     <div
       key={id}
@@ -59,6 +85,9 @@ function MultiSelectComponent({
             </div>
           )
         }
+        initialSelectedItems={finalInitialSelectedItems}
+        selectedItems={finalSelectedItems}
+        items={items}
         {...multiSelectProps}
       />
     </div>

@@ -5,6 +5,20 @@ import { object, text } from '@storybook/addon-knobs/react';
 
 import TextArea from './TextArea';
 
+const ExternallyControlledTextArea = (props) => {
+  const [value, setValue] = React.useState(null);
+
+  return (
+    <TextArea
+      {...props}
+      onChange={(e) => {
+        setValue(e.target.value);
+      }}
+      value={value}
+    />
+  )
+}
+
 storiesOf('TextArea', module)
   .add('default', () => {
     return (
@@ -28,6 +42,17 @@ storiesOf('TextArea', module)
         labelText={text('labelText', 'Label for text area')}
         tooltipContent={text('tooltipText', 'Tooltip for text area')}
         tooltipProps={object('tooltipProps', { direction: 'top' })}
+      />
+    );
+  })
+  .add('with max input length', () => {
+    return (
+      <ExternallyControlledTextArea
+        id="max-length-label-text-area"
+        placeholder={text('placeholder', 'Placeholder')}
+        style={{ resize: 'none' }}
+        labelText={text('labelText', 'Label for text area')}
+        max={200}
       />
     );
   });

@@ -20,10 +20,7 @@ const animals = [
   { label: 'Penguim', value: 'penguim' },
 ];
 
-const initialDefaultAnimals = [
-  { label: 'Panda', value: 'panda' },
-  { label: 'Dog', value: 'dog' },
-];
+const initialDefaultAnimals = 'panda,dog';
 
 storiesOf('ComboBoxMultiSelect', module)
   .add('default', () => {
