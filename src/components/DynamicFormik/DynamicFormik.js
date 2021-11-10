@@ -192,8 +192,14 @@ function generateYupAst({ inputs, allowCustomPropertySyntax, customPropertySynta
           `${input.key}-matches`,
           Yup.string().test(
             `${input.key}-matches`,
-            `Enter a value that matches pattern: ${input.pattern}`,
-            (value) => new RegExp(input.pattern).test(value)
+            input.patternInvalidText || `Enter a value that matches pattern: ${input.pattern}`,
+            (value) => {
+              if(!input.required && !Boolean(value)) {
+                return true;
+              }
+              else
+                return new RegExp(input.pattern).test(value)
+            }
           )
         );
         yupValidationArray.push([`${input.key}-matches`]);
@@ -247,6 +253,21 @@ function generateYupAst({ inputs, allowCustomPropertySyntax, customPropertySynta
       inputType === CHECKBOX_TYPES.CHECKBOX
     ) {
       yupValidationArray.push(['yup.array']);
+
+      if (input.pattern) {
+        addCustomValidator(
+          `${input.key}-matches`,
+          Yup.array().test(
+            `${input.key}-matches`,
+            input.patternInvalidText || `Enter values that matches pattern: ${input.pattern}`,
+            (values) => {
+              const regexTester = new RegExp(input.pattern);
+              return values.every((val) => regexTester.test(val))
+            }
+          )
+        );
+        yupValidationArray.push([`${input.key}-matches`]);
+      }
     }
 
     if (

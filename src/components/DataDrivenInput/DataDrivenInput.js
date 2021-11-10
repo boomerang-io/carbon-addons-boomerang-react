@@ -65,6 +65,16 @@ function formatRadioGroupOptions(options = []) {
   }));
 }
 
+function validateRegex(pattern, value) {
+  const regexTester = new RegExp(pattern);
+  let hasError = false;
+  if(Array.isArray(value))
+    hasError = !value.every((val) => regexTester.test(val))
+  else
+    hasError = !regexTester.test(value);
+  return hasError;
+}
+
 const determineInitialValues = (input) => {
   let value = '';
   const valueToCheck = input.value || input.defaultValue || input.values || input.defaultValues;
@@ -112,6 +122,8 @@ function DataDrivenInput(props) {
     defaultValues,
     label,
     helperText = '',
+    pattern,
+    patternInvalidText,
     invalid,
     invalidText,
     // eslint-disable-next-line no-unused-vars
@@ -141,6 +153,10 @@ function DataDrivenInput(props) {
   let componentProps = {};
 
   let inputValue = value || values;
+  let regexError = inputValue && Boolean(pattern) && validateRegex(pattern, inputValue);
+
+  let invalidInput = regexError || invalid;
+  let invalidTextMessage = regexError && patternInvalidText ? patternInvalidText : invalidText;
 
   React.useEffect(() => {
     // eslint-disable-next-line
@@ -181,8 +197,8 @@ function DataDrivenInput(props) {
       ...allInputProps,
       createKeyValuePair: type === CREATABLE_TYPES.CREATABLE_PAIR || type === CREATABLE_TYPES.CREATABLE_PAIR_NON_DELETABLE,
       nonDeletable: type === CREATABLE_TYPES.CREATABLE_SINGLE_NON_DELETABLE || type === CREATABLE_TYPES.CREATABLE_PAIR_NON_DELETABLE,
-      invalid,
-      invalidText,
+      invalid: invalidInput,
+      invalidText: invalidTextMessage,
       placeholder,
       value: inputValue,
       ...restInputProps,
@@ -244,8 +260,8 @@ function DataDrivenInput(props) {
     Component = TextArea;
     componentProps = {
       ...allInputProps,
-      invalid,
-      invalidText,
+      invalid: invalidInput,
+      invalidText: invalidTextMessage,
       placeholder,
       value: inputValue,
       ...restInputProps,
@@ -254,8 +270,8 @@ function DataDrivenInput(props) {
     Component = TextEditor;
     componentProps = {
       ...allInputProps,
-      invalid,
-      invalidText,
+      invalid: invalidInput,
+      invalidText: invalidTextMessage,
       placeholder,
       value: inputValue,
       ...restInputProps,
@@ -268,8 +284,8 @@ function DataDrivenInput(props) {
       minLength: minValueLength,
       max: maxValueLength,
       min: minValueLength,
-      invalid,
-      invalidText,
+      invalid: invalidInput,
+      invalidText: invalidTextMessage,
       placeholder,
       type: type === TEXT_INPUT_TYPES.SECURED ? TEXT_INPUT_TYPES.PASSWORD : type,
       value: inputValue,
