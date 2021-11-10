@@ -29,7 +29,7 @@ storiesOf('Creatable', module)
           onChange={action('creatable change')}
           helperText="Test helperText"
           placeholder={text('placeholder', 'Create some values')}
-          initialValues={["test", "test2"]}
+          initialValues="test,test2"
           nonDeletable={true}
           type="text"
         />

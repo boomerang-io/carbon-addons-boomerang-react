@@ -8,7 +8,6 @@ import ProfileSettings from '../ProfileSettings';
 import AboutPlatform from '../AboutPlatform';
 import ContactUs from '../ContactUs';
 import PrivacyStatement from '../PrivacyStatement';
-import ReportBug from '../ReportBug';
 import SignOut from '../SignOut';
 import GdprRedirectModal from '../GdprRedirectModal';
 
@@ -236,9 +235,6 @@ function UIShell({
           ),
           Boolean(finalBaseServiceUrl) && isSupportEnabled && (
             <ContactUs baseServiceUrl={finalBaseServiceUrl} key="Contact Us" />
-          ),
-          Boolean(finalBaseServiceUrl) && isSupportEnabled && (
-            <ReportBug baseServiceUrl={finalBaseServiceUrl} key="Report Bug" />
           ),
           Boolean(finalBaseServiceUrl) && isSupportEnabled && (
             <HeaderMenuLink

@@ -117,6 +117,8 @@ function DataDrivenInput(props) {
     // eslint-disable-next-line no-unused-vars
     invalidValues,
     key,
+    governingOptions,
+    governingDisabled,
     minValueLength,
     maxValueLength,
     onBlur,
@@ -192,6 +194,7 @@ function DataDrivenInput(props) {
       invalid,
       invalidText,
       placeholder,
+      type,
       value: inputValue,
       ...restInputProps,
     };
@@ -201,8 +204,10 @@ function DataDrivenInput(props) {
     componentProps = {
       ...allInputProps,
       items,
-      initialSelectedItems: Array.isArray(value)
-        ? items.filter((item) => value.includes(item.value))
+      initialSelectedItems: Array.isArray(inputValue)
+        ? items.filter((item) => inputValue.includes(item.value))
+        : typeof inputValue === 'string'
+        ? inputValue
         : [],
       itemToString: (input) => input && input.label,
       invalid,
@@ -220,13 +225,16 @@ function DataDrivenInput(props) {
       ...restInputProps,
     };
   } else if (Object.values(SELECT_TYPES).includes(type)) {
-    const items = formatSelectOptions(options);
+    const items = governingOptions || formatSelectOptions(options);
+    const selectedItem = items.find((item) => item.value === value) ?? {};
     Component = Select;
     componentProps = {
       ...allInputProps,
+      disabled: governingDisabled || disabled,
       invalid,
       invalidText,
-      initialSelectedItem: items.find((item) => item.value === value),
+      initialSelectedItem: selectedItem,
+      selectedItem,
       itemToString: (input) => input && input.label,
       items,
       placeholder,
@@ -271,6 +279,8 @@ function DataDrivenInput(props) {
     Component = Toggle;
     componentProps = {
       ...allInputProps,
+      invalid,
+      invalidText,
       onChange: undefined,
       onToggle: onChange,
       toggled: value === true || value === 'true',
