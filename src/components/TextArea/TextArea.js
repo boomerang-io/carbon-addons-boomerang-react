@@ -8,12 +8,17 @@ import { settings } from 'carbon-components';
 const { prefix } = settings;
 
 const TextAreaComponent = React.forwardRef(function TextAreaComponent(
-  { id, label, labelText, tooltipClassName, tooltipContent, tooltipProps, ...textAreaProps },
+  { id, label, labelText, max, tooltipClassName, tooltipContent, tooltipProps, value, ...textAreaProps },
   ref
 ) {
   const labelValue = label || labelText;
   return (
     <div key={id} className={`${prefix}--bmrg-text-area`}>
+      {max && (
+        <p className={`${prefix}--bmrg-text-area__length`}>
+          {`${value?.length ?? 0}/${max}`}
+        </p>
+      )}
       <TextArea
         id={id}
         labelText={
@@ -31,6 +36,7 @@ const TextAreaComponent = React.forwardRef(function TextAreaComponent(
           )
         }
         ref={ref}
+        value={value}
         {...textAreaProps}
       />
     </div>
@@ -41,9 +47,14 @@ TextAreaComponent.propTypes = {
   id: PropTypes.string.isRequired,
   label: PropTypes.string,
   labelText: PropTypes.string,
+  max: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number
+  ]),
   tooltipClassName: PropTypes.string,
   tooltipContent: PropTypes.any,
   tooltipProps: PropTypes.object,
+  value: PropTypes.string,
 };
 
 TextAreaComponent.defaultProps = {
