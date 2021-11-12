@@ -29,6 +29,25 @@ storiesOf('Toggle', module)
       </div>
     );
   })
+  .add('with invalid warning', () => {
+    return (
+      <div style={{ width: '16rem' }}>
+        <Toggle
+          id="tooltip-label-toggle"
+          defaultToggled
+          onToggle={action('Toggle clicked')}
+          labelText="Label for toggle"
+          tooltipContent="Tooltip for toggle"
+          tooltipProps={{ direction: 'top' }}
+          helperText={text('helperText', 'helperText')}
+          orientation={select('orienation', ['horizontal', 'vertical'], 'vertical')}
+          reversed={boolean('reversed', false)}
+          invalid
+          invalidText="This toggle value is invalid"
+        />
+      </div>
+    );
+  })
   .add('horizontal toggle', () => {
     return (
       <div style={{ width: '16rem' }}>

@@ -7,7 +7,7 @@ import * as Yup from 'yup';
 import DynamicFormik from './DynamicFormik';
 
 const additionalSchema = Yup.object().shape({
-  text: Yup.string().required('Text is required'),
+  text: Yup.string().required('Text is required - Additional Schema'),
 });
 
 const inputs = [
@@ -20,9 +20,8 @@ const inputs = [
     helperText: 'text',
     description: 'text',
     required: false,
-    min: '2',
-    max: '20',
     pattern: '(boomerang|carbon)',
+    patternInvalidText: 'Custom error for invalid pattern - Type boomerang or carbon.',
   },
   {
     key: 'password',
@@ -58,6 +57,17 @@ const inputs = [
     dateFormat: 'Y-m-d',
     min: '2020-01-01T13:10:20.219+00:00',
     max: '2020-01-31T13:10:20.219+00:00'
+  },
+  {
+    key: 'date-range',
+    label: 'Date Range',
+    values: ['2021-08-15T13:10:20.219+00:00', '2021-09-21T13:10:20.219+00:00'],
+    type: 'date-range',
+    placeholder: 'yyyy-mm-dd',
+    helperText: 'Date range',
+    dateFormat: 'Y-m-d',
+    min: '2021-01-01T13:10:20.219+00:00',
+    max: '2021-10-31T13:10:20.219+00:00'
   },
   {
     required: false,
@@ -123,6 +133,8 @@ const inputs = [
     required: true,
     helperText: 'text',
     description: 'text',
+    max: '150',
+    min: '4',
   },
   {
     key: 'editor',
@@ -211,12 +223,14 @@ const inputs = [
   {
     key: 'creatable',
     label: 'Creatable',
-    type: 'creatable-single-non-deletable',
-    values: ['one'],
-    placeholder: 'placeholder',
+    type: 'creatable-single',
+    values: ['ONE'],
+    placeholder: 'placeholder TEST',
     conditionallyRender: true,
     requiredForKey: 'select',
     requiredValueOf: ['one'],
+    pattern: '[A-Z]+',
+    patternInvalidText: 'Custom error for invalid pattern - Type only on Upper Case',
     helperText: 'text',
     description: 'text',
   },
@@ -279,6 +293,220 @@ const inputs = [
     placeholder: '',
   },
 ];
+
+const governingSelectsInputs = [
+  {
+    required: false,
+    placeholder: "",
+    language: null,
+    disabled: null,
+    defaultValue: null,
+    value: "",
+    values: null,
+    readOnly: false,
+    dateFormat: null,
+    order: 0,
+    description: "",
+    key: "countries",
+    label: "Country",
+    type: "select",
+    min: null,
+    max: null,
+    options: [],
+    governingJson: [
+      {
+        id: 233,
+        name: "United States",
+        iso3: "USA",
+        states: [
+          {
+            id: 1456,
+            name: "Alabama",
+            state_code: "AL",
+            latitude: "32.31823140",
+            longitude: "-86.90229800",
+            type: null,
+            cities: [
+              {
+                id: 110968,
+                name: "Abbeville",
+                latitude: "31.57184000",
+                longitude: "-85.25049000"
+              },
+              {
+                id: 111032,
+                name: "Adamsville",
+                latitude: "33.60094000",
+                longitude: "-86.95611000"
+              },
+              {
+                id: 111083,
+                name: "Alabaster",
+                latitude: "33.24428000",
+                longitude: "-86.81638000"
+              }
+            ]
+          },
+          {
+            id: 1441,
+            name: "Wisconsin",
+            state_code: "WI",
+            latitude: "43.78443970",
+            longitude: "-88.78786780",
+            type: null,
+            cities: [
+              {
+                id: 110970,
+                name: "Abbotsford",
+                latitude: "44.94636000",
+                longitude: "-90.31597000"
+              },
+              {
+                id: 111015,
+                name: "Adams",
+                latitude: "43.95608000",
+                longitude: "-89.81818000"
+              },
+              {
+                id: 111023,
+                name: "Adams County",
+                latitude: "43.96963000",
+                longitude: "-89.77064000"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        id: 39,
+        name: "Canada",
+        iso3: "CAN",
+        states: [
+          {
+            id: 872,
+            name: "Alberta",
+            state_code: "AB",
+            latitude: "53.93327060",
+            longitude: "-116.57650350",
+            type: null,
+            cities: [
+              {
+                id: 16151,
+                name: "Airdrie",
+                latitude: "51.30011000",
+                longitude: "-114.03528000"
+              },
+              {
+                id: 16178,
+                name: "Athabasca",
+                latitude: "54.71687000",
+                longitude: "-113.28537000"
+              },
+              {
+                id: 16190,
+                name: "Banff",
+                latitude: "51.17622000",
+                longitude: "-115.56982000"
+              }
+            ]
+          },
+          {
+            id: 875,
+            name: "British Columbia",
+            state_code: "BC",
+            latitude: "53.72666830",
+            longitude: "-127.64762050",
+            type: null,
+            cities: [
+              {
+                id: 16146,
+                name: "Abbotsford",
+                latitude: "49.05798000",
+                longitude: "-122.25257000"
+              },
+              {
+                id: 16150,
+                name: "Agassiz",
+                latitude: "49.23298000",
+                longitude: "-121.76926000"
+              },
+              {
+                id: 16155,
+                name: "Aldergrove",
+                latitude: "49.05801000",
+                longitude: "-122.47087000"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    isGoverning: true,
+    isGoverned: false,
+    governingJsonKey: "countries",
+    governingKey: null,
+    governedKey: "states",
+    jsonKey: "id",
+    jsonLabel: "name",
+    helperText: ""
+  },
+  {
+    required: false,
+    placeholder: "",
+    language: null,
+    disabled: null,
+    defaultValue: null,
+    value: "",
+    values: null,
+    readOnly: false,
+    dateFormat: null,
+    order: 0,
+    description: "",
+    key: "states",
+    label: "State",
+    type: "select",
+    min: null,
+    max: null,
+    options: [],
+    governingJson: null,
+    isGoverning: true,
+    isGoverned: true,
+    governingJsonKey: "countries",
+    governingKey: "countries",
+    governedKey: "cities",
+    jsonKey: "id",
+    jsonLabel: "name",
+    helperText: ""
+  },
+  {
+    required: false,
+    placeholder: "",
+    language: null,
+    disabled: null,
+    defaultValue: null,
+    value: "",
+    values: null,
+    readOnly: false,
+    dateFormat: null,
+    order: 0,
+    description: "",
+    key: "cities",
+    label: "City",
+    type: "select",
+    min: null,
+    max: null,
+    options: [],
+    governingJson: null,
+    isGoverning: false,
+    isGoverned: true,
+    governingJsonKey: "countries",
+    governingKey: "states",
+    governedKey: null,
+    jsonKey: "id",
+    jsonLabel: "name",
+    helperText: ""
+  },
+]
 
 function Wrapper(props) {
   return <div style={{ padding: '2rem' }}>{props.children}</div>;
@@ -358,6 +586,36 @@ storiesOf('DynamicFormik', module)
           onSubmit={() => {
             action('submit clicked');
           }}
+          validationSchemaExtension={additionalSchema}
+        >
+          {({ inputs, formikProps }) => {
+            return (
+              <form>
+                {inputs}
+                <button
+                  disabled={!formikProps.isValid}
+                  onClick={formikProps.handleSubmit}
+                  style={{ marginTop: '1rem' }}
+                  type="button"
+                >
+                  Submit
+                </button>
+              </form>
+            );
+          }}
+        </DynamicFormik>
+      </Wrapper>
+    );
+  }).add('governing selects', () => {
+    return (
+      <Wrapper>
+        <DynamicFormik
+          id="dynamic-formik-form-id"
+          inputs={governingSelectsInputs}
+          onSubmit={() => {
+            action('submit clicked');
+          }}
+          radioProps={({input}) => ({...input, verticalWrapped: true, columnHeight: "8rem"})}
           validationSchemaExtension={additionalSchema}
         >
           {({ inputs, formikProps }) => {

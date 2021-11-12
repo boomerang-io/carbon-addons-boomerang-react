@@ -1,7 +1,7 @@
 {
   "name": "@boomerang-io/carbon-addons-boomerang-react",
   "description": "Carbon Addons for Boomerang apps",
-  "version": "1.4.0-beta.7",
+  "version": "1.4.0-beta.8",
   "author": {
     "name": "Tim Bula",
     "email": "timrbula@gmail.com"
@@ -70,8 +70,8 @@
     "window-or-global": "^1.0.1"
   },
   "peerDependencies": {
-    "carbon-components": "10.22.0",
-    "carbon-components-react": "7.22.0",
+    "carbon-components": "10.25.0",
+    "carbon-components-react": "7.25.0",
     "formik": "^2.1.4",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
