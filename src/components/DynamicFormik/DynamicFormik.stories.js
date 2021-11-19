@@ -7,7 +7,7 @@ import * as Yup from 'yup';
 import DynamicFormik from './DynamicFormik';
 
 const additionalSchema = Yup.object().shape({
-  text: Yup.string().required('Text is required'),
+  text: Yup.string().required('Text is required - Additional Schema'),
 });
 
 const inputs = [
@@ -20,9 +20,8 @@ const inputs = [
     helperText: 'text',
     description: 'text',
     required: false,
-    min: '2',
-    max: '20',
     pattern: '(boomerang|carbon)',
+    patternInvalidText: 'Custom error for invalid pattern - Type boomerang or carbon.',
   },
   {
     key: 'password',
@@ -224,12 +223,14 @@ const inputs = [
   {
     key: 'creatable',
     label: 'Creatable',
-    type: 'creatable-single-non-deletable',
-    values: ['one'],
-    placeholder: 'placeholder',
+    type: 'creatable-single',
+    values: ['ONE'],
+    placeholder: 'placeholder TEST',
     conditionallyRender: true,
     requiredForKey: 'select',
     requiredValueOf: ['one'],
+    pattern: '[A-Z]+',
+    patternInvalidText: 'Custom error for invalid pattern - Type only on Upper Case',
     helperText: 'text',
     description: 'text',
   },
