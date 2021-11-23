@@ -445,7 +445,6 @@ const governingSelectsInputs = [
     isGoverned: false,
     governingJsonKey: "countries",
     governingKey: null,
-    governedKey: "states",
     jsonKey: "id",
     jsonLabel: "name",
     helperText: ""
@@ -473,7 +472,6 @@ const governingSelectsInputs = [
     isGoverned: true,
     governingJsonKey: "countries",
     governingKey: "countries",
-    governedKey: "cities",
     jsonKey: "id",
     jsonLabel: "name",
     helperText: ""
@@ -501,7 +499,6 @@ const governingSelectsInputs = [
     isGoverned: true,
     governingJsonKey: "countries",
     governingKey: "states",
-    governedKey: null,
     jsonKey: "id",
     jsonLabel: "name",
     helperText: ""
