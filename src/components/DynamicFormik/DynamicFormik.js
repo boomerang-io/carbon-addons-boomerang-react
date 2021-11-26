@@ -134,8 +134,9 @@ async function handleGoverningSelectChange({ formikProps, input, inputs, selecte
     });
   }
 
-  await formikProps.setFieldTouched(`['${key}']`, true);   
+  await formikProps.setFieldTouched(`['${key}']`, true);  
   formikProps.setFieldValue(`['${key}']`, selectedItem ? selectedItem.value : '');
+  formikProps.setFieldValue(`['${key}-keyLabel']`, selectedItem ? selectedItem.label : '');
 }
 
 /**
