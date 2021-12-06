@@ -258,7 +258,7 @@ class Header extends React.Component {
                 {Array.isArray(navLinks) &&
                   navLinks.map((link, i) => (
                     <li key={`${link.url}-${i}`}>
-                      <HeaderListItem href={link.url}>{link.name}</HeaderListItem>
+                      <HeaderListItem aria-label={`link for ${link.name}`} href={link.url}>{link.name}</HeaderListItem>
                     </li>
                   ))}
               </HeaderList>
