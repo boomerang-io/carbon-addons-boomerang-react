@@ -118,11 +118,11 @@ function CreatableComponent({
   let finalExternalInitialValues = externalInitialValues;
 
   if (typeof values === 'string') {
-    finalValues = values.split(',');
+    finalValues = values === '' ? [] : values.split(',');
   }
 
   if (typeof externalValues === 'string') {
-    finalExternalValues = externalValues.split(',');
+    finalExternalValues = externalValues === '' ? [] : externalValues.split(',');
   }
 
   if (typeof externalInitialValues === 'string') {
