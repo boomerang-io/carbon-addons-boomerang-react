@@ -331,6 +331,7 @@ class Header extends React.Component {
                       id="notification-icon"
                       onClick={this.handleIconClick('Notification')}
                       onKeyDown={this.handleIconKeypress('Notification')}
+                      aria-label={`Notification button`}
                     >
                       {this.state.hasNewNotifications ? <NotificationNew24 /> : <Notification24 />}
                       <PlatformNotificationsContainer
@@ -350,6 +351,7 @@ class Header extends React.Component {
                       id="bmrg-header-help-icon"
                       onClick={this.handleIconClick('Help')}
                       onKeyDown={this.handleIconKeypress('Help')}
+                      aria-label={`Help button`}
                     >
                       <Help24 />
                     </HeaderListItem>
@@ -365,6 +367,7 @@ class Header extends React.Component {
                         id="bmrg-header-profile-icon"
                         onClick={this.handleIconClick('Profile')}
                         onKeyDown={this.handleIconKeypress('Profile')}
+                        aria-label={`Profile options button`}
                       >
                         <UserAvatar24 />
                       </HeaderListItem>
@@ -381,6 +384,7 @@ class Header extends React.Component {
                     className={`${prefix}--bmrg-header-list__item-Globalicon`}
                     onClick={this.handleIconClick('Global')}
                     onKeyDown={this.handleIconKeypress('Global')}
+                    aria-label={`Global button`}
                   >
                     <AppSwitcher20 />
                   </HeaderListItem>
@@ -393,6 +397,7 @@ class Header extends React.Component {
                       id="bmrg-header-right-panel-icon"
                       onClick={this.handleIconClick('RightPanel')}
                       onKeyDown={this.handleIconKeypress('RightPanel')}
+                      aria-label={`Right panel button`}
                     >
                       {renderRightPanel.icon}
                     </HeaderListItem>

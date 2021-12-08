@@ -9,7 +9,7 @@ function HeaderMenu({ children }) {
     <div className={`${prefix}--bmrg-header-drop-down`}>
       <ul className={`${prefix}--bmrg-header-drop-down__items`}>
         {React.Children.map(children, (child) => (
-          <li className={`${prefix}--bmrg-header-drop-down__item`}>{child}</li>
+          <li className={`${prefix}--bmrg-header-drop-down__item`} aria-label={`${child.key} button`}>{child}</li>
         ))}
       </ul>
     </div>
