@@ -272,6 +272,7 @@ class Header extends React.Component {
                     ariaExpanded={this.state.isMobileNavActive}
                     onClick={this.handleIconClick('MobileNav')}
                     onKeyDown={this.handleIconKeypress('MobileNav')}
+                    aria-label={`Mobile navigation button`}
                   >
                     <span
                       style={{
@@ -310,6 +311,7 @@ class Header extends React.Component {
                       id="requests-icon"
                       onClick={this.handleIconClick('Requests')}
                       onKeyDown={this.handleIconKeypress('Requests')}
+                      aria-label={`Requests button`}
                     >
                       <Collaborate24 />
                     </HeaderListItem>
