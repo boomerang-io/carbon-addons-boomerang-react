@@ -76,6 +76,7 @@ const AboutPlatformContainer = ({ version, organization, isFlowApp }) => {
                   <li key="kubernetes-icon">
                     <a href="https://kubernetes.io/" target="_blank" rel="noopener noreferrer">
                       <KubernetesIcon
+                        alt="Kubernetes Icon"
                         className={`${prefix}--bmrg-aboutPlatform-images__img`}
                       />
                     </a>

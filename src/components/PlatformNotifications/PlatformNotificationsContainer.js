@@ -190,6 +190,7 @@ export default class PlatformNotificationsContainer extends React.Component {
             className={`${prefix}--bmrg-notifications-header__clear`}
             disabled={!currentNotifications.length}
             onClick={this.handleReadAllNotifications.bind(this)}
+            aria-label="Mark all read"
           >
             Mark All Read
           </button>
@@ -209,6 +210,7 @@ export default class PlatformNotificationsContainer extends React.Component {
           <a
             href={`${baseLaunchEnvUrl}/launchpad/notifications`}
             className={`${prefix}--bmrg-notifications__notifications-redirect-link`}
+            aria-label="Link for notification center"
           >
             Open Notification Center
           </a>

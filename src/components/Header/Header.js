@@ -272,7 +272,7 @@ class Header extends React.Component {
                     ariaExpanded={this.state.isMobileNavActive}
                     onClick={this.handleIconClick('MobileNav')}
                     onKeyDown={this.handleIconKeypress('MobileNav')}
-                    aria-label={`Mobile navigation button`}
+                    aria-label={`Mobile navigation menu`}
                   >
                     <span
                       style={{
@@ -283,7 +283,7 @@ class Header extends React.Component {
                       }}
                     >
                       Navigation{' '}
-                      {this.state.isMobileNavActive ? <ChevronUp16 /> : <ChevronDown16 />}
+                      {this.state.isMobileNavActive ? <ChevronUp16 aria-label="Close mobile navigation"/> : <ChevronDown16 aria-label="Open mobile navigation"/>}
                     </span>
                   </HeaderListItem>
                   {this.state.isMobileNavActive && (
@@ -313,7 +313,7 @@ class Header extends React.Component {
                       onKeyDown={this.handleIconKeypress('Requests')}
                       aria-label={`Requests button`}
                     >
-                      <Collaborate24 />
+                      <Collaborate24 alt="Requests icon"/>
                     </HeaderListItem>
                     {this.state.isRequestsActive && (
                       <HeaderMenu>
@@ -335,7 +335,7 @@ class Header extends React.Component {
                       onKeyDown={this.handleIconKeypress('Notification')}
                       aria-label={`Notification button`}
                     >
-                      {this.state.hasNewNotifications ? <NotificationNew24 /> : <Notification24 />}
+                      {this.state.hasNewNotifications ? <NotificationNew24 alt="New notifications icon"/> : <Notification24 alt="No new notifications icon"/>}
                       <PlatformNotificationsContainer
                         baseLaunchEnvUrl={baseLaunchEnvUrl}
                         config={this.props.notificationsConfig}
@@ -355,7 +355,7 @@ class Header extends React.Component {
                       onKeyDown={this.handleIconKeypress('Help')}
                       aria-label={`Help button`}
                     >
-                      <Help24 />
+                      <Help24 alt="Help icon"/>
                     </HeaderListItem>
                     {this.state.isHelpActive && <HeaderMenu>{this.props.onHelpClick}</HeaderMenu>}
                   </li>
@@ -371,7 +371,7 @@ class Header extends React.Component {
                         onKeyDown={this.handleIconKeypress('Profile')}
                         aria-label={`Profile options button`}
                       >
-                        <UserAvatar24 />
+                        <UserAvatar24 alt="Profile icon"/>
                       </HeaderListItem>
                     )}
                   {this.state.isProfileActive && (
@@ -388,7 +388,7 @@ class Header extends React.Component {
                     onKeyDown={this.handleIconKeypress('Global')}
                     aria-label={`Global button`}
                   >
-                    <AppSwitcher20 />
+                    <AppSwitcher20 alt="Global switcher icon" />
                   </HeaderListItem>
                 )}
                 {renderRightPanel && Object.keys(renderRightPanel).length ? (
