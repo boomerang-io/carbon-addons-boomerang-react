@@ -283,7 +283,7 @@ class Header extends React.Component {
                       }}
                     >
                       Navigation{' '}
-                      {this.state.isMobileNavActive ? <ChevronUp16 aria-label="Close mobile navigation"/> : <ChevronDown16 aria-label="Open mobile navigation"/>}
+                      {this.state.isMobileNavActive ? <ChevronUp16 alt="Close mobile navigation"/> : <ChevronDown16 alt="Open mobile navigation"/>}
                     </span>
                   </HeaderListItem>
                   {this.state.isMobileNavActive && (

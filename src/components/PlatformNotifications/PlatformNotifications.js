@@ -36,7 +36,7 @@ function Notification({ readNotification, notificationInfo }) {
           className={`${prefix}--bmrg-notification-content__close`}
           onClick={() => readNotification(notificationInfo.id)}
         >
-          <Close16 aria-label="Mark as read" alt="Mark as read icon"/>
+          <Close16 alt="Mark as read icon"/>
         </button>
       </div>
     </div>
