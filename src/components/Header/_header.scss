@@ -107,6 +107,7 @@ $breakpoints: (
     font-weight: 600;
     letter-spacing: 0.11px;
     line-height: rem(18px);
+    white-space: nowrap;
   }
 
   .#{$prefix}--bmrg-header-brand__text {
