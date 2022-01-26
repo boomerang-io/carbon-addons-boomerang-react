@@ -12,8 +12,8 @@ test('render Error404 with defaults', async () => {
 
 test('render Error404 without text', async () => {
   const { queryByText } = render(<Error404 header={null} title={null} message={null} />);
-  expect(queryByText('403 - Access Forbidden')).not.toBeInTheDocument();
-  expect(queryByText('You’ve found yourself in deep water.')).not.toBeInTheDocument();
+  expect(queryByText('404 Page Not Found')).not.toBeInTheDocument();
+  expect(queryByText('We spaced out and couldn’t find your page.')).not.toBeInTheDocument();
   expect(
     queryByText('You shouldn’t be here - contact the local authorities if you disagree.')
   ).not.toBeInTheDocument();

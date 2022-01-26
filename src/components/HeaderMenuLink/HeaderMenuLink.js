@@ -92,7 +92,7 @@ function HeaderMenuLink({ className, external = true, href, iconName, style, tex
 
   return (
     <div className={wrapperClassNames} style={style} role="presentation">
-      <Button className={`${prefix}--bmrg-header-menu-item`} href={href} role="link" {...rest}>
+      <Button className={`${prefix}--bmrg-header-menu-item`} href={href} role="link" {...rest} aria-label={`link for ${text}`}>
         <div className={`${prefix}--bmrg-header-menu-item__content`}>
           {Boolean(iconToRender) && (
             <div className={`${prefix}--bmrg-header-menu-item__img`}>{iconMapping[iconName]}</div>
@@ -100,12 +100,13 @@ function HeaderMenuLink({ className, external = true, href, iconName, style, tex
           <span className={`${prefix}--bmrg-header-menu-item__text`}>
             {text}
             {external ? (
-              <Launch16 fill={iconFill} className={iconClassName} style={{ height: '0.75rem' }} />
+              <Launch16 fill={iconFill} className={iconClassName} style={{ height: '0.75rem' }} aria-label={`${text} icon`}/>
             ) : (
               <ArrowRight16
                 fill={iconFill}
                 className={iconClassName}
                 style={{ height: '0.75rem' }}
+                aria-label={`${text} icon`}
               />
             )}
           </span>

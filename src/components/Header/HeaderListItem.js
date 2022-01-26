@@ -17,7 +17,6 @@ const HeaderListItem = (props) => {
         <div
           aria-expanded={ariaExpanded}
           aria-haspopup="true"
-          aria-label={`button for ${id}`}
           role="button"
           tabIndex="0"
           className={`${prefix}--bmrg-header-list__btn`}
@@ -35,6 +34,7 @@ const HeaderListItem = (props) => {
               window.location.href.startsWith(href),
           })}
           href={href}
+          tabIndex="0"
           {...other}
         >
           {children}

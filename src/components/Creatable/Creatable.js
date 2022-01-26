@@ -110,17 +110,35 @@ function CreatableComponent({
   const inputValueLabel = valueLabelText || valueLabel;
 
   const [createdItems, setCreatedItems] = useState([]);
-  const [initialItems] = useState(values || externalValues ? values || externalValues : []);
   const createButtonClassName = cx(buttonClassName, {"--no-label": (!createKeyValuePair && !inputLabel && !tooltipContent) || (createKeyValuePair && !inputKeyLabel && !inputValueLabel)});
-  const tagItems = values || externalValues ? values || externalValues : createdItems; // Externally controlled if values props exists
+ 
+  /** Add support for csv strings */
+  let finalValues = values;
+  let finalExternalValues = externalValues;
+  let finalExternalInitialValues = externalInitialValues;
+
+  if (typeof values === 'string') {
+    finalValues = values === '' ? [] : values.split(',');
+  }
+
+  if (typeof externalValues === 'string') {
+    finalExternalValues = externalValues === '' ? [] : externalValues.split(',');
+  }
+
+  if (typeof externalInitialValues === 'string') {
+    finalExternalInitialValues = externalInitialValues.split(',');
+  }
+
+  const [initialItems] = useState(finalValues || finalExternalValues ? finalValues || finalExternalValues : []);
+  const tagItems = finalValues || finalExternalValues ? finalValues || finalExternalValues : createdItems; // Externally controlled if values props exists
   
-  const initialTagItems = externalInitialValues || initialItems; // Externally controlled if initialValues props exists
+  const initialTagItems = finalExternalInitialValues || initialItems; // Externally controlled if initialValues props exists
   const existValue = (keyValue && value) || input;
 
   const hasBothHelperText = keyHelperText && valueHelperText;
   const hasBothLabelText = inputKeyLabel && inputValueLabel;
 
-  const tagsToShow = externalInitialValues ? [...initialTagItems, ...tagItems] : [...tagItems];
+  const tagsToShow = finalExternalInitialValues ? [...initialTagItems, ...tagItems] : [...tagItems];
   const disableInputs = disabled || (tagsToShow.length >= max && max > 0);
 
   const onInputChange = (e) => {

@@ -6,6 +6,15 @@
     width: 100%;
   }
 
+  .#{$prefix}--bmrg-text-area__length {
+    font-size: 0.75rem;
+    letter-spacing: 0.02rem;
+    line-height: 1rem;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
   .#{$prefix}--bmrg-text-area__tooltip {
     line-height: 0;
     margin-left: 0.5rem;
