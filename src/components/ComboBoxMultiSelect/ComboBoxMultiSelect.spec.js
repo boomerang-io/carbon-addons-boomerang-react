@@ -50,7 +50,7 @@ test('select and remove items', async () => {
     expect(queryByLabelText(/Clear filter cat/i)).toBeInTheDocument();
   });
 
-  const clearButton = getByRole('button', { name: 'Clear Selection' });
+  const clearButton = getByRole('button', { name: 'Clear selected item' });
   fireEvent.click(clearButton);
   await waitFor(() => {
     expect(queryByLabelText(/Clear filter panda/i)).not.toBeInTheDocument();

@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import {
-  AppSwitcher20,
   ChevronDown16,
   ChevronUp16,
   Collaborate24,
@@ -12,9 +11,8 @@ import {
   NotificationNew24,
 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
+import FocusTrap from 'focus-trap-react';
 import { SkipToContent } from 'carbon-components-react/lib/components/UIShell';
-
-// import PlatformBanner from '../PlatformBanner';
 import PlatformNotificationsContainer from '../PlatformNotifications';
 import HeaderMenu from '../HeaderMenu';
 import NotificationsContainer from '../Notifications/NotificationsContainer';
@@ -29,6 +27,20 @@ import HeaderRightPanel from './HeaderRightPanel';
 import BoomerangLogo from './assets/BoomerangLogo';
 
 const { prefix } = settings;
+
+const stateToButtonElemIdMap = {
+  isHelpActive: 'navigation-help-menu-button',
+  isMobileNavActive: 'navigation-mobile-menu-button',
+  isNotificationActive: 'navigation-notification-menu-button',
+  isProfileActive: 'navigation-profile-menu-button',
+  isRequestsActive: 'navigation-requests-menu-button',
+  isRightPanelActive: 'navigation-right-panel-button',
+  isSidenavActive: 'navigation-sidenav-menu-button',
+};
+
+function transformToIsStateKey(key) {
+  return `is${key}Active`;
+}
 
 class Header extends React.Component {
   static propTypes = {
@@ -58,8 +70,6 @@ class Header extends React.Component {
      */
     platformMessage: PropTypes.object,
     profileChildren: PropTypes.array,
-
-    renderGlobalSwitcher: PropTypes.bool,
     renderLogo: PropTypes.bool,
 
     /**
@@ -87,15 +97,14 @@ class Header extends React.Component {
   static defaultProps = {};
 
   state = {
-    isMobileNavActive: false,
+    hasNewNotifications: false,
     isHelpActive: false,
-    isMenuActive: false,
+    isMobileNavActive: false,
     isNotificationActive: false,
     isProfileActive: false,
-    isGlobalActive: false,
     isRequestsActive: false,
     isRightPanelActive: false,
-    hasNewNotifications: false,
+    isSidenavActive: false,
   };
 
   navRef = React.createRef();
@@ -104,22 +113,26 @@ class Header extends React.Component {
   sideNavButtonRef = React.createRef();
 
   componentDidMount() {
-    document.addEventListener('mousedown', this.handleClickOutside);
-    document.addEventListener('keydown', this.handleClickOutside);
+    document.addEventListener('mousedown', this.handleClickoutsideEvent);
+    document.addEventListener('keydown', this.handleKeyEvent);
   }
 
   componentWillUnmount() {
-    document.removeEventListener('mousedown', this.handleClickOutside);
-    document.removeEventListener('keydown', this.handleClickOutside);
+    document.removeEventListener('mousedown', this.handleClickoutsideEvent);
+    document.removeEventListener('keydown', this.handleKeyEvent);
   }
 
-  handleClickOutside = (event) => {
+  /**
+   * Handle clicking outside a open menu and closing the appropriate one
+   * @param {object} event - mousedown event
+   */
+  handleClickoutsideEvent = (event) => {
     if (this.navRef && !this.navRef.current?.contains(event.target)) {
-      this.handleClickOutsideHeaderState();
+      this.handleCloseHeaderMenus();
     }
 
     if (this.mobileNavRef && !this.mobileNavRef.current?.contains(event.target)) {
-      this.handleClickOutsideMobileNavState();
+      this.handleCloseMobileNav();
     }
 
     if (
@@ -127,37 +140,76 @@ class Header extends React.Component {
       !this.sideNavRef.current?.contains(event.target) &&
       !this.sideNavButtonRef.current?.contains(event.target)
     ) {
-      this.handleClickOutsideSidenavState();
+      this.handleCloseSidenav();
     }
   };
 
-  handleClickOutsideHeaderState = () => {
+  /**
+   * Close the active menu and focus on the button that triggered it
+   * Close menu
+   * via the ESC key
+   * @param {object} event - keydown event
+   */
+  handleKeyEvent = (event) => {
+    if (event.key === 'Escape') {
+      this.handleCloseViaEsc();
+      return;
+    }
+
+    if (event.key === 'Tab') {
+      // Only have to test for the right panel here bc other menus have a focus trap
+      if (this.state.isRightPanelActive && !this.navRef.current?.contains(event.target)) {
+        this.handleCloseHeaderMenus();
+        return;
+      }
+    }
+  };
+
+  handleCloseHeaderMenus = () => {
     this.setState({
       isHelpActive: false,
       isNotificationActive: false,
       isProfileActive: false,
-      isGlobalActive: false,
       isRequestsActive: false,
       isRightPanelActive: false,
     });
   };
 
-  handleClickOutsideMobileNavState = () => {
+  handleCloseMobileNav = () => {
     this.setState({
       isMobileNavActive: false,
     });
   };
 
-  handleClickOutsideSidenavState = () => {
+  handleCloseSidenav = () => {
     this.setState({
-      isMenuActive: false,
+      isSidenavActive: false,
     });
+  };
+
+  handleCloseViaEsc = () => {
+    const activeMenuStateKey = Object.keys(this.state).find(
+      (key) => key.startsWith('is') && this.state[key]
+    );
+
+    if (activeMenuStateKey) {
+      this.setState({
+        [activeMenuStateKey]: false,
+      });
+
+      const elemToReceiveFocus = document.getElementById(
+        stateToButtonElemIdMap[activeMenuStateKey]
+      );
+      if (elemToReceiveFocus) {
+        elemToReceiveFocus.focus();
+      }
+    }
   };
 
   /**
    * 13 - corresponds to return/enter key
    * 32 - corresponds to space key
-   * @param {string} type - Passes in the type of click (i.e. profile, notification, global)
+   * @param {string} type - Passes in the type of click (i.e. profile, notification)
    * @returns {Function} - if the appropriate type of click, calls handleIconClick with specified params
    */
   handleIconKeypress = (type) => (evt) => {
@@ -167,15 +219,16 @@ class Header extends React.Component {
   };
 
   /**
-   * @param {string} type - Passes in the type of click (i.e. profile, notification, global)
+   * @param {string} type - Passes in the type of click (i.e. profile, notification)
    * @returns {Function} - finds the appropriate click type to trigger function, sets all other state items that have
    * 'is' prefix to false (in order to only have one active item at a time)
    */
   handleIconClick = (type) => (evt) => {
+    console.log('running');
     Object.keys(this.state)
       .filter((key) => key.startsWith('is'))
       .forEach((key) => {
-        const clickType = `is${type}Active`;
+        const clickType = transformToIsStateKey(type);
         if (key === clickType) {
           this.setState({
             [clickType]: !this.state[clickType],
@@ -207,7 +260,7 @@ class Header extends React.Component {
 
   onMenuClose = () => {
     this.setState({
-      isMenuActive: false,
+      isSidenavActive: false,
     });
   };
 
@@ -218,8 +271,6 @@ class Header extends React.Component {
       className,
       navLinks,
       platformName,
-      // platformMessage,
-      renderGlobalSwitcher,
       renderLogo,
       renderRightPanel,
       skipToContentProps,
@@ -233,10 +284,11 @@ class Header extends React.Component {
               {skipToContentProps ? <SkipToContent {...skipToContentProps} /> : null}
               {this.props.renderSidenav && (
                 <HeaderMenuBmrg
+                  id={stateToButtonElemIdMap['isSidenavActive']}
+                  isOpen={this.state.isSidenavActive}
+                  onClick={this.handleIconClick('Sidenav')}
+                  onKeyDown={this.handleIconKeypress('Sidenav')}
                   ref={this.sideNavButtonRef}
-                  isOpen={this.state.isMenuActive}
-                  onClick={this.handleIconClick('Menu')}
-                  onKeyDown={this.handleIconKeypress('Menu')}
                 />
               )}
               <HeaderLogo
@@ -253,12 +305,14 @@ class Header extends React.Component {
                 )}
               </HeaderLogo>
             </div>
-            <nav aria-label="main">
+            <nav aria-label="Main navigation menu">
               <HeaderList className={`${prefix}--bmrg-header-list--link`}>
                 {Array.isArray(navLinks) &&
                   navLinks.map((link, i) => (
                     <li key={`${link.url}-${i}`}>
-                      <HeaderListItem href={link.url}>{link.name}</HeaderListItem>
+                      <HeaderListItem aria-label={`link for ${link.name}`} href={link.url}>
+                        {link.name}
+                      </HeaderListItem>
                     </li>
                   ))}
               </HeaderList>
@@ -268,8 +322,9 @@ class Header extends React.Component {
                 <li>
                   <HeaderListItem
                     isIcon
-                    id="navigation-mobile-menu"
-                    ariaExpanded={this.state.isMobileNavActive}
+                    aria-label="Mobile navigation menu"
+                    aria-expanded={this.state.isMobileNavActive}
+                    id={stateToButtonElemIdMap[transformToIsStateKey('MobileNavActive')]}
                     onClick={this.handleIconClick('MobileNav')}
                     onKeyDown={this.handleIconKeypress('MobileNav')}
                   >
@@ -282,16 +337,23 @@ class Header extends React.Component {
                       }}
                     >
                       Navigation{' '}
-                      {this.state.isMobileNavActive ? <ChevronUp16 /> : <ChevronDown16 />}
+                      {this.state.isMobileNavActive ? (
+                        <ChevronUp16 alt="Close mobile navigation" />
+                      ) : (
+                        <ChevronDown16 alt="Open mobile navigation" />
+                      )}
                     </span>
                   </HeaderListItem>
                   {this.state.isMobileNavActive && (
                     <HeaderMenu>
                       {Array.isArray(navLinks) &&
                         navLinks.map((link, i) => (
-                          <li key={`${link.url}-${i}`}>
-                            <HeaderMenuLink external={false} href={link.url} text={link.name} />
-                          </li>
+                          <HeaderMenuLink
+                            external={false}
+                            href={link.url}
+                            text={link.name}
+                            key={`${link.url}-${i}`}
+                          />
                         ))}
                     </HeaderMenu>
                   )}
@@ -306,12 +368,13 @@ class Header extends React.Component {
                   <li>
                     <HeaderListItem
                       isIcon
-                      ariaExpanded={this.state.isRequestsActive}
-                      id="requests-icon"
+                      aria-expanded={this.state.isRequestsActive}
+                      aria-label="Requests menu button"
+                      id={stateToButtonElemIdMap[transformToIsStateKey('Requests')]}
                       onClick={this.handleIconClick('Requests')}
                       onKeyDown={this.handleIconKeypress('Requests')}
                     >
-                      <Collaborate24 />
+                      <Collaborate24 alt="Requests icon" />
                     </HeaderListItem>
                     {this.state.isRequestsActive && (
                       <HeaderMenu>
@@ -327,12 +390,17 @@ class Header extends React.Component {
                   <li>
                     <HeaderListItem
                       isIcon
-                      ariaExpanded={this.state.isNotificationActive}
-                      id="notification-icon"
+                      aria-expanded={this.state.isNotificationActive}
+                      aria-label="Notification menu button"
+                      id={stateToButtonElemIdMap[transformToIsStateKey('Notification')]}
                       onClick={this.handleIconClick('Notification')}
                       onKeyDown={this.handleIconKeypress('Notification')}
                     >
-                      {this.state.hasNewNotifications ? <NotificationNew24 /> : <Notification24 />}
+                      {this.state.hasNewNotifications ? (
+                        <NotificationNew24 alt="New notifications icon" />
+                      ) : (
+                        <Notification24 alt="No new notifications icon" />
+                      )}
                       <PlatformNotificationsContainer
                         baseLaunchEnvUrl={baseLaunchEnvUrl}
                         config={this.props.notificationsConfig}
@@ -345,13 +413,14 @@ class Header extends React.Component {
                 {Array.isArray(this.props.onHelpClick) && this.props.onHelpClick.length > 0 && (
                   <li>
                     <HeaderListItem
-                      ariaExpanded={this.state.isHelpActive}
                       isIcon
-                      id="bmrg-header-help-icon"
+                      aria-expanded={this.state.isHelpActive}
+                      aria-label="Help menu button"
+                      id={stateToButtonElemIdMap[transformToIsStateKey('Help')]}
                       onClick={this.handleIconClick('Help')}
                       onKeyDown={this.handleIconKeypress('Help')}
                     >
-                      <Help24 />
+                      <Help24 alt="Help icon" />
                     </HeaderListItem>
                     {this.state.isHelpActive && <HeaderMenu>{this.props.onHelpClick}</HeaderMenu>}
                   </li>
@@ -360,37 +429,27 @@ class Header extends React.Component {
                   {Array.isArray(this.props.profileChildren) &&
                     this.props.profileChildren.length > 0 && (
                       <HeaderListItem
-                        ariaExpanded={this.state.isProfileActive}
                         isIcon
-                        id="bmrg-header-profile-icon"
+                        aria-expanded={this.state.isProfileActive}
+                        aria-label="Profile menu button"
+                        id={stateToButtonElemIdMap[transformToIsStateKey('Profile')]}
                         onClick={this.handleIconClick('Profile')}
                         onKeyDown={this.handleIconKeypress('Profile')}
                       >
-                        <UserAvatar24 />
+                        <UserAvatar24 alt="Profile icon" />
                       </HeaderListItem>
                     )}
                   {this.state.isProfileActive && (
                     <HeaderMenu>{this.props.profileChildren}</HeaderMenu>
                   )}
                 </li>
-                {renderGlobalSwitcher && (
-                  <HeaderListItem
-                    ariaExpanded={this.state.isGlobalActive}
-                    isIcon
-                    id="bmrg-header-global-switcher"
-                    className={`${prefix}--bmrg-header-list__item-Globalicon`}
-                    onClick={this.handleIconClick('Global')}
-                    onKeyDown={this.handleIconKeypress('Global')}
-                  >
-                    <AppSwitcher20 />
-                  </HeaderListItem>
-                )}
                 {renderRightPanel && Object.keys(renderRightPanel).length ? (
                   <li>
                     <HeaderListItem
-                      ariaExpanded={this.state.isRightPanelActive}
                       isIcon
-                      id="bmrg-header-right-panel-icon"
+                      aria-expanded={this.state.isRightPanelActive}
+                      aria-label={`Right panel button`}
+                      id={stateToButtonElemIdMap[transformToIsStateKey('RightPanel')]}
                       onClick={this.handleIconClick('RightPanel')}
                       onKeyDown={this.handleIconKeypress('RightPanel')}
                     >
@@ -412,24 +471,22 @@ class Header extends React.Component {
           {this.props.renderSidenav && (
             <div
               className={cx(`${prefix}--bmrg-header__app-menu-wrapper`, {
-                '--is-hidden': !this.state.isMenuActive,
+                '--is-hidden': !this.state.isSidenavActive,
               })}
               ref={this.sideNavRef}
             >
-              {this.props.renderSidenav({
-                isOpen: this.state.isMenuActive,
-                onMenuClose: this.onMenuClose,
-              })}
+              <FocusTrap
+                active={this.state.isSidenavActive}
+                focusTrapOptions={{ allowOutsideClick: true }}
+              >
+                {this.props.renderSidenav({
+                  isOpen: this.state.isSidenavActive,
+                  onMenuClose: this.onMenuClose,
+                })}
+              </FocusTrap>
             </div>
           )}
         </div>
-        {/*platformMessage && (
-          <PlatformBanner
-            kind={platformMessage.kind}
-            message={platformMessage.message}
-            title={platformMessage.title}
-          />
-        )*/}
         <NotificationsContainer
           enableMultiContainer
           containerId={`${prefix}--bmrg-header-notifications`}
