@@ -76,8 +76,8 @@ storiesOf('UIShell', module)
           status: 'active',
           requestSummary: {
             requireUserAction: 0,
-            submittedByUser: 17
-          }
+            submittedByUser: 17,
+          },
         }}
       />
     );
@@ -136,7 +136,7 @@ storiesOf('UIShell', module)
                   <SideNavLink isActive element={Link} renderIcon={ServiceDesk16} to="/">
                     Active link with icon
                   </SideNavLink>
-                  <SideNavLink element={Link} large>
+                  <SideNavLink element={Link} large to="/">
                     Large link
                   </SideNavLink>
                   <SideNavLink isActive element={Link} renderIcon={ServiceDesk16} to="/" large>
@@ -182,8 +182,8 @@ storiesOf('UIShell', module)
             email: 'test.user@ibm.com',
             requestSummary: {
               requireUserAction: 11,
-              submittedByUser: 17
-            }
+              submittedByUser: 17,
+            },
           }}
           renderRightPanel={{
             icon: <Help24 />,
@@ -272,7 +272,7 @@ storiesOf('UIShell', module)
           status: 'active',
           requestSummary: {
             requireUserAction: 11,
-            submittedByUser: 17
+            submittedByUser: 17,
           },
         }}
       />

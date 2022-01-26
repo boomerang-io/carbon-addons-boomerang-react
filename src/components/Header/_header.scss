@@ -1,5 +1,4 @@
 //header styles
-
 $breakpoints: (
   bp--xs--major: 500px,
   bp--sm--major: 768px,
@@ -316,17 +315,24 @@ $breakpoints: (
   }
 
   .#{$prefix}--bmrg-header__app-menu {
-    align-items: center;
-    box-sizing: content-box;
     display: inline-flex;
     justify-content: center;
+    align-items: center;
+    height: rem(48px);
+    width: rem(48px);
     cursor: pointer;
-    transition: all $carbon-motion--timing--productive $carbon-motion--easing--productive;
-    transform: scale(0.5);
-    margin-left: rem(19px);
-    margin-right: rem(4px);
+    background: none;
+    border: none;
+    padding: 0;
+    line-height: 0;
+
+    &:focus {
+      outline: rem(2px) solid $bmrg-header-active-text-color;
+      outline-offset: rem(-2px);
+    }
 
     svg {
+      transform: scale(0.5);
       fill: $bmrg-header-active-text-color;
     }
 
