@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { text } from '@storybook/addon-knobs/react';
+import { text } from '@storybook/addon-knobs';
 
 import Creatable from './Creatable';
 
@@ -68,7 +68,7 @@ storiesOf('Creatable', module)
         />
       </div>
     );
-  }) 
+  })
   .add('with tooltip and helper text', () => {
     return (
       <Creatable

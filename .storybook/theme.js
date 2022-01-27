@@ -6,7 +6,7 @@ const { field01, interactive01, text01, text04, ui01, ui03, ui04, uiBackground }
 
 //import BoomerangLogo from './assets/boomerang';
 
-export default create({
+const theme = create({
   base: 'light',
 
   colorPrimary: interactive01,
@@ -42,3 +42,5 @@ export default create({
   /*brandImage:
     <BoomerangLogo />,*/
 });
+
+export default theme;

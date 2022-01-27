@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { text } from '@storybook/addon-knobs/react';
+import { text } from '@storybook/addon-knobs';
 
 import AboutPlatform from './AboutPlatform';
 
@@ -12,7 +12,8 @@ storiesOf('AboutPlatform', module)
         version={text('version', '5.0.0')}
       />
     );
-  }).add('Flow Icons', () => {
+  })
+  .add('Flow Icons', () => {
     return (
       <AboutPlatform
         isFlowApp

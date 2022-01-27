@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { object, text } from '@storybook/addon-knobs/react';
+import { object, text } from '@storybook/addon-knobs';
 
 import TextArea from './TextArea';
 
@@ -16,8 +16,8 @@ const ExternallyControlledTextArea = (props) => {
       }}
       value={value}
     />
-  )
-}
+  );
+};
 
 storiesOf('TextArea', module)
   .add('default', () => {

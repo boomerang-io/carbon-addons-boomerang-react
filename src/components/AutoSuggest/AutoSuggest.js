@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import ms from 'match-sorter';
+import { matchSorter as ms } from 'match-sorter';
 
 import AutoSuggestInput from './AutoSuggestInput';
 

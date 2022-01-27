@@ -3,7 +3,7 @@ import React from 'react';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
 import { storiesOf } from '@storybook/react';
-import { text } from '@storybook/addon-knobs/react';
+import { text } from '@storybook/addon-knobs';
 
 import ProtectedRoute from './ProtectedRoute';
 

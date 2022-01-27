@@ -2,7 +2,7 @@ import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 import Downshift from 'downshift';
-import isEqual from 'lodash.isequal';
+import isEqual from 'lodash/isequal';
 import { settings } from 'carbon-components';
 import { WarningFilled16 } from '@carbon/icons-react';
 import { Tag } from 'carbon-components-react';

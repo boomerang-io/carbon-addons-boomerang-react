@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { text, boolean } from '@storybook/addon-knobs/react';
+import { text, boolean } from '@storybook/addon-knobs';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import { BrowserRouter as Router, Link } from 'react-router-dom';

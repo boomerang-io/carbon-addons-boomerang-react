@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import { text, boolean, object } from '@storybook/addon-knobs/react';
+import { text, boolean, object } from '@storybook/addon-knobs';
 import { Link, Router } from 'react-router-dom';
 import { ServiceDesk16 } from '@carbon/icons-react';
 import {
