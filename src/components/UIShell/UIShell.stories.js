@@ -40,6 +40,7 @@ storiesOf('UIShell', module)
             'community.enabled': boolean('community.enabled', true),
             'notifications.enabled': boolean('notifications.enabled', true),
             'support.enabled': boolean('support.enabled', true),
+            'feedback.enabled': boolean('feedback.enabled', true),
           },
           navigation: [
             {

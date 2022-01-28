@@ -7,6 +7,7 @@ import HeaderMenuLink from '../HeaderMenuLink';
 import ProfileSettings from '../ProfileSettings';
 import AboutPlatform from '../AboutPlatform';
 import ContactUs from '../ContactUs';
+import Feedback from '../Feedback';
 import PrivacyStatement from '../PrivacyStatement';
 import SignOut from '../SignOut';
 import GdprRedirectModal from '../GdprRedirectModal';
@@ -191,6 +192,7 @@ function UIShell({
   const finalBaseServiceUrl = platform?.baseServicesUrl || baseServiceUrl;
   const isLogoEnabled = platform?.displayLogo || renderLogo;
   const isSupportEnabled = Boolean(features?.['support.enabled']);
+  const isFeedbackEnabled = Boolean(features?.['feedback.enabled']);
 
   /**
    * Checking for conditions when we explicitly set "renderGdprRedirect" to false (it defaults to true) OR
@@ -202,7 +204,7 @@ function UIShell({
     renderGdprRedirect === false || features?.['consent.enabled'] === false;
 
   /**
-   * Also enable/disable privacy statement via the consent.enaable feature flag
+   * Also enable/disable privacy statement via the consent.enabled feature flag
    */
   const isPrivacyStatementDisabled =
     renderPrivacyStatement === false || features?.['consent.enabled'] === false;
@@ -256,6 +258,9 @@ function UIShell({
               iconName="information"
               text="Flow Documentation"
             />
+          ),
+          isFeedbackEnabled && (
+            <Feedback platformName={platformName} sendIdeasUrl="https://ideas.ibm.com" key="Feedback" />
           ),
         ].filter(Boolean)}
         profileChildren={[
