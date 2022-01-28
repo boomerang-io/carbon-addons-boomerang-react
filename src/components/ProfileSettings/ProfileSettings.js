@@ -131,7 +131,7 @@ function ProfileSettings({ baseServiceUrl, src, userName }) {
     setTeams(updatedTeams);
   }
 
-  if(disableModal)
+  if (disableModal)
     return (
       <div className={`${prefix}--bmrg-profile-menu-user`}>
         <Avatar size="medium" src={src} userName={userName} />

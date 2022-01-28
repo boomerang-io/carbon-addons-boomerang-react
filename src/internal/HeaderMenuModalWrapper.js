@@ -8,7 +8,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, ComposedModal } from 'carbon-components-react';
-//import FocusTrap from 'react-focus-trap';
 
 export default class HeaderMenuModalWrapper extends React.Component {
   static propTypes = {

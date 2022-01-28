@@ -8,15 +8,14 @@ const { prefix } = settings;
 const HeaderMenuBmrg = React.forwardRef((props, ref) => {
   const { isOpen, ...other } = props;
   return (
-    <div
+    <button
       aria-expanded={isOpen}
+      aria-haspopup="true"
       aria-label="header menu button"
       className={classNames(`${prefix}--bmrg-header__app-menu`, {
         '--is-open': isOpen,
       })}
       ref={ref}
-      role="button"
-      tabIndex="0"
       {...other}
     >
       <svg height="32" version="1.1" viewBox="0 0 32 32" width="32">
@@ -26,7 +25,7 @@ const HeaderMenuBmrg = React.forwardRef((props, ref) => {
           <rect className="bar3" x="0" y="24" width="32" height="4" rx="2" />
         </g>
       </svg>
-    </div>
+    </button>
   );
 });
 

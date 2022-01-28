@@ -49,7 +49,6 @@
   },
   "dependencies": {
     "@carbon/elements": "^10.21.0",
-    "@carbon/themes": "^10.21.0",
     "@stomp/stompjs": "^5.4.2",
     "@tippyjs/react": "^4.0.2",
     "carbon-icons": "^7.0.7",
@@ -57,16 +56,13 @@
     "date-fns": "^1.30.1",
     "dompurify": "^2.0.6",
     "downshift": "^5.2.1",
-    "invariant": "^2.2.3",
+    "focus-trap-react": "^8.9.1",
     "js-file-download": "^0.4.7",
-    "lodash.isequal": "^4.5.0",
     "match-sorter": "^4.2.1",
     "react-autosuggest": "^9.4.3",
     "react-dropzone": "^10.0.6",
-    "react-focus-trap": "^2.7.1",
     "react-modal": "^3.10.1",
     "react-toastify": "^5.3.2",
-    "warning": "^4.0.3",
     "window-or-global": "^1.0.1"
   },
   "peerDependencies": {
