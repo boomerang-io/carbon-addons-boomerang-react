@@ -14,10 +14,6 @@ const { prefix } = settings;
 
 class Feedback extends Component {
 
-  handleCloseModal = (closeModal) => {
-    closeModal();
-  };
-
   render() {
     return (
       <HeaderMenuItem
@@ -31,7 +27,7 @@ class Feedback extends Component {
             <>
               <ModalHeader
                 title="Submit an Idea"
-                closeModal={() => this.handleCloseModal(closeModal)}
+                closeModal={closeModal}
               />
               <ModalBody>
                 <div className={`${prefix}--bmrg-feedback`}>
@@ -58,7 +54,7 @@ class Feedback extends Component {
                 </div>
               </ModalBody>
               <ModalFooter>
-                <Button kind="secondary" onClick={() => this.handleCloseModal(closeModal)}>
+                <Button kind="secondary" onClick={closeModal}>
                   OK
                 </Button>
               </ModalFooter>

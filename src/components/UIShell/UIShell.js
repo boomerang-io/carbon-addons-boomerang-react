@@ -33,6 +33,11 @@ UIShell.propTypes = {
   companyName: PropTypes.string,
 
   /**
+   * used to redirect the users to a submit idea portal under feedback
+   */
+  sendIdeasUrl: PropTypes.string,
+
+  /**
    * Pass in whole header config object used for
    * - Feature flagging
    * - Platform links
@@ -158,6 +163,7 @@ UIShell.defaultProps = {
   renderPrivacyStatement: true,
   user: {},
   renderRightPanel: {},
+  sendIdeasUrl: "https://ideas.ibm.com",
 };
 
 function UIShell({
@@ -179,6 +185,7 @@ function UIShell({
   renderSidenav,
   skipToContentProps,
   user,
+  sendIdeasUrl,
 }) {
   const finalPlatformName = platformName || companyName;
   const finalAppName = appName || productName;
@@ -260,7 +267,7 @@ function UIShell({
             />
           ),
           isFeedbackEnabled && (
-            <Feedback platformName={platformName} sendIdeasUrl="https://ideas.ibm.com" key="Feedback" />
+            <Feedback platformName={platformName} sendIdeasUrl={sendIdeasUrl} key="Feedback" />
           ),
         ].filter(Boolean)}
         profileChildren={[
