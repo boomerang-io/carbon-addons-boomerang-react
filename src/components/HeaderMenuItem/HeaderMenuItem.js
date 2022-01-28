@@ -59,6 +59,7 @@ HeaderMenuItem.propTypes = {
     'information',
     'locked',
     'launch',
+    'idea'
   ]),
   /**
    *

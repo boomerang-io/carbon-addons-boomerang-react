@@ -1,0 +1,37 @@
+@include exports('addons-bmrg-feedback') {
+  .#{$prefix}--bmrg-feedback-container {
+    .#{$prefix}--modal-container {
+      height: rem(448px);
+    }
+
+    .#{$prefix}--bmrg-feedback {
+      height: rem(100px);
+      width: 100%;
+      margin-top: rem(16px);
+
+      a {
+        color: $bmrg-primary-color;
+      }
+
+      p {
+        margin-bottom: 1rem;
+      }
+
+      &__error {
+        color: #fb4b53;
+        font-size: 0.875rem;
+        font-weight: 400;
+        line-height: 1.125rem;
+        margin-top: rem(4px);
+        position: absolute;
+      }
+
+      .#{$prefix}--label {
+        color: $bmrg-brand-white;
+        font-size: rem(14px);
+        font-weight: 500;
+        line-height: rem(18px);
+      }
+    }
+  }
+}
