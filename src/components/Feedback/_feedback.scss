@@ -5,12 +5,13 @@
     }
 
     .#{$prefix}--bmrg-feedback {
+      color: $bmrg-brand-white;
       height: rem(100px);
-      width: 100%;
       margin-top: rem(16px);
+      width: 100%;
 
       a {
-        color: $bmrg-primary-color;
+        color: $bmrg-tertiary-color;
       }
 
       p {

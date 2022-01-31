@@ -54,7 +54,7 @@ class Feedback extends Component {
                 </div>
               </ModalBody>
               <ModalFooter>
-                <Button kind="secondary" onClick={closeModal}>
+                <Button kind="primary" onClick={closeModal}>
                   OK
                 </Button>
               </ModalFooter>
