@@ -42,6 +42,7 @@ class Feedback extends Component {
                     >
                       {this.props.sendIdeasUrl}
                     </a>
+                    .
                   </p>
                   <p>
                     For now, you must have an IBM email address and you will need to register with a
