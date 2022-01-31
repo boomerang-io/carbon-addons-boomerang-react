@@ -67,6 +67,7 @@ UIShell.propTypes = {
       name: PropTypes.string,
       platformName: PropTypes.string,
       privateTeams: PropTypes.bool,
+      sendIdeasUrl: PropTypes.string,
       sendMail: PropTypes.bool,
       signOutUrl: PropTypes.string,
       version: PropTypes.string,
@@ -163,7 +164,6 @@ UIShell.defaultProps = {
   renderPrivacyStatement: true,
   user: {},
   renderRightPanel: {},
-  sendIdeasUrl: "https://ideas.ibm.com",
 };
 
 function UIShell({
@@ -185,7 +185,6 @@ function UIShell({
   renderSidenav,
   skipToContentProps,
   user,
-  sendIdeasUrl,
 }) {
   const finalPlatformName = platformName || companyName;
   const finalAppName = appName || productName;
@@ -197,6 +196,7 @@ function UIShell({
    */
   const finalBaseUrl = platform?.baseEnvUrl || baseLaunchEnvUrl;
   const finalBaseServiceUrl = platform?.baseServicesUrl || baseServiceUrl;
+  const finalSendIdeasUrl = platform?.sendIdeasUrl || 'https://ideas.ibm.com';
   const isLogoEnabled = platform?.displayLogo || renderLogo;
   const isSupportEnabled = Boolean(features?.['support.enabled']);
   const isFeedbackEnabled = Boolean(features?.['feedback.enabled']);
@@ -266,9 +266,7 @@ function UIShell({
               text="Flow Documentation"
             />
           ),
-          isFeedbackEnabled && (
-            <Feedback platformName={platformName} sendIdeasUrl={sendIdeasUrl} key="Feedback" />
-          ),
+          isFeedbackEnabled && <Feedback sendIdeasUrl={finalSendIdeasUrl} key="Feedback" />,
         ].filter(Boolean)}
         profileChildren={[
           Boolean(user?.id) && (
