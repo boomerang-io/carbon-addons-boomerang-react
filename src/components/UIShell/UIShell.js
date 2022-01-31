@@ -33,11 +33,6 @@ UIShell.propTypes = {
   companyName: PropTypes.string,
 
   /**
-   * used to redirect the users to a submit idea portal under feedback
-   */
-  sendIdeasUrl: PropTypes.string,
-
-  /**
    * Pass in whole header config object used for
    * - Feature flagging
    * - Platform links
