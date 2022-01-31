@@ -66,6 +66,9 @@ class Feedback extends Component {
   }
 }
 
-Feedback.propTypes = { baseServiceUrl: PropTypes.string };
+Feedback.propTypes = {
+  platformName: PropTypes.string,
+  sendIdeasUrl: PropTypes.string
+};
 
 export default Feedback;
