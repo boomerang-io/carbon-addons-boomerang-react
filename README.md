@@ -21,7 +21,7 @@ yarn add @boomerang-io/carbon-addons-boomerang-react
 You need to import the `.scss` styles. If you are using SASS and webpack, perform the following import.
 
 ```css
-@import '~@boomerang-io/carbon-addons-boomerang-react/styles/scss/styles';
+@import '@boomerang-io/carbon-addons-boomerang-react/styles/scss/styles';
 ```
 
 You can then import components by the following:

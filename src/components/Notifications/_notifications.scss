@@ -1,4 +1,4 @@
-@import '~react-toastify/dist/ReactToastify.css';
+@import 'react-toastify/dist/ReactToastify.css';
 @include exports('addons-bmrg-notifications') {
   .#{$prefix}--bmrg-toastify-container {
     .Toastify__toast {

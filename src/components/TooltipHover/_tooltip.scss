@@ -1,5 +1,5 @@
-@import '~tippy.js/dist/tippy.css';
-@import '~tippy.js/dist/svg-arrow.css';
+@import 'tippy.js/dist/tippy.css';
+@import 'tippy.js/dist/svg-arrow.css';
 @include exports('addons-bmrg-tooltip') {
   .#{$prefix}--bmrg-tooltip {
     background-color: #343a3f;
