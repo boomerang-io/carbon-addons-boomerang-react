@@ -275,6 +275,14 @@ function UIShell({
               isFlowApp={isFlowApp}
             />
           ),
+          platform?.sendMail && (
+            <HeaderMenuLink
+              external={false}
+              href={`${finalBaseUrl}/launchpad/email-notifications`}
+              iconName="email"
+              text="Email Preferences"
+            />
+          ),
           baseServiceUrl && isPrivacyStatementDisabled === false && (
             <PrivacyStatement
               key="Privacy Statement"
