@@ -16,6 +16,7 @@ $carbon-addons-bmrg--theme-map--boomerang: (
   bmrg-header-modal-overlay: rgba(39, 39, 39, 0.5),
   bmrg-header-modal-cancel-color: #b9bfc7,
   bmrg-header-modal-confirm-color: #08bdba,
+  bmrg-header-modal-link-color: #08bdba,
   bmrg-header-nav-color: #061727,
   bmrg-header-modal-background-color: #061727,
   bmrg-header-button-text-color: #272727,
@@ -42,6 +43,7 @@ $carbon-addons-bmrg--theme-map--iap-dark: (
   bmrg-header-alternate-color: #b9bfc7,
   bmrg-header-modal-cancel-color: #b9bfc7,
   bmrg-header-modal-confirm-color: #20d5d2,
+  bmrg-header-modal-link-color: #20d5d2,
   bmrg-header-nav-color: #242a2e,
   bmrg-header-modal-background-color: #242a2e,
   bmrg-header-button-text-color: #242a2e,
@@ -88,6 +90,7 @@ $carbon-addons-bmrg--theme-maps: (
   $bmrg-header-modal-cancel-color: map-get($theme, bmrg-header-modal-cancel-color) !global;
 
   $bmrg-header-modal-confirm-color: map-get($theme, bmrg-header-modal-confirm-color) !global;
+  $bmrg-header-modal-link-color: map-get($theme, bmrg-header-modal-link-color) !global;
   $bmrg-header-nav-color: map-get($theme, bmrg-header-nav-color) !global;
   $bmrg-header-modal-background-color: map-get($theme, bmrg-header-modal-background-color) !global;
   $bmrg-header-button-text-color: map-get($theme, bmrg-header-button-text-color) !global;
