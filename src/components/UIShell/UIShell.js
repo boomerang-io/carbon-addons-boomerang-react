@@ -65,6 +65,7 @@ UIShell.propTypes = {
       platformName: PropTypes.string,
       platformOrganization: PropTypes.string,
       privateTeams: PropTypes.bool,
+      sendIdeasUrl: PropTypes.string,
       sendMail: PropTypes.bool,
       signOutUrl: PropTypes.string,
       version: PropTypes.string,
@@ -208,7 +209,7 @@ function UIShell({
     renderGdprRedirect === false || features?.['consent.enabled'] === false;
 
   /**
-   * Also enable/disable privacy statement via the consent.enaable feature flag
+   * Also enable/disable privacy statement via the consent.enabled feature flag
    */
   const isPrivacyStatementDisabled =
     renderPrivacyStatement === false || features?.['consent.enabled'] === false;
