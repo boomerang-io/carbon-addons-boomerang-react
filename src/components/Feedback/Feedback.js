@@ -45,8 +45,8 @@ class Feedback extends Component {
                     .
                   </p>
                   <p>
-                    For now, you must have an IBM email address and you will need to register with a
-                    password during your first visit.
+                    For now, you must have an {this.props.platformOrganization} email address and
+                    you will need to register with a password during your first visit.
                   </p>
                   <p>
                     You will have the opportunity to see other public ideas, vote on them and track
@@ -69,6 +69,8 @@ class Feedback extends Component {
 }
 
 Feedback.propTypes = {
+  platformName: PropTypes.string,
+  platformOrganization: PropTypes.string,
   sendIdeasUrl: PropTypes.string,
 };
 

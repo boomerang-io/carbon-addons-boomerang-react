@@ -43,6 +43,7 @@ UIShell.propTypes = {
     features: PropTypes.shape({
       'consent.enabled': PropTypes.bool,
       'docs.enabled': PropTypes.bool,
+      'feedback.enabled': PropTypes.bool,
       'metering.enabled': PropTypes.bool,
       'notifications.enabled': PropTypes.bool,
       'support.enabled': PropTypes.bool,
@@ -59,8 +60,10 @@ UIShell.propTypes = {
       baseServicesUrl: PropTypes.string,
       communityUrl: PropTypes.string,
       displayLogo: PropTypes.bool,
+      feedbackUrl: PropTypes.string,
       name: PropTypes.string,
       platformName: PropTypes.string,
+      platformOrganization: PropTypes.string,
       privateTeams: PropTypes.bool,
       sendIdeasUrl: PropTypes.string,
       sendMail: PropTypes.bool,
@@ -191,7 +194,7 @@ function UIShell({
    */
   const finalBaseUrl = platform?.baseEnvUrl || baseLaunchEnvUrl;
   const finalBaseServiceUrl = platform?.baseServicesUrl || baseServiceUrl;
-  const finalSendIdeasUrl = platform?.sendIdeasUrl || 'https://ideas.ibm.com';
+  const finalSendIdeasUrl = platform?.feedbackUrl || 'https://ideas.ibm.com';
   const isLogoEnabled = platform?.displayLogo || renderLogo;
   const isSupportEnabled = Boolean(features?.['support.enabled']);
   const isFeedbackEnabled = Boolean(features?.['feedback.enabled']);
@@ -261,7 +264,14 @@ function UIShell({
               text="Flow Documentation"
             />
           ),
-          isFeedbackEnabled && <Feedback sendIdeasUrl={finalSendIdeasUrl} key="Feedback" />,
+          isFeedbackEnabled && (
+            <Feedback
+              key="Feedback"
+              platformName={platform.platformName}
+              platformOrganization={platform.platformOrganization}
+              sendIdeasUrl={finalSendIdeasUrl}
+            />
+          ),
         ].filter(Boolean)}
         profileChildren={[
           Boolean(user?.id) && (

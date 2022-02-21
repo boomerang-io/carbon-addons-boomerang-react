@@ -61,6 +61,8 @@ storiesOf('UIShell', module)
             version: text('platform.version', '5.0.0'),
             signOutUrl: 'https://ibm.com',
             communityUrl: 'https://developer.ibm.com',
+            platformName: text('platform.platformName', 'IBM Boomerang'),
+            platformOrganization: text('platform.platformOrganization', 'IBM'),
           },
           platformMessage: {
             kind: text('platformMessage.kind', 'info'),
