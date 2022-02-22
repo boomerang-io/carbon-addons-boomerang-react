@@ -2,13 +2,11 @@ import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 import Downshift from 'downshift';
-import isEqual from 'lodash/isequal';
+import { isEqual } from 'lodash';
 import { settings } from 'carbon-components';
 import { WarningFilled16 } from '@carbon/icons-react';
 import { Tag } from 'carbon-components-react';
-import ListBox, {
-  PropTypes as ListBoxPropTypes,
-} from 'carbon-components-react/lib/components/ListBox';
+import ListBox, { PropTypes as ListBoxPropTypes } from '../../internal/ListBox';
 import { isAccessibleKeyDownEvent } from '../../tools/accessibility';
 import { mapDownshiftProps } from '../../tools/createPropAdapter';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';

@@ -32,23 +32,23 @@ storiesOf('Header', module)
       navLinks={object('navLinks', [
         {
           name: 'Launchpad',
-          url: 'https://launch.boomerangplatform.net/launchpad/',
+          url: 'https://servicesessentials.ibm.com/launchpad/',
         },
         {
           name: 'Next',
-          url: 'https://launch.boomerangplatform.net/next/',
+          url: 'https://servicesessentials.ibm.com/next/',
         },
         {
           name: 'Status',
-          url: 'https://launch.boomerangplatform.net/status/',
+          url: 'https://servicesessentials.ibm.com/status/',
         },
         {
           name: 'Docs',
-          url: 'https://launch.boomerangplatform.net/docs/',
+          url: 'https://servicesessentials.ibm.com/docs/',
         },
         {
           name: 'Admin',
-          url: 'https://launch.boomerangplatform.net/admin/',
+          url: 'https://servicesessentials.ibm.com/admin/',
         },
       ])}
       notificationsConfig={{
@@ -91,23 +91,23 @@ storiesOf('Header', module)
         navLinks={object('navLinks', [
           {
             name: 'Launchpad',
-            url: 'https://launch.boomerangplatform.net/launchpad/',
+            url: 'https://servicesessentials.ibm.com/launchpad/',
           },
           {
             name: 'Next',
-            url: 'https://launch.boomerangplatform.net/next/',
+            url: 'https://servicesessentials.ibm.com/next/',
           },
           {
             name: 'Status',
-            url: 'https://launch.boomerangplatform.net/status/',
+            url: 'https://servicesessentials.ibm.com/status/',
           },
           {
             name: 'Docs',
-            url: 'https://launch.boomerangplatform.net/docs/',
+            url: 'https://servicesessentials.ibm.com/docs/',
           },
           {
             name: 'Admin',
-            url: 'https://launch.boomerangplatform.net/admin/',
+            url: 'https://servicesessentials.ibm.com/admin/',
           },
         ])}
         notificationsConfig={{

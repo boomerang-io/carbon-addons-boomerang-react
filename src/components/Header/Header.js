@@ -12,7 +12,7 @@ import {
 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
 import FocusTrap from 'focus-trap-react';
-import { SkipToContent } from 'carbon-components-react/lib/components/UIShell';
+import { SkipToContent } from 'carbon-components-react';
 import PlatformNotificationsContainer from '../PlatformNotifications';
 import HeaderMenu from '../HeaderMenu';
 import NotificationsContainer from '../Notifications/NotificationsContainer';

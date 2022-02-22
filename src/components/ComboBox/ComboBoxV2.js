@@ -14,9 +14,7 @@ import { Checkmark16, WarningFilled16 } from '@carbon/icons-react';
 import { match, keys } from '../../internal/keyboard';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { mapDownshiftProps } from '../../tools/createPropAdapter';
-import ListBox, {
-  PropTypes as ListBoxPropTypes,
-} from 'carbon-components-react/lib/components/ListBox';
+import ListBox, { PropTypes as ListBoxPropTypes } from '../../internal/ListBox';
 
 const { prefix } = settings;
 
@@ -158,7 +156,7 @@ export default class ComboBox extends React.Component {
      * @param {string} inputText
      */
     onInputBlur: PropTypes.func,
-    
+
     /**
      * Callback function to notify consumer when the text input changes.
      * This provides support to change available items based on the text.
@@ -478,7 +476,8 @@ export default class ComboBox extends React.Component {
                   {...getToggleButtonProps({
                     disabled,
                     onBlur: onInputBlur,
-                    onKeyDown: (e) => this.handleOnInputKeyDown(e, toggleMenu, filteredItems, reset),
+                    onKeyDown: (e) =>
+                      this.handleOnInputKeyDown(e, toggleMenu, filteredItems, reset),
                   })}
                 >
                   <input

@@ -40,19 +40,20 @@ storiesOf('UIShell', module)
             'community.enabled': boolean('community.enabled', true),
             'notifications.enabled': boolean('notifications.enabled', true),
             'support.enabled': boolean('support.enabled', true),
+            'feedback.enabled': boolean('feedback.enabled', true),
           },
           navigation: [
             {
               name: 'Launchpad',
-              url: 'https://launch.boomerangplatform.net/launchpad',
+              url: 'https://servicesessentials.ibm.com/launchpad',
             },
             {
               name: 'Admin',
-              url: 'https://launch.boomerangplatform.net/launchpad',
+              url: 'https://servicesessentials.ibm.com/launchpad',
             },
             {
               name: 'Docs',
-              url: 'https://launch.boomerangplatform.net/launchpad',
+              url: 'https://servicesessentials.ibm.com/launchpad',
             },
           ],
           platform: {
@@ -60,6 +61,8 @@ storiesOf('UIShell', module)
             version: text('platform.version', '5.0.0'),
             signOutUrl: 'https://ibm.com',
             communityUrl: 'https://developer.ibm.com',
+            platformName: text('platform.platformName', 'IBM Boomerang'),
+            platformOrganization: text('platform.platformOrganization', 'IBM'),
           },
           platformMessage: {
             kind: text('platformMessage.kind', 'info'),
@@ -103,15 +106,15 @@ storiesOf('UIShell', module)
             navigation: [
               {
                 name: 'Launchpad',
-                url: 'https://launch.boomerangplatform.net/launchpad',
+                url: 'https://servicesessentials.ibm.com/launchpad',
               },
               {
                 name: 'Admin',
-                url: 'https://launch.boomerangplatform.net/launchpad',
+                url: 'https://servicesessentials.ibm.com/launchpad',
               },
               {
                 name: 'Docs',
-                url: 'https://launch.boomerangplatform.net/launchpad',
+                url: 'https://servicesessentials.ibm.com/launchpad',
               },
             ],
             platform: {
@@ -224,15 +227,15 @@ storiesOf('UIShell', module)
           navigation: [
             {
               name: 'Launchpad',
-              url: 'https://launch.boomerangplatform.net/launchpad',
+              url: 'https://servicesessentials.ibm.com/launchpad',
             },
             {
               name: 'Admin',
-              url: 'https://launch.boomerangplatform.net/launchpad',
+              url: 'https://servicesessentials.ibm.com/launchpad',
             },
             {
               name: 'Docs',
-              url: 'https://launch.boomerangplatform.net/launchpad',
+              url: 'https://servicesessentials.ibm.com/launchpad',
             },
           ],
           platform: {
@@ -295,15 +298,15 @@ storiesOf('UIShell', module)
           navigation: [
             {
               name: 'Launchpad',
-              url: 'https://launch.boomerangplatform.net/launchpad',
+              url: 'https://servicesessentials.ibm.com/launchpad',
             },
             {
               name: 'Admin',
-              url: 'https://launch.boomerangplatform.net/launchpad',
+              url: 'https://servicesessentials.ibm.com/launchpad',
             },
             {
               name: 'Docs',
-              url: 'https://launch.boomerangplatform.net/launchpad',
+              url: 'https://servicesessentials.ibm.com/launchpad',
             },
           ],
           platform: {
@@ -346,15 +349,15 @@ storiesOf('UIShell', module)
           navigation: [
             {
               name: 'Launchpad',
-              url: 'https://launch.boomerangplatform.net/launchpad',
+              url: 'https://servicesessentials.ibm.com/launchpad',
             },
             {
               name: 'Admin',
-              url: 'https://launch.boomerangplatform.net/launchpad',
+              url: 'https://servicesessentials.ibm.com/launchpad',
             },
             {
               name: 'Docs',
-              url: 'https://launch.boomerangplatform.net/launchpad',
+              url: 'https://servicesessentials.ibm.com/launchpad',
             },
           ],
           platform: {

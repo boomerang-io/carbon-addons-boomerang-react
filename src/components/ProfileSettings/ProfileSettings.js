@@ -12,18 +12,14 @@ import {
   StructuredListCell,
   StructuredListSkeleton,
 } from 'carbon-components-react';
-import {
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-} from 'carbon-components-react/lib/components/ComposedModal';
+import { ModalHeader, ModalBody, ModalFooter } from 'carbon-components-react';
 import Avatar from '../Avatar';
 import ErrorMessage from '../ErrorMessage';
 import HeaderMenuUser from '../HeaderMenuUser';
 import notify from '../Notifications/notify';
 import ToastNotification from '../Notifications/ToastNotification';
 import { settings } from 'carbon-components';
-import sortBy from 'lodash/sortby';
+import { sortBy } from 'lodash';
 
 const { prefix } = settings;
 

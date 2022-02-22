@@ -72,6 +72,7 @@ $css--plex: true !default;
 @import '../components/ContactUs/contactUs';
 @import '../components/Creatable/creatable';
 @import '../components/DateInput/dateInput';
+@import '../components/Feedback/feedback';
 @import '../components/DecisionButtons/decisionButtons';
 @import '../components/DynamicFormik/dynamicFormik';
 @import '../components/ErrorMessage/errorMessage';
@@ -115,13 +116,14 @@ $css--plex: true !default;
 // Scope to modal styles so they don't overwrite other carbon styles
 .#{$prefix}--loading-overlay {
   //harcoded to the RGBA value of the ui-background variable
-  background-color: rgba(242,244,248,0.5); 
+  background-color: rgba(242,244,248,0.5);
 }
 .#{$prefix}--tooltip {
   z-index: 9999;
 }
 .#{$prefix}--bmrg-aboutPlatform-container,
 .#{$prefix}--bmrg-contact-us-container,
+.#{$prefix}--bmrg-feedback-container,
 .#{$prefix}--bmrg-privacy-statement-container,
 .#{$prefix}--bmrg-profile-settings-container,
 .#{$prefix}--bmrg-report-bug-container,

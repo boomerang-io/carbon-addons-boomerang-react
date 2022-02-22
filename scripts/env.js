@@ -3,6 +3,8 @@
 const BABEL_ENV = process.env.BABEL_ENV;
 
 module.exports = () => ({
+  plugins:
+    BABEL_ENV === 'es' || BABEL_ENV === 'cjs' ? ['@babel/plugin-transform-runtime'] : undefined,
   presets: [
     [
       require.resolve('@babel/preset-env'),
@@ -13,6 +15,5 @@ module.exports = () => ({
         },
       },
     ],
-    '@babel/preset-react',
   ],
 });

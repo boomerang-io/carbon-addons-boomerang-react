@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import { ComposedModal, Button } from 'carbon-components-react';
 import PropTypes from 'prop-types';
-import {
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-} from 'carbon-components-react/lib/components/ComposedModal';
+import { ModalHeader, ModalBody, ModalFooter } from 'carbon-components-react';
 import { settings } from 'carbon-components';
 
 import { USER_STATUS } from './constants';
