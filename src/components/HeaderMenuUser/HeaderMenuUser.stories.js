@@ -1,5 +1,4 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { text } from '@storybook/addon-knobs';
 
 import HeaderMenuUser from './HeaderMenuUser';
@@ -10,7 +9,11 @@ const styleProp = {
   width: '200px',
 };
 
-storiesOf('HeaderMenuUser', module).add('default', () => {
+export default {
+  title: 'HeaderMenuUser',
+};
+
+export const Default = () => {
   return (
     <div style={styleProp}>
       <HeaderMenuUser
@@ -19,4 +22,8 @@ storiesOf('HeaderMenuUser', module).add('default', () => {
       />
     </div>
   );
-});
+};
+
+Default.story = {
+  name: 'default',
+};

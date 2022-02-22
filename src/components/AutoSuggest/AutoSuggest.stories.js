@@ -1,5 +1,4 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { text } from '@storybook/addon-knobs';
 
@@ -22,7 +21,11 @@ const animals = [
   { label: 'Penguim', value: 'penguim' },
 ];
 
-storiesOf('AutoSuggest', module).add('default', () => {
+export default {
+  title: 'AutoSuggest',
+};
+
+export const Default = () => {
   return (
     <div style={{ width: '25rem' }}>
       <AutoSuggest
@@ -38,4 +41,8 @@ storiesOf('AutoSuggest', module).add('default', () => {
       </AutoSuggest>
     </div>
   );
-});
+};
+
+Default.story = {
+  name: 'default',
+};

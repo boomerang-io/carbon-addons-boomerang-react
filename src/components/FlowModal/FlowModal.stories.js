@@ -1,5 +1,4 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { Button, TextInput, ModalBody, ModalFooter, Tooltip } from 'carbon-components-react';
 import FlowModal from './FlowModal';
 import FlowModalForm from './FlowModalForm';
@@ -12,12 +11,7 @@ const Component1 = (props) => (
         onChange={(e) => props.saveValues({ text: e.target.value })}
         placeholder="The second component will know what you write here"
       />
-      <Tooltip
-        triggerId="test-tooltip"
-        direction="top"
-        tabIndex={0}
-        triggerText=""
-      >
+      <Tooltip triggerId="test-tooltip" direction="top" tabIndex={0} triggerText="">
         Test Tooltip
       </Tooltip>
     </ModalBody>
@@ -68,56 +62,68 @@ class Component3 extends React.Component {
   }
 }
 
-storiesOf('FlowModal', module)
-  .add('default', () => {
-    return (
-      <FlowModal
-        appElement="#root"
-        composedModalProps={{ selectorPrimaryFocus: 'input[id="testing"]' }}
-        confirmModalProps={{
-          title: 'Close Modal Flow?',
-          children: <div>You will need to start from the first component</div>,
-        }}
-        modalHeaderProps={{
-          title: 'MODAL FLOW',
-          label: 'Change between components and persisted data',
-        }}
-        modalTrigger={({ openModal }) => <Button onClick={openModal}>Open modal flow</Button>}
-      >
-        <Component1 />
-        <Component2 />
-        <Component3 />
-      </FlowModal>
-    );
-  })
-  .add('initially open', () => {
-    return (
-      <FlowModal
-        isOpen
-        appElement="#root"
-        progressSteps={[
-          { label: 'Source' },
-          { label: 'Repo' },
-          { label: 'App Type' },
-          { label: 'Name' },
-          { label: 'Confirm' },
-        ]}
-        composedModalProps={{ selectorPrimaryFocus: 'input[id="testing"]' }}
-        confirmModalProps={{
-          title: 'Close Create Component?',
-          children: <div>Your current progress will not be saved.</div>,
-        }}
-        modalHeaderProps={{
-          subTitle: 'Create a new component for IBM Services Engineering',
-          title: 'Create Component',
-        }}
-        modalTrigger={({ openModal }) => <Button onClick={openModal}>Open modal flow</Button>}
-      >
-        <Component1 />
-        <Component2 />
-        <Component2 />
-        <Component2 />
-        <Component3 />
-      </FlowModal>
-    );
-  });
+export default {
+  title: 'FlowModal',
+};
+
+export const Default = () => {
+  return (
+    <FlowModal
+      appElement="#root"
+      composedModalProps={{ selectorPrimaryFocus: 'input[id="testing"]' }}
+      confirmModalProps={{
+        title: 'Close Modal Flow?',
+        children: <div>You will need to start from the first component</div>,
+      }}
+      modalHeaderProps={{
+        title: 'MODAL FLOW',
+        label: 'Change between components and persisted data',
+      }}
+      modalTrigger={({ openModal }) => <Button onClick={openModal}>Open modal flow</Button>}
+    >
+      <Component1 />
+      <Component2 />
+      <Component3 />
+    </FlowModal>
+  );
+};
+
+Default.story = {
+  name: 'default',
+};
+
+export const InitiallyOpen = () => {
+  return (
+    <FlowModal
+      isOpen
+      appElement="#root"
+      progressSteps={[
+        { label: 'Source' },
+        { label: 'Repo' },
+        { label: 'App Type' },
+        { label: 'Name' },
+        { label: 'Confirm' },
+      ]}
+      composedModalProps={{ selectorPrimaryFocus: 'input[id="testing"]' }}
+      confirmModalProps={{
+        title: 'Close Create Component?',
+        children: <div>Your current progress will not be saved.</div>,
+      }}
+      modalHeaderProps={{
+        subTitle: 'Create a new component for IBM Services Engineering',
+        title: 'Create Component',
+      }}
+      modalTrigger={({ openModal }) => <Button onClick={openModal}>Open modal flow</Button>}
+    >
+      <Component1 />
+      <Component2 />
+      <Component2 />
+      <Component2 />
+      <Component3 />
+    </FlowModal>
+  );
+};
+
+InitiallyOpen.story = {
+  name: 'initially open',
+};

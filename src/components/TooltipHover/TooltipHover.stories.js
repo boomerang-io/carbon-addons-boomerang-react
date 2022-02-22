@@ -1,9 +1,12 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { select, text } from '@storybook/addon-knobs';
 import TooltipHover from './TooltipHover';
 
-storiesOf('TooltipHover', module).add('default', () => {
+export default {
+  title: 'TooltipHover',
+};
+
+export const Default = () => {
   return (
     <div style={{ marginTop: '10rem' }}>
       <TooltipHover
@@ -19,4 +22,8 @@ storiesOf('TooltipHover', module).add('default', () => {
       </TooltipHover>
     </div>
   );
-});
+};
+
+Default.story = {
+  name: 'default',
+};

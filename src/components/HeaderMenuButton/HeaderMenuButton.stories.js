@@ -1,9 +1,16 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { storiesOf } from '@storybook/react';
 
 import HeaderMenuButton from './index';
 
-storiesOf('HeaderMenuButton', module).add('default', () => {
+export default {
+  title: 'HeaderMenuButton',
+};
+
+export const Default = () => {
   return <HeaderMenuButton text="Header Button" iconName="workspace" onClick={action('click')} />;
-});
+};
+
+Default.story = {
+  name: 'default',
+};

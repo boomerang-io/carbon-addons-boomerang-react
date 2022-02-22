@@ -1,10 +1,17 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 
 import HeaderMenuLink from './index'; // Using default export
 
-storiesOf('HeaderMenuLink', module).add('default', () => {
+export default {
+  title: 'HeaderMenuLink',
+};
+
+export const Default = () => {
   return (
     <HeaderMenuLink text="Navigate from Platform" iconName="workspace" href="https://www.ibm.com" />
   );
-});
+};
+
+Default.story = {
+  name: 'default',
+};

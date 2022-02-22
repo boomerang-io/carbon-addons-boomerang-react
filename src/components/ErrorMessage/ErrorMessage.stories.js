@@ -1,8 +1,15 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 
 import ErrorComponent from './index';
 
-storiesOf('ErrorMessage', module).add('default', () => {
+export default {
+  title: 'ErrorMessage',
+};
+
+export const Default = () => {
   return <ErrorComponent />;
-});
+};
+
+Default.story = {
+  name: 'default',
+};

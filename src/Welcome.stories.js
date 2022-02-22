@@ -1,5 +1,4 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import './welcome-story.css';
 import BoomerangLogo from '../.storybook/assets/boomerang';
 import {
@@ -15,7 +14,11 @@ import {
 //const carbonExports = Object.keys(require('carbon-components-react'));
 const boomerangAddonsExports = Object.keys(require('./index'));
 
-storiesOf('Getting Started|Welcome', module).add('About Storybook', () => (
+export default {
+  title: 'Getting Started|Welcome',
+};
+
+export const AboutStorybook = () => (
   <div className="storybook-welcome">
     <BoomerangLogo style={{ marginLeft: '1rem' }} />
     <p>
@@ -67,4 +70,4 @@ storiesOf('Getting Started|Welcome', module).add('About Storybook', () => (
       </AccordionItem>
     </Accordion>
   </div>
-));
+);

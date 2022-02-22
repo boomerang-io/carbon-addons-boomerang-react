@@ -1,5 +1,4 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 
 import {
   TextArea,
@@ -48,10 +47,18 @@ function Component1() {
   );
 }
 
-storiesOf('Modal', module).add('default', () => {
+export default {
+  title: 'Modal',
+};
+
+export const Default = () => {
   return (
     <Modal isOpen appElement="#root">
       <Component1 />
     </Modal>
   );
-});
+};
+
+Default.story = {
+  name: 'default',
+};

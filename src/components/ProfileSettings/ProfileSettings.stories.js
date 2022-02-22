@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
 import ProfileSettings from './ProfileSettings';
-import { storiesOf } from '@storybook/react';
 import MockAdapter from 'axios-mock-adapter';
 import { PROFILE_SETTINGS_DATA } from './constants';
 
@@ -9,7 +8,11 @@ const mock = new MockAdapter(axios);
 mock.onGet('https://ibm.com/launchpad/user').reply(200, PROFILE_SETTINGS_DATA);
 mock.onPatch('https://ibm.com/users/profile').reply(200);
 
-storiesOf('ProfileSettings', module).add('default', () => {
+export default {
+  title: 'ProfileSettings',
+};
+
+export const Default = () => {
   return (
     <div style={{ width: '16rem' }}>
       <ProfileSettings
@@ -19,4 +22,8 @@ storiesOf('ProfileSettings', module).add('default', () => {
       />
     </div>
   );
-});
+};
+
+Default.story = {
+  name: 'default',
+};

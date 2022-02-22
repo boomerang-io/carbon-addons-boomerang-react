@@ -1,8 +1,5 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
-
 import { action } from '@storybook/addon-actions';
-
 import OptionsGrid from './index';
 // import { tools, selectedTools } from "../../helpers/mockData";
 
@@ -73,38 +70,55 @@ export const selectedTools = [
 const mockFunc = action('onSelect');
 const style = { background: '#1d496d', margin: '2rem', width: '45rem' };
 
-storiesOf('OptionsGrid', module).add('single column', () => {
+export default {
+  title: 'OptionsGrid',
+  excludeStories: ['selectedTools'],
+};
+
+export const SingleColumn = () => {
   return (
     <div style={style}>
       <OptionsGrid columns={1} data={tools} selectedItems={selectedTools} onSelect={mockFunc} />
     </div>
   );
-});
+};
 
-storiesOf('OptionsGrid', module)
-  .add('double column', () => {
-    return (
-      <div style={style}>
-        <OptionsGrid
-          width="5rem"
-          columns={2}
-          data={tools}
-          selectedItems={selectedTools}
-          onSelect={mockFunc}
-        />
-      </div>
-    );
-  })
-  .add('triple column', () => {
-    return (
-      <div style={style}>
-        <OptionsGrid
-          width="5rem"
-          columns={3}
-          data={tools}
-          selectedItems={selectedTools}
-          onSelect={mockFunc}
-        />
-      </div>
-    );
-  });
+SingleColumn.story = {
+  name: 'single column',
+};
+
+export const DoubleColumn = () => {
+  return (
+    <div style={style}>
+      <OptionsGrid
+        width="5rem"
+        columns={2}
+        data={tools}
+        selectedItems={selectedTools}
+        onSelect={mockFunc}
+      />
+    </div>
+  );
+};
+
+DoubleColumn.story = {
+  name: 'double column',
+};
+
+export const TripleColumn = () => {
+  return (
+    <div style={style}>
+      <OptionsGrid
+        width="5rem"
+        columns={3}
+        data={tools}
+        selectedItems={selectedTools}
+        onSelect={mockFunc}
+      />
+    </div>
+  );
+};
+
+TripleColumn.story = {
+  name: 'triple column',
+};

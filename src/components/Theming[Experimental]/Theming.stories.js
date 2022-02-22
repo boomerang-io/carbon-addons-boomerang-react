@@ -1,5 +1,4 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { select } from '@storybook/addon-knobs';
 import {
   Accordion,
@@ -21,7 +20,11 @@ import { comboBoxItems, dropdownOptions, multiSelectOptions } from './propsData'
 
 const Divider = () => <div style={{ margin: '2rem' }} />;
 
-storiesOf('Theming', module).add('default', () => {
+export default {
+  title: 'Theming',
+};
+
+export const Default = () => {
   return (
     // dark-theme backgroundColor: '#1c496d'
     // light-theme backgroundColor: '#EAEAEA'
@@ -110,4 +113,8 @@ storiesOf('Theming', module).add('default', () => {
       <DataTable />
     </div>
   );
-});
+};
+
+Default.story = {
+  name: 'default',
+};

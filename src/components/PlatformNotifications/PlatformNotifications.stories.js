@@ -1,5 +1,4 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { boolean } from '@storybook/addon-knobs';
 
@@ -8,7 +7,11 @@ import PlatformNotificationsContainer from './index';
 // const mockSocketUrl = 'http://localhost:7750/notifications/ws';
 const mockSocketUrl = 'https://www.google.com/notifications/ws';
 
-storiesOf('PlatformNotifications', module).add('default', () => {
+export default {
+  title: 'PlatformNotifications',
+};
+
+export const Default = () => {
   return (
     <PlatformNotificationsContainer
       initialNotifications={[
@@ -29,4 +32,8 @@ storiesOf('PlatformNotifications', module).add('default', () => {
       setHasNewNotifications={action('setHasNewNotifications')}
     />
   );
-});
+};
+
+Default.story = {
+  name: 'default',
+};

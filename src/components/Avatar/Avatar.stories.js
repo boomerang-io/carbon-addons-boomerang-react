@@ -1,12 +1,15 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { text } from '@storybook/addon-knobs';
 
 import Avatar from './Avatar';
 
 const styleProp = { backgroundColor: '#50565b' };
 
-storiesOf('Avatar', module).add('default', () => {
+export default {
+  title: 'Avatar',
+};
+
+export const Default = () => {
   return (
     <div style={styleProp}>
       <Avatar
@@ -15,4 +18,8 @@ storiesOf('Avatar', module).add('default', () => {
       />
     </div>
   );
-});
+};
+
+Default.story = {
+  name: 'default',
+};

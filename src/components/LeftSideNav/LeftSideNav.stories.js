@@ -1,5 +1,4 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { ServiceDesk16 } from '@carbon/icons-react';
 import {
   SideNav,
@@ -12,7 +11,11 @@ import { BrowserRouter as Router, Link } from 'react-router-dom';
 
 import LeftSideNav from './LeftSideNav';
 
-storiesOf('LeftSideNav', module).add('with Router', () => (
+export default {
+  title: 'LeftSideNav',
+};
+
+export const WithRouter = () => (
   <Router>
     <LeftSideNav>
       <SideNav expanded>
@@ -39,4 +42,8 @@ storiesOf('LeftSideNav', module).add('with Router', () => (
       </SideNav>
     </LeftSideNav>
   </Router>
-));
+);
+
+WithRouter.story = {
+  name: 'with Router',
+};
