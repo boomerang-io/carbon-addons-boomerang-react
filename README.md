@@ -56,7 +56,7 @@ Please check out our [Contribution Guidelines](./.github/CONTRIBUTING.md) for mo
 
 ### v2
 
-The big change here is finally supporting tree-shaking properly. This should reduce bundle size and builds times, sometimes drastically based on your use case.
+The big change here is finally supporting tree-shaking properly. This should reduce bundle size and builds times, sometimes drastically based on your use case. [View the migration guide](./documentation/guides/v2-migration.md) for updating to v2.
 
 **Features**
 
