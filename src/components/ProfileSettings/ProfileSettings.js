@@ -19,7 +19,7 @@ import HeaderMenuUser from '../HeaderMenuUser';
 import notify from '../Notifications/notify';
 import ToastNotification from '../Notifications/ToastNotification';
 import { settings } from 'carbon-components';
-import { sortBy } from 'lodash';
+import sortBy from 'lodash.sortby';
 
 const { prefix } = settings;
 
