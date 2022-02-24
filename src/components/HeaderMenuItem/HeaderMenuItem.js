@@ -6,6 +6,7 @@ import {
   Chat16,
   Debug20,
   Group20,
+  Idea16,
   Information16,
   Launch16,
   Locked16,
@@ -29,6 +30,7 @@ const iconMapping = {
   information: <Information16 fill={iconFill} className={iconClassName} />,
   locked: <Locked16 fill={iconFill} className={iconClassName} />,
   launch: <Launch16 fill={iconFill} className={iconClassName} />,
+  idea: <Idea16 fill={iconFill} className={iconClassName} />,
 };
 
 HeaderMenuItem.propTypes = {
@@ -57,6 +59,7 @@ HeaderMenuItem.propTypes = {
     'information',
     'locked',
     'launch',
+    'idea',
   ]),
   /**
    *
