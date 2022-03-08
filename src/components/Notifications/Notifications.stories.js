@@ -6,9 +6,11 @@ import NotificationsContainer from './NotificationsContainer';
 import ToastNotification from './ToastNotification';
 import notify from './notify';
 
-export default {
+const about = {
   title: 'Notifications',
 };
+
+export default about;
 
 export const Default = () => {
   return (

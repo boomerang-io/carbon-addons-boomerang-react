@@ -1,7 +1,7 @@
 {
   "name": "@boomerang-io/carbon-addons-boomerang-react",
   "description": "Carbon Addons for Boomerang apps",
-  "version": "2.0.0-rc.1",
+  "version": "2.0.0-rc.2",
   "author": {
     "name": "Tim Bula",
     "email": "timrbula@gmail.com"
@@ -48,49 +48,38 @@
     "test:staged": "cross-env CI=true react-scripts test --passWithNoTests --findRelatedTests --bail"
   },
   "dependencies": {
-    "@babel/runtime": "^7.16.7",
-    "@carbon/themes": "^10.50.0",
-    "@stomp/stompjs": "^5.4.2",
-    "@tippyjs/react": "^4.0.2",
-    "classnames": "^2.2.5",
-    "date-fns": "^1.30.1",
-    "dompurify": "^2.0.6",
-    "downshift": "^5.2.1",
-    "focus-trap-react": "^8.9.1",
-    "js-file-download": "^0.4.7",
-    "lodash.get": "^4.4.2",
-    "lodash.isequal": "^4.5.0",
-    "lodash.sortby": "^4.7.0",
-    "match-sorter": "^6.3.1",
-    "react-autosuggest": "^9.4.3",
-    "react-dropzone": "^10.0.6",
-    "react-modal": "^3.10.1",
-    "react-toastify": "^5.3.2",
-    "sockjs-client": "^1.5.2",
-    "window-or-global": "^1.0.1"
+    "@babel/runtime": "7.17.2",
+    "@carbon/themes": "10.52.0",
+    "@stomp/stompjs": "6.1.2",
+    "@tippyjs/react": "4.2.6",
+    "classnames": "2.3.1",
+    "date-fns": "2.28.0",
+    "dompurify": "2.3.6",
+    "downshift": "6.1.7",
+    "focus-trap-react": "8.9.1",
+    "js-file-download": "0.4.12",
+    "lodash.get": "4.4.2",
+    "lodash.isequal": "4.5.0",
+    "lodash.sortby": "4.7.0",
+    "match-sorter": "6.3.1",
+    "react-autosuggest": "10.1.0",
+    "react-modal": "3.14.4",
+    "react-toastify": "8.2.0",
+    "sockjs-client": "1.6.0",
+    "window-or-global": "1.0.1"
   },
   "peerDependencies": {
+    "axios": ">=0.26.0",
     "@carbon/icons-react": "^10.38.0",
     "carbon-components": "^10.25.0",
     "carbon-components-react": "^7.25.0",
     "carbon-icons": "^7.0.7",
     "formik": "^2.1.5",
     "prop-types": "^15.7.2",
-    "react": "^16.14.0",
-    "react-dom": "^16.14.0",
+    "react": "^17.0.0 || ^16.14.0",
+    "react-dom": "^17.0.0 || ^16.14.0",
     "react-router-dom": "^5.3.0",
-    "yup": "^0.32.11"
-  },
-  "peerDependenciesMeta": {
-    "formik": {
-      "optional": true
-    },
-    "react-router-dom": {
-      "optional": true
-    },
-    "yup": {
-      "optional": true
-    }
+    "yup": ">=0.32.11"
   },
   "devDependencies": {
     "@babel/cli": "^7.14.5",
@@ -104,6 +93,7 @@
     "@babel/plugin-transform-runtime": "^7.17.0",
     "@babel/preset-env": "^7.14.7",
     "@babel/preset-react": "^7.14.5",
+    "@carbon/icons-react": "^10.47.0",
     "@storybook/addon-a11y": "^6.4.19",
     "@storybook/addon-actions": "^6.4.19",
     "@storybook/addon-centered": "^5.2.8",
@@ -123,20 +113,19 @@
     "@testing-library/dom": "^8.11.2",
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "12.1.2",
-    "axios": "^0.26.0",
+    "axios": "0.26.0",
     "axios-mock-adapter": "^1.20.0",
     "babel-plugin-dev-expression": "^0.2.3",
     "browserslist-config-carbon": "^10.6.1",
-    "carbon-components": "10.25.0",
-    "carbon-components-react": "7.25.0",
+    "carbon-components": "^10.54.0",
+    "carbon-components-react": "^7.54.0",
     "carbon-icons": "^7.0.7",
     "cross-env": "^7.0.3",
-    "formik": "^2.1.5",
+    "formik": "^2.2.9",
     "in-publish": "^2.0.1",
     "jest-axe": "^5.0.1",
     "lint-staged": "^12.3.1",
     "lodash": "4.17.21",
-    "match-sorter": "^6.3.1",
     "mock-socket": "^9.0.3",
     "moment": "^2.29.1",
     "moment-timezone": "^0.5.26",
