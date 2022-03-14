@@ -70,7 +70,3 @@ The big change here is finally supporting tree-shaking properly. This should red
 - Move `carbon-icons` to a peer dependency
 - Remove `@carbon/elements` as a dependency
 - No longer publish `UMD` builds
-
-**Changed**
-
-- `formik`, `react-router-dom`, `yup` are now optional dependencies
