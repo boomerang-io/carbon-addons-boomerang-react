@@ -19,7 +19,9 @@ export const Default = () => {
       <HeaderMenuUser
         src={text('imgSrc', 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50')}
         userName={text('userName', 'Gravatar User')}
-      />
+      >
+        {() => null}
+      </HeaderMenuUser>
     </div>
   );
 };

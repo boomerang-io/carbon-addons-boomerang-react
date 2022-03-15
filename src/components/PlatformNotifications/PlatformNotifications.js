@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Close16 } from '@carbon/icons-react';
-import { distanceInWordsToNow, format } from 'date-fns';
+import { formatDistance, format } from 'date-fns';
 import { settings } from 'carbon-components';
 
 const { prefix } = settings;
@@ -27,7 +27,7 @@ function Notification({ readNotification, notificationInfo }) {
         <h2 className={`${prefix}--bmrg-notification-content__title`}>{notificationInfo.title}</h2>
         <p className={`${prefix}--bmrg-notification-content__desc`}>{notificationInfo.detail}</p>
         <time className={`${prefix}--bmrg-notification-content__date`}>
-          {`${distanceInWordsToNow(new Date(notificationInfo.date))} ago at ${format(
+          {`${formatDistance(new Date(notificationInfo.date), new Date())} ago at ${format(
             notificationInfo.date,
             'hh:mma'
           )}`}
@@ -36,7 +36,7 @@ function Notification({ readNotification, notificationInfo }) {
           className={`${prefix}--bmrg-notification-content__close`}
           onClick={() => readNotification(notificationInfo.id)}
         >
-          <Close16 alt="Mark as read icon"/>
+          <Close16 alt="Mark as read icon" />
         </button>
       </div>
     </div>
