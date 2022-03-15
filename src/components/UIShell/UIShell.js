@@ -293,7 +293,7 @@ function UIShell({
           platform?.sendMail && (
             <HeaderMenuLink
               external={false}
-              href={`${finalBaseUrl}/launchpad/email-notifications`}
+              href={`${finalBaseUrl}/launchpad/email-preferences`}
               iconName="email"
               text="Email Preferences"
             />
