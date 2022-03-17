@@ -1,7 +1,7 @@
 {
   "name": "@boomerang-io/carbon-addons-boomerang-react",
   "description": "Carbon Addons for Boomerang apps",
-  "version": "2.0.0-rc.2",
+  "version": "2.0.0-rc.3",
   "author": {
     "name": "Tim Bula",
     "email": "timrbula@gmail.com"
@@ -41,6 +41,7 @@
     "precommit": "lint-staged",
     "prepublishOnly": "yarn build",
     "publish-npm": "yarn semantic-release",
+    "release": "release-it",
     "start": "yarn --max_old_space_size=16384 storybook",
     "storybook": "start-storybook -p 3000 -s public/development",
     "test": "react-scripts test",
@@ -137,6 +138,7 @@
     "react-router-dom": "^5.3.0",
     "react-scripts": "^5.0.0",
     "react-test-renderer": "^16.14.0",
+    "release-it": "^14.12.5",
     "rimraf": "^3.0.2",
     "sass": "^1.49.0",
     "semantic-release": "^19.0.2",
@@ -196,5 +198,14 @@
       "@babel/plugin-proposal-export-namespace-from",
       "@babel/plugin-proposal-export-default-from"
     ]
+  },
+  "release-it": {
+    "github": {
+      "release": true
+    },
+    "git": {
+      "commitMessage": "chore: release v${version}",
+      "requireCleanWorkingDir": false
+    }
   }
 }

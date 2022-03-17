@@ -7,6 +7,7 @@ import {
   ArrowRight16,
   Chat16,
   Debug20,
+  Email16,
   Forum16,
   HelpDesk16,
   Group20,
@@ -23,16 +24,17 @@ const iconClassName = `${prefix}--bmrg-header-menu-item__img`;
 const iconFill = '#FBFCFC';
 
 const iconMapping = {
-  workspace: <Workspace20 fill={iconFill} className={iconClassName} />,
-  group: <Group20 fill={iconFill} className={iconClassName} />,
   chat: <Chat16 fill={iconFill} className={iconClassName} />,
   debug: <Debug20 fill={iconFill} className={iconClassName} />,
-  power: <Power16 fill={iconFill} className={iconClassName} />,
-  information: <Information16 fill={iconFill} className={iconClassName} />,
-  locked: <Locked16 fill={iconFill} className={iconClassName} />,
-  launch: <Launch16 fill={iconFill} className={iconClassName} />,
-  support: <HelpDesk16 fill={iconFill} className={iconClassName} />,
+  email: <Email16 fill={iconFill} className={iconClassName} />,
   forum: <Forum16 fill={iconFill} className={iconClassName} />,
+  group: <Group20 fill={iconFill} className={iconClassName} />,
+  information: <Information16 fill={iconFill} className={iconClassName} />,
+  launch: <Launch16 fill={iconFill} className={iconClassName} />,
+  locked: <Locked16 fill={iconFill} className={iconClassName} />,
+  power: <Power16 fill={iconFill} className={iconClassName} />,
+  support: <HelpDesk16 fill={iconFill} className={iconClassName} />,
+  workspace: <Workspace20 fill={iconFill} className={iconClassName} />,
 };
 
 HeaderMenuLink.propTypes = {
@@ -56,16 +58,17 @@ HeaderMenuLink.propTypes = {
    * carbon name for icon to be rendered (internally mapped)
    */
   iconName: PropTypes.oneOf([
-    'workspace',
-    'group',
     'chat',
     'debug',
-    'power',
-    'information',
-    'locked',
-    'launch',
+    'email',
     'forum',
+    'group',
+    'information',
+    'launch',
+    'locked',
+    'power',
     'support',
+    'workspace',
   ]),
   /**
    *

@@ -35,8 +35,8 @@ class AutoSuggest extends Component {
   componentDidUpdate(prevProps, prevState) {
     if (this.state.value && prevState.value !== this.state.value) {
       // prevent it from focusing on initial render / empty
-      this.inputRef.current.focus();
-      this.inputRef.current.setSelectionRange(this.state.caretIndex, this.state.caretIndex);
+      this.inputRef.current?.focus();
+      this.inputRef.current?.setSelectionRange(this.state.caretIndex, this.state.caretIndex);
     }
   }
 
@@ -123,6 +123,7 @@ class AutoSuggest extends Component {
         onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
         renderSuggestion={this.renderSuggestion}
         suggestions={this.state.suggestions}
+        focusInputOnSuggestionClick={false}
         {...rest}
       >
         {(inputProps) => React.cloneElement(children, { ...inputProps, ref: this.inputRef })}

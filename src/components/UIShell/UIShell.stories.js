@@ -126,6 +126,7 @@ export const WithCarbonSidenavAndReactRouter = () => {
           ],
           platform: {
             name: text('platform.name', 'IBM Boomerang Platform'),
+            sendMail: true,
             version: text('platform.version', '5.0.0'),
             signOutUrl: 'https://ibm.com',
             communityUrl: 'https://developer.ibm.com',
