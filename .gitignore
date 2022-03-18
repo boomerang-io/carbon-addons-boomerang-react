@@ -5,7 +5,9 @@ coverage
 lib
 es
 umd
-/styles
+build
+styles
+docs
 
 
 # Dependency directory

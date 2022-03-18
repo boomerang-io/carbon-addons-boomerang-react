@@ -24,7 +24,7 @@ const HeaderGlobalSwitcher = () => {
           </li>
         )) */}
         <li className={`${prefix}--bmrg-header-global__collection--item`}>
-          <a href="https://launch.boomerangplatform.net/admin/">
+          <a href="https://servicesessentials.ibm.com/admin/">
             <Settings32
               alt="Admin Icon"
               fill="white"
@@ -34,7 +34,7 @@ const HeaderGlobalSwitcher = () => {
           <div className={`${prefix}-cloud-header-global__text`}>Admin</div>
         </li>
         <li className={`${prefix}--bmrg-header-global__collection--item`}>
-          <a href="https://launch.boomerangplatform.net/admin/">
+          <a href="https://servicesessentials.ibm.com/admin/">
             <Document32
               className={`${prefix}--bmrg-header-global__icon`}
               alt="Docs Icon"
@@ -44,7 +44,7 @@ const HeaderGlobalSwitcher = () => {
           <div className={`${prefix}-cloud-header-global__text`}>Docs</div>
         </li>
         <li className={`${prefix}--bmrg-header-global__collection--item`}>
-          <a href="https://launch.boomerangplatform.net/docs/">
+          <a href="https://servicesessentials.ibm.com/docs/">
             <Activity32
               className={`${prefix}--bmrg-header-global__icon`}
               alt="Status Icon"
@@ -54,7 +54,7 @@ const HeaderGlobalSwitcher = () => {
           <div className={`${prefix}-cloud-header-global__text`}>Status</div>
         </li>
         <li className={`${prefix}--bmrg-header-global__collection--item`}>
-          <a href="https://launch.boomerangplatform.net/next/">
+          <a href="https://servicesessentials.ibm.com/next/">
             <Calendar32
               className={`${prefix}--bmrg-header-global__icon`}
               alt="Next Icon"
@@ -64,7 +64,7 @@ const HeaderGlobalSwitcher = () => {
           <div className={`${prefix}-cloud-header-global__text`}>Next</div>
         </li>
         <li className={`${prefix}--bmrg-header-global__collection--item`}>
-          <a href="https://launch.boomerangplatform.net/launchpad/">
+          <a href="https://servicesessentials.ibm.com/launchpad/">
             <Rocket32
               className={`${prefix}--bmrg-header-global__icon`}
               alt="Launchpad Icon"

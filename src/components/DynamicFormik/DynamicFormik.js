@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
-import get from 'lodash/get';
+import get from 'lodash.get';
 import { transformAll, addCustomValidator } from '../../tools/yupAst';
 import isUrl from '../../tools/isUrl';
 import DataDrivenInput from '../DataDrivenInput';
@@ -44,7 +44,10 @@ function validateUrlWithProperties(customPropertySyntaxPattern, customPropertySt
   return function () {
     return this.transform(function (value, originalValue) {
       const propsSyntaxFound = value.match(customPropertyStartsWithPattern)?.length ?? 0;
-      if ((isUrl(value) && !Boolean(propsSyntaxFound)) || isPropertySyntaxValid({ value, customPropertySyntaxPattern, propsSyntaxFound })) {
+      if (
+        (isUrl(value) && !Boolean(propsSyntaxFound)) ||
+        isPropertySyntaxValid({ value, customPropertySyntaxPattern, propsSyntaxFound })
+      ) {
         return value;
       }
       return false;
@@ -59,7 +62,10 @@ function validateEmailWithProperties(customPropertySyntaxPattern, customProperty
       const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
       const propsSyntaxFound = value.match(customPropertyStartsWithPattern)?.length ?? 0;
 
-      if ((isValidEmail && !Boolean(propsSyntaxFound)) || isPropertySyntaxValid({ value, customPropertySyntaxPattern, propsSyntaxFound })) {
+      if (
+        (isValidEmail && !Boolean(propsSyntaxFound)) ||
+        isPropertySyntaxValid({ value, customPropertySyntaxPattern, propsSyntaxFound })
+      ) {
         return value;
       }
       return false;
@@ -67,9 +73,18 @@ function validateEmailWithProperties(customPropertySyntaxPattern, customProperty
   };
 }
 
-function registerCustomPropertyMethods(customPropertySyntaxPattern, customPropertyStartsWithPattern) {
-  const validateUrl = validateUrlWithProperties(customPropertySyntaxPattern, customPropertyStartsWithPattern);
-  const validateEmail = validateEmailWithProperties(customPropertySyntaxPattern, customPropertyStartsWithPattern);
+function registerCustomPropertyMethods(
+  customPropertySyntaxPattern,
+  customPropertyStartsWithPattern
+) {
+  const validateUrl = validateUrlWithProperties(
+    customPropertySyntaxPattern,
+    customPropertyStartsWithPattern
+  );
+  const validateEmail = validateEmailWithProperties(
+    customPropertySyntaxPattern,
+    customPropertyStartsWithPattern
+  );
   Yup.addMethod(Yup.string, 'urlWithCustomProperty', validateUrl);
   Yup.addMethod(Yup.string, 'emailWithCustomProperty', validateEmail);
 }
@@ -83,12 +98,18 @@ function registerCustomPropertyMethods(customPropertySyntaxPattern, customProper
  * @returns keys of all governing selects above the current one
  */
 function getGoverningSelectKeysMap({ governingKey, governingJsonKey, governingKeys, inputs }) {
-  if (Boolean(governingKey) && governingKey !== governingJsonKey) governingKeys.unshift(governingKey);
+  if (Boolean(governingKey) && governingKey !== governingJsonKey)
+    governingKeys.unshift(governingKey);
   const governingInput = inputs.find((input) => input.key === governingKey);
 
   /** Continue recursion if the governing select has a governingKey */
   if (Boolean(governingInput.governingKey)) {
-    return getGoverningSelectKeysMap({ governingKey: governingInput.governingKey, governingJsonKey, governingKeys, inputs });
+    return getGoverningSelectKeysMap({
+      governingKey: governingInput.governingKey,
+      governingJsonKey,
+      governingKeys,
+      inputs,
+    });
   } else {
     return governingKeys;
   }
@@ -96,36 +117,55 @@ function getGoverningSelectKeysMap({ governingKey, governingJsonKey, governingKe
 
 /**
  * Recursive function to get the deep options of the select input inside the json depending on the governing selects values
- * @param {object} formikValues 
+ * @param {object} formikValues
  * @param {object} governingInputJsonObject - the json object of the current iteration governing input key
- * @param {array} governingKeys - keys of governing selects above the current one that are updated in each iteration 
- * @param {object} input - the current input whose deep options we want to retrieve from the json 
- * @param {array} inputs - all the dynamic formik inputs 
+ * @param {array} governingKeys - keys of governing selects above the current one that are updated in each iteration
+ * @param {object} input - the current input whose deep options we want to retrieve from the json
+ * @param {array} inputs - all the dynamic formik inputs
  * @returns the input's deep options already formatted
  */
-function getGoverningSelectDeepOptions({ formikValues, governingInputJsonObject, governingKeys, input, inputs }) {
+function getGoverningSelectDeepOptions({
+  formikValues,
+  governingInputJsonObject,
+  governingKeys,
+  input,
+  inputs,
+}) {
   const nextKey = governingKeys.shift();
 
   if (Boolean(nextKey)) {
     const nextKeyInput = inputs.find((input) => input.key === nextKey);
-    const nextInputJsonObject = governingInputJsonObject[nextKey].find((jsonElement) => jsonElement[nextKeyInput.jsonKey] === formikValues[nextKey]);
+    const nextInputJsonObject = governingInputJsonObject[nextKey].find(
+      (jsonElement) => jsonElement[nextKeyInput.jsonKey] === formikValues[nextKey]
+    );
 
-    return getGoverningSelectDeepOptions({ formikValues, governingInputJsonObject: nextInputJsonObject, governingKeys, input, inputs });
+    return getGoverningSelectDeepOptions({
+      formikValues,
+      governingInputJsonObject: nextInputJsonObject,
+      governingKeys,
+      input,
+      inputs,
+    });
   } else {
-    return governingInputJsonObject[input.key].map((option) => ({ label: option[input.jsonLabel], value: option[input.jsonKey] }));
+    return governingInputJsonObject[input.key].map((option) => ({
+      label: option[input.jsonLabel],
+      value: option[input.jsonKey],
+    }));
   }
 }
 
 /**
  * Recursive function to erase the values of all governed selects below the current one when it changes
  * @param {object} formikValues
- * @param {object} input - the current input whose deep options we want to retrieve from the json 
- * @param {array} inputs - all the dynamic formik inputs 
+ * @param {object} input - the current input whose deep options we want to retrieve from the json
+ * @param {array} inputs - all the dynamic formik inputs
  * @param {string} selectedItem - new value of the select input
  */
 async function handleGoverningSelectChange({ formikProps, input, inputs, selectedItem }) {
   const { key } = input;
-  const inputsGovernedByCurrentOne = inputs.filter((formikInput) => formikInput.governingKey === key);
+  const inputsGovernedByCurrentOne = inputs.filter(
+    (formikInput) => formikInput.governingKey === key
+  );
 
   /** Erase value of governed inputs */
   if (inputsGovernedByCurrentOne.length) {
@@ -134,7 +174,7 @@ async function handleGoverningSelectChange({ formikProps, input, inputs, selecte
     });
   }
 
-  await formikProps.setFieldTouched(`['${key}']`, true);  
+  await formikProps.setFieldTouched(`['${key}']`, true);
   formikProps.setFieldValue(`['${key}']`, selectedItem ? selectedItem.value : '');
   formikProps.setFieldValue(`['${key}-keyLabel']`, selectedItem ? selectedItem.label : '');
 }
@@ -144,7 +184,12 @@ async function handleGoverningSelectChange({ formikProps, input, inputs, selecte
  * @param {Array} inputs
  * @returns {Array: Yup AST} validation schema AST
  */
-function generateYupAst({ inputs, allowCustomPropertySyntax, customPropertySyntaxPattern, customPropertyStartsWithPattern }) {
+function generateYupAst({
+  inputs,
+  allowCustomPropertySyntax,
+  customPropertySyntaxPattern,
+  customPropertyStartsWithPattern,
+}) {
   if (allowCustomPropertySyntax) {
     registerCustomPropertyMethods(customPropertySyntaxPattern, customPropertyStartsWithPattern);
   }
@@ -157,7 +202,7 @@ function generateYupAst({ inputs, allowCustomPropertySyntax, customPropertySynta
       return;
     }
 
-    if(inputType === DATE_TYPES.DATE) {
+    if (inputType === DATE_TYPES.DATE) {
       yupValidationArray.push(['yup.date', 'Enter a valid date']);
     }
 
@@ -196,11 +241,9 @@ function generateYupAst({ inputs, allowCustomPropertySyntax, customPropertySynta
             `${input.key}-matches`,
             input.patternInvalidText || `Enter a value that matches pattern: ${input.pattern}`,
             (value) => {
-              if(!input.required && !Boolean(value)) {
+              if (!input.required && !Boolean(value)) {
                 return true;
-              }
-              else
-                return new RegExp(input.pattern).test(value)
+              } else return new RegExp(input.pattern).test(value);
             }
           )
         );
@@ -264,7 +307,7 @@ function generateYupAst({ inputs, allowCustomPropertySyntax, customPropertySynta
             input.patternInvalidText || `Enter values that matches pattern: ${input.pattern}`,
             (values) => {
               const regexTester = new RegExp(input.pattern);
-              return values.every((val) => regexTester.test(val))
+              return values.every((val) => regexTester.test(val));
             }
           )
         );
@@ -279,35 +322,19 @@ function generateYupAst({ inputs, allowCustomPropertySyntax, customPropertySynta
     ) {
       if (inputType === TEXT_INPUT_TYPES.NUMBER) {
         if (input.min) {
-          yupValidationArray.push([
-            'yup.min',
-            input.min,
-            `Enter value greater than ${input.min}`,
-          ]);
+          yupValidationArray.push(['yup.min', input.min, `Enter value greater than ${input.min}`]);
         }
 
         if (input.max) {
-          yupValidationArray.push([
-            'yup.max',
-            input.max,
-            `Enter value less than ${input.max}`,
-          ]);
+          yupValidationArray.push(['yup.max', input.max, `Enter value less than ${input.max}`]);
         }
       } else {
         if (input.min) {
-          yupValidationArray.push([
-            'yup.min',
-            input.min,
-            `Enter at least ${input.min} characters`,
-          ]);
+          yupValidationArray.push(['yup.min', input.min, `Enter at least ${input.min} characters`]);
         }
 
         if (input.max) {
-          yupValidationArray.push([
-            'yup.max',
-            input.max,
-            `Enter at most ${input.max} characters`,
-          ]);
+          yupValidationArray.push(['yup.max', input.max, `Enter at most ${input.max} characters`]);
         }
       }
     }
@@ -317,7 +344,7 @@ function generateYupAst({ inputs, allowCustomPropertySyntax, customPropertySynta
     }
 
     if (input.required) {
-      if(inputType === BOOLEAN_TYPES.BOOLEAN) {
+      if (inputType === BOOLEAN_TYPES.BOOLEAN) {
         yupValidationArray.push(['yup.oneOf', [true], 'Toggle must be checked']);
       } else {
         yupValidationArray.push(['yup.required', `Enter a value for ${input.label}`]);
@@ -347,7 +374,12 @@ function generateYupSchema({
   customPropertyStartsWithPattern,
 }) {
   let validationSchema = transformAll(
-    generateYupAst({ inputs, allowCustomPropertySyntax, customPropertySyntaxPattern, customPropertyStartsWithPattern })
+    generateYupAst({
+      inputs,
+      allowCustomPropertySyntax,
+      customPropertySyntaxPattern,
+      customPropertyStartsWithPattern,
+    })
   );
   if (validationSchemaExtension) {
     validationSchema = validationSchema.concat(validationSchemaExtension);
@@ -435,7 +467,8 @@ const conditionallyRenderInput = (input, values) => {
  */
 const TYPE_PROPS = {
   [INPUT_GROUPS.CHECKBOX]: (formikProps, { key }) => ({
-    onChange: (value, id, event, selectedItems) => formikProps.setFieldValue(`['${key}']`, selectedItems),
+    onChange: (value, id, event, selectedItems) =>
+      formikProps.setFieldValue(`['${key}']`, selectedItems),
   }),
 
   [INPUT_GROUPS.CREATABLE]: (formikProps, { key }) => ({
@@ -443,25 +476,33 @@ const TYPE_PROPS = {
       formikProps.setFieldTouched(`['${key}']`, true);
       formikProps.setFieldValue(`['${key}']`, createdItems);
     },
-    onInputBlur: () => formikProps.setFieldTouched(`['${key}']`, true, true)
+    onInputBlur: () => formikProps.setFieldTouched(`['${key}']`, true, true),
   }),
 
-  [INPUT_GROUPS.DATE]: (formikProps, { key, type }) => type === DATE_TYPES.DATE_RANGE ? ({
-    onChange: (dateArray) => formikProps.setFieldValue(`['${key}']`, dateArray?.map((date) => date.toISOString())),
-  }) : ({
-    onChange: formikProps.handleChange,
-    onCalendarChange: (dateArray) => formikProps.setFieldValue(`['${key}']`, dateArray[0]?.toISOString()),
-  }),
+  [INPUT_GROUPS.DATE]: (formikProps, { key, type }) =>
+    type === DATE_TYPES.DATE_RANGE
+      ? {
+          onChange: (dateArray) =>
+            formikProps.setFieldValue(
+              `['${key}']`,
+              dateArray?.map((date) => date.toISOString())
+            ),
+        }
+      : {
+          onChange: formikProps.handleChange,
+          onCalendarChange: (dateArray) =>
+            formikProps.setFieldValue(`['${key}']`, dateArray[0]?.toISOString()),
+        },
 
   [INPUT_GROUPS.MULTI_SELECT]: (formikProps, { key }) => ({
-    onChange: async({ selectedItems }) =>{
+    onChange: async ({ selectedItems }) => {
       await formikProps.setFieldTouched(`['${key}']`, true);
       formikProps.setFieldValue(
         `['${key}']`,
         selectedItems.map((item) => item && item.value)
       );
     },
-    onInputBlur: () => formikProps.setFieldTouched(`['${key}']`, true, true)
+    onInputBlur: () => formikProps.setFieldTouched(`['${key}']`, true, true),
   }),
 
   [INPUT_GROUPS.RADIO]: (formikProps, { key }) => ({
@@ -472,17 +513,17 @@ const TYPE_PROPS = {
     const { key } = input;
 
     let typeProps = {
-      onChange: async({ selectedItem }) => {
-        await formikProps.setFieldTouched(`['${key}']`, true);   
+      onChange: async ({ selectedItem }) => {
+        await formikProps.setFieldTouched(`['${key}']`, true);
         formikProps.setFieldValue(`['${key}']`, selectedItem ? selectedItem.value : '');
       },
       onInputBlur: () => formikProps.setFieldTouched(`['${key}']`, true, true),
-    }
+    };
 
     /**
      * Start Governing Selects logic if input contains governingJsonKey
      */
-    if(Boolean(input.governingJsonKey)) {
+    if (Boolean(input.governingJsonKey)) {
       const { governingJsonKey, governingKey, jsonKey, jsonLabel } = input;
       const governingJsonInput = inputs.find((input) => input.key === governingJsonKey);
 
@@ -493,25 +534,35 @@ const TYPE_PROPS = {
         let governingOptions = [];
         let governingDisabled = false;
 
-        /** 
+        /**
          * Select "governingOptions"
-         * If current select is the top level governing select, just get the top level options from the json 
+         * If current select is the top level governing select, just get the top level options from the json
          */
         if (key === governingJsonKey) {
-          governingOptions = governingJson.map((option) => ({ label: option[jsonLabel], value: option[jsonKey] }));
+          governingOptions = governingJson.map((option) => ({
+            label: option[jsonLabel],
+            value: option[jsonKey],
+          }));
         } else {
           /** Check if the select that governs this one has a value and disable if it doesn't */
           const governingSelectValue = formikProps.values[governingKey];
           if (Boolean(governingSelectValue)) {
-            let governingKeys = getGoverningSelectKeysMap({ governingKey, governingJsonKey, governingKeys: [], inputs });
+            let governingKeys = getGoverningSelectKeysMap({
+              governingKey,
+              governingJsonKey,
+              governingKeys: [],
+              inputs,
+            });
             governingOptions = getGoverningSelectDeepOptions({
               formikValues: formikProps.values,
-              governingInputJsonObject: governingJson.find((jsonElement) => jsonElement[governingJsonInput.jsonKey] === formikProps.values[governingJsonKey]),
+              governingInputJsonObject: governingJson.find(
+                (jsonElement) =>
+                  jsonElement[governingJsonInput.jsonKey] === formikProps.values[governingJsonKey]
+              ),
               governingKeys: [...governingKeys],
               input,
-              inputs
+              inputs,
             });
-
           } else {
             governingDisabled = true;
           }
@@ -519,10 +570,11 @@ const TYPE_PROPS = {
 
         typeProps = {
           ...typeProps,
-          onChange: ({ selectedItem }) => handleGoverningSelectChange({ formikProps, input, inputs, selectedItem }),
+          onChange: ({ selectedItem }) =>
+            handleGoverningSelectChange({ formikProps, input, inputs, selectedItem }),
           governingOptions,
-          governingDisabled
-        }
+          governingDisabled,
+        };
       }
     }
 
@@ -543,8 +595,8 @@ const TYPE_PROPS = {
 
   [INPUT_GROUPS.BOOLEAN]: (formikProps, { key }) => ({
     onChange: (value) => {
-      formikProps.setFieldTouched(`['${key}']`, true, true)
-      formikProps.setFieldValue(`['${key}']`, value)
+      formikProps.setFieldTouched(`['${key}']`, true, true);
+      formikProps.setFieldValue(`['${key}']`, value);
     },
   }),
 };
@@ -711,7 +763,6 @@ export default function DynamicFormik({
   validationSchemaExtension,
   ...otherProps
 }) {
-
   return (
     <Formik
       initialValues={
@@ -735,9 +786,7 @@ export default function DynamicFormik({
     >
       {(formikProps) => {
         const { values, touched, errors, handleBlur } = formikProps;
-        const finalInputs = inputs.filter((input) =>
-          conditionallyRenderInput(input, values)
-        );
+        const finalInputs = inputs.filter((input) => conditionallyRenderInput(input, values));
 
         const dataDrivenInputs = finalInputs.map((input) => {
           const {
@@ -747,7 +796,14 @@ export default function DynamicFormik({
             ...otherInputsProps
           } = input;
 
-          const inputValue = values[key] !== undefined && values[key] !== null && (Object.values(TEXT_INPUT_TYPES).includes(type) || type === TEXT_AREA_TYPES.TEXT_AREA || type === TEXT_EDITOR_TYPES.TEXT_EDITOR) ? values[key].toString() : values[key];
+          const inputValue =
+            values[key] !== undefined &&
+            values[key] !== null &&
+            (Object.values(TEXT_INPUT_TYPES).includes(type) ||
+              type === TEXT_AREA_TYPES.TEXT_AREA ||
+              type === TEXT_EDITOR_TYPES.TEXT_EDITOR)
+              ? values[key].toString()
+              : values[key];
           const invalidText = get(errors, key);
           const invalid = invalidText && get(touched, key);
 

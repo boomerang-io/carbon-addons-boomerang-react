@@ -1,5 +1,4 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { Button } from 'carbon-components-react';
 
@@ -33,32 +32,49 @@ function ExternallyControlled() {
   );
 }
 
-storiesOf('ConfirmModal', module)
-  .add('default', () => {
-    return (
-      <ConfirmModal
-        affirmativeAction={action('confirm modal affirmative action')}
-        appElement="#root"
-        label="do things"
-        title="Yeah?"
-        modalTrigger={({ openModal }) => <Button onClick={openModal}>Open confirm modal</Button>}
-      >
-        <div>stuff here</div>
-      </ConfirmModal>
-    );
-  })
-  .add('initially open', () => {
-    return (
-      <ConfirmModal
-        affirmativeAction={action('confirm modal affirmative action')}
-        appElement="#root"
-        label="delete things"
-        title="Huh?"
-        isOpen
-        modalTrigger={({ openModal }) => <Button onClick={openModal}>Open confirm modal</Button>}
-      />
-    );
-  })
-  .add('externally controlled', () => {
-    return <ExternallyControlled />;
-  });
+export default {
+  title: 'ConfirmModal',
+};
+
+export const Default = () => {
+  return (
+    <ConfirmModal
+      affirmativeAction={action('confirm modal affirmative action')}
+      appElement="#root"
+      label="do things"
+      title="Yeah?"
+      modalTrigger={({ openModal }) => <Button onClick={openModal}>Open confirm modal</Button>}
+    >
+      <div>stuff here</div>
+    </ConfirmModal>
+  );
+};
+
+Default.story = {
+  name: 'default',
+};
+
+export const InitiallyOpen = () => {
+  return (
+    <ConfirmModal
+      affirmativeAction={action('confirm modal affirmative action')}
+      appElement="#root"
+      label="delete things"
+      title="Huh?"
+      isOpen
+      modalTrigger={({ openModal }) => <Button onClick={openModal}>Open confirm modal</Button>}
+    />
+  );
+};
+
+InitiallyOpen.story = {
+  name: 'initially open',
+};
+
+export const _ExternallyControlled = () => {
+  return <ExternallyControlled />;
+};
+
+_ExternallyControlled.story = {
+  name: 'externally controlled',
+};

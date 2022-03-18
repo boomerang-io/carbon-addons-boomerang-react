@@ -1,5 +1,4 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 
 import { Button } from 'carbon-components-react';
 
@@ -7,7 +6,13 @@ import NotificationsContainer from './NotificationsContainer';
 import ToastNotification from './ToastNotification';
 import notify from './notify';
 
-storiesOf('Notifications', module).add('default', () => {
+const about = {
+  title: 'Notifications',
+};
+
+export default about;
+
+export const Default = () => {
   return (
     <div>
       <Button
@@ -22,4 +27,8 @@ storiesOf('Notifications', module).add('default', () => {
       <NotificationsContainer />
     </div>
   );
-});
+};
+
+Default.story = {
+  name: 'default',
+};

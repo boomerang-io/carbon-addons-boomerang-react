@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { settings } from 'carbon-components';
-import { ModalHeader, ModalBody } from 'carbon-components-react/lib/components/ComposedModal';
+import { ModalHeader, ModalBody } from 'carbon-components-react';
 import IBMCloudIcon from './assets/IBMCloudIcon';
 import HeaderMenuItem from '../HeaderMenuItem';
 import KubernetesIcon from './assets/KubernetesIcon';
@@ -33,8 +33,7 @@ const AboutPlatformContainer = ({ version, organization, isFlowApp }) => {
               <footer className={`${prefix}--bmrg-aboutPlatform-footer`}>
                 <h1 className={`${prefix}--bmrg-aboutPlatform-footer__header`}>Powered by</h1>
                 <ul className={`${prefix}--bmrg-aboutPlatform-images`}>
-                  {
-                    isFlowApp ? 
+                  {isFlowApp ? (
                     <>
                       <li key="tekton-icon">
                         <a href="https://tekton.dev/" target="_blank" rel="noopener noreferrer">
@@ -53,7 +52,7 @@ const AboutPlatformContainer = ({ version, organization, isFlowApp }) => {
                         </a>
                       </li>
                     </>
-                    :
+                  ) : (
                     <>
                       <li key="ibm-cloud-icon">
                         <a href="https://www.ibm.com/cloud" target="_blank" rel="noopener noreferrer">
@@ -72,7 +71,7 @@ const AboutPlatformContainer = ({ version, organization, isFlowApp }) => {
                         </a>
                       </li>
                     </>
-                  }
+                  )}
                   <li key="kubernetes-icon">
                     <a href="https://kubernetes.io/" target="_blank" rel="noopener noreferrer">
                       <KubernetesIcon

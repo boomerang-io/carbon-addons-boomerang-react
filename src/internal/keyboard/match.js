@@ -70,11 +70,7 @@ export function match(eventOrCode, { key, which, keyCode } = {}) {
     return key.indexOf(eventOrCode.key) !== -1;
   }
 
-  return (
-    eventOrCode.key === key ||
-    eventOrCode.which === which ||
-    eventOrCode.keyCode === keyCode
-  );
+  return eventOrCode.key === key || eventOrCode.which === which || eventOrCode.keyCode === keyCode;
 }
 
 /**
@@ -89,8 +85,5 @@ export function getCharacterFor(eventOrCode) {
     return String.fromCharCode(eventOrCode);
   }
 
-  return (
-    eventOrCode.key ||
-    String.fromCharCode(eventOrCode.which || eventOrCode.keyCode)
-  );
+  return eventOrCode.key || String.fromCharCode(eventOrCode.which || eventOrCode.keyCode);
 }

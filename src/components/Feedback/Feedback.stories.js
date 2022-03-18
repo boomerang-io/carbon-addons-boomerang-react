@@ -1,8 +1,11 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import Feedback from './Feedback';
 
-storiesOf('Feedback', module).add('default', () => {
+export default {
+  title: 'Feedback',
+};
+
+export const Default = () => {
   return (
     <>
       <Feedback
@@ -12,4 +15,8 @@ storiesOf('Feedback', module).add('default', () => {
       />
     </>
   );
-});
+};
+
+Default.story = {
+  name: 'default',
+};

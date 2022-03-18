@@ -1,25 +1,46 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
-import { text } from '@storybook/addon-knobs/react';
+import { text } from '@storybook/addon-knobs';
 
 import Error404Component from './index';
 
-storiesOf('Error404', module)
-  .add('default', () => {
-    return <Error404Component />;
-  })
-  .add('custom text', () => {
-    return (
-      <Error404Component
-        header={text('header', 'Header')}
-        title={text('title', 'Title')}
-        message={text('message', 'Message')}
-      />
-    );
-  })
-  .add('no text', () => {
-    return <Error404Component header={null} title={null} message={null} />;
-  })
-  .add('boomerang', () => {
-    return <Error404Component theme="boomerang" />;
-  });
+export default {
+  title: 'Error404',
+};
+
+export const Default = () => {
+  return <Error404Component />;
+};
+
+Default.story = {
+  name: 'default',
+};
+
+export const CustomText = () => {
+  return (
+    <Error404Component
+      header={text('header', 'Header')}
+      title={text('title', 'Title')}
+      message={text('message', 'Message')}
+    />
+  );
+};
+
+CustomText.story = {
+  name: 'custom text',
+};
+
+export const NoText = () => {
+  return <Error404Component header={null} title={null} message={null} />;
+};
+
+NoText.story = {
+  name: 'no text',
+};
+
+export const Boomerang = () => {
+  return <Error404Component theme="boomerang" />;
+};
+
+Boomerang.story = {
+  name: 'boomerang',
+};

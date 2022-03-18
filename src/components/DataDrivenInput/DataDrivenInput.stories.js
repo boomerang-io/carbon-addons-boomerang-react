@@ -1,5 +1,4 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 
 import TextInput from '../TextInput';
 
@@ -29,11 +28,26 @@ const customInput = {
   customComponent: ({ formikProps, ...rest }) => <TextInput {...rest} />,
 };
 
-storiesOf('DataDrivenInput', module)
-  .add('default', () => {
-    const [testValue, setTestValue] = React.useState("boomerang");
-    return <DataDrivenInput id="dynamic-formik-form-id" {...input} value={testValue} onChange={(e) => setTestValue(e.target.value)}/>;
-  })
-  .add('Custom Component Input', () => {
-    return <DataDrivenInput id="dynamic-formik-form-id" {...customInput} />;
-  });
+export default {
+  title: 'DataDrivenInput',
+};
+
+export const Default = () => {
+  const [testValue, setTestValue] = React.useState('boomerang');
+  return (
+    <DataDrivenInput
+      id="dynamic-formik-form-id"
+      {...input}
+      value={testValue}
+      onChange={(e) => setTestValue(e.target.value)}
+    />
+  );
+};
+
+Default.story = {
+  name: 'default',
+};
+
+export const CustomComponentInput = () => {
+  return <DataDrivenInput id="dynamic-formik-form-id" {...customInput} />;
+};

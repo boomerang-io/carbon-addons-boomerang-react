@@ -1,5 +1,4 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import ModalConfirmEdit from './ModalConfirmEdit';
@@ -24,23 +23,31 @@ const arrayItems = [
   'Maas360',
 ];
 
-storiesOf('ModalConfirmEdit', module)
-  .add('details', () => {
-    return (
-      <ModalConfirmEdit
-        items={detailsItems}
-        onEdit={action('pencil clicked')}
-        title="Some details"
-      />
-    );
-  })
-  .add('array', () => {
-    return (
-      <ModalConfirmEdit
-        items={arrayItems}
-        onEdit={action('pencil clicked')}
-        title="Array of items"
-        type="array"
-      />
-    );
-  });
+export default {
+  title: 'ModalConfirmEdit',
+};
+
+export const Details = () => {
+  return (
+    <ModalConfirmEdit items={detailsItems} onEdit={action('pencil clicked')} title="Some details" />
+  );
+};
+
+Details.story = {
+  name: 'details',
+};
+
+export const Array = () => {
+  return (
+    <ModalConfirmEdit
+      items={arrayItems}
+      onEdit={action('pencil clicked')}
+      title="Array of items"
+      type="array"
+    />
+  );
+};
+
+Array.story = {
+  name: 'array',
+};

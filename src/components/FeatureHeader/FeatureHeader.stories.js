@@ -1,5 +1,4 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { Router, Link } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import { FeatureHeader, FeatureHeaderTitle, FeatureHeaderSubtitle } from './index';
@@ -68,11 +67,110 @@ const Actions = () => (
   </div>
 );
 
-storiesOf('FeatureHeader', module)
-  .add('default', () => {
-    return (
+export default {
+  title: 'FeatureHeader',
+};
+
+export const Default = () => {
+  return (
+    <div style={{ backgroundColor: '#f2f4f8', height: '100vh', width: '100vw' }}>
+      <FeatureHeader
+        header={
+          <>
+            <FeatureHeaderTitle>With Header</FeatureHeaderTitle>
+            <FeatureHeaderSubtitle>Subtitle</FeatureHeaderSubtitle>
+          </>
+        }
+      />
+    </div>
+  );
+};
+
+Default.story = {
+  name: 'default',
+};
+
+export const SubtitleFirst = () => {
+  return (
+    <div style={{ backgroundColor: '#f2f4f8', height: '100vh', width: '100vw' }}>
+      <FeatureHeader
+        header={
+          <>
+            <FeatureHeaderSubtitle style={{ fontSize: '0.875rem', fontWeight: '300' }}>
+              Subtitle as label
+            </FeatureHeaderSubtitle>
+            <FeatureHeaderTitle style={{ fontSize: '1.5rem' }}>I'm smaller</FeatureHeaderTitle>
+          </>
+        }
+      />
+    </div>
+  );
+};
+
+SubtitleFirst.story = {
+  name: 'subtitle first',
+};
+
+export const WithoutBorder = () => {
+  return (
+    <div style={{ backgroundColor: '#f2f4f8', height: '100vh', width: '100vw' }}>
+      <FeatureHeader
+        includeBorder={false}
+        header={
+          <>
+            <FeatureHeaderTitle>Withouth Border</FeatureHeaderTitle>
+            <FeatureHeaderSubtitle>Subtitle</FeatureHeaderSubtitle>
+          </>
+        }
+      ></FeatureHeader>
+    </div>
+  );
+};
+
+WithoutBorder.story = {
+  name: 'without border',
+};
+
+export const Loading = () => {
+  return (
+    <div style={{ backgroundColor: '#f2f4f8', height: '100vh', width: '100vw' }}>
+      <FeatureHeader
+        isLoading
+        header={
+          <>
+            <FeatureHeaderTitle>It is Loading</FeatureHeaderTitle>
+            <FeatureHeaderSubtitle>Subtitle</FeatureHeaderSubtitle>
+          </>
+        }
+      ></FeatureHeader>
+    </div>
+  );
+};
+
+Loading.story = {
+  name: 'loading',
+};
+
+export const WithFooter = () => {
+  return (
+    <Router history={createMemoryHistory({ initialEntries: ['/'] })}>
+      <div style={{ backgroundColor: '#f2f4f8', height: '100vh', width: '100vw' }}>
+        <FeatureHeader footer={<Footer />} />
+      </div>
+    </Router>
+  );
+};
+
+WithFooter.story = {
+  name: 'with footer',
+};
+
+export const WithNav = () => {
+  return (
+    <Router history={createMemoryHistory({ initialEntries: ['/'] })}>
       <div style={{ backgroundColor: '#f2f4f8', height: '100vh', width: '100vw' }}>
         <FeatureHeader
+          nav={<Nav />}
           header={
             <>
               <FeatureHeaderTitle>With Header</FeatureHeaderTitle>
@@ -81,133 +179,86 @@ storiesOf('FeatureHeader', module)
           }
         />
       </div>
-    );
-  })
-  .add('subtitle first', () => {
-    return (
+    </Router>
+  );
+};
+
+WithNav.story = {
+  name: 'with nav',
+};
+
+export const OnlyNav = () => {
+  return (
+    <Router history={createMemoryHistory({ initialEntries: ['/'] })}>
       <div style={{ backgroundColor: '#f2f4f8', height: '100vh', width: '100vw' }}>
-        <FeatureHeader
-          header={
-            <>
-              <FeatureHeaderSubtitle style={{ fontSize: '0.875rem', fontWeight: '300' }}>
-                Subtitle as label
-              </FeatureHeaderSubtitle>
-              <FeatureHeaderTitle style={{ fontSize: '1.5rem' }}>I'm smaller</FeatureHeaderTitle>
-            </>
-          }
-        />
+        <FeatureHeader nav={<Nav />} />
       </div>
-    );
-  })
-  .add('without border', () => {
-    return (
+    </Router>
+  );
+};
+
+OnlyNav.story = {
+  name: 'only nav',
+};
+
+export const WithActions = () => {
+  return (
+    <Router history={createMemoryHistory({ initialEntries: ['/'] })}>
       <div style={{ backgroundColor: '#f2f4f8', height: '100vh', width: '100vw' }}>
         <FeatureHeader
-          includeBorder={false}
+          actions={<Actions />}
+          header={<FeatureHeaderTitle>With Actions</FeatureHeaderTitle>}
+        ></FeatureHeader>
+      </div>
+    </Router>
+  );
+};
+
+WithActions.story = {
+  name: 'with actions',
+};
+
+export const OnlyChildren = () => {
+  return (
+    <Router history={createMemoryHistory({ initialEntries: ['/'] })}>
+      <div style={{ backgroundColor: '#f2f4f8', height: '100vh', width: '100vw' }}>
+        <FeatureHeader>
+          <div style={{ marginBottom: '1rem' }}>
+            <FeatureHeaderTitle>Rendered as Child</FeatureHeaderTitle>
+          </div>
+          <DataList />
+        </FeatureHeader>
+      </div>
+    </Router>
+  );
+};
+
+OnlyChildren.story = {
+  name: 'only children',
+};
+
+export const WithNavHeaderFooterActionsAndChildren = () => {
+  return (
+    <Router history={createMemoryHistory({ initialEntries: ['/'] })}>
+      <div style={{ backgroundColor: '#f2f4f8', height: '100vh', width: '100vw' }}>
+        <FeatureHeader
+          nav={<Nav />}
+          footer={<Footer />}
+          actions={<Actions />}
           header={
             <>
-              <FeatureHeaderTitle>Withouth Border</FeatureHeaderTitle>
+              <FeatureHeaderTitle>With Everything</FeatureHeaderTitle>
               <FeatureHeaderSubtitle>Subtitle</FeatureHeaderSubtitle>
             </>
           }
-        ></FeatureHeader>
+        >
+          <DataList />
+        </FeatureHeader>
       </div>
-    );
-  })
-  .add('loading', () => {
-    return (
-      <div style={{ backgroundColor: '#f2f4f8', height: '100vh', width: '100vw' }}>
-        <FeatureHeader
-          isLoading
-          header={
-            <>
-              <FeatureHeaderTitle>It is Loading</FeatureHeaderTitle>
-              <FeatureHeaderSubtitle>Subtitle</FeatureHeaderSubtitle>
-            </>
-          }
-        ></FeatureHeader>
-      </div>
-    );
-  })
-  .add('with footer', () => {
-    return (
-      <Router history={createMemoryHistory({ initialEntries: ['/'] })}>
-        <div style={{ backgroundColor: '#f2f4f8', height: '100vh', width: '100vw' }}>
-          <FeatureHeader footer={<Footer />} />
-        </div>
-      </Router>
-    );
-  })
-  .add('with nav', () => {
-    return (
-      <Router history={createMemoryHistory({ initialEntries: ['/'] })}>
-        <div style={{ backgroundColor: '#f2f4f8', height: '100vh', width: '100vw' }}>
-          <FeatureHeader
-            nav={<Nav />}
-            header={
-              <>
-                <FeatureHeaderTitle>With Header</FeatureHeaderTitle>
-                <FeatureHeaderSubtitle>Subtitle</FeatureHeaderSubtitle>
-              </>
-            }
-          />
-        </div>
-      </Router>
-    );
-  })
-  .add('only nav', () => {
-    return (
-      <Router history={createMemoryHistory({ initialEntries: ['/'] })}>
-        <div style={{ backgroundColor: '#f2f4f8', height: '100vh', width: '100vw' }}>
-          <FeatureHeader nav={<Nav />} />
-        </div>
-      </Router>
-    );
-  })
-  .add('with actions', () => {
-    return (
-      <Router history={createMemoryHistory({ initialEntries: ['/'] })}>
-        <div style={{ backgroundColor: '#f2f4f8', height: '100vh', width: '100vw' }}>
-          <FeatureHeader
-            actions={<Actions />}
-            header={<FeatureHeaderTitle>With Actions</FeatureHeaderTitle>}
-          ></FeatureHeader>
-        </div>
-      </Router>
-    );
-  })
-  .add('only children', () => {
-    return (
-      <Router history={createMemoryHistory({ initialEntries: ['/'] })}>
-        <div style={{ backgroundColor: '#f2f4f8', height: '100vh', width: '100vw' }}>
-          <FeatureHeader>
-            <div style={{ marginBottom: '1rem' }}>
-              <FeatureHeaderTitle>Rendered as Child</FeatureHeaderTitle>
-            </div>
-            <DataList />
-          </FeatureHeader>
-        </div>
-      </Router>
-    );
-  })
-  .add('with nav, header, footer, actions, and children', () => {
-    return (
-      <Router history={createMemoryHistory({ initialEntries: ['/'] })}>
-        <div style={{ backgroundColor: '#f2f4f8', height: '100vh', width: '100vw' }}>
-          <FeatureHeader
-            nav={<Nav />}
-            footer={<Footer />}
-            actions={<Actions />}
-            header={
-              <>
-                <FeatureHeaderTitle>With Everything</FeatureHeaderTitle>
-                <FeatureHeaderSubtitle>Subtitle</FeatureHeaderSubtitle>
-              </>
-            }
-          >
-            <DataList />
-          </FeatureHeader>
-        </div>
-      </Router>
-    );
-  });
+    </Router>
+  );
+};
+
+WithNavHeaderFooterActionsAndChildren.story = {
+  name: 'with nav, header, footer, actions, and children',
+};

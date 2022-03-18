@@ -1,5 +1,4 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import TextInput from '../TextInput';
 import { Button, ModalBody, ModalFooter } from 'carbon-components-react';
 import ComposedModal from './index';
@@ -61,71 +60,84 @@ function Component2(props) {
   );
 }
 
-storiesOf('ComposedModal', module)
-  .add('default', () => {
-    return (
-      <ComposedModal
-        appElement="#root"
-        composedModalProps={{ selectorPrimaryFocus: 'input[id="testing"]' }}
-        confirmModalProps={{
-          title: 'Close Composed Modal?',
-          children: <div>You will need to start from the first component</div>,
-        }}
-        modalHeaderProps={{
-          title: 'Composed Modal',
-          label: 'Single child as a function',
-          subtitle: 'Even more info here',
-        }}
-        modalTrigger={({ openModal }) => <Button onClick={openModal}>Open modal composed</Button>}
-      >
-        {({ closeModal }) => <Component1 closeModal={closeModal} />}
-      </ComposedModal>
-    );
-  })
-  .add('initially open', () => {
-    return (
-      <ComposedModal
-        isOpen
-        appElement="#root"
-        composedModalProps={{ selectorPrimaryFocus: 'input[id="testing"]' }}
-        confirmModalProps={{
-          title: 'Close Create Component?',
-          children: <div>Your current progress will not be saved.</div>,
-        }}
-        modalHeaderProps={{
-          subTitle: 'Create a new component for IBM Services Engineering',
-          title: 'Create Component',
-        }}
-        modalTrigger={({ openModal }) => <Button onClick={openModal}>Open modal flow</Button>}
-      >
-        {({ closeModal, setShouldConfirmModalClose }) => (
-          <Component2
-            closeModal={closeModal}
-            setShouldConfirmModalClose={setShouldConfirmModalClose}
-          />
-        )}
-      </ComposedModal>
-    );
-  })
-  .add('size', () => {
-    const [size, setSize] = React.useState("");
-    return (
-      <div>
+export default {
+  title: 'ComposedModal',
+};
+
+export const Default = () => {
+  return (
+    <ComposedModal
+      appElement="#root"
+      composedModalProps={{ selectorPrimaryFocus: 'input[id="testing"]' }}
+      confirmModalProps={{
+        title: 'Close Composed Modal?',
+        children: <div>You will need to start from the first component</div>,
+      }}
+      modalHeaderProps={{
+        title: 'Composed Modal',
+        label: 'Single child as a function',
+        subtitle: 'Even more info here',
+      }}
+      modalTrigger={({ openModal }) => <Button onClick={openModal}>Open modal composed</Button>}
+    >
+      {({ closeModal }) => <Component1 closeModal={closeModal} />}
+    </ComposedModal>
+  );
+};
+
+Default.story = {
+  name: 'default',
+};
+
+export const InitiallyOpen = () => {
+  return (
+    <ComposedModal
+      isOpen
+      appElement="#root"
+      composedModalProps={{ selectorPrimaryFocus: 'input[id="testing"]' }}
+      confirmModalProps={{
+        title: 'Close Create Component?',
+        children: <div>Your current progress will not be saved.</div>,
+      }}
+      modalHeaderProps={{
+        subTitle: 'Create a new component for IBM Services Engineering',
+        title: 'Create Component',
+      }}
+      modalTrigger={({ openModal }) => <Button onClick={openModal}>Open modal flow</Button>}
+    >
+      {({ closeModal, setShouldConfirmModalClose }) => (
+        <Component2
+          closeModal={closeModal}
+          setShouldConfirmModalClose={setShouldConfirmModalClose}
+        />
+      )}
+    </ComposedModal>
+  );
+};
+
+InitiallyOpen.story = {
+  name: 'initially open',
+};
+
+export const Size = () => {
+  const [size, setSize] = React.useState('');
+  return (
+    <div>
       <RadioGroup
-      id="testSize"
-      //defaultSelected={"md"}
-      labelText={"Size"}
-      onChange={(value) => setSize(value)}
-      options={[
-        { labelText: 'xs', value: 'xs' },
-        { labelText: 'sm', value: 'sm' },
-        { labelText: 'md', value: 'md' },
-        { labelText: 'lg', value: 'lg' },
-      ]}
-      orientation="horizontal"
-    />
+        id="testSize"
+        //defaultSelected={"md"}
+        labelText={'Size'}
+        onChange={(value) => setSize(value)}
+        options={[
+          { labelText: 'xs', value: 'xs' },
+          { labelText: 'sm', value: 'sm' },
+          { labelText: 'md', value: 'md' },
+          { labelText: 'lg', value: 'lg' },
+        ]}
+        orientation="horizontal"
+      />
       <ComposedModal
-       size={size}
+        size={size}
         appElement="#root"
         composedModalProps={{ selectorPrimaryFocus: 'input[id="testing"]' }}
         confirmModalProps={{
@@ -141,6 +153,10 @@ storiesOf('ComposedModal', module)
       >
         {({ closeModal }) => <Component1 closeModal={closeModal} />}
       </ComposedModal>
-      </div>
-    );
-  });
+    </div>
+  );
+};
+
+Size.story = {
+  name: 'size',
+};

@@ -1,13 +1,24 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import ErrorFullPage from './index';
 
 const statusUrl = '/support/status';
 
-storiesOf('ErrorFullPage', module)
-  .add('default', () => {
-    return <ErrorFullPage statusUrl={statusUrl} />;
-  })
-  .add('boomerang', () => {
-    return <ErrorFullPage theme="boomerang" statusUrl={statusUrl} />;
-  });
+export default {
+  title: 'ErrorFullPage',
+};
+
+export const Default = () => {
+  return <ErrorFullPage statusUrl={statusUrl} />;
+};
+
+Default.story = {
+  name: 'default',
+};
+
+export const Boomerang = () => {
+  return <ErrorFullPage theme="boomerang" statusUrl={statusUrl} />;
+};
+
+Boomerang.story = {
+  name: 'boomerang',
+};

@@ -1,7 +1,6 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { object, text } from '@storybook/addon-knobs/react';
+import { object, text } from '@storybook/addon-knobs';
 
 import MultiSelect from './ComboBoxMultiSelect';
 
@@ -22,55 +21,72 @@ const animals = [
 
 const initialDefaultAnimals = 'panda,dog';
 
-storiesOf('ComboBoxMultiSelect', module)
-  .add('default', () => {
-    return (
-      <div style={{ width: '25rem' }}>
-        <MultiSelect
-          id="multi-select"
-          initialSelectedItems={initialDefaultAnimals}
-          items={object('items', animals)}
-          itemToString={(item) => item.label}
-          onChange={action('Multiselect changed')}
-          titleText={text('titleText', 'Select some animals')}
-          placeholder={text('placeholder', 'Select an animal')}
-        />
-      </div>
-    );
-  })
-  .add('No selected items', () => {
-    return (
-      <div style={{ width: '25rem' }}>
-        <MultiSelect
-          id="multi-select"
-          items={object('items', animals)}
-          itemToString={(item) => item.label}
-          onChange={action('Multiselect changed')}
-          titleText={text('titleText', 'Select some animals')}
-          placeholder={text('placeholder', 'Select an animal')}
-        />
-      </div>
-    );
-  })
-  .add('with tooltip, title, helper text and disabled clear', () => {
-    return (
-      <div style={{ width: '25rem' }}>
-        <MultiSelect
-          disableClear
-          id="tooltip-title-multi-select"
-          initialSelectedItems={[
-            { label: 'Cat', value: 'cat' },
-            { label: 'Cheetah', value: 'cheetah' },
-          ]}
-          items={object('items', animals)}
-          itemToString={(item) => item.label}
-          onChange={action('Multiselect changed')}
-          titleText={text('titleText', 'Select some animals')}
-          placeholder={text('placeholder', 'Select an animal')}
-          helperText={text('helperText', 'Some helper text')}
-          tooltipContent={text('tooltipContent', 'Tooltip for multiSelect')}
-          tooltipProps={{ direction: 'top' }}
-        />
-      </div>
-    );
-  });
+export default {
+  title: 'ComboBoxMultiSelect',
+};
+
+export const Default = () => {
+  return (
+    <div style={{ width: '25rem' }}>
+      <MultiSelect
+        id="multi-select"
+        initialSelectedItems={initialDefaultAnimals}
+        items={object('items', animals)}
+        itemToString={(item) => item.label}
+        onChange={action('Multiselect changed')}
+        titleText={text('titleText', 'Select some animals')}
+        placeholder={text('placeholder', 'Select an animal')}
+      />
+    </div>
+  );
+};
+
+Default.story = {
+  name: 'default',
+};
+
+export const NoSelectedItems = () => {
+  return (
+    <div style={{ width: '25rem' }}>
+      <MultiSelect
+        id="multi-select"
+        items={object('items', animals)}
+        itemToString={(item) => item.label}
+        onChange={action('Multiselect changed')}
+        titleText={text('titleText', 'Select some animals')}
+        placeholder={text('placeholder', 'Select an animal')}
+      />
+    </div>
+  );
+};
+
+NoSelectedItems.story = {
+  name: 'No selected items',
+};
+
+export const WithTooltipTitleHelperTextAndDisabledClear = () => {
+  return (
+    <div style={{ width: '25rem' }}>
+      <MultiSelect
+        disableClear
+        id="tooltip-title-multi-select"
+        initialSelectedItems={[
+          { label: 'Cat', value: 'cat' },
+          { label: 'Cheetah', value: 'cheetah' },
+        ]}
+        items={object('items', animals)}
+        itemToString={(item) => item.label}
+        onChange={action('Multiselect changed')}
+        titleText={text('titleText', 'Select some animals')}
+        placeholder={text('placeholder', 'Select an animal')}
+        helperText={text('helperText', 'Some helper text')}
+        tooltipContent={text('tooltipContent', 'Tooltip for multiSelect')}
+        tooltipProps={{ direction: 'top' }}
+      />
+    </div>
+  );
+};
+
+WithTooltipTitleHelperTextAndDisabledClear.story = {
+  name: 'with tooltip, title, helper text and disabled clear',
+};

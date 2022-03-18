@@ -1,8 +1,15 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 
 import DelayedRender from './index';
 
-storiesOf('DelayedRender', module).add('default', () => {
+export default {
+  title: 'DelayedRender',
+};
+
+export const Default = () => {
   return <DelayedRender delay={1000}>I render after a second</DelayedRender>;
-});
+};
+
+Default.story = {
+  name: 'default',
+};

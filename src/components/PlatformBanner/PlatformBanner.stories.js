@@ -1,5 +1,4 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { select, text } from '@storybook/addon-knobs';
 
 import PlatformBanner from './PlatformBanner';
@@ -14,6 +13,14 @@ const props = () => ({
   title: text('title', 'Title'),
 });
 
-storiesOf('PlatformBanner', module).add('default', () => {
+export default {
+  title: 'PlatformBanner',
+};
+
+export const Default = () => {
   return <PlatformBanner {...props()} />;
-});
+};
+
+Default.story = {
+  name: 'default',
+};

@@ -1,6 +1,3 @@
-// Styles
-import './styles/index.scss';
-
 // Components
 export { default as AutoSuggest } from './components/AutoSuggest';
 export { default as Avatar } from './components/Avatar';

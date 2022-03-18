@@ -92,7 +92,7 @@ ToastNotification.defaultProps = {
   iconDescription: 'closes notification',
   onCloseButtonClick: () => {},
   hideCloseButton: true, // altered
-  timeout: 0,
+  timeout: 1000000,
 };
 
 export default ToastNotification;

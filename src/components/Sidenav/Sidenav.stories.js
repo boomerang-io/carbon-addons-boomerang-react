@@ -1,61 +1,84 @@
 import React, { Fragment } from 'react';
-import { storiesOf } from '@storybook/react';
 
 import { BrowserRouter } from 'react-router-dom';
 
 import SidenavComponent from './index';
 
-storiesOf('Sidenav', module)
-  .add('default', () => {
-    return (
-      <BrowserRouter>
-        <SidenavComponent navItems={navItems} />
-      </BrowserRouter>
-    );
-  })
-  .add('with title', () => {
-    return (
-      <BrowserRouter>
-        <SidenavComponent header={header} navItems={navItems} />
-      </BrowserRouter>
-    );
-  })
-  .add('with title & footer', () => {
-    return (
-      <BrowserRouter>
-        <SidenavComponent
-          header={header}
-          navItems={navItems}
-          footer={() => (
-            <SidenavOutstandingTeams outstandingTeamRequests={outstandingTeamRequests} />
-          )}
-        />
-      </BrowserRouter>
-    );
-  })
-  .add('only title & footer', () => {
-    return (
-      <BrowserRouter>
-        <SidenavComponent
-          header={header}
-          footer={() => (
-            <SidenavOutstandingTeams outstandingTeamRequests={outstandingTeamRequests} />
-          )}
-        />
-      </BrowserRouter>
-    );
-  })
-  .add('with content', () => {
-    return (
-      <BrowserRouter>
-        <SidenavComponent
-          header={header}
-          navItems={navItems}
-          content={() => <div style={{ color: 'white' }}>test content</div>}
-        />
-      </BrowserRouter>
-    );
-  });
+export default {
+  title: 'Sidenav',
+  excludeStories: ['outstandingTeamRequests'],
+};
+
+export const Default = () => {
+  return (
+    <BrowserRouter>
+      <SidenavComponent navItems={navItems} />
+    </BrowserRouter>
+  );
+};
+
+Default.story = {
+  name: 'default',
+};
+
+export const WithTitle = () => {
+  return (
+    <BrowserRouter>
+      <SidenavComponent header={header} navItems={navItems} />
+    </BrowserRouter>
+  );
+};
+
+WithTitle.story = {
+  name: 'with title',
+};
+
+export const WithTitleFooter = () => {
+  return (
+    <BrowserRouter>
+      <SidenavComponent
+        header={header}
+        navItems={navItems}
+        footer={() => <SidenavOutstandingTeams outstandingTeamRequests={outstandingTeamRequests} />}
+      />
+    </BrowserRouter>
+  );
+};
+
+WithTitleFooter.story = {
+  name: 'with title & footer',
+};
+
+export const OnlyTitleFooter = () => {
+  return (
+    <BrowserRouter>
+      <SidenavComponent
+        header={header}
+        footer={() => <SidenavOutstandingTeams outstandingTeamRequests={outstandingTeamRequests} />}
+      />
+    </BrowserRouter>
+  );
+};
+
+OnlyTitleFooter.story = {
+  name: 'only title & footer',
+};
+
+export const WithContent = () => {
+  return (
+    <BrowserRouter>
+      <SidenavComponent
+        header={header}
+        navItems={navItems}
+        content={() => <div style={{ color: 'white' }}>test content</div>}
+      />
+    </BrowserRouter>
+  );
+};
+
+WithContent.story = {
+  name: 'with content',
+};
 
 // Helpers
 

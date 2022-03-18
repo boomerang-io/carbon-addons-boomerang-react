@@ -13,7 +13,8 @@ test('render Error403 with defaults', async () => {
 
 test('render Error403 without text', async () => {
   const { queryByText } = render(<Error403 header={null} title={null} message={null} />);
-  expect(queryByText('403 - Access Forbidden')).not.toBeInTheDocument();
+
+  expect(queryByText('403 Access Forbidden')).not.toBeInTheDocument();
   expect(queryByText(`Looks like you've taken a wrong turn.`)).not.toBeInTheDocument();
   expect(
     queryByText('You shouldn’t be here - contact the local authorities if you disagree.')

@@ -1,5 +1,4 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { text } from '@storybook/addon-knobs';
 import { Help16, ThumbsUp16, ThumbsDown16 } from '@carbon/icons-react';
@@ -36,45 +35,67 @@ function ExternallyControlledDecisionButtons() {
   );
 }
 
-storiesOf('DecisionButtons', module)
-  .add('default and vertical', () => {
-    return (
-      <DecisionButtons
-        defaultSelected="radio 2"
-        name="radio buttons 1"
-        onChange={action('Change radio button')}
-        labelText={text('labelText', 'Example label text')}
-        helperText={text('helperText', 'Example helper text')}
-        items={items1}
-        orientation="vertical"
-        tooltipContent={text('tooltipContent', 'Tooltip for DecisionButtons')}
-        tooltipProps={{ direction: 'right' }}
-      />
-    );
-  })
-  .add('with positive and negative buttons and horizontal', () => {
-    return (
-      <DecisionButtons
-        defaultSelected="no"
-        name="radio buttons 2"
-        helperText={text('helperText', 'Example helper text')}
-        onChange={action('Change radio button')}
-        orientation="horizontal"
-        items={items2}
-      />
-    );
-  })
-  .add('externallyControlled', () => {
-    return <ExternallyControlledDecisionButtons />;
-  })
-  .add('can uncheck buttons', () => {
-    return (
-      <DecisionButtons
-        canUncheck
-        name="radio buttons 4"
-        onChange={action('Change radio button')}
-        orientation="horizontal"
-        items={items2}
-      />
-    );
-  });
+export default {
+  title: 'DecisionButtons',
+};
+
+export const DefaultAndVertical = () => {
+  return (
+    <DecisionButtons
+      defaultSelected="radio 2"
+      name="radio buttons 1"
+      onChange={action('Change radio button')}
+      labelText={text('labelText', 'Example label text')}
+      helperText={text('helperText', 'Example helper text')}
+      items={items1}
+      orientation="vertical"
+      tooltipContent={text('tooltipContent', 'Tooltip for DecisionButtons')}
+      tooltipProps={{ direction: 'right' }}
+    />
+  );
+};
+
+DefaultAndVertical.story = {
+  name: 'default and vertical',
+};
+
+export const WithPositiveAndNegativeButtonsAndHorizontal = () => {
+  return (
+    <DecisionButtons
+      defaultSelected="no"
+      name="radio buttons 2"
+      helperText={text('helperText', 'Example helper text')}
+      onChange={action('Change radio button')}
+      orientation="horizontal"
+      items={items2}
+    />
+  );
+};
+
+WithPositiveAndNegativeButtonsAndHorizontal.story = {
+  name: 'with positive and negative buttons and horizontal',
+};
+
+export const ExternallyControlled = () => {
+  return <ExternallyControlledDecisionButtons />;
+};
+
+ExternallyControlled.story = {
+  name: 'externallyControlled',
+};
+
+export const CanUncheckButtons = () => {
+  return (
+    <DecisionButtons
+      canUncheck
+      name="radio buttons 4"
+      onChange={action('Change radio button')}
+      orientation="horizontal"
+      items={items2}
+    />
+  );
+};
+
+CanUncheckButtons.story = {
+  name: 'can uncheck buttons',
+};

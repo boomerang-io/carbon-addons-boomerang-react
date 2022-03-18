@@ -1,28 +1,31 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { text } from '@storybook/addon-knobs/react';
+import { text } from '@storybook/addon-knobs';
 
 import TextInput from '../TextInput';
 
 import AutoSuggest from './AutoSuggest';
 
 const animals = [
-  { label: 'Caribou', value: 'caribou' },
-  { label: 'Cat', value: 'cat' },
-  { label: 'Catfish', value: 'catfish' },
-  { label: 'Cheetah', value: 'cheetah' },
-  { label: 'Chipmunk', value: 'chipmunk' },
-  { label: 'Dog', value: 'dog' },
-  { label: 'Dolphin', value: 'dolphin' },
-  { label: 'Dove', value: 'dove' },
-  { label: 'Panda', value: 'panda' },
-  { label: 'Parrot', value: 'parrot' },
-  { label: 'Peacock', value: 'peacock' },
-  { label: 'Penguim', value: 'penguim' },
+  { label: 'caribou', value: 'caribou' },
+  { label: 'cat', value: 'cat' },
+  { label: 'catfish', value: 'catfish' },
+  { label: 'cheetah', value: 'cheetah' },
+  { label: 'chipmunk', value: 'chipmunk' },
+  { label: 'dog', value: 'dog' },
+  { label: 'dolphin', value: 'dolphin' },
+  { label: 'dove', value: 'dove' },
+  { label: 'panda', value: 'panda' },
+  { label: 'parrot', value: 'parrot' },
+  { label: 'peacock', value: 'peacock' },
+  { label: 'penguin', value: 'penguin' },
 ];
 
-storiesOf('AutoSuggest', module).add('default', () => {
+export default {
+  title: 'AutoSuggest',
+};
+
+export const Default = () => {
   return (
     <div style={{ width: '25rem' }}>
       <AutoSuggest
@@ -38,4 +41,8 @@ storiesOf('AutoSuggest', module).add('default', () => {
       </AutoSuggest>
     </div>
   );
-});
+};
+
+Default.story = {
+  name: 'default',
+};

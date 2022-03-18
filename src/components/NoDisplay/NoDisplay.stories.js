@@ -1,16 +1,27 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 
 import NoDisplayComponent from './index';
 
-storiesOf('NoDisplay', module)
-  .add('default', () => {
-    return (
-      <div style={{ background: '#fff' }}>
-        <NoDisplayComponent />
-      </div>
-    );
-  })
-  .add('message', () => {
-    return <NoDisplayComponent text="Looks like you need to add some repos." />;
-  });
+export default {
+  title: 'NoDisplay',
+};
+
+export const Default = () => {
+  return (
+    <div style={{ background: '#fff' }}>
+      <NoDisplayComponent />
+    </div>
+  );
+};
+
+Default.story = {
+  name: 'default',
+};
+
+export const Message = () => {
+  return <NoDisplayComponent text="Looks like you need to add some repos." />;
+};
+
+Message.story = {
+  name: 'message',
+};

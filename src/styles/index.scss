@@ -12,54 +12,54 @@
 $css--plex: true !default;
 
 // Import all of the carbon defaults
-@import '~carbon-components/scss/globals/scss/feature-flags';
-@import '~carbon-components/scss/globals/scss/vars';
-@import '~carbon-components/scss/globals/scss/colors';
-@import '~carbon-components/scss/globals/scss/theme';
-@import '~carbon-components/scss/globals/scss/mixins';
-@import '~carbon-components/scss/globals/scss/motion';
-@import '~carbon-components/scss/globals/scss/layout';
-//@import '~carbon-components/scss/globals/scss/layer';
-@import '~carbon-components/scss/globals/scss/spacing';
-@import '~carbon-components/scss/globals/scss/typography';
-@import '~carbon-components/scss/globals/scss/import-once';
-@import '~carbon-components/scss/globals/scss/css--reset';
-@import '~carbon-components/scss/globals/scss/css--font-face';
-@import '~carbon-components/scss/globals/scss/css--helpers';
-@import '~carbon-components/scss/globals/scss/css--body';
-@import '~carbon-components/scss/globals/grid/grid';
+@import 'carbon-components/scss/globals/scss/feature-flags';
+@import 'carbon-components/scss/globals/scss/vars';
+@import 'carbon-components/scss/globals/scss/colors';
+@import 'carbon-components/scss/globals/scss/theme';
+@import 'carbon-components/scss/globals/scss/mixins';
+@import 'carbon-components/scss/globals/scss/motion';
+@import 'carbon-components/scss/globals/scss/layout';
+//@import 'carbon-components/scss/globals/scss/layer';
+@import 'carbon-components/scss/globals/scss/spacing';
+@import 'carbon-components/scss/globals/scss/typography';
+@import 'carbon-components/scss/globals/scss/import-once';
+@import 'carbon-components/scss/globals/scss/css--reset';
+@import 'carbon-components/scss/globals/scss/css--font-face';
+@import 'carbon-components/scss/globals/scss/css--helpers';
+@import 'carbon-components/scss/globals/scss/css--body';
+@import 'carbon-components/scss/globals/grid/grid';
 
 @import 'themes/index';
 @import 'mixins/index';
 
 // Import carbon styles that are used in our components
-@import '~carbon-components/scss/components/accordion/accordion';
-@import '~carbon-components/scss/components/breadcrumb/breadcrumb';
-@import '~carbon-components/scss/components/button/button';
-@import '~carbon-components/scss/components/checkbox/checkbox';
-@import '~carbon-components/scss/components/combo-box/combo-box';
-@import '~carbon-components/scss/components/date-picker/date-picker';
-@import '~carbon-components/scss/components/date-picker/flatpickr';
-@import '~carbon-components/scss/components/loading/loading';
-@import '~carbon-components/scss/components/link/link';
-@import '~carbon-components/scss/components/modal/modal';
-@import '~carbon-components/scss/components/multi-select/multi-select';
-@import '~carbon-components/scss/components/notification/inline-notification';
-@import '~carbon-components/scss/components/notification/toast-notification';
-@import '~carbon-components/scss/components/progress-indicator/progress-indicator';
-@import '~carbon-components/scss/components/radio-button/radio-button';
-@import '~carbon-components/scss/components/skeleton/skeleton-placeholder';
-@import '~carbon-components/scss/components/structured-list/structured-list';
-@import '~carbon-components/scss/components/tag/tag';
-@import '~carbon-components/scss/components/text-area/text-area';
-@import '~carbon-components/scss/components/text-input/text-input';
-@import '~carbon-components/scss/components/tooltip/tooltip';
-@import '~carbon-components/scss/components/toggle/toggle';
+@import 'carbon-components/scss/components/accordion/accordion';
+@import 'carbon-components/scss/components/breadcrumb/breadcrumb';
+@import 'carbon-components/scss/components/button/button';
+@import 'carbon-components/scss/components/checkbox/checkbox';
+@import 'carbon-components/scss/components/combo-box/combo-box';
+@import 'carbon-components/scss/components/date-picker/date-picker';
+@import 'carbon-components/scss/components/date-picker/flatpickr';
+@import 'carbon-components/scss/components/loading/loading';
+@import 'carbon-components/scss/components/link/link';
+@import 'carbon-components/scss/components/modal/modal';
+@import 'carbon-components/scss/components/multi-select/multi-select';
+@import 'carbon-components/scss/components/notification/inline-notification';
+@import 'carbon-components/scss/components/notification/toast-notification';
+@import 'carbon-components/scss/components/progress-indicator/progress-indicator';
+@import 'carbon-components/scss/components/radio-button/radio-button';
+@import 'carbon-components/scss/components/skeleton/skeleton-placeholder';
+@import 'carbon-components/scss/components/structured-list/structured-list';
+@import 'carbon-components/scss/components/tag/tag';
+@import 'carbon-components/scss/components/text-area/text-area';
+@import 'carbon-components/scss/components/text-input/text-input';
+@import 'carbon-components/scss/components/tooltip/tooltip';
+@import 'carbon-components/scss/components/toggle/toggle';
 
 //only for testing
-@import '~carbon-components/scss/components/dropdown/dropdown';
-@import '~carbon-components/scss/components/search/search';
-@import '~carbon-components/scss/components/overflow-menu/overflow-menu';
+@import 'carbon-components/scss/components/dropdown/dropdown';
+@import 'carbon-components/scss/components/search/search';
+@import 'carbon-components/scss/components/overflow-menu/overflow-menu';
 
 // Import local styles for custom components
 @import '../components/AboutPlatform/aboutPlatform';
@@ -116,7 +116,7 @@ $css--plex: true !default;
 // Scope to modal styles so they don't overwrite other carbon styles
 .#{$prefix}--loading-overlay {
   //harcoded to the RGBA value of the ui-background variable
-  background-color: rgba(242,244,248,0.5);
+  background-color: rgba(242, 244, 248, 0.5);
 }
 .#{$prefix}--tooltip {
   z-index: 9999;

@@ -39,8 +39,7 @@ export const getNextIndex = (key, index, arrayLength) => {
  */
 export const DOCUMENT_POSITION_BROAD_PRECEDING =
   // Checks `typeof Node` for `react-docgen`
-  typeof Node !== 'undefined' &&
-  Node.DOCUMENT_POSITION_PRECEDING | Node.DOCUMENT_POSITION_CONTAINS;
+  typeof Node !== 'undefined' && Node.DOCUMENT_POSITION_PRECEDING | Node.DOCUMENT_POSITION_CONTAINS;
 
 /**
  * A flag `node.compareDocumentPosition(target)` returns,
@@ -55,18 +54,18 @@ export const DOCUMENT_POSITION_BROAD_FOLLOWING =
  * CSS selector that selects major nodes that are sequential-focusable.
  */
 export const selectorTabbable = `
-  a[href], area[href], input:not([disabled]):not([tabindex='-1']),
-  button:not([disabled]):not([tabindex='-1']),select:not([disabled]):not([tabindex='-1']),
-  textarea:not([disabled]):not([tabindex='-1']),
-  iframe, object, embed, *[tabindex]:not([tabindex='-1']), *[contenteditable=true]
-`;
+   a[href], area[href], input:not([disabled]):not([tabindex='-1']),
+   button:not([disabled]):not([tabindex='-1']),select:not([disabled]):not([tabindex='-1']),
+   textarea:not([disabled]):not([tabindex='-1']),
+   iframe, object, embed, *[tabindex]:not([tabindex='-1']):not([disabled]), *[contenteditable=true]
+ `;
 
 /**
  * CSS selector that selects major nodes that are click focusable
  */
 export const selectorFocusable = `
-  a[href], area[href], input:not([disabled]),
-  button:not([disabled]),select:not([disabled]),
-  textarea:not([disabled]),
-  iframe, object, embed, *[tabindex]:not([disabled]), *[contenteditable=true]
-`;
+   a[href], area[href], input:not([disabled]),
+   button:not([disabled]),select:not([disabled]),
+   textarea:not([disabled]),
+   iframe, object, embed, *[tabindex]:not([disabled]), *[contenteditable=true]
+ `;

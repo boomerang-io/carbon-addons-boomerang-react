@@ -1,12 +1,12 @@
 import { create } from '@storybook/theming';
 import { g10 } from '@carbon/themes';
-import { name, homepage } from '../package.json';
+import project from '../package.json';
 
 const { field01, interactive01, text01, text04, ui01, ui03, ui04, uiBackground } = g10;
 
 //import BoomerangLogo from './assets/boomerang';
 
-export default create({
+const theme = create({
   base: 'light',
 
   colorPrimary: interactive01,
@@ -37,8 +37,10 @@ export default create({
   inputTextColor: text01,
   inputBorderRadius: 0,
 
-  brandTitle: name,
-  brandUrl: homepage,
+  brandTitle: project.name,
+  brandUrl: project.homepage,
   /*brandImage:
     <BoomerangLogo />,*/
 });
+
+export default theme;

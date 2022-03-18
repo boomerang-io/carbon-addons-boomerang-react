@@ -3,11 +3,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import { settings } from 'carbon-components';
 import { Button, TextArea } from 'carbon-components-react';
-import {
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-} from 'carbon-components-react/lib/components/ComposedModal';
+import { ModalHeader, ModalBody, ModalFooter } from 'carbon-components-react';
 
 import notify from '../Notifications/notify';
 import HeaderMenuItem from '../HeaderMenuItem';

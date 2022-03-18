@@ -2,11 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { settings } from 'carbon-components';
 import { Button } from 'carbon-components-react';
-import {
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-} from 'carbon-components-react/lib/components/ComposedModal';
+import { ModalHeader, ModalBody, ModalFooter } from 'carbon-components-react';
 
 import HeaderMenuItem from '../HeaderMenuItem';
 

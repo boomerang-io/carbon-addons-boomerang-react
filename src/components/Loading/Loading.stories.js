@@ -1,15 +1,31 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 
 import Loading from './Loading';
 
-storiesOf('Loading', module)
-  .add('default', () => {
-    return <Loading />;
-  })
-  .add('delay render after 2 seconds', () => {
-    return <Loading delay={2000} />;
-  })
-  .add('without overlay', () => {
-    return <Loading withOverlay={false} />;
-  });
+export default {
+  title: 'Loading',
+};
+
+export const Default = () => {
+  return <Loading />;
+};
+
+Default.story = {
+  name: 'default',
+};
+
+export const DelayRenderAfter2Seconds = () => {
+  return <Loading delay={2000} />;
+};
+
+DelayRenderAfter2Seconds.story = {
+  name: 'delay render after 2 seconds',
+};
+
+export const WithoutOverlay = () => {
+  return <Loading withOverlay={false} />;
+};
+
+WithoutOverlay.story = {
+  name: 'without overlay',
+};

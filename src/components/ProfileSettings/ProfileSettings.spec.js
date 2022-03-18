@@ -41,7 +41,7 @@ test('Profile Settings success', async () => {
 });
 
 const mock = new MockAdapter(axios);
-mock.onGet(`${baseServiceUrl}/launchpad/users`).reply(200, PROFILE_SETTINGS_DATA);
+mock.onGet(`${baseServiceUrl}/launchpad/user`).reply(200, PROFILE_SETTINGS_DATA);
 mock.onPatch(`${baseServiceUrl}/users/profile`).reply(500);
 
 test('Profile Settings error', async () => {

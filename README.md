@@ -4,15 +4,19 @@
 
 ## Getting Started
 
+Install the Carbon peer dependencies in addition to the package itself. We re-export all of the components from `carbon-components-react` but in some cases you may want to import directly from a Carbon library. It is a best practice to have the dependency defined in the `package.json` in that situation and depending on your package manager and node version, a requirement. It also gives consumers more control over the version of the packages they are using without being dependent on our library.
+
 Run the following command using [npm](https://www.npmjs.com/):
 
 ```bash
+npm install carbon-components carbon-components-react carbon-icons @carbon/icons-react
 npm install @boomerang-io/carbon-addons-boomerang-react
 ```
 
 If you prefer [Yarn](https://yarnpkg.com/en/), use the following command instead:
 
 ```bash
+yarn add carbon-components carbon-components-react carbon-icons @carbon/icons-react
 yarn add @boomerang-io/carbon-addons-boomerang-react
 ```
 
@@ -21,7 +25,7 @@ yarn add @boomerang-io/carbon-addons-boomerang-react
 You need to import the `.scss` styles. If you are using SASS and webpack, perform the following import.
 
 ```css
-@import '~@boomerang-io/carbon-addons-boomerang-react/styles/scss/styles';
+@import '@boomerang-io/carbon-addons-boomerang-react/styles/scss/styles';
 ```
 
 You can then import components by the following:
@@ -47,3 +51,22 @@ You can find more information about how to use each Component by checking out ou
 ## 🤲 Contributing
 
 Please check out our [Contribution Guidelines](./.github/CONTRIBUTING.md) for more info on how you can help out!
+
+## Release History
+
+### v2
+
+The big change here is finally supporting tree-shaking properly. This should reduce bundle size and builds times, sometimes drastically based on your use case. [View the migration guide](./documentation/guides/v2-migration.md) for updating to v2.
+
+**Features**
+
+- Tree-shaking via `ESM` builds
+- Storybook v6 migration
+- Dependency updates and security fixes
+
+**Breaking Changes**
+
+- Move `@carbon/icons-react` to a peer dependency
+- Move `carbon-icons` to a peer dependency
+- Remove `@carbon/elements` as a dependency
+- No longer publish `UMD` builds

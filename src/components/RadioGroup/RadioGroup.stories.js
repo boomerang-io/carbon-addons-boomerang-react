@@ -1,5 +1,4 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { text } from '@storybook/addon-knobs';
 
@@ -14,33 +13,45 @@ const options2 = [
   { labelText: 'Radio 4', value: 'radio 4 value' },
 ];
 
-storiesOf('RadioGroup', module)
-  .add('default and vertical', () => {
-    return (
-      <RadioGroup
-        id="test"
-        defaultSelected={text('defaultSelected', 'default value')}
-        helperText={text('helperText', 'Test helper text')}
-        name={text('name', 'Radio group 1')}
-        onChange={action('radio changed')}
-        options={options1}
-        orientation="horizontal"
-      />
-    );
-  })
-  .add('with tooltip and label and horizontal', () => {
-    return (
-      <RadioGroup
-        id="test"
-        defaultSelected={text('defaultSelected', 'default value')}
-        labelText={text('labelText', 'Select a value')}
-        helperText={text('helperText', 'Test helper text')}
-        name={text('name', 'Radio group 2')}
-        onChange={() => {}}
-        options={options2}
-        orientation="vertical"
-        tooltipContent={text('tooltipContent', 'Tooltip for radioGroup')}
-        tooltipProps={{ direction: 'right' }}
-      />
-    );
-  });
+export default {
+  title: 'RadioGroup',
+};
+
+export const DefaultAndVertical = () => {
+  return (
+    <RadioGroup
+      id="test"
+      defaultSelected={text('defaultSelected', 'default value')}
+      helperText={text('helperText', 'Test helper text')}
+      name={text('name', 'Radio group 1')}
+      onChange={action('radio changed')}
+      options={options1}
+      orientation="horizontal"
+    />
+  );
+};
+
+DefaultAndVertical.story = {
+  name: 'default and vertical',
+};
+
+export const WithTooltipAndLabelAndHorizontal = () => {
+  return (
+    <RadioGroup
+      id="test"
+      defaultSelected={text('defaultSelected', 'default value')}
+      labelText={text('labelText', 'Select a value')}
+      helperText={text('helperText', 'Test helper text')}
+      name={text('name', 'Radio group 2')}
+      onChange={() => {}}
+      options={options2}
+      orientation="vertical"
+      tooltipContent={text('tooltipContent', 'Tooltip for radioGroup')}
+      tooltipProps={{ direction: 'right' }}
+    />
+  );
+};
+
+WithTooltipAndLabelAndHorizontal.story = {
+  name: 'with tooltip and label and horizontal',
+};
