@@ -17,8 +17,8 @@ const notificationsObj = {
   userId: '61730018ae92414d2bd15b4c',
 };
 
-describe('Default Notification Container', () => {
-  test('Render correctly', async () => {
+describe('Platform notification', () => {
+  test('Renders correctly', async () => {
     render(
       <PlatformNotifications notificationInfo={notificationsObj} readNotification={() => {}} />
     );
