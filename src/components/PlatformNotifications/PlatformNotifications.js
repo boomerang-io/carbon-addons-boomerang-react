@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Close16 } from '@carbon/icons-react';
-import { formatDistance, format } from 'date-fns';
+import { formatDistance, format, parseISO } from 'date-fns';
 import { settings } from 'carbon-components';
 
 const { prefix } = settings;
@@ -28,7 +28,7 @@ function Notification({ readNotification, notificationInfo }) {
         <p className={`${prefix}--bmrg-notification-content__desc`}>{notificationInfo.detail}</p>
         <time className={`${prefix}--bmrg-notification-content__date`}>
           {`${formatDistance(new Date(notificationInfo.date), new Date())} ago at ${format(
-            notificationInfo.date,
+            parseISO(notificationInfo.date),
             'hh:mma'
           )}`}
         </time>
@@ -47,7 +47,7 @@ Notification.propTypes = {
   readNotification: PropTypes.func,
   notificationInfo: PropTypes.shape({
     creator: PropTypes.string,
-    date: PropTypes.number,
+    date: PropTypes.string,
     detail: PropTypes.string,
     id: PropTypes.string,
     location: PropTypes.string,

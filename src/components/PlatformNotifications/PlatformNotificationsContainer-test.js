@@ -1,10 +1,9 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render } from '@testing-library/react';
 import { action } from '@storybook/addon-actions';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import { Server } from 'mock-socket';
-import { getTime, subDays } from 'date-fns';
 
 import PlatformNotificationsContainer from './PlatformNotificationsContainer';
 
@@ -13,13 +12,18 @@ const mockServer = new Server(mockSocketUrl);
 const notificationsObj = {
   notifications: [
     {
-      id: 'testID1',
-      location: 'Launchpad',
-      title: 'Maintenance Scheduled for a long long long long time',
-      detail:
-        'Launchpad is scheduled for maintenance on January 8 from 2am-3am for a long long long time',
-      date: '1551300716020',
-      type: 'exception',
+      creator: 'Boomerang CICD',
+      date: '2022-02-15T12:47:47.655+00:00',
+      detail: 'Outage description test for the following service(s): Boomerang Flow,Boomerang CICD',
+      eventId: '620b9f7e99fcb715cbc222b3',
+      id: '620ba0f354f1b83f5077dec6',
+      priority: 'highest',
+      read: false,
+      severity: 'INFO',
+      target: 'user',
+      title: 'Resolved',
+      type: 'notification',
+      userId: '61730018ae92414d2bd15b4c',
     },
   ],
 };
@@ -32,9 +36,6 @@ mockServer.on('connection', (socket) => {
   socket.on('message', () => {
     setInterval(() => {
       notificationsObj.notifications[0].id = Math.round(Math.random() * 100000000); // Change for each one
-      notificationsObj.notifications[0].date = getTime(
-        subDays(new Date(), Math.round(Math.random() * 10))
-      );
       socket.send(JSON.stringify(notificationsObj));
     }, 10000);
   });
@@ -42,7 +43,7 @@ mockServer.on('connection', (socket) => {
 
 describe('Default Notification Container', () => {
   describe('Renders as expected', () => {
-    const wrapper = shallow(
+    const wrapper = render(
       <PlatformNotificationsContainer
         config={{
           wsUrl: 'ws://localhost:8081/ws',
