@@ -20,10 +20,10 @@ const ignoreGlobs = ['**/*.spec.js', '**/*.stories.js'].join(',');
 
 async function build() {
   try {
-    exec(`${babelPath} src --quiet -d es --ignore "${ignoreGlobs}"`, {
+    exec(`"${babelPath}" src --quiet -d es --ignore "${ignoreGlobs}"`, {
       BABEL_ENV: 'es',
     });
-    exec(`${babelPath} src --quiet -d lib --ignore "${ignoreGlobs}"`, {
+    exec(`"${babelPath}" src --quiet -d lib --ignore "${ignoreGlobs}"`, {
       BABEL_ENV: 'cjs',
     });
     await cpy('**/*.scss', '../styles/scss', {
