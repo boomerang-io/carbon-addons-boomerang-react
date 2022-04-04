@@ -6,7 +6,6 @@ import HeaderMenuButton from '../HeaderMenuButton';
 import HeaderMenuLink from '../HeaderMenuLink';
 import ProfileSettings from '../ProfileSettings';
 import AboutPlatform from '../AboutPlatform';
-import ContactUs from '../ContactUs';
 import Feedback from '../Feedback';
 import PrivacyStatement from '../PrivacyStatement';
 import SignOut from '../SignOut';
@@ -239,9 +238,6 @@ function UIShell({
               onClick={onTutorialClick}
               text="Tutorial"
             />
-          ),
-          Boolean(finalBaseServiceUrl) && isSupportEnabled && (
-            <ContactUs baseServiceUrl={finalBaseServiceUrl} key="Contact Us" />
           ),
           Boolean(finalBaseServiceUrl) && isSupportEnabled && (
             <HeaderMenuLink
