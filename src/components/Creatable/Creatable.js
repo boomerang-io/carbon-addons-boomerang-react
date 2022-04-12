@@ -193,17 +193,21 @@ function CreatableComponent({
               type={type}
               value={keyValue}
               style={{
-                marginBottom: hasBothHelperText || keyHelperText ? "0" : valueHelperText ? "1.5rem" : "0rem",
-                marginTop: hasBothLabelText || inputKeyLabel ? "0" : inputValueLabel ? "1.5rem":"0.5rem",
+                marginBottom:
+                  hasBothHelperText || keyHelperText ? '0' : valueHelperText ? '1.5rem' : '0rem',
+                marginTop:
+                  hasBothLabelText || inputKeyLabel ? '0' : inputValueLabel ? '1.5rem' : '0.5rem',
               }}
               {...textInputProps}
             />
-            <p 
+            <span
               className={`${prefix}--bmrg-creatable__colon`}
               style={{
-                marginTop: inputKeyLabel || inputValueLabel ? "1.75rem" : "0.75rem",
+                marginTop: inputKeyLabel || inputValueLabel ? '1.75rem' : '0.75rem',
               }}
-            >:</p>
+            >
+              :
+            </span>
             <TextInput
               disabled={disableInputs}
               id={`${id}-value`}
@@ -217,15 +221,17 @@ function CreatableComponent({
               type={type}
               value={value}
               style={{
-                marginBottom: hasBothHelperText || valueHelperText ? "0" : keyHelperText ? "1.5rem" : "0rem",
-                marginTop: hasBothLabelText || inputValueLabel ? "0" : inputKeyLabel ? "1.5rem":"0.5rem",
+                marginBottom:
+                  hasBothHelperText || valueHelperText ? '0' : keyHelperText ? '1.5rem' : '0rem',
+                marginTop:
+                  hasBothLabelText || inputValueLabel ? '0' : inputKeyLabel ? '1.5rem' : '0.5rem',
               }}
               {...textInputProps}
             />
           </div>
         ) : (
           <TextInput
-            disabled={disableInputs}        
+            disabled={disableInputs}
             id={id}
             invalid={invalid}
             invalidText={invalidText}
@@ -269,8 +275,14 @@ function CreatableComponent({
             key={`${item}-${index}`}
             disabled={disabled}
             type={tagType}
-            onClick={nonDeletable && initialTagItems.includes(item) ? undefined : () => removeValue(item)}
-            onKeyDown={nonDeletable && initialTagItems.includes(item) ? undefined : (e) => isAccessibleKeyDownEvent(e) && removeValue(item)}
+            onClick={
+              nonDeletable && initialTagItems.includes(item) ? undefined : () => removeValue(item)
+            }
+            onKeyDown={
+              nonDeletable && initialTagItems.includes(item)
+                ? undefined
+                : (e) => isAccessibleKeyDownEvent(e) && removeValue(item)
+            }
             filter={!nonDeletable || (nonDeletable && !initialTagItems.includes(item))}
             {...tagProps}
           >
