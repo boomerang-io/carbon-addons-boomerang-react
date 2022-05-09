@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import FocusTrap from 'focus-trap-react';
-import SockJS from 'sockjs-client';
+import SockJS from '../../internal/sockjs-client';
 import { Client } from '@stomp/stompjs';
 import { settings } from 'carbon-components';
 import Notification from './PlatformNotifications';
@@ -56,7 +56,7 @@ export default class PlatformNotificationsContainer extends React.Component {
       reconnectDelay: 10000
     });
     this.ws.webSocketFactory = () => {
-      return new SockJS(this.props.config.wsUrl, null, { timeout: 60000});
+      return new SockJS(this.props.config.wsUrl, null, { timeout: 60000 });
     };
     this.ws.onConnect = this.connect;
     this.ws.activate();
