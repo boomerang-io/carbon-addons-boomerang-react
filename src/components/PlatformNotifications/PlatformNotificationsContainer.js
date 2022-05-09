@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import FocusTrap from 'focus-trap-react';
-import SockJS from '../../internal/sockjs-client';
+import SockJS from '../../tools/sockjs-client';
 import { Client } from '@stomp/stompjs';
 import { settings } from 'carbon-components';
 import Notification from './PlatformNotifications';
