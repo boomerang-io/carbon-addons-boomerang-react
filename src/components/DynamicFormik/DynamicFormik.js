@@ -161,7 +161,7 @@ function getGoverningSelectDeepOptions({
  * @param {array} inputs - all the dynamic formik inputs
  * @param {string} selectedItem - new value of the select input
  */
-async function handleGoverningSelectChange({ formikProps, input, inputs, selectedItem }) {
+async function handleGoverningSelectChange({ formikProps, input, inputs, isInputBeingChanged, selectedItem }) {
   const { key } = input;
   const inputsGovernedByCurrentOne = inputs.filter(
     (formikInput) => formikInput.governingKey === key
@@ -170,11 +170,12 @@ async function handleGoverningSelectChange({ formikProps, input, inputs, selecte
   /** Erase value of governed inputs */
   if (inputsGovernedByCurrentOne.length) {
     await inputsGovernedByCurrentOne.forEach(async (input) => {
-      await handleGoverningSelectChange({ formikProps, input, inputs, selectedItem: '' });
+      await handleGoverningSelectChange({ formikProps, input, inputs, isInputBeingChanged: false, selectedItem: '' });
     });
   }
 
-  await formikProps.setFieldTouched(`['${key}']`, true);
+  // only the top governing select should display warnings if changed and reset touched status for governed ones
+  await formikProps.setFieldTouched(`['${key}']`, isInputBeingChanged);
   formikProps.setFieldValue(`['${key}']`, selectedItem ? selectedItem.value : '');
   formikProps.setFieldValue(`['${key}-keyLabel']`, selectedItem ? selectedItem.label : '');
 }
@@ -571,7 +572,7 @@ const TYPE_PROPS = {
         typeProps = {
           ...typeProps,
           onChange: ({ selectedItem }) =>
-            handleGoverningSelectChange({ formikProps, input, inputs, selectedItem }),
+            handleGoverningSelectChange({ formikProps, input, inputs, selectedItem, isInputBeingChanged: true }),
           governingOptions,
           governingDisabled,
         };
