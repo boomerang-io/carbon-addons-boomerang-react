@@ -30,61 +30,63 @@ export const Default = () => {
   mock.onGet(`${BASE_URL}/launchpad/users`).reply(200, PROFILE_SETTINGS_DATA);
   mock.onPost(`${BASE_URL}/support/contact`).reply(200);
   return (
-    <UIShell
-      renderFlowDocs
-      renderLogo={boolean('renderLogo', true)}
-      renderRequests={boolean('renderRequests', true)}
-      appName={text('appName', 'Flow')}
-      platformName={text('platformName', 'Boomerang')}
-      baseServiceUrl={BASE_URL}
-      headerConfig={{
-        features: {
-          'community.enabled': boolean('community.enabled', true),
-          'notifications.enabled': boolean('notifications.enabled', true),
-          'support.enabled': boolean('support.enabled', true),
-          'feedback.enabled': boolean('feedback.enabled', true),
-        },
-        navigation: [
-          {
-            name: 'Launchpad',
-            url: 'https://servicesessentials.ibm.com/launchpad',
+    <Router>
+      <UIShell
+        renderFlowDocs
+        renderLogo={boolean('renderLogo', true)}
+        renderRequests={boolean('renderRequests', true)}
+        appName={text('appName', 'Flow')}
+        platformName={text('platformName', 'Boomerang')}
+        baseServiceUrl={BASE_URL}
+        headerConfig={{
+          features: {
+            'community.enabled': boolean('community.enabled', true),
+            'notifications.enabled': boolean('notifications.enabled', true),
+            'support.enabled': boolean('support.enabled', true),
+            'feedback.enabled': boolean('feedback.enabled', true),
           },
-          {
-            name: 'Admin',
-            url: 'https://servicesessentials.ibm.com/launchpad',
+          navigation: [
+            {
+              name: 'Launchpad',
+              url: 'https://servicesessentials.ibm.com/launchpad',
+            },
+            {
+              name: 'Admin',
+              url: 'https://servicesessentials.ibm.com/launchpad',
+            },
+            {
+              name: 'Docs',
+              url: 'https://servicesessentials.ibm.com/launchpad',
+            },
+          ],
+          platform: {
+            name: text('platform.name', 'IBM Boomerang Platform'),
+            version: text('platform.version', '5.0.0'),
+            signOutUrl: 'https://ibm.com',
+            communityUrl: 'https://developer.ibm.com',
+            platformName: text('platform.platformName', 'IBM Boomerang'),
+            platformOrganization: text('platform.platformOrganization', 'IBM'),
           },
-          {
-            name: 'Docs',
-            url: 'https://servicesessentials.ibm.com/launchpad',
+          platformMessage: {
+            kind: text('platformMessage.kind', 'info'),
+            message: text('platformMessage.message', 'Message Goes Here'),
+            title: text('platformMessage.title', 'Testing Platform Title'),
           },
-        ],
-        platform: {
-          name: text('platform.name', 'IBM Boomerang Platform'),
-          version: text('platform.version', '5.0.0'),
-          signOutUrl: 'https://ibm.com',
-          communityUrl: 'https://developer.ibm.com',
-          platformName: text('platform.platformName', 'IBM Boomerang'),
-          platformOrganization: text('platform.platformOrganization', 'IBM'),
-        },
-        platformMessage: {
-          kind: text('platformMessage.kind', 'info'),
-          message: text('platformMessage.message', 'Message Goes Here'),
-          title: text('platformMessage.title', 'Testing Platform Title'),
-        },
-      }}
-      onTutorialClick={action('Tutorial')}
-      skipToContentProps={{ href: '#id' }}
-      user={{
-        name: 'test user',
-        email: 'test.user@ibm.com',
-        hasConsented: true,
-        status: 'active',
-        requestSummary: {
-          requireUserAction: 0,
-          submittedByUser: 17,
-        },
-      }}
-    />
+        }}
+        onTutorialClick={action('Tutorial')}
+        skipToContentProps={{ href: '#id' }}
+        user={{
+          name: 'test user',
+          email: 'test.user@ibm.com',
+          hasConsented: true,
+          status: 'active',
+          requestSummary: {
+            requireUserAction: 0,
+            submittedByUser: 17,
+          },
+        }}
+      />
+    </Router>
   );
 };
 
@@ -225,73 +227,75 @@ export const WithRightPanel = () => {
   mock.onGet(`${BASE_URL}/users/consents`).reply(200, PRIVACY_DATA);
   mock.onPost(`${BASE_URL}/support/contact`).reply(200);
   return (
-    <UIShell
-      isFlowApp
-      renderLogo={boolean('renderLogo', true)}
-      appName={text('appName', '')}
-      platformName={text('platformName', 'Boomerang')}
-      baseServiceUrl={BASE_URL}
-      headerConfig={{
-        features: {
-          'community.enabled': boolean('community.enabled', true),
-          'notifications.enabled': boolean('notifications.enabled', true),
-          'support.enabled': boolean('support.enabled', true),
-        },
-        navigation: [
-          {
-            name: 'Launchpad',
-            url: 'https://servicesessentials.ibm.com/launchpad',
+    <Router>
+      <UIShell
+        isFlowApp
+        renderLogo={boolean('renderLogo', true)}
+        appName={text('appName', '')}
+        platformName={text('platformName', 'Boomerang')}
+        baseServiceUrl={BASE_URL}
+        headerConfig={{
+          features: {
+            'community.enabled': boolean('community.enabled', true),
+            'notifications.enabled': boolean('notifications.enabled', true),
+            'support.enabled': boolean('support.enabled', true),
           },
-          {
-            name: 'Admin',
-            url: 'https://servicesessentials.ibm.com/launchpad',
+          navigation: [
+            {
+              name: 'Launchpad',
+              url: 'https://servicesessentials.ibm.com/launchpad',
+            },
+            {
+              name: 'Admin',
+              url: 'https://servicesessentials.ibm.com/launchpad',
+            },
+            {
+              name: 'Docs',
+              url: 'https://servicesessentials.ibm.com/launchpad',
+            },
+          ],
+          platform: {
+            name: text('platform.name', 'IBM Boomerang Platform'),
+            version: text('platform.version', '5.0.0'),
+            signOutUrl: 'https://ibm.com',
+            communityUrl: 'https://developer.ibm.com',
           },
-          {
-            name: 'Docs',
-            url: 'https://servicesessentials.ibm.com/launchpad',
+          platformMessage: {
+            kind: text('platformMessage.kind', 'info'),
+            message: text('platformMessage.message', 'Message Goes Here'),
+            title: text('platformMessage.title', 'Testing Platform Title'),
           },
-        ],
-        platform: {
-          name: text('platform.name', 'IBM Boomerang Platform'),
-          version: text('platform.version', '5.0.0'),
-          signOutUrl: 'https://ibm.com',
-          communityUrl: 'https://developer.ibm.com',
-        },
-        platformMessage: {
-          kind: text('platformMessage.kind', 'info'),
-          message: text('platformMessage.message', 'Message Goes Here'),
-          title: text('platformMessage.title', 'Testing Platform Title'),
-        },
-      }}
-      onTutorialClick={action('Tutorial')}
-      renderRightPanel={{
-        icon: <Help24 />,
-        component: (
-          <div
-            style={{
-              color: 'white',
-              display: 'flex',
-              justifyContent: 'center',
-              marginTop: '4rem',
-              width: '25rem',
-            }}
-          >
-            Custom content behaviour
-          </div>
-        ),
-      }}
-      user={{
-        id: '1',
-        name: 'test user',
-        email: 'test.user@ibm.com',
-        hasConsented: true,
-        status: 'active',
-        requestSummary: {
-          requireUserAction: 11,
-          submittedByUser: 17,
-        },
-      }}
-    />
+        }}
+        onTutorialClick={action('Tutorial')}
+        renderRightPanel={{
+          icon: <Help24 />,
+          component: (
+            <div
+              style={{
+                color: 'white',
+                display: 'flex',
+                justifyContent: 'center',
+                marginTop: '4rem',
+                width: '25rem',
+              }}
+            >
+              Custom content behaviour
+            </div>
+          ),
+        }}
+        user={{
+          id: '1',
+          name: 'test user',
+          email: 'test.user@ibm.com',
+          hasConsented: true,
+          status: 'active',
+          requestSummary: {
+            requireUserAction: 11,
+            submittedByUser: 17,
+          },
+        }}
+      />
+    </Router>
   );
 };
 
@@ -302,52 +306,54 @@ WithRightPanel.story = {
 export const UserNotConsented = () => {
   mock.onGet(`${BASE_URL}/users/consents`).reply(200, PRIVACY_DATA);
   return (
-    <UIShell
-      renderLogo={boolean('renderLogo', true)}
-      appName={text('appName', '')}
-      baseServiceUrl={BASE_URL}
-      platformName={text('platformName', 'Boomerang')}
-      headerConfig={{
-        features: {
-          'community.enabled': boolean('community.enabled', true),
-          'notifications.enabled': boolean('notifications.enabled', true),
-          'support.enabled': boolean('support.enabled', true),
-        },
-        navigation: [
-          {
-            name: 'Launchpad',
-            url: 'https://servicesessentials.ibm.com/launchpad',
+    <Router>
+      <UIShell
+        renderLogo={boolean('renderLogo', true)}
+        appName={text('appName', '')}
+        baseServiceUrl={BASE_URL}
+        platformName={text('platformName', 'Boomerang')}
+        headerConfig={{
+          features: {
+            'community.enabled': boolean('community.enabled', true),
+            'notifications.enabled': boolean('notifications.enabled', true),
+            'support.enabled': boolean('support.enabled', true),
           },
-          {
-            name: 'Admin',
-            url: 'https://servicesessentials.ibm.com/launchpad',
+          navigation: [
+            {
+              name: 'Launchpad',
+              url: 'https://servicesessentials.ibm.com/launchpad',
+            },
+            {
+              name: 'Admin',
+              url: 'https://servicesessentials.ibm.com/launchpad',
+            },
+            {
+              name: 'Docs',
+              url: 'https://servicesessentials.ibm.com/launchpad',
+            },
+          ],
+          platform: {
+            name: text('platform.name', 'IBM Boomerang Platform'),
+            version: text('platform.version', '5.0.0'),
+            signOutUrl: 'https://ibm.com',
+            communityUrl: 'https://developer.ibm.com',
           },
-          {
-            name: 'Docs',
-            url: 'https://servicesessentials.ibm.com/launchpad',
+          platformMessage: {
+            kind: text('platformMessage.kind', 'info'),
+            message: text('platformMessage.message', 'Message Goes Here'),
+            title: text('platformMessage.title', 'Testing Platform Title'),
           },
-        ],
-        platform: {
-          name: text('platform.name', 'IBM Boomerang Platform'),
-          version: text('platform.version', '5.0.0'),
-          signOutUrl: 'https://ibm.com',
-          communityUrl: 'https://developer.ibm.com',
-        },
-        platformMessage: {
-          kind: text('platformMessage.kind', 'info'),
-          message: text('platformMessage.message', 'Message Goes Here'),
-          title: text('platformMessage.title', 'Testing Platform Title'),
-        },
-      }}
-      onTutorialClick={action('Tutorial')}
-      user={{
-        id: '1',
-        name: 'test user',
-        email: 'test.user@ibm.com',
-        hasConsented: false,
-        status: 'active',
-      }}
-    />
+        }}
+        onTutorialClick={action('Tutorial')}
+        user={{
+          id: '1',
+          name: 'test user',
+          email: 'test.user@ibm.com',
+          hasConsented: false,
+          status: 'active',
+        }}
+      />
+    </Router>
   );
 };
 
@@ -358,52 +364,54 @@ UserNotConsented.story = {
 export const UserPendingDeletion = () => {
   mock.onGet(`${BASE_URL}/users/consents`).reply(200, PRIVACY_DATA);
   return (
-    <UIShell
-      renderLogo={boolean('renderLogo', true)}
-      platformName={text('platformName', 'Boomerang')}
-      appName={text('appName', '')}
-      baseServiceUrl={BASE_URL}
-      headerConfig={{
-        features: {
-          'community.enabled': boolean('community.enabled', true),
-          'notifications.enabled': boolean('notifications.enabled', true),
-          'support.enabled': boolean('support.enabled', true),
-        },
-        navigation: [
-          {
-            name: 'Launchpad',
-            url: 'https://servicesessentials.ibm.com/launchpad',
+    <Router>
+      <UIShell
+        renderLogo={boolean('renderLogo', true)}
+        platformName={text('platformName', 'Boomerang')}
+        appName={text('appName', '')}
+        baseServiceUrl={BASE_URL}
+        headerConfig={{
+          features: {
+            'community.enabled': boolean('community.enabled', true),
+            'notifications.enabled': boolean('notifications.enabled', true),
+            'support.enabled': boolean('support.enabled', true),
           },
-          {
-            name: 'Admin',
-            url: 'https://servicesessentials.ibm.com/launchpad',
+          navigation: [
+            {
+              name: 'Launchpad',
+              url: 'https://servicesessentials.ibm.com/launchpad',
+            },
+            {
+              name: 'Admin',
+              url: 'https://servicesessentials.ibm.com/launchpad',
+            },
+            {
+              name: 'Docs',
+              url: 'https://servicesessentials.ibm.com/launchpad',
+            },
+          ],
+          platform: {
+            name: text('platform.name', 'IBM Boomerang Platform'),
+            version: text('platform.version', '5.0.0'),
+            signOutUrl: 'https://ibm.com',
+            communityUrl: 'https://developer.ibm.com',
           },
-          {
-            name: 'Docs',
-            url: 'https://servicesessentials.ibm.com/launchpad',
+          platformMessage: {
+            kind: text('platformMessage.kind', 'info'),
+            message: text('platformMessage.message', 'Message Goes Here'),
+            title: text('platformMessage.title', 'Testing Platform Title'),
           },
-        ],
-        platform: {
-          name: text('platform.name', 'IBM Boomerang Platform'),
-          version: text('platform.version', '5.0.0'),
-          signOutUrl: 'https://ibm.com',
-          communityUrl: 'https://developer.ibm.com',
-        },
-        platformMessage: {
-          kind: text('platformMessage.kind', 'info'),
-          message: text('platformMessage.message', 'Message Goes Here'),
-          title: text('platformMessage.title', 'Testing Platform Title'),
-        },
-      }}
-      onTutorialClick={action('Tutorial')}
-      user={{
-        id: '1',
-        name: 'test user',
-        email: 'test.user@ibm.com',
-        hasConsented: false,
-        status: 'pending_deletion',
-      }}
-    />
+        }}
+        onTutorialClick={action('Tutorial')}
+        user={{
+          id: '1',
+          name: 'test user',
+          email: 'test.user@ibm.com',
+          hasConsented: false,
+          status: 'pending_deletion',
+        }}
+      />
+    </Router>
   );
 };
 
