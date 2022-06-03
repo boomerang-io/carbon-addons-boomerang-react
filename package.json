@@ -65,7 +65,7 @@
     "match-sorter": "6.3.1",
     "react-autosuggest": "10.1.0",
     "react-modal": "3.14.4",
-    "react-toastify": "8.2.0",
+    "react-toastify": "9.0.1",
     "sockjs-client": "1.6.0",
     "window-or-global": "1.0.1"
   },
