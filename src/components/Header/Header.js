@@ -224,7 +224,6 @@ class Header extends React.Component {
    * 'is' prefix to false (in order to only have one active item at a time)
    */
   handleIconClick = (type) => (evt) => {
-    console.log('running');
     Object.keys(this.state)
       .filter((key) => key.startsWith('is'))
       .forEach((key) => {
