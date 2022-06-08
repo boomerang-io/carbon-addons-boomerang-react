@@ -15,6 +15,7 @@ node_modules
 
 # Socksjs-client exceptions
 !src/tools/sockjs-client/lib
+!src/tools/sockjs-client/lib/transport/lib
 !src/tools/sockjs-client/node_modules
 
 
