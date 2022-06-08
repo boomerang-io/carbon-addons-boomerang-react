@@ -1,4 +1,12 @@
 {
   "extends": ["react-app", "plugin:jsx-a11y/recommended"],
-  "plugins": ["jsx-a11y"]
+  "plugins": ["jsx-a11y"],
+  "overrides": [
+    {
+      "files": ["**/*.stories.js"],
+      "rules": {
+        "import/no-anonymous-default-export": "off"
+      }
+    }
+  ]
 }
