@@ -1,0 +1,75 @@
+@include exports('addons-bmrg-service-autocomplete-input') {
+
+  .#{$prefix}--bmrg-service-autocomplete__container {
+    position: relative;
+  }
+
+  .#{$prefix}--bmrg-service-autocomplete__input-container {
+    display: flex;
+    position: relative;
+  }
+
+  .#{$prefix}--bmrg-service-autocomplete__downshift {
+    position: relative;
+  }
+  
+  .#{$prefix}--bmrg-service-autocomplete__options-container {
+    background-color: var(--cds-ui-01);
+    max-height: 12.5rem;
+    position: absolute;
+    top: 4rem;
+    width: 37.0625rem;
+    z-index: 10;
+  }
+  
+  .#{$prefix}--bmrg-service-autocomplete__options {
+    max-height: 6rem;
+    overflow-y: auto;
+    width: 100%;
+  }
+  
+  .#{$prefix}--bmrg-service-autocomplete__option {
+    background-color: var(--cds-ui-02);
+    cursor: pointer !important;
+    height: 2.5rem;
+    padding: 0.6875rem 1.5rem 0.6875rem 1rem;
+    transition: border-color 70ms cubic-bezier(0.2, 0, 0.38, 0.9), color 70ms cubic-bezier(0.2, 0, 0.38, 0.9);
+  
+    + .#{$prefix}--bmrg-service-autocomplete__option {
+      border-top: 0.0625rem var(--cds-ui-03) solid;
+    }
+  
+    &[aria-selected="true"] {
+      background-color: var(--cds-active-ui);
+    }
+  }
+  
+  .#{$prefix}--bmrg-service-autocomplete__option-use {
+    bottom: -2.5rem;
+    color: var(--cds-interactive-01);
+    position: absolute;
+    width: 100%;
+  }
+  
+  .#{$prefix}--bmrg-service-autocomplete__message {
+    color: var(--cds-support-02);
+    font-size: 0.75rem;
+    line-height: 1rem;
+    margin-top: 0.25rem;
+    opacity: 0;
+    &.#{$prefix}--bmrg-service-autocomplete__message-is-valid {
+      opacity: 1;
+    }
+  }
+  
+  .#{$prefix}--bmrg-service-autocomplete__validity-status {
+    font-size: 0.75rem !important;
+    height: 2rem;
+    margin-left: 1rem !important;
+    margin-top: 1.75rem !important;
+  
+    .bx--inline-loading__checkmark-container {
+      fill: var(--cds-support-02);
+    }
+  }
+}
