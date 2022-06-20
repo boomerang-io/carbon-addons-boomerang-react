@@ -1,0 +1,9 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/src"
+    target-branch: "security"
+    schedule:
+      interval: "daily"
+      time: "10:15"
+      timezone: "US/Central"
