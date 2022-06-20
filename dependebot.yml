@@ -5,5 +5,5 @@ updates:
     target-branch: "security"
     schedule:
       interval: "daily"
-      time: "10:15"
+      time: "08:00"
       timezone: "US/Central"
