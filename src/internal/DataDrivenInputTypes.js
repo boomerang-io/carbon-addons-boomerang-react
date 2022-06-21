@@ -62,6 +62,12 @@ export const INPUT_GROUPS = {
   BOOLEAN: 'boolean',
 };
 
+export const ARRAY_INPUT_TYPES = {
+  ...CHECKBOX_TYPES,
+  ...CREATABLE_TYPES,
+  ...MULTI_SELECT_TYPES
+}
+
 export const INPUT_TYPES_ARRAY = Object.values({
   ...BOOLEAN_TYPES,
   ...CHECKBOX_TYPES,
