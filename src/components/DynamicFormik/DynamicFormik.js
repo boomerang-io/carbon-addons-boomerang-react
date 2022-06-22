@@ -8,6 +8,7 @@ import isUrl from '../../tools/isUrl';
 import DataDrivenInput from '../DataDrivenInput';
 import { settings } from 'carbon-components';
 import {
+  ARRAY_INPUT_TYPES,
   CHECKBOX_TYPES,
   CREATABLE_TYPES,
   DATE_TYPES,
@@ -190,6 +191,7 @@ function generateYupAst({
   allowCustomPropertySyntax,
   customPropertySyntaxPattern,
   customPropertyStartsWithPattern,
+  useCSVforArrays,
 }) {
   if (allowCustomPropertySyntax) {
     registerCustomPropertyMethods(customPropertySyntaxPattern, customPropertyStartsWithPattern);
@@ -298,21 +300,40 @@ function generateYupAst({
       inputType === CREATABLE_TYPES.CREATABLE_PAIR_NON_DELETABLE ||
       inputType === CHECKBOX_TYPES.CHECKBOX
     ) {
-      yupValidationArray.push(['yup.array']);
-
-      if (input.pattern) {
-        addCustomValidator(
-          `${input.key}-matches`,
-          Yup.array().test(
+      if(useCSVforArrays) {
+        yupValidationArray.push(['yup.string']);
+  
+        if (input.pattern) {
+          addCustomValidator(
             `${input.key}-matches`,
-            input.patternInvalidText || `Enter values that matches pattern: ${input.pattern}`,
-            (values) => {
-              const regexTester = new RegExp(input.pattern);
-              return values.every((val) => regexTester.test(val));
-            }
-          )
-        );
-        yupValidationArray.push([`${input.key}-matches`]);
+            Yup.string().test(
+              `${input.key}-matches`,
+              input.patternInvalidText || `Enter values that matches pattern: ${input.pattern}`,
+              (csv) => {
+                const regexTester = new RegExp(input.pattern);
+                return csv.split(",").every((val) => regexTester.test(val));
+              }
+            )
+          );
+          yupValidationArray.push([`${input.key}-matches`]);
+        }
+      } else {
+        yupValidationArray.push(['yup.array']);
+  
+        if (input.pattern) {
+          addCustomValidator(
+            `${input.key}-matches`,
+            Yup.array().test(
+              `${input.key}-matches`,
+              input.patternInvalidText || `Enter values that matches pattern: ${input.pattern}`,
+              (values) => {
+                const regexTester = new RegExp(input.pattern);
+                return values.every((val) => regexTester.test(val));
+              }
+            )
+          );
+          yupValidationArray.push([`${input.key}-matches`]);
+        }
       }
     }
 
@@ -371,8 +392,9 @@ function generateYupSchema({
   inputs,
   allowCustomPropertySyntax,
   customPropertySyntaxPattern,
-  validationSchemaExtension,
   customPropertyStartsWithPattern,
+  useCSVforArrays,
+  validationSchemaExtension,
 }) {
   let validationSchema = transformAll(
     generateYupAst({
@@ -380,6 +402,7 @@ function generateYupSchema({
       allowCustomPropertySyntax,
       customPropertySyntaxPattern,
       customPropertyStartsWithPattern,
+      useCSVforArrays,
     })
   );
   if (validationSchemaExtension) {
@@ -391,11 +414,17 @@ function generateYupSchema({
 /**
  * Get initial values of each input in array of inputs
  */
-const determineInitialValues = (inputs) => {
+const determineInitialValues = (inputs, useCSVforArrays) => {
   const values = {};
   inputs.forEach((input) => {
     let value = '';
-    const valueToCheck = input.value || input.defaultValue || input.values || input.defaultValues;
+    let valueToCheck = input.value || input.defaultValue;
+    const isArrayInput = !useCSVforArrays && Object.values(ARRAY_INPUT_TYPES).includes(input.type);
+
+    if (isArrayInput) {
+      valueToCheck = input.value || input.defaultValue || input.values || input.defaultValues;
+    }
+
     if (valueToCheck) {
       switch (valueToCheck) {
         case 'false': {
@@ -467,15 +496,25 @@ const conditionallyRenderInput = (input, values) => {
  * Map of the input groups to specifc props to be passed
  */
 const TYPE_PROPS = {
-  [INPUT_GROUPS.CHECKBOX]: (formikProps, { key }) => ({
-    onChange: (value, id, event, selectedItems) =>
-      formikProps.setFieldValue(`['${key}']`, selectedItems),
+  [INPUT_GROUPS.CHECKBOX]: (formikProps, { key }, inputs, useCSVforArrays) => ({
+    onChange: (value, id, event, selectedItems) => {
+      if(useCSVforArrays) {
+        formikProps.setFieldValue(`['${key}']`, selectedItems?.join() ?? "");
+      } else {
+        formikProps.setFieldValue(`['${key}']`, selectedItems);
+      }
+    }
   }),
 
-  [INPUT_GROUPS.CREATABLE]: (formikProps, { key }) => ({
+  [INPUT_GROUPS.CREATABLE]: (formikProps, { key }, inputs, useCSVforArrays) => ({
     onChange: (createdItems) => {
       formikProps.setFieldTouched(`['${key}']`, true);
-      formikProps.setFieldValue(`['${key}']`, createdItems);
+
+      if(useCSVforArrays) {
+        formikProps.setFieldValue(`['${key}']`, createdItems?.join() ?? "");
+      } else {
+        formikProps.setFieldValue(`['${key}']`, createdItems);
+      }
     },
     onInputBlur: () => formikProps.setFieldTouched(`['${key}']`, true, true),
   }),
@@ -495,13 +534,21 @@ const TYPE_PROPS = {
             formikProps.setFieldValue(`['${key}']`, dateArray[0]?.toISOString()),
         },
 
-  [INPUT_GROUPS.MULTI_SELECT]: (formikProps, { key }) => ({
+  [INPUT_GROUPS.MULTI_SELECT]: (formikProps, { key }, inputs, useCSVforArrays) => ({
     onChange: async ({ selectedItems }) => {
       await formikProps.setFieldTouched(`['${key}']`, true);
-      formikProps.setFieldValue(
-        `['${key}']`,
-        selectedItems.map((item) => item && item.value)
-      );
+
+      if(useCSVforArrays) {
+        formikProps.setFieldValue(
+          `['${key}']`,
+          selectedItems ? selectedItems.map((item) => item && item.value).join() : ""
+        );
+      } else {
+        formikProps.setFieldValue(
+          `['${key}']`,
+          selectedItems.map((item) => item && item.value)
+        );
+      }
     },
     onInputBlur: () => formikProps.setFieldTouched(`['${key}']`, true, true),
   }),
@@ -714,6 +761,10 @@ DynamicFormik.propTypes = {
   initialValues: PropTypes.object,
   inputs: PropTypes.array.isRequired,
   onSubmit: PropTypes.func,
+  /**
+   * If true, update DynamicFormik to handle string values for array inputs
+   */
+  useCSVforArrays: PropTypes.bool,
   validationSchema: PropTypes.any,
   validationSchemaExtension: PropTypes.object,
 
@@ -747,6 +798,7 @@ DynamicFormik.defaultProps = {
   textEditorProps: () => ({}),
   textInputProps: () => ({}),
   toggleProps: () => ({}),
+  useCSVforArrays: false
 };
 
 export default function DynamicFormik({
@@ -760,6 +812,7 @@ export default function DynamicFormik({
   initialValues,
   inputs,
   onSubmit,
+  useCSVforArrays,
   validationSchema,
   validationSchemaExtension,
   ...otherProps
@@ -768,7 +821,7 @@ export default function DynamicFormik({
     <Formik
       initialValues={
         (Boolean(initialValues) && initialValues) || {
-          ...determineInitialValues(inputs),
+          ...determineInitialValues(inputs, useCSVforArrays),
           ...additionalInitialValues,
         }
       }
@@ -776,10 +829,11 @@ export default function DynamicFormik({
         validationSchema ||
         generateYupSchema({
           inputs,
-          validationSchemaExtension,
           allowCustomPropertySyntax,
           customPropertySyntaxPattern,
           customPropertyStartsWithPattern,
+          useCSVforArrays,
+          validationSchemaExtension,
         })
       }
       onSubmit={(values, actions) => onSubmit(values, actions)}
@@ -825,7 +879,7 @@ export default function DynamicFormik({
               onBlur={handleBlur}
               type={type}
               value={inputValue}
-              {...typeProps(formikProps, input, finalInputs)}
+              {...typeProps(formikProps, input, finalInputs, useCSVforArrays)}
               {...otherInputsProps}
               {...inputProps}
               {...additionalTypeProps({ formikProps, input })}
