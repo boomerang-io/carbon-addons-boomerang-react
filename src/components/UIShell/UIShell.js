@@ -275,7 +275,7 @@ function UIShell({
               baseServiceUrl={finalBaseServiceUrl}
               key="Avatar"
               src={`${finalBaseServiceUrl}/users/image/${user.email}`}
-              userName={user.name}
+              user={user}
             />
           ),
           platform && (

@@ -26,10 +26,10 @@ const { prefix } = settings;
 ProfileSettings.propTypes = {
   baseServiceUrl: PropTypes.string.isRequired,
   src: PropTypes.string.isRequired,
-  userName: PropTypes.string.isRequired,
+  user: PropTypes.object.isRequired,
 };
 
-function ProfileSettings({ baseServiceUrl, src, userName }) {
+function ProfileSettings({ baseServiceUrl, src, user }) {
   const [initialTeams, setInitialTeams] = useState([]);
   const [teams, setTeams] = useState([]);
   const [disableModal, setDisableModal] = useState([]);
@@ -37,6 +37,8 @@ function ProfileSettings({ baseServiceUrl, src, userName }) {
   const [isSubmitting, setIsSubmitting] = useState();
   const [isLoadingError, setIsLoadingError] = useState();
   const [isSubmitError, setIsSubmitError] = useState();
+
+  const { name: userName, launchpadTutorialState } = user;
 
   const fetchTeams = useCallback(
     ({ showLoading }) => {
@@ -74,6 +76,7 @@ function ProfileSettings({ baseServiceUrl, src, userName }) {
     setIsSubmitError(false);
     axios
       .patch(`${baseServiceUrl}/users/profile`, {
+        launchpadTutorialState,
         lowerLevelGroups: teams,
       })
       .then(() => {
