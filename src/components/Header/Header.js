@@ -13,7 +13,6 @@ import {
 import { settings } from 'carbon-components';
 import FocusTrap from 'focus-trap-react';
 import { SkipToContent } from 'carbon-components-react';
-import window from 'window-or-global';
 import PlatformNotificationsContainer from '../PlatformNotifications';
 import HeaderMenu from '../HeaderMenu';
 import NotificationsContainer from '../Notifications/NotificationsContainer';
