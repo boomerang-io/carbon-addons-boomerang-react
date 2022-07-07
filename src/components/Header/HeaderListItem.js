@@ -1,6 +1,5 @@
-import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import React from 'react';
 import cx from 'classnames';
 import { settings } from 'carbon-components';
 import window from 'window-or-global';
@@ -8,7 +7,7 @@ import window from 'window-or-global';
 const { prefix } = settings;
 
 const HeaderListItem = (props) => {
-  const { children, className, href, isIcon, ariaExpanded, newNotifications, id, isCurrentNavLink, ...other } = props;
+  const { children, className, href, isIcon, ariaExpanded, newNotifications, id, ...other } = props;
 
   const headerListItemClasses = cx(`${prefix}--bmrg-header-list__item`, className);
 
@@ -25,14 +24,6 @@ const HeaderListItem = (props) => {
         >
           {children}
         </div>
-      ) : isCurrentNavLink ? (
-        <Link
-          className={cx(`${prefix}--bmrg-header-list__link`, '--is-active')}
-          to="/"
-          tabIndex="0"
-        >
-          {children}
-        </Link>
       ) : (
         <a
           className={cx(`${prefix}--bmrg-header-list__link`, {
@@ -59,7 +50,6 @@ HeaderListItem.propTypes = {
   className: PropTypes.string,
   href: PropTypes.string,
   id: PropTypes.string,
-  isCurrentNavLink: PropTypes.bool,
   isIcon: PropTypes.bool,
   newNotifications: PropTypes.bool,
 };
