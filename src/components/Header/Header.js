@@ -13,7 +13,6 @@ import {
 import { settings } from 'carbon-components';
 import FocusTrap from 'focus-trap-react';
 import { SkipToContent } from 'carbon-components-react';
-import window from 'window-or-global';
 import PlatformNotificationsContainer from '../PlatformNotifications';
 import HeaderMenu from '../HeaderMenu';
 import NotificationsContainer from '../Notifications/NotificationsContainer';
@@ -308,16 +307,13 @@ class Header extends React.Component {
             <nav aria-label="Main navigation menu">
               <HeaderList className={`${prefix}--bmrg-header-list--link`}>
                 {Array.isArray(navLinks) &&
-                  navLinks.map((link, i) => {
-                    const isCurrentNavLink = window.location?.href?.startsWith(link.url);
-                    return (
-                      <li key={`${link.url}-${i}`}>
-                        <HeaderListItem aria-label={`link for ${link.name}`} href={link.url} isCurrentNavLink={isCurrentNavLink}>
-                          {link.name}
-                        </HeaderListItem>
-                      </li>
-                    )
-                  })}
+                  navLinks.map((link, i) => (
+                    <li key={`${link.url}-${i}`}>
+                      <HeaderListItem aria-label={`link for ${link.name}`} href={link.url}>
+                        {link.name}
+                      </HeaderListItem>
+                    </li>
+                  ))}
               </HeaderList>
             </nav>
             <div ref={this.mobileNavRef}>
