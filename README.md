@@ -6,18 +6,13 @@
 
 Install the Carbon peer dependencies in addition to the package itself. We re-export all of the components from `carbon-components-react` but in some cases you may want to import directly from a Carbon library. It is a best practice to have the dependency defined in the `package.json` in that situation and depending on your package manager and node version, a requirement. It also gives consumers more control over the version of the packages they are using without being dependent on our library.
 
-Run the following command using [npm](https://www.npmjs.com/):
-
+Run the following command using [pnpm](https://pnpm.io)
 ```bash
-npm install carbon-components carbon-components-react carbon-icons @carbon/icons-react
+pnpm install carbon-components carbon-components-react carbon-icons @carbon/icons-react
 npm install @boomerang-io/carbon-addons-boomerang-react
 ```
 
-If you prefer [Yarn](https://yarnpkg.com/en/), use the following command instead:
-
-```bash
-yarn add carbon-components carbon-components-react carbon-icons @carbon/icons-react
-yarn add @boomerang-io/carbon-addons-boomerang-react
+> You can also use npm and yarn if you'd prefer.
 ```
 
 ## Using

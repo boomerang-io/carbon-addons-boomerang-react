@@ -16,7 +16,7 @@ const exec = (command, extraEnv) =>
     env: Object.assign({}, process.env, extraEnv),
   });
 
-const ignoreGlobs = ['**/*.spec.js', '**/*.stories.js'].join(',');
+const ignoreGlobs = ['**/*.spec.jsx', '**/*.stories.jsx', '**/*.spec.tsx', '**/*.stories.tsx'].join(',');
 
 async function build() {
   try {

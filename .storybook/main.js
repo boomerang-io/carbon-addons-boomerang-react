@@ -1,27 +1,33 @@
-const path = require('path');
+const { mergeConfig } = require('vite');
 
 module.exports = {
-  core: {
-    builder: 'webpack5',
-  },
-  stories: ['../src/**/*.stories.js'],
-  addons: [
-    '@storybook/preset-create-react-app',
-    {
-      name: '@storybook/addon-storysource',
-      options: {
-        rule: {
-          include: [path.resolve(__dirname, '../src')],
-        },
-        loaderOptions: {
-          prettierConfig: { printWidth: 80, singleQuote: false },
-        },
-      },
-    },
-    '@storybook/addon-knobs',
-    '@storybook/addon-actions',
-    '@storybook/addon-links',
-    '@storybook/addon-a11y',
-    'storybook-readme',
+  "stories": [
+    "../src/components/**/*.stories.@(js|jsx|ts|tsx)"
   ],
-};
+  "addons": [
+    "@storybook/addon-links",
+    "@storybook/addon-essentials",
+    "@storybook/addon-interactions"
+  ],
+  "framework": "@storybook/react",
+  "core": {
+    "builder": "@storybook/builder-vite"
+  },
+  "features": {
+    "storyStoreV7": true
+  },
+  typescript: {
+    check: false,
+  },
+  async viteFinal(config) {
+    // return the customized config
+    return mergeConfig(config, {
+      define: {
+        // By default, Vite doesn't include shims for NodeJS/
+        // necessary for segment analytics lib to work
+        global: {},
+      },
+
+    });
+  },
+}

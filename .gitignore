@@ -1,5 +1,5 @@
-# Coverage directory used by tools like istanbul
-coverage
+#
+node_modules
 
 # Compiled
 lib
@@ -9,38 +9,29 @@ build
 styles
 docs
 
-# Dependency directory
-# https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
-node_modules
+# Testing
+coverage
 
-# Socksjs-client exceptions
-!src/tools/sockjs-client/lib
-!src/tools/sockjs-client/lib/transport/lib
-!src/tools/sockjs-client/node_modules
-
-
-
-
-
-# Package Files #
-*.jar
-*.war
-*.ear
-*.zip
-*.tar.gz
-*.rar
-
-# log files
+# Logs
+logs
 *.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
-# We don't use npm, we use yarn
-package-lock.json
-
-# Mac OS Specific files
-.DS_Store
-
-.npmrc
-results
-
+# Environment
 .env
+*.local
 
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

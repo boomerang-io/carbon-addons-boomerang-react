@@ -1,4 +1,4 @@
-@include exports('addons-bmrg-feedback') {
+@include exports("addons-bmrg-feedback") {
   .#{$prefix}--bmrg-feedback-container {
     .#{$prefix}--modal-container {
       height: rem(448px);
@@ -6,7 +6,6 @@
 
     .#{$prefix}--bmrg-feedback {
       color: $bmrg-brand-white;
-      height: rem(100px);
       margin-top: rem(16px);
       width: 100%;
 

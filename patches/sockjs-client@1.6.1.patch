@@ -1,0 +1,12 @@
+diff --git a/lib/info-receiver.js b/lib/info-receiver.js
+index afefea5c5aa36dcb10f934a9b82b5e5200cce662..9b2664d5dd687ed64eebf6e7ff8823c345e405f1 100644
+--- a/lib/info-receiver.js
++++ b/lib/info-receiver.js
+@@ -84,6 +84,6 @@ InfoReceiver.prototype.close = function() {
+   this._cleanup(false);
+ };
+ 
+-InfoReceiver.timeout = 8000;
++InfoReceiver.timeout = 60000;
+ 
+ module.exports = InfoReceiver;

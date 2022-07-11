@@ -1,19 +1,17 @@
-'use strict';
-
-const BABEL_ENV = process.env.BABEL_ENV;
+"use strict";
 
 module.exports = () => ({
-  plugins:
-    BABEL_ENV === 'es' || BABEL_ENV === 'cjs' ? ['@babel/plugin-transform-runtime'] : undefined,
+  plugins: ["@babel/plugin-transform-runtime"],
   presets: [
+    "@babel/preset-react",
     [
-      require.resolve('@babel/preset-env'),
+      "@babel/preset-env",
       {
-        modules: BABEL_ENV === 'es' ? false : 'commonjs',
-        targets: {
-          browsers: ['extends browserslist-config-carbon'],
-        },
+        useBuiltIns: "entry",
+        corejs: "3.23",
+        browserslistConfigFile: true,
+        browserslistEnv: "production",
       },
-    ],
+    ]
   ],
 });
