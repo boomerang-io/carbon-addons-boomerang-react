@@ -1,3 +1,5 @@
+const BABEL_ENV = process.env.BABEL_ENV;
+
 module.exports = {
   plugins: ["@babel/plugin-transform-runtime"],
   presets: [
@@ -7,6 +9,7 @@ module.exports = {
       {
         useBuiltIns: "entry",
         corejs: "3.23",
+        modules: BABEL_ENV === 'esm' ? false : 'commonjs',
         browserslistEnv: "production"
       },
     ],

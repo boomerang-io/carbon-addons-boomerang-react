@@ -23,20 +23,10 @@ async function build() {
     
     // Compile ES and CJS versions of the lib
     exec(`"${babelPath}" src --quiet -d es --ignore "${ignoreGlobs}"`, {
-      BABEL_ENV: 'es',
+      BABEL_ENV: 'esm',
     });
     exec(`"${babelPath}" src --quiet -d lib --ignore "${ignoreGlobs}"`, {
       BABEL_ENV: 'cjs',
-    });
-    
-    // Copy over package.json file for interal libs
-    await cpy('**/package.json', '../lib', {
-      parents: true,
-      cwd: path.resolve(process.cwd(), 'src'),
-    });
-    await cpy('**/package.json', '../es', {
-      parents: true,
-      cwd: path.resolve(process.cwd(), 'src'),
     });
     
     // Copy over SCSS
