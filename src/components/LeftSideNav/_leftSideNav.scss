@@ -1,4 +1,6 @@
 /* stylelint-disable */
+@use "../../styles/config" as *;
+@use '@carbon/styles/scss/colors';
 
 /// Get a `rem` value based for a number of mini-units.
 /// @param {Number} $count
@@ -153,7 +155,7 @@ $shell-side-nav-accent-01: $bmrg-secondary-color !default;
     border-bottom: rem(2px) solid transparent;
     border-right: rem(2px) solid transparent;
     border-top: rem(2px) solid transparent;
-    transition: all $carbon-motion--timing--productive $carbon-motion--easing--productive;
+    transition: all motion.motion("standard");
 
     &:focus {
       border-bottom: rem(2px) solid $bmrg-accent-color;
@@ -753,8 +755,7 @@ $shell-side-nav-accent-01: $bmrg-secondary-color !default;
   }
 }
 
-@include exports('leftSideNav') {
+
   @if feature-flag-enabled('ui-shell') {
     @include leftSideNav;
   }
-}

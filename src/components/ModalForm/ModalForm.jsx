@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import cx from "classnames";
-import { settings } from "carbon-components";
-const { prefix } = settings;
+import { prefix } from "../../internal/settings";
+
 
 const ModalForm = React.forwardRef(function ModalForm({ children, className, element: Element, title, ...rest }, ref) {
   return (

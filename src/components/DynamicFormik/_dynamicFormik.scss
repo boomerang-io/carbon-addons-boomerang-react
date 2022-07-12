@@ -1,4 +1,4 @@
-@include exports('addons-bmrg-dynamicFormik') {
+@use "../../styles/config" as *;
   .#{$prefix}--bmrg-dynamic-formik {
     display: flex;
     flex-direction: column;
@@ -8,4 +8,3 @@
       margin-top: 1rem;
     }
   }
-}

@@ -11,7 +11,7 @@ import {
   SelectItem,
   ComboBox,
   Toggle,
-} from "carbon-components-react";
+} from "@carbon/react";
 import Modal from "./index";
 import { ModalForm } from "../ModalForm";
 

@@ -1,4 +1,4 @@
-@include exports('addons-bmrg-radio') {
+@use "../../styles/config" as *;
   .#{$prefix}--bmrg-decision-buttons {
     position: relative;
     width: 100%;
@@ -119,4 +119,3 @@
       }
     }
   }
-}

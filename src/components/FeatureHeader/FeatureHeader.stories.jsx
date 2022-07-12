@@ -4,8 +4,8 @@ import { createMemoryHistory } from "history";
 import { FeatureHeader, FeatureHeaderTitle, FeatureHeaderSubtitle } from "./index";
 import { default as Tabs } from "../FeatureNavTabs";
 import { default as Tab } from "../FeatureNavTab";
-import { Button, Breadcrumb, BreadcrumbItem } from "carbon-components-react";
-import { Save16, View16 } from "@carbon/icons-react";
+import { Button, Breadcrumb, BreadcrumbItem } from "@carbon/react";
+import { Save, View } from "@carbon/react/icons";
 
 const Nav = () => {
   return (
@@ -53,10 +53,10 @@ const DataList = () => {
 
 const Actions = () => (
   <div style={{ display: "flex", alignItems: "flex-end", marginBottom: "1rem" }}>
-    <Button kind="ghost" renderIcon={View16} style={{ marginRight: "1rem", width: "10rem" }} size="field">
+    <Button kind="ghost" renderIcon={View} style={{ marginRight: "1rem", width: "10rem" }} size="field">
       View component
     </Button>
-    <Button renderIcon={Save16} style={{ width: "10rem" }} size="field">
+    <Button renderIcon={Save} style={{ width: "10rem" }} size="field">
       Save
     </Button>
   </div>

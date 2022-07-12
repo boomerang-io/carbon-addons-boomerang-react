@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import cx from "classnames";
-import { Button } from "carbon-components-react";
-import { settings } from "carbon-components";
+import { Button } from "@carbon/react";
+import { prefix } from "../../internal/settings";
 
-const { prefix } = settings;
+
 
 UserRequests.propTypes = {
   /**

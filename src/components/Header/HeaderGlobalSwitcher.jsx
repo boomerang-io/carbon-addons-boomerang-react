@@ -1,9 +1,7 @@
 import PropTypes from "prop-types";
 import React from "react";
-import { Activity32, Calendar32, Document32, Rocket32, Settings32 } from "@carbon/icons-react";
-import { settings } from "carbon-components";
-
-const { prefix } = settings;
+import { Activity, Calendar, Document, Rocket, Settings } from "@carbon/react/icons";
+import { prefix } from "../../internal/settings";
 
 const HeaderGlobalSwitcher = () => {
   // const { links } = props;
@@ -25,31 +23,31 @@ const HeaderGlobalSwitcher = () => {
         )) */}
         <li className={`${prefix}--bmrg-header-global__collection--item`}>
           <a href="https://servicesessentials.ibm.com/admin/">
-            <Settings32 alt="Admin Icon" fill="white" className={`${prefix}--bmrg-header-global__icon`} />
+            <Settings size={32} alt="Admin Icon" fill="white" className={`${prefix}--bmrg-header-global__icon`} />
           </a>
           <div className={`${prefix}-cloud-header-global__text`}>Admin</div>
         </li>
         <li className={`${prefix}--bmrg-header-global__collection--item`}>
           <a href="https://servicesessentials.ibm.com/admin/">
-            <Document32 className={`${prefix}--bmrg-header-global__icon`} alt="Docs Icon" fill="white" />
+            <Document size={32} className={`${prefix}--bmrg-header-global__icon`} alt="Docs Icon" fill="white" />
           </a>
           <div className={`${prefix}-cloud-header-global__text`}>Docs</div>
         </li>
         <li className={`${prefix}--bmrg-header-global__collection--item`}>
           <a href="https://servicesessentials.ibm.com/docs/">
-            <Activity32 className={`${prefix}--bmrg-header-global__icon`} alt="Status Icon" fill="white" />
+            <Activity size={32} className={`${prefix}--bmrg-header-global__icon`} alt="Status Icon" fill="white" />
           </a>
           <div className={`${prefix}-cloud-header-global__text`}>Status</div>
         </li>
         <li className={`${prefix}--bmrg-header-global__collection--item`}>
           <a href="https://servicesessentials.ibm.com/next/">
-            <Calendar32 className={`${prefix}--bmrg-header-global__icon`} alt="Next Icon" fill="white" />
+            <Calendar size={32} className={`${prefix}--bmrg-header-global__icon`} alt="Next Icon" fill="white" />
           </a>
           <div className={`${prefix}-cloud-header-global__text`}>Next</div>
         </li>
         <li className={`${prefix}--bmrg-header-global__collection--item`}>
           <a href="https://servicesessentials.ibm.com/launchpad/">
-            <Rocket32 className={`${prefix}--bmrg-header-global__icon`} alt="Launchpad Icon" fill="white" />
+            <Rocket size={32} className={`${prefix}--bmrg-header-global__icon`} alt="Launchpad Icon" fill="white" />
           </a>
           <div className={`${prefix}-cloud-header-global__text`}>Launchpad</div>
         </li>

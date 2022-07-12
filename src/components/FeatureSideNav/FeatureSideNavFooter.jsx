@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import cx from "classnames";
-import { SkeletonPlaceholder } from "carbon-components-react";
-import { settings } from "carbon-components";
+import { SkeletonPlaceholder } from "@carbon/react";
+import { prefix } from "../../internal/settings";
 
 FeatureSideNavFooter.propTypes = {
   children: PropTypes.any,
@@ -10,7 +10,7 @@ FeatureSideNavFooter.propTypes = {
   isLoading: PropTypes.bool,
 };
 
-const { prefix } = settings;
+
 
 export function FeatureSideNavFooter(props) {
   const { children, className, isLoading, ...rest } = props;

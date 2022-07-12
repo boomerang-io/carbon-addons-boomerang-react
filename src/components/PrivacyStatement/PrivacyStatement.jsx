@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 import dompurify from "dompurify";
-import { Accordion, AccordionItem, Button } from "carbon-components-react";
-import { ModalHeader, ModalBody, ModalFooter } from "carbon-components-react";
-import { settings } from "carbon-components";
+import { Accordion, AccordionItem, Button } from "@carbon/react";
+import { ModalHeader, ModalBody, ModalFooter } from "@carbon/react";
+import { prefix } from "../../internal/settings";
 import HeaderMenuModalWrapper from "../../internal/HeaderMenuModalWrapper";
 import HeaderMenuItem from "../HeaderMenuItem";
 import notify from "../Notifications/notify";
@@ -12,7 +12,7 @@ import ToastNotification from "../Notifications/ToastNotification";
 
 import CastleImg from "./assets/x_castle_drawbridge";
 
-const { prefix } = settings;
+
 
 /**
  * Helper to format date timestamp

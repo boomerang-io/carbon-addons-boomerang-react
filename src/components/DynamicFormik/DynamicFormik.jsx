@@ -6,7 +6,7 @@ import get from "lodash.get";
 import { transformAll, addCustomValidator } from "../../tools/yupAst";
 import isUrl from "../../tools/isUrl";
 import DataDrivenInput from "../DataDrivenInput";
-import { settings } from "carbon-components";
+import { prefix } from "../../internal/settings";
 import {
   ARRAY_INPUT_TYPES,
   CHECKBOX_TYPES,
@@ -23,7 +23,7 @@ import {
   INPUT_GROUPS,
 } from "../../internal/DataDrivenInputTypes";
 
-const { prefix } = settings;
+
 
 /**
  *

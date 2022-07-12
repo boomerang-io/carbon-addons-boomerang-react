@@ -4,8 +4,8 @@ import { text, boolean } from "@storybook/addon-knobs";
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
 import { BrowserRouter as Router, Link } from "react-router-dom";
-import { SideNav, SideNavLink, SideNavItems, SideNavMenu, SideNavMenuItem } from "carbon-components-react";
-import { Help24, ServiceDesk16 } from "@carbon/icons-react";
+import { SideNav, SideNavLink, SideNavItems, SideNavMenu, SideNavMenuItem } from "@carbon/react";
+import { Help, ServiceDesk } from "@carbon/react/icons";
 import LeftSideNav from "../LeftSideNav";
 import { PRIVACY_DATA } from "../PrivacyStatement/constants";
 import { PROFILE_SETTINGS_DATA } from "../ProfileSettings/constants";
@@ -138,13 +138,13 @@ export const WithCarbonSidenavAndReactRouter = () => {
                 <SideNavLink element={Link} to="/">
                   Link
                 </SideNavLink>
-                <SideNavLink isActive element={Link} renderIcon={ServiceDesk16} to="/">
+                <SideNavLink isActive element={Link} renderIcon={ServiceDesk} to="/">
                   Active link with icon
                 </SideNavLink>
                 <SideNavLink element={Link} large to="/">
                   Large link
                 </SideNavLink>
-                <SideNavLink isActive element={Link} renderIcon={ServiceDesk16} to="/" large>
+                <SideNavLink isActive element={Link} renderIcon={ServiceDesk} to="/" large>
                   Large active link with icon
                 </SideNavLink>
                 <SideNavMenu title="Menu">
@@ -154,7 +154,7 @@ export const WithCarbonSidenavAndReactRouter = () => {
                   <SideNavMenuItem href="/">Menu item 2</SideNavMenuItem>
                   <SideNavMenuItem href="/">Menu item 3</SideNavMenuItem>
                 </SideNavMenu>
-                <SideNavMenu renderIcon={ServiceDesk16} title="Active menu with icon">
+                <SideNavMenu renderIcon={ServiceDesk} title="Active menu with icon">
                   <SideNavMenuItem isActive element={Link} to="/">
                     Active menu item 1
                   </SideNavMenuItem>
@@ -169,7 +169,7 @@ export const WithCarbonSidenavAndReactRouter = () => {
                     Large menu item 2
                   </SideNavMenuItem>
                 </SideNavMenu>
-                <SideNavMenu renderIcon={ServiceDesk16} title="Large active menu with icon" large>
+                <SideNavMenu renderIcon={ServiceDesk} title="Large active menu with icon" large>
                   <SideNavMenuItem isActive element={Link} to="/">
                     Large active menu item 1
                   </SideNavMenuItem>
@@ -191,7 +191,7 @@ export const WithCarbonSidenavAndReactRouter = () => {
           },
         }}
         renderRightPanel={{
-          icon: <Help24 />,
+          icon: <Help size={24} />,
           component: (
             <div
               style={{
@@ -259,7 +259,7 @@ export const WithRightPanel = () => {
       }}
       onTutorialClick={action("Tutorial")}
       renderRightPanel={{
-        icon: <Help24 />,
+        icon: <Help size={24} />,
         component: (
           <div
             style={{

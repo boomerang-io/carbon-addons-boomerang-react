@@ -1,15 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
 import cx from "classnames";
-import { ButtonSkeleton } from "carbon-components-react";
-import { settings } from "carbon-components";
+import { ButtonSkeleton } from "@carbon/react";
+import { prefix } from "../../internal/settings";
 
 FeatureSideNavLinks.propTypes = {
   children: PropTypes.any,
   className: PropTypes.string,
 };
 
-const { prefix } = settings;
+
 
 const LoadingSkeleton = () => {
   return (

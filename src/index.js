@@ -235,4 +235,4 @@ export {
   SideNavMenu,
   SideNavMenuItem,
   SideNavSwitcher,
-} from 'carbon-components-react';
+} from '@carbon/react';

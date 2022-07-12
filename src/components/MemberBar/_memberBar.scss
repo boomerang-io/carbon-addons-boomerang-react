@@ -1,9 +1,12 @@
-@include exports('addons-bmrg-memberBar') {
+@use '@carbon/styles/scss/theme';
+@use "../../styles/config" as *;
+@use "../../styles//mixins/utils";
+
   .#{$prefix}--bmrg-member-bar {
     align-items: center;
     background-color: transparent;
     border: none;
-    border-bottom: 0.0625rem solid $active-ui;
+    border-bottom: 0.0625rem solid theme.$background-active;
     cursor: pointer;
     display: flex;
     height: 3.56rem;
@@ -12,11 +15,11 @@
     width: 100%;
 
     &:hover {
-      background-color: $active-ui;
+      background-color: theme.$background-active;
     }
 
     &:focus {
-      @include focus-outline();
+      @include utils.focus-outline();
     }
     &.#{$prefix}--bmrg-member-bar--detail {
       cursor: initial;
@@ -46,20 +49,20 @@
   }
 
   .#{$prefix}--bmrg-member-bar__name {
-    color: $text-01;
+    color: theme.$text-primary;
     font-size: 0.87rem;
     line-height: 1.125rem;
     margin-bottom: 0.25rem;
   }
 
   .#{$prefix}--bmrg-member-bar__email {
-    color: $text-02;
+    color: theme.$text-secondary;
     font-size: 0.75rem;
     line-height: 0.93rem;
   }
 
   .#{$prefix}--bmrg-member-bar__close-icon {
-    fill: $inverse-support-01;
+    fill: theme.$support-error-inverse;
     height: 1.25rem;
     width: 1.25rem;
     margin-left: 1rem;
@@ -83,4 +86,3 @@
     align-items: center;
     display: flex;
   }
-}

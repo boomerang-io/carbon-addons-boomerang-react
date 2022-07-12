@@ -2,10 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
 import classnames from "classnames";
-import { SkeletonPlaceholder } from "carbon-components-react";
-import { settings } from "carbon-components";
+import { SkeletonPlaceholder } from "@carbon/react";
+import { prefix } from "../../internal/settings";
 
-const { prefix } = settings;
+
 
 const FeatureNavTab = ({ activeClassName, className, style, label, isLoading, ...rest }) => {
   const classNames = classnames(`${prefix}--bmrg-feature-nav-tab`, className);

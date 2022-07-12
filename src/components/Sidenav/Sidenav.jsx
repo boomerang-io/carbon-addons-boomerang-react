@@ -1,14 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
-import { settings } from "carbon-components";
+import { prefix } from "../../internal/settings";
 
 import SidenavHeader from "./SidenavHeader";
 import SidenavContent from "./SidenavContent";
 import SidenavFooter from "./SidenavFooter";
 import SidenavLinks from "./SidenavLinks";
 
-const { prefix } = settings;
+
 
 const Sidenav = ({ header, hidden, content, navItems, footer, theme, ...rest }) => {
   const classNames = classnames(`${prefix}--bmrg-sidenav`, `--${theme}`, {

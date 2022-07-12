@@ -1,13 +1,13 @@
 import React, { Component } from "react";
-import { ComposedModal, Button } from "carbon-components-react";
+import { ComposedModal, Button } from "@carbon/react";
 import PropTypes from "prop-types";
-import { ModalHeader, ModalBody, ModalFooter } from "carbon-components-react";
-import { settings } from "carbon-components";
+import { ModalHeader, ModalBody, ModalFooter } from "@carbon/react";
+import { prefix } from "../../internal/settings";
 import { USER_STATUS } from "./constants";
 import CastleDrawBridge from "./assets/CastleDrawBridge";
 import CastleNoDoor from "./assets/castle_nodoor";
 
-const { prefix } = settings;
+
 
 class GdprRedirectModal extends Component {
   static propTypes = {

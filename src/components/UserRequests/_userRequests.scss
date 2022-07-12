@@ -1,9 +1,9 @@
-@import '../../styles/mixins/utils';
+@use '@carbon/styles/scss/theme';
+@use "../../styles/config" as *;
 
-@include exports('addons-bmrg-userRequests') {
 
   .#{$prefix}--bmrg-requests__title {
-    color: $text-04;
+    color: theme.$text-on-color;
     font-size: 0.875rem;
     font-weight: bold;
     letter-spacing: 0.04rem;
@@ -11,16 +11,15 @@
     margin-left: 1rem;
 
     &.#{$prefix}--bmrg-requests-empty__title {
-      color: $text-03;
+      color: theme.$text-placeholder;
       font-weight: initial;
     }
   }
 
   .#{$prefix}--bmrg-requests__text {
-    color: $text-04;
+    color: theme.$text-on-color;
     font-size: 0.875rem;
     letter-spacing: 0.04rem;
     line-height: 1.125rem;
     margin-left: 1rem;
   }
-}

@@ -7,7 +7,7 @@
 
 import React from "react";
 import PropTypes from "prop-types";
-import { Button, ComposedModal } from "carbon-components-react";
+import { Button, ComposedModal } from "@carbon/react";
 
 export default class HeaderMenuModalWrapper extends React.Component {
   static propTypes = {

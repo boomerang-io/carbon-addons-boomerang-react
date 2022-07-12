@@ -2,12 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 import cx from "classnames";
 import TooltipHover from "../TooltipHover";
-import { DatePicker, DatePickerInput } from "carbon-components-react";
-import { Information16 } from "@carbon/icons-react";
+import { DatePicker, DatePickerInput } from "@carbon/react";
+import { Information } from "@carbon/react/icons";
 import { DATE_TYPES } from "../../internal/DataDrivenInputTypes";
-import { settings } from "carbon-components";
+import { prefix } from "../../internal/settings";
 
-const { prefix } = settings;
+
 
 const DateInputComponent = React.forwardRef(function DateInputComponent(
   {
@@ -52,7 +52,7 @@ const DateInputComponent = React.forwardRef(function DateInputComponent(
             {tooltipContent && (
               <div className={tooltipClassName}>
                 <TooltipHover tooltipContent={tooltipContent} {...tooltipProps}>
-                  <Information16 fill="#4d5358" />
+                  <Information size={16} fill="#4d5358" />
                 </TooltipHover>
               </div>
             )}
@@ -129,7 +129,7 @@ const DateInputComponent = React.forwardRef(function DateInputComponent(
                   {tooltipContent && (
                     <div className={tooltipClassName}>
                       <TooltipHover tooltipContent={tooltipContent} {...tooltipProps}>
-                        <Information16 fill="#4d5358" />
+                        <Information size={16} fill="#4d5358" />
                       </TooltipHover>
                     </div>
                   )}

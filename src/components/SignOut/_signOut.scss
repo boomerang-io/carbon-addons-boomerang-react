@@ -1,4 +1,4 @@
-@include exports('addons-bmrg-signOut') {
+@use "../../styles/config" as *;
   .#{$prefix}--bmrg-signout-container {
     .#{$prefix}--modal-container {
       height: rem(226px);
@@ -29,4 +29,3 @@
       }
     }
   }
-}

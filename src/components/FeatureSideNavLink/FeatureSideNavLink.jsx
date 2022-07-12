@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
-import { settings } from "carbon-components";
+import { prefix } from "../../internal/settings";
 import cx from "classnames";
 
 FeatureSideNavLink.propTypes = {
@@ -14,7 +14,7 @@ FeatureSideNavLink.propTypes = {
 FeatureSideNavLink.defaultProps = {
   hasDivider: false,
 };
-const { prefix } = settings;
+
 
 function FeatureSideNavLink(props) {
   const { children, className, activeClassName, iconProps, icon: Icon, hasDivider, ...rest } = props;

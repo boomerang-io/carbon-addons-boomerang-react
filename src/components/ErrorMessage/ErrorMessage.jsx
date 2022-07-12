@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
-import { Warning16 } from "@carbon/icons-react";
-import { settings } from "carbon-components";
+import { Warning } from "@carbon/react/icons";
+import { prefix } from "../../internal/settings";
 
-const { prefix } = settings;
+
 
 const Error = ({ status, statusText, className, style, ...rest }) => {
   let message;
@@ -20,7 +20,7 @@ const Error = ({ status, statusText, className, style, ...rest }) => {
 
   return (
     <div className={classNames} style={style} {...rest}>
-      <Warning16 className={`${prefix}--bmrg-error-message__img`} alt="Warning" />
+      <Warning size={16} lassName={`${prefix}--bmrg-error-message__img`} alt="Warning" />
       <h2 className={`${prefix}--bmrg-error-message__text`}>Oops, something went wrong.</h2>
       {message}
       <p className={`${prefix}--bmrg-error-message__subtext`}>

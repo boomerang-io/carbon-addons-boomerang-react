@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
 import React from "react";
 import cx from "classnames";
-import { settings } from "carbon-components";
+import { prefix } from "../../internal/settings";
 
-const { prefix } = settings;
+
 
 const HeaderListItem = (props) => {
   const { children, className, href, isIcon, ariaExpanded, newNotifications, id, ...other } = props;

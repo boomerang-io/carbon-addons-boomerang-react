@@ -8,10 +8,10 @@
 import cx from "classnames";
 import React from "react";
 import PropTypes from "prop-types";
-import { settings } from "carbon-components";
+import { prefix } from "../../internal/settings";
 import { ListBoxType, ListBoxSize } from "./ListBoxPropTypes";
 
-const { prefix } = settings;
+
 
 const handleOnKeyDown = (event) => {
   if (event.keyCode === 27) {
@@ -109,7 +109,7 @@ ListBox.propTypes = {
   isOpen: PropTypes.bool,
 
   /**
-   * `true` to use the light version. For use on $ui-01 backgrounds only.
+   * `true` to use the light version. For use on theme.$layer-01 backgrounds only.
    * Don't use this to make tile background color same as container background color.
    */
   light: PropTypes.bool,

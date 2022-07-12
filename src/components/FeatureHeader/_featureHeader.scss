@@ -1,6 +1,9 @@
-@include exports('addons-bmrg-featureHeader') {
+@use "../../styles/config" as *;
+@use '@carbon/styles/scss/theme';
+@use "../../styles/mixins/utils";
+
   .#{$prefix}--bmrg-feature-header {
-    background-color: $ui-01;
+    background-color: theme.$layer-01;
     display: flex;
     justify-content: space-between;
     min-height: 6.25rem;
@@ -9,7 +12,7 @@
     top: 0;
     z-index: 999;
     &.--bordered {
-      border-bottom: 0.0625rem solid $active-ui;
+      border-bottom: 0.0625rem solid theme.$background-active;
     }
   }
 
@@ -38,21 +41,20 @@
   }
 
   h1.#{$prefix}--bmrg-feature-header-title {
-    color: $text-01;
+    color: theme.$text-primary;
     font-size: 2rem;
     font-weight: 600;
     letter-spacing: 0;
     line-height: 1.25;
     margin: 0;
-    @include text-overflow-ellipsis();
+    @include utils.text-overflow-ellipsis();
   }
 
   h2.#{$prefix}--bmrg-feature-header-title {
-    color: $text-02;
+    color: theme.$text-secondary;
     font-size: 1rem;
     letter-spacing: 0;
     line-height: 1.25;
     margin: 0;
-    @include text-overflow-ellipsis();
+    @include utils.text-overflow-ellipsis();
   }
-}

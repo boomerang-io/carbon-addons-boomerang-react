@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
-import { settings } from "carbon-components";
+import { prefix } from "../../internal/settings";
 
 import ShipSharks from "./assets/ShipSharks";
 
-const { prefix } = settings;
+
 
 const TEXT_LOCATIONS = {
   ABOVE: "above",

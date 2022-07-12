@@ -2,9 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import cx from "classnames";
 import ReactModal from "react-modal";
-import { settings } from "carbon-components";
+import { prefix } from "../../internal/settings";
 
-const { prefix } = settings;
+
 
 Modal.propTypes = {
   appElement: PropTypes.string,

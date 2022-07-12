@@ -5,9 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { settings } from "carbon-components";
+import { prefix } from "../../internal/settings";
 
-const { prefix } = settings;
+
 
 // Finding nodes in a ListBox
 export const findListBoxNode = (wrapper) => wrapper.find(`.${prefix}--list-box`);

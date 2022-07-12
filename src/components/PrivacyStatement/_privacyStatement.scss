@@ -1,4 +1,6 @@
-@include exports('addons-bmrg-privacyStatement') {
+@use '../../styles/themes/addons';
+@use "../../styles/config" as *;
+
   .#{$prefix}--bmrg-privacy-statement-container {
     .#{$prefix}--modal-container {
       height: rem(598px);
@@ -63,11 +65,11 @@
 
         &__content {
           h3 {
-            color: $bmrg-brand-white;
+            color: addons.$brand-white;
             padding: 1rem 0 0.3125rem;
           }
           a {
-            color: $bmrg-secondary-color;
+            color: addons.$secondary-color;
             text-decoration: none;
           }
         }
@@ -82,7 +84,7 @@
           margin-bottom: rem(24px);
 
           a {
-            color: $bmrg-secondary-color;
+            color: addons.$secondary-color;
             text-decoration: none;
           }
         }
@@ -99,7 +101,7 @@
       .#{$prefix}--accordion__arrow {
         transform: rotate(90deg);
         path {
-          fill: $bmrg-brand-white;
+          fill: addons.$brand-white;
         }
       }
 
@@ -117,13 +119,13 @@
 
       .#{$prefix}--accordion__heading:focus {
         .#{$prefix}--accordion__arrow {
-          outline: rem(1px) solid $bmrg-secondary-color;
+          outline: rem(1px) solid addons.$secondary-color;
         }
       }
 
       .#{$prefix}--accordion__title {
         height: rem(18px);
-        color: $bmrg-brand-white;
+        color: addons.$brand-white;
         font-size: rem(14px);
         font-weight: 600;
         line-height: rem(18px);
@@ -137,4 +139,3 @@
       }
     }
   }
-}

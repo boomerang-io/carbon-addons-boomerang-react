@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import cx from "classnames";
-import { settings } from "carbon-components";
-import { Button, ModalHeader, ModalBody, ModalFooter } from "carbon-components-react";
+import { prefix } from "../../internal/settings";
+import { Button, ModalHeader, ModalBody, ModalFooter } from "@carbon/react";
 
 import Modal from "../Modal";
 
-const { prefix } = settings;
+
 
 ConfirmModal.propTypes = {
   affirmativeAction: PropTypes.func,

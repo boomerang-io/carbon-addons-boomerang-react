@@ -5,7 +5,7 @@ import FeatureSideNavLinks from "./FeatureSideNavLinks";
 import FeatureSideNavFooter from "./FeatureSideNavFooter";
 import FeatureSideNavHeader from "./FeatureSideNavHeader";
 import FeatureSideNavLink from "../FeatureSideNavLink";
-import { Search, Accordion, AccordionItem, Button } from "carbon-components-react";
+import { Search, Accordion, AccordionItem, Button } from "@carbon/react";
 import { createBrowserHistory } from "history";
 
 const history = createBrowserHistory();

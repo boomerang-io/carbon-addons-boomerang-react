@@ -1,7 +1,7 @@
 import React from "react";
 import { action } from "@storybook/addon-actions";
 import { text } from "@storybook/addon-knobs";
-import { Help16, ThumbsUp16, ThumbsDown16 } from "@carbon/icons-react";
+import { Help, ThumbsUp, ThumbsDown } from "@carbon/react/icons";
 
 import DecisionButtons from "./DecisionButtons";
 
@@ -11,9 +11,9 @@ const items1 = [
 ];
 
 const items2 = [
-  { icon: ThumbsUp16, label: "Yes", type: "positive", value: "yes" },
-  { icon: ThumbsDown16, label: "No", type: "negative", value: "no" },
-  { icon: Help16, label: "Maybe", value: "maybe" },
+  { icon: ThumbsUp, label: "Yes", type: "positive", value: "yes" },
+  { icon: ThumbsDown, label: "No", type: "negative", value: "no" },
+  { icon: Help, label: "Maybe", value: "maybe" },
 ];
 
 function ExternallyControlledDecisionButtons() {

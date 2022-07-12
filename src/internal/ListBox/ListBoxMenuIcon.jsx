@@ -8,10 +8,10 @@
 import cx from "classnames";
 import React from "react";
 import PropTypes from "prop-types";
-import { ChevronDown16 } from "@carbon/icons-react";
-import { settings } from "carbon-components";
+import { ChevronDown } from "@carbon/react/icons";
+import { prefix } from "../../internal/settings";
 
-const { prefix } = settings;
+
 
 export const translationIds = {
   "close.menu": "close.menu",
@@ -34,9 +34,9 @@ const ListBoxMenuIcon = ({ isOpen, translateWithId: t }) => {
   const description = isOpen ? t("close.menu") : t("open.menu");
   return (
     <div className={className}>
-      <ChevronDown16 name="chevron--down" aria-label={description}>
+      <ChevronDown name="chevron--down" aria-label={description}>
         <title>{description}</title>
-      </ChevronDown16>
+      </ChevronDown>
     </div>
   );
 };

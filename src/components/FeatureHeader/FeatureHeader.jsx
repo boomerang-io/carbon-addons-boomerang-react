@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
-import { SkeletonPlaceholder } from "carbon-components-react";
-import { settings } from "carbon-components";
+import { SkeletonPlaceholder } from "@carbon/react";
+import { prefix } from "../../internal/settings";
 
-const { prefix } = settings;
+
 
 FeatureHeader.defaultProps = {
   className: "",

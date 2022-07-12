@@ -27,7 +27,7 @@ $button-border-radius: 0.25rem;
 /// @access public
 /// @group @boomerang/carbon-addons-boomerang
 $carbon--theme--boomerang: map-merge(
-  $carbon--theme--g10,
+  $g10,
   (
     field-01: #ffffff,
     field-02: #f2f4f8,

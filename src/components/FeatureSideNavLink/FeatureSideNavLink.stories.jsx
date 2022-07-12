@@ -1,7 +1,7 @@
 import React from "react";
 import { Router } from "react-router-dom";
 import FeatureSideNavLink from "./FeatureSideNavLink";
-import { Rocket16 } from "@carbon/icons-react";
+import { Rocket } from "@carbon/react/icons";
 import { createBrowserHistory } from "history";
 
 const history = createBrowserHistory();
@@ -29,7 +29,7 @@ export const ActiveFeatureSidenavLink = () => {
 export const FeatureSidenavLinkWithIcon = () => {
   return (
     <Router history={history}>
-      <FeatureSideNavLink to="/test" children="TESTING" iconProps={{ "data-testid": "rocket-icon" }} icon={Rocket16} />
+      <FeatureSideNavLink to="/test" children="TESTING" iconProps={{ "data-testid": "rocket-icon" }} icon={Rocket} />
     </Router>
   );
 };

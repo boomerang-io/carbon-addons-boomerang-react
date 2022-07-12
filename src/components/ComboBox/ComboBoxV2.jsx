@@ -9,14 +9,14 @@ import cx from "classnames";
 import React from "react";
 import PropTypes from "prop-types";
 import Downshift from "downshift";
-import { settings } from "carbon-components";
-import { Checkmark16, WarningFilled16 } from "@carbon/icons-react";
+import { prefix } from "../../internal/settings";
+import { Checkmark, WarningFilled } from "@carbon/react/icons";
 import { match, keys } from "../../internal/keyboard";
 import setupGetInstanceId from "../../tools/setupGetInstanceId";
 import { mapDownshiftProps } from "../../tools/createPropAdapter";
 import ListBox, { PropTypes as ListBoxPropTypes } from "../../internal/ListBox";
 
-const { prefix } = settings;
+
 
 const defaultItemToString = (item) => {
   if (typeof item === "string") {
@@ -489,7 +489,7 @@ export default class ComboBox extends React.Component {
                       onKeyDown: (e) => this.handleOnInputKeyDown(e, toggleMenu, filteredItems, reset),
                     })}
                   />
-                  {invalid && <WarningFilled16 className={`${prefix}--list-box__invalid-icon`} />}
+                  {invalid && <WarningFilled size={16} className={`${prefix}--list-box__invalid-icon`} />}
                   {inputValue && (
                     <ListBox.Selection
                       clearSelection={clearSelection}
@@ -515,7 +515,7 @@ export default class ComboBox extends React.Component {
                         >
                           {itemToElement ? <ItemToElement key={itemProps.id} {...item} /> : itemToString(item)}
                           {selectedItem === item && (
-                            <Checkmark16 className={`${prefix}--list-box__menu-item__selected-icon`} />
+                            <Checkmark size={16} className={`${prefix}--list-box__menu-item__selected-icon`} />
                           )}
                         </ListBox.MenuItem>
                       );

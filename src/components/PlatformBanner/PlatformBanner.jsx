@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { InlineNotification as CarbonInlineNotification } from "carbon-components-react";
-import { settings } from "carbon-components";
+import { InlineNotification as CarbonInlineNotification } from "@carbon/react";
+import { prefix } from "../../internal/settings";
 
-const { prefix } = settings;
+
 
 PlatformBanner.propTypes = {
   kind: PropTypes.string,

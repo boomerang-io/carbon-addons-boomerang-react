@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { ToastContainer, Slide } from "react-toastify";
-import { Close20 } from "@carbon/icons-react";
-import { settings } from "carbon-components";
+import { Close } from "@carbon/react/icons";
+import { prefix } from "../../internal/settings";
 
-const { prefix } = settings;
+
 
 // eslint-disable-next-line
-const CloseButton = ({ closeToast }) => <Close20 onClick={closeToast} />;
+const CloseButton = ({ closeToast }) => <Close size={20} onClick={closeToast} />;
 CloseButton.propTypes = { closeToast: PropTypes.func };
 
 class NotificationsContainer extends Component {

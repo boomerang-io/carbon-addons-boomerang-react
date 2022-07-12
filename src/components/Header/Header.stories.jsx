@@ -2,8 +2,8 @@ import React from "react";
 
 import { text, boolean, object } from "@storybook/addon-knobs";
 import { Link, Router } from "react-router-dom";
-import { ServiceDesk16 } from "@carbon/icons-react";
-import { Modal, SideNav, SideNavLink, SideNavItems, SideNavMenu, SideNavMenuItem } from "carbon-components-react";
+import { ServiceDesk } from "@carbon/react/icons";
+import { Modal, SideNav, SideNavLink, SideNavItems, SideNavMenu, SideNavMenuItem } from "@carbon/react";
 import HeaderMenuItem from "../HeaderMenuItem";
 import LeftSideNav from "../LeftSideNav";
 // eslint-disable-next-line
@@ -150,14 +150,14 @@ export const WithIntegratedSidenav = () => (
                   Menu 3
                 </SideNavMenuItem>
               </SideNavMenu>
-              <SideNavMenu renderIcon={ServiceDesk16} title="Large menu w/icon" large>
+              <SideNavMenu renderIcon={ServiceDesk} title="Large menu w/icon" large>
                 <SideNavMenuItem isActive element={Link} to="">
                   Menu 1
                 </SideNavMenuItem>
                 <SideNavMenuItem href="">Menu 2</SideNavMenuItem>
                 <SideNavMenuItem href="">Menu 3</SideNavMenuItem>
               </SideNavMenu>
-              <SideNavLink isActive element={Link} renderIcon={ServiceDesk16} to="" large>
+              <SideNavLink isActive element={Link} renderIcon={ServiceDesk} to="" large>
                 Large link w/icon
               </SideNavLink>
             </SideNavItems>

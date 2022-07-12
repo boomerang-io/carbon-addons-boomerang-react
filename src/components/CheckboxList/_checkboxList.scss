@@ -1,4 +1,4 @@
-@include exports('addons-bmrg-checkboxList') {
+@use "../../styles/config" as *;
   .#{$prefix}--bmrg-checkbox-list {
     position: relative;
     width: 100%;
@@ -17,4 +17,4 @@
   .#{$prefix}--bmrg-checkbox-list__tooltip {
     margin-left: 0.5rem;
   }
-}
+

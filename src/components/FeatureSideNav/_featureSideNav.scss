@@ -1,15 +1,17 @@
-@include exports('addons-bmrg-feature-sidenav') {
+@use "../../styles/config" as *;
+@use '@carbon/styles/scss/theme';
+
   .#{$prefix}--bmrg-feature-sidenav-container {
-    background-color: $ui-01;
+    background-color: theme.$layer-01;
     display: flex;
     flex-direction: column;
     height: calc(100vh - 3rem);
     width: 21.875rem;
     &.--left-border {
-      border-left: 0.0625rem solid $active-ui;
+      border-left: 0.0625rem solid theme.$background-active;
     }
     &.--right-border {
-      border-right: 0.0625rem solid $active-ui;
+      border-right: 0.0625rem solid theme.$background-active;
     }
     &.--small {
       width: 18.75rem;
@@ -65,4 +67,3 @@
       margin-top: 1rem;
     }
   }
-}

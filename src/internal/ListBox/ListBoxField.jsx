@@ -6,10 +6,10 @@
  */
 
 import React from "react";
-import { settings } from "carbon-components";
+import { prefix } from "../../internal/settings";
 import PropTypes from "prop-types";
 
-const { prefix } = settings;
+
 
 // No longer used, left export for backward-compatibility
 export const translationIds = {};

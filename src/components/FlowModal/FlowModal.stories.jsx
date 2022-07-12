@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, TextInput, ModalBody, ModalFooter, Tooltip } from "carbon-components-react";
+import { Button, TextInput, ModalBody, ModalFooter, Tooltip } from "@carbon/react";
 import FlowModal from "./FlowModal";
 import FlowModalForm from "./FlowModalForm";
 

@@ -1,6 +1,6 @@
 import { expect, test } from "vitest";
 import { render, fireEvent } from "@testing-library/react";
-import { Button } from "carbon-components-react";
+import { Button } from "@carbon/react";
 
 import NotificationsContainer from "./NotificationsContainer";
 import ToastNotification from "./ToastNotification";

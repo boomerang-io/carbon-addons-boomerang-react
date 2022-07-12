@@ -1,6 +1,6 @@
 import React from "react";
 import { action } from "@storybook/addon-actions";
-import { Button } from "carbon-components-react";
+import { Button } from "@carbon/react";
 
 import ConfirmModal from "./ConfirmModal";
 

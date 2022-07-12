@@ -1,4 +1,4 @@
-@include exports('addons-bmrg-profileSettings') {
+@use "../../styles/config" as *;
   .#{$prefix}--bmrg-profile-settings-container {
     .#{$prefix}--modal-container {
       min-height: rem(448px);
@@ -104,4 +104,3 @@
     line-height: rem(18px);
     margin-left: rem(16px);
   }
-}

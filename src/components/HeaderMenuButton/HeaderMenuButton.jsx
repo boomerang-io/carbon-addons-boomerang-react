@@ -1,24 +1,22 @@
 import React from "react";
 import PropTypes from "prop-types";
 import cx from "classnames";
-import { settings } from "carbon-components";
-import { Button } from "carbon-components-react";
-import { Chat16, Debug20, Group20, Information16, Launch16, Locked16, Power16, Workspace20 } from "@carbon/icons-react";
-
-const { prefix } = settings;
+import { prefix } from "../../internal/settings";
+import { Button } from "@carbon/react";
+import { Chat, Debug, Group, Information, Launch, Locked, Power, Workspace } from "@carbon/react/icons";
 
 const iconClassName = `${prefix}--bmrg-header-menu-item__img`;
 const iconFill = "#FBFCFC";
 
 const iconMapping = {
-  workspace: <Workspace20 fill={iconFill} className={iconClassName} />,
-  group: <Group20 fill={iconFill} className={iconClassName} />,
-  chat: <Chat16 fill={iconFill} className={iconClassName} />,
-  debug: <Debug20 fill={iconFill} className={iconClassName} />,
-  power: <Power16 fill={iconFill} className={iconClassName} />,
-  information: <Information16 fill={iconFill} className={iconClassName} />,
-  locked: <Locked16 fill={iconFill} className={iconClassName} />,
-  launch: <Launch16 fill={iconFill} className={iconClassName} />,
+  workspace: <Workspace size={16} fill={iconFill} className={iconClassName} />,
+  group: <Group size={16} fill={iconFill} className={iconClassName} />,
+  chat: <Chat size={16} fill={iconFill} className={iconClassName} />,
+  debug: <Debug size={16} fill={iconFill} className={iconClassName} />,
+  power: <Power size={16} fill={iconFill} className={iconClassName} />,
+  information: <Information size={16} fill={iconFill} className={iconClassName} />,
+  locked: <Locked size={16} fill={iconFill} className={iconClassName} />,
+  launch: <Launch size={16} fill={iconFill} className={iconClassName} />,
 };
 
 HeaderMenuButton.propTypes = {

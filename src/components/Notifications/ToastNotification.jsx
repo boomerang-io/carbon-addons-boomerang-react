@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { ToastNotification as CarbonToastNotification } from "carbon-components-react";
-import { settings } from "carbon-components";
+import { ToastNotification as CarbonToastNotification } from "@carbon/react";
+import { prefix } from "../../internal/settings";
 
-const { prefix } = settings;
+
 
 const ToastNotification = ({
   closeToast, // eslint-disable-line no-unused-vars

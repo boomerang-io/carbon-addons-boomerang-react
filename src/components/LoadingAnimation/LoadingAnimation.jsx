@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import ReactDom from "react-dom";
 import PropTypes from "prop-types";
-import { settings } from "carbon-components";
+import { prefix } from "../../internal/settings";
 
 import loadingMessages from "./loadingMessages";
 import LoadingAnimationContent from "./LoadingAnimationContent";
 
-const { prefix } = settings;
+
 
 /** Loading animation with integrated loading svg, and messages to be randomly selected by default and
  * configurable time to wait to render to prevent flickering on quickly resolved requests */

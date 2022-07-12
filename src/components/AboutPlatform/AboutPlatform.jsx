@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { settings } from "carbon-components";
-import { ModalHeader, ModalBody } from "carbon-components-react";
+import { prefix } from "../../internal/settings";
+import { ModalHeader, ModalBody } from "@carbon/react";
 import IBMCloudIcon from "./assets/IBMCloudIcon";
 import HeaderMenuItem from "../HeaderMenuItem";
 import KubernetesIcon from "./assets/KubernetesIcon";
@@ -12,7 +12,7 @@ import ReactIcon from "./assets/ReactIcon";
 import SpringIcon from "./assets/SpringIcon";
 import TektonIcon from "./assets/TektonIcon";
 
-const { prefix } = settings;
+
 
 const AboutPlatformContainer = ({ version, organization, isFlowApp }) => {
   return (

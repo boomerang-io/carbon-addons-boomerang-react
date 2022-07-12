@@ -6,11 +6,11 @@
  */
 
 import React from "react";
-import { settings } from "carbon-components";
+import { prefix } from "../../internal/settings";
 import PropTypes from "prop-types";
 import ListBoxMenuItem from "./ListBoxMenuItem";
 
-const { prefix } = settings;
+
 
 /**
  * `ListBoxMenu` is a simple container node that isolates the `list-box__menu`

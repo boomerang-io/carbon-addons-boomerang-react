@@ -1,10 +1,14 @@
-@import '../../styles/mixins/utils';
 
-@include exports('addons-bmrg-platformNotifications') {
+@use "@carbon/styles/scss/motion";
+@use "@carbon/styles/scss/theme";
+@use '../../styles/themes/addons';
+@use "../../styles/config" as *;
+@use '../../styles/mixins/utils';
+
   .#{$prefix}--bmrg-notifications {
-    animation: fade-in $carbon-motion--timing--productive $carbon-motion--easing--productive;
-    background-color: $bmrg-tertiary-color;
-    border-top: 0.375rem solid $bmrg-header-menu-options-accent-color;
+    animation: fade-in motion.motion("standard");
+    background-color: addons.$tertiary-color;
+    border-top: 0.375rem solid addons.$header-menu-options-accent-color;
     cursor: auto;
     display: none;
     position: absolute;
@@ -28,7 +32,7 @@
   }
 
   .#{$prefix}--bmrg-notifications-header__newNotificaitons {
-    color: $bmrg-secondary-color;
+    color: addons.$secondary-color;
     font-size: 0.875rem;
     font-weight: 500;
     height: 1.25rem;
@@ -39,7 +43,7 @@
   .#{$prefix}--bmrg-notifications-header__clear {
     background-color: inherit;
     border: none;
-    color: $bmrg-secondary-color;
+    color: addons.$secondary-color;
     cursor: pointer;
     font-size: 0.75rem;
     height: 1rem;
@@ -53,12 +57,12 @@
       opacity: 0.5;
     }
     &:focus {
-      @include focus-outline($bmrg-secondary-color);
+      @include utils.focus-outline(addons.$secondary-color);
     }
   }
 
   .#{$prefix}--bmrg-notification {
-    animation: fade-in $carbon-motion--timing--productive $carbon-motion--easing--productive;
+    animation: fade-in motion.motion("standard");
     border-bottom: rem(1px) solid #b8c1c1;
     min-height: 7.6875rem;
     padding: 0rem;
@@ -66,13 +70,13 @@
     width: 100%;
     //TODO: determine the different notification statuses and their colors
     &.--notification {
-      border-left: 0.3125rem solid $bmrg-header-notification-default;
+      border-left: 0.3125rem solid addons.$header-notification-default;
     }
     &.--exception {
       border-left: 0.3125rem solid #fb4b53;
     }
     &.--maintenance {
-      border-left: 0.3125rem solid $support-04;
+      border-left: 0.3125rem solid theme.$support-info;
     }
   }
 
@@ -139,10 +143,10 @@
     right: 0.9375rem;
     top: 0.8125rem;
     path {
-      fill: $bmrg-secondary-color;
+      fill: addons.$secondary-color;
     }
     &:focus {
-      @include focus-outline($bmrg-secondary-color);
+      @include utils.focus-outline(addons.$secondary-color);
     }
   }
 
@@ -153,7 +157,7 @@
   .#{$prefix}--bmrg-notifications-footer__notification-link {
     position: relative;
     top: 25%;
-    color: $bmrg-secondary-color;
+    color: addons.$secondary-color;
     cursor: pointer;
   }
 
@@ -186,7 +190,7 @@
   }
 
   .#{$prefix}--bmrg-notifications-empty__view-old {
-    color: $bmrg-secondary-color;
+    color: addons.$secondary-color;
     font-size: rem(12px);
     font-weight: 300;
     line-height: rem(15px);
@@ -201,7 +205,7 @@
   }
 
   .#{$prefix}--bmrg-notifications__notifications-redirect-link {
-    color: $bmrg-secondary-color;
+    color: addons.$secondary-color;
     font-size: 0.875rem;
     outline: rem(2px) solid transparent;
     outline-offset: rem(-2px);
@@ -210,11 +214,10 @@
     padding: 0.625rem;
     width: 100%;
     &:hover {
-      color: $bmrg-header-active-text-color;
-      background: $bmrg-header-hover-background-color;
+      color: addons.$header-active-text-color;
+      background: addons.$header-hover-background-color;
     }
     &:focus {
-      outline: rem(2px) solid $bmrg-header-active-text-color;
+      outline: rem(2px) solid addons.$header-active-text-color;
     }
   }
-}

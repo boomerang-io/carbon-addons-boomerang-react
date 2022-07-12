@@ -4,10 +4,10 @@ import cx from "classnames";
 import FocusTrap from "focus-trap-react";
 import SockJS from "sockjs-client";
 import { Client } from "@stomp/stompjs";
-import { settings } from "carbon-components";
+import { prefix } from "../../internal/settings";
 import Notification from "./PlatformNotifications";
 
-const { prefix } = settings;
+
 
 export default class PlatformNotificationsContainer extends React.Component {
   static propTypes = {

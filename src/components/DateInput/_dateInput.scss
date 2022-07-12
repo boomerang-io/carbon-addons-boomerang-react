@@ -1,4 +1,6 @@
-@include exports('addons-bmrg-dateInput') {
+@use "../../styles/config" as *;
+@use '@carbon/styles/scss/theme';
+
   .#{$prefix}--bmrg-date-input {
     align-items: center;
     display: flex;
@@ -10,8 +12,8 @@
     }
 
     input[readonly] {
-      background-color: $ui-01;
-      color: $text-01;
+      background-color: theme.$layer-01;
+      color: theme.$text-primary;
     }
   }
 
@@ -24,4 +26,4 @@
     line-height: 0;
     margin-left: 0.5rem;
   }
-}
+

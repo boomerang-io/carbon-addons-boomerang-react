@@ -8,108 +8,107 @@
 // ====================//
 // Imports and Exports //
 // ====================//
+@use "sass:map";
 
-$css--plex: true !default;
+// Configuration
+@use '@carbon/react/scss/config' with
+  ($css--default-type: true, $css--reset: true, $use-akamai-cdn: true);
+// Reset
+@use '@carbon/react/scss/reset';
+// Helpers
+@use '@carbon/react/scss/spacing';
+@use '@carbon/react/scss/type';
+@use '@carbon/styles/scss/theme';
+// Theme w/ compat layer
+//@use './theme';
+@use 'config' as local;
+$prefix: local.$prefix;
+
+@use "./themes/addons";
+@use "./themes/mixins" as theme-mixins;
+
 
 // Import all of the carbon defaults
-@import 'carbon-components/scss/globals/scss/feature-flags';
-@import 'carbon-components/scss/globals/scss/vars';
-@import 'carbon-components/scss/globals/scss/colors';
-@import 'carbon-components/scss/globals/scss/theme';
-@import 'carbon-components/scss/globals/scss/mixins';
-@import 'carbon-components/scss/globals/scss/motion';
-@import 'carbon-components/scss/globals/scss/layout';
-//@import 'carbon-components/scss/globals/scss/layer';
-@import 'carbon-components/scss/globals/scss/spacing';
-@import 'carbon-components/scss/globals/scss/typography';
-@import 'carbon-components/scss/globals/scss/import-once';
-@import 'carbon-components/scss/globals/scss/css--reset';
-@import 'carbon-components/scss/globals/scss/css--font-face';
-@import 'carbon-components/scss/globals/scss/css--helpers';
-@import 'carbon-components/scss/globals/scss/css--body';
-@import 'carbon-components/scss/globals/grid/grid';
-
-@import 'themes/index';
-@import 'mixins/index';
+// @import 'themes/index';
+// @import 'mixins/index';
 
 // Import carbon styles that are used in our components
-@import 'carbon-components/scss/components/accordion/accordion';
-@import 'carbon-components/scss/components/breadcrumb/breadcrumb';
-@import 'carbon-components/scss/components/button/button';
-@import 'carbon-components/scss/components/checkbox/checkbox';
-@import 'carbon-components/scss/components/combo-box/combo-box';
-@import 'carbon-components/scss/components/date-picker/date-picker';
-@import 'carbon-components/scss/components/date-picker/flatpickr';
-@import 'carbon-components/scss/components/loading/loading';
-@import 'carbon-components/scss/components/link/link';
-@import 'carbon-components/scss/components/modal/modal';
-@import 'carbon-components/scss/components/multi-select/multi-select';
-@import 'carbon-components/scss/components/notification/inline-notification';
-@import 'carbon-components/scss/components/notification/toast-notification';
-@import 'carbon-components/scss/components/progress-indicator/progress-indicator';
-@import 'carbon-components/scss/components/radio-button/radio-button';
-@import 'carbon-components/scss/components/skeleton/skeleton-placeholder';
-@import 'carbon-components/scss/components/structured-list/structured-list';
-@import 'carbon-components/scss/components/tag/tag';
-@import 'carbon-components/scss/components/text-area/text-area';
-@import 'carbon-components/scss/components/text-input/text-input';
-@import 'carbon-components/scss/components/tooltip/tooltip';
-@import 'carbon-components/scss/components/toggle/toggle';
+@use '@carbon/react/scss/components/accordion';
+@use '@carbon/react/scss/components/breadcrumb';
+@use '@carbon/react/scss/components/button';
+@use '@carbon/react/scss/components/checkbox';
+@use '@carbon/react/scss/components/combo-box';
+@use '@carbon/react/scss/components/date-picker';
+@use '@carbon/react/scss/components/loading';
+@use '@carbon/react/scss/components/link';
+@use '@carbon/react/scss/components/modal';
+@use '@carbon/react/scss/components/multiselect';
+@use '@carbon/react/scss/components/notification';
+@use '@carbon/react/scss/components/progress-indicator';
+@use '@carbon/react/scss/components/radio-button';
+@use '@carbon/react/scss/components/skeleton-styles';
+@use '@carbon/react/scss/components/structured-list';
+@use '@carbon/react/scss/components/tag';
+@use '@carbon/react/scss/components/text-area';
+@use '@carbon/react/scss/components/text-input';
+@use '@carbon/react/scss/components/tooltip';
+@use '@carbon/react/scss/components/toggle';
 
 //only for testing
-@import 'carbon-components/scss/components/dropdown/dropdown';
-@import 'carbon-components/scss/components/search/search';
-@import 'carbon-components/scss/components/overflow-menu/overflow-menu';
+@use '@carbon/react/scss/components/dropdown/dropdown';
+@use '@carbon/react/scss/components/search/search';
+@use '@carbon/react/scss/components/overflow-menu/overflow-menu';
 
 // Import local styles for custom components
-@import '../components/AboutPlatform/aboutPlatform';
-@import '../components/AutoSuggest/autoSuggest';
-@import '../components/Avatar/avatar';
-@import '../components/CheckboxList/checkboxList';
-@import '../components/ComboBox/combobox';
-@import '../components/ComboBoxMultiSelect/comboBoxMultiSelect';
-@import '../components/ConfirmModal/confirmModal';
-@import '../components/Creatable/creatable';
-@import '../components/DateInput/dateInput';
-@import '../components/Feedback/feedback';
-@import '../components/DecisionButtons/decisionButtons';
-@import '../components/DynamicFormik/dynamicFormik';
-@import '../components/ErrorMessage/errorMessage';
-@import '../components/ErrorBoundary/errorBoundary';
-@import '../components/ErrorDragon/errorDragon';
-@import '../components/ErrorPage/errorPage';
-@import '../components/ErrorPageCore/errorPageCore';
-@import '../components/FeatureHeader/featureHeader';
-@import '../components/FeatureNavTab/featureNavTab';
-@import '../components/FeatureNavTabs/featureNavTabs';
-@import '../components/FeatureSideNav/featureSideNav';
-@import '../components/FeatureSideNavLink/featureSideNavLink';
-@import '../components/GdprRedirectModal/gdprRedirectModal';
-@import '../components/Header/header';
-@import '../components/Header/headerDropDown';
-@import '../components/HeaderMenuItem/headerMenuItem';
-@import '../components/HeaderMenuUser/headerMenuUser';
-@import '../components/LeftSideNav/leftSideNav';
-@import '../components/LoadingAnimation/loadingAnimation';
-@import '../components/MemberBar/memberBar';
-@import '../components/Modal/modal';
-@import '../components/ModalConfirmEdit/modalConfirmEdit';
-@import '../components/Notifications/notifications';
-@import '../components/NoDisplay/noDisplay';
-@import '../components/OptionsGrid/optionsGrid';
-@import '../components/PlatformBanner/platformBanner';
-@import '../components/PlatformNotifications/platformNotifications';
-@import '../components/PrivacyStatement/privacyStatement';
-@import '../components/ProfileSettings/profileSettings';
-@import '../components/ProtectedRoute/protectedRoute';
-@import '../components/RadioGroup/radioGroup';
-@import '../components/Sidenav/sidenav';
-@import '../components/SignOut/signOut';
-@import '../components/TextArea/textArea';
-@import '../components/TextInput/textInput';
-@import '../components/Toggle/toggle';
-@import '../components/TooltipHover/tooltip';
-@import '../components/UserRequests/userRequests';
+@use '../components/AboutPlatform/aboutPlatform';
+@use '../components/AutoSuggest/autoSuggest';
+@use '../components/Avatar/avatar';
+@use '../components/CheckboxList/checkboxList';
+@use '../components/ComboBox/combobox';
+@use '../components/ComboBoxMultiSelect/comboBoxMultiSelect';
+@use '../components/ConfirmModal/confirmModal';
+@use '../components/Creatable/creatable';
+@use '../components/DateInput/dateInput';
+@use '../components/Feedback/feedback';
+@use '../components/DecisionButtons/decisionButtons';
+@use '../components/DynamicFormik/dynamicFormik';
+@use '../components/ErrorMessage/errorMessage';
+@use '../components/ErrorBoundary/errorBoundary';
+@use '../components/ErrorDragon/errorDragon';
+@use '../components/ErrorPage/errorPage';
+@use '../components/ErrorPageCore/errorPageCore';
+@use '../components/FeatureHeader/featureHeader';
+@use '../components/FeatureNavTab/featureNavTab';
+@use '../components/FeatureNavTabs/featureNavTabs';
+@use '../components/FeatureSideNav/featureSideNav';
+@use '../components/FeatureSideNavLink/featureSideNavLink';
+@use '../components/GdprRedirectModal/gdprRedirectModal';
+@use '../components/Header/header';
+@use '../components/Header/headerDropDown';
+@use '../components/HeaderMenuItem/headerMenuItem';
+@use '../components/HeaderMenuUser/headerMenuUser';
+//@use '../components/LeftSideNav/leftSideNav';
+@use '../components/LoadingAnimation/loadingAnimation';
+@use '../components/MemberBar/memberBar';
+@use '../components/Modal/modal' as addons-modal;
+@use '../components/ModalConfirmEdit/modalConfirmEdit';
+@use '../components/Notifications/notifications';
+@use '../components/NoDisplay/noDisplay';
+@use '../components/OptionsGrid/optionsGrid';
+@use '../components/PlatformBanner/platformBanner';
+@use '../components/PlatformNotifications/platformNotifications';
+@use '../components/PrivacyStatement/privacyStatement';
+@use '../components/ProfileSettings/profileSettings';
+@use '../components/ProtectedRoute/protectedRoute';
+@use '../components/RadioGroup/radioGroup';
+@use '../components/Sidenav/sidenav';
+@use '../components/SignOut/signOut';
+@use '../components/TextArea/textArea';
+@use '../components/TextInput/textInput';
+@use '../components/Toggle/toggle' as addons-toggle;
+@use '../components/TooltipHover/tooltip' as addons-tooltip;
+@use '../components/UserRequests/userRequests';
+
 
 // Carbon overrides for the Platform theme
 // Scope to modal styles so they don't overwrite other carbon styles
@@ -120,6 +119,7 @@ $css--plex: true !default;
 .#{$prefix}--tooltip {
   z-index: 9999;
 }
+
 .#{$prefix}--bmrg-aboutPlatform-container,
 .#{$prefix}--bmrg-contact-us-container,
 .#{$prefix}--bmrg-feedback-container,
@@ -129,19 +129,19 @@ $css--plex: true !default;
 .#{$prefix}--bmrg-signout-container,
 .#{$prefix}--bmrg-redirect-container {
   .#{$prefix}--modal-container {
-    background-color: $bmrg-header-modal-background-color;
+    background-color: addons.$header-modal-background-color;
     border-radius: rem(4px);
 
     * {
       &:focus,
       &::before {
-        outline-color: $bmrg-secondary-color !important;
-        border-color: $bmrg-secondary-color !important;
+        outline-color: addons.$secondary-color !important;
+        border-color: addons.$secondary-color !important;
       }
     }
 
     .#{$prefix}--btn:focus {
-      outline-color: $bmrg-primary-color;
+      outline-color: addons.$primary-color;
     }
 
     .#{$prefix}--modal-content {
@@ -150,14 +150,14 @@ $css--plex: true !default;
   }
 
   .#{$prefix}--modal {
-    background-color: $bmrg-header-modal-overlay; //default isrgba($ui-03, 0.5)
+    background-color: addons.$header-modal-overlay; //default isrgba(theme.$layer-accent-01, 0.5)
   }
   .#{$prefix}--modal-close {
     &:hover {
-      background-color: $bmrg-header-hover-background-color;
+      background-color: addons.$header-hover-background-color;
     }
     &:focus {
-      outline: rem(1px) solid $bmrg-secondary-color;
+      outline: rem(1px) solid addons.$secondary-color;
     }
   }
 
@@ -172,7 +172,7 @@ $css--plex: true !default;
 
   .#{$prefix}--modal-header__heading {
     height: rem(26px);
-    color: $bmrg-brand-white;
+    color: addons.$brand-white;
     font-size: rem(20px);
     font-weight: 300;
   }
@@ -181,11 +181,11 @@ $css--plex: true !default;
     svg,
     polygon,
     path {
-      fill: $bmrg-brand-white;
+      fill: addons.$brand-white;
     }
   }
   .#{$prefix}--modal-footer {
-    background-color: $bmrg-primary-color;
+    background-color: addons.$primary-color;
     margin: 0;
     /** carbon 10 override */
     padding: 0;
@@ -198,8 +198,8 @@ $css--plex: true !default;
       border-radius: 0;
 
       &.#{$prefix}--btn--primary {
-        background-color: $bmrg-header-modal-confirm-color;
-        color: $bmrg-header-button-text-color;
+        background-color: addons.$header-modal-confirm-color;
+        color: addons.$header-button-text-color;
         border-bottom-right-radius: rem(4px);
 
         &.#{$prefix}--btn:disabled {
@@ -209,8 +209,8 @@ $css--plex: true !default;
       }
 
       &.#{$prefix}--btn--secondary {
-        background-color: $bmrg-header-modal-cancel-color;
-        color: $bmrg-header-button-text-color;
+        background-color: addons.$header-modal-cancel-color;
+        color: addons.$header-button-text-color;
         border-bottom-left-radius: rem(4px);
       }
     }
@@ -218,11 +218,95 @@ $css--plex: true !default;
 
   .#{$prefix}--accordion__heading {
     &:hover:before {
-      background-color: $bmrg-header-hover-background-color;
+      background-color: addons.$header-hover-background-color;
     }
 
     &:focus:before {
-      border-color: $bmrg-secondary-color;
+      border-color: addons.$secondary-color;
     }
   }
 }
+
+// Global overrides
+// https://www.carbondesignsystem.com/guidelines/themes#global
+$edited: false;
+$use-layer: false;
+$input-border: 1px solid transparent;
+$accordion-flex-direction: row;
+$accordion-justify-content: flex-start;
+$accordion-arrow-margin: 0 0 0 0.25rem;
+$accordion-title-margin: 0 0 0 1rem;
+$accordion-content-padding: 0 1rem 0 1.75rem;
+$button-border-radius: 0.25rem;
+
+/// Boomerang's default color theme
+// /// @type Map
+// /// @access public
+// /// @group @boomerang/carbon-addons-boomerang
+// $carbon--theme--boomerang: map.merge(
+//   themes.$g10,
+//   (
+//     field-01: #ffffff,
+//     field-02: #f2f4f8,
+//     icon-01: #121619,
+//     icon-02: #4d5358,
+//     icon-03: #ffffff,
+//     interactive-01: #0072c3,
+//     interactive-02: #343a3f,
+//     interactive-03: #0072c3,
+//     interactive-04: #0072c3,
+//     inverse-01: #ffffff,
+//     inverse-02: #343a3f,
+//     inverse-support-01: #fa4d56,
+//     inverse-support-02: #08bdba,
+//     inverse-support-03: #f1c21b,
+//     inverse-support-04: #1192e8,
+//     link-01: #0072c3,
+//     overlay-01: rgba(18, 22, 25, 0.5),
+//     support-01: #da1e28,
+//     support-02: #009d9a,
+//     support-03: #f1c21b,
+//     support-04: #00539a,
+//     text-01: #121619,
+//     text-02: #4d5358,
+//     text-03: #878d96,
+//     text-04: #ffffff,
+//     ui-01: #ffffff,
+//     ui-02: #f2f4f8,
+//     ui-03: #dde1e6,
+//     ui-04: #878d96,
+//     ui-05: #121619,
+//     ui-background: #f2f4f8,
+//     active-01: #bebebe,
+//     active-danger: #750e13,
+//     active-primary: #003a6d,
+//     active-secondary: #697077,
+//     active-tertiary: #003a6d,
+//     active-ui: #c1c7cd,
+//     disabled-01: #ffffff,
+//     disabled-02: #c1c7cd,
+//     disabled-03: #878d96,
+//     focus: #0072c3,
+//     highlight: #e5f6ff,
+//     hover-danger: #da1e28,
+//     hover-primary: #0072c3,
+//     hover-primary-text: #00539a,
+//     hover-field: #f3f3f3,
+//     hover-row: #dde1e6,
+//     hover-secondary: #4d5358,
+//     hover-selected-ui: #c1c7cd,
+//     hover-tertiary: #0072c3,
+//     hover-ui: #dde1e6,
+//     inverse-focus-ui: #ffffff,
+//     inverse-hover-ui: #4d5358,
+//     selected-ui: #dde1e6,
+//     skeleton-01: #f2f4f8,
+//     skeleton-02: #c1c7cd,
+//     visited-link: #8a3ffc,
+//   )
+// );
+
+
+
+@include theme-mixins.carbon-overrides();
+

@@ -1,4 +1,4 @@
-@include exports('addons-bmrg-avatar') {
+@use "../../styles/config" as *;
   .#{$prefix}--bmrg-avatar {
     border-radius: 50%;
 
@@ -21,4 +21,4 @@
       min-width: rem(64px);
     }
   }
-}
+

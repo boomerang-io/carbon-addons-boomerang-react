@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { TextArea } from "carbon-components-react";
+import { TextArea } from "@carbon/react";
 import TooltipHover from "../TooltipHover";
-import { Information16 } from "@carbon/icons-react";
-import { settings } from "carbon-components";
+import { Information } from "@carbon/react/icons";
+import { prefix } from "../../internal/settings";
 
-const { prefix } = settings;
+
 
 const TextAreaComponent = React.forwardRef(function TextAreaComponent(
   { id, label, labelText, max, tooltipClassName, tooltipContent, tooltipProps, value, ...textAreaProps },
@@ -24,7 +24,7 @@ const TextAreaComponent = React.forwardRef(function TextAreaComponent(
               {tooltipContent && (
                 <div className={tooltipClassName}>
                   <TooltipHover {...tooltipProps} tooltipText={tooltipContent}>
-                    <Information16 fill="#4d5358" />
+                    <Information size={16} fill="#4d5358" />
                   </TooltipHover>
                 </div>
               )}

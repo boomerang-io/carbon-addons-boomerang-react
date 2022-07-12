@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import classnames from "classnames";
-import { settings } from "carbon-components";
+import { prefix } from "../../internal/settings";
 
-const { prefix } = settings;
+
 
 export default class LeftSideNav extends Component {
   static propTypes = {

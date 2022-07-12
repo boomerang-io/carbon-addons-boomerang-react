@@ -1,3 +1,7 @@
+@use '@carbon/react/scss/theme';
+@use '@carbon/react/scss/components/button/tokens';
+@use "../config" as *;
+
 // Create global css properties
 @mixin carbon-addons-bmrg--create-properties($carbon-addons-bmrg--property-prefix: --cds-) {
   @if ($carbon-addons-bmrg--create-properties == true) {
@@ -14,9 +18,9 @@
 
 // Some additional overrides to carbon base styles
 // add :root to have a higher level of specificity and not rely in import order
-@mixin carbon-addons-bmrg--carbon-overrides() {
+@mixin carbon-overrides() {
   a {
-    color: $interactive-01;
+    color: tokens.$button-primary;
     font-size: rem(14px);
     letter-spacing: 0;
     line-height: rem(18px);
@@ -68,7 +72,7 @@
     }
 
     .#{$prefix}--form-requirement {
-      color: $support-01;
+      color: theme.$support-error;
       &::before {
         content: '';
       }
@@ -76,7 +80,7 @@
 
     .#{$prefix}--label,
     .#{$prefix}--list-box__label {
-      color: $text-01;
+      color: theme.$text-primary;
       font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, Helvetica, sans-serif;
     }
 
@@ -126,8 +130,8 @@
     }
 
     .#{$prefix}--checkbox:checked + .#{$prefix}--checkbox-label::before {
-      background-color: $support-02;
-      border-color: $support-02;
+      background-color: theme.$support-success;
+      border-color: theme.$support-success;
     }
 
     .#{$prefix}--list-box--expanded .#{$prefix}--list-box__menu {

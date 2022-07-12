@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import cx from "classnames";
-import { Close16 } from "@carbon/icons-react";
+import { Close } from "@carbon/react/icons";
 import { formatDistance, format, parseISO } from "date-fns";
-import { settings } from "carbon-components";
+import { prefix } from "../../internal/settings";
 
-const { prefix } = settings;
+
 
 /**
  * @param {Function} readNotification - function to be used on the delete button associated with a notification
@@ -34,7 +34,7 @@ function Notification({ readNotification, notificationInfo }) {
           className={`${prefix}--bmrg-notification-content__close`}
           onClick={() => readNotification(notificationInfo.id)}
         >
-          <Close16 alt="Mark as read icon" />
+          <Close size={16} alt="Mark as read icon" />
         </button>
       </div>
     </div>

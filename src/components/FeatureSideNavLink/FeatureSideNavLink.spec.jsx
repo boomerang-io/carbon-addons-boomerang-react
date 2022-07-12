@@ -3,7 +3,7 @@ import { Router } from "react-router-dom";
 import { render } from "@testing-library/react";
 import FeatureSideNavLink from ".";
 import { createBrowserHistory } from "history";
-import { Rocket16 } from "@carbon/icons-react";
+import { Rocket } from "@carbon/react/icons";
 
 const history = createBrowserHistory();
 test("render FeatureSideNavLink with correct class", async () => {
@@ -30,7 +30,7 @@ test("render FeatureSideNavLink with Divider", async () => {
 test("render FeatureSideNavLink with Icon", async () => {
   const { getByTestId } = render(
     <Router history={history}>
-      <FeatureSideNavLink to="/testlink" icon={Rocket16} iconProps={{ "data-testid": "rocket-icon" }} hasDivider>
+      <FeatureSideNavLink to="/testlink" icon={Rocket} iconProps={{ "data-testid": "rocket-icon" }} hasDivider>
         Test Link
       </FeatureSideNavLink>
     </Router>

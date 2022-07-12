@@ -4,11 +4,11 @@
 
 ## Getting Started
 
-Install the Carbon peer dependencies in addition to the package itself. We re-export all of the components from `carbon-components-react` but in some cases you may want to import directly from a Carbon library. It is a best practice to have the dependency defined in the `package.json` in that situation and depending on your package manager and node version, a requirement. It also gives consumers more control over the version of the packages they are using without being dependent on our library.
+Install the Carbon peer dependencies in addition to the package itself. We re-export all of the components from `@carbon/react` but in some cases you may want to import directly from a Carbon library. It is a best practice to have the dependency defined in the `package.json` in that situation and depending on your package manager and node version, a requirement. It also gives consumers more control over the version of the packages they are using without being dependent on our library.
 
 Run the following command using [pnpm](https://pnpm.io)
 ```bash
-pnpm install carbon-components carbon-components-react carbon-icons @carbon/icons-react
+pnpm install carbon-components @carbon/react carbon-icons @carbon/react/icons
 npm install @boomerang-io/carbon-addons-boomerang-react
 ```
 
@@ -61,7 +61,7 @@ The big change here is finally supporting tree-shaking properly. This should red
 
 **Breaking Changes**
 
-- Move `@carbon/icons-react` to a peer dependency
+- Move `@carbon/react/icons` to a peer dependency
 - Move `carbon-icons` to a peer dependency
 - Remove `@carbon/elements` as a dependency
 - No longer publish `UMD` builds

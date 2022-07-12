@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import cx from "classnames";
-import { settings } from "carbon-components";
-const { prefix } = settings;
+import { prefix } from "../../internal/settings";
+
 
 const FlowModalForm = React.forwardRef(function FlowModalForm(
   { children, className, element: Element, title, ...rest },

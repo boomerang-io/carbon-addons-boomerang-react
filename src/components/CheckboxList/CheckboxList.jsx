@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { Checkbox } from "carbon-components-react";
+import { Checkbox } from "@carbon/react";
 import TooltipHover from "../TooltipHover";
-import { Information16 } from "@carbon/icons-react";
-import { settings } from "carbon-components";
+import { Information } from "@carbon/react/icons";
+import { prefix } from "../../internal/settings";
 
-const { prefix } = settings;
+
 
 CheckboxListComponent.propTypes = {
   checkboxProps: PropTypes.object,
@@ -78,7 +78,7 @@ function CheckboxListComponent({
           {tooltipContent && (
             <div className={tooltipClassName}>
               <TooltipHover {...tooltipProps} tooltipText={tooltipContent}>
-                <Information16 fill="#4d5358" />
+                <Information size={16} fill="#4d5358" />
               </TooltipHover>
             </div>
           )}

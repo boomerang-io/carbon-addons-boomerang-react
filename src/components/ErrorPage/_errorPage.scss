@@ -1,7 +1,9 @@
-@include exports('addons-bmrg-errorPage') {
+@use "../../styles/config" as *;
+@use '@carbon/styles/scss/theme';
+
   .#{$prefix}--bmrg-error-page {
     align-items: center;
-    color: $text-02;
+    color: theme.$text-secondary;
     display: flex;
     font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, Helvetica, sans-serif;
     flex-direction: column;
@@ -11,7 +13,7 @@
   }
 
   .#{$prefix}--bmrg-error-page__header {
-    color: $inverse-support-01;
+    color: theme.$support-error-inverse;
     font-size: rem(32px);
     font-weight: 600;
     line-height: 42px;
@@ -36,7 +38,7 @@
     text-align: center;
 
     a {
-      color: $interactive-01;
+      color: theme.$background-brand;
       font-weight: 600;
       text-decoration: none;
     }
@@ -54,4 +56,3 @@
       width: 100%;
     }
   }
-}

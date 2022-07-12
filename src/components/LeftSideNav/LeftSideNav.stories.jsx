@@ -1,6 +1,6 @@
 import React from "react";
-import { ServiceDesk16 } from "@carbon/icons-react";
-import { SideNav, SideNavLink, SideNavItems, SideNavMenu, SideNavMenuItem } from "carbon-components-react";
+import { ServiceDesk } from "@carbon/react/icons";
+import { SideNav, SideNavLink, SideNavItems, SideNavMenu, SideNavMenuItem } from "@carbon/react";
 import { BrowserRouter as Router, Link } from "react-router-dom";
 
 import LeftSideNav from "./LeftSideNav";
@@ -22,14 +22,14 @@ export const WithRouter = () => (
               Menu 3
             </SideNavMenuItem>
           </SideNavMenu>
-          <SideNavMenu renderIcon={ServiceDesk16} title="Large menu w/icon" large>
+          <SideNavMenu renderIcon={ServiceDesk} title="Large menu w/icon" large>
             <SideNavMenuItem isActive element={Link} to="">
               Menu 1
             </SideNavMenuItem>
             <SideNavMenuItem href="">Menu 2</SideNavMenuItem>
             <SideNavMenuItem href="">Menu 3</SideNavMenuItem>
           </SideNavMenu>
-          <SideNavLink element={Link} renderIcon={ServiceDesk16} to="" large>
+          <SideNavLink element={Link} renderIcon={ServiceDesk} to="" large>
             Large link w/icon
           </SideNavLink>
         </SideNavItems>

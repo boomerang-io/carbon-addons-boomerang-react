@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Button } from "carbon-components-react";
+import { Button } from "@carbon/react";
 
 import NotificationsContainer from "./NotificationsContainer";
 import ToastNotification from "./ToastNotification";

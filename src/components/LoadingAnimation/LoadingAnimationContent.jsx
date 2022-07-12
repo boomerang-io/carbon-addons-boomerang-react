@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import cx from "classnames";
-import { settings } from "carbon-components";
+import { prefix } from "../../internal/settings";
 
 import Loading from "./assets/Loading";
 
-const { prefix } = settings;
+
 
 const LoadingAnimationContent = ({ className, messages, ...rest }) => {
   return (

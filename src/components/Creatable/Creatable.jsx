@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import cx from "classnames";
-import { Button, Tag, TextInput } from "carbon-components-react";
+import { Button, Tag, TextInput } from "@carbon/react";
 import TooltipHover from "../TooltipHover";
-import { Add16, Information16 } from "@carbon/icons-react";
-import { settings } from "carbon-components";
+import { Add, Information } from "@carbon/react/icons";
+import { prefix } from "../../internal/settings";
 
 import { isAccessibleKeyDownEvent } from "../../tools/accessibility";
 
-const { prefix } = settings;
+
 
 CreatableComponent.propTypes = {
   buttonClassName: PropTypes.string,
@@ -242,7 +242,7 @@ function CreatableComponent({
                 {tooltipContent && (
                   <div className={tooltipClassName}>
                     <TooltipHover {...tooltipProps} tooltipText={tooltipContent}>
-                      <Information16 fill="#4d5358" />
+                      <Information size={16} fill="#4d5358" />
                     </TooltipHover>
                   </div>
                 )}
@@ -261,7 +261,7 @@ function CreatableComponent({
           disabled={disabled || !existValue}
           onClick={addValue}
           iconDescription="Add"
-          renderIcon={Add16}
+          renderIcon={Add}
           size="field"
           type="button"
           {...buttonProps}

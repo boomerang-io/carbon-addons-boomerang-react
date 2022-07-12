@@ -1,40 +1,38 @@
 import React from "react";
 import PropTypes from "prop-types";
 import cx from "classnames";
-import { settings } from "carbon-components";
-import { Button } from "carbon-components-react";
+import { prefix } from "../../internal/settings";
+import { Button } from "@carbon/react";
 import {
-  ArrowRight16,
-  Chat16,
-  Debug20,
-  Email16,
-  Forum16,
-  HelpDesk16,
-  Group20,
-  Information16,
-  Launch16,
-  Locked16,
-  Power16,
-  Workspace20,
-} from "@carbon/icons-react";
-
-const { prefix } = settings;
+  ArrowRight,
+  Chat,
+  Debug,
+  Email,
+  Forum,
+  HelpDesk,
+  Group,
+  Information,
+  Launch,
+  Locked,
+  Power,
+  Workspace,
+} from "@carbon/react/icons";
 
 const iconClassName = `${prefix}--bmrg-header-menu-item__img`;
 const iconFill = "#FBFCFC";
 
 const iconMapping = {
-  chat: <Chat16 fill={iconFill} className={iconClassName} />,
-  debug: <Debug20 fill={iconFill} className={iconClassName} />,
-  email: <Email16 fill={iconFill} className={iconClassName} />,
-  forum: <Forum16 fill={iconFill} className={iconClassName} />,
-  group: <Group20 fill={iconFill} className={iconClassName} />,
-  information: <Information16 fill={iconFill} className={iconClassName} />,
-  launch: <Launch16 fill={iconFill} className={iconClassName} />,
-  locked: <Locked16 fill={iconFill} className={iconClassName} />,
-  power: <Power16 fill={iconFill} className={iconClassName} />,
-  support: <HelpDesk16 fill={iconFill} className={iconClassName} />,
-  workspace: <Workspace20 fill={iconFill} className={iconClassName} />,
+  chat: <Chat size={16} fill={iconFill} className={iconClassName} />,
+  debug: <Debug size={16} fill={iconFill} className={iconClassName} />,
+  email: <Email size={16} fill={iconFill} className={iconClassName} />,
+  forum: <Forum size={16} fill={iconFill} className={iconClassName} />,
+  group: <Group size={16} fill={iconFill} className={iconClassName} />,
+  information: <Information size={16} fill={iconFill} className={iconClassName} />,
+  launch: <Launch size={16} fill={iconFill} className={iconClassName} />,
+  locked: <Locked size={16} fill={iconFill} className={iconClassName} />,
+  power: <Power size={16} fill={iconFill} className={iconClassName} />,
+  support: <HelpDesk size={16} fill={iconFill} className={iconClassName} />,
+  workspace: <Workspace size={16} fill={iconFill} className={iconClassName} />,
 };
 
 HeaderMenuLink.propTypes = {
@@ -109,14 +107,16 @@ function HeaderMenuLink({ className, external = true, href, iconName, style, tex
           <span className={`${prefix}--bmrg-header-menu-item__text`}>
             {text}
             {external ? (
-              <Launch16
+              <Launch
+                size={16}
                 fill={iconFill}
                 className={iconClassName}
                 style={{ height: "0.75rem" }}
                 aria-label={`${text} icon`}
               />
             ) : (
-              <ArrowRight16
+              <ArrowRight
+                size={16}
                 fill={iconFill}
                 className={iconClassName}
                 style={{ height: "0.75rem" }}

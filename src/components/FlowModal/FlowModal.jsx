@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import cx from "classnames";
-import { ModalHeader, ProgressIndicator, ProgressStep } from "carbon-components-react";
-import { settings } from "carbon-components";
+import { ModalHeader, ProgressIndicator, ProgressStep } from "@carbon/react";
+import { prefix } from "../../internal/settings";
 
 import Modal from "../Modal";
 import useSetState from "../../tools/useSetState";
 import ConfirmModal from "../ConfirmModal";
 
-const { prefix } = settings;
+
 
 FlowModalContainer.propTypes = {
   appElement: PropTypes.string,

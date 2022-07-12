@@ -6,8 +6,8 @@ import GraphicLoch from "../GraphicLoch";
 import ErrorPage from "../ErrorPage";
 import ErrorPageCore from "../ErrorPageCore";
 
-import { settings } from "carbon-components";
-const { prefix } = settings;
+import { prefix } from "../../internal/settings";
+
 
 export default function Error404(props) {
   return props?.theme === "boomerang" ? (

@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { settings } from "carbon-components";
+import { prefix } from "../../internal/settings";
 import FocusTrap from "focus-trap-react";
 
-const { prefix } = settings;
+
 
 function HeaderMenu({ children }) {
   return (

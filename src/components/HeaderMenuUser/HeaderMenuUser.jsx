@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import cx from "classnames";
-import { settings } from "carbon-components";
+import { prefix } from "../../internal/settings";
 import Avatar from "../Avatar";
 import HeaderMenuModalWrapper from "../../internal/HeaderMenuModalWrapper";
 
-const { prefix } = settings;
+
 
 const UserHeaderMenuItem = ({ children, className, forwardRef, src, style, userName, ...rest }) => {
   const wrapperClassNames = cx(`${prefix}--bmrg-header-menu-item-wrapper`, {

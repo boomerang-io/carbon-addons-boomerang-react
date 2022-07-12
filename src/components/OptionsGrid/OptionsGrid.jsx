@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { settings } from "carbon-components";
+import { prefix } from "../../internal/settings";
 
 import Option from "./Option";
 
-const { prefix } = settings;
+
 
 const OptionsGrid = ({
   className,

@@ -1,4 +1,6 @@
-@include exports('bmrg-addons-modal') {
+@use "../../styles/config" as *;
+@use '@carbon/styles/scss/theme';
+
   .#{$prefix}--bmrg-body-modal-is-open,
   .#{$prefix}--bmrg-html-modal-is-open {
     overflow: hidden;
@@ -33,7 +35,7 @@
   }
 
   .#{$prefix}--bmrg-modal-container {
-    background: $ui-01;
+    background: theme.$layer-01;
     border-radius: 0.25rem;
     display: flex;
     flex-direction: column;
@@ -66,7 +68,7 @@
     .#{$prefix}--toggle-input:disabled
       + .#{$prefix}--toggle-input__label
       > .#{$prefix}--toggle__switch::before {
-      background: $ui-background;
+      background: theme.$background;
     }
   }
 
@@ -105,7 +107,7 @@
 
     .#{$prefix}--bmrg-modal-flow-subtitle,
     .#{$prefix}--bmrg-modal-composed-subtitle {
-      color: $text-01;
+      color: theme.$text-primary;
       font-size: rem(14px);
       min-height: rem(20px);
       letter-spacing: rem(0.16px);
@@ -146,11 +148,10 @@
     }
     .#{$prefix}--bmrg-modal-flow-form__title,
     .#{$prefix}--bmrg-modal-form__title {
-      color: $text-01;
+      color: theme.$text-primary;
       font-size: rem(14px);
       letter-spacing: rem(0.16px);
       line-height: rem(20px);
       padding: 0 1rem 1rem;
     }
   }
-}

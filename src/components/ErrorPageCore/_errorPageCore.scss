@@ -1,4 +1,7 @@
-@include exports('addons-bmrg-errorPageCore') {
+@use "../../styles/config" as *;
+@use '@carbon/styles/scss/theme';
+@use '@carbon/react/scss/components/button/tokens';
+
   .#{$prefix}--bmrg-error-page-core {
     font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, Helvetica, sans-serif;
     // margin: rem(80px) auto;
@@ -19,7 +22,7 @@
   }
 
   .#{$prefix}--bmrg-error-page-core__header {
-    color: $danger-01;
+    color: tokens.$button-danger-primary;
     font-size: rem(36px);
     line-height: rem(46px);
     font-weight: 600;
@@ -28,7 +31,7 @@
   }
 
   .#{$prefix}--bmrg-error-page-core__title {
-    color: $text-01;
+    color: theme.$text-primary;
     font-size: rem(20px);
     font-weight: 600;
     line-height: rem(25px);
@@ -37,13 +40,13 @@
   }
 
   .#{$prefix}--bmrg-error-page-core__message {
-    color: $text-02;
+    color: theme.$text-secondary;
     font-size: rem(16px);
     line-height: rem(20px);
     max-width: 27rem;
 
     a {
-      color: $interactive-01;
+      color: theme.$background-brand;
       font-weight: 600;
       text-decoration: none;
     }
@@ -59,4 +62,3 @@
       width: calc(100vw - 2rem);
     }
   }
-}

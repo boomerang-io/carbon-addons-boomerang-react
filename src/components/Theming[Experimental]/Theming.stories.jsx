@@ -13,7 +13,7 @@ import {
   Search,
   TextInput,
   TextArea,
-} from "carbon-components-react";
+} from "@carbon/react";
 
 import DataTable from "./dataTableDefault";
 import { comboBoxItems, dropdownOptions, multiSelectOptions } from "./propsData";

@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { settings } from "carbon-components";
+import { prefix } from "../../internal/settings";
 
 import ErrorMessage from "../ErrorMessage";
 
-const { prefix } = settings;
+
 
 /**
  * todo: convert this to hooks in the future.

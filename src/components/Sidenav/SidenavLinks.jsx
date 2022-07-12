@@ -2,9 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 import { NavLink } from "react-router-dom";
-import { settings } from "carbon-components";
+import { prefix } from "../../internal/settings";
 
-const { prefix } = settings;
+
 
 const SidenavLinks = ({ navItems, theme, ...rest }) => {
   const linkClassNames = classnames(`${prefix}--bmrg-sidenav-links__link`, `--${theme}`);

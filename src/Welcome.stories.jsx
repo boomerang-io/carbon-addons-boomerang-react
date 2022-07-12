@@ -11,7 +11,7 @@ import {
   StructuredListCell,
 } from "./index";
 
-//const carbonExports = Object.keys(require('carbon-components-react'));
+//const carbonExports = Object.keys(require('@carbon/react'));
 const boomerangAddonsExports = Object.keys(require("./index"));
 
 export default {

@@ -1,4 +1,4 @@
-@include exports('addons-bmrg-textInput') {
+@use "../../styles/config" as *;
   .#{$prefix}--bmrg-text-input {
     align-items: center;
     display: flex;
@@ -13,4 +13,3 @@
     line-height: 0;
     margin-left: 0.5rem;
   }
-}

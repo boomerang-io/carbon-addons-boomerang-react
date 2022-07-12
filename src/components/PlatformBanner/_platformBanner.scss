@@ -1,4 +1,4 @@
-@include exports('addons-bmrg-platformBanner') {
+@use "../../styles/config" as *;
   .#{$prefix}--bmrg-banner-container {
     left: 0;
     position: fixed;
@@ -20,4 +20,3 @@
       fill: #ffffff;
     }
   }
-}

@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import cx from "classnames";
 import TooltipHover from "../TooltipHover";
-import { Information16 } from "@carbon/icons-react";
-import { settings } from "carbon-components";
+import { Information } from "@carbon/react/icons";
+import { prefix } from "../../internal/settings";
 
-const { prefix } = settings;
+
 
 const ButtonTypes = {
   Negative: "negative",
@@ -129,7 +129,7 @@ function DecisionButtons({
           {tooltipContent && (
             <div className={tooltipClassName}>
               <TooltipHover {...tooltipProps} onClick={(e) => e.preventDefault()} tooltipText={tooltipContent}>
-                <Information16 fill="#4d5358" />
+                <Information size={16} fill="#4d5358" />
               </TooltipHover>
             </div>
           )}

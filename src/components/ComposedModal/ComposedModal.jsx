@@ -3,11 +3,11 @@ import useSetState from "../../tools/useSetState";
 import PropTypes from "prop-types";
 import cx from "classnames";
 import Modal from "../Modal";
-import { ModalHeader } from "carbon-components-react";
-import { settings } from "carbon-components";
+import { ModalHeader } from "@carbon/react";
+import { prefix } from "../../internal/settings";
 import ConfirmModal from "../ConfirmModal";
 
-const { prefix } = settings;
+
 
 ComposedModal.propTypes = {
   appElement: PropTypes.string,

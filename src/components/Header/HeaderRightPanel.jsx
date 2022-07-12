@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
-import { settings } from "carbon-components";
+import { prefix } from "../../internal/settings";
 
-const { prefix } = settings;
+
 
 const HeaderRightPanel = ({ content, className }) => {
   const classNames = classnames(`${prefix}--bmrg-right-panel`, className);

@@ -1,12 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { settings } from "carbon-components";
-import { Button } from "carbon-components-react";
-import { ModalHeader, ModalBody, ModalFooter } from "carbon-components-react";
+import { prefix } from "../../internal/settings";
+import { Button } from "@carbon/react";
+import { ModalHeader, ModalBody, ModalFooter } from "@carbon/react";
 
 import HeaderMenuItem from "../HeaderMenuItem";
 
-const { prefix } = settings;
+
 
 SignOutContainer.propTypes = {
   signOutLink: PropTypes.string,

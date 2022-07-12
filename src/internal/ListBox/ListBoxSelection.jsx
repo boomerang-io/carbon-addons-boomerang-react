@@ -8,11 +8,11 @@
 import cx from "classnames";
 import React from "react";
 import PropTypes from "prop-types";
-import { Close16 } from "@carbon/icons-react";
-import { settings } from "carbon-components";
+import { Close } from "@carbon/react/icons";
+import { prefix } from "../../internal/settings";
 import { match, keys } from "../../internal/keyboard";
 
-const { prefix } = settings;
+
 
 /**
  * `ListBoxSelection` is used to provide controls for clearing a selection, in
@@ -67,7 +67,7 @@ const ListBoxSelection = ({ clearSelection, selectionCount, translateWithId: t, 
         aria-label={t("clear.all")}
         title={description}
       >
-        <Close16 />
+        <Close size={16} />
       </div>
     </div>
   ) : (
@@ -81,7 +81,7 @@ const ListBoxSelection = ({ clearSelection, selectionCount, translateWithId: t, 
       title={description}
     >
       {selectionCount}
-      <Close16 />
+      <Close size={16} />
     </div>
   );
 };

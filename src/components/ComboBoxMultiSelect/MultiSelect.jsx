@@ -3,15 +3,15 @@ import React from "react";
 import PropTypes from "prop-types";
 import Downshift from "downshift";
 import isEqual from "lodash.isequal";
-import { settings } from "carbon-components";
-import { WarningFilled16 } from "@carbon/icons-react";
-import { Tag } from "carbon-components-react";
+import { prefix } from "../../internal/settings";
+import { WarningFilled} from "@carbon/react/icons";
+import { Tag } from "@carbon/react";
 import ListBox, { PropTypes as ListBoxPropTypes } from "../../internal/ListBox";
 import { isAccessibleKeyDownEvent } from "../../tools/accessibility";
 import { mapDownshiftProps } from "../../tools/createPropAdapter";
 import setupGetInstanceId from "../../tools/setupGetInstanceId";
 
-const { prefix } = settings;
+
 
 const defaultItemToString = (item) => {
   if (typeof item === "string") {
@@ -370,7 +370,7 @@ export default class MultiSelectComboBox extends React.Component {
                     onBlur: this.handleInputBlur,
                   })}
                 />
-                {invalid && <WarningFilled16 className={`${prefix}--list-box__invalid-icon`} />}
+                {invalid && <WarningFilled size={16} className={`${prefix}--list-box__invalid-icon`} />}
                 {(inputValue || selectedItems.length > 0) && (
                   <Selection
                     clearSelection={clearSelection}

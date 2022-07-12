@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { RadioButton, RadioButtonGroup } from "carbon-components-react";
+import { RadioButton, RadioButtonGroup } from "@carbon/react";
 import TooltipHover from "../TooltipHover";
-import { Information16 } from "@carbon/icons-react";
-import { settings } from "carbon-components";
+import { Information } from "@carbon/react/icons";
+import { prefix } from "../../internal/settings";
 
-const { prefix } = settings;
+
 
 RadioGroupComponent.propTypes = {
   columnHeight: PropTypes.string,
@@ -74,7 +74,7 @@ function RadioGroupComponent({
           {tooltipContent && (
             <div className={tooltipClassName}>
               <TooltipHover {...tooltipProps} tooltipText={tooltipContent}>
-                <Information16 fill="#4d5358" />
+                <Information size={16} fill="#4d5358" />
               </TooltipHover>
             </div>
           )}

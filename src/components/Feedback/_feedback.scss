@@ -1,16 +1,18 @@
-@include exports("addons-bmrg-feedback") {
+@use "../../styles/config" as *;
+@use "../../styles/themes/addons";
+
   .#{$prefix}--bmrg-feedback-container {
     .#{$prefix}--modal-container {
       height: rem(448px);
     }
 
     .#{$prefix}--bmrg-feedback {
-      color: $bmrg-brand-white;
+      color: addons.$brand-white;
       margin-top: rem(16px);
       width: 100%;
 
       a {
-        color: $bmrg-header-modal-link-color;
+        color: addons.$header-modal-link-color;
       }
 
       p {
@@ -27,11 +29,10 @@
       }
 
       .#{$prefix}--label {
-        color: $bmrg-brand-white;
+        color: addons.$brand-white;
         font-size: rem(14px);
         font-weight: 500;
         line-height: rem(18px);
       }
     }
   }
-}

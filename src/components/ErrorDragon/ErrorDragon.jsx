@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
-import { settings } from "carbon-components";
+import { prefix } from "../../internal/settings";
 
 import ErrorGraphic from "./assets/ErrorGraphic";
 
-const { prefix } = settings;
+
 
 const ErrorDragon = ({ className, header, message, style, statusText, statusUrl, title, ...rest }) => {
   const classNames = classnames(`${prefix}--bmrg-error-dragon`, className);

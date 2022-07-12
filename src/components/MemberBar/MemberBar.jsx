@@ -2,10 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import cx from "classnames";
 import Avatar from "../Avatar";
-import { CloseOutline32 } from "@carbon/icons-react";
-import { settings } from "carbon-components";
+import { CloseOutline } from "@carbon/react/icons";
+import { prefix } from "../../internal/settings";
 
-const { prefix } = settings;
+
 
 function MemberBar({
   addUser,
@@ -48,7 +48,8 @@ function MemberBar({
               <p className={`${prefix}--bmrg-member-bar__partner-not-allowed-text`}>{notAllowedMessage}</p>
             )}
             {removeUser && (
-              <CloseOutline32
+              <CloseOutline
+              size={32}
                 className={`${prefix}--bmrg-member-bar__close-icon`}
                 alt="remove user"
                 data-testid="remove-user-button"

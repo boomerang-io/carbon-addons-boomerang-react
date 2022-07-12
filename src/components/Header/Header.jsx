@@ -2,17 +2,17 @@ import React from "react";
 import PropTypes from "prop-types";
 import cx from "classnames";
 import {
-  ChevronDown16,
-  ChevronUp16,
-  Collaborate24,
-  Help24,
-  UserAvatar24,
-  Notification24,
-  NotificationNew24,
-} from "@carbon/icons-react";
-import { settings } from "carbon-components";
+  ChevronDown,
+  ChevronUp,
+  Collaborate,
+  Help,
+  UserAvatar,
+  Notification,
+  NotificationNew,
+} from "@carbon/react/icons";
+import { prefix } from "../../internal/settings";
 import FocusTrap from "focus-trap-react";
-import { SkipToContent } from "carbon-components-react";
+import { SkipToContent } from "@carbon/react";
 import PlatformNotificationsContainer from "../PlatformNotifications";
 import HeaderMenu from "../HeaderMenu";
 import NotificationsContainer from "../Notifications/NotificationsContainer";
@@ -26,7 +26,7 @@ import HeaderWrapper from "./HeaderWrapper";
 import HeaderRightPanel from "./HeaderRightPanel";
 import BoomerangLogo from "./assets/BoomerangLogo";
 
-const { prefix } = settings;
+
 
 const stateToButtonElemIdMap = {
   isHelpActive: "navigation-help-menu-button",
@@ -323,9 +323,9 @@ class Header extends React.Component {
                     >
                       Navigation{" "}
                       {this.state.isMobileNavActive ? (
-                        <ChevronUp16 alt="Close mobile navigation" />
+                        <ChevronUp alt="Close mobile navigation" />
                       ) : (
-                        <ChevronDown16 alt="Open mobile navigation" />
+                        <ChevronDown alt="Open mobile navigation" />
                       )}
                     </span>
                   </HeaderListItem>
@@ -354,7 +354,7 @@ class Header extends React.Component {
                       onClick={this.handleIconClick("Requests")}
                       onKeyDown={this.handleIconKeypress("Requests")}
                     >
-                      <Collaborate24 alt="Requests icon" />
+                      <Collaborate alt="Requests icon" />
                     </HeaderListItem>
                     {this.state.isRequestsActive && (
                       <HeaderMenu>
@@ -374,9 +374,9 @@ class Header extends React.Component {
                       onKeyDown={this.handleIconKeypress("Notification")}
                     >
                       {this.state.hasNewNotifications ? (
-                        <NotificationNew24 alt="New notifications icon" />
+                        <NotificationNew alt="New notifications icon" />
                       ) : (
-                        <Notification24 alt="No new notifications icon" />
+                        <Notification alt="No new notifications icon" />
                       )}
                       <PlatformNotificationsContainer
                         baseLaunchEnvUrl={baseLaunchEnvUrl}
@@ -397,7 +397,7 @@ class Header extends React.Component {
                       onClick={this.handleIconClick("Help")}
                       onKeyDown={this.handleIconKeypress("Help")}
                     >
-                      <Help24 alt="Help icon" />
+                      <Help size={24} alt="Help icon" />
                     </HeaderListItem>
                     {this.state.isHelpActive && <HeaderMenu>{this.props.onHelpClick}</HeaderMenu>}
                   </li>
@@ -412,7 +412,7 @@ class Header extends React.Component {
                       onClick={this.handleIconClick("Profile")}
                       onKeyDown={this.handleIconKeypress("Profile")}
                     >
-                      <UserAvatar24 alt="Profile icon" />
+                      <UserAvatar alt="Profile icon" />
                     </HeaderListItem>
                   )}
                   {this.state.isProfileActive && <HeaderMenu>{this.props.profileChildren}</HeaderMenu>}

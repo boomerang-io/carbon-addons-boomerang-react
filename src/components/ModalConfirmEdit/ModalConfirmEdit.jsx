@@ -1,12 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { settings } from "carbon-components";
-import { Edit16 } from "@carbon/icons-react";
+import { prefix } from "../../internal/settings";
+import { Edit } from "@carbon/react/icons";
 
 import ModalConfirmDetails from "./ModalConfirmDetails";
 import ModalConfirmArray from "./ModalConfirmArray";
 
-const { prefix } = settings;
+
 
 const TYPES = {
   DETAILS: "details",
@@ -39,7 +39,7 @@ function ModalConfirmEdit({ items, onEdit, style, title, type, ...rest }) {
           ) : null}
           {typeof onEdit === "function" && (
             <button className={`${prefix}--bmrg-modal-confirm-edit__button`} onClick={onEdit}>
-              <Edit16 className={`${prefix}--bmrg-modal-confirm-edit__icon`} />
+              <Edit size={16} className={`${prefix}--bmrg-modal-confirm-edit__icon`} />
             </button>
           )}
         </div>
