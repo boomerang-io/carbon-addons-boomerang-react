@@ -1,5 +1,5 @@
 @use "../../styles/config" as *;
-@use '@carbon/styles/scss/theme';
+@use '@carbon/themes/scss/tokens' as theme;
 
   .#{$prefix}--bmrg-date-input {
     align-items: center;
@@ -7,7 +7,7 @@
     position: relative;
     width: 100%;
 
-    .bx--date-picker-container {
+    .#{$prefix}--date-picker-container {
       width: 100%;
     }
 

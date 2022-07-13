@@ -1,6 +1,6 @@
-@use "@carbon/styles/scss/motion";
+@use "@carbon/react/scss/motion";
 @use "../../styles/config" as *;
-@use "../../styles/themes/addons";
+@use "../../styles/themes/shell";
 
 $breakpoints: (
   bp--xs--major: 500px,
@@ -26,8 +26,8 @@ $breakpoints: (
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: addons.$header-nav-color;
-    color: addons.$secondary-color;
+    background-color: shell.$header-nav-color;
+    color: shell.$secondary-color;
     height: rem(48px);
     width: 100%;
     position: fixed;
@@ -48,11 +48,11 @@ $breakpoints: (
         display: flex;
         align-items: center;
         z-index: 1;
-        color: addons.$secondary-color;
+        color: shell.$secondary-color;
         outline: none;
         padding: 0 1rem;
-        background-color: addons.$header-nav-color;
-        border: rem(2px) solid addons.$header-active-text-color;
+        background-color: shell.$header-nav-color;
+        border: rem(2px) solid shell.$header-active-text-color;
       }
     }
   }
@@ -61,16 +61,16 @@ $breakpoints: (
   .#{$prefix}--bmrg-header-brand__link,
   .#{$prefix}--bmrg-header-brand,
   .#{$prefix}--bmrg-header-brand-container {
-    color: addons.$brand-white;
+    color: shell.$brand-white;
     height: 100%;
     display: flex;
     align-items: center;
   }
 
   .#{$prefix}--bmrg-header-brand {
-    color: addons.$secondary-color;
+    color: shell.$secondary-color;
     text-decoration: none;
-    transition: color motion.motion("standard");
+    transition: color motion.$duration-moderate-01 motion.motion("standard");
   }
 
   .#{$prefix}--bmrg-header-brand__icon {
@@ -84,16 +84,16 @@ $breakpoints: (
     padding-right: rem(16px);
     text-decoration: none;
     &:hover {
-      background-color: addons.$header-hover-background-color;
-      color: addons.$header-active-text-color;
+      background-color: shell.$header-hover-background-color;
+      color: shell.$header-active-text-color;
     }
 
     &:focus {
-      outline: rem(2px) solid addons.$header-active-text-color;
+      outline: rem(2px) solid shell.$header-active-text-color;
       outline-offset: rem(-2px);
 
       &:active {
-        color: addons.$header-active-text-color;
+        color: shell.$header-active-text-color;
       }
     }
   }
@@ -104,7 +104,7 @@ $breakpoints: (
   }
 
   .#{$prefix}--bmrg-header-brand__title {
-    color: addons.$brand-white;
+    color: shell.$brand-white;
     font-size: rem(16px);
     font-weight: 600;
     letter-spacing: 0.11px;
@@ -171,7 +171,7 @@ $breakpoints: (
 
   .#{$prefix}--bmrg-header-list__link {
     align-items: center;
-    color: addons.$secondary-color;
+    color: shell.$secondary-color;
     display: flex;
     font-size: rem(14px);
     height: 100%;
@@ -179,29 +179,29 @@ $breakpoints: (
     outline: rem(2px) solid transparent;
     padding: 0 rem(14px);
     text-decoration: none;
-    transition: color motion.motion("standard"),
-      background motion.motion("standard"),
-      box-shadow motion.motion("standard");
+    transition: color motion.$duration-moderate-01 motion.motion("standard"),
+      background motion.$duration-moderate-01 motion.motion("standard"),
+      box-shadow motion.$duration-moderate-01 motion.motion("standard");
 
     &:hover {
-      background-color: addons.$header-hover-background-color;
-      color: addons.$header-active-text-color;
+      background-color: shell.$header-hover-background-color;
+      color: shell.$header-active-text-color;
     }
 
     &.--is-active {
-      box-shadow: inset 0px rem(-4px) 0px 0px addons.$header-active-background-color;
-      color: addons.$header-active-text-color;
+      box-shadow: inset 0px rem(-4px) 0px 0px shell.$header-active-background-color;
+      color: shell.$header-active-text-color;
       &:focus {
-        box-shadow: inset 0px rem(-7px) 0px 0px addons.$header-active-background-color;
-        color: addons.$header-active-text-color;
+        box-shadow: inset 0px rem(-7px) 0px 0px shell.$header-active-background-color;
+        color: shell.$header-active-text-color;
       }
     }
     &:focus {
-      outline: rem(2px) solid addons.$header-active-text-color;
+      outline: rem(2px) solid shell.$header-active-text-color;
       outline-offset: rem(-2px);
 
       &:active {
-        color: addons.$header-active-text-color;
+        color: shell.$header-active-text-color;
       }
     }
   }
@@ -209,38 +209,38 @@ $breakpoints: (
   .#{$prefix}--bmrg-header-list__btn {
     align-items: center;
     border: rem(2px) solid transparent;
-    color: addons.$secondary-color;
+    color: shell.$secondary-color;
     cursor: pointer;
     display: flex;
     height: 100%;
     padding: rem(14px);
-    transition: color motion.motion("standard"),
-      background motion.motion("standard");
+    transition: color motion.$duration-moderate-01 motion.motion("standard"),
+      background motion.$duration-moderate-01 motion.motion("standard");
     &:focus {
-      border: rem(2px) solid addons.$header-active-text-color;
+      border: rem(2px) solid shell.$header-active-text-color;
       outline: none;
     }
 
     svg {
-      fill: addons.$secondary-color;
+      fill: shell.$secondary-color;
       height: rem(20px);
       width: rem(20px);
-      transition: fill motion.motion("standard");
+      transition: fill motion.$duration-moderate-01 motion.motion("standard");
     }
 
     &:hover {
-      color: addons.$header-active-text-color;
-      background-color: addons.$header-hover-background-color;
+      color: shell.$header-active-text-color;
+      background-color: shell.$header-hover-background-color;
       svg {
-        fill: addons.$header-active-text-color;
+        fill: shell.$header-active-text-color;
       }
     }
 
     &[aria-expanded='true'] {
-      background: addons.$header-menu-options-accent-color;
-      border: rem(2px) solid addons.$header-menu-options-accent-color;
+      background: shell.$header-menu-options-accent-color;
+      border: rem(2px) solid shell.$header-menu-options-accent-color;
       svg {
-        fill: addons.$header-hover-background-color;
+        fill: shell.$header-hover-background-color;
       }
     }
   }
@@ -256,7 +256,7 @@ $breakpoints: (
     width: 100%;
     left: 0;
     border-top-style: solid;
-    border-top-color: addons.$header-menu-options-accent-color;
+    border-top-color: shell.$header-menu-options-accent-color;
     border-top-width: 0.375rem;
     cursor: auto;
   }
@@ -286,7 +286,7 @@ $breakpoints: (
   .#{$prefix}-cloud-header-global__text {
     height: 0.9375rem;
     width: 3.875rem;
-    color: addons.$secondary-color;
+    color: shell.$secondary-color;
     font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, Helvetica, sans-serif;
     font-size: 0.75rem;
     font-weight: 500;
@@ -303,7 +303,7 @@ $breakpoints: (
 
   .#{$prefix}--bmrg-header__app-menu-wrapper > :first-child {
     transform: translateX(0%);
-    transition: transform motion.motion("standard");
+    transition: transform motion.$duration-moderate-01 motion.motion("standard");
   }
 
   .#{$prefix}--bmrg-header__app-menu-wrapper.--is-hidden > :first-child {
@@ -313,7 +313,7 @@ $breakpoints: (
   .#{$prefix}--bmrg-header__app-menu-wrapper {
     display: contents;
 
-    .bx--side-nav__navigation {
+    .#{$prefix}--side-nav__navigation {
       height: calc(100vh - 3rem);
     }
   }
@@ -331,20 +331,20 @@ $breakpoints: (
     line-height: 0;
 
     &:focus {
-      outline: rem(2px) solid addons.$header-active-text-color;
+      outline: rem(2px) solid shell.$header-active-text-color;
       outline-offset: rem(-2px);
     }
 
     svg {
       transform: scale(0.5);
-      fill: addons.$header-active-text-color;
+      fill: shell.$header-active-text-color;
     }
 
     .bar1 {
-      transition: all motion.motion("standard");
+      transition: all motion.$duration-moderate-01 motion.motion("standard");
     }
     .bar3 {
-      transition: all motion.motion("standard");
+      transition: all motion.$duration-moderate-01 motion.motion("standard");
     }
 
     .bar2 {
@@ -371,9 +371,9 @@ $breakpoints: (
     height: 100%;
     width: 22rem;
     right: 0;
-    background-color: addons.$tertiary-color;
+    background-color: shell.$tertiary-color;
     transform: translateX(0);
-    transition: transform motion.motion("standard");
+    transition: transform motion.$duration-moderate-01 motion.motion("standard");
 
     &.--is-hidden {
       transform: translateX(100%);

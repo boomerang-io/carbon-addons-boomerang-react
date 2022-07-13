@@ -57,8 +57,8 @@ export const Default = () => {
         <AccordionItem title="Section 3 title" />
       </Accordion>
       <Divider />
-      <fieldset className="bx--fieldset">
-        <legend className="bx--label">Checkbox heading</legend>
+      <fieldset className="cds--fieldset">
+        <legend className="cds--label">Checkbox heading</legend>
         <Checkbox id="checkbox-label-1" />
         <Checkbox id="checkbox-label-2" />
       </fieldset>

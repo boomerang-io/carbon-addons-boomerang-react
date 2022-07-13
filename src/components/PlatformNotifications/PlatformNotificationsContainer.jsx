@@ -182,7 +182,7 @@ export default class PlatformNotificationsContainer extends React.Component {
           })}
         >
           <div className={`${prefix}--bmrg-notifications-header`}>
-            <h1 className="bx--bmrg-notifications-header__newNotificaitons">
+            <h1 className={`${prefix}--bmrg-notifications-header__newNotifications`}>
               {`${numNotifications} new notification${numNotifications !== 1 ? "s" : ""}`}
             </h1>
             <button

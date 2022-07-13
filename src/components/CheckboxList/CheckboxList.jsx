@@ -48,7 +48,7 @@ function CheckboxListComponent({
 
   const selectedItems = propsSelectedItems || stateSelectedItems; // Externally controlled if selectedItems props exists
 
-  const handleCheckboxChange = (value, id, event) => {
+  const handleCheckboxChange = (event, { checked: value, id }) => {
     let newSelectedItems = [...stateSelectedItems];
 
     if (value) {

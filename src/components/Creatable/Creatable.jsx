@@ -262,7 +262,7 @@ function CreatableComponent({
           onClick={addValue}
           iconDescription="Add"
           renderIcon={Add}
-          size="field"
+          size="md"
           type="button"
           {...buttonProps}
         >

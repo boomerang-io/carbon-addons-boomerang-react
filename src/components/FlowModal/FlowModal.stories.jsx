@@ -12,7 +12,7 @@ const Component1 = (props) => (
         placeholder="The second component will know what you write here"
       />
       <Tooltip triggerId="test-tooltip" direction="top" tabIndex={0} triggerText="">
-        Test Tooltip
+        <p>Test Tooltip</p>
       </Tooltip>
     </ModalBody>
     <ModalFooter>

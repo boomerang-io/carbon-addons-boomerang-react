@@ -1,5 +1,29 @@
-// @import '../src/styles/themes/_boomerang.scss';
-// $carbon--theme: $carbon--theme--boomerang;
-// $carbon-addons-bmrg--theme: boomerang;
+@use "sass:map";
 
-@import '../src/styles/index.scss';
+@use '@carbon/react/scss/config' with ($use-akamai-cdn: true);
+@use '@carbon/react/scss/reset';
+@use '@carbon/react/scss/motion';
+@use '@carbon/react/scss/type';
+@use "../src/styles/themes/boomerang";
+@use '@carbon/react/scss/compat/themes' as compat;
+@use '@carbon/react/scss/compat/theme' with (
+  $theme: map.merge(compat.$white, boomerang.$theme)
+);
+
+@use '@carbon/react/scss/fonts';
+@use '@carbon/react/scss/grid';
+@use '@carbon/react/scss/layer';
+@use '@carbon/react/scss/zone';
+@use '@carbon/react/scss/components/button/tokens' as button;
+@use '@carbon/react/scss/components/notification/tokens' as notification;
+@use '@carbon/react/scss/components/tag/tokens' as tag;
+@use '@carbon/react/scss/components';
+@use '../src/styles/index' with ($use-theme-boomerang: true);
+
+@include theme.add-component-tokens(button.$button-tokens);
+@include theme.add-component-tokens(notification.$notification-tokens);
+@include theme.add-component-tokens(tag.$tag-tokens);
+
+:root {
+  @include theme.theme();
+}

@@ -1,7 +1,17 @@
-@mixin text-overflow-ellipsis() {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+@mixin border-radius() {
+  border-radius: 0.25rem;
+}
+
+@mixin button-reset() {
+  background: none;
+  border: none;
+  padding: 0;
+  line-height: 0;
+}
+
+@mixin focus-outline($color: var(--cds-button-primary), $offset: 0.125rem) {
+  outline: 0.125rem solid $color;
+  outline-offset: $offset;
 }
 
 @mixin multiline-text-overflow-ellipsis($lineClamp: 2, $orient: vertical) {
@@ -12,18 +22,10 @@
   -webkit-line-clamp: $lineClamp;
 }
 
-@mixin border-radius() {
-  border-radius: 0.25rem;
-}
 
-@mixin focus-outline($color: var(--cds-interactive-01), $offset: 0.125rem) {
-  outline: 0.125rem solid $color;
-  outline-offset: $offset;
-}
 
-@mixin button-reset() {
-  background: none;
-  border: none;
-  padding: 0;
-  line-height: 0;
+@mixin text-overflow-ellipsis() {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

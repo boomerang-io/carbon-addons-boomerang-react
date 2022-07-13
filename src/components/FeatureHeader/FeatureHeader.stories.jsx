@@ -53,10 +53,10 @@ const DataList = () => {
 
 const Actions = () => (
   <div style={{ display: "flex", alignItems: "flex-end", marginBottom: "1rem" }}>
-    <Button kind="ghost" renderIcon={View} style={{ marginRight: "1rem", width: "10rem" }} size="field">
+    <Button kind="ghost" renderIcon={View} style={{ marginRight: "1rem", width: "10rem" }} size="medium">
       View component
     </Button>
-    <Button renderIcon={Save} style={{ width: "10rem" }} size="field">
+    <Button renderIcon={Save} style={{ width: "10rem" }} size="medium">
       Save
     </Button>
   </div>

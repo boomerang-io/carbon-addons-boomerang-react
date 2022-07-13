@@ -54,7 +54,7 @@ describe("Default Notification Container", () => {
       />
     );
     it("Should Render at top level", () => {
-      expect(wrapper.hasClass("bx--bmrg-notifications")).toEqual(true);
+      expect(wrapper.hasClass("cds--bmrg-notifications")).toEqual(true);
     });
   });
 });

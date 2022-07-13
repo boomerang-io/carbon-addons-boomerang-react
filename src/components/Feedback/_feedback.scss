@@ -1,5 +1,5 @@
 @use "../../styles/config" as *;
-@use "../../styles/themes/addons";
+@use "../../styles/themes/shell";
 
   .#{$prefix}--bmrg-feedback-container {
     .#{$prefix}--modal-container {
@@ -7,12 +7,12 @@
     }
 
     .#{$prefix}--bmrg-feedback {
-      color: addons.$brand-white;
+      color: shell.$brand-white;
       margin-top: rem(16px);
       width: 100%;
 
       a {
-        color: addons.$header-modal-link-color;
+        color: shell.$header-modal-link-color;
       }
 
       p {
@@ -29,7 +29,7 @@
       }
 
       .#{$prefix}--label {
-        color: addons.$brand-white;
+        color: shell.$brand-white;
         font-size: rem(14px);
         font-weight: 500;
         line-height: rem(18px);

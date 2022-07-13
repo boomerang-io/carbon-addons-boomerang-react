@@ -6,8 +6,6 @@ import { Button, ModalHeader, ModalBody, ModalFooter } from "@carbon/react";
 
 import Modal from "../Modal";
 
-
-
 ConfirmModal.propTypes = {
   affirmativeAction: PropTypes.func,
   affirmativeButtonProps: PropTypes.object,
@@ -31,7 +29,7 @@ ConfirmModal.defaultProps = {
   affirmativeText: "Yes",
   modalTrigger: () => {},
   negativeText: "No",
-  selectorPrimaryFocus: 'button[id="bx--bmrg-confirm-modal-primary-button"]',
+  selectorPrimaryFocus: `button[id="${prefix}--bmrg-confirm-modal-primary-button"]`,
   title: "Are you sure?",
 };
 

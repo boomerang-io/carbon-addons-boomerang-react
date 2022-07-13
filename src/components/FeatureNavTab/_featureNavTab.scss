@@ -1,6 +1,6 @@
 @use "../../styles/config" as *;
-@use '@carbon/styles/scss/theme';
-@use "@carbon/styles/scss/motion";
+@use '@carbon/themes/scss/tokens' as theme;
+@use "@carbon/react/scss/motion";
 
   .#{$prefix}--bmrg-feature-nav-tab {
     border-bottom: 0.125rem solid #b9bfc7;
@@ -10,7 +10,7 @@
     line-height: 1.125rem;
     padding: 0 1.75rem 0.625rem;
     text-decoration: none;
-    transition: border-bottom motion.motion("standard"), color motion.motion("standard");
+    transition: border-bottom motion.$duration-moderate-01 motion.motion("standard"), color motion.$duration-moderate-01 motion.motion("standard");
 
     &:hover {
       border-bottom: 0.125rem solid #5d6168;

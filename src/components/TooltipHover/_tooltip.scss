@@ -1,10 +1,11 @@
 @use "../../styles/config" as *;
-@import 'tippy.js/dist/tippy.css';
-@import 'tippy.js/dist/svg-arrow.css';
+@use 'tippy.js/dist/tippy.css';
+@use 'tippy.js/dist/svg-arrow.css';
+
   .#{$prefix}--bmrg-tooltip {
     background-color: #343a3f;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
-    border-radius: 0.125rem;
+    border-radius: 0.125rem; // TODO: this is hardcoded
     height: auto;
     max-width: 13rem;
     padding: 0.5rem 1rem;

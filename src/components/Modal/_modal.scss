@@ -1,5 +1,5 @@
 @use "../../styles/config" as *;
-@use '@carbon/styles/scss/theme';
+@use '@carbon/themes/scss/tokens' as theme;
 
   .#{$prefix}--bmrg-body-modal-is-open,
   .#{$prefix}--bmrg-html-modal-is-open {
@@ -36,7 +36,7 @@
 
   .#{$prefix}--bmrg-modal-container {
     background: theme.$layer-01;
-    border-radius: 0.25rem;
+    border-radius: 0.25rem; // TODO: this is hardcoded;
     display: flex;
     flex-direction: column;
     height: 100%;

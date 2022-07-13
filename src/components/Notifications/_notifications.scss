@@ -1,6 +1,6 @@
 @use "../../styles/config" as *;
-@use "@carbon/styles/scss/theme";
-@import 'react-toastify/dist/ReactToastify.css';
+@use '@carbon/themes/scss/tokens' as theme;
+@use 'react-toastify/dist/ReactToastify.css';
 
   .#{$prefix}--bmrg-toastify-container {
     .Toastify__toast {

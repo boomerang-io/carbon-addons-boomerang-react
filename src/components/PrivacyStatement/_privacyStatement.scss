@@ -1,4 +1,4 @@
-@use '../../styles/themes/addons';
+@use '../../styles/themes/shell';
 @use "../../styles/config" as *;
 
   .#{$prefix}--bmrg-privacy-statement-container {
@@ -65,11 +65,11 @@
 
         &__content {
           h3 {
-            color: addons.$brand-white;
+            color: shell.$brand-white;
             padding: 1rem 0 0.3125rem;
           }
           a {
-            color: addons.$secondary-color;
+            color: shell.$secondary-color;
             text-decoration: none;
           }
         }
@@ -84,7 +84,7 @@
           margin-bottom: rem(24px);
 
           a {
-            color: addons.$secondary-color;
+            color: shell.$secondary-color;
             text-decoration: none;
           }
         }
@@ -101,7 +101,7 @@
       .#{$prefix}--accordion__arrow {
         transform: rotate(90deg);
         path {
-          fill: addons.$brand-white;
+          fill: shell.$brand-white;
         }
       }
 
@@ -119,13 +119,13 @@
 
       .#{$prefix}--accordion__heading:focus {
         .#{$prefix}--accordion__arrow {
-          outline: rem(1px) solid addons.$secondary-color;
+          outline: rem(1px) solid shell.$secondary-color;
         }
       }
 
       .#{$prefix}--accordion__title {
         height: rem(18px);
-        color: addons.$brand-white;
+        color: shell.$brand-white;
         font-size: rem(14px);
         font-weight: 600;
         line-height: rem(18px);

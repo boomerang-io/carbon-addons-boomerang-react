@@ -5,59 +5,19 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+// Defaults
+$use-theme-boomerang: false !default;
+
 // ====================//
 // Imports and Exports //
 // ====================//
 @use "sass:map";
+@use '@carbon/styles/scss/theme' as theme;
+@use '@carbon/react/scss/components/button/tokens' as button-tokens;
+@use 'config' as *;
 
-// Configuration
-@use '@carbon/react/scss/config' with
-  ($css--default-type: true, $css--reset: true, $use-akamai-cdn: true);
-// Reset
-@use '@carbon/react/scss/reset';
-// Helpers
-@use '@carbon/react/scss/spacing';
-@use '@carbon/react/scss/type';
-@use '@carbon/styles/scss/theme';
-// Theme w/ compat layer
-//@use './theme';
-@use 'config' as local;
-$prefix: local.$prefix;
-
-@use "./themes/addons";
-@use "./themes/mixins" as theme-mixins;
-
-
-// Import all of the carbon defaults
-// @import 'themes/index';
-// @import 'mixins/index';
-
-// Import carbon styles that are used in our components
-@use '@carbon/react/scss/components/accordion';
-@use '@carbon/react/scss/components/breadcrumb';
-@use '@carbon/react/scss/components/button';
-@use '@carbon/react/scss/components/checkbox';
-@use '@carbon/react/scss/components/combo-box';
-@use '@carbon/react/scss/components/date-picker';
-@use '@carbon/react/scss/components/loading';
-@use '@carbon/react/scss/components/link';
-@use '@carbon/react/scss/components/modal';
-@use '@carbon/react/scss/components/multiselect';
-@use '@carbon/react/scss/components/notification';
-@use '@carbon/react/scss/components/progress-indicator';
-@use '@carbon/react/scss/components/radio-button';
-@use '@carbon/react/scss/components/skeleton-styles';
-@use '@carbon/react/scss/components/structured-list';
-@use '@carbon/react/scss/components/tag';
-@use '@carbon/react/scss/components/text-area';
-@use '@carbon/react/scss/components/text-input';
-@use '@carbon/react/scss/components/tooltip';
-@use '@carbon/react/scss/components/toggle';
-
-//only for testing
-@use '@carbon/react/scss/components/dropdown/dropdown';
-@use '@carbon/react/scss/components/search/search';
-@use '@carbon/react/scss/components/overflow-menu/overflow-menu';
+@use "./themes/shell";
+@use "./themes/boomerang" as theme-boomerang;
 
 // Import local styles for custom components
 @use '../components/AboutPlatform/aboutPlatform';
@@ -87,7 +47,7 @@ $prefix: local.$prefix;
 @use '../components/Header/headerDropDown';
 @use '../components/HeaderMenuItem/headerMenuItem';
 @use '../components/HeaderMenuUser/headerMenuUser';
-//@use '../components/LeftSideNav/leftSideNav';
+@use '../components/LeftSideNav/leftSideNav';
 @use '../components/LoadingAnimation/loadingAnimation';
 @use '../components/MemberBar/memberBar';
 @use '../components/Modal/modal' as addons-modal;
@@ -109,13 +69,13 @@ $prefix: local.$prefix;
 @use '../components/TooltipHover/tooltip' as addons-tooltip;
 @use '../components/UserRequests/userRequests';
 
-
 // Carbon overrides for the Platform theme
 // Scope to modal styles so they don't overwrite other carbon styles
 .#{$prefix}--loading-overlay {
   //harcoded to the RGBA value of the ui-background variable
   background-color: rgba(242, 244, 248, 0.5);
 }
+
 .#{$prefix}--tooltip {
   z-index: 9999;
 }
@@ -129,19 +89,19 @@ $prefix: local.$prefix;
 .#{$prefix}--bmrg-signout-container,
 .#{$prefix}--bmrg-redirect-container {
   .#{$prefix}--modal-container {
-    background-color: addons.$header-modal-background-color;
+    background-color: shell.$header-modal-background-color;
     border-radius: rem(4px);
 
     * {
       &:focus,
       &::before {
-        outline-color: addons.$secondary-color !important;
-        border-color: addons.$secondary-color !important;
+        outline-color: shell.$secondary-color !important;
+        border-color: shell.$secondary-color !important;
       }
     }
 
     .#{$prefix}--btn:focus {
-      outline-color: addons.$primary-color;
+      outline-color: shell.$primary-color;
     }
 
     .#{$prefix}--modal-content {
@@ -150,14 +110,14 @@ $prefix: local.$prefix;
   }
 
   .#{$prefix}--modal {
-    background-color: addons.$header-modal-overlay; //default isrgba(theme.$layer-accent-01, 0.5)
+    background-color: shell.$header-modal-overlay; //default isrgba(theme.$layer-accent-01, 0.5)
   }
   .#{$prefix}--modal-close {
     &:hover {
-      background-color: addons.$header-hover-background-color;
+      background-color: shell.$header-hover-background-color;
     }
     &:focus {
-      outline: rem(1px) solid addons.$secondary-color;
+      outline: rem(1px) solid shell.$secondary-color;
     }
   }
 
@@ -172,7 +132,7 @@ $prefix: local.$prefix;
 
   .#{$prefix}--modal-header__heading {
     height: rem(26px);
-    color: addons.$brand-white;
+    color: shell.$brand-white;
     font-size: rem(20px);
     font-weight: 300;
   }
@@ -181,11 +141,11 @@ $prefix: local.$prefix;
     svg,
     polygon,
     path {
-      fill: addons.$brand-white;
+      fill: shell.$brand-white;
     }
   }
   .#{$prefix}--modal-footer {
-    background-color: addons.$primary-color;
+    background-color: shell.$primary-color;
     margin: 0;
     /** carbon 10 override */
     padding: 0;
@@ -198,8 +158,8 @@ $prefix: local.$prefix;
       border-radius: 0;
 
       &.#{$prefix}--btn--primary {
-        background-color: addons.$header-modal-confirm-color;
-        color: addons.$header-button-text-color;
+        background-color: shell.$header-modal-confirm-color;
+        color: shell.$header-button-text-color;
         border-bottom-right-radius: rem(4px);
 
         &.#{$prefix}--btn:disabled {
@@ -209,8 +169,8 @@ $prefix: local.$prefix;
       }
 
       &.#{$prefix}--btn--secondary {
-        background-color: addons.$header-modal-cancel-color;
-        color: addons.$header-button-text-color;
+        background-color: shell.$header-modal-cancel-color;
+        color: shell.$header-button-text-color;
         border-bottom-left-radius: rem(4px);
       }
     }
@@ -218,95 +178,172 @@ $prefix: local.$prefix;
 
   .#{$prefix}--accordion__heading {
     &:hover:before {
-      background-color: addons.$header-hover-background-color;
+      background-color: shell.$header-hover-background-color;
     }
 
     &:focus:before {
-      border-color: addons.$secondary-color;
+      border-color: shell.$secondary-color;
     }
   }
 }
 
-// Global overrides
-// https://www.carbondesignsystem.com/guidelines/themes#global
-$edited: false;
-$use-layer: false;
-$input-border: 1px solid transparent;
-$accordion-flex-direction: row;
-$accordion-justify-content: flex-start;
-$accordion-arrow-margin: 0 0 0 0.25rem;
-$accordion-title-margin: 0 0 0 1rem;
-$accordion-content-padding: 0 1rem 0 1.75rem;
-$button-border-radius: 0.25rem;
+@if ($use-theme-boomerang) {
+  // Some additional overrides to carbon base styles
+  // add :root to have a higher level of specificity and not rely in import order
+  a {
+    color: button-tokens.$button-primary;
+    font-size: rem(14px);
+    letter-spacing: 0;
+    line-height: rem(18px);
+  }
 
-/// Boomerang's default color theme
-// /// @type Map
-// /// @access public
-// /// @group @boomerang/carbon-addons-boomerang
-// $carbon--theme--boomerang: map.merge(
-//   themes.$g10,
-//   (
-//     field-01: #ffffff,
-//     field-02: #f2f4f8,
-//     icon-01: #121619,
-//     icon-02: #4d5358,
-//     icon-03: #ffffff,
-//     interactive-01: #0072c3,
-//     interactive-02: #343a3f,
-//     interactive-03: #0072c3,
-//     interactive-04: #0072c3,
-//     inverse-01: #ffffff,
-//     inverse-02: #343a3f,
-//     inverse-support-01: #fa4d56,
-//     inverse-support-02: #08bdba,
-//     inverse-support-03: #f1c21b,
-//     inverse-support-04: #1192e8,
-//     link-01: #0072c3,
-//     overlay-01: rgba(18, 22, 25, 0.5),
-//     support-01: #da1e28,
-//     support-02: #009d9a,
-//     support-03: #f1c21b,
-//     support-04: #00539a,
-//     text-01: #121619,
-//     text-02: #4d5358,
-//     text-03: #878d96,
-//     text-04: #ffffff,
-//     ui-01: #ffffff,
-//     ui-02: #f2f4f8,
-//     ui-03: #dde1e6,
-//     ui-04: #878d96,
-//     ui-05: #121619,
-//     ui-background: #f2f4f8,
-//     active-01: #bebebe,
-//     active-danger: #750e13,
-//     active-primary: #003a6d,
-//     active-secondary: #697077,
-//     active-tertiary: #003a6d,
-//     active-ui: #c1c7cd,
-//     disabled-01: #ffffff,
-//     disabled-02: #c1c7cd,
-//     disabled-03: #878d96,
-//     focus: #0072c3,
-//     highlight: #e5f6ff,
-//     hover-danger: #da1e28,
-//     hover-primary: #0072c3,
-//     hover-primary-text: #00539a,
-//     hover-field: #f3f3f3,
-//     hover-row: #dde1e6,
-//     hover-secondary: #4d5358,
-//     hover-selected-ui: #c1c7cd,
-//     hover-tertiary: #0072c3,
-//     hover-ui: #dde1e6,
-//     inverse-focus-ui: #ffffff,
-//     inverse-hover-ui: #4d5358,
-//     selected-ui: #dde1e6,
-//     skeleton-01: #f2f4f8,
-//     skeleton-02: #c1c7cd,
-//     visited-link: #8a3ffc,
-//   )
-// );
+  :root {
+    button,
+    html [type="button"],
+    [type="reset"],
+    [type="submit"] {
+      appearance: none;
+    }
 
+    .#{$prefix}--skeleton {
+      .#{$prefix}--data-table-header,
+      .#{$prefix}--table-toolbar {
+        display: none;
+      }
+    }
 
+    .#{$prefix}--form-item {
+      .#{$prefix}--text-input,
+      .#{$prefix}--text-area,
+      .#{$prefix}--number input[type="number"] {
+        border: none;
+        border-bottom: none;
+        border-radius: rem(4px);
+      }
+    }
 
-@include theme-mixins.carbon-overrides();
+    .#{$prefix}--date-picker__input,
+    .#{$prefix}--dropdown,
+    .#{$prefix}--dropdown-text,
+    .#{$prefix}--overflow-menu-options,
+    .#{$prefix}--select-input,
+    .#{$prefix}--search .#{$prefix}--search-input,
+    .#{$prefix}--list-box,
+    .#{$prefix}--list-box input[role="combobox"],
+    .#{$prefix}--list-box__field[aria-expanded="true"],
+    .#{$prefix}--list-box__field,
+    .#{$prefix}--text-area,
+    .#{$prefix}--text-input {
+      border: none;
+      border-radius: rem(4px);
+    }
 
+    .#{$prefix}--text-area__wrapper {
+      width: 100%;
+    }
+
+    .#{$prefix}--form-requirement {
+      color: theme.$support-error;
+      &::before {
+        content: "";
+      }
+    }
+
+    .#{$prefix}--label,
+    .#{$prefix}--list-box__label {
+      color: theme.$text-primary;
+      font-family: "IBM Plex Sans", "Helvetica Neue", Arial, Helvetica, sans-serif;
+    }
+
+    .#{$prefix}--modal-container {
+      border-radius: rem(4px);
+    }
+
+    .#{$prefix}--modal-footer {
+      border-bottom-right-radius: rem(4px);
+      border-bottom-left-radius: rem(4px);
+      .#{$prefix}--btn {
+        border-radius: 0;
+
+        &:first-child {
+          border-bottom-left-radius: rem(4px);
+        }
+
+        &:last-child {
+          border-bottom-right-radius: rem(4px);
+        }
+
+        &:last-child:first-child {
+          border-bottom-left-radius: 0;
+        }
+      }
+    }
+
+    .#{$prefix}--search--xl {
+      .#{$prefix}--search-input,
+      .#{$prefix}--search-close {
+        height: 2.5rem;
+      }
+    }
+
+    // .#{$prefix}--btn--field {
+    //   height: 2.5rem;
+    //   min-height: 2.5rem;
+    // }
+
+    .#{$prefix}--checkbox-label::before {
+      border-radius: 0.15rem;
+    }
+
+    .#{$prefix}--checkbox:checked:focus + .#{$prefix}--checkbox-label:before,
+    .#{$prefix}--checkbox:focus + .#{$prefix}--checkbox-label:before {
+      border-color: #005d5d;
+    }
+
+    .#{$prefix}--checkbox:checked + .#{$prefix}--checkbox-label::before {
+      background-color: theme.$support-success;
+      border-color: theme.$support-success;
+    }
+
+    .#{$prefix}--list-box--expanded .#{$prefix}--list-box__menu {
+      max-height: 24rem;
+    }
+
+    .#{$prefix}--tooltip__trigger.#{$prefix}--tooltip__trigger--definition {
+      border-bottom: none;
+    }
+
+    .#{$prefix}--tag {
+      font-size: 0.75rem;
+    }
+
+    .#{$prefix}--side-nav__item--large.#{$prefix}--side-nav__submenu {
+      height: 3rem;
+    }
+
+    // DataTable Overrides
+    .#{$prefix}--data-table:not(.#{$prefix}--skeleton)
+      th:first-of-type:not(.#{$prefix}--table-expand):not(.#{$prefix}--table-column-checkbox) {
+      padding-left: 0;
+    }
+
+    .#{$prefix}--data-table .#{$prefix}--table-header-label {
+      padding: 0.875rem 1rem;
+    }
+
+    .#{$prefix}--table-sort {
+      padding: 0 1rem 0 0;
+    }
+
+    .#{$prefix}--data-table:not(.#{$prefix}--skeleton) th:not(.#{$prefix}--table-column-checkbox) {
+      padding: 0;
+    }
+
+    .#{$prefix}--data-table td {
+      max-width: 20rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+}

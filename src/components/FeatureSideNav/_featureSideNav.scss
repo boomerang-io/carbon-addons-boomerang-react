@@ -1,5 +1,5 @@
 @use "../../styles/config" as *;
-@use '@carbon/styles/scss/theme';
+@use '@carbon/themes/scss/tokens' as theme;
 
   .#{$prefix}--bmrg-feature-sidenav-container {
     background-color: theme.$layer-01;
@@ -21,20 +21,20 @@
     flex-grow: 1;
     overflow-y: auto;
 
-    .bx--accordion {
+    .#{$prefix}--accordion {
       height: 100%;
       overflow-y: auto;
     }
-    .bx--accordion__content {
+    .#{$prefix}--accordion__content {
       padding: 0 !important;
     }
-    .bx--accordion__item {
+    .#{$prefix}--accordion__item {
       list-style-type: none;
-      .bx--accordion__arrow {
+      .#{$prefix}--accordion__arrow {
         position: absolute;
         right: 1.5rem;
       }
-      .bx--accordion__title {
+      .#{$prefix}--accordion__title {
         color: var(--cds-text-01);
         font-size: 0.875rem;
         letter-spacing: 0.01rem;
@@ -54,7 +54,7 @@
     grid-column: 1/-1;
     margin-top: 1rem;
     width: 100%;
-    .bx--btn {
+    .#{$prefix}--btn {
       border-radius: initial;
       flex: 0 1 50%;
       max-width: 100%;

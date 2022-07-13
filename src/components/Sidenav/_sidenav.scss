@@ -1,5 +1,5 @@
 @use '@carbon/react/scss/components/button/tokens';
-@use '@carbon/styles/scss/theme';
+@use '@carbon/themes/scss/tokens' as theme;
 @use "../../styles/config" as *;
 
 .#{$prefix}--bmrg-sidenav {
