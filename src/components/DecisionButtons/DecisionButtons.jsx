@@ -129,7 +129,7 @@ function DecisionButtons({
           {tooltipContent && (
             <div className={tooltipClassName}>
               <TooltipHover {...tooltipProps} onClick={(e) => e.preventDefault()} tooltipText={tooltipContent}>
-                <Information size={16} fill="#4d5358" />
+                <Information size={16} fill="currentColor" />
               </TooltipHover>
             </div>
           )}

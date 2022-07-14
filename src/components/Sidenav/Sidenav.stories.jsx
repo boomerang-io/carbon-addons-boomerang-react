@@ -5,7 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 import SidenavComponent from "./index";
 
 export default {
-  title: "Sidenav",
+  title: "Deprecated/Sidenav",
   excludeStories: ["outstandingTeamRequests"],
 };
 

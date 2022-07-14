@@ -1,15 +1,14 @@
-import React from "react";
-
-import ErrorDragonComponent from "./index";
+import ErrorDragon from "./ErrorDragon";
 
 const statusUrl = "/status";
 
 export default {
-  title: "ErrorDragon",
+  title: "Errors/ErrorDragon",
+  component: ErrorDragon
 };
 
 export const Default = () => {
-  return <ErrorDragonComponent statusUrl={statusUrl} />;
+  return <ErrorDragon statusUrl={statusUrl} />;
 };
 
 Default.story = {

@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Link } from "react-router-dom";
 import LeftSideNav from "./LeftSideNav";
 
 export default {
-  title: "LeftSideNav",
+  title: "Platform/LeftSideNav",
 };
 
 export const WithRouter = () => (

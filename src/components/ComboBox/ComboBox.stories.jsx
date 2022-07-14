@@ -1,7 +1,11 @@
 import React from "react";
 import { action } from "@storybook/addon-actions";
-
 import ComboBox from "./index";
+
+export default {
+  title: "Inputs/ComboBox",
+  component: ComboBox
+};
 
 const items = [
   { label: "Caribou", value: "caribou" },
@@ -33,9 +37,6 @@ const ComboBoxExternallyControlled = () => {
   );
 };
 
-export default {
-  title: "ComboBox",
-};
 
 export const Default = () => {
   return (

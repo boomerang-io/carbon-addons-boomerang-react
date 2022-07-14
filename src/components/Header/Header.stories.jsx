@@ -15,7 +15,7 @@ import Header from "./index"; // Using default export
 const mockSocketUrl = "https://www.google.com/ws";
 
 export default {
-  title: "Header",
+  title: "Platform/Header",
 };
 
 export const Default = () => (

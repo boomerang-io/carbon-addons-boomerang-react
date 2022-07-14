@@ -1,8 +1,11 @@
-import React from "react";
 import { action } from "@storybook/addon-actions";
 import { object, text } from "@storybook/addon-knobs";
-
 import MultiSelect from "./ComboBoxMultiSelect";
+
+export default {
+  title: "Inputs/ComboBoxMultiSelect",
+  component: MultiSelect
+};
 
 const animals = [
   { label: "Caribou", value: "caribou" },
@@ -21,9 +24,7 @@ const animals = [
 
 const initialDefaultAnimals = "panda,dog";
 
-export default {
-  title: "ComboBoxMultiSelect",
-};
+
 
 export const Default = () => {
   return (

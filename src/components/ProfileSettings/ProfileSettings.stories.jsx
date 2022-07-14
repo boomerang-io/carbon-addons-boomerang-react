@@ -9,7 +9,7 @@ mock.onGet("https://ibm.com/launchpad/user").reply(200, PROFILE_SETTINGS_DATA);
 mock.onPatch("https://ibm.com/users/profile").reply(200);
 
 export default {
-  title: "ProfileSettings",
+  title: "Platform/ProfileSettings",
 };
 
 export const Default = () => {

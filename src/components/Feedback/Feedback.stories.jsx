@@ -1,18 +1,15 @@
-import React from "react";
-import Feedback from "./Feedback";
+import Component from "./Feedback";
 
 export default {
-  title: "Feedback",
+  title: "Platform/Feedback",
+  component: Component,
 };
 
-export const Default = () => {
-  return (
-    <>
-      <Feedback platformName="IBM Boomerang" sendIdeasUrl="https://ideas.ibm.com" platformOrganization="IBM" />
-    </>
-  );
-};
+const Template = (args) => <Component {...args} />;
 
-Default.story = {
-  name: "default",
+export const Feedback = Template.bind({});
+Feedback.args = {
+  platformName: "Boomerang",
+  sendIdeasUrl: "https://ideas.ibm.com",
+  platformOrganization: "IBM",
 };

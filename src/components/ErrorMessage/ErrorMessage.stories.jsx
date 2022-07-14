@@ -1,13 +1,12 @@
-import React from "react";
-
-import ErrorComponent from "./index";
+import ErrorMessage from "./ErrorMessage";
 
 export default {
-  title: "ErrorMessage",
+  title: "Errors/ErrorMessage",
+  component: ErrorMessage
 };
 
 export const Default = () => {
-  return <ErrorComponent />;
+  return <ErrorMessage />;
 };
 
 Default.story = {

@@ -1,8 +1,11 @@
 import React from "react";
 import { action } from "@storybook/addon-actions";
 import { object, text } from "@storybook/addon-knobs";
-
 import TextArea from "./TextArea";
+
+export default {
+  title: "Inputs/TextArea",
+};
 
 const ExternallyControlledTextArea = (props) => {
   const [value, setValue] = React.useState(null);
@@ -16,10 +19,6 @@ const ExternallyControlledTextArea = (props) => {
       value={value}
     />
   );
-};
-
-export default {
-  title: "TextArea",
 };
 
 export const Default = () => {

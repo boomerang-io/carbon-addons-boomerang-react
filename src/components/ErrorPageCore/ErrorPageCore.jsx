@@ -25,8 +25,8 @@ export default function ErrorPageCore({ className, graphic, header, message, sta
     <div className={cx(`${prefix}--bmrg-error-page-core`, className)} style={style}>
       {graphic ?? <GenericErrorBackground className={`${prefix}--bmrg-error-page-core__background`} />}
       <div className={`${prefix}--bmrg-error-page-core__content`}>
-        {header && <header className={`${prefix}--bmrg-error-page-core__header`}>{header}</header>}
-        {title && <h1 className={`${prefix}--bmrg-error-page-core__title`}>{title}</h1>}
+        {header && <h1 className={`${prefix}--bmrg-error-page-core__header`}>{header}</h1>}
+        {title && <p className={`${prefix}--bmrg-error-page-core__title`}>{title}</p>}
         <section className={`${prefix}--bmrg-error-page-core__message`}>
           {message ? (
             message

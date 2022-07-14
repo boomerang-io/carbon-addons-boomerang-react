@@ -1,23 +1,59 @@
-<link rel="icon" type="image/png" href="/favicon.png" />
+
+<meta
+  name="keywords"
+  content="IBM, design, system, Carbon, design system, styleguide, style, guide, components, library, pattern, kit, component, cloud, React, React.js"
+/>
+<meta
+  name="description"
+  content="This is the React implementation of the Boomerang built with the Carbon Design System. Carbon is a series of individual styles and components, that when combined make beautiful, intuitive designs."
+/>
+
+<!-- Open Graph -->
+<meta property="og:title" content="Carbon Components React" />
+<meta property="og:site_name" content="Carbon Components React" />
+<meta
+  property="og:description"
+  content="This is the React implementation of Boomerang built with the Carbon Design System. Carbon is a series of individual styles and components, that when combined make beautiful, intuitive designs."
+/>
+<meta
+  property="og:image"
+  content="https://media.github.ibm.com/user/1679/files/aa651000-7749-11eb-900e-eeb9312ed756"
+/>
+<meta property="og:url" content="https://github.com/boomerang-io/carbon-addons-boomerang-react" />
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="favicon.png" sizes="any" />
+
+<!-- Social -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image:alt" content="Carbon Design System" />
+<meta
+  name="twitter:image"
+  content="https://media.github.ibm.com/user/1679/files/aa651000-7749-11eb-900e-eeb9312ed756"
+/>
+<meta name="twitter:site" content="@useboomerang.io" />
 <link href="https://1.www.s81c.com/common/carbon/plex/sans.css" rel="stylesheet">
 <link href="https://1.www.s81c.com/common/carbon/plex/mono.css" rel="stylesheet">
+
+<!-- Style overrides -->
 <style>
   body {
-    font-family: 'IBM Plex Sans', sans-serif !important;
-  }
-  .sidebar-header img {
-    margin: 0 auto;
+    font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
   }
 
-  .simplebar-content section:last-of-type .sidebar-subheading {
-    position: relative;
+  body a[href='/?path=/settings/about'] {
+    display: none;
   }
 
-  .simplebar-content section:last-of-type .sidebar-subheading::after {
-    content: 'Boomerang';
-    position: absolute;
-    left: 0;
-    background: white;
-    padding-right: 4rem;
+  .os-content form span {
+    font-weight: 600;
+  }
+
+  .os-content a button {
+    color: #161616;
+  }
+
+  mark[class*='css-'] {
+    color: #0f62fe;
   }
 </style>

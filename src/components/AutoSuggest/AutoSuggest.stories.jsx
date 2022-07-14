@@ -1,10 +1,12 @@
-import React from "react";
 import { action } from "@storybook/addon-actions";
 import { text } from "@storybook/addon-knobs";
-
 import TextInput from "../TextInput";
-
 import AutoSuggest from "./AutoSuggest";
+
+export default {
+  title: "Inputs/AutoSuggest",
+  component: AutoSuggest
+};
 
 const animals = [
   { label: "caribou", value: "caribou" },
@@ -21,9 +23,7 @@ const animals = [
   { label: "penguin", value: "penguin" },
 ];
 
-export default {
-  title: "AutoSuggest",
-};
+
 
 export const Default = () => {
   return (

@@ -1,7 +1,11 @@
-import React from "react";
+import CheckboxList from "./CheckboxList";
 import { action } from "@storybook/addon-actions";
 
-import CheckboxList from "./CheckboxList";
+export default {
+  title: "Inputs/CheckboxList",
+  component: CheckboxList
+};
+
 
 const animals = [
   { labelText: "Cat", id: "cat" },
@@ -15,9 +19,6 @@ const animals2 = [
   { labelText: "Penguin", id: "penguin" },
 ];
 
-export default {
-  title: "CheckboxList",
-};
 
 export const Default = () => {
   return <CheckboxList initialSelectedItems={["panda"]} onChange={action("checkboxlist changed")} options={animals} />;

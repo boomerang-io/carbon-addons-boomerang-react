@@ -1,7 +1,9 @@
-import React from "react";
 import { action } from "@storybook/addon-actions";
-
 import ModalConfirmEdit from "./ModalConfirmEdit";
+
+export default {
+  title: "Components/ModalConfirmEdit",
+};
 
 const detailsItems = [
   { name: "Title", value: "Boomerang" },
@@ -13,10 +15,6 @@ const detailsItems = [
 ];
 
 const arrayItems = ["AutoBot", "NewRelic", "Github", "Jira", "Boomerang", "Urban Code", "GitLab", "Maas360"];
-
-export default {
-  title: "ModalConfirmEdit",
-};
 
 export const Details = () => {
   return <ModalConfirmEdit items={detailsItems} onEdit={action("pencil clicked")} title="Some details" />;

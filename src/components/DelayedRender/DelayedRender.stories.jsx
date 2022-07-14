@@ -1,15 +1,15 @@
-import React from "react";
-
-import DelayedRender from "./index";
+import Component from "./DelayedRender";
 
 export default {
-  title: "DelayedRender",
+  title: "Components/DelayedRender",
+  component: Component,
 };
 
-export const Default = () => {
-  return <DelayedRender delay={1000}>I render after a second</DelayedRender>;
+const Template = (args) => <Component {...args} />;
+
+export const DelayedRender = Template.bind({});
+DelayedRender.args = {
+  delay: 1000,
+  children: "Hello, friend"
 };
 
-Default.story = {
-  name: "default",
-};

@@ -12,4 +12,8 @@
   .#{$prefix}--bmrg-text-input__tooltip {
     line-height: 0;
     margin-left: 0.5rem;
+
+    svg {
+      fill: currentColor;
+    }
   }

@@ -16,7 +16,7 @@
 
   .#{$prefix}--bmrg-modal-confirm-edit__section {
     background-color: theme.$layer-accent-01;
-    border-radius: 0.25rem;
+    border-radius: var(--cds-border-radius, 0);
     color: theme.$text-primary;
     width: 100%;
   }

@@ -10,7 +10,7 @@ const props = () => ({
 });
 
 export default {
-  title: "PlatformBanner",
+  title: "Platform/PlatformBanner",
 };
 
 export const Default = () => {

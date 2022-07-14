@@ -50,7 +50,7 @@ function ComboBoxComponent({
               {tooltipContent && (
                 <div className={tooltipClassName}>
                   <TooltipHover {...tooltipProps} tooltipText={tooltipContent}>
-                    <Information size={16} fill="#4d5358" />
+                    <Information size={16} fill="currentColor" />
                   </TooltipHover>
                 </div>
               )}

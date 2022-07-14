@@ -1,6 +1,6 @@
 @use "../../styles/config" as *;
 @use '@carbon/themes/scss/tokens' as theme;
-@use "../../styles/mixins/utils";
+@use "../../styles/utils";
 
   .#{$prefix}--bmrg-feature-header {
     background-color: theme.$layer-01;

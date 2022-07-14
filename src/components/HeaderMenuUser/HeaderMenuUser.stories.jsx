@@ -10,7 +10,7 @@ const styleProp = {
 };
 
 export default {
-  title: "HeaderMenuUser",
+  title: "Platform/HeaderMenuUser",
 };
 
 export const Default = () => {

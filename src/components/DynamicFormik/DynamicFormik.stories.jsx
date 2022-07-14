@@ -1,9 +1,13 @@
 /* eslint-disable no-template-curly-in-string */
-import React from "react";
 import { action } from "@storybook/addon-actions";
 import TextInput from "../TextInput";
 import * as Yup from "yup";
 import DynamicFormik from "./DynamicFormik";
+
+export default {
+  title: "Inputs/DynamicFormik",
+  component: DynamicFormik
+};
 
 const additionalSchema = Yup.object().shape({
   text: Yup.string().required("Text is required - Additional Schema"),
@@ -508,9 +512,7 @@ function Wrapper(props) {
   return <div style={{ padding: "2rem" }}>{props.children}</div>;
 }
 
-export default {
-  title: "DynamicFormik",
-};
+
 
 export const Default = () => {
   return (

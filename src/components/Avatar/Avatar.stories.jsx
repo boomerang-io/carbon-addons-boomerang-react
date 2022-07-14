@@ -1,25 +1,35 @@
-import React from "react";
-import { text } from "@storybook/addon-knobs";
 
-import Avatar from "./Avatar";
-
-const styleProp = { backgroundColor: "#50565b" };
+import Component from "./Avatar";
 
 export default {
-  title: "Avatar",
+  title: "Components/Avatar",
+  components: Component,
+  argTypes: {
+    src: {
+      description: "URL to avatar image"
+    },
+    size: {
+      description: "Control the size",
+      control: "select",
+      options: ["small", "medium", "large"]
+    },
+    userName: {
+      description: "Used for alt text"
+    },
+    style: {
+      description: "Pass styles"
+    },
+    className: {
+      description: "Pass custom class"
+    }
+  }
 };
 
-export const Default = () => {
-  return (
-    <div style={styleProp}>
-      <Avatar
-        src={text("src", 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50"')}
-        userName={text("userName", "Gratav User")}
-      />
-    </div>
-  );
-};
+const Template = (args) => <Component {...args} />;
 
-Default.story = {
-  name: "default",
+export const Avatar = Template.bind({});
+Avatar.args = {
+  src: "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50",
+  userName: "Gratav User",
+  size: "small"
 };

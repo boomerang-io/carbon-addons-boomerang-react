@@ -5,7 +5,8 @@ import { default as Tabs } from "./index";
 import { default as Tab } from "../FeatureNavTab";
 
 export default {
-  title: "FeatureNavTabs",
+  title: "Features/FeatureNavTabs",
+  component: Tabs
 };
 
 export const Default = () => {

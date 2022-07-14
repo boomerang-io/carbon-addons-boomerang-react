@@ -1,10 +1,9 @@
-import React from "react";
 import { text } from "@storybook/addon-knobs";
-
 import AboutPlatform from "./AboutPlatform";
 
 export default {
-  title: "AboutPlatform",
+  title: "Platform/AboutPlatform",
+  component: AboutPlatform
 };
 
 export const Default = () => {
@@ -13,9 +12,6 @@ export const Default = () => {
   );
 };
 
-Default.story = {
-  name: "default",
-};
 
 export const FlowIcons = () => {
   return (

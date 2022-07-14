@@ -1,8 +1,7 @@
-import React from "react";
 import MemberBar from "./index";
 
 export default {
-  title: "MemberBar",
+  title: "Components/MemberBar",
 };
 
 export const Default = () => {

@@ -1,8 +1,11 @@
 import React from "react";
 import { action } from "@storybook/addon-actions";
 import { text } from "@storybook/addon-knobs";
-
 import RadioGroup from "./RadioGroup";
+
+export default {
+  title: "Inputs/RadioGroup",
+};
 
 const options1 = [
   { labelText: "Radio 1", value: "radio 1 value" },
@@ -13,9 +16,7 @@ const options2 = [
   { labelText: "Radio 4", value: "radio 4 value" },
 ];
 
-export default {
-  title: "RadioGroup",
-};
+
 
 export const DefaultAndVertical = () => {
   return (

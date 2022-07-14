@@ -1,6 +1,6 @@
 @use '@carbon/themes/scss/tokens' as theme;
 @use "../../styles/config" as *;
-@use "../../styles//mixins/utils";
+@use "../../styles/utils";
 
   .#{$prefix}--bmrg-member-bar {
     align-items: center;

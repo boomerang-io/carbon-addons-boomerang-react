@@ -21,7 +21,7 @@ import { comboBoxItems, dropdownOptions, multiSelectOptions } from "./propsData"
 const Divider = () => <div style={{ margin: "2rem" }} />;
 
 export default {
-  title: "Theming",
+  title: "Playground/Theming",
 };
 
 export const Default = () => {

@@ -3,6 +3,11 @@ import { action } from "@storybook/addon-actions";
 import OptionsGrid from "./index";
 // import { tools, selectedTools } from "../../helpers/mockData";
 
+export default {
+  title: "Deprecated/OptionsGrid",
+  excludeStories: ["selectedTools"],
+};
+
 const tools = [
   {
     id: 1,
@@ -70,10 +75,6 @@ export const selectedTools = [
 const mockFunc = action("onSelect");
 const style = { background: "#1d496d", margin: "2rem", width: "45rem" };
 
-export default {
-  title: "OptionsGrid",
-  excludeStories: ["selectedTools"],
-};
 
 export const SingleColumn = () => {
   return (

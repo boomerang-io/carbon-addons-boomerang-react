@@ -1,8 +1,11 @@
 import React from "react";
-
 import TextInput from "../TextInput";
-
 import DataDrivenInput from "./index";
+
+export default {
+  title: "Inputs/DataDrivenInput",
+  component: DataDrivenInput
+};
 
 const input = {
   key: "text",
@@ -28,9 +31,6 @@ const customInput = {
   customComponent: ({ formikProps, ...rest }) => <TextInput {...rest} />,
 };
 
-export default {
-  title: "DataDrivenInput",
-};
 
 export const Default = () => {
   const [testValue, setTestValue] = React.useState("boomerang");

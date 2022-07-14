@@ -1,6 +1,6 @@
 import React from "react";
 import "./welcome-story.css";
-import BoomerangLogo from "../.storybook/assets/boomerang";
+import BoomerangLogo from "../.storybook/favicon.png";
 import {
   Accordion,
   AccordionItem,
@@ -10,33 +10,30 @@ import {
   StructuredListRow,
   StructuredListCell,
 } from "./index";
-
+import * as All from "./index";
 //const carbonExports = Object.keys(require('@carbon/react'));
-const boomerangAddonsExports = Object.keys(require("./index"));
+const boomerangAddonsExports = Object.keys(All);
 
 export default {
-  title: "Getting Started|Welcome",
+  title: "Welcome",
 };
 
-export const AboutStorybook = () => (
+export const Welcome = () => (
   <div className="storybook-welcome">
-    <BoomerangLogo style={{ marginLeft: "1rem" }} />
+    <header className="header">
+      <img alt="Boomerang logo" src={BoomerangLogo} style={{height: "6rem", width: "auto" }} />
+      <h1>Carbon Addons Boomerang React</h1>
+    </header>
     <p>
-      Storybook is a development environment for UI components. It allows you to browse the component library, view the
-      different states of each component, and interactively develop and test components.
+      Open source components for Boomerang projects. It includes the following:
     </p>
     <p>
-      <strong>Boomerang</strong> - Components that are either extensions of Carbon components with added functionality,
-      or custom components beyond Carbon.
+      <strong>Carbon Addons Boomerang</strong> - Components that are either extensions of Carbon components with added functionality,
+      or custom components beyond the functionality that Carbon provides. The components are grouped by function and purpose.
     </p>
     <p>
-      <strong>Boomerang Experimental</strong> - Similar to above, but these components are not yet finalized or stable.
-      The APIs of these components may change rapidly and are not required to have associated tests, including
-      snapshots.
-    </p>
-    <p>
-      <strong>Carbon</strong> - Components imported from Carbon and re-exported with no modifications. Carbon's stories
-      are not included in our storybook, please reference their
+      <strong>Carbon</strong> - Components imported from Carbon and re-exported without modification. Carbon's stories
+      are not included in our storybook, please reference the
       <a href="https://react.carbondesignsystem.com/" style={{ marginLeft: "0.15rem" }}>
         Carbon Storybook
       </a>
@@ -49,10 +46,10 @@ export const AboutStorybook = () => (
       </a>
     </p>
     <Accordion>
-      <AccordionItem title={"Carbon and Boomerang Addons Component Exports table"} open={false}>
+      <AccordionItem title={"Component Exports table"} open={false}>
         <p>
-          The following table displays a list of the total exported components: including our custom Boomerang
-          compoonents and unaltered carbon-components
+          The following table displays a list of the total exported components: our custom Boomerang
+          compoonents and re-exported carbon-components
         </p>
         <StructuredListWrapper>
           <StructuredListHead>

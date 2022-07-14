@@ -52,7 +52,7 @@ const DateInputComponent = React.forwardRef(function DateInputComponent(
             {tooltipContent && (
               <div className={tooltipClassName}>
                 <TooltipHover tooltipContent={tooltipContent} {...tooltipProps}>
-                  <Information size={16} fill="#4d5358" />
+                  <Information size={16} fill="currentColor" />
                 </TooltipHover>
               </div>
             )}
@@ -129,7 +129,7 @@ const DateInputComponent = React.forwardRef(function DateInputComponent(
                   {tooltipContent && (
                     <div className={tooltipClassName}>
                       <TooltipHover tooltipContent={tooltipContent} {...tooltipProps}>
-                        <Information size={16} fill="#4d5358" />
+                        <Information size={16} fill="currentColor" />
                       </TooltipHover>
                     </div>
                   )}

@@ -1,9 +1,9 @@
 
 @use "@carbon/react/scss/motion";
 @use '@carbon/themes/scss/tokens' as theme;
-@use '../../styles/themes/shell';
 @use "../../styles/config" as *;
-@use '../../styles/mixins/utils';
+@use '../../styles/themes/shell';
+@use '../../styles/utils';
 
   .#{$prefix}--bmrg-notifications {
     animation: fade-in motion.$duration-moderate-01 motion.motion("standard");
@@ -25,7 +25,7 @@
   .#{$prefix}--bmrg-notifications-header {
     align-items: center;
     display: flex;
-    border-bottom: rem(1px) solid #b8c1c1;
+    border-bottom: utils.rem(1px) solid #b8c1c1;
     height: 2.4375rem;
     justify-content: space-between;
     position: relative;
@@ -37,7 +37,7 @@
     font-weight: 500;
     height: 1.25rem;
     line-height: 1.125rem;
-    padding-left: rem(10px);
+    padding-left: utils.rem(10px);
   }
 
   .#{$prefix}--bmrg-notifications-header__clear {
@@ -63,7 +63,7 @@
 
   .#{$prefix}--bmrg-notification {
     animation: fade-in motion.$duration-moderate-01 motion.motion("standard");
-    border-bottom: rem(1px) solid #b8c1c1;
+    border-bottom: utils.rem(1px) solid #b8c1c1;
     min-height: 7.6875rem;
     padding: 0rem;
     position: relative;
@@ -132,7 +132,7 @@
     font-size: 0.75rem;
     height: 0.9375rem;
     line-height: 0.9375rem;
-    margin-top: rem(10px);
+    margin-top: utils.rem(10px);
   }
   .#{$prefix}--bmrg-notification-content__close {
     background: none;
@@ -162,7 +162,7 @@
   }
 
   .#{$prefix}--bmrg-notifications__collection {
-    max-height: rem(575px);
+    max-height: utils.rem(575px);
     overflow-y: auto;
     overflow-x: hidden;
     padding: 0rem;
@@ -173,17 +173,17 @@
     border-bottom-width: 0;
     border-left-width: 0;
     border-right-width: 0;
-    height: rem(62px);
-    padding: rem(20px);
+    height: utils.rem(62px);
+    padding: utils.rem(20px);
     text-align: center;
-    width: rem(270px);
+    width: utils.rem(270px);
   }
 
   .#{$prefix}--bmrg-notifications-empty__no-news {
     color: #fbfcfc;
-    font-size: rem(14px);
+    font-size: utils.rem(14px);
     font-weight: 300;
-    line-height: rem(18px);
+    line-height: utils.rem(18px);
     margin: 0rem;
     margin-bottom: 1rem;
     text-align: center;
@@ -191,9 +191,9 @@
 
   .#{$prefix}--bmrg-notifications-empty__view-old {
     color: shell.$secondary-color;
-    font-size: rem(12px);
+    font-size: utils.rem(12px);
     font-weight: 300;
-    line-height: rem(15px);
+    line-height: utils.rem(15px);
   }
 
   .#{$prefix}--bmrg-notifications__notifications-footer {
@@ -207,8 +207,8 @@
   .#{$prefix}--bmrg-notifications__notifications-redirect-link {
     color: shell.$secondary-color;
     font-size: 0.875rem;
-    outline: rem(2px) solid transparent;
-    outline-offset: rem(-2px);
+    outline: utils.rem(2px) solid transparent;
+    outline-offset: utils.rem(-2px);
     text-align: center;
     text-decoration: none;
     padding: 0.625rem;
@@ -218,6 +218,6 @@
       background: shell.$header-hover-background-color;
     }
     &:focus {
-      outline: rem(2px) solid shell.$header-active-text-color;
+      outline: utils.rem(2px) solid shell.$header-active-text-color;
     }
   }

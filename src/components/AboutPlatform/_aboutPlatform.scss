@@ -1,11 +1,12 @@
 @use "sass:map";
 @use "../../styles/config" as *;
 @use "../../styles/themes/shell";
+@use "../../styles/utils";
 
 .#{$prefix}--bmrg-aboutPlatform-container {
   .#{$prefix}--modal-container {
-    height: rem(244px);
-    width: rem(500px);
+    height: utils.rem(244px);
+    width: utils.rem(500px);
   }
 
   .#{$prefix}--modal-content {
@@ -20,12 +21,12 @@
 
   .#{$prefix}--bmrg-aboutPlatform-footer__header {
     color: shell.$brand-white;
-    margin-bottom: rem(18px);
-    margin-top: rem(16px);
+    margin-bottom: utils.rem(18px);
+    margin-top: utils.rem(16px);
     font-family: "IBM Plex Sans", "Helvetica Neue", Arial, Helvetica, sans-serif;
-    font-size: rem(14px);
+    font-size: utils.rem(14px);
     font-weight: 500;
-    line-height: rem(18px);
+    line-height: utils.rem(18px);
   }
 
   .#{$prefix}--bmrg-aboutPlatform-images {

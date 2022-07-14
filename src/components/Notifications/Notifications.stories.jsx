@@ -7,7 +7,7 @@ import ToastNotification from "./ToastNotification";
 import notify from "./notify";
 
 const about = {
-  title: "Notifications",
+  title: "Components/Notifications",
 };
 
 export default about;
@@ -16,9 +16,9 @@ export const Default = () => {
   return (
     <div>
       <Button
-        onClick={() => notify(<ToastNotification subtitle="This happened" title="Something happened" kind="success" />)}
+        onClick={() => notify(<ToastNotification subtitle="So notification" title="Wow" kind="success" />)}
       >
-        Try Me
+        Create Notification
       </Button>
       <NotificationsContainer />
     </div>

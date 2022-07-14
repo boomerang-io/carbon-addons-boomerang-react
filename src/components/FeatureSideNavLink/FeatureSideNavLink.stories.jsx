@@ -7,7 +7,7 @@ import { createBrowserHistory } from "history";
 const history = createBrowserHistory();
 
 export default {
-  title: "FeatureSideNavLink",
+  title: "Features/FeatureSideNavLink",
 };
 
 export const DefaultFeatureSidenavLink = () => {

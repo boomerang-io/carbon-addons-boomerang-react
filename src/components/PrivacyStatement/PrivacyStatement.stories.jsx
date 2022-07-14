@@ -21,7 +21,7 @@ const props = () => ({
 });
 
 export default {
-  title: "PrivacyStatement",
+  title: "Platform/PrivacyStatement",
 };
 
 export const Default = () => {

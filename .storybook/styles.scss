@@ -20,10 +20,25 @@
 @use '@carbon/react/scss/components';
 @use '../src/styles/index' with ($use-theme-boomerang: true);
 
-@include theme.add-component-tokens(button.$button-tokens);
-@include theme.add-component-tokens(notification.$notification-tokens);
-@include theme.add-component-tokens(tag.$tag-tokens);
-
-:root {
+[data-carbon-theme="boomerang"] {
+  @include theme.add-component-tokens(map.merge(button.$button-tokens, boomerang.$v11-button-tokens));
+  @include theme.add-component-tokens(notification.$notification-tokens);
+  @include theme.add-component-tokens(tag.$tag-tokens);
   @include theme.theme();
+}
+
+[data-carbon-theme="white"] {
+  @include theme.theme(compat.$white);
+}
+
+[data-carbon-theme="g10"] {
+  @include theme.theme(compat.$g10);
+}
+
+[data-carbon-theme="g90"] {
+  @include theme.theme(compat.$g90);
+}
+
+[data-carbon-theme="g100"] {
+  @include theme.theme(compat.$g100);
 }

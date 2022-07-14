@@ -3,7 +3,7 @@ import { select, text } from "@storybook/addon-knobs";
 import TooltipHover from "./TooltipHover";
 
 export default {
-  title: "TooltipHover",
+  title: "Components/TooltipHover",
 };
 
 export const Default = () => {

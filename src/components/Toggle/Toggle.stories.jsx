@@ -4,7 +4,7 @@ import { boolean, text, select } from "@storybook/addon-knobs";
 import Toggle from "./Toggle";
 
 export default {
-  title: "Toggle",
+  title: "Inputs/Toggle",
 };
 
 export const Default = () => {

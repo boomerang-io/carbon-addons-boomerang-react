@@ -2,8 +2,12 @@ import React from "react";
 import { action } from "@storybook/addon-actions";
 import { text } from "@storybook/addon-knobs";
 import { Help, ThumbsUp, ThumbsDown } from "@carbon/react/icons";
-
 import DecisionButtons from "./DecisionButtons";
+
+export default {
+  title: "Inputs/DecisionButtons",
+  component: DecisionButtons
+};
 
 const items1 = [
   { label: "Radiooooooooooo 1", value: "radio 1" },
@@ -35,9 +39,6 @@ function ExternallyControlledDecisionButtons() {
   );
 }
 
-export default {
-  title: "DecisionButtons",
-};
 
 export const DefaultAndVertical = () => {
   return (

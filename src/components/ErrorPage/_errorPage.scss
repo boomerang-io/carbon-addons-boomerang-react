@@ -1,5 +1,6 @@
-@use "../../styles/config" as *;
 @use '@carbon/themes/scss/tokens' as theme;
+@use "../../styles/config" as *;
+@use "../../styles/utils";
 
   .#{$prefix}--bmrg-error-page {
     align-items: center;
@@ -7,33 +8,33 @@
     display: flex;
     font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, Helvetica, sans-serif;
     flex-direction: column;
-    margin: rem(80px) auto;
+    margin: utils.rem(80px) auto;
     padding: 0 2rem;
     width: 100%;
   }
 
   .#{$prefix}--bmrg-error-page__header {
     color: theme.$support-error-inverse;
-    font-size: rem(32px);
+    font-size: utils.rem(32px);
     font-weight: 600;
     line-height: 42px;
-    margin-bottom: rem(30px);
+    margin-bottom: utils.rem(30px);
     text-align: center;
   }
 
   .#{$prefix}--bmrg-error-page__title {
     color: inherit;
-    font-size: rem(24px);
+    font-size: utils.rem(24px);
     font-weight: 600;
-    line-height: rem(32px);
+    line-height: utils.rem(32px);
     text-align: center;
   }
 
   .#{$prefix}--bmrg-error-page__message {
     color: inherit;
-    font-size: rem(16px);
-    line-height: rem(20px);
-    margin-top: rem(12px);
+    font-size: utils.rem(16px);
+    line-height: utils.rem(20px);
+    margin-top: utils.rem(12px);
     max-width: 60ch;
     text-align: center;
 
@@ -47,8 +48,8 @@
   .#{$prefix}--bmrg-error-page__graphic {
     display: flex;
     justify-content: center;
-    margin-top: rem(40px);
-    max-width: rem(576px);
+    margin-top: utils.rem(40px);
+    max-width: utils.rem(576px);
     width: 100%;
 
     svg {

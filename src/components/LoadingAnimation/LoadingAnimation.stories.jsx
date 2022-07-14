@@ -3,7 +3,7 @@ import React from "react";
 import LoadingAnimation from "./LoadingAnimation";
 
 export default {
-  title: "LoadingAnimation",
+  title: "Deprecated/LoadingAnimation",
 };
 
 export const Default = () => {

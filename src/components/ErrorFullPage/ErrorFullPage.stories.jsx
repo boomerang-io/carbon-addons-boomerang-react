@@ -1,10 +1,10 @@
-import React from "react";
-import ErrorFullPage from "./index";
+import ErrorFullPage from "./ErrorFullPage";
 
 const statusUrl = "/support/status";
 
 export default {
-  title: "ErrorFullPage",
+  title: "Errors/ErrorFullPage",
+  component: ErrorFullPage
 };
 
 export const Default = () => {

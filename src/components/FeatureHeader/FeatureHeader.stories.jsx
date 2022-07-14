@@ -1,4 +1,3 @@
-import React from "react";
 import { Router, Link } from "react-router-dom";
 import { createMemoryHistory } from "history";
 import { FeatureHeader, FeatureHeaderTitle, FeatureHeaderSubtitle } from "./index";
@@ -6,6 +5,11 @@ import { default as Tabs } from "../FeatureNavTabs";
 import { default as Tab } from "../FeatureNavTab";
 import { Button, Breadcrumb, BreadcrumbItem } from "@carbon/react";
 import { Save, View } from "@carbon/react/icons";
+
+export default {
+  title: "Features/FeatureHeader",
+  component: FeatureHeader
+};
 
 const Nav = () => {
   return (
@@ -62,9 +66,7 @@ const Actions = () => (
   </div>
 );
 
-export default {
-  title: "FeatureHeader",
-};
+
 
 export const Default = () => {
   return (

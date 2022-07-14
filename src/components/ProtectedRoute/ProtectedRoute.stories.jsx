@@ -3,16 +3,14 @@ import React from "react";
 import { createMemoryHistory } from "history";
 import { Router } from "react-router-dom";
 import { text } from "@storybook/addon-knobs";
-
 import ProtectedRoute from "./ProtectedRoute";
 
-const history = createMemoryHistory();
-
-const Component = () => <div>If you see me, then you have authorization to do so.</div>;
-
 export default {
-  title: "ProtectedRoute",
+  title: "Components/ProtectedRoute",
 };
+
+const history = createMemoryHistory();
+const Component = () => <div>If you see me, then you have authorization to do so.</div>;
 
 export const Authorized = () => {
   return (

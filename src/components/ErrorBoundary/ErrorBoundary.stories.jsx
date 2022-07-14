@@ -7,7 +7,8 @@ const ErrorComponent = () => {
 };
 
 export default {
-  title: "ErrorBoundary",
+  title: "Errors/ErrorBoundary",
+  component: ErrorBoundary
 };
 
 export const Default = () => {

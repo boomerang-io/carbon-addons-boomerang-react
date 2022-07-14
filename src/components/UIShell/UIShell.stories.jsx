@@ -16,7 +16,7 @@ const mock = new MockAdapter(axios);
 const BASE_URL = "https://www.ibm.com/services";
 
 export default {
-  title: "UIShell",
+  title: "Platform/UIShell",
 };
 
 export const Default = () => {

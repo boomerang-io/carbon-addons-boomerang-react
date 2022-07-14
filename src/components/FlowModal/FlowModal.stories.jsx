@@ -3,6 +3,10 @@ import { Button, TextInput, ModalBody, ModalFooter, Tooltip } from "@carbon/reac
 import FlowModal from "./FlowModal";
 import FlowModalForm from "./FlowModalForm";
 
+export default {
+  title: "Components/FlowModal",
+};
+
 const Component1 = (props) => (
   <FlowModalForm title="Testing some text here">
     <ModalBody>
@@ -59,9 +63,6 @@ class Component3 extends React.Component {
   }
 }
 
-export default {
-  title: "FlowModal",
-};
 
 export const Default = () => {
   return (

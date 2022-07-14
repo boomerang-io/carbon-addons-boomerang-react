@@ -1,11 +1,10 @@
-import React from "react";
 import { action } from "@storybook/addon-actions";
 import { object, text } from "@storybook/addon-knobs";
-
 import DateInput from "./DateInput";
 
 export default {
-  title: "DateInput",
+  title: "Inputs/DateInput",
+  component: DateInput
 };
 
 export const Default = () => {
@@ -29,7 +28,7 @@ Default.story = {
 
 export const WithTooltipLabelAndHelperText = () => {
   return (
-    <div style={{ height: "5rem" }}>
+    <div style={{ height: "5rem", width: "20rem" }}>
       <DateInput
         id="tooltip-label-date-input"
         onCalendarChange={action("date input calendar change")}

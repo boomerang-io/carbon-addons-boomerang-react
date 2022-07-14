@@ -1,8 +1,13 @@
 import React from "react";
 import { action } from "@storybook/addon-actions";
 import { Button } from "@carbon/react";
-
 import ConfirmModal from "./ConfirmModal";
+
+export default {
+  title: "Components/ConfirmModal",
+  component: ConfirmModal
+};
+
 
 function ExternallyControlled() {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -31,10 +36,6 @@ function ExternallyControlled() {
     </ConfirmModal>
   );
 }
-
-export default {
-  title: "ConfirmModal",
-};
 
 export const Default = () => {
   return (

@@ -5,6 +5,12 @@ import ComposedModal from "./index";
 import ModalForm from "../ModalForm/ModalForm";
 import RadioGroup from "../RadioGroup";
 
+export default {
+  title: "Components/ComposedModal",
+  component: ComposedModal
+};
+
+
 function Component1(props) {
   return (
     <ModalForm title="Testing some text here">
@@ -54,10 +60,6 @@ function Component2(props) {
     </ModalForm>
   );
 }
-
-export default {
-  title: "ComposedModal",
-};
 
 export const Default = () => {
   return (

@@ -1,17 +1,15 @@
-import React from "react";
 import { text } from "@storybook/addon-knobs";
-
 import GraphicWrangler from "../GraphicWrangler";
-
-import ErrorPageComponent from "./index";
+import ErrorPage from "./ErrorPage";
 
 export default {
-  title: "ErrorPage",
+  title: "Errors/ErrorPage",
+  component: ErrorPage
 };
 
 export const Default = () => {
   return (
-    <ErrorPageComponent
+    <ErrorPage
       header={text("header", "Header")}
       title={text("title", "Title")}
       message={text("message", "Message")}
@@ -22,7 +20,7 @@ export const Default = () => {
 
 export const MessageLink = () => {
   return (
-    <ErrorPageComponent
+    <ErrorPage
       title={text("title", "Title")}
       message={
         <p>

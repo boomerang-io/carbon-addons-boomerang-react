@@ -1,23 +1,28 @@
-const { mergeConfig } = require('vite');
+const { mergeConfig } = require("vite");
 
 module.exports = {
-  "stories": [
-    "../src/components/**/*.stories.@(js|jsx|ts|tsx)"
+  stories: ["../src/**/*.stories.@(js|jsx|ts|tsx)"],
+  addons: [
+    {
+      name: "@storybook/addon-essentials",
+      options: {
+        actions: true,
+        backgrounds: false,
+        controls: true,
+        docs: true,
+        toolbars: true,
+        viewport: true,
+      },
+    },
+    "@storybook/addon-a11y",
   ],
-  "addons": [
-    "@storybook/addon-links",
-    "@storybook/addon-essentials",
-    "@storybook/addon-interactions"
-  ],
-  "framework": "@storybook/react",
-  "core": {
-    "builder": "@storybook/builder-vite"
-  },
-  "features": {
-    "storyStoreV7": true
+  framework: "@storybook/react",
+  core: {
+    builder: "@storybook/builder-vite",
   },
   typescript: {
     check: false,
+    reactDocgen: "react-docgen",
   },
   async viteFinal(config) {
     // return the customized config
@@ -27,7 +32,6 @@ module.exports = {
         // necessary for segment analytics lib to work
         global: {},
       },
-
     });
   },
-}
+};

@@ -5,7 +5,7 @@ import { object, text } from "@storybook/addon-knobs";
 import TextInput from "./TextInput";
 
 export default {
-  title: "TextInput",
+  title: "Inputs/TextInput",
 };
 
 export const Default = () => {

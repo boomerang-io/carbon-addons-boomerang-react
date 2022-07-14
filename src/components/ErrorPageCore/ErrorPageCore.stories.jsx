@@ -1,15 +1,15 @@
-import React from "react";
 import { text } from "@storybook/addon-knobs";
 
-import ErrorPageCoreComponent from "./index";
+import ErrorPageCore from "./ErrorPageCore";
 
 export default {
-  title: "ErrorPageCore",
+  title: "Errors/ErrorPageCore",
+  component: ErrorPageCore
 };
 
 export const Default = () => {
   return (
-    <ErrorPageCoreComponent
+    <ErrorPageCore
       header={text("header", "Header")}
       title={text("title", "Title")}
       message={text("message", "Message")}
@@ -19,7 +19,7 @@ export const Default = () => {
 
 export const MessageLink = () => {
   return (
-    <ErrorPageCoreComponent
+    <ErrorPageCore
       title={text("title", "Title")}
       message={
         <p>

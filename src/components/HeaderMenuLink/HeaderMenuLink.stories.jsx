@@ -3,7 +3,7 @@ import React from "react";
 import HeaderMenuLink from "./index"; // Using default export
 
 export default {
-  title: "HeaderMenuLink",
+  title: "Platform/HeaderMenuLink",
 };
 
 export const Default = () => {

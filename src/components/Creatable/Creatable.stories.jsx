@@ -1,11 +1,10 @@
-import React from "react";
 import { action } from "@storybook/addon-actions";
 import { text } from "@storybook/addon-knobs";
-
 import Creatable from "./Creatable";
 
 export default {
-  title: "Creatable",
+  title: "Inputs/Creatable",
+  component: Creatable
 };
 
 export const Default = () => {

@@ -1,10 +1,9 @@
-import React from "react";
 import { text } from "@storybook/addon-knobs";
-
 import Error403Component from "./index";
 
 export default {
-  title: "Error403",
+  title: "Errors/Error403",
+  component: Error403Component
 };
 
 export const Default = () => {

@@ -15,6 +15,10 @@ import {
 import Modal from "./index";
 import { ModalForm } from "../ModalForm";
 
+export default {
+  title: "Components/Modal",
+};
+
 function Component1() {
   return (
     <ModalForm>
@@ -35,9 +39,6 @@ function Component1() {
   );
 }
 
-export default {
-  title: "Modal",
-};
 
 export const Default = () => {
   return (

@@ -4,7 +4,8 @@ import { text } from "@storybook/addon-knobs";
 import Error404Component from "./index";
 
 export default {
-  title: "Error404",
+  title: "Errors/Error404",
+  component: Error404Component
 };
 
 export const Default = () => {

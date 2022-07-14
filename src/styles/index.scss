@@ -80,6 +80,10 @@ $use-theme-boomerang: false !default;
   z-index: 9999;
 }
 
+.#{$prefix}--btn {
+  border-radius: var(--cds-border-radius, 0);
+}
+
 .#{$prefix}--bmrg-aboutPlatform-container,
 .#{$prefix}--bmrg-contact-us-container,
 .#{$prefix}--bmrg-feedback-container,
@@ -90,7 +94,7 @@ $use-theme-boomerang: false !default;
 .#{$prefix}--bmrg-redirect-container {
   .#{$prefix}--modal-container {
     background-color: shell.$header-modal-background-color;
-    border-radius: rem(4px);
+    border-radius: var(--cds-border-radius, 0);
 
     * {
       &:focus,
@@ -218,7 +222,7 @@ $use-theme-boomerang: false !default;
       .#{$prefix}--number input[type="number"] {
         border: none;
         border-bottom: none;
-        border-radius: rem(4px);
+        border-radius: var(--cds-border-radius, 0);
       }
     }
 
@@ -235,7 +239,7 @@ $use-theme-boomerang: false !default;
     .#{$prefix}--text-area,
     .#{$prefix}--text-input {
       border: none;
-      border-radius: rem(4px);
+      border-radius: var(--cds-border-radius, 0);
     }
 
     .#{$prefix}--text-area__wrapper {
@@ -256,21 +260,21 @@ $use-theme-boomerang: false !default;
     }
 
     .#{$prefix}--modal-container {
-      border-radius: rem(4px);
+      border-radius: var(--cds-border-radius, 0);
     }
 
     .#{$prefix}--modal-footer {
-      border-bottom-right-radius: rem(4px);
-      border-bottom-left-radius: rem(4px);
+      border-bottom-right-radius: var(--cds-border-radius, 0);
+      border-bottom-left-radius: var(--cds-border-radius, 0);
       .#{$prefix}--btn {
         border-radius: 0;
 
         &:first-child {
-          border-bottom-left-radius: rem(4px);
+          border-bottom-left-radius: var(--cds-border-radius, 0);
         }
 
         &:last-child {
-          border-bottom-right-radius: rem(4px);
+          border-bottom-right-radius: var(--cds-border-radius, 0);
         }
 
         &:last-child:first-child {

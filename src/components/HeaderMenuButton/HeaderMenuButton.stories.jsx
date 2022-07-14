@@ -4,7 +4,7 @@ import { action } from "@storybook/addon-actions";
 import HeaderMenuButton from "./index";
 
 export default {
-  title: "HeaderMenuButton",
+  title: "Platform/HeaderMenuButton",
 };
 
 export const Default = () => {

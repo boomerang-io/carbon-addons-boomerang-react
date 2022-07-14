@@ -1,11 +1,13 @@
 @use "../../styles/config" as *;
+@use "../../styles/utils";
 @use "../../styles/themes/shell";
+
 .#{$prefix}--bmrg-header-menu-item {
-  min-height: rem(48px);
+  min-height: utils.rem(48px);
   height: 100%;
-  width: rem(240px);
+  width: utils.rem(240px);
   background-color: shell.$tertiary-color;
-  border: rem(1px) solid transparent;
+  border: utils.rem(1px) solid transparent;
   border-radius: 0;
   cursor: pointer;
   padding: 0;
@@ -23,7 +25,7 @@
   }
 
   &:focus {
-    outline: rem(2px) solid shell.$header-active-text-color !important;
+    outline: utils.rem(2px) solid shell.$header-active-text-color !important;
     box-shadow: none;
   }
 }
@@ -31,7 +33,7 @@
 .#{$prefix}--bmrg-header-menu-item__content {
   display: flex;
   align-items: center;
-  margin-left: rem(16px);
+  margin-left: utils.rem(16px);
 }
 
 .#{$prefix}--bmrg-header-menu-item__img {
@@ -46,12 +48,12 @@
   align-items: center;
   color: shell.$header-active-text-color;
   display: flex;
-  font-size: rem(14px);
+  font-size: utils.rem(14px);
   font-weight: 500;
-  line-height: rem(18px);
-  margin-left: rem(16px);
+  line-height: utils.rem(18px);
+  margin-left: utils.rem(16px);
 
   svg {
-    margin-left: rem(8px);
+    margin-left: utils.rem(8px);
   }
 }

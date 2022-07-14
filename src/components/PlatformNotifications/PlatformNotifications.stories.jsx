@@ -7,13 +7,14 @@ import PlatformNotificationsContainer from "./index";
 // const mockSocketUrl = 'http://localhost:7750/notifications/ws';
 
 export default {
-  title: "PlatformNotifications",
+  title: "Platform/PlatformNotifications",
 };
 
 const mockSocketUrl = "http://localhost:8080/ws";
 
 export const Default = () => {
   return (
+    <div style={{display: "block", height: "3rem"}}> 
     <PlatformNotificationsContainer
       initialNotifications={[
         {
@@ -37,6 +38,7 @@ export const Default = () => {
       isNotificationActive={boolean("isNotificationActive", true)}
       setHasNewNotifications={action("setHasNewNotifications")}
     />
+    </div>
   );
 };
 
