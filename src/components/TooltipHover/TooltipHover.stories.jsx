@@ -1,9 +1,9 @@
-import React from "react";
 import { select, text } from "@storybook/addon-knobs";
 import TooltipHover from "./TooltipHover";
 
 export default {
   title: "Components/TooltipHover",
+  component: TooltipHover,
 };
 
 export const Default = () => {
@@ -22,8 +22,4 @@ export const Default = () => {
       </TooltipHover>
     </div>
   );
-};
-
-Default.story = {
-  name: "default",
 };

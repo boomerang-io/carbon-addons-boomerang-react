@@ -4,7 +4,7 @@ import MultiSelect from "./ComboBoxMultiSelect";
 
 export default {
   title: "Inputs/ComboBoxMultiSelect",
-  component: MultiSelect
+  component: MultiSelect,
 };
 
 const animals = [
@@ -24,8 +24,6 @@ const animals = [
 
 const initialDefaultAnimals = "panda,dog";
 
-
-
 export const Default = () => {
   return (
     <div style={{ width: "25rem" }}>
@@ -40,10 +38,6 @@ export const Default = () => {
       />
     </div>
   );
-};
-
-Default.story = {
-  name: "default",
 };
 
 export const NoSelectedItems = () => {

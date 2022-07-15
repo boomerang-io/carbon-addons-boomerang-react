@@ -1,14 +1,10 @@
-import React from "react";
-
 import { text, boolean, object } from "@storybook/addon-knobs";
 import { Link, Router } from "react-router-dom";
 import { ServiceDesk } from "@carbon/react/icons";
 import { Modal, SideNav, SideNavLink, SideNavItems, SideNavMenu, SideNavMenuItem } from "@carbon/react";
 import HeaderMenuItem from "../HeaderMenuItem";
 import LeftSideNav from "../LeftSideNav";
-// eslint-disable-next-line
 import { createMemoryHistory } from "history";
-
 import Header from "./index"; // Using default export
 
 // const mockSocketUrl = 'http://localhost:7750/notifications/ws';
@@ -16,6 +12,7 @@ const mockSocketUrl = "https://www.google.com/ws";
 
 export default {
   title: "Platform/Header",
+  component: Header,
 };
 
 export const Default = () => (
@@ -76,10 +73,6 @@ export const Default = () => (
     ]}
   />
 );
-
-Default.story = {
-  name: "default",
-};
 
 export const WithIntegratedSidenav = () => (
   <Router history={createMemoryHistory({ initialEntries: ["/"] })}>

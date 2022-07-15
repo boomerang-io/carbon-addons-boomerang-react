@@ -1,8 +1,8 @@
-import React from "react";
-import HeaderMenuItem from "./index"; // Using default export
+import HeaderMenuItem from "./HeaderMenuItem"; // Using default export
 
 export default {
   title: "Platform/HeaderMenuItem",
+  component: HeaderMenuItem,
 };
 
 export const Default = () => {
@@ -15,8 +15,4 @@ export const Default = () => {
       )}
     </HeaderMenuItem>
   );
-};
-
-Default.story = {
-  name: "default",
 };

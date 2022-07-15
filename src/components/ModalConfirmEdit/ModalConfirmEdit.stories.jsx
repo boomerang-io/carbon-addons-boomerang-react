@@ -3,6 +3,7 @@ import ModalConfirmEdit from "./ModalConfirmEdit";
 
 export default {
   title: "Components/ModalConfirmEdit",
+  component: ModalConfirmEdit,
 };
 
 const detailsItems = [
@@ -20,14 +21,6 @@ export const Details = () => {
   return <ModalConfirmEdit items={detailsItems} onEdit={action("pencil clicked")} title="Some details" />;
 };
 
-Details.story = {
-  name: "details",
-};
-
 export const Array = () => {
   return <ModalConfirmEdit items={arrayItems} onEdit={action("pencil clicked")} title="Array of items" type="array" />;
-};
-
-Array.story = {
-  name: "array",
 };

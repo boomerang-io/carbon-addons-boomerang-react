@@ -1,14 +1,10 @@
-import React from "react";
-import SignOut from "./SignOut";
+import Component from "./SignOut";
 
 export default {
   title: "Platform/SignOut",
+  component: Component,
 };
 
-export const Default = () => {
-  return <SignOut />;
-};
-
-Default.story = {
-  name: "default",
+export const SignOut = () => {
+  return <Component />;
 };

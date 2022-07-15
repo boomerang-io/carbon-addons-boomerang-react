@@ -8,7 +8,7 @@ import { Save, View } from "@carbon/react/icons";
 
 export default {
   title: "Features/FeatureHeader",
-  component: FeatureHeader
+  component: FeatureHeader,
 };
 
 const Nav = () => {
@@ -66,8 +66,6 @@ const Actions = () => (
   </div>
 );
 
-
-
 export const Default = () => {
   return (
     <div style={{ backgroundColor: "#f2f4f8", height: "100vh", width: "100vw" }}>
@@ -81,10 +79,6 @@ export const Default = () => {
       />
     </div>
   );
-};
-
-Default.story = {
-  name: "default",
 };
 
 export const SubtitleFirst = () => {

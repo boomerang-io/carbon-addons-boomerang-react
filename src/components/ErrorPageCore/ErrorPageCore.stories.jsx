@@ -4,7 +4,7 @@ import ErrorPageCore from "./ErrorPageCore";
 
 export default {
   title: "Errors/ErrorPageCore",
-  component: ErrorPageCore
+  component: ErrorPageCore,
 };
 
 export const Default = () => {
@@ -28,8 +28,4 @@ export const MessageLink = () => {
       }
     />
   );
-};
-
-MessageLink.story = {
-  name: "message link",
 };

@@ -17,6 +17,7 @@ import { ModalForm } from "../ModalForm";
 
 export default {
   title: "Components/Modal",
+  component: Modal,
 };
 
 function Component1() {
@@ -39,15 +40,10 @@ function Component1() {
   );
 }
 
-
 export const Default = () => {
   return (
     <Modal isOpen appElement="#root">
       <Component1 />
     </Modal>
   );
-};
-
-Default.story = {
-  name: "default",
 };

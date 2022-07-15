@@ -1,4 +1,3 @@
-import React from "react";
 import { Router } from "react-router-dom";
 import FeatureSideNav from "./FeatureSideNav";
 import FeatureSideNavLinks from "./FeatureSideNavLinks";
@@ -12,6 +11,7 @@ const history = createBrowserHistory();
 
 export default {
   title: "Features/FeatureSideNav",
+  component: FeatureSideNav,
 };
 
 export const DefaultFeatureSidenavLink = () => {

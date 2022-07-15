@@ -5,6 +5,7 @@ import FlowModalForm from "./FlowModalForm";
 
 export default {
   title: "Components/FlowModal",
+  component: FlowModal,
 };
 
 const Component1 = (props) => (
@@ -63,7 +64,6 @@ class Component3 extends React.Component {
   }
 }
 
-
 export const Default = () => {
   return (
     <FlowModal
@@ -84,10 +84,6 @@ export const Default = () => {
       <Component3 />
     </FlowModal>
   );
-};
-
-Default.story = {
-  name: "default",
 };
 
 export const InitiallyOpen = () => {

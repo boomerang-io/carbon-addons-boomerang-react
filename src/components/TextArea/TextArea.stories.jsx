@@ -5,6 +5,7 @@ import TextArea from "./TextArea";
 
 export default {
   title: "Inputs/TextArea",
+  component: TextArea,
 };
 
 const ExternallyControlledTextArea = (props) => {
@@ -31,10 +32,6 @@ export const Default = () => {
       type="text"
     />
   );
-};
-
-Default.story = {
-  name: "default",
 };
 
 export const WithTooltipLabelAndHelperText = () => {

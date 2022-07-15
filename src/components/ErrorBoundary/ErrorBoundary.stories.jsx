@@ -8,7 +8,7 @@ const ErrorComponent = () => {
 
 export default {
   title: "Errors/ErrorBoundary",
-  component: ErrorBoundary
+  component: ErrorBoundary,
 };
 
 export const Default = () => {
@@ -19,10 +19,6 @@ export const Default = () => {
       </ErrorBoundary>
     </div>
   );
-};
-
-Default.story = {
-  name: "default",
 };
 
 export const _ErrorDragon = () => {

@@ -4,7 +4,7 @@ import DataDrivenInput from "./index";
 
 export default {
   title: "Inputs/DataDrivenInput",
-  component: DataDrivenInput
+  component: DataDrivenInput,
 };
 
 const input = {
@@ -31,7 +31,6 @@ const customInput = {
   customComponent: ({ formikProps, ...rest }) => <TextInput {...rest} />,
 };
 
-
 export const Default = () => {
   const [testValue, setTestValue] = React.useState("boomerang");
   return (
@@ -42,10 +41,6 @@ export const Default = () => {
       onChange={(e) => setTestValue(e.target.value)}
     />
   );
-};
-
-Default.story = {
-  name: "default",
 };
 
 export const CustomComponentInput = () => {

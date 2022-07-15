@@ -5,6 +5,9 @@ import {
   Button,
   Checkbox,
   InlineNotification,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
   StructuredListWrapper,
   StructuredListHead,
   StructuredListBody,
@@ -12,7 +15,6 @@ import {
   StructuredListCell,
   StructuredListSkeleton,
 } from "@carbon/react";
-import { ModalHeader, ModalBody, ModalFooter } from "@carbon/react";
 import Avatar from "../Avatar";
 import ErrorMessage from "../ErrorMessage";
 import HeaderMenuUser from "../HeaderMenuUser";
@@ -20,8 +22,6 @@ import notify from "../Notifications/notify";
 import ToastNotification from "../Notifications/ToastNotification";
 import { prefix } from "../../internal/settings";
 import sortBy from "lodash.sortby";
-
-
 
 ProfileSettings.propTypes = {
   baseServiceUrl: PropTypes.string.isRequired,

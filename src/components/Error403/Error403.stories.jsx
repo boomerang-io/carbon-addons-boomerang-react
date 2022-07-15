@@ -3,15 +3,11 @@ import Error403Component from "./index";
 
 export default {
   title: "Errors/Error403",
-  component: Error403Component
+  component: Error403Component,
 };
 
 export const Default = () => {
   return <Error403Component />;
-};
-
-Default.story = {
-  name: "default",
 };
 
 export const CustomText = () => {
@@ -24,22 +20,10 @@ export const CustomText = () => {
   );
 };
 
-CustomText.story = {
-  name: "custom text",
-};
-
 export const NoText = () => {
   return <Error403Component header={null} title={null} message={null} />;
 };
 
-NoText.story = {
-  name: "no text",
-};
-
 export const Boomerang = () => {
   return <Error403Component theme="boomerang" />;
-};
-
-Boomerang.story = {
-  name: "boomerang",
 };

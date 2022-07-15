@@ -1,11 +1,9 @@
-import React from "react";
 import { action } from "@storybook/addon-actions";
 import OptionsGrid from "./index";
-// import { tools, selectedTools } from "../../helpers/mockData";
 
 export default {
   title: "Deprecated/OptionsGrid",
-  excludeStories: ["selectedTools"],
+  component: OptionsGrid,
 };
 
 const tools = [
@@ -47,7 +45,7 @@ const tools = [
   },
 ];
 
-export const selectedTools = [
+const selectedTools = [
   {
     id: 2,
     name: "Client Engagement Assist",
@@ -74,7 +72,6 @@ export const selectedTools = [
 
 const mockFunc = action("onSelect");
 const style = { background: "#1d496d", margin: "2rem", width: "45rem" };
-
 
 export const SingleColumn = () => {
   return (

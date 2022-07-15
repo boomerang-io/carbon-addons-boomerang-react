@@ -5,9 +5,8 @@ import ConfirmModal from "./ConfirmModal";
 
 export default {
   title: "Components/ConfirmModal",
-  component: ConfirmModal
+  component: ConfirmModal,
 };
-
 
 function ExternallyControlled() {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -49,10 +48,6 @@ export const Default = () => {
       <div>stuff here</div>
     </ConfirmModal>
   );
-};
-
-Default.story = {
-  name: "default",
 };
 
 export const InitiallyOpen = () => {

@@ -1,11 +1,10 @@
-import React from "react";
 import { action } from "@storybook/addon-actions";
 import { object, text } from "@storybook/addon-knobs";
-
 import TextInput from "./TextInput";
 
 export default {
   title: "Inputs/TextInput",
+  component: TextInput,
 };
 
 export const Default = () => {
@@ -17,10 +16,6 @@ export const Default = () => {
       type="text"
     />
   );
-};
-
-Default.story = {
-  name: "default",
 };
 
 export const WithTooltipLabelAndHelperText = () => {

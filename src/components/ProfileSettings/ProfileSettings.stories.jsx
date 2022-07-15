@@ -1,4 +1,3 @@
-import React from "react";
 import axios from "axios";
 import ProfileSettings from "./ProfileSettings";
 import MockAdapter from "axios-mock-adapter";
@@ -10,11 +9,12 @@ mock.onPatch("https://ibm.com/users/profile").reply(200);
 
 export default {
   title: "Platform/ProfileSettings",
+  component: ProfileSettings,
 };
 
 export const Default = () => {
   return (
-    <div style={{ width: "16rem" }}>
+    <div style={{ width: "16rem", background: "#061727" }}>
       <ProfileSettings
         baseServiceUrl="https://ibm.com"
         src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50"
@@ -22,8 +22,4 @@ export const Default = () => {
       />
     </div>
   );
-};
-
-Default.story = {
-  name: "default",
 };

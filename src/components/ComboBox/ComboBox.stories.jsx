@@ -4,7 +4,7 @@ import ComboBox from "./index";
 
 export default {
   title: "Inputs/ComboBox",
-  component: ComboBox
+  component: ComboBox,
 };
 
 const items = [
@@ -37,7 +37,6 @@ const ComboBoxExternallyControlled = () => {
   );
 };
 
-
 export const Default = () => {
   return (
     <div style={{ width: "25rem" }}>
@@ -51,10 +50,6 @@ export const Default = () => {
       />
     </div>
   );
-};
-
-Default.story = {
-  name: "default",
 };
 
 export const WithoutFilter = () => {

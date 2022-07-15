@@ -4,7 +4,7 @@ import ErrorPage from "./ErrorPage";
 
 export default {
   title: "Errors/ErrorPage",
-  component: ErrorPage
+  component: ErrorPage,
 };
 
 export const Default = () => {
@@ -30,8 +30,4 @@ export const MessageLink = () => {
       graphic={<GraphicWrangler />}
     />
   );
-};
-
-MessageLink.story = {
-  name: "message link",
 };

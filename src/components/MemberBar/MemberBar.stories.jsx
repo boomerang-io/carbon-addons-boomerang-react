@@ -2,6 +2,7 @@ import MemberBar from "./index";
 
 export default {
   title: "Components/MemberBar",
+  component: MemberBar,
 };
 
 export const Default = () => {
@@ -13,8 +14,4 @@ export const Default = () => {
       <MemberBar name="Gato Neko" email="neko@email.com" isUserNotAllowed addUser={() => console.log("yay")} />
     </ul>
   );
-};
-
-Default.story = {
-  name: "default",
 };

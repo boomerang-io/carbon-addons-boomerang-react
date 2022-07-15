@@ -5,7 +5,7 @@ import AutoSuggest from "./AutoSuggest";
 
 export default {
   title: "Inputs/AutoSuggest",
-  component: AutoSuggest
+  component: AutoSuggest,
 };
 
 const animals = [
@@ -23,8 +23,6 @@ const animals = [
   { label: "penguin", value: "penguin" },
 ];
 
-
-
 export const Default = () => {
   return (
     <div style={{ width: "25rem" }}>
@@ -41,8 +39,4 @@ export const Default = () => {
       </AutoSuggest>
     </div>
   );
-};
-
-Default.story = {
-  name: "default",
 };

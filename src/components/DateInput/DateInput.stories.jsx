@@ -4,7 +4,7 @@ import DateInput from "./DateInput";
 
 export default {
   title: "Inputs/DateInput",
-  component: DateInput
+  component: DateInput,
 };
 
 export const Default = () => {
@@ -20,10 +20,6 @@ export const Default = () => {
       min="2020-01-01T13:10:20.219+00:00"
     />
   );
-};
-
-Default.story = {
-  name: "default",
 };
 
 export const WithTooltipLabelAndHelperText = () => {

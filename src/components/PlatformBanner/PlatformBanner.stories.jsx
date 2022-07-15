@@ -1,6 +1,4 @@
-import React from "react";
 import { select, text } from "@storybook/addon-knobs";
-
 import PlatformBanner from "./PlatformBanner";
 
 const props = () => ({
@@ -11,12 +9,9 @@ const props = () => ({
 
 export default {
   title: "Platform/PlatformBanner",
+  component: PlatformBanner,
 };
 
 export const Default = () => {
   return <PlatformBanner {...props()} />;
-};
-
-Default.story = {
-  name: "default",
 };

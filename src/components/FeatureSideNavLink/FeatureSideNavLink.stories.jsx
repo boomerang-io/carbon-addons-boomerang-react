@@ -1,4 +1,3 @@
-import React from "react";
 import { Router } from "react-router-dom";
 import FeatureSideNavLink from "./FeatureSideNavLink";
 import { Rocket } from "@carbon/react/icons";
@@ -8,6 +7,7 @@ const history = createBrowserHistory();
 
 export default {
   title: "Features/FeatureSideNavLink",
+  component: FeatureSideNavLink,
 };
 
 export const DefaultFeatureSidenavLink = () => {

@@ -17,6 +17,7 @@ const BASE_URL = "https://www.ibm.com/services";
 
 export default {
   title: "Platform/UIShell",
+  component: UIShell,
 };
 
 export const Default = () => {
@@ -80,10 +81,6 @@ export const Default = () => {
       }}
     />
   );
-};
-
-Default.story = {
-  name: "default",
 };
 
 export const WithCarbonSidenavAndReactRouter = () => {

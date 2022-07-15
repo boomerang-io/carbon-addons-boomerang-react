@@ -6,7 +6,7 @@ import { default as Tab } from "../FeatureNavTab";
 
 export default {
   title: "Features/FeatureNavTabs",
-  component: Tabs
+  component: Tabs,
 };
 
 export const Default = () => {
@@ -21,10 +21,6 @@ export const Default = () => {
       </Tabs>
     </Router>
   );
-};
-
-Default.story = {
-  name: "default",
 };
 
 export const Loading = () => {

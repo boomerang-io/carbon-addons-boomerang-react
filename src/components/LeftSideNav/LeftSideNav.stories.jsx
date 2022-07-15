@@ -1,12 +1,11 @@
-import React from "react";
 import { ServiceDesk } from "@carbon/react/icons";
 import { SideNav, SideNavLink, SideNavItems, SideNavMenu, SideNavMenuItem } from "@carbon/react";
 import { BrowserRouter as Router, Link } from "react-router-dom";
-
 import LeftSideNav from "./LeftSideNav";
 
 export default {
   title: "Platform/LeftSideNav",
+  component: LeftSideNav,
 };
 
 export const WithRouter = () => (

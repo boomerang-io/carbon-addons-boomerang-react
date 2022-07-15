@@ -6,7 +6,7 @@ import DynamicFormik from "./DynamicFormik";
 
 export default {
   title: "Inputs/DynamicFormik",
-  component: DynamicFormik
+  component: DynamicFormik,
 };
 
 const additionalSchema = Yup.object().shape({
@@ -512,8 +512,6 @@ function Wrapper(props) {
   return <div style={{ padding: "2rem" }}>{props.children}</div>;
 }
 
-
-
 export const Default = () => {
   return (
     <Wrapper>
@@ -544,10 +542,6 @@ export const Default = () => {
       </DynamicFormik>
     </Wrapper>
   );
-};
-
-Default.story = {
-  name: "default",
 };
 
 export const AllowPropertySyntax = () => {
@@ -653,8 +647,4 @@ export const GoverningSelects = () => {
       </DynamicFormik>
     </Wrapper>
   );
-};
-
-GoverningSelects.story = {
-  name: "governing selects",
 };

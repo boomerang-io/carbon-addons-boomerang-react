@@ -1,6 +1,4 @@
-import React from "react";
 import { text } from "@storybook/addon-knobs";
-
 import HeaderMenuUser from "./HeaderMenuUser";
 
 const styleProp = {
@@ -11,6 +9,7 @@ const styleProp = {
 
 export default {
   title: "Platform/HeaderMenuUser",
+  component: HeaderMenuUser,
 };
 
 export const Default = () => {
@@ -24,8 +23,4 @@ export const Default = () => {
       </HeaderMenuUser>
     </div>
   );
-};
-
-Default.story = {
-  name: "default",
 };

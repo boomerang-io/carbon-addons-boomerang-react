@@ -7,9 +7,8 @@ import RadioGroup from "../RadioGroup";
 
 export default {
   title: "Components/ComposedModal",
-  component: ComposedModal
+  component: ComposedModal,
 };
-
 
 function Component1(props) {
   return (
@@ -80,10 +79,6 @@ export const Default = () => {
       {({ closeModal }) => <Component1 closeModal={closeModal} />}
     </ComposedModal>
   );
-};
-
-Default.story = {
-  name: "default",
 };
 
 export const InitiallyOpen = () => {

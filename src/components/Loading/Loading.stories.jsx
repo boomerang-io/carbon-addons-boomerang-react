@@ -2,28 +2,17 @@ import Loading from "./Loading";
 
 export default {
   title: "Components/Loading",
+  component: Loading,
 };
 
 export const Default = () => {
   return <Loading />;
 };
 
-Default.story = {
-  name: "default",
-};
-
-export const DelayRenderAfter2Seconds = () => {
+export const DelayRender2Seconds = () => {
   return <Loading delay={2000} />;
-};
-
-DelayRenderAfter2Seconds.story = {
-  name: "delay render after 2 seconds",
 };
 
 export const WithoutOverlay = () => {
   return <Loading withOverlay={false} />;
-};
-
-WithoutOverlay.story = {
-  name: "without overlay",
 };

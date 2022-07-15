@@ -4,7 +4,7 @@ import Creatable from "./Creatable";
 
 export default {
   title: "Inputs/Creatable",
-  component: Creatable
+  component: Creatable,
 };
 
 export const Default = () => {
@@ -20,10 +20,6 @@ export const Default = () => {
       />
     </div>
   );
-};
-
-Default.story = {
-  name: "default",
 };
 
 export const NonDelatable = () => {

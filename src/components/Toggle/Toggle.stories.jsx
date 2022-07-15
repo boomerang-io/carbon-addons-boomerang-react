@@ -1,10 +1,10 @@
-import React from "react";
 import { action } from "@storybook/addon-actions";
 import { boolean, text, select } from "@storybook/addon-knobs";
 import Toggle from "./Toggle";
 
 export default {
   title: "Inputs/Toggle",
+  component: Toggle,
 };
 
 export const Default = () => {
@@ -13,10 +13,6 @@ export const Default = () => {
       <Toggle id="default-toggle" defaultToggled onToggle={action("Toggle clicked")} />
     </div>
   );
-};
-
-Default.story = {
-  name: "default",
 };
 
 export const WithTooltipAndLabel = () => {

@@ -1,12 +1,10 @@
-import React, { Fragment } from "react";
-
+import { Fragment } from "react";
 import { BrowserRouter } from "react-router-dom";
-
 import SidenavComponent from "./index";
 
 export default {
   title: "Deprecated/Sidenav",
-  excludeStories: ["outstandingTeamRequests"],
+  component: SidenavComponent,
 };
 
 export const Default = () => {
@@ -15,10 +13,6 @@ export const Default = () => {
       <SidenavComponent navItems={navItems} />
     </BrowserRouter>
   );
-};
-
-Default.story = {
-  name: "default",
 };
 
 export const WithTitle = () => {
@@ -109,7 +103,7 @@ const SidenavOutstandingTeams = ({ outstandingTeamRequests }) => {
   );
 };
 
-export const outstandingTeamRequests = [
+const outstandingTeamRequests = [
   {
     id: "59e5720c0aa79f128e639448",
     groupName: "Pending Test Team",

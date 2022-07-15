@@ -8,6 +8,7 @@ import notify from "./notify";
 
 const about = {
   title: "Components/Notifications",
+  component: ToastNotification,
 };
 
 export default about;
@@ -15,16 +16,10 @@ export default about;
 export const Default = () => {
   return (
     <div>
-      <Button
-        onClick={() => notify(<ToastNotification subtitle="So notification" title="Wow" kind="success" />)}
-      >
+      <Button onClick={() => notify(<ToastNotification subtitle="So notification" title="Wow" kind="success" />)}>
         Create Notification
       </Button>
       <NotificationsContainer />
     </div>
   );
-};
-
-Default.story = {
-  name: "default",
 };

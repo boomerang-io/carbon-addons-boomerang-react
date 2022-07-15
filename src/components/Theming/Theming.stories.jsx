@@ -110,7 +110,3 @@ export const Default = () => {
     </div>
   );
 };
-
-Default.story = {
-  name: "default",
-};

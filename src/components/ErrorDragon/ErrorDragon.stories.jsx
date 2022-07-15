@@ -4,13 +4,9 @@ const statusUrl = "/status";
 
 export default {
   title: "Errors/ErrorDragon",
-  component: ErrorDragon
+  component: ErrorDragon,
 };
 
 export const Default = () => {
   return <ErrorDragon statusUrl={statusUrl} />;
-};
-
-Default.story = {
-  name: "default",
 };

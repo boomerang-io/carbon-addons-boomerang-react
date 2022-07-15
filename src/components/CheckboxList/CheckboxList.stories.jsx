@@ -3,9 +3,8 @@ import { action } from "@storybook/addon-actions";
 
 export default {
   title: "Inputs/CheckboxList",
-  component: CheckboxList
+  component: CheckboxList,
 };
-
 
 const animals = [
   { labelText: "Cat", id: "cat" },
@@ -19,13 +18,8 @@ const animals2 = [
   { labelText: "Penguin", id: "penguin" },
 ];
 
-
 export const Default = () => {
   return <CheckboxList initialSelectedItems={["panda"]} onChange={action("checkboxlist changed")} options={animals} />;
-};
-
-Default.story = {
-  name: "default",
 };
 
 export const WithTooltipAndLabel = () => {

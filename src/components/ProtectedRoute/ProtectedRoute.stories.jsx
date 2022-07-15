@@ -1,5 +1,3 @@
-import React from "react";
-//eslint-disable-next-line
 import { createMemoryHistory } from "history";
 import { Router } from "react-router-dom";
 import { text } from "@storybook/addon-knobs";
@@ -7,6 +5,7 @@ import ProtectedRoute from "./ProtectedRoute";
 
 export default {
   title: "Components/ProtectedRoute",
+  component: ProtectedRoute,
 };
 
 const history = createMemoryHistory();
@@ -25,20 +24,12 @@ export const Authorized = () => {
   );
 };
 
-Authorized.story = {
-  name: "authorized",
-};
-
 export const NotAuthorized = () => {
   return (
     <Router history={history}>
       <ProtectedRoute allowedUserRoles={["admin", "operator"]} component={Component} path="/" userRole="user" />
     </Router>
   );
-};
-
-NotAuthorized.story = {
-  name: "not authorized",
 };
 
 export const WithCustomMessage = () => {
@@ -54,8 +45,4 @@ export const WithCustomMessage = () => {
       />
     </Router>
   );
-};
-
-WithCustomMessage.story = {
-  name: "with custom message",
 };
