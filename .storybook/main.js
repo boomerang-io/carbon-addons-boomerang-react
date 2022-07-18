@@ -20,9 +20,6 @@ module.exports = {
   core: {
     builder: "@storybook/builder-vite",
   },
-  features: {
-    storyStoreV7: true,
-  },
   typescript: {
     check: false,
     reactDocgen: "react-docgen",
