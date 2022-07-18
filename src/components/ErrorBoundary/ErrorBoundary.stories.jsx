@@ -1,4 +1,3 @@
-import React from "react";
 import ErrorDragon from "../ErrorDragon";
 import ErrorBoundary from "./index";
 

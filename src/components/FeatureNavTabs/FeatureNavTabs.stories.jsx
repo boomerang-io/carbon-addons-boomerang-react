@@ -1,4 +1,4 @@
-import React from "react";
+
 import { createMemoryHistory } from "history";
 import { Router } from "react-router-dom";
 import { default as Tabs } from "./index";

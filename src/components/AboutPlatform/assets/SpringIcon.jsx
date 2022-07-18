@@ -1,5 +1,3 @@
-import React from "react";
-
 const SpringIcon = (props) => (
   <svg width={66} height={66} viewBox="0 0 66 66" preserveAspectRatio="none" {...props}>
     <title>Spring</title>

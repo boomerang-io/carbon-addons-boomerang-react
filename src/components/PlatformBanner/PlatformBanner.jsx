@@ -1,4 +1,4 @@
-import React from "react";
+
 import PropTypes from "prop-types";
 import { InlineNotification as CarbonInlineNotification } from "@carbon/react";
 import { prefix } from "../../internal/settings";

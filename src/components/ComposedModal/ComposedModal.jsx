@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import  { useEffect } from "react";
 import useSetState from "../../tools/useSetState";
 import PropTypes from "prop-types";
 import cx from "classnames";

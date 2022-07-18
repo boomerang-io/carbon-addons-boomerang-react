@@ -1,6 +1,6 @@
-import cx from "classnames";
 import React from "react";
 import PropTypes from "prop-types";
+import cx from "classnames";
 import Downshift from "downshift";
 import isEqual from "lodash.isequal";
 import { prefix } from "../../internal/settings";

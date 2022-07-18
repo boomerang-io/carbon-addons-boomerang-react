@@ -1,4 +1,4 @@
-import React from "react";
+
 import PropTypes from "prop-types";
 import { Loading as CarbonLoading } from "@carbon/react";
 import DelayedRender from "../DelayedRender";

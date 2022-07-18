@@ -1,4 +1,3 @@
-import React from "react";
 import "./welcome-story.css";
 import BoomerangLogo from "../.storybook/favicon.png";
 import {

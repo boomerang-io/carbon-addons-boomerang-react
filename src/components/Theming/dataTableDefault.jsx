@@ -1,4 +1,4 @@
-import React from "react";
+
 import { DataTable } from "@carbon/react";
 
 import { initialRows, headers } from "./propsData";

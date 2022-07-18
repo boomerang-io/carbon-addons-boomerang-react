@@ -4,14 +4,12 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-
-import "./styles.scss";
-
+import React from "react";
 import { configureActions } from "@storybook/addon-actions";
 import { white, g10, g90, g100 } from "@carbon/themes";
-import React from "react";
 import { breakpoints } from "@carbon/layout";
 import { Theme as GlobalTheme } from "@carbon/react";
+import "./styles.scss";
 
 export const globalTypes = {
   theme: {

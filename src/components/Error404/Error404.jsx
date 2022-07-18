@@ -1,4 +1,3 @@
-import React from "react";
 import PropTypes from "prop-types";
 import NotFoundErrorBackground from "./NotFoundErrorBackground";
 import GraphicLoch from "../GraphicLoch";

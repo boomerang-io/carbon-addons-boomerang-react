@@ -1,4 +1,4 @@
-import React from "react";
+
 
 const SvgShipSharks = (props) => (
   <svg viewBox="0 0 422 474" {...props}>

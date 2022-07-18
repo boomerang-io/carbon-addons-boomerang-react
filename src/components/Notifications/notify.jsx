@@ -1,4 +1,4 @@
-import React from "react";
+
 import { toast } from "react-toastify";
 import { prefix } from "../../internal/settings";
 

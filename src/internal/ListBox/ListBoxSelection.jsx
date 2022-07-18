@@ -6,7 +6,7 @@
  */
 
 import cx from "classnames";
-import React from "react";
+
 import PropTypes from "prop-types";
 import { Close } from "@carbon/react/icons";
 import { prefix } from "../../internal/settings";

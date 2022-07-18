@@ -1,4 +1,3 @@
-import React from "react";
 import PropTypes from "prop-types";
 import ForbiddenErrorBackground from "./ForbiddenErrorBackground";
 import GraphicWrangler from "../GraphicWrangler";

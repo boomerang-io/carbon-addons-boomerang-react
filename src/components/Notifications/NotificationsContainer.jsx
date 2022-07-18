@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import { Component } from "react";
 import PropTypes from "prop-types";
 import { ToastContainer, Slide } from "react-toastify";
 import { Close } from "@carbon/react/icons";
