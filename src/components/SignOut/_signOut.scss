@@ -1,3 +1,4 @@
+@use '@carbon/themes/scss/tokens' as theme;
 @use "../../styles/config" as *;
 @use "../../styles/utils";
 
@@ -11,11 +12,19 @@
     margin-bottom: 0.5rem;
   }
 
+  .#{$prefix}--bmrg-header-menu-item__img {
+    color: theme.$support-error-inverse;
+  }
+
+  .#{$prefix}--bmrg-header-menu-item__text {
+    color: theme.$support-error-inverse !important;
+  }
+
   .#{$prefix}--bmrg-signout {
     margin-top: 1rem;
     margin-bottom: 2rem;
     &__message {
-      color: #9fa5ad;
+      color: theme.$text-on-color;
       font-size: utils.rem(14px);
       line-height: utils.rem(18px);
     }

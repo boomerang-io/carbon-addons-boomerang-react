@@ -1,12 +1,9 @@
-
 import PropTypes from "prop-types";
 import { prefix } from "../../internal/settings";
 import { Button } from "@carbon/react";
 import { ModalHeader, ModalBody, ModalFooter } from "@carbon/react";
 
 import HeaderMenuItem from "../HeaderMenuItem";
-
-
 
 SignOutContainer.propTypes = {
   signOutLink: PropTypes.string,
@@ -20,7 +17,7 @@ function SignOutContainer({ signOutLink }) {
       {({ closeModal }) => {
         return (
           <>
-            <ModalHeader title="Sign out?" closeModal={closeModal} />
+            <ModalHeader title="Sign out" closeModal={closeModal} />
             <ModalBody>
               <div className={`${prefix}--bmrg-signout`}>
                 <p className={`${prefix}--bmrg-signout__message`}>{"Are you sure you'd like to leave us?"}</p>

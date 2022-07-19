@@ -9,7 +9,6 @@
 @use '@carbon/react/scss/compat/theme' with (
   $theme: map.merge(compat.$white, boomerang.$theme)
 );
-
 @use '@carbon/react/scss/fonts';
 @use '@carbon/react/scss/grid';
 @use '@carbon/react/scss/layer';

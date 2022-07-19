@@ -1,16 +1,6 @@
 @use "sass:map";
 @use "../config" as *;
 
-// Global overrides
-// https://www.carbondesignsystem.com/guidelines/themes#global
-$input-border: 1px solid transparent;
-$accordion-flex-direction: row;
-$accordion-justify-content: flex-start;
-$accordion-arrow-margin: 0 0 0 0.25rem;
-$accordion-title-margin: 0 0 0 1rem;
-$accordion-content-padding: 0 1rem 0 1.75rem;
-$button-border-radius: 0.25rem;
-
 /// Boomerang's default color theme
 /// @type Map
 /// @access public
@@ -164,6 +154,31 @@ $v11-button-tokens: (
   button-primary-hover: #0072c3,
   button-secondary-hover: #4d5358,
   button-tertiary-hover: #0072c3,
+);
+
+$shell-tokens: (
+  bmrg-primary-color: #061727,
+  bmrg-secondary-color: #c0c7ce,
+  bmrg-tertiary-color: #061727,
+  bmrg-accent-color: #08bdba,
+  bmrg-brand-white: #f2f4f8,
+  bmrg-header-active-background-color: #08bdba,
+  bmrg-header-active-text-color: #f2f4f8,
+  bmrg-header-hover-background-color: #343a3f,
+  bmrg-header-menu-options-accent-color: #343a3f,
+  bmrg-header-menu-options-active-background-color: #002b50,
+  bmrg-header-menu-options-top-border-color: #08bdba,
+  bmrg-header-notification-default: #9fa5ad,
+  bmrg-header-notification-icon: #bb8eff,
+  bmrg-header-modal-overlay: rgba(39, 39, 39, 0.5),
+  bmrg-header-modal-cancel-color: #b9bfc7,
+  bmrg-header-modal-confirm-color: #08bdba,
+  bmrg-header-modal-link-color: #08bdba,
+  bmrg-header-nav-color: #061727,
+  bmrg-header-modal-background-color: #061727,
+  bmrg-header-button-text-color: #272727,
+  bmrg-header-attachment-background-color: #50565b,
+  bmrg-sidenav-active-background-color: #343a3f,
 );
 
 $theme: map.merge($v11-tokens, $v10-tokens);

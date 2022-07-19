@@ -16,8 +16,10 @@ $use-theme-boomerang: false !default;
 @use '@carbon/react/scss/components/button/tokens' as button-tokens;
 @use 'config' as *;
 
-@use "./themes/shell";
+@use "./themes/default" as theme-default;
 @use "./themes/boomerang" as theme-boomerang;
+@use "./themes/shell-tokens" as shell;
+@use "./utils";
 
 // Import local styles for custom components
 @use '../components/AboutPlatform/aboutPlatform';
@@ -69,21 +71,12 @@ $use-theme-boomerang: false !default;
 @use '../components/TooltipHover/tooltip' as addons-tooltip;
 @use '../components/UserRequests/userRequests';
 
-// Carbon overrides for the Platform theme
-// Scope to modal styles so they don't overwrite other carbon styles
-.#{$prefix}--loading-overlay {
-  //harcoded to the RGBA value of the ui-background variable
-  background-color: rgba(242, 244, 248, 0.5);
+// UIShell tokens
+:root {
+  @include utils.create-properties(theme-default.$shell-tokens);
 }
 
-.#{$prefix}--tooltip {
-  z-index: 9999;
-}
-
-.#{$prefix}--btn {
-  border-radius: var(--cds-border-radius, 0);
-}
-
+// Styles for the UIShell from addons
 .#{$prefix}--bmrg-aboutPlatform-container,
 .#{$prefix}--bmrg-contact-us-container,
 .#{$prefix}--bmrg-feedback-container,
@@ -93,35 +86,36 @@ $use-theme-boomerang: false !default;
 .#{$prefix}--bmrg-signout-container,
 .#{$prefix}--bmrg-redirect-container {
   .#{$prefix}--modal-container {
-    background-color: shell.$header-modal-background-color;
+    background-color: shell.$bmrg-header-modal-background-color;
     border-radius: var(--cds-border-radius, 0);
 
     * {
       &:focus,
       &::before {
-        outline-color: shell.$secondary-color !important;
-        border-color: shell.$secondary-color !important;
+        outline-color: shell.$bmrg-secondary-color !important;
+        border-color: shell.$bmrg-secondary-color !important;
       }
     }
 
     .#{$prefix}--btn:focus {
-      outline-color: shell.$primary-color;
+      outline-color: shell.$bmrg-primary-color;
     }
 
     .#{$prefix}--modal-content {
+      color: var(--cds-text-on-color);
       padding: 0 1rem;
     }
   }
 
   .#{$prefix}--modal {
-    background-color: shell.$header-modal-overlay; //default isrgba(theme.$layer-accent-01, 0.5)
+    background-color: shell.$bmrg-header-modal-overlay; //default isrgba(theme.$layer-accent-01, 0.5)
   }
   .#{$prefix}--modal-close {
     &:hover {
-      background-color: shell.$header-hover-background-color;
+      background-color: shell.$bmrg-header-hover-background-color;
     }
     &:focus {
-      outline: rem(1px) solid shell.$secondary-color;
+      outline: rem(1px) solid shell.$bmrg-secondary-color;
     }
   }
 
@@ -130,13 +124,13 @@ $use-theme-boomerang: false !default;
   }
 
   .#{$prefix}--modal-header__label {
-    color: #9fa5ad;
+    color: theme.$text-on-color;
     text-transform: initial;
   }
 
   .#{$prefix}--modal-header__heading {
     height: rem(26px);
-    color: shell.$brand-white;
+    color: shell.$bmrg-brand-white;
     font-size: rem(20px);
     font-weight: 300;
   }
@@ -145,11 +139,11 @@ $use-theme-boomerang: false !default;
     svg,
     polygon,
     path {
-      fill: shell.$brand-white;
+      fill: shell.$bmrg-brand-white;
     }
   }
   .#{$prefix}--modal-footer {
-    background-color: shell.$primary-color;
+    background-color: shell.$bmrg-primary-color;
     margin: 0;
     /** carbon 10 override */
     padding: 0;
@@ -162,8 +156,6 @@ $use-theme-boomerang: false !default;
       border-radius: 0;
 
       &.#{$prefix}--btn--primary {
-        background-color: shell.$header-modal-confirm-color;
-        color: shell.$header-button-text-color;
         border-bottom-right-radius: rem(4px);
 
         &.#{$prefix}--btn:disabled {
@@ -173,8 +165,6 @@ $use-theme-boomerang: false !default;
       }
 
       &.#{$prefix}--btn--secondary {
-        background-color: shell.$header-modal-cancel-color;
-        color: shell.$header-button-text-color;
         border-bottom-left-radius: rem(4px);
       }
     }
@@ -182,31 +172,41 @@ $use-theme-boomerang: false !default;
 
   .#{$prefix}--accordion__heading {
     &:hover:before {
-      background-color: shell.$header-hover-background-color;
+      background-color: shell.$bmrg-header-hover-background-color;
     }
 
     &:focus:before {
-      border-color: shell.$secondary-color;
+      border-color: shell.$bmrg-secondary-color;
     }
   }
 }
 
+// Styles for Boomerang theme
 @if ($use-theme-boomerang) {
   // Some additional overrides to carbon base styles
   // add :root to have a higher level of specificity and not rely in import order
-  a {
-    color: button-tokens.$button-primary;
-    font-size: rem(14px);
-    letter-spacing: 0;
-    line-height: rem(18px);
-  }
 
-  :root {
+  :root[data-carbon-theme="boomerang"] {
+    @include utils.create-properties(theme-boomerang.$shell-tokens);
+
     button,
     html [type="button"],
     [type="reset"],
     [type="submit"] {
       appearance: none;
+    }
+
+    .#{$prefix}--btn {
+      border-radius: var(--cds-border-radius, 0);
+    }
+
+    .#{$prefix}--tooltip {
+      z-index: 9999;
+    }
+
+    .#{$prefix}--loading-overlay {
+      //harcoded to the RGBA value of the ui-background variable
+      background-color: rgba(242, 244, 248, 0.5);
     }
 
     .#{$prefix}--skeleton {

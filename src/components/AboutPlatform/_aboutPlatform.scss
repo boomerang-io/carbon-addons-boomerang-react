@@ -1,6 +1,6 @@
 @use "sass:map";
 @use "../../styles/config" as *;
-@use "../../styles/themes/shell";
+@use "../../styles/themes/shell-tokens" as shell;
 @use "../../styles/utils";
 
 .#{$prefix}--bmrg-aboutPlatform-container {
@@ -20,7 +20,7 @@
   }
 
   .#{$prefix}--bmrg-aboutPlatform-footer__header {
-    color: shell.$brand-white;
+    color: shell.$bmrg-brand-white;
     margin-bottom: utils.rem(18px);
     margin-top: utils.rem(16px);
     font-family: "IBM Plex Sans", "Helvetica Neue", Arial, Helvetica, sans-serif;

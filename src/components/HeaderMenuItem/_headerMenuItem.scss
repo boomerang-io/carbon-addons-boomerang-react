@@ -1,31 +1,31 @@
 @use "../../styles/config" as *;
 @use "../../styles/utils";
-@use "../../styles/themes/shell";
+@use "../../styles/themes/shell-tokens" as shell;
 
 .#{$prefix}--bmrg-header-menu-item {
   min-height: utils.rem(48px);
   height: 100%;
   width: utils.rem(240px);
-  background-color: shell.$tertiary-color;
+  background-color: shell.$bmrg-tertiary-color;
   border: utils.rem(1px) solid transparent;
-  border-radius: 0;
+  border-radius: 0 !important;
   cursor: pointer;
   padding: 0;
   outline: 2px solid transparent;
   outline-offset: -2px;
 
   &:hover {
-    background: shell.$header-hover-background-color;
+    background: shell.$bmrg-header-hover-background-color;
     span {
-      color: shell.$header-active-text-color;
+      color: shell.$bmrg-header-active-text-color;
     }
   }
   &:active {
-    background: shell.$header-hover-background-color;
+    background: shell.$bmrg-header-hover-background-color;
   }
 
   &:focus {
-    outline: utils.rem(2px) solid shell.$header-active-text-color !important;
+    outline: utils.rem(2px) solid shell.$bmrg-header-active-text-color !important;
     box-shadow: none;
   }
 }
@@ -40,13 +40,13 @@
   line-height: 0;
   width: 1rem;
   svg {
-    fill: shell.$header-active-text-color;
+    fill: currentColor;
   }
 }
 
 .#{$prefix}--bmrg-header-menu-item__text {
   align-items: center;
-  color: shell.$header-active-text-color;
+  color: shell.$bmrg-header-active-text-color;
   display: flex;
   font-size: utils.rem(14px);
   font-weight: 500;

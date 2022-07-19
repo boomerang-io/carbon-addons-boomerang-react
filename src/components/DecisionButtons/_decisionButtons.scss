@@ -1,3 +1,4 @@
+@use '@carbon/themes/scss/tokens' as theme;
 @use "../../styles/config" as *;
 
 .#{$prefix}--bmrg-decision-buttons {
@@ -56,18 +57,18 @@
 
 [type="radio"]:focus {
   + .#{$prefix}--bmrg-decision-button {
-    border: 0.0625rem solid #0d70c3;
+    border: 0.0625rem solid theme.$background-brand;
   }
 }
 
 .#{$prefix}--bmrg-decision-button {
   align-items: center;
-  background-color: var(--cds-background);
-  border-color: var(--cds-text-primary);
+  background-color: theme.$background;
+  border-color: theme.$text-primary;
   border-radius: var(--cds-border-radius, 0);
   border-style: solid;
   border-width: 0.0625rem;
-  color: var(--cds-text-primary);
+  color: theme.$text-primary;
   cursor: pointer;
   display: flex;
   height: 2.5rem;

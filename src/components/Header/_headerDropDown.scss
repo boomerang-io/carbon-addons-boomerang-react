@@ -1,11 +1,12 @@
+@use '@carbon/themes/scss/tokens' as theme;
 @use "@carbon/react/scss/motion";
 @use "../../styles/config" as *;
-@use "../../styles/themes/shell";
+@use "../../styles/themes/shell-tokens" as shell;
 
 .#{$prefix}--bmrg-header-drop-down {
   animation: fade-in motion.$duration-moderate-01 motion.motion("standard");
-  background: shell.$tertiary-color;
-  border-top: 0.375rem solid shell.$header-menu-options-accent-color;
+  background: shell.$bmrg-tertiary-color;
+  border-top: 0.375rem solid shell.$bmrg-header-menu-options-top-border-color;
   display: flex;
   flex-direction: column;
   position: absolute;
@@ -14,15 +15,15 @@
 }
 
 .#{$prefix}--bmrg-header-drop-down__item {
-  color: shell.$secondary-color;
+  color: shell.$bmrg-secondary-color;
   width: 100%;
 
   &:hover {
-    background: shell.$header-hover-background-color;
+    background: shell.$bmrg-header-hover-background-color;
   }
 
-  a {
-    color: shell.$secondary-color;
+  > a {
+    color: shell.$bmrg-secondary-color;
     text-decoration: none;
   }
 }

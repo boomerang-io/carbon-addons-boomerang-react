@@ -1,9 +1,8 @@
-
 import PropTypes from "prop-types";
 import cx from "classnames";
-import { prefix } from "../../internal/settings";
 import { Button } from "@carbon/react";
 import { Chat, Debug, Group, Information, Launch, Locked, Power, Workspace } from "@carbon/react/icons";
+import { prefix } from "../../internal/settings";
 
 const iconClassName = `${prefix}--bmrg-header-menu-item__img`;
 const iconFill = "#FBFCFC";

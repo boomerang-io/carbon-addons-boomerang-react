@@ -1,9 +1,7 @@
-import PropTypes from "prop-types";
 import React from "react";
+import PropTypes from "prop-types";
 import classNames from "classnames";
 import { prefix } from "../../internal/settings";
-
-
 
 const HeaderMenuBmrg = React.forwardRef((props, ref) => {
   const { isOpen, ...other } = props;
