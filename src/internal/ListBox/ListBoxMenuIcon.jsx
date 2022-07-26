@@ -4,14 +4,10 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-
 import cx from "classnames";
-
 import PropTypes from "prop-types";
-import { ChevronDown } from "@carbon/react/icons";
-import { prefix } from "../../internal/settings";
-
-
+import { ChevronDown } from "@carbon/icons-react";
+import { prefix } from "../settings";
 
 export const translationIds = {
   "close.menu": "close.menu",

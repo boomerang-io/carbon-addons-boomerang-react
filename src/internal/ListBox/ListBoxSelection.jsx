@@ -6,20 +6,17 @@
  */
 
 import cx from "classnames";
-
 import PropTypes from "prop-types";
-import { Close } from "@carbon/react/icons";
-import { prefix } from "../../internal/settings";
-import { match, keys } from "../../internal/keyboard";
-
-
+import { Close } from "@carbon/icons-react";
+import { match, keys } from "../keyboard";
+import { prefix } from "../settings";
 
 /**
  * `ListBoxSelection` is used to provide controls for clearing a selection, in
  * addition to conditionally rendering a badge if the control has more than one
  * selection.
  */
-const ListBoxSelection = ({ clearSelection, selectionCount, translateWithId: t, disabled, onClearSelection }) => {
+function ListBoxSelection({ clearSelection, selectionCount, translateWithId: t, disabled, onClearSelection }) {
   const className = cx(`${prefix}--list-box__selection`, {
     [`${prefix}--tag--filter`]: selectionCount,
     [`${prefix}--list-box__selection--multi`]: selectionCount,
@@ -67,7 +64,7 @@ const ListBoxSelection = ({ clearSelection, selectionCount, translateWithId: t, 
         aria-label={t("clear.all")}
         title={description}
       >
-        <Close size={16} />
+        <Close />
       </div>
     </div>
   ) : (
@@ -81,10 +78,10 @@ const ListBoxSelection = ({ clearSelection, selectionCount, translateWithId: t, 
       title={description}
     >
       {selectionCount}
-      <Close size={16} />
+      <Close />
     </div>
   );
-};
+}
 
 export const translationIds = {
   "clear.all": "clear.all",

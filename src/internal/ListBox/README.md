@@ -1,7 +1,3 @@
-> This is a copy/paste of the carbon component library version. We are doing this because it is not part of the
-> public API and importing via /lib/ breaks tree shaking. Importing via /es/ is a breaking change for things that
-> run in a node.js env .e.g. Jest.
-
 # `ListBox` component
 
 `ListBox` is responsible for powering a variety of dropdown-flavored components

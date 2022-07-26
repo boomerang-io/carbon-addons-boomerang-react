@@ -8,9 +8,7 @@
 import cx from "classnames";
 import React, { useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
-import { prefix } from "../../internal/settings";
-
-
+import { prefix } from "../settings";
 
 function useIsTruncated(ref) {
   const [isTruncated, setIsTruncated] = useState(false);

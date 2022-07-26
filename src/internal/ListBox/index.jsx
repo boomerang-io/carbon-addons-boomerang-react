@@ -19,4 +19,5 @@ ListBox.MenuItem = ListBoxMenuItem;
 ListBox.Selection = ListBoxSelection;
 
 export * as PropTypes from "./ListBoxPropTypes";
+
 export default ListBox;

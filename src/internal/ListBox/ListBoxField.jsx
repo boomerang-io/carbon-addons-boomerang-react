@@ -5,11 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-
-import { prefix } from "../../internal/settings";
 import PropTypes from "prop-types";
-
-
+import { prefix } from "../settings";
 
 // No longer used, left export for backward-compatibility
 export const translationIds = {};

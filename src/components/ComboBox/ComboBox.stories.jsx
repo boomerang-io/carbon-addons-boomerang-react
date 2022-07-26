@@ -1,14 +1,14 @@
 import React from "react";
-import { action } from "@storybook/addon-actions";
 import ComboBox from "./index";
 
 export default {
   title: "Inputs/ComboBox",
   component: ComboBox,
+  argTypes: { onChange: { action: "clicked" } },
 };
 
 const items = [
-  { label: "Caribou", value: "caribou", isDisabled: true },
+  { label: "Caribou", value: "caribou", disabled: true },
   { label: "Cat", value: "cat" },
   { label: "Catfish", value: "catfish" },
   { label: "Cheetah", value: "cheetah" },
@@ -22,28 +22,41 @@ const items = [
   { label: "Penguin", value: "penguin" },
 ];
 
-const ComboBoxExternallyControlled = () => {
-  const [selectedItem, setSelectedItem] = React.useState([]);
-
-  return (
-    <ComboBox
-      onChange={() => setSelectedItem({ label: "Penguin", value: "penguin" })}
-      id="select-default"
-      items={items}
-      placeholder="Search for something"
-      titleText="Should always select penguin"
-      selectedItem={selectedItem}
-    />
-  );
-};
+const singleItems = [
+  "Caribou",
+  "Cat",
+  "Catfish",
+  "Cheetah",
+  "Chipmunk",
+  "Dog",
+  "Dolphin",
+  "Dove",
+  "Panda",
+  "Parrot",
+  "Peacock",
+  "Penguin",
+];
 
 export const Default = () => {
   return (
     <div style={{ width: "25rem" }}>
       <ComboBox
-        onChange={action("select change")}
         id="select-default"
         items={items}
+        placeholder="Search for something"
+        titleText="Should filter item"
+        helperText="Default behavior"
+      />
+    </div>
+  );
+};
+
+export const SingleItems = () => {
+  return (
+    <div style={{ width: "25rem" }}>
+      <ComboBox
+        id="select-default"
+        items={singleItems}
         placeholder="Search for something"
         titleText="Should filter item"
         helperText="Default behavior"
@@ -56,11 +69,10 @@ export const WithoutFilter = () => {
   return (
     <div style={{ width: "25rem" }}>
       <ComboBox
-        onChange={action("select change")}
         id="select-filter"
         items={items}
         placeholder="Select something"
-        titleText="Should filter item"
+        titleText="Should not filter, only highlight"
         shouldFilterItem={false}
       />
     </div>
@@ -72,21 +84,12 @@ export const ItemToElement = () => {
     <div style={{ width: "25rem" }}>
       <ComboBox
         disableClear
-        onChange={action("select change")}
         id="select-tooltip-helper"
         items={items}
         placeholder="Search for something"
         titleText="Should filter item"
         helperText="My items are filtered internally"
-        shouldFilterItem={({ item, inputValue }) => item.label.toLowerCase().includes(inputValue.toLowerCase())}
-        itemToElement={(item) => (
-          <button
-            style={{ height: "100%", width: "100%", outline: "none", background: "none", border: "none" }}
-            disabled
-          >
-            {item.value + " test"}
-          </button>
-        )}
+        itemToElement={(item) => item.value + " 😊"}
         tooltipContent="Tooltip for select"
         tooltipProps={{ direction: "top" }}
       />
@@ -96,9 +99,8 @@ export const ItemToElement = () => {
 
 export const MenuOpenUpwards = () => {
   return (
-    <div style={{ width: "25rem", height: "30rem", display: "flex", alignItems: "flex-end" }}>
+    <div style={{ width: "25rem", height: "15rem", display: "flex", alignItems: "flex-end" }}>
       <ComboBox
-        onChange={action("select change")}
         id="select-default"
         items={items}
         placeholder="Search for something"
@@ -106,6 +108,21 @@ export const MenuOpenUpwards = () => {
         direction="top"
       />
     </div>
+  );
+};
+
+const ComboBoxExternallyControlled = () => {
+  const [selectedItem, setSelectedItem] = React.useState([]);
+
+  return (
+    <ComboBox
+      onChange={({ selectedItem }) => (selectedItem ? setSelectedItem({ label: "Penguin", value: "penguin" }) : null)}
+      id="select-default"
+      items={items}
+      placeholder="Search for something"
+      titleText="Always getting pengiun"
+      selectedItem={selectedItem}
+    />
   );
 };
 
@@ -122,13 +139,11 @@ export const KitchenSink = () => {
     <div style={{ width: "25rem" }}>
       <ComboBox
         disableClear
-        onChange={action("select change")}
         id="select-tooltip-helper"
         items={items}
         placeholder="Search for something"
         titleText="Should filter item"
         helperText="My items are filtered internally"
-        shouldFilterItem={({ item, inputValue }) => item.label.toLowerCase().includes(inputValue.toLowerCase())}
         tooltipContent="Tooltip for select"
         tooltipProps={{ direction: "top" }}
       />

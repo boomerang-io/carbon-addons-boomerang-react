@@ -1,20 +1,10 @@
+import React from "react";
 import PropTypes from "prop-types";
 import cx from "classnames";
 import TooltipHover from "../TooltipHover";
 import { Information } from "@carbon/react/icons";
 import { prefix } from "../../internal/settings";
-
 import { ComboBox } from "@carbon/react";
-
-const defaultShouldFilterItem = ({ item, inputValue }) => {
-  if (typeof item === "string") {
-    return item.toLowerCase().includes(inputValue?.toLowerCase());
-  }
-  if (item && item.label) {
-    return item.label.toLowerCase().includes(inputValue?.toLowerCase());
-  }
-  return item;
-};
 
 ComboBoxComponent.propTypes = {
   ...ComboBox.propTypes,
@@ -22,6 +12,7 @@ ComboBoxComponent.propTypes = {
   id: PropTypes.string.isRequired,
   labelText: PropTypes.node,
   label: PropTypes.node,
+  shouldFilterItem: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
   titleText: PropTypes.node,
   tooltipClassName: PropTypes.string,
   tooltipContent: PropTypes.any,
@@ -29,7 +20,6 @@ ComboBoxComponent.propTypes = {
 };
 
 ComboBoxComponent.defaultProps = {
-  shouldFilterItem: defaultShouldFilterItem,
   disableClear: false,
   tooltipClassName: `${prefix}--bmrg-select__tooltip`,
   tooltipProps: { direction: "top" },
@@ -44,9 +34,116 @@ function ComboBoxComponent({
   tooltipClassName,
   tooltipContent,
   tooltipProps,
-  ...comboBoxProps
+  onChange,
+  onInputChange,
+  shouldFilterItem,
+  ...restComboBoxProps
 }) {
+  // Set the initial selected item to the label or single value passed
+  const selectedItemRef = React.useRef(
+    restComboBoxProps.initialSelectedItem?.label ?? restComboBoxProps.initialSelectedItem
+  );
+  const queryRef = React.useRef(selectedItemRef.current);
+  const [hasQuery, setHasQuery] = React.useState(false);
+
+  // Support several props for the label text
   const labelValue = titleText || label || labelText;
+
+  /**
+   * The following three functions are to support a better ComboBox filtering experience
+   * than the default or passing a `shouldFilterItem` function. With the latter, if you have a selected item
+   * only that will be displayed if you do a naive filtering of the input.
+   * We want to:
+   * 1. Filter options based on the input text and plain value or label of the item
+   * 2. After selecting a value, show all options when opening the combobox with having to clear the selection
+   * 3. Filter the values when you enter a query with an item selected
+   */
+
+  /**
+   * Keep track of the selected value with a ref so it doesn' re-render and to ensure that
+   * onInputChange has a fresh value. `onChange` is called, then `onInputChange` when selecting an item
+   */
+  const defaultOnChange = React.useCallback(
+    ({ selectedItem }) => {
+      if (!selectedItem) {
+        selectedItemRef.current = selectedItem;
+      }
+
+      if (typeof selectedItem === "string" || typeof selectedItem === "number") {
+        selectedItemRef.current = selectedItem;
+      } else {
+        selectedItemRef.current = selectedItem?.label;
+      }
+
+      // Additional check if the onInputChange function is not called
+      // Isn't triggered if the query value matches the selected one
+      if (queryRef.current === selectedItemRef.current) {
+        setHasQuery(false);
+      }
+
+      // Call consumer
+      if (onChange) {
+        onChange({ selectedItem });
+      }
+    },
+    [onChange]
+  );
+
+  /**
+   * When an item is selected, the `onInputChange` handler is called with the value selected
+   * so it is difficult to disambiguate between a keydown event and a select event
+   * Take a simple approach here. If the selectedItem and input values match, there isn't a query
+   * they don't, there is. We use this to determine if we should filter the values
+   */
+  const defaultInputChange = (input) => {
+    queryRef.current = input;
+    if (input !== selectedItemRef.current) {
+      setHasQuery(true);
+    } else {
+      setHasQuery(false);
+    }
+    // Call consumer
+    if (onInputChange) {
+      onInputChange(input);
+    }
+  };
+
+  /**
+   * Determine if I should filter the items or not
+   * Selected value and no query means show everything, otherwise filter based on the input
+   * No point in optimizing this because re-renders will only occur on query changes
+   * and we need fresh values on those events to determine how to filter
+   */
+  const defaultShouldFilterItem = ({ item, inputValue }) => {
+    if (selectedItemRef.current && !hasQuery) {
+      return true;
+    }
+
+    if (typeof item === "string" || typeof item === "number") {
+      return item.toLowerCase().includes(inputValue?.toLowerCase());
+    }
+
+    if (item && item.label) {
+      return item.label.toLowerCase().includes(inputValue?.toLowerCase());
+    }
+
+    return item;
+  };
+
+  /**
+   * If a function is passed, use that
+   * If a false or null value is explicitely passed, then use default filtering behavior in component
+   * Otherwise use our filtering logic as the new default
+   */
+  let finalShouldFilterItem;
+  if (typeof shouldFilterItem === "function") {
+    finalShouldFilterItem = shouldFilterItem;
+  } else if (shouldFilterItem === false || shouldFilterItem === null) {
+    finalShouldFilterItem = undefined;
+  } else {
+    finalShouldFilterItem = defaultShouldFilterItem;
+  }
+
   return (
     <div key={id} className={cx(`${prefix}--bmrg-select`, { "--disableClear": disableClear })}>
       <ComboBox
@@ -65,7 +162,10 @@ function ComboBoxComponent({
             </div>
           )
         }
-        {...comboBoxProps}
+        onChange={defaultOnChange}
+        onInputChange={defaultInputChange}
+        shouldFilterItem={finalShouldFilterItem}
+        {...restComboBoxProps}
       />
     </div>
   );

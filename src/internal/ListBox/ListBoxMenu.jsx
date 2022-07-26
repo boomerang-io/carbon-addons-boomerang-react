@@ -6,11 +6,9 @@
  */
 
 import React from "react";
-import { prefix } from "../../internal/settings";
 import PropTypes from "prop-types";
 import ListBoxMenuItem from "./ListBoxMenuItem";
-
-
+import { prefix } from "../settings";
 
 /**
  * `ListBoxMenu` is a simple container node that isolates the `list-box__menu`

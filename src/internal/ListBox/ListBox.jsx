@@ -8,10 +8,13 @@
 import cx from "classnames";
 import React from "react";
 import PropTypes from "prop-types";
-import { prefix } from "../../internal/settings";
 import { ListBoxType, ListBoxSize } from "./ListBoxPropTypes";
-
-
+import ListBoxField from "./ListBoxField";
+import ListBoxMenu from "./ListBoxMenu";
+import ListBoxMenuIcon from "./ListBoxMenuIcon";
+import ListBoxMenuItem from "./ListBoxMenuItem";
+import ListBoxSelection from "./ListBoxSelection";
+import { prefix } from "../settings";
 
 const handleOnKeyDown = (event) => {
   if (event.keyCode === 27) {
@@ -109,7 +112,7 @@ ListBox.propTypes = {
   isOpen: PropTypes.bool,
 
   /**
-   * `true` to use the light version. For use on theme.$layer-01 backgrounds only.
+   * `true` to use the light version. For use on $ui-01 backgrounds only.
    * Don't use this to make tile background color same as container background color.
    */
   light: PropTypes.bool,
@@ -140,5 +143,11 @@ ListBox.defaultProps = {
   disabled: false,
   type: "default",
 };
+
+ListBox.Field = ListBoxField;
+ListBox.Menu = ListBoxMenu;
+ListBox.MenuIcon = ListBoxMenuIcon;
+ListBox.MenuItem = ListBoxMenuItem;
+ListBox.Selection = ListBoxSelection;
 
 export default ListBox;
