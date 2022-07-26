@@ -4,11 +4,20 @@ import TooltipHover from "../TooltipHover";
 import { Information } from "@carbon/react/icons";
 import { prefix } from "../../internal/settings";
 
-import ComboBox from "./ComboBoxV2";
+import { ComboBox } from "@carbon/react";
 
-
+const defaultShouldFilterItem = ({ item, inputValue }) => {
+  if (typeof item === "string") {
+    return item.toLowerCase().includes(inputValue?.toLowerCase());
+  }
+  if (item && item.label) {
+    return item.label.toLowerCase().includes(inputValue?.toLowerCase());
+  }
+  return item;
+};
 
 ComboBoxComponent.propTypes = {
+  ...ComboBox.propTypes,
   disableClear: PropTypes.bool,
   id: PropTypes.string.isRequired,
   labelText: PropTypes.node,
@@ -20,6 +29,7 @@ ComboBoxComponent.propTypes = {
 };
 
 ComboBoxComponent.defaultProps = {
+  shouldFilterItem: defaultShouldFilterItem,
   disableClear: false,
   tooltipClassName: `${prefix}--bmrg-select__tooltip`,
   tooltipProps: { direction: "top" },
@@ -34,7 +44,6 @@ function ComboBoxComponent({
   tooltipClassName,
   tooltipContent,
   tooltipProps,
-
   ...comboBoxProps
 }) {
   const labelValue = titleText || label || labelText;

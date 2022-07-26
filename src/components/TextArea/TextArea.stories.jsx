@@ -1,4 +1,3 @@
-
 import React from "react";
 import { action } from "@storybook/addon-actions";
 import { object, text } from "@storybook/addon-knobs";
@@ -35,7 +34,19 @@ export const Default = () => {
   );
 };
 
-export const WithTooltipLabelAndHelperText = () => {
+export const MaxInputLength = () => {
+  return (
+    <ExternallyControlledTextArea
+      id="max-length-label-text-area"
+      placeholder={text("placeholder", "Placeholder")}
+      style={{ resize: "none" }}
+      labelText={text("labelText", "Label for text area")}
+      max={200}
+    />
+  );
+};
+
+export const KitchenSink = () => {
   return (
     <TextArea
       id="tooltip-label-text-area"
@@ -48,24 +59,4 @@ export const WithTooltipLabelAndHelperText = () => {
       tooltipProps={object("tooltipProps", { direction: "top" })}
     />
   );
-};
-
-WithTooltipLabelAndHelperText.story = {
-  name: "with tooltip, label and helper text",
-};
-
-export const WithMaxInputLength = () => {
-  return (
-    <ExternallyControlledTextArea
-      id="max-length-label-text-area"
-      placeholder={text("placeholder", "Placeholder")}
-      style={{ resize: "none" }}
-      labelText={text("labelText", "Label for text area")}
-      max={200}
-    />
-  );
-};
-
-WithMaxInputLength.story = {
-  name: "with max input length",
 };

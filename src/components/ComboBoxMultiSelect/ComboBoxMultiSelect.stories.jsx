@@ -59,7 +59,7 @@ NoSelectedItems.story = {
   name: "No selected items",
 };
 
-export const WithTooltipTitleHelperTextAndDisabledClear = () => {
+export const KitchenSink = () => {
   return (
     <div style={{ width: "25rem" }}>
       <MultiSelect
@@ -80,8 +80,4 @@ export const WithTooltipTitleHelperTextAndDisabledClear = () => {
       />
     </div>
   );
-};
-
-WithTooltipTitleHelperTextAndDisabledClear.story = {
-  name: "with tooltip, title, helper text and disabled clear",
 };

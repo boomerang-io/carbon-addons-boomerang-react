@@ -18,7 +18,7 @@ export const Default = () => {
   );
 };
 
-export const WithTooltipLabelAndHelperText = () => {
+export const KitchenSink = () => {
   return (
     <div style={{ height: "5rem" }}>
       <TextInput
@@ -32,8 +32,4 @@ export const WithTooltipLabelAndHelperText = () => {
       />
     </div>
   );
-};
-
-WithTooltipLabelAndHelperText.story = {
-  name: "with tooltip, label and helper text",
 };

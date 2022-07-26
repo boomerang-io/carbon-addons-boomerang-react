@@ -6,11 +6,11 @@ import DecisionButtons from "./DecisionButtons";
 
 export default {
   title: "Inputs/DecisionButtons",
-  component: DecisionButtons
+  component: DecisionButtons,
 };
 
 const items1 = [
-  { label: "Radiooooooooooo 1", value: "radio 1" },
+  { label: "Radio 1", value: "radio 1" },
   { label: "Radio 2", value: "radio 2" },
 ];
 
@@ -39,8 +39,7 @@ function ExternallyControlledDecisionButtons() {
   );
 }
 
-
-export const DefaultAndVertical = () => {
+export const Default = () => {
   return (
     <DecisionButtons
       defaultSelected="radio 2"
@@ -56,11 +55,7 @@ export const DefaultAndVertical = () => {
   );
 };
 
-DefaultAndVertical.story = {
-  name: "default and vertical",
-};
-
-export const WithPositiveAndNegativeButtonsAndHorizontal = () => {
+export const PositiveAndNegativeButtonsAndHorizontal = () => {
   return (
     <DecisionButtons
       defaultSelected="no"
@@ -73,16 +68,8 @@ export const WithPositiveAndNegativeButtonsAndHorizontal = () => {
   );
 };
 
-WithPositiveAndNegativeButtonsAndHorizontal.story = {
-  name: "with positive and negative buttons and horizontal",
-};
-
 export const ExternallyControlled = () => {
   return <ExternallyControlledDecisionButtons />;
-};
-
-ExternallyControlled.story = {
-  name: "externallyControlled",
 };
 
 export const CanUncheckButtons = () => {
@@ -95,8 +82,4 @@ export const CanUncheckButtons = () => {
       items={items2}
     />
   );
-};
-
-CanUncheckButtons.story = {
-  name: "can uncheck buttons",
 };

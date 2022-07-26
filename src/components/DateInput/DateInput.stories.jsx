@@ -22,28 +22,6 @@ export const Default = () => {
   );
 };
 
-export const WithTooltipLabelAndHelperText = () => {
-  return (
-    <div style={{ height: "5rem", width: "20rem" }}>
-      <DateInput
-        id="tooltip-label-date-input"
-        onCalendarChange={action("date input calendar change")}
-        onChange={action("date input change")}
-        placeholder={text("placeholder", "mm/dd/yyyy")}
-        autoComplete="off"
-        helperText={text("helperText", "Some helper text")}
-        labelText={text("labelText", "Label for text input")}
-        tooltipContent={text("tooltipContent", "Tooltip for text input")}
-        tooltipProps={object("tooltipProps", { placement: "top" })}
-      />
-    </div>
-  );
-};
-
-WithTooltipLabelAndHelperText.story = {
-  name: "with tooltip, label and helper text",
-};
-
 export const ReadOnly = () => {
   return (
     <DateInput
@@ -59,10 +37,6 @@ export const ReadOnly = () => {
       readOnly
     />
   );
-};
-
-ReadOnly.story = {
-  name: "read only",
 };
 
 export const Range = () => {
@@ -86,6 +60,20 @@ export const Range = () => {
   );
 };
 
-Range.story = {
-  name: "range",
+export const KitchenSink = () => {
+  return (
+    <div style={{ height: "5rem", width: "20rem" }}>
+      <DateInput
+        id="tooltip-label-date-input"
+        onCalendarChange={action("date input calendar change")}
+        onChange={action("date input change")}
+        placeholder={text("placeholder", "mm/dd/yyyy")}
+        autoComplete="off"
+        helperText={text("helperText", "Some helper text")}
+        labelText={text("labelText", "Label for text input")}
+        tooltipContent={text("tooltipContent", "Tooltip for text input")}
+        tooltipProps={object("tooltipProps", { placement: "top" })}
+      />
+    </div>
+  );
 };

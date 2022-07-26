@@ -22,7 +22,7 @@ export const Default = () => {
   );
 };
 
-export const NonDelatable = () => {
+export const NonDeletable = () => {
   return (
     <div style={{ width: "25rem" }}>
       <Creatable
@@ -37,10 +37,6 @@ export const NonDelatable = () => {
       />
     </div>
   );
-};
-
-NonDelatable.story = {
-  name: "Non delatable",
 };
 
 export const KeyValuePair = () => {
@@ -62,10 +58,6 @@ export const KeyValuePair = () => {
   );
 };
 
-KeyValuePair.story = {
-  name: "key value pair",
-};
-
 export const LimitTheNumberOfAddedValues = () => {
   return (
     <div style={{ width: "25rem" }}>
@@ -82,11 +74,7 @@ export const LimitTheNumberOfAddedValues = () => {
   );
 };
 
-LimitTheNumberOfAddedValues.story = {
-  name: "limit the number of added values",
-};
-
-export const WithTooltipAndHelperText = () => {
+export const KitchenSink = () => {
   return (
     <Creatable
       id="tooltip-creatable"
@@ -99,8 +87,4 @@ export const WithTooltipAndHelperText = () => {
       tooltipProps={{ direction: "top" }}
     />
   );
-};
-
-WithTooltipAndHelperText.story = {
-  name: "with tooltip and helper text",
 };

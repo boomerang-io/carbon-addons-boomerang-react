@@ -22,7 +22,7 @@ export const Default = () => {
   return <CheckboxList initialSelectedItems={["panda"]} onChange={action("checkboxlist changed")} options={animals} />;
 };
 
-export const WithTooltipAndLabel = () => {
+export const KitchenSink = () => {
   return (
     <CheckboxList
       helperText="Testing this"
@@ -34,8 +34,4 @@ export const WithTooltipAndLabel = () => {
       tooltipProps={{ direction: "top" }}
     />
   );
-};
-
-WithTooltipAndLabel.story = {
-  name: "with tooltip and label",
 };

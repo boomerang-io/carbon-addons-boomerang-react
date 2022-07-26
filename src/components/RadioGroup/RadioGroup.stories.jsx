@@ -16,7 +16,7 @@ const options2 = [
   { labelText: "Radio 4", value: "radio 4 value" },
 ];
 
-export const DefaultAndVertical = () => {
+export const Default = () => {
   return (
     <RadioGroup
       id="test"
@@ -30,11 +30,7 @@ export const DefaultAndVertical = () => {
   );
 };
 
-DefaultAndVertical.story = {
-  name: "default and vertical",
-};
-
-export const WithTooltipAndLabelAndHorizontal = () => {
+export const KitchenSink = () => {
   return (
     <RadioGroup
       id="test"
@@ -49,8 +45,4 @@ export const WithTooltipAndLabelAndHorizontal = () => {
       tooltipProps={{ direction: "right" }}
     />
   );
-};
-
-WithTooltipAndLabelAndHorizontal.story = {
-  name: "with tooltip and label and horizontal",
 };

@@ -15,29 +15,7 @@ export const Default = () => {
   );
 };
 
-export const WithTooltipAndLabel = () => {
-  return (
-    <div style={{ width: "16rem" }}>
-      <Toggle
-        id="tooltip-label-toggle"
-        defaultToggled
-        onToggle={action("Toggle clicked")}
-        labelText="Label for toggle"
-        tooltipContent="Tooltip for toggle"
-        tooltipProps={{ direction: "top" }}
-        helperText={text("helperText", "helperText")}
-        orientation={select("orienation", ["horizontal", "vertical"], "vertical")}
-        reversed={boolean("reversed", false)}
-      />
-    </div>
-  );
-};
-
-WithTooltipAndLabel.story = {
-  name: "with tooltip and label",
-};
-
-export const WithInvalidWarning = () => {
+export const InvalidWarning = () => {
   return (
     <div style={{ width: "16rem" }}>
       <Toggle
@@ -57,10 +35,6 @@ export const WithInvalidWarning = () => {
   );
 };
 
-WithInvalidWarning.story = {
-  name: "with invalid warning",
-};
-
 export const HorizontalToggle = () => {
   return (
     <div style={{ width: "16rem" }}>
@@ -75,6 +49,20 @@ export const HorizontalToggle = () => {
   );
 };
 
-HorizontalToggle.story = {
-  name: "horizontal toggle",
+export const KitchenSink = () => {
+  return (
+    <div style={{ width: "16rem" }}>
+      <Toggle
+        id="tooltip-label-toggle"
+        defaultToggled
+        onToggle={action("Toggle clicked")}
+        labelText="Label for toggle"
+        tooltipContent="Tooltip for toggle"
+        tooltipProps={{ direction: "top" }}
+        helperText={text("helperText", "helperText")}
+        orientation={select("orienation", ["horizontal", "vertical"], "vertical")}
+        reversed={boolean("reversed", false)}
+      />
+    </div>
+  );
 };
