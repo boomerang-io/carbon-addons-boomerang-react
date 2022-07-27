@@ -6,7 +6,7 @@ import ComboBox from './index';
 const items = [
   { label: 'Caribou', value: 'caribou' },
   { label: 'Cat', value: 'cat' },
-  { label: 'Catfish', value: 'catfish' },
+  { label: 'Catfish', value: 'catfish', disabled: true },
   { label: 'Cheetah', value: 'cheetah' },
   { label: 'Chipmunk', value: 'chipmunk' },
   { label: 'Dog', value: 'dog' },
