@@ -228,7 +228,7 @@ function UIShell({
         skipToContentProps={skipToContentProps}
         requestSummary={user.requestSummary}
         notificationsConfig={{
-          wsUrl: `${finalBaseServiceUrl}/notifications/ws`,
+          wsUrl: `${finalBaseServiceUrl}/notifications/ws`.replace("https://", "wss://"),
         }}
         onHelpClick={[
           typeof onTutorialClick === 'function' && (
