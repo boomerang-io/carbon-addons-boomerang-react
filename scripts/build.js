@@ -29,16 +29,6 @@ async function build() {
       BABEL_ENV: 'cjs',
     });
     
-    // Copy over package.json file for interal libs
-    await cpy('**/package.json', '../lib', {
-      parents: true,
-      cwd: path.resolve(process.cwd(), 'src'),
-    });
-    await cpy('**/package.json', '../es', {
-      parents: true,
-      cwd: path.resolve(process.cwd(), 'src'),
-    });
-    
     // Copy over SCSS
     await cpy('**/*.scss', '../styles/scss', {
       parents: true,
