@@ -1,3 +1,5 @@
+import React from "react";
+
 function OpenShiftIcon(props) {
   return (
     <svg id="prefix__icon" viewBox="0 0 100 100" {...props}>

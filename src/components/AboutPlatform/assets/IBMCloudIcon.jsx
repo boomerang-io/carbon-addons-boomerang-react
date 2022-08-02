@@ -1,3 +1,5 @@
+import React from "react";
+
 const SvgComponent = (props) => (
   <svg viewBox="0 0 230 210" {...props}>
     <title>IBM Cloud</title>

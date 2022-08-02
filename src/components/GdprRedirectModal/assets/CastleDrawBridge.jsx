@@ -1,4 +1,4 @@
-
+import React from "react";
 
 const CastleDrawBridge = (props) => (
   <svg viewBox="-10 0 615 145" xmlns="http://www.w3.org/2000/svg" {...props}>

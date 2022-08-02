@@ -1,3 +1,5 @@
+import React from "react";
+
 const ReactIcon = (props) => (
   <svg viewBox="0 0 841.9 595.3" {...props}>
     <title>React</title>

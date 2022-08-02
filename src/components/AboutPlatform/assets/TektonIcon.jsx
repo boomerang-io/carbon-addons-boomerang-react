@@ -1,3 +1,5 @@
+import React from "react";
+
 const TektonIcon = () => (
   <svg
     id="Layer_1"

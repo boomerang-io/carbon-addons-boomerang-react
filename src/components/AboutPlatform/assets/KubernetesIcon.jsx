@@ -1,3 +1,5 @@
+import React from "react";
+
 const KubernetesIcon = (props) => (
   <svg viewBox="0 0 32 32" {...props}>
     <title>Kubernetes</title>
