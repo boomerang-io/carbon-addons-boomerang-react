@@ -1,0 +1,60 @@
+@forward "@carbon/react/scss/utilities/convert" show em, rem;
+
+@mixin border-radius() {
+  border-radius: var(--cds-border-radius, 0);
+}
+
+@mixin button-reset() {
+  background: none;
+  border: none;
+  padding: 0;
+  line-height: 0;
+}
+
+@mixin focus-outline($color: var(--cds-button-primary), $offset: 0.125rem) {
+  outline: 0.125rem solid $color;
+  outline-offset: $offset;
+}
+
+@mixin multiline-text-overflow-ellipsis($lineClamp: 2, $orient: vertical) {
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-box-orient: $orient;
+  -webkit-line-clamp: $lineClamp;
+}
+
+@mixin text-overflow-ellipsis() {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+$breakpoints: (
+  xs: 500px,
+  sm: 768px,
+  md: 992px,
+  lg: 1200px,
+);
+
+@mixin breakpoint($size) {
+  @if map-has-key($breakpoints, $size) {
+    @media screen and (min-width: map-get($breakpoints, $size)) {
+      @content;
+    }
+  } @else {
+    @media (min-width: $size) {
+      @content;
+    }
+  }
+}
+
+// Create global css properties
+@mixin create-properties($token-map, $prefix: --cds) {
+  @each $name, $variable in $token-map {
+    // Only create properties for non-map objects. Some theme tokens are maps in the default themes that we merge with
+    @if type-of($variable) != map {
+      #{$prefix}-#{$name}: $variable;
+    }
+  }
+}

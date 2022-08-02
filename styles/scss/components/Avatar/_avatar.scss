@@ -1,0 +1,24 @@
+@include exports('addons-bmrg-avatar') {
+  .#{$prefix}--bmrg-avatar {
+    border-radius: 50%;
+
+    &.--small {
+      height: rem(16px);
+      width: rem(16px);
+      min-height: rem(16px);
+      min-width: rem(16px);
+    }
+    &.--medium {
+      height: rem(32px);
+      width: rem(32px);
+      min-height: rem(32px);
+      min-width: rem(32px);
+    }
+    &.--large {
+      height: rem(64px);
+      width: rem(64px);
+      min-height: rem(64px);
+      min-width: rem(64px);
+    }
+  }
+}

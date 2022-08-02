@@ -1,0 +1,75 @@
+@include exports('addons-bmrg-sidenav') {
+  .#{$prefix}--bmrg-sidenav {
+    position: fixed;
+    width: 16rem;
+    margin-top: 3rem;
+    height: calc(100vh - 3rem);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transform: translateX(0);
+    transition: transform 0.3s ease-in-out;
+    background: $field-01;
+
+    &.--hidden {
+      transform: translateX(-100%);
+    }
+  }
+  .#{$prefix}--bmrg-sidenav-content {
+    min-height: 0;
+    overflow: auto;
+    width: 100%;
+  }
+  .#{$prefix}--bmrg-sidenav-footer {
+    width: 100%;
+    margin-top: auto;
+  }
+  .#{$prefix}--bmrg-sidenav-header {
+    width: 100%;
+  }
+  .#{$prefix}--bmrg-sidenav-links {
+    overflow: auto;
+    min-height: 0;
+    padding: 0.25rem;
+  }
+
+  .#{$prefix}--bmrg-sidenav-links__link {
+    box-sizing: border-box;
+    color: $interactive-01;
+    display: flex;
+    font-size: 1.25rem;
+    font-weight: 300;
+    justify-content: space-between;
+    letter-spacing: 0.1875rem;
+    line-height: 1.5rem;
+    min-height: 3rem;
+    position: relative;
+    padding: 1.375rem 0.25rem 1.375rem 1.5rem;
+    text-align: start;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .#{$prefix}--bmrg-sidenav-links__text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+    transition-property: background-color, color;
+  }
+
+  .#{$prefix}--bmrg-sidenav-links--is-active {
+    color: $active-primary;
+    font-weight: 500;
+    &::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 0;
+      right: -0.25rem;
+      border-right: 0.75rem solid $ui-03;
+      border-bottom: 0.75rem solid transparent;
+      border-top: 0.75rem solid transparent;
+    }
+  }
+}

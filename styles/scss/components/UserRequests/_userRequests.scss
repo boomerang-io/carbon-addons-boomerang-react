@@ -1,0 +1,26 @@
+@import '../../styles/mixins/utils';
+
+@include exports('addons-bmrg-userRequests') {
+
+  .#{$prefix}--bmrg-requests__title {
+    color: $text-04;
+    font-size: 0.875rem;
+    font-weight: bold;
+    letter-spacing: 0.04rem;
+    line-height: 1.125rem;
+    margin-left: 1rem;
+
+    &.#{$prefix}--bmrg-requests-empty__title {
+      color: $text-03;
+      font-weight: initial;
+    }
+  }
+
+  .#{$prefix}--bmrg-requests__text {
+    color: $text-04;
+    font-size: 0.875rem;
+    letter-spacing: 0.04rem;
+    line-height: 1.125rem;
+    margin-left: 1rem;
+  }
+}

@@ -1,0 +1,24 @@
+@use '@carbon/themes/scss/tokens' as theme;
+
+$bmrg-primary-color: var(--cds-bmrg-primary-color);
+$bmrg-secondary-color: var(--cds-bmrg-secondary-color);
+$bmrg-tertiary-color: var(--cds-bmrg-tertiary-color);
+$bmrg-accent-color: var(--cds-bmrg-accent-color);
+$bmrg-brand-white: var(--cds-bmrg-brand-white);
+$bmrg-header-active-background-color: var(--cds-bmrg-header-menu-options-active-background-color);
+$bmrg-header-active-text-color: var(--cds-bmrg-header-active-text-color);
+$bmrg-header-hover-background-color: var(--cds-bmrg-header-hover-background-color);
+$bmrg-header-menu-options-accent-color: var(--cds-bmrg-header-menu-options-accent-color);
+$bmrg-header-menu-options-active-background-color: var(--cds-bmrg-header-menu-options-active-background-color);
+$bmrg-header-menu-options-top-border-color: var(--cds-bmrg-header-menu-options-top-border-color);
+$bmrg-header-notification-default: var(--cds-bmrg-header-notification-defaul);
+$bmrg-header-notification-icon: var(--cds-bmrg-header-notification-icon);
+$bmrg-header-modal-overlay: var(--cds-bmrg-header-modal-overlay);
+$bmrg-header-modal-cancel-color: var(--cds-bmrg-header-modal-cancel-color);
+$bmrg-header-modal-confirm-color: theme.$background-brand;
+$bmrg-header-modal-link-color: theme.$background-brand;
+$bmrg-header-nav-color: var(--cds-bmrg-header-nav-color);
+$bmrg-header-modal-background-color: var(--cds-bmrg-header-modal-background-color);
+$bmrg-header-button-text-color: theme.$text-inverse;
+$bmrg-header-attachment-background-color: var(--cds-bmrg-header-attachment-background-color);
+$bmrg-sidenav-active-background-color: var(--cds-bmrg-sidenav-active-background-color);

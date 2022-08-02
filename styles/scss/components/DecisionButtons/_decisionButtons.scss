@@ -1,0 +1,122 @@
+@include exports('addons-bmrg-radio') {
+  .#{$prefix}--bmrg-decision-buttons {
+    position: relative;
+    width: 100%;
+  }
+
+  .#{$prefix}--bmrg-decision-buttons__title {
+    display: flex;
+    .#{$prefix}--label {
+      margin-bottom: 0;
+    }
+  }
+
+  .#{$prefix}--bmrg-radio-group__tooltip {
+    line-height: 0;
+    margin-left: 0.5rem;
+  }
+
+  .#{$prefix}--bmrg-decision-button-wrapper {
+    margin: 0 1rem 0 0;
+
+    &.#{$prefix}--bmrg-decision-button-wrapper--vertical {
+      margin: 0 0 1rem 0;
+      width: 100%;
+    }
+
+    &:last-of-type {
+      margin: 0;
+    }
+  }
+
+  [type='radio'] {
+    height: 0;
+    opacity: 0;
+    position: absolute;
+    width: 0;
+  }
+
+  [type='radio']:checked {
+    + .#{$prefix}--bmrg-decision-button {
+      background-color: #d0dada;
+      border-color: #d0dada;
+    }
+
+    + .#{$prefix}--bmrg-decision-button--positive {
+      background-color: #3ddbd9;
+      border-color: #3ddbd9;
+    }
+
+    + .#{$prefix}--bmrg-decision-button--negative {
+      background-color: #ffb3b8;
+      border-color: #ffb3b8;
+    }
+  }
+
+  [type='radio']:focus {
+    + .#{$prefix}--bmrg-decision-button {
+      border: 0.0625rem solid #0d70c3;
+    }
+  }
+
+  .#{$prefix}--bmrg-decision-button {
+    align-items: center;
+    background-color: transparent;
+    border-color: #21272a;
+    border-radius: 0.25rem;
+    border-style: solid;
+    border-width: 0.0625rem;
+    color: #21272a;
+    cursor: pointer;
+    display: flex;
+    height: 2.5rem;
+    justify-content: space-between;
+    padding: 0 1rem;
+    path {
+      fill: #21272a;
+    }
+
+    .#{$prefix}--bmrg-decision-button-icon {
+      margin-left: 0.625rem;
+    }
+
+    &:hover,
+    &:active {
+      color: #21272a;
+      path {
+        fill: #21272a;
+      }
+    }
+
+    &:hover {
+      background-color: #9fa7a7;
+      border-color: #9fa7a7;
+    }
+    &:active {
+      background-color: #b8c1c1;
+      border-color: #b8c1c1;
+    }
+
+    &.#{$prefix}--bmrg-decision-button--positive {
+      &:hover {
+        background-color: #08bdba;
+        border-color: #08bdba;
+      }
+      &:active {
+        background-color: #009d9a;
+        border-color: #009d9a;
+      }
+    }
+
+    &.#{$prefix}--bmrg-decision-button--negative {
+      &:hover {
+        background-color: #ff8389;
+        border-color: #ff8389;
+      }
+      &:active {
+        background-color: #fa4d56;
+        border-color: #fa4d56;
+      }
+    }
+  }
+}

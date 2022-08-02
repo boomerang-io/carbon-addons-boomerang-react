@@ -1,0 +1,16 @@
+@include exports('addons-bmrg-textInput') {
+  .#{$prefix}--bmrg-text-input {
+    align-items: center;
+    display: flex;
+    position: relative;
+  }
+
+  .#{$prefix}--bmrg-text-input__label {
+    display: flex;
+  }
+
+  .#{$prefix}--bmrg-text-input__tooltip {
+    line-height: 0;
+    margin-left: 0.5rem;
+  }
+}

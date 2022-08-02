@@ -1,0 +1,23 @@
+@include exports('addons-bmrg-platformBanner') {
+  .#{$prefix}--bmrg-banner-container {
+    left: 0;
+    position: fixed;
+    top: 3rem;
+    width: 100%;
+    z-index: 9998;
+    .#{$prefix}--inline-notification {
+      background: #1d364d;
+      margin: 0;
+      max-width: 100%;
+    }
+    .#{$prefix}--inline-notification__title {
+      color: #ffffff;
+    }
+    .#{$prefix}--inline-notification__subtitle {
+      color: #ffffff;
+    }
+    .#{$prefix}--inline-notification__close-icon {
+      fill: #ffffff;
+    }
+  }
+}
