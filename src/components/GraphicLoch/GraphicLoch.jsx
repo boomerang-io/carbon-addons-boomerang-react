@@ -1,4 +1,4 @@
-
+import React from "react";
 
 const LochGraphic = (props) => (
   <svg id="graphic-loch" data-name="graphic-loch" viewBox="0 0 570.04 265.53" {...props}>

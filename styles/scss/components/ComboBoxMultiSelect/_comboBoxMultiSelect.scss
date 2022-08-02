@@ -1,4 +1,6 @@
-@include exports('addons-bmrg-comboBoxMultiSelect') {
+@use "../../styles/config" as *;
+@use '@carbon/themes/scss/tokens' as theme;
+
   .#{$prefix}--bmrg-multi-select {
     position: relative;
     width: 100%;
@@ -19,7 +21,7 @@
 
     .#{$prefix}--combo-box.#{$prefix}--list-box {
       &:hover {
-        background: $ui-01;
+        background: theme.$layer-01;
       }
     }
 
@@ -31,7 +33,7 @@
   }
 
   .#{$prefix}--bmrg-multi-select-selected {
-    background: $ui-01;
+    background: theme.$layer-01;
     align-items: center;
     display: flex;
     flex-wrap: wrap;
@@ -42,4 +44,4 @@
     line-height: 0;
     margin-left: 0.5rem;
   }
-}
+

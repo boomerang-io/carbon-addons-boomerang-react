@@ -1,4 +1,4 @@
-
+import React from "react";
 import PropTypes from "prop-types";
 import { ToastNotification as CarbonToastNotification } from "@carbon/react";
 import { prefix } from "../../internal/settings";

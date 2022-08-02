@@ -1,3 +1,4 @@
+import React from "react";
 import PropTypes from "prop-types";
 import ErrorDragon from "../ErrorDragon";
 import ErrorPageCore from "../ErrorPageCore";

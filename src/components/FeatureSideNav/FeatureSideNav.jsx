@@ -1,4 +1,4 @@
-
+import React from "react";
 import PropTypes from "prop-types";
 import cx from "classnames";
 import { SkeletonPlaceholder } from "@carbon/react";
@@ -11,8 +11,6 @@ FeatureSideNav.propTypes = {
   isLoading: PropTypes.bool,
   small: PropTypes.bool,
 };
-
-
 
 export function FeatureSideNav(props) {
   const { border, small, children, className, isLoading, ...rest } = props;

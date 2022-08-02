@@ -1,4 +1,4 @@
-@include exports('addons-bmrg-textArea') {
+@use "../../styles/config" as *;
   .#{$prefix}--bmrg-text-area {
     align-items: center;
     display: flex;
@@ -19,4 +19,3 @@
     line-height: 0;
     margin-left: 0.5rem;
   }
-}

@@ -7,7 +7,7 @@
 
 import cx from "classnames";
 import PropTypes from "prop-types";
-import { Close } from "@carbon/icons-react";
+import { Close } from "@carbon/react/icons";
 import { match, keys } from "../keyboard";
 import { prefix } from "../settings";
 

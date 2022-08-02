@@ -1,4 +1,4 @@
-@include exports('addons-bmrg-creatable') {
+@use "../../styles/config" as *;
   .#{$prefix}--bmrg-creatable {
     position: relative;
   }
@@ -39,4 +39,4 @@
     line-height: 0;
     margin-left: 0.5rem;
   }
-}
+

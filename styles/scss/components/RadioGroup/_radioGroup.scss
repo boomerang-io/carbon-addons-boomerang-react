@@ -1,4 +1,4 @@
-@include exports('addons-bmrg-radioGroup') {
+@use "../../styles/config" as *;
   .#{$prefix}--bmrg-radio-group {
     position: relative;
     width: 100%;
@@ -37,4 +37,3 @@
     line-height: 0;
     margin-left: 0.5rem;
   }
-}

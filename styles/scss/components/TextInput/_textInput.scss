@@ -1,4 +1,4 @@
-@include exports('addons-bmrg-textInput') {
+@use "../../styles/config" as *;
   .#{$prefix}--bmrg-text-input {
     align-items: center;
     display: flex;
@@ -12,5 +12,8 @@
   .#{$prefix}--bmrg-text-input__tooltip {
     line-height: 0;
     margin-left: 0.5rem;
+
+    svg {
+      fill: currentColor;
+    }
   }
-}

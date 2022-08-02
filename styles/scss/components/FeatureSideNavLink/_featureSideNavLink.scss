@@ -1,8 +1,10 @@
-@include exports('addons-bmrg-feature-sidenav-link') {
+@use "../../styles/config" as *;
+@use '@carbon/themes/scss/tokens' as theme;
+
   .#{$prefix}--bmrg-feature-sidenav-link {
     align-items: center;
     border-left: transparent 0.25rem solid;
-    color: $text-02;
+    color: theme.$text-secondary;
     cursor: pointer;
     display: flex;
     height: 3rem;
@@ -11,18 +13,18 @@
     width: 100%;
     &:focus {
       outline-offset: -0.125rem !important;
-      outline: 0.125rem solid $support-02 !important;
+      outline: 0.125rem solid theme.$support-success !important;
     }
     &.#{$prefix}--bmrg-feature-sidenav-active-link {
-      background-color: $selected-ui;
-      border-left-color: $support-02;
-      color: $text-01;
+      background-color: theme.$background-selected;
+      border-left-color: theme.$support-success;
+      color: theme.$text-primary;
       svg {
         fill: initial;
       }
     }
     svg {
-      fill: $text-02;
+      fill: theme.$text-secondary;
       min-width: 1rem;
       min-height: 1rem;
     }
@@ -37,4 +39,3 @@
     height: 0.0625rem;
     margin: 0.5625rem 1rem;
   }
-}

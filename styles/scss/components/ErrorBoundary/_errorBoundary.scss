@@ -1,4 +1,4 @@
-@include exports('addons-bmrg-errorBoundary') {
+@use "../../styles/config" as *;
   .#{$prefix}--bmrg-error-boundary {
     position: fixed;
     height: 100%;
@@ -11,4 +11,4 @@
     justify-content: center;
     align-items: center;
   }
-}
+

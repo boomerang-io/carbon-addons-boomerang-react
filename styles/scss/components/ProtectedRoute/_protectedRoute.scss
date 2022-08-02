@@ -1,7 +1,9 @@
-@include exports('addons-bmrg-protectedRoute') {
+@use "../../styles/config" as *;
+@use '@carbon/themes/scss/tokens' as theme;
+
   .#{$prefix}--bmrg-protected-route {
     align-items: center;
-    color: $text-01;
+    color: theme.$text-primary;
     display: flex;
     flex: 1;
     flex-direction: column;
@@ -21,4 +23,3 @@
     min-width: 40rem;
     width: 50vw;
   }
-}

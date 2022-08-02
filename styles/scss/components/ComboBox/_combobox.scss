@@ -1,4 +1,4 @@
-@include exports('addons-bmrg-select') {
+@use "../../styles/config" as *;
   .#{$prefix}--bmrg-select {
     position: relative;
     width: 100%;
@@ -14,4 +14,4 @@
     line-height: 0;
     margin-left: 0.5rem;
   }
-}
+

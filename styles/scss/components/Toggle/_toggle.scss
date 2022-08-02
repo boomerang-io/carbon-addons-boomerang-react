@@ -1,4 +1,4 @@
-@include exports('addons-bmrg-toggle') {
+@use "../../styles/config" as *;
   .#{$prefix}--bmrg-toggle__container {
     width: 100%;
   }
@@ -34,7 +34,7 @@
     }
   }
 
-  .#{$prefix}--bmrg-toggle .bx--form-item {
+  .#{$prefix}--bmrg-toggle  .#{$prefix}--form-item {
     max-width: 3rem;
   }
 
@@ -61,4 +61,3 @@
     overflow: visible;
     font-weight: 400;
   }
-}

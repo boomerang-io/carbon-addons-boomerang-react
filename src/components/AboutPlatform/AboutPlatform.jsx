@@ -1,3 +1,4 @@
+import React from "react";
 import PropTypes from "prop-types";
 import { prefix } from "../../internal/settings";
 import { ModalHeader, ModalBody } from "@carbon/react";

@@ -1,4 +1,7 @@
-@include exports('bmrg-addons-modal') {
+@use "../../styles/config" as *;
+@use "../../styles/utils";
+@use '@carbon/themes/scss/tokens' as theme;
+
   .#{$prefix}--bmrg-body-modal-is-open,
   .#{$prefix}--bmrg-html-modal-is-open {
     overflow: hidden;
@@ -33,8 +36,8 @@
   }
 
   .#{$prefix}--bmrg-modal-container {
-    background: $ui-01;
-    border-radius: 0.25rem;
+    background: theme.$layer-01;
+    border-radius: var(--cds-border-radius, 0);
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -66,7 +69,7 @@
     .#{$prefix}--toggle-input:disabled
       + .#{$prefix}--toggle-input__label
       > .#{$prefix}--toggle__switch::before {
-      background: $ui-background;
+      background: theme.$background;
     }
   }
 
@@ -105,12 +108,12 @@
 
     .#{$prefix}--bmrg-modal-flow-subtitle,
     .#{$prefix}--bmrg-modal-composed-subtitle {
-      color: $text-01;
-      font-size: rem(14px);
-      min-height: rem(20px);
-      letter-spacing: rem(0.16px);
-      line-height: rem(20px);
-      margin-top: rem(12px);
+      color: theme.$text-primary;
+      font-size: utils.rem(14px);
+      min-height: utils.rem(20px);
+      letter-spacing: utils.rem(0.16px);
+      line-height: utils.rem(20px);
+      margin-top: utils.rem(12px);
     }
 
     .#{$prefix}--bmrg-modal-flow-form,
@@ -146,11 +149,10 @@
     }
     .#{$prefix}--bmrg-modal-flow-form__title,
     .#{$prefix}--bmrg-modal-form__title {
-      color: $text-01;
-      font-size: rem(14px);
-      letter-spacing: rem(0.16px);
-      line-height: rem(20px);
+      color: theme.$text-primary;
+      font-size: utils.rem(14px);
+      letter-spacing: utils.rem(0.16px);
+      line-height: utils.rem(20px);
       padding: 0 1rem 1rem;
     }
   }
-}

@@ -1,4 +1,6 @@
-@include exports('addons-bmrg-loadingAnimation') {
+@use "../../styles/config" as *;
+@use '@carbon/themes/scss/tokens' as theme;
+
   .#{$prefix}--bmrg-loading-animation--centered {
     align-items: center;
     display: flex;
@@ -13,7 +15,7 @@
 
   .#{$prefix}--bmrg-loading-animation {
     align-items: center;
-    color: $text-01;
+    color: theme.$text-primary;
     display: flex;
     flex-direction: column;
     margin: 0 auto;
@@ -37,4 +39,3 @@
       margin-top: 1rem;
     }
   }
-}

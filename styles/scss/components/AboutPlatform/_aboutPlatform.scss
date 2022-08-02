@@ -1,38 +1,41 @@
-@include exports('addons-bmrg-aboutPlatform') {
-  .#{$prefix}--bmrg-aboutPlatform-container {
-    .#{$prefix}--modal-container {
-      height: rem(244px);
-      width: rem(500px);
-    }
+@use "sass:map";
+@use "../../styles/config" as *;
+@use "../../styles/themes/shell-tokens" as shell;
+@use "../../styles/utils";
 
-    .#{$prefix}--modal-content {
-      height: 100%;
-    }
+.#{$prefix}--bmrg-aboutPlatform-container {
+  .#{$prefix}--modal-container {
+    height: utils.rem(244px);
+    width: utils.rem(500px);
+  }
 
-    .#{$prefix}--modal-header {
-      .#{$prefix}--modal-header__label.#{$prefix}--type-delta {
-        white-space: pre;
-      }
-    }
+  .#{$prefix}--modal-content {
+    height: 100%;
+  }
 
-    .#{$prefix}--bmrg-aboutPlatform-footer__header {
-      color: $bmrg-brand-white;
-      margin-bottom: rem(18px);
-      margin-top: rem(16px);
-      font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, Helvetica, sans-serif;
-      font-size: rem(14px);
-      font-weight: 500;
-      line-height: rem(18px);
+  .#{$prefix}--modal-header {
+    .#{$prefix}--modal-header__label.#{$prefix}--type-delta {
+      white-space: pre;
     }
+  }
 
-    .#{$prefix}--bmrg-aboutPlatform-images {
-      display: flex;
-    }
+  .#{$prefix}--bmrg-aboutPlatform-footer__header {
+    color: shell.$bmrg-brand-white;
+    margin-bottom: utils.rem(18px);
+    margin-top: utils.rem(16px);
+    font-family: "IBM Plex Sans", "Helvetica Neue", Arial, Helvetica, sans-serif;
+    font-size: utils.rem(14px);
+    font-weight: 500;
+    line-height: utils.rem(18px);
+  }
 
-    .#{$prefix}--bmrg-aboutPlatform-images__img {
-      height: 2rem;
-      margin-right: 2rem;
-      width: auto;
-    }
+  .#{$prefix}--bmrg-aboutPlatform-images {
+    display: flex;
+  }
+
+  .#{$prefix}--bmrg-aboutPlatform-images__img {
+    height: 2rem;
+    margin-right: 2rem;
+    width: auto;
   }
 }

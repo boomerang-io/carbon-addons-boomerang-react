@@ -1,4 +1,6 @@
-@include exports('bmrg-addons-modalConfirmEdit') {
+@use "../../styles/config" as *;
+@use '@carbon/themes/scss/tokens' as theme;
+
   .#{$prefix}--bmrg-modal-confirm-edit {
     display: flex;
     flex-direction: column;
@@ -7,15 +9,15 @@
 
   .#{$prefix}--bmrg-modal-confirm-edit__title {
     align-self: flex-start;
-    color: $text-01;
+    color: theme.$text-primary;
     font-size: 0.875rem;
     margin-bottom: 0.375rem;
   }
 
   .#{$prefix}--bmrg-modal-confirm-edit__section {
-    background-color: $ui-03;
-    border-radius: 0.25rem;
-    color: $text-01;
+    background-color: theme.$layer-accent-01;
+    border-radius: var(--cds-border-radius, 0);
+    color: theme.$text-primary;
     width: 100%;
   }
 
@@ -42,7 +44,7 @@
       transform: scale(0.9);
     }
     path {
-      fill: $text-01;
+      fill: theme.$text-primary;
     }
   }
 
@@ -52,7 +54,7 @@
   }
 
   .#{$prefix}--bmrg-modal-confirm-array__content {
-    background-color: $ui-03;
+    background-color: theme.$layer-accent-01;
     height: 100%;
     line-height: 1.1;
     overflow-x: hidden;
@@ -102,4 +104,3 @@
     line-height: 1.1;
     margin-bottom: 0.5em;
   }
-}

@@ -1,11 +1,14 @@
-@include exports('addons-bmrg-autoSuggest') {
+@use "../../styles/config" as *;
+@use '@carbon/themes/scss/tokens' as theme;
+@use '@carbon/react/scss/components/button/tokens';
+
   .#{$prefix}--bmrg-auto-suggest {
     width: 100%;
 
     .react-autosuggest__suggestions-container {
-      background-color: $ui-01;
+      background-color: theme.$layer-01;
       box-shadow: 0 0.1875rem 0.1875rem 0 rgba(0, 0, 0, 0.1);
-      color: $text-02;
+      color: theme.$text-secondary;
       max-height: 8.75rem;
       overflow-y: auto;
       width: 100%;
@@ -31,7 +34,7 @@
       }
 
       &:after {
-        background-color: $ui-03;
+        background-color: theme.$layer-accent-01;
         bottom: 0;
         content: '';
         height: 0.08rem;
@@ -41,8 +44,8 @@
       }
 
       &--highlighted {
-        color: $interactive-02;
-        background-color: $hover-ui;
+        color: tokens.$button-secondary;
+        background-color: theme.$background-hover;
 
         &:after {
           background-color: transparent;
@@ -50,4 +53,3 @@
       }
     }
   }
-}
