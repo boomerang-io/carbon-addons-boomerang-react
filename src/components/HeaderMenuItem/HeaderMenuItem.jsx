@@ -2,21 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import cx from "classnames";
 import { prefix } from "../../internal/settings";
-import {
-  Chat,
-  Debug,
-  Group,
-  Idea, 
-  Information,
-  Launch,
-  Locked,
-  Power,
-  Workspace,
-} from "@carbon/react/icons";
+import { Chat, Debug, Group, Idea, Information, Launch, Locked, Power, Workspace } from "@carbon/react/icons";
 
 import HeaderMenuModalWrapper from "../../internal/HeaderMenuModalWrapper";
-
-
 
 const iconClassName = `${prefix}--bmrg-header-menu-item__img`;
 const iconFill = "#FBFCFC";
@@ -30,7 +18,7 @@ const iconMapping = {
   information: <Information size={16} fill={iconFill} className={iconClassName} />,
   locked: <Locked size={16} fill={iconFill} className={iconClassName} />,
   launch: <Launch size={16} fill={iconFill} className={iconClassName} />,
-  idea: <Idea size={16}  fill={iconFill} className={iconClassName} />,
+  idea: <Idea size={16} fill={iconFill} className={iconClassName} />,
 };
 
 HeaderMenuItem.propTypes = {
