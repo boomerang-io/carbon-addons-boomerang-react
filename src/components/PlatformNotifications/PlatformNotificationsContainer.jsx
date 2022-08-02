@@ -2,12 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import cx from "classnames";
 import FocusTrap from "focus-trap-react";
-import SockJS from "sockjs-client";
 import { Client } from "@stomp/stompjs";
 import { prefix } from "../../internal/settings";
 import Notification from "./PlatformNotifications";
-
-
 
 export default class PlatformNotificationsContainer extends React.Component {
   static propTypes = {
@@ -53,11 +50,9 @@ export default class PlatformNotificationsContainer extends React.Component {
 
   componentDidMount() {
     this.ws = new Client({
+      brokerURL: this.props.config.wsUrl,
       reconnectDelay: 10000,
     });
-    this.ws.webSocketFactory = () => {
-      return new SockJS(this.props.config.wsUrl, null, { timeout: 60000 });
-    };
     this.ws.onConnect = this.connect;
     this.ws.activate();
   }

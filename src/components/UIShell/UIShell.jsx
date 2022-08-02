@@ -1,4 +1,3 @@
-
 import PropTypes from "prop-types";
 
 import Header from "../Header"; // Using default export
@@ -226,7 +225,7 @@ function UIShell({
         skipToContentProps={skipToContentProps}
         requestSummary={user.requestSummary}
         notificationsConfig={{
-          wsUrl: `${finalBaseServiceUrl}/notifications/ws`,
+          wsUrl: `${finalBaseServiceUrl}/notifications/ws`.replace("https://", "wss://"),
         }}
         onHelpClick={[
           typeof onTutorialClick === "function" && (
