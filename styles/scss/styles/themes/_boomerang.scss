@@ -179,6 +179,7 @@ $shell-tokens: (
   bmrg-header-button-text-color: #272727,
   bmrg-header-attachment-background-color: #50565b,
   bmrg-sidenav-active-background-color: #343a3f,
+  bmrg-active-color: #009d9a
 );
 
 $theme: map.merge($v11-tokens, $v10-tokens);

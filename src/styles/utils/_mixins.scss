@@ -54,7 +54,7 @@ $breakpoints: (
   @each $name, $variable in $token-map {
     // Only create properties for non-map objects. Some theme tokens are maps in the default themes that we merge with
     @if type-of($variable) != map {
-      #{$prefix}-#{$name}: $variable;
+      #{$prefix}-#{$name}: #{$variable};
     }
   }
 }

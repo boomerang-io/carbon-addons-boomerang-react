@@ -1,4 +1,5 @@
 @use "../../styles/config" as *;
+@use "../../styles/themes/shell-tokens" as shell;
 @use '@carbon/themes/scss/tokens' as theme;
 
   .#{$prefix}--bmrg-feature-sidenav-link {
@@ -13,11 +14,11 @@
     width: 100%;
     &:focus {
       outline-offset: -0.125rem !important;
-      outline: 0.125rem solid theme.$support-success !important;
+      outline: 0.125rem solid shell.$bmrg-active-color !important;
     }
     &.#{$prefix}--bmrg-feature-sidenav-active-link {
       background-color: theme.$background-selected;
-      border-left-color: theme.$support-success;
+      border-left-color: shell.$bmrg-active-color;
       color: theme.$text-primary;
       svg {
         fill: initial;

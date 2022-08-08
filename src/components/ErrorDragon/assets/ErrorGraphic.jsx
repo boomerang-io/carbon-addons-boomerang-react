@@ -1,3 +1,4 @@
+import React from "react";
 const SvgErrorGraphic = (props) => (
   <svg width={1244} height={386} {...props}>
     <defs>

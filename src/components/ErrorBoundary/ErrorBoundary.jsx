@@ -4,8 +4,6 @@ import { prefix } from "../../internal/settings";
 
 import ErrorMessage from "../ErrorMessage";
 
-
-
 /**
  * todo: convert this to hooks in the future.
  * As of now getDerivedStateFromError not available via hooks
@@ -41,10 +39,10 @@ class ErrorBoundary extends Component {
   }
 
   render() {
-    const ErrorComponent = this.props.errorComponent;
+    const { errorComponent: ErrorComponent, className, style, errorProps, ...rest } = this.props;
     if (this.state.hasError) {
       return (
-        <div className={this.props.className} style={this.props.style} {...this.props}>
+        <div className={className} style={style} {...rest}>
           <ErrorComponent {...this.props.errorProps} />
         </div>
       );

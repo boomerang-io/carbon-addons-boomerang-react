@@ -5,7 +5,7 @@ import { ModalHeader, ModalBody, ModalFooter } from "@carbon/react";
 import { prefix } from "../../internal/settings";
 import { USER_STATUS } from "./constants";
 import CastleDrawBridge from "./assets/CastleDrawBridge";
-import CastleNoDoor from "./assets/castle_nodoor";
+import CastleNoDoor from "./assets/CastleNoDoor";
 
 
 

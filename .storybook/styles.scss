@@ -17,7 +17,7 @@
 @use '@carbon/react/scss/components/notification/tokens' as notification;
 @use '@carbon/react/scss/components/tag/tokens' as tag;
 @use '@carbon/react/scss/components';
-@use '../src/styles/index' with ($use-theme-boomerang: false);
+@use '../src/styles/index' with ($use-theme-boomerang: true);
 
 [data-carbon-theme="boomerang"] {
   @include theme.add-component-tokens(map.merge(button.$button-tokens, button.$button-tokens));
