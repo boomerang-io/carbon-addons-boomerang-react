@@ -49,7 +49,7 @@
     "test:staged": "cross-env CI=true react-scripts test --passWithNoTests --findRelatedTests --bail"
   },
   "dependencies": {
-    "@babel/runtime": "7.18.3",
+    "@babel/runtime": "7.18.9",
     "@carbon/themes": "10.54.0",
     "@stomp/stompjs": "6.1.2",
     "@tippyjs/react": "4.2.6",
