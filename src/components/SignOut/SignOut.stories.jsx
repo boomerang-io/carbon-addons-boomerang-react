@@ -5,6 +5,6 @@ export default {
   component: Component,
 };
 
-export const SignOut = () => {
-  return <Component />;
+export const SignOut = (args) => {
+  return <Component {...args} />;
 };

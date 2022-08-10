@@ -2,78 +2,6 @@ import { Fragment } from "react";
 import { BrowserRouter } from "react-router-dom";
 import SidenavComponent from "./index";
 
-export default {
-  title: "Deprecated/Sidenav",
-  component: SidenavComponent,
-};
-
-export const Default = () => {
-  return (
-    <BrowserRouter>
-      <SidenavComponent navItems={navItems} />
-    </BrowserRouter>
-  );
-};
-
-export const WithTitle = () => {
-  return (
-    <BrowserRouter>
-      <SidenavComponent header={header} navItems={navItems} />
-    </BrowserRouter>
-  );
-};
-
-WithTitle.story = {
-  name: "with title",
-};
-
-export const WithTitleFooter = () => {
-  return (
-    <BrowserRouter>
-      <SidenavComponent
-        header={header}
-        navItems={navItems}
-        footer={() => <SidenavOutstandingTeams outstandingTeamRequests={outstandingTeamRequests} />}
-      />
-    </BrowserRouter>
-  );
-};
-
-WithTitleFooter.story = {
-  name: "with title & footer",
-};
-
-export const OnlyTitleFooter = () => {
-  return (
-    <BrowserRouter>
-      <SidenavComponent
-        header={header}
-        footer={() => <SidenavOutstandingTeams outstandingTeamRequests={outstandingTeamRequests} />}
-      />
-    </BrowserRouter>
-  );
-};
-
-OnlyTitleFooter.story = {
-  name: "only title & footer",
-};
-
-export const WithContent = () => {
-  return (
-    <BrowserRouter>
-      <SidenavComponent
-        header={header}
-        navItems={navItems}
-        content={() => <div style={{ color: "white" }}>test content</div>}
-      />
-    </BrowserRouter>
-  );
-};
-
-WithContent.story = {
-  name: "with content",
-};
-
 // Helpers
 
 const header = () => <div style={{ fontSize: "5rem", color: "#047cc0" }}>title</div>;
@@ -247,7 +175,7 @@ const navItems = [
     dateCreated: "2017-08-28T18:10:11Z",
     id: "59a45c83b0756d1fa0c26ffb",
     isActive: false,
-    text: "Demo team 2",
+    text: "Demo team 24557423432",
     ownerEmail: "tester@us.ibm.com",
     ownerId: "59a45e60b0756d1fa0c27825",
     ownerName: "Test user",
@@ -259,7 +187,7 @@ const navItems = [
     dateCreated: "2017-08-28T18:10:11Z",
     id: "59a45c83b0756d1fa0c26ffb",
     isActive: false,
-    text: "Demo team 2",
+    text: "Demo team 12",
     ownerEmail: "tester@us.ibm.com",
     ownerId: "59a45e60b0756d1fa0c27825",
     ownerName: "Test user",
@@ -271,7 +199,7 @@ const navItems = [
     dateCreated: "2017-08-28T18:10:11Z",
     id: "59a45c83b0756d1fa0c26ffb",
     isActive: false,
-    text: "Demo team 2",
+    text: "Demo team 2564",
     ownerEmail: "tester@us.ibm.com",
     ownerId: "59a45e60b0756d1fa0c27825",
     ownerName: "Test user",
@@ -283,7 +211,7 @@ const navItems = [
     dateCreated: "2017-08-28T18:10:11Z",
     id: "59a45c83b0756d1fa0c26ffb",
     isActive: false,
-    text: "Demo team 2",
+    text: "Demo team 234",
     ownerEmail: "tester@us.ibm.com",
     ownerId: "59a45e60b0756d1fa0c27825",
     ownerName: "Test user",
@@ -295,7 +223,7 @@ const navItems = [
     dateCreated: "2017-08-28T18:10:11Z",
     id: "59a45c83b0756d1fa0c26ffb",
     isActive: false,
-    text: "Demo team 2",
+    text: "Demo team 288676443",
     ownerEmail: "tester@us.ibm.com",
     ownerId: "59a45e60b0756d1fa0c27825",
     ownerName: "Test user",
@@ -307,7 +235,7 @@ const navItems = [
     dateCreated: "2017-08-28T18:10:11Z",
     id: "59a45c83b0756d1fa0c26ffb",
     isActive: false,
-    text: "Demo team 2",
+    text: "Demo team 2222",
     ownerEmail: "tester@us.ibm.com",
     ownerId: "59a45e60b0756d1fa0c27825",
     ownerName: "Test user",
@@ -319,7 +247,7 @@ const navItems = [
     dateCreated: "2017-08-28T18:10:11Z",
     id: "59a45c83b0756d1fa0c26ffb",
     isActive: false,
-    text: "Demo team 2",
+    text: "Demo team 25555",
     ownerEmail: "tester@us.ibm.com",
     ownerId: "59a45e60b0756d1fa0c27825",
     ownerName: "Test user",
@@ -331,7 +259,7 @@ const navItems = [
     dateCreated: "2017-08-28T18:10:11Z",
     id: "59a45c83b0756d1fa0c26ffb",
     isActive: false,
-    text: "Demo team 2",
+    text: "Demo team 2666",
     ownerEmail: "tester@us.ibm.com",
     ownerId: "59a45e60b0756d1fa0c27825",
     ownerName: "Test user",
@@ -343,7 +271,7 @@ const navItems = [
     dateCreated: "2017-08-28T18:10:11Z",
     id: "59a45c83b0756d1fa0c26ffb",
     isActive: false,
-    text: "Demo team 2",
+    text: "Demo team 2899",
     ownerEmail: "tester@us.ibm.com",
     ownerId: "59a45e60b0756d1fa0c27825",
     ownerName: "Test user",
@@ -352,3 +280,97 @@ const navItems = [
     exact: false,
   },
 ];
+
+export default {
+  title: "Deprecated/Sidenav",
+  component: SidenavComponent,
+};
+
+export const Default = (args) => {
+  return (
+    <BrowserRouter>
+      <SidenavComponent navItems={navItems} {...args} />
+    </BrowserRouter>
+  );
+};
+
+Default.args = {
+  navItems: navItems,
+};
+
+export const WithTitle = (args) => {
+  return (
+    <BrowserRouter>
+      <SidenavComponent header={header} navItems={navItems} {...args} />
+    </BrowserRouter>
+  );
+};
+
+WithTitle.args = {
+  header: header,
+  navItems: navItems,
+};
+
+WithTitle.story = {
+  name: "with title",
+};
+
+export const WithTitleFooter = (args) => {
+  return (
+    <BrowserRouter>
+      <SidenavComponent
+        header={header}
+        navItems={navItems}
+        footer={() => <SidenavOutstandingTeams outstandingTeamRequests={outstandingTeamRequests} {...args} />}
+      />
+    </BrowserRouter>
+  );
+};
+
+WithTitleFooter.args = {
+  header: header,
+  navItems: navItems,
+  footer: () => <SidenavOutstandingTeams outstandingTeamRequests={outstandingTeamRequests} {...args} />,
+};
+
+WithTitleFooter.story = {
+  name: "with title & footer",
+};
+
+export const OnlyTitleFooter = (args) => {
+  return (
+    <BrowserRouter>
+      <SidenavComponent
+        header={header}
+        footer={() => <SidenavOutstandingTeams outstandingTeamRequests={outstandingTeamRequests} {...args} />}
+      />
+    </BrowserRouter>
+  );
+};
+
+OnlyTitleFooter.args = {
+  header: header,
+  footer: () => <SidenavOutstandingTeams outstandingTeamRequests={outstandingTeamRequests} {...args} />,
+};
+
+OnlyTitleFooter.story = {
+  name: "only title & footer",
+};
+
+export const WithContent = (args) => {
+  return (
+    <BrowserRouter>
+      <SidenavComponent {...args} />
+    </BrowserRouter>
+  );
+};
+
+WithContent.args = {
+  header: header,
+  navItems: navItems,
+  content: () => <div style={{ color: "white" }}>test content</div>,
+};
+
+WithContent.story = {
+  name: "with content",
+};

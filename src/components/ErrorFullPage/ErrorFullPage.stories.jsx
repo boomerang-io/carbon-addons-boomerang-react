@@ -7,10 +7,10 @@ export default {
   component: ErrorFullPage,
 };
 
-export const Default = () => {
-  return <ErrorFullPage statusUrl={statusUrl} />;
+export const Default = (args) => {
+  return <ErrorFullPage statusUrl={statusUrl} {...args} />;
 };
 
-export const Boomerang = () => {
-  return <ErrorFullPage theme="boomerang" statusUrl={statusUrl} />;
+export const Boomerang = (args) => {
+  return <ErrorFullPage theme="boomerang" statusUrl={statusUrl} {...args} />;
 };

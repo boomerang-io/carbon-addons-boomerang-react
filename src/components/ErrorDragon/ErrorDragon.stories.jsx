@@ -7,6 +7,6 @@ export default {
   component: ErrorDragon,
 };
 
-export const Default = () => {
-  return <ErrorDragon statusUrl={statusUrl} />;
+export const Default = (args) => {
+  return <ErrorDragon statusUrl={statusUrl} {...args} />;
 };

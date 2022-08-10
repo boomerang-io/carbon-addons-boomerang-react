@@ -19,7 +19,7 @@ export default {
   component: UIShell,
 };
 
-export const Default = () => {
+export const Default = (args) => {
   mock.onGet(`${BASE_URL}/users/consents`).reply(200, PRIVACY_DATA);
   mock.onGet(`${BASE_URL}/launchpad/users`).reply(200, PROFILE_SETTINGS_DATA);
   mock.onPost(`${BASE_URL}/support/contact`).reply(200);
@@ -78,6 +78,7 @@ export const Default = () => {
           submittedByUser: 17,
         },
       }}
+      {...args}
     />
   );
 };

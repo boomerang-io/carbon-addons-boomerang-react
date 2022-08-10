@@ -21,10 +21,25 @@ class ErrorBoundary extends Component {
   };
 
   static propTypes = {
+    /**
+     * Component to place the error boundary around
+     */
     children: PropTypes.node,
+    /**
+     * Classname for error boundary wrapper div
+     */
     className: PropTypes.string,
+    /**
+     * Style for error boundary wrapper div
+     */
     style: PropTypes.string,
+    /**
+     * Props to pass to error component
+     */
     errorProps: PropTypes.object,
+    /**
+     * Error component to render on error
+     */
     errorComponent: PropTypes.func,
   };
 

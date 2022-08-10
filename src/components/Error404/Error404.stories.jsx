@@ -7,24 +7,18 @@ export default {
   component: Error404Component,
 };
 
-export const Default = () => {
-  return <Error404Component />;
+export const Default = (args) => {
+  return <Error404Component {...args} />;
 };
 
-export const CustomText = () => {
-  return (
-    <Error404Component
-      header={text("header", "Header")}
-      title={text("title", "Title")}
-      message={text("message", "Message")}
-    />
-  );
+export const CustomText = (args) => {
+  return <Error404Component header={"Header"} title={"Title"} message={"Message"} {...args} />;
 };
 
-export const NoText = () => {
-  return <Error404Component header={null} title={null} message={null} />;
+export const NoText = (args) => {
+  return <Error404Component header={null} title={null} message={null} {...args} />;
 };
 
-export const Boomerang = () => {
-  return <Error404Component theme="boomerang" />;
+export const Boomerang = (args) => {
+  return <Error404Component theme="boomerang" {...args} />;
 };

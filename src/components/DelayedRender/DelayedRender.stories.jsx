@@ -1,15 +1,29 @@
-import Component from "./DelayedRender";
+import React from "react";
+import DelayedRender from "./DelayedRender";
+import { Button } from "@carbon/react";
 
 export default {
   title: "Components/DelayedRender",
-  component: Component,
+  component: DelayedRender,
+  argTypes: {
+    delay: {
+      description: "Number of milliseconds to delay before rendering the children",
+      defaultValue: 300,
+    },
+  },
 };
 
-const Template = (args) => <Component {...args} />;
+export const Default = (args) => {
+  const [index, setIndex] = React.useState(0);
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+      <Button onClick={() => setIndex(index + 1)}>Restart</Button>
+      <DelayedRender {...args} key={index} />
+    </div>
+  );
+};
 
-export const DelayedRender = Template.bind({});
-DelayedRender.args = {
+Default.args = {
   delay: 1000,
-  children: "Hello, friend"
+  children: "I'm delayed",
 };
-

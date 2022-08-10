@@ -3,10 +3,8 @@ import PropTypes from "prop-types";
 import { InlineNotification as CarbonInlineNotification } from "@carbon/react";
 import { prefix } from "../../internal/settings";
 
-
-
 PlatformBanner.propTypes = {
-  kind: PropTypes.string,
+  kind: PropTypes.oneOf(["error", "info", "success", "warning"]),
   message: PropTypes.string,
   title: PropTypes.string,
 };

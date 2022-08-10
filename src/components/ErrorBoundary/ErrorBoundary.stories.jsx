@@ -1,32 +1,35 @@
 import ErrorDragon from "../ErrorDragon";
 import ErrorBoundary from "./index";
 
-const ErrorComponent = () => {
+const ThrowComponent = () => {
   throw new Error("test");
 };
 
 export default {
   title: "Errors/ErrorBoundary",
   component: ErrorBoundary,
+  decorators: [
+    (Story) => (
+      <div style={{ height: "100vh", width: "40rem" }}>
+        <Story />
+      </div>
+    ),
+  ],
 };
 
-export const Default = () => {
+export const Default = (args) => {
   return (
-    <div style={{ height: "100vh", width: "40rem" }}>
-      <ErrorBoundary>
-        <ErrorComponent />
-      </ErrorBoundary>
-    </div>
+    <ErrorBoundary {...args}>
+      <ThrowComponent />
+    </ErrorBoundary>
   );
 };
 
-export const _ErrorDragon = () => {
+export const _ErrorDragon = (args) => {
   return (
-    <div style={{ height: "100vh", width: "40rem" }}>
-      <ErrorBoundary errorComponent={ErrorDragon}>
-        <ErrorComponent />
-      </ErrorBoundary>
-    </div>
+    <ErrorBoundary errorComponent={ErrorDragon} {...args}>
+      <ThrowComponent />
+    </ErrorBoundary>
   );
 };
 

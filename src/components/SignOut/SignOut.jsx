@@ -7,7 +7,7 @@ import { ModalHeader, ModalBody, ModalFooter } from "@carbon/react";
 import HeaderMenuItem from "../HeaderMenuItem";
 
 SignOutContainer.propTypes = {
-  signOutLink: PropTypes.string,
+  signOutLink: PropTypes.string.isRequired,
 };
 
 SignOutContainer.defaultProps = {};

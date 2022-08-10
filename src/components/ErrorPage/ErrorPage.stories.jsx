@@ -7,18 +7,19 @@ export default {
   component: ErrorPage,
 };
 
-export const Default = () => {
+export const Default = (args) => {
   return (
     <ErrorPage
       header={text("header", "Header")}
       title={text("title", "Title")}
       message={text("message", "Message")}
       graphic={<GraphicWrangler />}
+      {...args}
     />
   );
 };
 
-export const MessageLink = () => {
+export const MessageLink = (args) => {
   return (
     <ErrorPage
       title={text("title", "Title")}
@@ -28,6 +29,7 @@ export const MessageLink = () => {
         </p>
       }
       graphic={<GraphicWrangler />}
+      {...args}
     />
   );
 };

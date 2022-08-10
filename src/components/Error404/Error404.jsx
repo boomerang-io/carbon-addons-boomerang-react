@@ -8,7 +8,6 @@ import ErrorPageCore from "../ErrorPageCore";
 
 import { prefix } from "../../internal/settings";
 
-
 export default function Error404(props) {
   return props?.theme === "boomerang" ? (
     <ErrorPage
@@ -34,5 +33,9 @@ Error404.defaultProps = {
 };
 
 Error404.propTypes = {
+  header: PropTypes.string,
+  title: PropTypes.string,
+  message: PropTypes.string,
+  graphic: PropTypes.node,
   theme: PropTypes.oneOf(["core", "boomerang"]),
 };

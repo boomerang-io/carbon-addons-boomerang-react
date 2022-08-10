@@ -7,7 +7,10 @@ DelayedRender.defaultProps = {
 
 DelayedRender.propTypes = {
   children: PropTypes.node.isRequired,
-  /** Time to delay in milliseconds before rendering the component */
+  /**
+   * Time to delay in milliseconds before rendering the component
+   */
+
   delay: PropTypes.number,
 };
 

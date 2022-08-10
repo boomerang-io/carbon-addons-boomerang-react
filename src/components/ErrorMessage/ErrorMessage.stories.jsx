@@ -5,6 +5,6 @@ export default {
   component: ErrorMessage,
 };
 
-export const Default = () => {
-  return <ErrorMessage />;
+export const Default = (args) => {
+  return <ErrorMessage {...args} />;
 };
