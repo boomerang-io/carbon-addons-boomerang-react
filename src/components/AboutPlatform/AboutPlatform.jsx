@@ -12,8 +12,6 @@ import ReactIcon from "./assets/ReactIcon";
 import SpringIcon from "./assets/SpringIcon";
 import TektonIcon from "./assets/TektonIcon";
 
-
-
 const AboutPlatformContainer = ({ version, organization, isFlowApp }) => {
   return (
     <HeaderMenuItem

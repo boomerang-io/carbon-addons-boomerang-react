@@ -80,6 +80,13 @@ export const parameters = {
       order: ["Welcome", "Components", "Inputs", "Features", "Platform", "Errors", "Playground", "*", "Deprecated"],
     },
   },
+  parameters: {
+    docs: {
+      source: {
+        excludeDecorators: true,
+      },
+    },
+  },
   // Small (<672)
   // Medium (672 - 1056px)
   // Large (1056 - 1312px)

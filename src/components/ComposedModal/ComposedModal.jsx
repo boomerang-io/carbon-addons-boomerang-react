@@ -7,23 +7,35 @@ import { ModalHeader } from "@carbon/react";
 import { prefix } from "../../internal/settings";
 import ConfirmModal from "../ConfirmModal";
 
-
-
 ComposedModal.propTypes = {
+  /**
+   * Element ID to attach to portal to
+   */
   appElement: PropTypes.string,
+  /**
+   * Render inside the body of the modal
+   */
   children: PropTypes.func,
   composedModalProps: PropTypes.object,
   confirmModalProps: PropTypes.object,
   initialState: PropTypes.object,
+  /**
+   * Imperatively control if the modal is open or not
+   */
   isOpen: PropTypes.bool,
   modalHeaderChildren: PropTypes.element,
   modalHeaderProps: PropTypes.object,
+
   modalTrigger: PropTypes.func,
+  /**
+   * Function to call onCloseModal event
+   */
   onCloseModal: PropTypes.func,
   size: PropTypes.oneOf(["xs", "sm", "md", "lg"]),
 };
 
 ComposedModal.defaultProps = {
+  appElement: "#app",
   composedModalProps: {},
   isOpen: false,
   modalHeaderProps: {},

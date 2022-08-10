@@ -3,8 +3,6 @@ import PropTypes from "prop-types";
 import AutoSuggest from "react-autosuggest";
 import { prefix } from "../../internal/settings";
 
-
-
 const getSuggestions = (values, value) => {
   const inputValue = value.trim().toLowerCase();
   const inputLength = inputValue.length;

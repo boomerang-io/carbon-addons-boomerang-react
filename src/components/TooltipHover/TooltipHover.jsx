@@ -4,8 +4,6 @@ import cx from "classnames";
 import Tippy from "@tippyjs/react";
 import { prefix } from "../../internal/settings";
 
-
-
 /**
  * Wrapper props
  * View all supported props here: https://atomiks.github.io/tippyjs/v6/all-props/
@@ -16,23 +14,46 @@ TooltipHover.propTypes = {
    * Can be one of: start or end. Default behavior is center.
    */
   align: PropTypes.oneOf(["start", "end"]),
+  /**
+   * The element that is tooltip is attached to and shows on hover.
+   */
   children: PropTypes.node,
   className: PropTypes.string,
+  /**
+   * One of three props to set the tooltip content: content, tooltipContent, and tooltipText in order of precedence
+   */
   content: PropTypes.node,
   /**
    * Specify the direction of the tooltip. Can be either top or bottom.
    */
   direction: PropTypes.oneOf(["auto", "top", "bottom", "left", "right"]),
   /**
+   * In place of using align and direction, a placement string can be passed
    * https://atomiks.github.io/tippyjs/v6/all-props/#placement
    */
-  placement: PropTypes.string,
+  placement: PropTypes.oneOf([
+    "top",
+    "top-start",
+    "top-end",
+    "right",
+    "right-start",
+    "right-end",
+    "bottom",
+    "bottom-start",
+    "bottom-end",
+    "left",
+    "left-start",
+    "left-end",
+    "auto",
+    "auto-start",
+    "auto-end",
+  ]),
   tooltipContent: PropTypes.node,
   tooltipText: PropTypes.node,
 };
 
 /**
- * TooltipHover to replace TooltipDefintion in most situations
+ * TooltipHover to replace TooltipDefintion in most situations.
  * Uses https://github.com/atomiks/tippyjs-react
  */
 function TooltipHover({

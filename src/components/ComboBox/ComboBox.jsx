@@ -7,7 +7,6 @@ import { prefix } from "../../internal/settings";
 import { ComboBox } from "@carbon/react";
 
 ComboBoxComponent.propTypes = {
-  ...ComboBox.propTypes,
   disableClear: PropTypes.bool,
   id: PropTypes.string.isRequired,
   labelText: PropTypes.node,
@@ -55,7 +54,7 @@ function ComboBoxComponent({
    * only that will be displayed if you do a naive filtering of the input.
    * We want to:
    * 1. Filter options based on the input text and plain value or label of the item
-   * 2. After selecting a value, show all options when opening the combobox with having to clear the selection
+   * 2. After selecting a value, show all options when opening the combobox without having to clear the selection
    * 3. Filter the values when you enter a query with an item selected
    */
 
@@ -93,7 +92,7 @@ function ComboBoxComponent({
    * When an item is selected, the `onInputChange` handler is called with the value selected
    * so it is difficult to disambiguate between a keydown event and a select event
    * Take a simple approach here. If the selectedItem and input values match, there isn't a query
-   * they don't, there is. We use this to determine if we should filter the values
+   * If they don't, there is a query. We use this to determine if we should filter the values.
    */
   const defaultInputChange = (input) => {
     queryRef.current = input;
@@ -120,11 +119,11 @@ function ComboBoxComponent({
     }
 
     if (typeof item === "string" || typeof item === "number") {
-      return item.toLowerCase().includes(inputValue?.toLowerCase());
+      return String(item).toLowerCase().includes(inputValue?.toLowerCase());
     }
 
     if (item && item.label) {
-      return item.label.toLowerCase().includes(inputValue?.toLowerCase());
+      return String(item.label).toLowerCase().includes(inputValue?.toLowerCase());
     }
 
     return item;

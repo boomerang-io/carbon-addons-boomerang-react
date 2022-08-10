@@ -5,20 +5,34 @@ import TextInput from "./TextInput";
 export default {
   title: "Inputs/TextInput",
   component: TextInput,
+  decorators: [
+    (Story) => (
+      <div style={{ maxWidth: "25rem", padding: "1rem" }}>
+        <Story />
+      </div>
+    ),
+  ],
+  argTypes: {
+    tooltipContent: {
+      control: "text",
+    },
+  },
 };
 
-export const Default = () => {
+export const Default = (args) => {
   return (
     <TextInput
       id="default-text-input"
       onChange={action("text input change")}
       placeholder={text("placeholder", "Placeholder")}
       type="text"
+      labelText="Label"
+      {...args}
     />
   );
 };
 
-export const KitchenSink = () => {
+export const KitchenSink = (args) => {
   return (
     <div style={{ height: "5rem" }}>
       <TextInput
@@ -29,6 +43,7 @@ export const KitchenSink = () => {
         labelText={text("labelText", "Label for text input")}
         tooltipContent={text("tooltipContent", "Tooltip for text input")}
         tooltipProps={object("tooltipProps", { placement: "top" })}
+        {...args}
       />
     </div>
   );

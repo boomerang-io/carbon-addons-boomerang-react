@@ -7,6 +7,13 @@ import DynamicFormik from "./DynamicFormik";
 export default {
   title: "Inputs/DynamicFormik",
   component: DynamicFormik,
+  decorators: [
+    (Story) => (
+      <div style={{ maxWidth: "30rem", padding: "2rem" }}>
+        <Story />
+      </div>
+    ),
+  ],
 };
 
 const additionalSchema = Yup.object().shape({
@@ -508,71 +515,63 @@ const governingSelectsInputs = [
   },
 ];
 
-function Wrapper(props) {
-  return <div style={{ padding: "2rem" }}>{props.children}</div>;
-}
-
 export const Default = () => {
   return (
-    <Wrapper>
-      <DynamicFormik
-        id="dynamic-formik-form-id"
-        inputs={inputs}
-        onSubmit={() => {
-          action("submit clicked");
-        }}
-        radioProps={({ input }) => ({ ...input, verticalWrapped: true, columnHeight: "8rem" })}
-        validationSchemaExtension={additionalSchema}
-      >
-        {({ inputs, formikProps }) => {
-          return (
-            <form>
-              {inputs}
-              <button
-                disabled={!formikProps.isValid}
-                onClick={formikProps.handleSubmit}
-                style={{ marginTop: "1rem" }}
-                type="button"
-              >
-                Submit
-              </button>
-            </form>
-          );
-        }}
-      </DynamicFormik>
-    </Wrapper>
+    <DynamicFormik
+      id="dynamic-formik-form-id"
+      inputs={inputs}
+      onSubmit={() => {
+        action("submit clicked");
+      }}
+      radioProps={({ input }) => ({ ...input, verticalWrapped: true, columnHeight: "8rem" })}
+      validationSchemaExtension={additionalSchema}
+    >
+      {({ inputs, formikProps }) => {
+        return (
+          <form style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+            {inputs}
+            <button
+              disabled={!formikProps.isValid}
+              onClick={formikProps.handleSubmit}
+              style={{ marginTop: "1rem" }}
+              type="button"
+            >
+              Submit
+            </button>
+          </form>
+        );
+      }}
+    </DynamicFormik>
   );
 };
 
 export const AllowPropertySyntax = () => {
   return (
-    <Wrapper>
-      <DynamicFormik
-        allowCustomPropertySyntax
-        id="dynamic-formik-form-id"
-        inputs={inputs}
-        onSubmit={() => {
-          action("submit clicked");
-        }}
-        validationSchemaExtension={additionalSchema}
-      >
-        {({ inputs, formikProps }) => {
-          return (
-            <form>
-              {inputs}
-              <button
-                disabled={!formikProps.isValid}
-                onClick={formikProps.handleSubmit}
-                style={{ marginTop: "1rem" }}
-                type="button"
-              >
-                Submit
-              </button>
-            </form>
-          );
-        }}
-      </DynamicFormik>
-    </Wrapper>
+    <DynamicFormik
+      allowCustomPropertySyntax
+      id="dynamic-formik-form-id"
+      inputs={inputs}
+      onSubmit={() => {
+        action("submit clicked");
+      }}
+      validationSchemaExtension={additionalSchema}
+    >
+      {({ inputs, formikProps }) => {
+        return (
+          <form style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+            {inputs}
+            <button
+              disabled={!formikProps.isValid}
+              onClick={formikProps.handleSubmit}
+              style={{ marginTop: "1rem" }}
+              type="button"
+            >
+              Submit
+            </button>
+          </form>
+        );
+      }}
+    </DynamicFormik>
   );
 };
 
@@ -582,34 +581,32 @@ AllowPropertySyntax.story = {
 
 export const AllowPropertySyntaxCustomPatternB = () => {
   return (
-    <Wrapper>
-      <DynamicFormik
-        allowCustomPropertySyntax
-        customPropertySyntaxPattern={/\$\{b:([a-zA-Z0-9_.-]+)\}/}
-        id="dynamic-formik-form-id"
-        inputs={inputs}
-        onSubmit={() => {
-          action("submit clicked");
-        }}
-        validationSchemaExtension={additionalSchema}
-      >
-        {({ inputs, formikProps }) => {
-          return (
-            <form>
-              {inputs}
-              <button
-                disabled={!formikProps.isValid}
-                onClick={formikProps.handleSubmit}
-                style={{ marginTop: "1rem" }}
-                type="button"
-              >
-                Submit
-              </button>
-            </form>
-          );
-        }}
-      </DynamicFormik>
-    </Wrapper>
+    <DynamicFormik
+      allowCustomPropertySyntax
+      customPropertySyntaxPattern={/\$\{b:([a-zA-Z0-9_.-]+)\}/}
+      id="dynamic-formik-form-id"
+      inputs={inputs}
+      onSubmit={() => {
+        action("submit clicked");
+      }}
+      validationSchemaExtension={additionalSchema}
+    >
+      {({ inputs, formikProps }) => {
+        return (
+          <form style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+            {inputs}
+            <button
+              disabled={!formikProps.isValid}
+              onClick={formikProps.handleSubmit}
+              style={{ marginTop: "1rem" }}
+              type="button"
+            >
+              Submit
+            </button>
+          </form>
+        );
+      }}
+    </DynamicFormik>
   );
 };
 
@@ -619,32 +616,30 @@ AllowPropertySyntaxCustomPatternB.story = {
 
 export const GoverningSelects = () => {
   return (
-    <Wrapper>
-      <DynamicFormik
-        id="dynamic-formik-form-id"
-        inputs={governingSelectsInputs}
-        onSubmit={() => {
-          action("submit clicked");
-        }}
-        radioProps={({ input }) => ({ ...input, verticalWrapped: true, columnHeight: "8rem" })}
-        validationSchemaExtension={additionalSchema}
-      >
-        {({ inputs, formikProps }) => {
-          return (
-            <form>
-              {inputs}
-              <button
-                disabled={!formikProps.isValid}
-                onClick={formikProps.handleSubmit}
-                style={{ marginTop: "1rem" }}
-                type="button"
-              >
-                Submit
-              </button>
-            </form>
-          );
-        }}
-      </DynamicFormik>
-    </Wrapper>
+    <DynamicFormik
+      id="dynamic-formik-form-id"
+      inputs={governingSelectsInputs}
+      onSubmit={() => {
+        action("submit clicked");
+      }}
+      radioProps={({ input }) => ({ ...input, verticalWrapped: true, columnHeight: "8rem" })}
+      validationSchemaExtension={additionalSchema}
+    >
+      {({ inputs, formikProps }) => {
+        return (
+          <form style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+            {inputs}
+            <button
+              disabled={!formikProps.isValid}
+              onClick={formikProps.handleSubmit}
+              style={{ marginTop: "1rem" }}
+              type="button"
+            >
+              Submit
+            </button>
+          </form>
+        );
+      }}
+    </DynamicFormik>
   );
 };

@@ -7,7 +7,7 @@
 @use "../src/styles/themes/boomerang";
 @use '@carbon/react/scss/compat/themes' as compat;
 @use '@carbon/react/scss/compat/theme' with (
-  $theme: map.merge(compat.$white, compat.$white)
+  $theme: map.merge(compat.$white, boomerang.$theme)
 );
 @use '@carbon/react/scss/fonts';
 @use '@carbon/react/scss/grid';
@@ -20,7 +20,7 @@
 @use '../src/styles/index' with ($use-theme-boomerang: true);
 
 [data-carbon-theme="boomerang"] {
-  @include theme.add-component-tokens(map.merge(button.$button-tokens, button.$button-tokens));
+  @include theme.add-component-tokens(map.merge(button.$button-tokens, boomerang.$v11-button-tokens));
   @include theme.add-component-tokens(notification.$notification-tokens);
   @include theme.add-component-tokens(tag.$tag-tokens);
   @include theme.theme();

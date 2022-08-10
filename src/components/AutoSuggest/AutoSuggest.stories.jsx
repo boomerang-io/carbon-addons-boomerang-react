@@ -3,11 +3,6 @@ import { text } from "@storybook/addon-knobs";
 import TextInput from "../TextInput";
 import AutoSuggest from "./AutoSuggest";
 
-export default {
-  title: "Inputs/AutoSuggest",
-  component: AutoSuggest,
-};
-
 const animals = [
   { label: "caribou", value: "caribou" },
   { label: "cat", value: "cat" },
@@ -23,20 +18,40 @@ const animals = [
   { label: "penguin", value: "penguin" },
 ];
 
-export const Default = () => {
+export default {
+  title: "Inputs/AutoSuggest",
+  component: AutoSuggest,
+  decorators: [
+    (Story) => (
+      <div style={{ maxWidth: "25rem", minHeight: "20rem" }}>
+        <Story />
+      </div>
+    ),
+  ],
+  parameters: {
+    docs: {
+      source: {
+        excludeDecorators: true,
+      },
+    },
+  },
+  argTypes: {
+    autoSuggestions: { control: "array", defaultValue: animals },
+    inputProps: {
+      control: "object",
+      defaultValue: {
+        id: "auto-suggest",
+        placeholder: "Type an animal",
+        labelText: "Animal",
+      },
+    },
+  },
+};
+
+export const Default = (args) => {
   return (
-    <div style={{ width: "25rem" }}>
-      <AutoSuggest
-        autoSuggestions={animals}
-        inputProps={{
-          id: text("id", "auto-suggest"),
-          placeholder: text("placeholder", "Type an animal"),
-          labelText: text("labelText", "Animal"),
-        }}
-        onChange={action("Auto suggest change")}
-      >
-        <TextInput />
-      </AutoSuggest>
-    </div>
+    <AutoSuggest onChange={action("Auto suggest change")} {...args}>
+      <TextInput />
+    </AutoSuggest>
   );
 };

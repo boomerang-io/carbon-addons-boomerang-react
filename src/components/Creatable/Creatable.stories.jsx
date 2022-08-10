@@ -7,7 +7,7 @@ export default {
   component: Creatable,
 };
 
-export const Default = () => {
+export const Default = (args) => {
   return (
     <div style={{ width: "25rem" }}>
       <Creatable
@@ -17,12 +17,13 @@ export const Default = () => {
         helperText="Test helperText"
         placeholder={text("placeholder", "Create some values")}
         type="text"
+        {...args}
       />
     </div>
   );
 };
 
-export const NonDeletable = () => {
+export const NonDeletable = (args) => {
   return (
     <div style={{ width: "25rem" }}>
       <Creatable
@@ -34,12 +35,13 @@ export const NonDeletable = () => {
         initialValues="test,test2"
         nonDeletable={true}
         type="text"
+        {...args}
       />
     </div>
   );
 };
 
-export const KeyValuePair = () => {
+export const KeyValuePair = (args) => {
   return (
     <div style={{ width: "25rem" }}>
       <Creatable
@@ -53,12 +55,13 @@ export const KeyValuePair = () => {
         keyHelperText={text("keyHelperText", "Key Helper")}
         valueHelperText={text("valueHelperText", "Value Helper")}
         type="text"
+        {...args}
       />
     </div>
   );
 };
 
-export const LimitTheNumberOfAddedValues = () => {
+export const LimitTheNumberOfAddedValues = (args) => {
   return (
     <div style={{ width: "25rem" }}>
       <Creatable
@@ -69,12 +72,13 @@ export const LimitTheNumberOfAddedValues = () => {
         placeholder={text("placeholder", "Create some values")}
         type="text"
         max={3}
+        {...args}
       />
     </div>
   );
 };
 
-export const KitchenSink = () => {
+export const KitchenSink = (args) => {
   return (
     <Creatable
       id="tooltip-creatable"
@@ -85,6 +89,7 @@ export const KitchenSink = () => {
       type="text"
       tooltipContent={text("tooltipContent", "Tooltip for creatable")}
       tooltipProps={{ direction: "top" }}
+      {...args}
     />
   );
 };

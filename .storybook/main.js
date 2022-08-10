@@ -3,6 +3,7 @@ const { mergeConfig } = require("vite");
 module.exports = {
   stories: ["../src/**/*.stories.@(js|jsx|ts|tsx)"],
   addons: [
+    "@storybook/addon-links",
     {
       name: "@storybook/addon-essentials",
       options: {
@@ -14,6 +15,7 @@ module.exports = {
         viewport: true,
       },
     },
+    "@storybook/addon-storysource",
     "@storybook/addon-a11y",
   ],
   framework: "@storybook/react",

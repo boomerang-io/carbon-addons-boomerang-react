@@ -1,35 +1,37 @@
-
-import Component from "./Avatar";
+import Avatar from "./Avatar";
 
 export default {
   title: "Components/Avatar",
-  components: Component,
+  components: Avatar,
   argTypes: {
+    className: {
+      description: "Pass custom class",
+      control: "text",
+    },
     src: {
-      description: "URL to avatar image"
+      control: "text",
+      description: "URL to avatar image",
     },
     size: {
       description: "Control the size",
       control: "select",
-      options: ["small", "medium", "large"]
-    },
-    userName: {
-      description: "Used for alt text"
+      options: ["small", "medium", "large"],
     },
     style: {
-      description: "Pass styles"
+      description: "Pass styles",
+      control: "object",
     },
-    className: {
-      description: "Pass custom class"
-    }
-  }
+    userName: {
+      control: "text",
+      description: "Set image alt text",
+    },
+  },
 };
 
-const Template = (args) => <Component {...args} />;
+export const Default = (args) => <Avatar {...args} />;
 
-export const Avatar = Template.bind({});
-Avatar.args = {
+Default.args = {
+  size: "large",
   src: "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50",
-  userName: "Gratav User",
-  size: "small"
+  userName: "Gravatar User",
 };

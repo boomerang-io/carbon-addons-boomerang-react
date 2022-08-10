@@ -1,24 +1,23 @@
-import { text } from "@storybook/addon-knobs";
 import AboutPlatform from "./AboutPlatform";
 
 export default {
   title: "Platform/AboutPlatform",
-  component: AboutPlatform
+  component: AboutPlatform,
+  argTypes: {
+    isFlowApp: { control: "boolean", defaultValue: false },
+    organization: { control: "text", defaultValue: "IBM" },
+    version: { control: "text", defaultValue: "5.0.0" },
+  },
 };
 
-export const Default = () => {
-  return (
-    <AboutPlatform organization={text("organization", "IBM Boomerang Platform")} version={text("version", "5.0.0")} />
-  );
+export const Default = (args) => {
+  return <AboutPlatform {...args} />;
 };
 
+export const Flow = (args) => {
+  return <AboutPlatform {...args} />;
+};
 
-export const FlowIcons = () => {
-  return (
-    <AboutPlatform
-      isFlowApp
-      organization={text("organization", "IBM Boomerang Platform")}
-      version={text("version", "5.0.0")}
-    />
-  );
+Flow.args = {
+  isFlowApp: true,
 };

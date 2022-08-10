@@ -6,6 +6,13 @@ import TextArea from "./TextArea";
 export default {
   title: "Inputs/TextArea",
   component: TextArea,
+  decorators: [
+    (Story) => (
+      <div style={{ maxWidth: "25rem", padding: "1rem" }}>
+        <Story />
+      </div>
+    ),
+  ],
 };
 
 const ExternallyControlledTextArea = (props) => {
@@ -41,7 +48,7 @@ export const MaxInputLength = () => {
       placeholder={text("placeholder", "Placeholder")}
       style={{ resize: "none" }}
       labelText={text("labelText", "Label for text area")}
-      max={200}
+      maxCount={200}
     />
   );
 };
