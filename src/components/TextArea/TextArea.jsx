@@ -44,8 +44,17 @@ const TextAreaComponent = React.forwardRef(function TextAreaComponent(
 });
 
 TextAreaComponent.propTypes = {
+  /**
+   * Classname to pass to tooltip
+   */
   tooltipClassName: PropTypes.string,
-  tooltipContent: PropTypes.any,
+  /**
+   * Content to display in tooltip
+   */
+  tooltipContent: PropTypes.node,
+  /**
+   * Additional props to pass to the tooltip
+   */
   tooltipProps: PropTypes.object,
   /**
    * Provide a custom className that is applied directly to the underlying

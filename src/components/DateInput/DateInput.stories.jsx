@@ -7,7 +7,7 @@ export default {
   component: DateInput,
 };
 
-export const Default = () => {
+export const Default = (args) => {
   return (
     <DateInput
       id="default-date-input"
@@ -18,11 +18,12 @@ export const Default = () => {
       dateFormat="Y-m-d"
       max="2020-01-31T13:10:20.219+00:00"
       min="2020-01-01T13:10:20.219+00:00"
+      {...args}
     />
   );
 };
 
-export const ReadOnly = () => {
+export const ReadOnly = (args) => {
   return (
     <DateInput
       id="read-only-date-input"
@@ -35,11 +36,12 @@ export const ReadOnly = () => {
       min="2020-01-01T13:10:20.219+00:00"
       value="2020-01-15T13:10:20.219+00:00"
       readOnly
+      {...args}
     />
   );
 };
 
-export const Range = () => {
+export const Range = (args) => {
   return (
     <div style={{ height: "5rem" }}>
       <DateInput
@@ -55,12 +57,13 @@ export const Range = () => {
         min="2021-01-01T13:10:20.219+00:00"
         value="2021-08-15T13:10:20.219+00:00,2021-09-19T13:10:20.219+00:00"
         type="date-range"
+        {...args}
       />
     </div>
   );
 };
 
-export const KitchenSink = () => {
+export const KitchenSink = (args) => {
   return (
     <div style={{ height: "5rem", width: "20rem" }}>
       <DateInput
@@ -73,6 +76,7 @@ export const KitchenSink = () => {
         labelText={text("labelText", "Label for text input")}
         tooltipContent={text("tooltipContent", "Tooltip for text input")}
         tooltipProps={object("tooltipProps", { placement: "top" })}
+        {...args}
       />
     </div>
   );

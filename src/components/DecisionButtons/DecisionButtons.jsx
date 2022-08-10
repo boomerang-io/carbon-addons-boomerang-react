@@ -5,8 +5,6 @@ import TooltipHover from "../TooltipHover";
 import { Information } from "@carbon/react/icons";
 import { prefix } from "../../internal/settings";
 
-
-
 const ButtonTypes = {
   Negative: "negative",
   Positive: "positive",
@@ -26,8 +24,17 @@ DecisionButtons.propTypes = {
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func,
   orientation: PropTypes.oneOf(["horizontal", "vertical"]),
+  /**
+   * Classname to pass to tooltip
+   */
   tooltipClassName: PropTypes.string,
-  tooltipContent: PropTypes.any,
+  /**
+   * Content to display in tooltip
+   */
+  tooltipContent: PropTypes.node,
+  /**
+   * Additional props to pass to the tooltip
+   */
   tooltipProps: PropTypes.object,
   selectedItem: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };

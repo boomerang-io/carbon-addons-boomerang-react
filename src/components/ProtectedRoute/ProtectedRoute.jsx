@@ -19,7 +19,7 @@ const ProtectedRoute = ({ allowedUserRoles, component, message, title, userRole,
 
 ProtectedRoute.propTypes = {
   allowedUserRoles: PropTypes.array.isRequired,
-  component: PropTypes.oneOfType([PropTypes.func, PropTypes.object]).isRequired,
+  component: PropTypes.node.isRequired,
   location: PropTypes.object,
   message: PropTypes.string,
   title: PropTypes.string,

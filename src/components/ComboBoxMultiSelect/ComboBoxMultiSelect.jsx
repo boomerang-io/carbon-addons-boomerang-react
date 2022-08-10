@@ -4,23 +4,30 @@ import cx from "classnames";
 import TooltipHover from "../TooltipHover";
 import { Information } from "@carbon/react/icons";
 import { prefix } from "../../internal/settings";
-
 import MultiSelect from "./MultiSelect";
 
-
-
-MultiSelectComponent.propTypes = {
+ComboBoxMultiSelect.propTypes = {
   disableClear: PropTypes.bool,
   id: PropTypes.string.isRequired,
   labelText: PropTypes.string,
   label: PropTypes.string,
   titleText: PropTypes.string,
+  /**
+   * Classname to pass to tooltip
+   */
   tooltipClassName: PropTypes.string,
-  tooltipContent: PropTypes.any,
+  /**
+   * Content to display in tooltip
+   */
+  tooltipContent: PropTypes.node,
+  /**
+   * Additional props to pass to the tooltip
+   */
   tooltipProps: PropTypes.object,
+  ...MultiSelect.propTypes,
 };
 
-MultiSelectComponent.defaultProps = {
+ComboBoxMultiSelect.defaultProps = {
   disableClear: false,
   tooltipClassName: `${prefix}--bmrg-multi-select__tooltip`,
   tooltipProps: { direction: "top" },
@@ -37,7 +44,7 @@ function getFilteredItems({ items, selectedItems }) {
   );
 }
 
-function MultiSelectComponent({
+function ComboBoxMultiSelect({
   disableClear,
   id,
   initialSelectedItems,
@@ -93,4 +100,4 @@ function MultiSelectComponent({
   );
 }
 
-export default MultiSelectComponent;
+export default ComboBoxMultiSelect;

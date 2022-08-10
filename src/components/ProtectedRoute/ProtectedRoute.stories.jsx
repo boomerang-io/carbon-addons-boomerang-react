@@ -6,43 +6,49 @@ import ProtectedRoute from "./ProtectedRoute";
 export default {
   title: "Components/ProtectedRoute",
   component: ProtectedRoute,
+  decorators: [
+    (Story) => (
+      <Router history={history}>
+        <Story />
+      </Router>
+    ),
+  ],
 };
 
 const history = createMemoryHistory();
-const Component = () => <div>If you see me, then you have authorization to do so.</div>;
+const Component = () => <div>Yay, you are authorized for this page.</div>;
 
-export const Authorized = () => {
-  return (
-    <Router history={history}>
-      <ProtectedRoute
-        allowedUserRoles={["admin", "operator"]}
-        component={Component}
-        path="/"
-        userRole={["user", "operator"]}
-      />
-    </Router>
-  );
+export const Authorized = (args) => {
+  return <ProtectedRoute {...args} />;
 };
 
-export const NotAuthorized = () => {
-  return (
-    <Router history={history}>
-      <ProtectedRoute allowedUserRoles={["admin", "operator"]} component={Component} path="/" userRole="user" />
-    </Router>
-  );
+Authorized.args = {
+  allowedUserRoles: ["admin", "operator"],
+  component: Component,
+  path: "/",
+  userRole: ["user", "operator"],
 };
 
-export const WithCustomMessage = () => {
-  return (
-    <Router history={history}>
-      <ProtectedRoute
-        allowedUserRoles={["admin", "operator"]}
-        component={Component}
-        path="/"
-        title={text("title", "custom title")}
-        subtitle={text("subtitle", "custom subtitle")}
-        userRole="user"
-      />
-    </Router>
-  );
+export const NotAuthorized = (args) => {
+  return <ProtectedRoute {...args} />;
+};
+
+NotAuthorized.args = {
+  allowedUserRoles: ["admin", "operator"],
+  component: Component,
+  path: "/",
+  userRole: "user",
+};
+
+export const WithCustomMessage = (args) => {
+  return <ProtectedRoute {...args} />;
+};
+
+WithCustomMessage.args = {
+  allowedUserRoles: ["admin", "operator"],
+  component: Component,
+  path: "/",
+  title: text("title", "custom title"),
+  subtitle: text("subtitle", "custom subtitle"),
+  userRole: "user",
 };

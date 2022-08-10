@@ -15,12 +15,12 @@ export default {
   ],
 };
 
-const ExternallyControlledTextArea = (props) => {
+const ExternallyControlledTextArea = (args) => {
   const [value, setValue] = React.useState(null);
 
   return (
     <TextArea
-      {...props}
+      {...args}
       onChange={(e) => {
         setValue(e.target.value);
       }}
@@ -29,7 +29,7 @@ const ExternallyControlledTextArea = (props) => {
   );
 };
 
-export const Default = () => {
+export const Default = (args) => {
   return (
     <TextArea
       id="default-text-area"
@@ -37,11 +37,12 @@ export const Default = () => {
       placeholder={text("placeholder", "Placeholder")}
       style={object("style", { resize: "none" })}
       type="text"
+      {...args}
     />
   );
 };
 
-export const MaxInputLength = () => {
+export const MaxInputLength = (args) => {
   return (
     <ExternallyControlledTextArea
       id="max-length-label-text-area"
@@ -49,11 +50,12 @@ export const MaxInputLength = () => {
       style={{ resize: "none" }}
       labelText={text("labelText", "Label for text area")}
       maxCount={200}
+      {...args}
     />
   );
 };
 
-export const KitchenSink = () => {
+export const KitchenSink = (args) => {
   return (
     <TextArea
       id="tooltip-label-text-area"
@@ -64,6 +66,7 @@ export const KitchenSink = () => {
       labelText={text("labelText", "Label for text area")}
       tooltipContent={text("tooltipText", "Tooltip for text area")}
       tooltipProps={object("tooltipProps", { direction: "top" })}
+      {...args}
     />
   );
 };

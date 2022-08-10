@@ -5,6 +5,13 @@ import MultiSelect from "./ComboBoxMultiSelect";
 export default {
   title: "Inputs/ComboBoxMultiSelect",
   component: MultiSelect,
+  decorators: [
+    (Story) => (
+      <div style={{ maxWidth: "25rem", padding: "1rem" }}>
+        <Story />
+      </div>
+    ),
+  ],
 };
 
 const animals = [
@@ -24,34 +31,32 @@ const animals = [
 
 const initialDefaultAnimals = "panda,dog";
 
-export const Default = () => {
+export const Default = (args) => {
   return (
-    <div style={{ width: "25rem" }}>
-      <MultiSelect
-        id="multi-select"
-        initialSelectedItems={initialDefaultAnimals}
-        items={object("items", animals)}
-        itemToString={(item) => item.label}
-        onChange={action("Multiselect changed")}
-        titleText={text("titleText", "Select some animals")}
-        placeholder={text("placeholder", "Select an animal")}
-      />
-    </div>
+    <MultiSelect
+      id="multi-select"
+      initialSelectedItems={initialDefaultAnimals}
+      items={object("items", animals)}
+      itemToString={(item) => item.label}
+      onChange={action("Multiselect changed")}
+      titleText={text("titleText", "Select some animals")}
+      placeholder={text("placeholder", "Select an animal")}
+      {...args}
+    />
   );
 };
 
-export const NoSelectedItems = () => {
+export const NoSelectedItems = (args) => {
   return (
-    <div style={{ width: "25rem" }}>
-      <MultiSelect
-        id="multi-select"
-        items={object("items", animals)}
-        itemToString={(item) => item.label}
-        onChange={action("Multiselect changed")}
-        titleText={text("titleText", "Select some animals")}
-        placeholder={text("placeholder", "Select an animal")}
-      />
-    </div>
+    <MultiSelect
+      id="multi-select"
+      items={object("items", animals)}
+      itemToString={(item) => item.label}
+      onChange={action("Multiselect changed")}
+      titleText={text("titleText", "Select some animals")}
+      placeholder={text("placeholder", "Select an animal")}
+      {...args}
+    />
   );
 };
 
@@ -59,25 +64,24 @@ NoSelectedItems.story = {
   name: "No selected items",
 };
 
-export const KitchenSink = () => {
+export const KitchenSink = (args) => {
   return (
-    <div style={{ width: "25rem" }}>
-      <MultiSelect
-        disableClear
-        id="tooltip-title-multi-select"
-        initialSelectedItems={[
-          { label: "Cat", value: "cat" },
-          { label: "Cheetah", value: "cheetah" },
-        ]}
-        items={object("items", animals)}
-        itemToString={(item) => item.label}
-        onChange={action("Multiselect changed")}
-        titleText={text("titleText", "Select some animals")}
-        placeholder={text("placeholder", "Select an animal")}
-        helperText={text("helperText", "Some helper text")}
-        tooltipContent={text("tooltipContent", "Tooltip for multiSelect")}
-        tooltipProps={{ direction: "top" }}
-      />
-    </div>
+    <MultiSelect
+      disableClear
+      id="tooltip-title-multi-select"
+      initialSelectedItems={[
+        { label: "Cat", value: "cat" },
+        { label: "Cheetah", value: "cheetah" },
+      ]}
+      items={object("items", animals)}
+      itemToString={(item) => item.label}
+      onChange={action("Multiselect changed")}
+      titleText={text("titleText", "Select some animals")}
+      placeholder={text("placeholder", "Select an animal")}
+      helperText={text("helperText", "Some helper text")}
+      tooltipContent={text("tooltipContent", "Tooltip for multiSelect")}
+      tooltipProps={{ direction: "top" }}
+      {...args}
+    />
   );
 };

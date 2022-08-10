@@ -5,64 +5,64 @@ import Toggle from "./Toggle";
 export default {
   title: "Inputs/Toggle",
   component: Toggle,
+  decorators: [
+    (Story) => (
+      <div style={{ maxWidth: "16rem", padding: "1rem" }}>
+        <Story />
+      </div>
+    ),
+  ],
 };
 
-export const Default = () => {
+export const Default = (args) => {
+  return <Toggle id="default-toggle" defaultToggled onToggle={action("Toggle clicked")} {...args} />;
+};
+
+export const InvalidWarning = (args) => {
   return (
-    <div style={{ width: "16rem" }}>
-      <Toggle id="default-toggle" defaultToggled onToggle={action("Toggle clicked")} />
-    </div>
+    <Toggle
+      id="tooltip-label-toggle"
+      defaultToggled
+      onToggle={action("Toggle clicked")}
+      labelText="Label for toggle"
+      tooltipContent="Tooltip for toggle"
+      tooltipProps={{ direction: "top" }}
+      helperText={text("helperText", "helperText")}
+      orientation={select("orienation", ["horizontal", "vertical"], "vertical")}
+      reversed={boolean("reversed", false)}
+      invalid
+      invalidText="This toggle value is invalid"
+      {...args}
+    />
   );
 };
 
-export const InvalidWarning = () => {
+export const HorizontalToggle = (args) => {
   return (
-    <div style={{ width: "16rem" }}>
-      <Toggle
-        id="tooltip-label-toggle"
-        defaultToggled
-        onToggle={action("Toggle clicked")}
-        labelText="Label for toggle"
-        tooltipContent="Tooltip for toggle"
-        tooltipProps={{ direction: "top" }}
-        helperText={text("helperText", "helperText")}
-        orientation={select("orienation", ["horizontal", "vertical"], "vertical")}
-        reversed={boolean("reversed", false)}
-        invalid
-        invalidText="This toggle value is invalid"
-      />
-    </div>
+    <Toggle
+      id="default-toggle"
+      defaultToggled
+      onToggle={action("Toggle clicked")}
+      labelText="Label for toggle"
+      helperText={text("helperText", "helperText")}
+      {...args}
+    />
   );
 };
 
-export const HorizontalToggle = () => {
+export const KitchenSink = (args) => {
   return (
-    <div style={{ width: "16rem" }}>
-      <Toggle
-        id="default-toggle"
-        defaultToggled
-        onToggle={action("Toggle clicked")}
-        labelText="Label for toggle"
-        helperText={text("helperText", "helperText")}
-      />
-    </div>
-  );
-};
-
-export const KitchenSink = () => {
-  return (
-    <div style={{ width: "16rem" }}>
-      <Toggle
-        id="tooltip-label-toggle"
-        defaultToggled
-        onToggle={action("Toggle clicked")}
-        labelText="Label for toggle"
-        tooltipContent="Tooltip for toggle"
-        tooltipProps={{ direction: "top" }}
-        helperText={text("helperText", "helperText")}
-        orientation={select("orienation", ["horizontal", "vertical"], "vertical")}
-        reversed={boolean("reversed", false)}
-      />
-    </div>
+    <Toggle
+      id="tooltip-label-toggle"
+      defaultToggled
+      onToggle={action("Toggle clicked")}
+      labelText="Label for toggle"
+      tooltipContent="Tooltip for toggle"
+      tooltipProps={{ direction: "top" }}
+      helperText={text("helperText", "helperText")}
+      orientation={select("orienation", ["horizontal", "vertical"], "vertical")}
+      reversed={boolean("reversed", false)}
+      {...args}
+    />
   );
 };

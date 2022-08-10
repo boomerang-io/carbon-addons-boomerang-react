@@ -515,7 +515,7 @@ const governingSelectsInputs = [
   },
 ];
 
-export const Default = () => {
+export const Default = (args) => {
   return (
     <DynamicFormik
       id="dynamic-formik-form-id"
@@ -525,6 +525,7 @@ export const Default = () => {
       }}
       radioProps={({ input }) => ({ ...input, verticalWrapped: true, columnHeight: "8rem" })}
       validationSchemaExtension={additionalSchema}
+      {...args}
     >
       {({ inputs, formikProps }) => {
         return (
@@ -545,7 +546,7 @@ export const Default = () => {
   );
 };
 
-export const AllowPropertySyntax = () => {
+export const AllowPropertySyntax = (args) => {
   return (
     <DynamicFormik
       allowCustomPropertySyntax
@@ -555,6 +556,7 @@ export const AllowPropertySyntax = () => {
         action("submit clicked");
       }}
       validationSchemaExtension={additionalSchema}
+      {...args}
     >
       {({ inputs, formikProps }) => {
         return (
@@ -579,7 +581,7 @@ AllowPropertySyntax.story = {
   name: "allow property syntax",
 };
 
-export const AllowPropertySyntaxCustomPatternB = () => {
+export const AllowPropertySyntaxCustomPatternB = (args) => {
   return (
     <DynamicFormik
       allowCustomPropertySyntax
@@ -590,6 +592,7 @@ export const AllowPropertySyntaxCustomPatternB = () => {
         action("submit clicked");
       }}
       validationSchemaExtension={additionalSchema}
+      {...args}
     >
       {({ inputs, formikProps }) => {
         return (
@@ -614,7 +617,7 @@ AllowPropertySyntaxCustomPatternB.story = {
   name: "allow property syntax, custom pattern ${b:}",
 };
 
-export const GoverningSelects = () => {
+export const GoverningSelects = (args) => {
   return (
     <DynamicFormik
       id="dynamic-formik-form-id"
@@ -624,6 +627,7 @@ export const GoverningSelects = () => {
       }}
       radioProps={({ input }) => ({ ...input, verticalWrapped: true, columnHeight: "8rem" })}
       validationSchemaExtension={additionalSchema}
+      {...args}
     >
       {({ inputs, formikProps }) => {
         return (

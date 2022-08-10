@@ -7,8 +7,6 @@ import { Information } from "@carbon/react/icons";
 import { DATE_TYPES } from "../../internal/DataDrivenInputTypes";
 import { prefix } from "../../internal/settings";
 
-
-
 const DateInputComponent = React.forwardRef(function DateInputComponent(
   {
     id,
@@ -167,8 +165,17 @@ DateInputComponent.propTypes = {
   onCalendarChange: PropTypes.func,
   onChange: PropTypes.func,
   readOnly: PropTypes.bool,
+  /**
+   * Classname to pass to tooltip
+   */
   tooltipClassName: PropTypes.string,
-  tooltipContent: PropTypes.any,
+  /**
+   * Content to display in tooltip
+   */
+  tooltipContent: PropTypes.node,
+  /**
+   * Additional props to pass to the tooltip
+   */
   tooltipProps: PropTypes.object,
   type: PropTypes.oneOf([DATE_TYPES.DATE, DATE_TYPES.DATE_RANGE]),
 };

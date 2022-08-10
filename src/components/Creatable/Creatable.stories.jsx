@@ -5,76 +5,75 @@ import Creatable from "./Creatable";
 export default {
   title: "Inputs/Creatable",
   component: Creatable,
+  decorators: [
+    (Story) => (
+      <div style={{ maxWidth: "25rem", padding: "1rem" }}>
+        <Story />
+      </div>
+    ),
+  ],
 };
 
 export const Default = (args) => {
   return (
-    <div style={{ width: "25rem" }}>
-      <Creatable
-        id="text-input-creatable"
-        labelText={text("labelText", "Creatable")}
-        onChange={action("creatable change")}
-        helperText="Test helperText"
-        placeholder={text("placeholder", "Create some values")}
-        type="text"
-        {...args}
-      />
-    </div>
+    <Creatable
+      id="text-input-creatable"
+      labelText={text("labelText", "Creatable")}
+      onChange={action("creatable change")}
+      helperText="Test helperText"
+      placeholder={text("placeholder", "Create some values")}
+      type="text"
+      {...args}
+    />
   );
 };
 
 export const NonDeletable = (args) => {
   return (
-    <div style={{ width: "25rem" }}>
-      <Creatable
-        id="text-input-creatable"
-        labelText={text("labelText", "Creatable")}
-        onChange={action("creatable change")}
-        helperText="Test helperText"
-        placeholder={text("placeholder", "Create some values")}
-        initialValues="test,test2"
-        nonDeletable={true}
-        type="text"
-        {...args}
-      />
-    </div>
+    <Creatable
+      id="text-input-creatable"
+      labelText={text("labelText", "Creatable")}
+      onChange={action("creatable change")}
+      helperText="Test helperText"
+      placeholder={text("placeholder", "Create some values")}
+      initialValues="test,test2"
+      nonDeletable={true}
+      type="text"
+      {...args}
+    />
   );
 };
 
 export const KeyValuePair = (args) => {
   return (
-    <div style={{ width: "25rem" }}>
-      <Creatable
-        createKeyValuePair
-        id="key-value-creatable"
-        keyLabelText={text("keyLabelText", "Creatable Key")}
-        valueLabelText={text("valueLabelText", "Creatable Value")}
-        onChange={action("creatable change")}
-        keyPlaceholder={text("keyPlaceholder", "Key")}
-        valuePlaceholder={text("valuePlaceholder", "Value")}
-        keyHelperText={text("keyHelperText", "Key Helper")}
-        valueHelperText={text("valueHelperText", "Value Helper")}
-        type="text"
-        {...args}
-      />
-    </div>
+    <Creatable
+      createKeyValuePair
+      id="key-value-creatable"
+      keyLabelText={text("keyLabelText", "Creatable Key")}
+      valueLabelText={text("valueLabelText", "Creatable Value")}
+      onChange={action("creatable change")}
+      keyPlaceholder={text("keyPlaceholder", "Key")}
+      valuePlaceholder={text("valuePlaceholder", "Value")}
+      keyHelperText={text("keyHelperText", "Key Helper")}
+      valueHelperText={text("valueHelperText", "Value Helper")}
+      type="text"
+      {...args}
+    />
   );
 };
 
 export const LimitTheNumberOfAddedValues = (args) => {
   return (
-    <div style={{ width: "25rem" }}>
-      <Creatable
-        id="limit-values-creatable"
-        labelText={text("labelText", "Creatable with added items limited")}
-        onChange={action("creatable change")}
-        helperText="Items added limited by 3"
-        placeholder={text("placeholder", "Create some values")}
-        type="text"
-        max={3}
-        {...args}
-      />
-    </div>
+    <Creatable
+      id="limit-values-creatable"
+      labelText={text("labelText", "Creatable with added items limited")}
+      onChange={action("creatable change")}
+      helperText="Items added limited by 3"
+      placeholder={text("placeholder", "Create some values")}
+      type="text"
+      max={3}
+      {...args}
+    />
   );
 };
 

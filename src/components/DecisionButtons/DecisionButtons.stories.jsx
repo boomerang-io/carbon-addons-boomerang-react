@@ -20,7 +20,7 @@ const items2 = [
   { icon: Help, label: "Maybe", value: "maybe" },
 ];
 
-function ExternallyControlledDecisionButtons() {
+function ExternallyControlledDecisionButtons(args) {
   const [selectedItem, setSelectedItem] = React.useState("");
   const handleClear = () => {
     setSelectedItem("");
@@ -33,13 +33,14 @@ function ExternallyControlledDecisionButtons() {
         onChange={(value) => setSelectedItem(value)}
         orientation="vertical"
         items={items1}
+        {...args}
       />
       <button onClick={handleClear}>Clear selection</button>
     </>
   );
 }
 
-export const Default = () => {
+export const Default = (args) => {
   return (
     <DecisionButtons
       defaultSelected="radio 2"
@@ -51,11 +52,12 @@ export const Default = () => {
       orientation="vertical"
       tooltipContent={text("tooltipContent", "Tooltip for DecisionButtons")}
       tooltipProps={{ direction: "right" }}
+      {...args}
     />
   );
 };
 
-export const PositiveAndNegativeButtonsAndHorizontal = () => {
+export const PositiveAndNegativeButtonsAndHorizontal = (args) => {
   return (
     <DecisionButtons
       defaultSelected="no"
@@ -64,15 +66,16 @@ export const PositiveAndNegativeButtonsAndHorizontal = () => {
       onChange={action("Change radio button")}
       orientation="horizontal"
       items={items2}
+      {...args}
     />
   );
 };
 
-export const ExternallyControlled = () => {
-  return <ExternallyControlledDecisionButtons />;
+export const ExternallyControlled = (args) => {
+  return <ExternallyControlledDecisionButtons {...args} />;
 };
 
-export const CanUncheckButtons = () => {
+export const CanUncheckButtons = (args) => {
   return (
     <DecisionButtons
       canUncheck
@@ -80,6 +83,7 @@ export const CanUncheckButtons = () => {
       onChange={action("Change radio button")}
       orientation="horizontal"
       items={items2}
+      {...args}
     />
   );
 };

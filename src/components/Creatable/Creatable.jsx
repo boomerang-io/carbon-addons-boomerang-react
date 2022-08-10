@@ -8,8 +8,6 @@ import { prefix } from "../../internal/settings";
 
 import { isAccessibleKeyDownEvent } from "../../tools/accessibility";
 
-
-
 CreatableComponent.propTypes = {
   buttonClassName: PropTypes.string,
   buttonContent: PropTypes.string,
@@ -38,8 +36,17 @@ CreatableComponent.propTypes = {
   tagProps: PropTypes.object,
   tagType: PropTypes.string,
   textInputProps: PropTypes.object,
+  /**
+   * Classname to pass to tooltip
+   */
   tooltipClassName: PropTypes.string,
-  tooltipContent: PropTypes.any,
+  /**
+   * Content to display in tooltip
+   */
+  tooltipContent: PropTypes.node,
+  /**
+   * Additional props to pass to the tooltip
+   */
   tooltipProps: PropTypes.object,
   type: PropTypes.string,
   valueHelperText: PropTypes.string,

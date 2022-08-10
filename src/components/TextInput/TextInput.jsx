@@ -38,10 +38,16 @@ const TextInputComponent = React.forwardRef(function TextInputComponent(
 });
 
 TextInputComponent.propTypes = {
+  /**
+   * Classname to pass to tooltip
+   */
   tooltipClassName: PropTypes.string,
+  /**
+   * Content to display in tooltip
+   */
   tooltipContent: PropTypes.node,
   /**
-   * See props available in TooltipHover component
+   * Additional props to pass to the tooltip
    */
   tooltipProps: PropTypes.object,
   /**

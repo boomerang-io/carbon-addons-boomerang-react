@@ -16,7 +16,7 @@ const options2 = [
   { labelText: "Radio 4", value: "radio 4 value" },
 ];
 
-export const Default = () => {
+export const Default = (args) => {
   return (
     <RadioGroup
       id="test"
@@ -26,11 +26,12 @@ export const Default = () => {
       onChange={action("radio changed")}
       options={options1}
       orientation="horizontal"
+      {...args}
     />
   );
 };
 
-export const KitchenSink = () => {
+export const KitchenSink = (args) => {
   return (
     <RadioGroup
       id="test"
@@ -43,6 +44,7 @@ export const KitchenSink = () => {
       orientation="vertical"
       tooltipContent={text("tooltipContent", "Tooltip for radioGroup")}
       tooltipProps={{ direction: "right" }}
+      {...args}
     />
   );
 };

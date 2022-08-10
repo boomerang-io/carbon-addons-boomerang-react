@@ -5,8 +5,6 @@ import TooltipHover from "../TooltipHover";
 import { Information } from "@carbon/react/icons";
 import { prefix } from "../../internal/settings";
 
-
-
 CheckboxListComponent.propTypes = {
   checkboxProps: PropTypes.object,
   disabled: PropTypes.bool,
@@ -18,8 +16,17 @@ CheckboxListComponent.propTypes = {
   onChange: PropTypes.func,
   options: PropTypes.array.isRequired,
   selectedItems: PropTypes.array,
+  /**
+   * Classname to pass to tooltip
+   */
   tooltipClassName: PropTypes.string,
-  tooltipContent: PropTypes.any,
+  /**
+   * Content to display in tooltip
+   */
+  tooltipContent: PropTypes.node,
+  /**
+   * Additional props to pass to the tooltip
+   */
   tooltipProps: PropTypes.object,
 };
 

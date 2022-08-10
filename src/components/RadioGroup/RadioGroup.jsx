@@ -5,12 +5,10 @@ import TooltipHover from "../TooltipHover";
 import { Information } from "@carbon/react/icons";
 import { prefix } from "../../internal/settings";
 
-
-
 RadioGroupComponent.propTypes = {
   columnHeight: PropTypes.string,
   defaultSelected: PropTypes.string,
-  disabled: PropTypes.string,
+  disabled: PropTypes.bool,
   helperText: PropTypes.string,
   id: PropTypes.string,
   key: PropTypes.string,
@@ -22,8 +20,17 @@ RadioGroupComponent.propTypes = {
   orientation: PropTypes.string,
   radioGroupProps: PropTypes.object,
   radioButtonProps: PropTypes.object,
+  /**
+   * Classname to pass to tooltip
+   */
   tooltipClassName: PropTypes.string,
-  tooltipContent: PropTypes.any,
+  /**
+   * Content to display in tooltip
+   */
+  tooltipContent: PropTypes.node,
+  /**
+   * Additional props to pass to the tooltip
+   */
   tooltipProps: PropTypes.object,
   value: PropTypes.string,
   verticalWrapped: PropTypes.bool,
