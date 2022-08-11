@@ -5,6 +5,13 @@ import DateInput from "./DateInput";
 export default {
   title: "Inputs/DateInput",
   component: DateInput,
+  parameters: {
+    docs: {
+      description: {
+        component: "Enhanced date input with support for tooltip text",
+      },
+    },
+  },
 };
 
 export const Default = (args) => {

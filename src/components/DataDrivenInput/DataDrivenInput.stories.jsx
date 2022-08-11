@@ -5,6 +5,13 @@ import DataDrivenInput from "./index";
 export default {
   title: "Inputs/DataDrivenInput",
   component: DataDrivenInput,
+  parameters: {
+    docs: {
+      description: {
+        component: "A dynamic input driven via data. Used for data driven forms.",
+      },
+    },
+  },
 };
 
 const input = {

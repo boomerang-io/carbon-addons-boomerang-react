@@ -1,12 +1,20 @@
 import React from "react";
 import { action } from "@storybook/addon-actions";
 import { text } from "@storybook/addon-knobs";
+import { Button } from "@carbon/react";
 import { Help, ThumbsUp, ThumbsDown } from "@carbon/react/icons";
 import DecisionButtons from "./DecisionButtons";
 
 export default {
   title: "Inputs/DecisionButtons",
   component: DecisionButtons,
+  parameters: {
+    docs: {
+      description: {
+        component: "A button-like radio experience for selecting between a descrete set of options UI",
+      },
+    },
+  },
 };
 
 const items1 = [
@@ -35,7 +43,9 @@ function ExternallyControlledDecisionButtons(args) {
         items={items1}
         {...args}
       />
-      <button onClick={handleClear}>Clear selection</button>
+      <Button size="sm" kind="tertiary" onClick={handleClear} style={{ marginTop: "1rem" }}>
+        Clear selection
+      </Button>
     </>
   );
 }

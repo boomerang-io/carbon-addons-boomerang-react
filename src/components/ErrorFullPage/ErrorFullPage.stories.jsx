@@ -5,6 +5,13 @@ const statusUrl = "/support/status";
 export default {
   title: "Errors/ErrorFullPage",
   component: ErrorFullPage,
+  parameters: {
+    docs: {
+      description: {
+        component: "Wrapper for errors for both Core and Boomerang themes",
+      },
+    },
+  },
 };
 
 export const Default = (args) => {

@@ -3,6 +3,13 @@ import Avatar from "./Avatar";
 export default {
   title: "Components/Avatar",
   components: Avatar,
+  parameters: {
+    docs: {
+      description: {
+        component: "A image component to display a user's profile image with a fallback user icon.",
+      },
+    },
+  },
   argTypes: {
     className: {
       description: "Pass custom class",

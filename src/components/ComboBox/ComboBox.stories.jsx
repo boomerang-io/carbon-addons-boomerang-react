@@ -4,6 +4,13 @@ import ComboBox from "./index";
 export default {
   title: "Inputs/ComboBox",
   component: ComboBox,
+  parameters: {
+    docs: {
+      description: {
+        component: "Enhanced combobox that default filters options on type by default",
+      },
+    },
+  },
   argTypes: { onChange: { action: "clicked" } },
 };
 

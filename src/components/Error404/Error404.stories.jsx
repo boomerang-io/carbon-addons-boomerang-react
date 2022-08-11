@@ -5,6 +5,13 @@ import Error404Component from "./index";
 export default {
   title: "Errors/Error404",
   component: Error404Component,
+  parameters: {
+    docs: {
+      description: {
+        component: "Customizable 404 page component for Core and Boomerang themes",
+      },
+    },
+  },
 };
 
 export const Default = (args) => {

@@ -6,6 +6,19 @@ import ConfirmModal from "./ConfirmModal";
 export default {
   title: "Components/ConfirmModal",
   component: ConfirmModal,
+  parameters: {
+    docs: {
+      description: {
+        component:
+          "A pre-built confirm modal that has built in state management, modal header, exposed trigger and renders children.",
+      },
+    },
+  },
+  argTypes: {
+    children: {
+      control: "text",
+    },
+  },
 };
 
 function ExternallyControlled() {
@@ -36,7 +49,7 @@ function ExternallyControlled() {
   );
 }
 
-export const Default = () => {
+export const Default = (args) => {
   return (
     <ConfirmModal
       affirmativeAction={action("confirm modal affirmative action")}
@@ -44,13 +57,14 @@ export const Default = () => {
       label="do things"
       title="Yeah?"
       modalTrigger={({ openModal }) => <Button onClick={openModal}>Open confirm modal</Button>}
+      {...args}
     >
-      <div>stuff here</div>
+      <div>Welcome to the World Wide Web</div>
     </ConfirmModal>
   );
 };
 
-export const InitiallyOpen = () => {
+export const InitiallyOpen = (args) => {
   return (
     <ConfirmModal
       affirmativeAction={action("confirm modal affirmative action")}
@@ -59,6 +73,7 @@ export const InitiallyOpen = () => {
       title="Huh?"
       isOpen
       modalTrigger={({ openModal }) => <Button onClick={openModal}>Open confirm modal</Button>}
+      {...args}
     />
   );
 };

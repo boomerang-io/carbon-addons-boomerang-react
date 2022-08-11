@@ -5,6 +5,13 @@ import Creatable from "./Creatable";
 export default {
   title: "Inputs/Creatable",
   component: Creatable,
+  parameters: {
+    docs: {
+      description: {
+        component: "An input to create values or key/value pairs.",
+      },
+    },
+  },
   decorators: [
     (Story) => (
       <div style={{ maxWidth: "25rem", padding: "1rem" }}>

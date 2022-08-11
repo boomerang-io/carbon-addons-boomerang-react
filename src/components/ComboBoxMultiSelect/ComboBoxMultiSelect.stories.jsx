@@ -5,6 +5,13 @@ import MultiSelect from "./ComboBoxMultiSelect";
 export default {
   title: "Inputs/ComboBoxMultiSelect",
   component: MultiSelect,
+  parameters: {
+    docs: {
+      description: {
+        component: "Enhanced multiselect that allows multiple options to be selected with filtering",
+      },
+    },
+  },
   decorators: [
     (Story) => (
       <div style={{ maxWidth: "25rem", padding: "1rem" }}>

@@ -80,6 +80,7 @@ export const parameters = {
       order: ["Welcome", "Components", "Inputs", "Features", "Platform", "Errors", "Playground", "*", "Deprecated"],
     },
   },
+
   parameters: {
     docs: {
       source: {

@@ -1,6 +1,6 @@
 import React from "react";
 const SvgErrorGraphic = (props) => (
-  <svg width={1244} height={386} {...props}>
+  <svg viewBox={"0 0 1244 386"} {...props}>
     <defs>
       <path id="error_graphic_svg__a" d="M0 .412h136.66V163.81H0z" />
       <path id="error_graphic_svg__c" d="M.354.386h67.579V121.37H.353z" />

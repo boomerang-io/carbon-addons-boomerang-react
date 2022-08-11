@@ -11,6 +11,13 @@ const animals = [
 export default {
   title: "Inputs/CheckboxList",
   component: CheckboxList,
+  parameters: {
+    docs: {
+      description: {
+        component: "Manage checkbox inputs with optional label, helper and tooltip text",
+      },
+    },
+  },
   argTypes: {
     options: {
       type: "array",

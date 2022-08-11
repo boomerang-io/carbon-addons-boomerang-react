@@ -1,5 +1,4 @@
 import { action } from "@storybook/addon-actions";
-import { text } from "@storybook/addon-knobs";
 import TextInput from "../TextInput";
 import AutoSuggest from "./AutoSuggest";
 
@@ -21,6 +20,13 @@ const animals = [
 export default {
   title: "Inputs/AutoSuggest",
   component: AutoSuggest,
+  parameters: {
+    docs: {
+      description: {
+        component: "An enhanced TextInput that supports selecting from a provided list of options.",
+      },
+    },
+  },
   decorators: [
     (Story) => (
       <div style={{ maxWidth: "25rem", minHeight: "20rem" }}>

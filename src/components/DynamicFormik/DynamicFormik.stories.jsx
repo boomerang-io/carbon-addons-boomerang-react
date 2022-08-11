@@ -7,6 +7,14 @@ import DynamicFormik from "./DynamicFormik";
 export default {
   title: "Inputs/DynamicFormik",
   component: DynamicFormik,
+  parameters: {
+    docs: {
+      description: {
+        component:
+          "Data-driven formik with a bevy of options for creating a client-side validated form from data. Uses DataDrivenInput underneath.",
+      },
+    },
+  },
   decorators: [
     (Story) => (
       <div style={{ maxWidth: "30rem", padding: "2rem" }}>

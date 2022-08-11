@@ -3,6 +3,13 @@ import AboutPlatform from "./AboutPlatform";
 export default {
   title: "Platform/AboutPlatform",
   component: AboutPlatform,
+  parameters: {
+    docs: {
+      description: {
+        component: "Modal that displays key metadata about the platform.",
+      },
+    },
+  },
   argTypes: {
     isFlowApp: { control: "boolean", defaultValue: false },
     organization: { control: "text", defaultValue: "IBM" },

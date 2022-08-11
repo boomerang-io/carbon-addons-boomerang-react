@@ -11,6 +11,14 @@ export default {
       defaultValue: 300,
     },
   },
+  parameters: {
+    docs: {
+      description: {
+        component:
+          "Component that is used to delay the rendering of the children. It is useful for avoiding waterfall spinners on load for resources that are dynamically loaded but usually resolve quickly",
+      },
+    },
+  },
 };
 
 export const Default = (args) => {

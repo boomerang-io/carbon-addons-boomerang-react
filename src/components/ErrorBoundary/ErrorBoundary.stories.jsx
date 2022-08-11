@@ -1,3 +1,4 @@
+import ErrorPageCore from "../ErrorPageCore";
 import ErrorDragon from "../ErrorDragon";
 import ErrorBoundary from "./index";
 
@@ -8,18 +9,27 @@ const ThrowComponent = () => {
 export default {
   title: "Errors/ErrorBoundary",
   component: ErrorBoundary,
-  decorators: [
-    (Story) => (
-      <div style={{ height: "100vh", width: "40rem" }}>
-        <Story />
-      </div>
-    ),
-  ],
+  parameters: {
+    docs: {
+      description: {
+        component: "Catches and renders fallback component on uncaught error using 'getDerivedStateFromError'",
+      },
+    },
+  },
+  decorators: [(Story) => <Story />],
 };
 
 export const Default = (args) => {
   return (
     <ErrorBoundary {...args}>
+      <ThrowComponent />
+    </ErrorBoundary>
+  );
+};
+
+export const _ErrorPageFull = (args) => {
+  return (
+    <ErrorBoundary errorComponent={ErrorPageCore} {...args}>
       <ThrowComponent />
     </ErrorBoundary>
   );

@@ -13,7 +13,13 @@ ComposedModal.propTypes = {
    */
   appElement: PropTypes.string,
   /**
-   * Render inside the body of the modal
+   * Function-as-a-child pattern to render content within modal
+   * Recieves an object with the following props:
+   * handleShouldCloseModal,
+   * forceCloseModal,
+   * resetInitialState,
+   * setShouldConfirmModalClose,
+   * shouldConfirmModalClose
    */
   children: PropTypes.func,
   composedModalProps: PropTypes.object,

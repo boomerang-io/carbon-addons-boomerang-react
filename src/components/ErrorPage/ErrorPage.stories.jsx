@@ -5,6 +5,14 @@ import ErrorPage from "./ErrorPage";
 export default {
   title: "Errors/ErrorPage",
   component: ErrorPage,
+  parameters: {
+    docs: {
+      description: {
+        component:
+          "Customizable full page error for Boomerang theme. Used as base component for core 403 and 404 error components",
+      },
+    },
+  },
 };
 
 export const Default = (args) => {

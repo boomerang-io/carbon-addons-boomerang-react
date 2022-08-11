@@ -4,6 +4,13 @@ import Error403Component from "./index";
 export default {
   title: "Errors/Error403",
   component: Error403Component,
+  parameters: {
+    docs: {
+      description: {
+        component: "Customizable 403 page component for Core and Boomerang themes",
+      },
+    },
+  },
 };
 
 export const Default = (args) => {
