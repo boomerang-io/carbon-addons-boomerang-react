@@ -1,4 +1,3 @@
-import { select, text } from "@storybook/addon-knobs";
 import PlatformBanner from "./PlatformBanner";
 
 export default {

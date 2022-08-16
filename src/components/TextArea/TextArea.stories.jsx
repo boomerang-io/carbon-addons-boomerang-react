@@ -1,6 +1,5 @@
 import React from "react";
 import { action } from "@storybook/addon-actions";
-import { object, text } from "@storybook/addon-knobs";
 import TextArea from "./TextArea";
 
 export default {
@@ -34,8 +33,8 @@ export const Default = (args) => {
     <TextArea
       id="default-text-area"
       onChange={action("text area change")}
-      placeholder={text("placeholder", "Placeholder")}
-      style={object("style", { resize: "none" })}
+      placeholder={"Placeholder"}
+      style={{ resize: "none" }}
       type="text"
       {...args}
     />
@@ -46,9 +45,9 @@ export const MaxInputLength = (args) => {
   return (
     <ExternallyControlledTextArea
       id="max-length-label-text-area"
-      placeholder={text("placeholder", "Placeholder")}
+      placeholder={"Placeholder"}
       style={{ resize: "none" }}
-      labelText={text("labelText", "Label for text area")}
+      labelText={"Label for text area"}
       maxCount={200}
       {...args}
     />
@@ -60,12 +59,12 @@ export const KitchenSink = (args) => {
     <TextArea
       id="tooltip-label-text-area"
       onChange={action("text area change")}
-      placeholder={text("placeholder", "Placeholder")}
+      placeholder={"Placeholder"}
       style={{ resize: "none" }}
-      helperText={text("helperText", "Some helper text")}
-      labelText={text("labelText", "Label for text area")}
-      tooltipContent={text("tooltipText", "Tooltip for text area")}
-      tooltipProps={object("tooltipProps", { direction: "top" })}
+      helperText={"Some helper text"}
+      labelText={"Label for text area"}
+      tooltipContent={"Tooltip for text area"}
+      tooltipProps={{ direction: "top" }}
       {...args}
     />
   );

@@ -1,4 +1,3 @@
-import { text, boolean, object } from "@storybook/addon-knobs";
 import { Link, Router } from "react-router-dom";
 import { ServiceDesk } from "@carbon/react/icons";
 import { Modal, SideNav, SideNavLink, SideNavItems, SideNavMenu, SideNavMenuItem } from "@carbon/react";
@@ -15,13 +14,13 @@ export default {
   component: Header,
 };
 
-export const Default = () => (
+export const Default = (args) => (
   <Header
-    renderLogo={boolean("renderLogo", true)}
-    appName={text("appName", "")}
-    platformName={text("platformName", "")}
-    enableNotifications={boolean("enableNotifications", true)}
-    navLinks={object("navLinks", [
+    renderLogo={false}
+    appName={"App"}
+    platformName={"Boomerang"}
+    enableNotifications={true}
+    navLinks={[
       {
         name: "Launchpad",
         url: "https://servicesessentials.ibm.com/launchpad/",
@@ -42,7 +41,7 @@ export const Default = () => (
         name: "Admin",
         url: "https://servicesessentials.ibm.com/admin/",
       },
-    ])}
+    ]}
     notificationsConfig={{
       wsUrl: mockSocketUrl,
     }}
@@ -74,14 +73,14 @@ export const Default = () => (
   />
 );
 
-export const WithIntegratedSidenav = () => (
+export const WithIntegratedSidenav = (args) => (
   <Router history={createMemoryHistory({ initialEntries: ["/"] })}>
     <Header
-      renderLogo={boolean("renderLogo", true)}
-      enableNotifications={boolean("enableNotifications", true)}
-      companyName={text("companyName", "")}
-      productName={text("productName", "")}
-      navLinks={object("navLinks", [
+      renderLogo={false}
+      enableNotifications={true}
+      companyName={"Boomerang"}
+      productName={"Flow"}
+      navLinks={[
         {
           name: "Launchpad",
           url: "https://servicesessentials.ibm.com/launchpad/",
@@ -102,7 +101,7 @@ export const WithIntegratedSidenav = () => (
           name: "Admin",
           url: "https://servicesessentials.ibm.com/admin/",
         },
-      ])}
+      ]}
       notificationsConfig={{
         wsUrl: mockSocketUrl,
       }}

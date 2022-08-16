@@ -1,6 +1,5 @@
 import { createMemoryHistory } from "history";
 import { Router } from "react-router-dom";
-import { text } from "@storybook/addon-knobs";
 import ProtectedRoute from "./ProtectedRoute";
 
 export default {
@@ -48,7 +47,7 @@ WithCustomMessage.args = {
   allowedUserRoles: ["admin", "operator"],
   component: Component,
   path: "/",
-  title: text("title", "custom title"),
-  subtitle: text("subtitle", "custom subtitle"),
+  title: "custom title",
+  subtitle: "custom subtitle",
   userRole: "user",
 };

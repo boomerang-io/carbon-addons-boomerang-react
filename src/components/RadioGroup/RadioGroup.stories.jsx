@@ -1,5 +1,4 @@
 import { action } from "@storybook/addon-actions";
-import { text } from "@storybook/addon-knobs";
 import RadioGroup from "./RadioGroup";
 
 export default {
@@ -20,9 +19,9 @@ export const Default = (args) => {
   return (
     <RadioGroup
       id="test"
-      defaultSelected={text("defaultSelected", "default value")}
-      helperText={text("helperText", "Test helper text")}
-      name={text("name", "Radio group 1")}
+      defaultSelected={"default value"}
+      helperText={"Test helper text"}
+      name={"Radio group 1"}
       onChange={action("radio changed")}
       options={options1}
       orientation="horizontal"
@@ -35,14 +34,14 @@ export const KitchenSink = (args) => {
   return (
     <RadioGroup
       id="test"
-      defaultSelected={text("defaultSelected", "default value")}
-      labelText={text("labelText", "Select a value")}
-      helperText={text("helperText", "Test helper text")}
-      name={text("name", "Radio group 2")}
+      defaultSelected={"default value"}
+      labelText={"Select a value"}
+      helperText={"Test helper text"}
+      name={"Radio group 2"}
       onChange={() => {}}
       options={options2}
       orientation="vertical"
-      tooltipContent={text("tooltipContent", "Tooltip for radioGroup")}
+      tooltipContent={"Tooltip for radioGroup"}
       tooltipProps={{ direction: "right" }}
       {...args}
     />

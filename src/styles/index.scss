@@ -104,6 +104,7 @@ $use-theme-boomerang: false !default;
     .#{$prefix}--modal-content {
       color: var(--cds-text-on-color);
       padding: 0 1rem;
+      margin-bottom: 4rem;
     }
   }
 
@@ -115,7 +116,7 @@ $use-theme-boomerang: false !default;
       background-color: shell.$bmrg-header-hover-background-color;
     }
     &:focus {
-      outline: rem(1px) solid shell.$bmrg-secondary-color;
+      outline: utils.rem(1px) solid shell.$bmrg-secondary-color;
     }
   }
 
@@ -129,10 +130,9 @@ $use-theme-boomerang: false !default;
   }
 
   .#{$prefix}--modal-header__heading {
-    height: rem(26px);
-    color: shell.$bmrg-brand-white;
-    font-size: rem(20px);
-    font-weight: 300;
+    height: utils.rem(26px);
+    color: theme.$text-on-color;
+    font-size: utils.rem(20px);
   }
 
   .#{$prefix}--modal-close__icon {
@@ -156,7 +156,7 @@ $use-theme-boomerang: false !default;
       border-radius: 0;
 
       &.#{$prefix}--btn--primary {
-        border-bottom-right-radius: rem(4px);
+        border-bottom-right-radius: utils.rem(4px);
 
         &.#{$prefix}--btn:disabled {
           opacity: 0.5;
@@ -165,7 +165,7 @@ $use-theme-boomerang: false !default;
       }
 
       &.#{$prefix}--btn--secondary {
-        border-bottom-left-radius: rem(4px);
+        border-bottom-left-radius: utils.rem(4px);
       }
     }
   }

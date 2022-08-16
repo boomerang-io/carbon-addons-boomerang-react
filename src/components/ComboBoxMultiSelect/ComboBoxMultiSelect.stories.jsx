@@ -1,5 +1,4 @@
 import { action } from "@storybook/addon-actions";
-import { object, text } from "@storybook/addon-knobs";
 import MultiSelect from "./ComboBoxMultiSelect";
 
 export default {
@@ -43,11 +42,11 @@ export const Default = (args) => {
     <MultiSelect
       id="multi-select"
       initialSelectedItems={initialDefaultAnimals}
-      items={object("items", animals)}
+      items={animals}
       itemToString={(item) => item.label}
       onChange={action("Multiselect changed")}
-      titleText={text("titleText", "Select some animals")}
-      placeholder={text("placeholder", "Select an animal")}
+      titleText={"Select some animals"}
+      placeholder={"Select an animal"}
       {...args}
     />
   );
@@ -57,11 +56,11 @@ export const NoSelectedItems = (args) => {
   return (
     <MultiSelect
       id="multi-select"
-      items={object("items", animals)}
+      items={animals}
       itemToString={(item) => item.label}
       onChange={action("Multiselect changed")}
-      titleText={text("titleText", "Select some animals")}
-      placeholder={text("placeholder", "Select an animal")}
+      titleText={"Select some animals"}
+      placeholder={"Select an animal"}
       {...args}
     />
   );
@@ -80,13 +79,13 @@ export const KitchenSink = (args) => {
         { label: "Cat", value: "cat" },
         { label: "Cheetah", value: "cheetah" },
       ]}
-      items={object("items", animals)}
+      items={animals}
       itemToString={(item) => item.label}
       onChange={action("Multiselect changed")}
-      titleText={text("titleText", "Select some animals")}
-      placeholder={text("placeholder", "Select an animal")}
-      helperText={text("helperText", "Some helper text")}
-      tooltipContent={text("tooltipContent", "Tooltip for multiSelect")}
+      titleText={"Select some animals"}
+      placeholder={"Select an animal"}
+      helperText={"Some helper text"}
+      tooltipContent={"Tooltip for multiSelect"}
       tooltipProps={{ direction: "top" }}
       {...args}
     />

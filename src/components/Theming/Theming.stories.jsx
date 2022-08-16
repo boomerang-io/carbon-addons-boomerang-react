@@ -1,5 +1,4 @@
 
-import { select } from "@storybook/addon-knobs";
 import {
   Accordion,
   AccordionItem,
@@ -26,11 +25,8 @@ export default {
 
 export const Default = () => {
   return (
-    // dark-theme backgroundColor: '#1c496d'
-    // light-theme backgroundColor: '#EAEAEA'
     <div
       style={{
-        backgroundColor: select("Background", { Light: "#EAEAEA", Dark: "#1c496d" }, "Light"),
         padding: "2rem",
       }}
     >

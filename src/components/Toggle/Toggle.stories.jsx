@@ -1,5 +1,4 @@
 import { action } from "@storybook/addon-actions";
-import { boolean, text, select } from "@storybook/addon-knobs";
 import Toggle from "./Toggle";
 
 export default {
@@ -27,9 +26,9 @@ export const InvalidWarning = (args) => {
       labelText="Label for toggle"
       tooltipContent="Tooltip for toggle"
       tooltipProps={{ direction: "top" }}
-      helperText={text("helperText", "helperText")}
-      orientation={select("orienation", ["horizontal", "vertical"], "vertical")}
-      reversed={boolean("reversed", false)}
+      helperText={"helperText"}
+      orientation={"vertical"}
+      reversed={false}
       invalid
       invalidText="This toggle value is invalid"
       {...args}
@@ -44,7 +43,7 @@ export const HorizontalToggle = (args) => {
       defaultToggled
       onToggle={action("Toggle clicked")}
       labelText="Label for toggle"
-      helperText={text("helperText", "helperText")}
+      helperText={"helperText"}
       {...args}
     />
   );
@@ -59,9 +58,9 @@ export const KitchenSink = (args) => {
       labelText="Label for toggle"
       tooltipContent="Tooltip for toggle"
       tooltipProps={{ direction: "top" }}
-      helperText={text("helperText", "helperText")}
-      orientation={select("orienation", ["horizontal", "vertical"], "vertical")}
-      reversed={boolean("reversed", false)}
+      helperText={"helperText"}
+      orientation={"vertical"}
+      reversed={false}
       {...args}
     />
   );

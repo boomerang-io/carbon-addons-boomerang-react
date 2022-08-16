@@ -1,5 +1,4 @@
 import { action } from "@storybook/addon-actions";
-import { object, text } from "@storybook/addon-knobs";
 import DateInput from "./DateInput";
 
 export default {
@@ -20,7 +19,7 @@ export const Default = (args) => {
       id="default-date-input"
       onCalendarChange={action("date input calendar change")}
       onChange={action("date input change")}
-      placeholder={text("placeholder", "yyyy-mm-dd")}
+      placeholder={"yyyy-mm-dd"}
       autoComplete="off"
       dateFormat="Y-m-d"
       max="2020-01-31T13:10:20.219+00:00"
@@ -36,7 +35,7 @@ export const ReadOnly = (args) => {
       id="read-only-date-input"
       onCalendarChange={action("date input calendar change")}
       onChange={action("date input change")}
-      placeholder={text("placeholder", "yyyy-mm-dd")}
+      placeholder={"yyyy-mm-dd"}
       autoComplete="off"
       dateFormat="Y-m-d"
       max="2020-01-31T13:10:20.219+00:00"
@@ -55,11 +54,11 @@ export const Range = (args) => {
         id="range-date-input"
         dateFormat="Y-m-d"
         onChange={action("date input change")}
-        placeholder={text("placeholder", "mm/dd/yyyy")}
-        helperText={text("helperText", "Some helper text")}
-        labelText={text("labelText", "Label for text input")}
-        tooltipContent={text("tooltipContent", "Tooltip for text input")}
-        tooltipProps={object("tooltipProps", { placement: "top" })}
+        placeholder={"mm/dd/yyyy"}
+        helperText={"Some helper text"}
+        labelText={"Label for text input"}
+        tooltipContent={"Tooltip for text input"}
+        tooltipProps={{ placement: "top" }}
         max="2021-10-31T13:10:20.219+00:00"
         min="2021-01-01T13:10:20.219+00:00"
         value="2021-08-15T13:10:20.219+00:00,2021-09-19T13:10:20.219+00:00"
@@ -77,12 +76,12 @@ export const KitchenSink = (args) => {
         id="tooltip-label-date-input"
         onCalendarChange={action("date input calendar change")}
         onChange={action("date input change")}
-        placeholder={text("placeholder", "mm/dd/yyyy")}
+        placeholder={"mm/dd/yyyy"}
         autoComplete="off"
-        helperText={text("helperText", "Some helper text")}
-        labelText={text("labelText", "Label for text input")}
-        tooltipContent={text("tooltipContent", "Tooltip for text input")}
-        tooltipProps={object("tooltipProps", { placement: "top" })}
+        helperText={"Some helper text"}
+        labelText={"Label for text input"}
+        tooltipContent={"Tooltip for text input"}
+        tooltipProps={{ placement: "top" }}
         {...args}
       />
     </div>

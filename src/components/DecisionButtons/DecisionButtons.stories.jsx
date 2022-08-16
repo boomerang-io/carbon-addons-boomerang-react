@@ -1,6 +1,5 @@
 import React from "react";
 import { action } from "@storybook/addon-actions";
-import { text } from "@storybook/addon-knobs";
 import { Button } from "@carbon/react";
 import { Help, ThumbsUp, ThumbsDown } from "@carbon/react/icons";
 import DecisionButtons from "./DecisionButtons";
@@ -56,11 +55,11 @@ export const Default = (args) => {
       defaultSelected="radio 2"
       name="radio buttons 1"
       onChange={action("Change radio button")}
-      labelText={text("labelText", "Example label text")}
-      helperText={text("helperText", "Example helper text")}
+      labelText={"Example label text"}
+      helperText={"Example helper text"}
       items={items1}
       orientation="vertical"
-      tooltipContent={text("tooltipContent", "Tooltip for DecisionButtons")}
+      tooltipContent={"Tooltip for DecisionButtons"}
       tooltipProps={{ direction: "right" }}
       {...args}
     />
@@ -72,7 +71,7 @@ export const PositiveAndNegativeButtonsAndHorizontal = (args) => {
     <DecisionButtons
       defaultSelected="no"
       name="radio buttons 2"
-      helperText={text("helperText", "Example helper text")}
+      helperText={"Example helper text"}
       onChange={action("Change radio button")}
       orientation="horizontal"
       items={items2}

@@ -1,4 +1,3 @@
-import { text } from "@storybook/addon-knobs";
 import Error403Component from "./index";
 
 export default {

@@ -1,5 +1,4 @@
 import { action } from "@storybook/addon-actions";
-import { text, boolean } from "@storybook/addon-knobs";
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
 import { BrowserRouter as Router, Link } from "react-router-dom";
@@ -26,17 +25,17 @@ export const Default = (args) => {
   return (
     <UIShell
       renderFlowDocs
-      renderLogo={boolean("renderLogo", true)}
-      renderRequests={boolean("renderRequests", true)}
-      appName={text("appName", "Flow")}
-      platformName={text("platformName", "Boomerang")}
+      renderLogo={true}
+      renderRequests={true}
+      appName={"Flow"}
+      platformName={"Boomerang"}
       baseServiceUrl={BASE_URL}
       headerConfig={{
         features: {
-          "community.enabled": boolean("community.enabled", true),
-          "notifications.enabled": boolean("notifications.enabled", true),
-          "support.enabled": boolean("support.enabled", true),
-          "feedback.enabled": boolean("feedback.enabled", true),
+          "community.enabled": true,
+          "notifications.enabled": true,
+          "support.enabled": true,
+          "feedback.enabled": true,
         },
         navigation: [
           {
@@ -53,17 +52,17 @@ export const Default = (args) => {
           },
         ],
         platform: {
-          name: text("platform.name", "IBM Boomerang Platform"),
-          version: text("platform.version", "5.0.0"),
+          name: "IBM Boomerang Platform",
+          version: "5.0.0",
           signOutUrl: "https://ibm.com",
           communityUrl: "https://developer.ibm.com",
-          platformName: text("platform.platformName", "IBM Boomerang"),
-          platformOrganization: text("platform.platformOrganization", "IBM"),
+          platformName: "IBM Boomerang",
+          platformOrganization: "IBM",
         },
         platformMessage: {
-          kind: text("platformMessage.kind", "info"),
-          message: text("platformMessage.message", "Message Goes Here"),
-          title: text("platformMessage.title", "Testing Platform Title"),
+          kind: "info",
+          message: "Message Goes Here",
+          title: "Testing Platform Title",
         },
       }}
       onTutorialClick={action("Tutorial")}
@@ -91,15 +90,15 @@ export const WithCarbonSidenavAndReactRouter = () => {
   return (
     <Router>
       <UIShell
-        renderLogo={boolean("renderLogo", true)}
-        platformName={text("platformName", "Boomerang")}
-        appName={text("appName", "")}
+        renderLogo={true}
+        platformName={"Boomerang"}
+        appName={""}
         baseServiceUrl={BASE_URL}
         headerConfig={{
           features: {
-            "community.enabled": boolean("community.enabled", true),
-            "notifications.enabled": boolean("notifications.enabled", true),
-            "support.enabled": boolean("support.enabled", true),
+            "community.enabled": true,
+            "notifications.enabled": true,
+            "support.enabled": true,
           },
           navigation: [
             {
@@ -116,16 +115,16 @@ export const WithCarbonSidenavAndReactRouter = () => {
             },
           ],
           platform: {
-            name: text("platform.name", "IBM Boomerang Platform"),
+            name: "IBM Boomerang Platform",
             sendMail: true,
-            version: text("platform.version", "5.0.0"),
+            version: "5.0.0",
             signOutUrl: "https://ibm.com",
             communityUrl: "https://developer.ibm.com",
           },
           platformMessage: {
-            kind: text("platformMessage.kind", "info"),
-            message: text("platformMessage.message", "Message Goes Here"),
-            title: text("platformMessage.title", "Testing Platform Title"),
+            kind: "info",
+            message: "Message Goes Here",
+            title: "Testing Platform Title",
           },
         }}
         renderSidenav={({ isOpen }) => (
@@ -218,15 +217,15 @@ export const WithRightPanel = () => {
   return (
     <UIShell
       isFlowApp
-      renderLogo={boolean("renderLogo", true)}
-      appName={text("appName", "")}
-      platformName={text("platformName", "Boomerang")}
+      renderLogo={true}
+      appName={""}
+      platformName={"Boomerang"}
       baseServiceUrl={BASE_URL}
       headerConfig={{
         features: {
-          "community.enabled": boolean("community.enabled", true),
-          "notifications.enabled": boolean("notifications.enabled", true),
-          "support.enabled": boolean("support.enabled", true),
+          "community.enabled": true,
+          "notifications.enabled": true,
+          "support.enabled": true,
         },
         navigation: [
           {
@@ -243,15 +242,15 @@ export const WithRightPanel = () => {
           },
         ],
         platform: {
-          name: text("platform.name", "IBM Boomerang Platform"),
-          version: text("platform.version", "5.0.0"),
+          name: "IBM Boomerang Platform",
+          version: "5.0.0",
           signOutUrl: "https://ibm.com",
           communityUrl: "https://developer.ibm.com",
         },
         platformMessage: {
-          kind: text("platformMessage.kind", "info"),
-          message: text("platformMessage.message", "Message Goes Here"),
-          title: text("platformMessage.title", "Testing Platform Title"),
+          kind: "info",
+          message: "Message Goes Here",
+          title: "Testing Platform Title",
         },
       }}
       onTutorialClick={action("Tutorial")}
@@ -294,15 +293,15 @@ export const UserNotConsented = () => {
   mock.onGet(`${BASE_URL}/users/consents`).reply(200, PRIVACY_DATA);
   return (
     <UIShell
-      renderLogo={boolean("renderLogo", true)}
-      appName={text("appName", "")}
+      renderLogo={true}
+      appName={""}
       baseServiceUrl={BASE_URL}
-      platformName={text("platformName", "Boomerang")}
+      platformName={"Boomerang"}
       headerConfig={{
         features: {
-          "community.enabled": boolean("community.enabled", true),
-          "notifications.enabled": boolean("notifications.enabled", true),
-          "support.enabled": boolean("support.enabled", true),
+          "community.enabled": true,
+          "notifications.enabled": true,
+          "support.enabled": true,
         },
         navigation: [
           {
@@ -319,15 +318,15 @@ export const UserNotConsented = () => {
           },
         ],
         platform: {
-          name: text("platform.name", "IBM Boomerang Platform"),
-          version: text("platform.version", "5.0.0"),
+          name: "IBM Boomerang Platform",
+          version: "5.0.0",
           signOutUrl: "https://ibm.com",
           communityUrl: "https://developer.ibm.com",
         },
         platformMessage: {
-          kind: text("platformMessage.kind", "info"),
-          message: text("platformMessage.message", "Message Goes Here"),
-          title: text("platformMessage.title", "Testing Platform Title"),
+          kind: "info",
+          message: "Message Goes Here",
+          title: "Testing Platform Title",
         },
       }}
       onTutorialClick={action("Tutorial")}
@@ -350,15 +349,15 @@ export const UserPendingDeletion = () => {
   mock.onGet(`${BASE_URL}/users/consents`).reply(200, PRIVACY_DATA);
   return (
     <UIShell
-      renderLogo={boolean("renderLogo", true)}
-      platformName={text("platformName", "Boomerang")}
-      appName={text("appName", "")}
+      renderLogo={true}
+      platformName={"Boomerang"}
+      appName={""}
       baseServiceUrl={BASE_URL}
       headerConfig={{
         features: {
-          "community.enabled": boolean("community.enabled", true),
-          "notifications.enabled": boolean("notifications.enabled", true),
-          "support.enabled": boolean("support.enabled", true),
+          "community.enabled": true,
+          "notifications.enabled": true,
+          "support.enabled": true,
         },
         navigation: [
           {
@@ -375,15 +374,15 @@ export const UserPendingDeletion = () => {
           },
         ],
         platform: {
-          name: text("platform.name", "IBM Boomerang Platform"),
-          version: text("platform.version", "5.0.0"),
+          name: "IBM Boomerang Platform",
+          version: "5.0.0",
           signOutUrl: "https://ibm.com",
           communityUrl: "https://developer.ibm.com",
         },
         platformMessage: {
-          kind: text("platformMessage.kind", "info"),
-          message: text("platformMessage.message", "Message Goes Here"),
-          title: text("platformMessage.title", "Testing Platform Title"),
+          kind: "info",
+          message: "Message Goes Here",
+          title: "Testing Platform Title",
         },
       }}
       onTutorialClick={action("Tutorial")}

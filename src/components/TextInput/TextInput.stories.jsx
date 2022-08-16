@@ -1,5 +1,4 @@
 import { action } from "@storybook/addon-actions";
-import { object, text } from "@storybook/addon-knobs";
 import TextInput from "./TextInput";
 
 export default {
@@ -24,7 +23,7 @@ export const Default = (args) => {
     <TextInput
       id="default-text-input"
       onChange={action("text input change")}
-      placeholder={text("placeholder", "Placeholder")}
+      placeholder={"Placeholder"}
       type="text"
       labelText="Label"
       {...args}
@@ -38,11 +37,11 @@ export const KitchenSink = (args) => {
       <TextInput
         id="tooltip-label-text-input"
         onChange={action("text input change")}
-        placeholder={text("placeholder", "Placeholder")}
-        helperText={text("helperText", "Some helper text")}
-        labelText={text("labelText", "Label for text input")}
-        tooltipContent={text("tooltipContent", "Tooltip for text input")}
-        tooltipProps={object("tooltipProps", { placement: "top" })}
+        placeholder={"Placeholder"}
+        helperText={"Some helper text"}
+        labelText={"Label for text input"}
+        tooltipContent={"Tooltip for text input"}
+        tooltipProps={{ placement: "top" }}
         {...args}
       />
     </div>
