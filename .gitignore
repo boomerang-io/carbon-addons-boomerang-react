@@ -7,7 +7,8 @@ es
 umd
 build
 docs
-./styles
+styles
+*.tgz
 
 # Testing
 coverage

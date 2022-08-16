@@ -2,7 +2,7 @@
 @use '@carbon/themes/scss/tokens' as theme;
 
 .#{$prefix}--bmrg-feature-sidenav-container {
-  background-color: theme.$layer-01;
+  background-color: theme.$background;
   display: flex;
   flex-direction: column;
   height: calc(100vh - 3rem);
