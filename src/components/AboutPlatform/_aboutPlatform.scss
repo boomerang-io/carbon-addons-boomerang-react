@@ -31,11 +31,11 @@
 
   .#{$prefix}--bmrg-aboutPlatform-images {
     display: flex;
+    gap: 2rem;
   }
 
   .#{$prefix}--bmrg-aboutPlatform-images__img {
     height: 2rem;
-    margin-right: 2rem;
     width: auto;
   }
 }

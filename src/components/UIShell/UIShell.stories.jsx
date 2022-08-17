@@ -208,10 +208,10 @@ export const WithCarbonSidenavAndReactRouter = () => {
 };
 
 WithCarbonSidenavAndReactRouter.story = {
-  name: "with Carbon sidenav and React Router ",
+  name: "Carbon Sidenav + React Router ",
 };
 
-export const WithRightPanel = () => {
+export const RightPanel = () => {
   mock.onGet(`${BASE_URL}/users/consents`).reply(200, PRIVACY_DATA);
   mock.onPost(`${BASE_URL}/support/contact`).reply(200);
   return (
@@ -285,9 +285,6 @@ export const WithRightPanel = () => {
   );
 };
 
-WithRightPanel.story = {
-  name: "with right panel",
-};
 
 export const UserNotConsented = () => {
   mock.onGet(`${BASE_URL}/users/consents`).reply(200, PRIVACY_DATA);
@@ -339,10 +336,6 @@ export const UserNotConsented = () => {
       }}
     />
   );
-};
-
-UserNotConsented.story = {
-  name: "user not consented",
 };
 
 export const UserPendingDeletion = () => {
@@ -397,15 +390,8 @@ export const UserPendingDeletion = () => {
   );
 };
 
-UserPendingDeletion.story = {
-  name: "user pending deletion",
-};
 
-export const WithoutProps = () => {
+export const EmptyState = () => {
   mock.onGet(`${BASE_URL}/users/consents`).reply(200, PRIVACY_DATA);
   return <UIShell />;
-};
-
-WithoutProps.story = {
-  name: "without props",
 };

@@ -94,21 +94,22 @@
 }
 
 .#{$prefix}--bmrg-notification-content__creator {
-  color: #b9bfc7;
+  color: theme.$text-on-color;
   font-size: 0.75rem;
   font-weight: 500;
   height: 2.375rem;
   line-height: 0.9375rem;
-  padding-top: 0.75rem;
-  padding-bottom: 0.6875rem;
-  text-transform: capitalize;
+  opacity: 0.8;
   overflow: hidden;
+  padding-bottom: 0.6875rem;
+  padding-top: 0.75rem;
   text-overflow: ellipsis;
+  text-transform: capitalize;
   white-space: nowrap;
 }
 
 .#{$prefix}--bmrg-notification-content__title {
-  color: #fbfcfc;
+  color: theme.$text-on-color;
   font-size: 0.875rem;
   font-weight: 500;
   line-height: 1.125rem;
@@ -116,7 +117,7 @@
 }
 
 .#{$prefix}--bmrg-notification-content__desc {
-  color: #b9bfc7;
+  color: theme.$text-on-color;
   display: block;
   font-size: 0.75rem;
   min-height: 2rem;
@@ -125,12 +126,13 @@
 }
 
 .#{$prefix}--bmrg-notification-content__date {
-  color: #878d96;
+  color: theme.$text-on-color;
   display: block;
   font-size: 0.75rem;
   height: 0.9375rem;
   line-height: 0.9375rem;
   margin-top: utils.rem(10px);
+  opacity: 0.8;
 }
 .#{$prefix}--bmrg-notification-content__close {
   background: none;
@@ -178,9 +180,9 @@
 }
 
 .#{$prefix}--bmrg-notifications-empty__no-news {
-  color: #fbfcfc;
+  color: theme.$text-on-color;
   font-size: utils.rem(14px);
-  font-weight: 300;
+  font-weight: 400;
   line-height: utils.rem(18px);
   margin: 0rem;
   margin-bottom: 1rem;

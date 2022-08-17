@@ -24,7 +24,7 @@ const AboutPlatformContainer = ({ version, organization, isFlowApp }) => {
           <>
             <ModalHeader
               closeModal={closeModal}
-              label={`${organization} ${" "} | ${" "} version ${version}`}
+              label={`${organization} ${" "} | ${" "} Version ${version}`}
               title="About the Platform"
             />
             <ModalBody>
