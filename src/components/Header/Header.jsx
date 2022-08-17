@@ -11,7 +11,6 @@ import {
   NotificationNew,
 } from "@carbon/react/icons";
 import { prefix } from "../../internal/settings";
-import FocusTrap from "focus-trap-react";
 import { SkipToContent } from "@carbon/react";
 import PlatformNotificationsContainer from "../PlatformNotifications";
 import HeaderMenu from "../HeaderMenu";
@@ -25,8 +24,6 @@ import HeaderMenuBmrg from "./HeaderMenuBmrg";
 import HeaderWrapper from "./HeaderWrapper";
 import HeaderRightPanel from "./HeaderRightPanel";
 import BoomerangLogo from "./assets/BoomerangLogo";
-
-
 
 const stateToButtonElemIdMap = {
   isHelpActive: "navigation-help-menu-button",
@@ -449,12 +446,10 @@ class Header extends React.Component {
               })}
               ref={this.sideNavRef}
             >
-              <FocusTrap active={this.state.isSidenavActive} focusTrapOptions={{ allowOutsideClick: true }}>
-                {this.props.renderSidenav({
-                  isOpen: this.state.isSidenavActive,
-                  onMenuClose: this.onMenuClose,
-                })}
-              </FocusTrap>
+              {this.props.renderSidenav({
+                isOpen: this.state.isSidenavActive,
+                onMenuClose: this.onMenuClose,
+              })}
             </div>
           )}
         </div>

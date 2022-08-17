@@ -9,6 +9,13 @@ const styleProp = {
 export default {
   title: "Platform/HeaderMenuUser",
   component: HeaderMenuUser,
+  parameters: {
+    docs: {
+      description: {
+        component: "Platform header menu item that displays user and launches a modal.",
+      },
+    },
+  },
 };
 
 export const Default = () => {
@@ -18,7 +25,11 @@ export const Default = () => {
         src={"https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50"}
         userName={"Gravatar User"}
       >
-        {() => null}
+        {() => (
+          <div style={{ height: "20rem", width: "20rem" }}>
+            <p>User!</p>
+          </div>
+        )}
       </HeaderMenuUser>
     </div>
   );

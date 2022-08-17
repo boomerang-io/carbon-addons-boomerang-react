@@ -12,9 +12,17 @@ const mockSocketUrl = "https://www.google.com/ws";
 export default {
   title: "Platform/Header",
   component: Header,
+  parameters: {
+    docs: {
+      description: {
+        component: "Platform header that is used by the UIShell. Exported to allow composibility of Header in place of UIShell.",
+      },
+    },
+  },
 };
 
-export const Default = (args) => (
+export const Default = () => (
+  <div style={{display: "block"}}>
   <Header
     renderLogo={false}
     appName={"App"}
@@ -71,11 +79,14 @@ export const Default = (args) => (
       </HeaderMenuItem>,
     ]}
   />
+  </div>
 );
 
-export const WithIntegratedSidenav = (args) => (
+export const WithIntegratedSidenav = () => (
   <Router history={createMemoryHistory({ initialEntries: ["/"] })}>
     <Header
+     appName={"App"}
+     platformName={"Boomerang"}
       renderLogo={false}
       enableNotifications={true}
       companyName={"Boomerang"}
@@ -130,7 +141,7 @@ export const WithIntegratedSidenav = (args) => (
           <Modal passiveModal />
         </HeaderMenuItem>,
       ]}
-      onMenuClick={({ isOpen, onMenuClose }) => (
+      renderSidenav={({ isOpen, onMenuClose }) => (
         <LeftSideNav isOpen={isOpen} onMenuClose={onMenuClose}>
           <SideNav aria-label="sidenav" expanded isChildOfHeader>
             <SideNavItems>

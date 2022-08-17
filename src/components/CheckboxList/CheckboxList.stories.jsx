@@ -14,7 +14,7 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: "Manage checkbox inputs with optional label, helper and tooltip text",
+        component: "Manage checkbox inputs with optional label, helper and tooltip text and use as a data driven component",
       },
     },
   },

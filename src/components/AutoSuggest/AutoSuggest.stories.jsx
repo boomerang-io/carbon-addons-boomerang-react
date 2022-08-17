@@ -34,13 +34,6 @@ export default {
       </div>
     ),
   ],
-  parameters: {
-    docs: {
-      source: {
-        excludeDecorators: true,
-      },
-    },
-  },
   argTypes: {
     autoSuggestions: { control: "array", defaultValue: animals },
     inputProps: {

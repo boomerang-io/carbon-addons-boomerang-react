@@ -5,6 +5,13 @@ import ProtectedRoute from "./ProtectedRoute";
 export default {
   title: "Components/ProtectedRoute",
   component: ProtectedRoute,
+  parameters: {
+    docs: {
+      description: {
+        component: "Protect react-router routes via user roles.",
+      },
+    },
+  },
   decorators: [
     (Story) => (
       <Router history={history}>

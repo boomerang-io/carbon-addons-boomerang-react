@@ -9,6 +9,22 @@ import { Save, View } from "@carbon/react/icons";
 export default {
   title: "Features/FeatureHeader",
   component: FeatureHeader,
+  parameters: {
+    docs: {
+      description: {
+        component: "Page feature header for consistent layouts. Includes component slots to support many usecases.",
+      },
+    },
+  },
+  decorators: [
+    (Story) => (
+      <Router history={createMemoryHistory({ initialEntries: ["/"] })}>
+        <div style={{ backgroundColor: "#f2f4f8", height: "20rem", width: "100%" }}>
+          <Story />
+        </div>
+      </Router>
+    ),
+  ],
 };
 
 const Nav = () => {
@@ -18,7 +34,7 @@ const Nav = () => {
         <Link to="/teams">Teams</Link>
       </BreadcrumbItem>
       <BreadcrumbItem isCurrentPage>
-        <Link to="/teams/123">Testing Team</Link>
+        <Link to="/teams/boomerang">Boomerang</Link>
       </BreadcrumbItem>
     </Breadcrumb>
   );
@@ -66,190 +82,150 @@ const Actions = () => (
   </div>
 );
 
-export const Default = () => {
+export const Default = (args) => {
   return (
-    <div style={{ backgroundColor: "#f2f4f8", height: "100vh", width: "100vw" }}>
-      <FeatureHeader
-        header={
-          <>
-            <FeatureHeaderTitle>With Header</FeatureHeaderTitle>
-            <FeatureHeaderSubtitle>Subtitle</FeatureHeaderSubtitle>
-          </>
-        }
-      />
-    </div>
+    <FeatureHeader
+      header={
+        <>
+          <FeatureHeaderTitle>With Header</FeatureHeaderTitle>
+          <FeatureHeaderSubtitle>Subtitle</FeatureHeaderSubtitle>
+        </>
+      }
+      {...args}
+    />
   );
 };
 
-export const SubtitleFirst = () => {
+export const SubtitleFirst = (args) => {
   return (
-    <div style={{ backgroundColor: "#f2f4f8", height: "100vh", width: "100vw" }}>
-      <FeatureHeader
-        header={
-          <>
-            <FeatureHeaderSubtitle style={{ fontSize: "0.875rem", fontWeight: "300" }}>
-              Subtitle as label
-            </FeatureHeaderSubtitle>
-            <FeatureHeaderTitle style={{ fontSize: "1.5rem" }}>I'm smaller</FeatureHeaderTitle>
-          </>
-        }
-      />
-    </div>
+    <FeatureHeader
+      header={
+        <>
+          <FeatureHeaderSubtitle style={{ fontSize: "0.875rem", fontWeight: "300" }}>
+            Subtitle as label
+          </FeatureHeaderSubtitle>
+          <FeatureHeaderTitle style={{ fontSize: "1.5rem" }}>I'm smaller</FeatureHeaderTitle>
+        </>
+      }
+      {...args}
+    />
   );
 };
 
 SubtitleFirst.story = {
-  name: "subtitle first",
+  name: "Subtitle above title",
 };
 
-export const WithoutBorder = () => {
+export const WithoutBorder = (args) => {
   return (
-    <div style={{ backgroundColor: "#f2f4f8", height: "100vh", width: "100vw" }}>
-      <FeatureHeader
-        includeBorder={false}
-        header={
-          <>
-            <FeatureHeaderTitle>Withouth Border</FeatureHeaderTitle>
-            <FeatureHeaderSubtitle>Subtitle</FeatureHeaderSubtitle>
-          </>
-        }
-      ></FeatureHeader>
-    </div>
+    <FeatureHeader
+      includeBorder={false}
+      header={
+        <>
+          <FeatureHeaderTitle>Withouth Border</FeatureHeaderTitle>
+          <FeatureHeaderSubtitle>Subtitle</FeatureHeaderSubtitle>
+        </>
+      }
+      {...args}
+    />
   );
 };
 
 WithoutBorder.story = {
-  name: "without border",
+  name: "No border",
 };
 
-export const Loading = () => {
+export const Loading = (args) => {
   return (
-    <div style={{ backgroundColor: "#f2f4f8", height: "100vh", width: "100vw" }}>
-      <FeatureHeader
-        isLoading
-        header={
-          <>
-            <FeatureHeaderTitle>It is Loading</FeatureHeaderTitle>
-            <FeatureHeaderSubtitle>Subtitle</FeatureHeaderSubtitle>
-          </>
-        }
-      ></FeatureHeader>
-    </div>
+    <FeatureHeader
+      isLoading
+      header={
+        <>
+          <FeatureHeaderTitle>It is Loading</FeatureHeaderTitle>
+          <FeatureHeaderSubtitle>Subtitle</FeatureHeaderSubtitle>
+        </>
+      }
+      {...args}
+    />
   );
 };
 
 Loading.story = {
-  name: "loading",
+  name: "Loading state",
 };
 
-export const WithFooter = () => {
-  return (
-    <Router history={createMemoryHistory({ initialEntries: ["/"] })}>
-      <div style={{ backgroundColor: "#f2f4f8", height: "100vh", width: "100vw" }}>
-        <FeatureHeader footer={<Footer />} />
-      </div>
-    </Router>
-  );
+export const WithFooter = (args) => {
+  return <FeatureHeader footer={<Footer />} {...args} />;
 };
 
 WithFooter.story = {
-  name: "with footer",
+  name: "Footer",
 };
 
-export const WithNav = () => {
+export const WithNav = (args) => {
   return (
-    <Router history={createMemoryHistory({ initialEntries: ["/"] })}>
-      <div style={{ backgroundColor: "#f2f4f8", height: "100vh", width: "100vw" }}>
-        <FeatureHeader
-          nav={<Nav />}
-          header={
-            <>
-              <FeatureHeaderTitle>With Header</FeatureHeaderTitle>
-              <FeatureHeaderSubtitle>Subtitle</FeatureHeaderSubtitle>
-            </>
-          }
-        />
-      </div>
-    </Router>
+    <FeatureHeader
+      nav={<Nav />}
+      header={
+        <>
+          <FeatureHeaderTitle>With Header</FeatureHeaderTitle>
+          <FeatureHeaderSubtitle>Subtitle</FeatureHeaderSubtitle>
+        </>
+      }
+      {...args}
+    />
   );
 };
 
 WithNav.story = {
-  name: "with nav",
+  name: "Breadcrumb",
 };
 
-export const OnlyNav = () => {
-  return (
-    <Router history={createMemoryHistory({ initialEntries: ["/"] })}>
-      <div style={{ backgroundColor: "#f2f4f8", height: "100vh", width: "100vw" }}>
-        <FeatureHeader nav={<Nav />} />
-      </div>
-    </Router>
-  );
-};
-
-OnlyNav.story = {
-  name: "only nav",
-};
 
 export const WithActions = () => {
   return (
-    <Router history={createMemoryHistory({ initialEntries: ["/"] })}>
-      <div style={{ backgroundColor: "#f2f4f8", height: "100vh", width: "100vw" }}>
-        <FeatureHeader
-          actions={<Actions />}
-          header={<FeatureHeaderTitle>With Actions</FeatureHeaderTitle>}
-        ></FeatureHeader>
-      </div>
-    </Router>
+    <FeatureHeader actions={<Actions />} header={<FeatureHeaderTitle>Actions</FeatureHeaderTitle>}></FeatureHeader>
   );
 };
 
 WithActions.story = {
-  name: "with actions",
+  name: "Actions",
 };
 
 export const OnlyChildren = () => {
   return (
-    <Router history={createMemoryHistory({ initialEntries: ["/"] })}>
-      <div style={{ backgroundColor: "#f2f4f8", height: "100vh", width: "100vw" }}>
-        <FeatureHeader>
-          <div style={{ marginBottom: "1rem" }}>
-            <FeatureHeaderTitle>Rendered as Child</FeatureHeaderTitle>
-          </div>
-          <DataList />
-        </FeatureHeader>
+    <FeatureHeader>
+      <div style={{ marginBottom: "1rem" }}>
+        <FeatureHeaderTitle>Rendered as Child</FeatureHeaderTitle>
       </div>
-    </Router>
+      <DataList />
+    </FeatureHeader>
   );
 };
 
 OnlyChildren.story = {
-  name: "only children",
+  name: "Children",
 };
 
-export const WithNavHeaderFooterActionsAndChildren = () => {
+export const WithNavHeaderFooterActionsAndChildren = (args) => {
   return (
-    <Router history={createMemoryHistory({ initialEntries: ["/"] })}>
-      <div style={{ backgroundColor: "#f2f4f8", height: "100vh", width: "100vw" }}>
-        <FeatureHeader
-          nav={<Nav />}
-          footer={<Footer />}
-          actions={<Actions />}
-          header={
-            <>
-              <FeatureHeaderTitle>With Everything</FeatureHeaderTitle>
-              <FeatureHeaderSubtitle>Subtitle</FeatureHeaderSubtitle>
-            </>
-          }
-        >
-          <DataList />
-        </FeatureHeader>
-      </div>
-    </Router>
+    <FeatureHeader
+      nav={<Nav />}
+      footer={<Footer />}
+      actions={<Actions />}
+      header={
+        <>
+          <FeatureHeaderTitle>Everything Everywhere</FeatureHeaderTitle>
+          <FeatureHeaderSubtitle>All at once</FeatureHeaderSubtitle>
+        </>
+      }
+      {...args}
+    >
+      <DataList />
+    </FeatureHeader>
   );
 };
 
 WithNavHeaderFooterActionsAndChildren.story = {
-  name: "with nav, header, footer, actions, and children",
+  name: "Kitchen Sink",
 };

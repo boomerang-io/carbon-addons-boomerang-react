@@ -8,40 +8,36 @@ const history = createBrowserHistory();
 export default {
   title: "Features/FeatureSideNavLink",
   component: FeatureSideNavLink,
+  parameters: {
+    docs: {
+      description: {
+        component: "Link used in FeatureSideNav component. Uses react-router NavLink.",
+      },
+    },
+  },
 };
 
-export const DefaultFeatureSidenavLink = () => {
+export const Default = () => {
   return (
     <Router history={history}>
-      <FeatureSideNavLink to="/test" children="TESTING" />
+      <FeatureSideNavLink to="#" children="TESTING" />
     </Router>
   );
 };
 
-export const ActiveFeatureSidenavLink = () => {
+export const Icon = () => {
   return (
     <Router history={history}>
-      <FeatureSideNavLink to="/" children="TESTING" />
+      <FeatureSideNavLink to="#" children="Boomerang" iconProps={{ "data-testid": "rocket-icon" }} icon={Rocket} />
     </Router>
   );
 };
 
-export const FeatureSidenavLinkWithIcon = () => {
+
+export const CustomContent = () => {
   return (
     <Router history={history}>
-      <FeatureSideNavLink to="/test" children="TESTING" iconProps={{ "data-testid": "rocket-icon" }} icon={Rocket} />
-    </Router>
-  );
-};
-
-FeatureSidenavLinkWithIcon.story = {
-  name: "Feature Sidenav Link with Icon",
-};
-
-export const FeatureSidenavLinkWithCustomContent = () => {
-  return (
-    <Router history={history}>
-      <FeatureSideNavLink to="/test">
+      <FeatureSideNavLink to="#">
         <div>
           <p>text1</p>
           <p>text2</p>
@@ -51,18 +47,10 @@ export const FeatureSidenavLinkWithCustomContent = () => {
   );
 };
 
-FeatureSidenavLinkWithCustomContent.story = {
-  name: "Feature Sidenav Link with custom content",
-};
-
-export const FeatureSidenavLinkWithDivider = () => {
+export const Divider = () => {
   return (
     <Router history={history}>
-      <FeatureSideNavLink to="/test" children="TESTING" hasDivider />
+      <FeatureSideNavLink to="#" children="Boomerang" hasDivider />
     </Router>
   );
-};
-
-FeatureSidenavLinkWithDivider.story = {
-  name: "Feature Sidenav Link with divider",
 };

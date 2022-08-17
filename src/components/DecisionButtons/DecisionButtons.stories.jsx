@@ -10,7 +10,7 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: "A button-like radio experience for selecting between a descrete set of options UI",
+        component: "A button-like radio button experience for selecting between a descrete set of options UI",
       },
     },
   },

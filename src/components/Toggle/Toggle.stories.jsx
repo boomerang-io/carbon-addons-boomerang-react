@@ -4,6 +4,13 @@ import Toggle from "./Toggle";
 export default {
   title: "Inputs/Toggle",
   component: Toggle,
+  parameters: {
+    docs: {
+      description: {
+        component: "Enhanced toggle with support for label, helper and tooltip text and use as a data driven component",
+      },
+    },
+  },
   decorators: [
     (Story) => (
       <div style={{ maxWidth: "16rem", padding: "1rem" }}>

@@ -5,6 +5,13 @@ import TextArea from "./TextArea";
 export default {
   title: "Inputs/TextArea",
   component: TextArea,
+  parameters: {
+    docs: {
+      description: {
+        component: "Enhanced text area with support for tooltip text and use as a data driven component",
+      },
+    },
+  },
   decorators: [
     (Story) => (
       <div style={{ maxWidth: "25rem", padding: "1rem" }}>

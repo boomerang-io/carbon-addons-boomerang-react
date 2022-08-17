@@ -7,7 +7,7 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: "Enhanced date input with support for tooltip text",
+        component: "Enhanced date input with support for tooltip text and use as a data driven component",
       },
     },
   },

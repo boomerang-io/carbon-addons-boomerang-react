@@ -6,7 +6,7 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: "Modal that displays key metadata about the platform.",
+        component: "Header menu item that displays modal with key metadata about the platform.",
       },
     },
   },

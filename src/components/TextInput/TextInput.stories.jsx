@@ -4,6 +4,13 @@ import TextInput from "./TextInput";
 export default {
   title: "Inputs/TextInput",
   component: TextInput,
+  parameters: {
+    docs: {
+      description: {
+        component: "Enhanced text input with support for tooltip text and use as a data driven component",
+      },
+    },
+  },
   decorators: [
     (Story) => (
       <div style={{ maxWidth: "25rem", padding: "1rem" }}>
