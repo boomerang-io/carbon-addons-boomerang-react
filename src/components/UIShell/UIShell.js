@@ -298,7 +298,7 @@ function UIShell({
             <PrivacyStatement
               key="Privacy Statement"
               baseServiceUrl={finalBaseServiceUrl}
-              organization={platform?.name}
+              platformName={platform?.name}
               platformEmail={platform?.platformEmail}
             />
           ),
@@ -308,7 +308,7 @@ function UIShell({
         ].filter(Boolean)}
       />
       {isGdprRedirectDisabled === false && user.hasConsented === false ? (
-        <GdprRedirectModal isOpen baseLaunchEnvUrl={finalBaseUrl} user={user} />
+        <GdprRedirectModal isOpen baseLaunchEnvUrl={finalBaseUrl} user={user} platformName={platform?.name} />
       ) : null}
     </>
   );
