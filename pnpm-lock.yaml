@@ -7,7 +7,7 @@ specifiers:
   '@babel/preset-env': ^7.18.6
   '@babel/preset-react': ^7.18.6
   '@babel/runtime': 7.18.9
-  '@carbon/react': 1.7.0
+  '@carbon/react': 1.12.0
   '@commitlint/cli': ^17.0.3
   '@commitlint/config-conventional': ^17.0.3
   '@stomp/stompjs': 6.1.2
@@ -88,7 +88,7 @@ devDependencies:
   '@babel/plugin-transform-runtime': 7.18.10_@babel+core@7.18.10
   '@babel/preset-env': 7.18.10_@babel+core@7.18.10
   '@babel/preset-react': 7.18.6_@babel+core@7.18.10
-  '@carbon/react': 1.7.0_pjytiwbja3h37alvraajcacd3i
+  '@carbon/react': 1.12.0_pjytiwbja3h37alvraajcacd3i
   '@commitlint/cli': 17.0.3
   '@commitlint/config-conventional': 17.0.3
   '@storybook/addon-a11y': 6.5.10_wcqkhtmu7mswc6yz4uyexck3ty
@@ -1694,8 +1694,8 @@ packages:
     resolution: {integrity: sha512-uhseTXlSXBH7FA2euriLYrFcKZqx65raXyVN0F1XIiw3dDfTOwdXGLdg8nPQB3sGVefTinEvGxqwc6dwinbsNA==}
     dev: true
 
-  /@carbon/react/1.7.0_pjytiwbja3h37alvraajcacd3i:
-    resolution: {integrity: sha512-m1UbgoYyQJFVRYf49/FrLj/6uk8GiNAJ1auKp9JGAAqpbT7fsBrihV5ijFuogIUlYgeSley2SsFLECCEUdDRKQ==}
+  /@carbon/react/1.12.0_pjytiwbja3h37alvraajcacd3i:
+    resolution: {integrity: sha512-cMOL1fBUDObwIW8VkuTYyGbWe0UAi7277+NxvXxfK3+Otza5b+tZFNcL/HUoCr3KgyW/PxhYKsSSHrRQ8/l9dA==}
     requiresBuild: true
     peerDependencies:
       react: ^16.8.6 || ^17.0.1
@@ -1706,7 +1706,7 @@ packages:
       '@carbon/feature-flags': 0.8.0
       '@carbon/icons-react': 11.7.0_react@16.14.0
       '@carbon/layout': 11.5.0
-      '@carbon/styles': 1.9.0_sass@1.54.3
+      '@carbon/styles': 1.12.0_sass@1.54.3
       '@carbon/telemetry': 0.1.0
       classnames: 2.3.1
       copy-to-clipboard: 3.3.2
@@ -1728,8 +1728,8 @@ packages:
       window-or-global: 1.0.1
     dev: true
 
-  /@carbon/styles/1.9.0_sass@1.54.3:
-    resolution: {integrity: sha512-PI0uuegz4cnexmtiorlwRaYeosF9cF9kyM08267gS5KnG87BojiG/U78oqQKD0zcuN9yatdTkYgGwfbmgTOihg==}
+  /@carbon/styles/1.12.0_sass@1.54.3:
+    resolution: {integrity: sha512-C44P2AEgKe+bUQ7Jf77IlJ6C1VpTM0WYOpL5pzPK7vJvf29o2LkrGDyWfqPBo0wE8SsF76qJ58lRgnNqgyodEw==}
     peerDependencies:
       sass: ^1.33.0
     dependencies:
@@ -1738,8 +1738,8 @@ packages:
       '@carbon/grid': 11.5.0
       '@carbon/layout': 11.5.0
       '@carbon/motion': 11.3.0
-      '@carbon/themes': 11.6.0
-      '@carbon/type': 11.6.0
+      '@carbon/themes': 11.8.0
+      '@carbon/type': 11.8.0
       '@ibm/plex': 6.0.0-next.6
       sass: 1.54.3
     dev: true
@@ -1749,17 +1749,17 @@ packages:
     hasBin: true
     dev: true
 
-  /@carbon/themes/11.6.0:
-    resolution: {integrity: sha512-NpO/GXvuIWycMCHy36HF0Mdegq8zgj9mLTkFyoIMGWRCGZuKbWiNy0xT18XQsTTCOedc41V+EMWOrIxCv60n1w==}
+  /@carbon/themes/11.8.0:
+    resolution: {integrity: sha512-Bl8C59EdBA9qNe9ws25CmpC5HY26Iq1HycsMd6nqp/voFOLtpcV34acmdcElw4x6vOrq9eP7Q+Hx4TxAPSwDDg==}
     dependencies:
       '@carbon/colors': 11.4.0
       '@carbon/layout': 11.5.0
-      '@carbon/type': 11.6.0
+      '@carbon/type': 11.8.0
       color: 3.2.1
     dev: true
 
-  /@carbon/type/11.6.0:
-    resolution: {integrity: sha512-2W7llkafQ3BzJHhmTfRPXmFD6FgEAeO1PJklSYFNnxLgV6/AhtU4nNUZ7oLQ6Y6uM4DPaT6peeWxTOgHm1DWRQ==}
+  /@carbon/type/11.8.0:
+    resolution: {integrity: sha512-2npBuvgUKQB2uBFe+sbv5/eGP3eu2/feebeaPUujO8YWc1u2lpjhkEPp86OrujyzTaDwZ9YHywgIFLdndZAQgg==}
     dependencies:
       '@carbon/grid': 11.5.0
     dev: true
