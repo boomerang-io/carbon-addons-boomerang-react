@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import cx from "classnames";
 import React from "react";
+import cx from "classnames";
 import PropTypes from "prop-types";
 import { ListBoxType, ListBoxSize } from "./ListBoxPropTypes";
 import ListBoxField from "./ListBoxField";
