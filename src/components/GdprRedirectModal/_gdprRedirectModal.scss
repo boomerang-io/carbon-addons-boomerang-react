@@ -1,8 +1,8 @@
 @include exports('addons-bmrg-gdprRedirect') {
   .#{$prefix}--bmrg-redirect__body {
-    color: #9fa5ad;
+    color: #121619 !important;
     font-size: 0.875rem;
-    font-weight: 600;
+    font-weight: 400;
     height: 1.25rem;
     line-height: 1.25rem;
     text-transform: initial;
@@ -10,8 +10,22 @@
 
   .#{$prefix}--bmrg-redirect-container {
     .#{$prefix}--modal-container {
+      background-color: white !important;
       height: 12rem;
       max-height: 28rem;
     }
+
+    .#{$prefix}--modal-header__heading {
+      color: #121619 !important;
+    }
+
+    .#{$prefix}--modal-footer {
+      background-color: white !important;
+      button {
+        background-color: #0072c3 !important;
+        color: #ffffff !important;
+      }
+    }
+
   }
 }
