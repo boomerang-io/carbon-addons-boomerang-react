@@ -5,7 +5,6 @@ import { TextInput } from "@carbon/react";
 import { Information } from "@carbon/react/icons";
 import { prefix } from "../../internal/settings";
 
-console.log(TextInput);
 
 const TextInputComponent = React.forwardRef(function TextInputComponent(
   { id, label, labelText, tooltipClassName, tooltipContent, tooltipProps, ...textInputProps },
