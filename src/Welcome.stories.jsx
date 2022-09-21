@@ -8,7 +8,7 @@ import {
   StructuredListBody,
   StructuredListRow,
   StructuredListCell,
-} from "./index";
+} from "@carbon/react";
 import * as All from "./index";
 //const carbonExports = Object.keys(require('@carbon/react'));
 const boomerangAddonsExports = Object.keys(All);
@@ -31,11 +31,11 @@ export const Welcome = () => (
       or custom components beyond the functionality that Carbon provides. The components are grouped by function and purpose.
     </p>
     <p>
-      <strong>Carbon</strong> - Components imported from Carbon and re-exported without modification. Carbon's stories
-      are not included in our storybook, please reference the
+      <strong>Carbon</strong> - Please reference the
       <a href="https://react.carbondesignsystem.com/" style={{ marginLeft: "0.15rem" }}>
         Carbon Storybook
       </a>
+      to see the full component library.
     </p>
 
     <p>

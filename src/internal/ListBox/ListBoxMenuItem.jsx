@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import cx from "classnames";
 import React, { useEffect, useRef, useState } from "react";
+import cx from "classnames";
 import PropTypes from "prop-types";
 import { prefix } from "../settings";
 

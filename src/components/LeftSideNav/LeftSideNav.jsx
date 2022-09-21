@@ -21,7 +21,7 @@ export default function LeftSideNav(props) {
   const classNames = classnames(`${prefix}--bmrg-left-side-nav-container`, className);
 
   return (
-    <FocusTrap focusTrapOptions={{ allowOutsideClick: true }}>
+    <FocusTrap active={isOpen} focusTrapOptions={{ allowOutsideClick: true }}>
       <aside aria-label="Left side nav" className={classNames} tabIndex={-1} {...other}>
         {children}
       </aside>

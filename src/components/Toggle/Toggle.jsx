@@ -10,11 +10,11 @@ ToggleComponent.propTypes = {
   /**
    * Helper text to match other inputs
    */
-  helperText: PropTypes.string,
+  helperText: PropTypes.node,
   /**
    * Alias for labelText
    */
-  label: PropTypes.string,
+  label: PropTypes.node,
   /**
    * Set the orientation of the toggle, horizontal is the default
    */
@@ -77,7 +77,7 @@ ToggleComponent.propTypes = {
    * Provide the text that will be read by a screen reader when visiting this
    * control
    */
-  labelText: PropTypes.node.isRequired,
+  labelText: PropTypes.node,
 
   /**
    * Provide an event listener that is called when the control is clicked
