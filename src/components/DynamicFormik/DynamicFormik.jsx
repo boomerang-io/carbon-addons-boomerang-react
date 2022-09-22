@@ -23,8 +23,6 @@ import {
   INPUT_GROUPS,
 } from "../../internal/DataDrivenInputTypes";
 
-
-
 /**
  *
  * @param {string} value - value to test for valid property syntax
@@ -727,7 +725,7 @@ DynamicFormik.propTypes = {
    */
   customPropertyStartsWithPattern: PropTypes.instanceOf(RegExp),
   additionalInitialValues: PropTypes.object,
-  allowCustomPropertySyntax: PropTypes.object,
+  allowCustomPropertySyntax: PropTypes.bool,
   inputProps: PropTypes.object,
   initialValues: PropTypes.object,
   inputs: PropTypes.array.isRequired,
