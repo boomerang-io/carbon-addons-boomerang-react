@@ -1,0 +1,69 @@
+@use "../../styles/config" as *;
+@use '@carbon/themes/scss/tokens' as theme;
+
+.#{$prefix}--bmrg-feature-sidenav-container {
+  background-color: theme.$background;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 3rem);
+  width: 21.875rem;
+  &.--left-border {
+    border-left: 0.0625rem solid theme.$background-active;
+  }
+  &.--right-border {
+    border-right: 0.0625rem solid theme.$background-active;
+  }
+  &.--small {
+    width: 18.75rem;
+  }
+}
+.#{$prefix}--bmrg-feature-sidenav-links {
+  flex-grow: 1;
+  overflow-y: auto;
+
+  .#{$prefix}--accordion {
+    height: 100%;
+    overflow-y: auto;
+  }
+  .#{$prefix}--accordion__content {
+    padding: 0 !important;
+  }
+  .#{$prefix}--accordion__item {
+    list-style-type: none;
+    .#{$prefix}--accordion__arrow {
+      position: absolute;
+      right: 1.5rem;
+    }
+    .#{$prefix}--accordion__title {
+      color: theme.$text-primary;
+      font-size: 0.875rem;
+      letter-spacing: 0.01rem;
+      line-height: 1.25rem;
+      text-transform: capitalize;
+    }
+  }
+}
+.#{$prefix}--bmrg-feature-sidenav-header {
+  align-self: flex-start;
+  padding: 1rem;
+  width: 100%;
+}
+.#{$prefix}--bmrg-feature-sidenav-footer {
+  display: flex;
+  grid-row: -1/-1;
+  grid-column: 1/-1;
+  margin-top: 1rem;
+  width: 100%;
+  .#{$prefix}--btn {
+    border-radius: initial;
+    flex: 0 1 50%;
+    max-width: 100%;
+  }
+}
+
+.#{$prefix}--bmrg-feature-sidenav-links-skeleton {
+  padding: 1rem;
+  > div + div {
+    margin-top: 1rem;
+  }
+}

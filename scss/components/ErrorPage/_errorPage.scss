@@ -1,0 +1,59 @@
+@use '@carbon/themes/scss/tokens' as theme;
+@use "../../styles/config" as *;
+@use "../../styles/utils";
+
+  .#{$prefix}--bmrg-error-page {
+    align-items: center;
+    color: theme.$text-secondary;
+    display: flex;
+    font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    flex-direction: column;
+    margin: utils.rem(80px) auto;
+    padding: 0 2rem;
+    width: 100%;
+  }
+
+  .#{$prefix}--bmrg-error-page__header {
+    color: theme.$support-error-inverse;
+    font-size: utils.rem(32px);
+    font-weight: 600;
+    line-height: 42px;
+    margin-bottom: utils.rem(30px);
+    text-align: center;
+  }
+
+  .#{$prefix}--bmrg-error-page__title {
+    color: inherit;
+    font-size: utils.rem(24px);
+    font-weight: 600;
+    line-height: utils.rem(32px);
+    text-align: center;
+  }
+
+  .#{$prefix}--bmrg-error-page__message {
+    color: inherit;
+    font-size: utils.rem(16px);
+    line-height: utils.rem(20px);
+    margin-top: utils.rem(12px);
+    max-width: 60ch;
+    text-align: center;
+
+    a {
+      color: theme.$background-brand;
+      font-weight: 600;
+      text-decoration: none;
+    }
+  }
+
+  .#{$prefix}--bmrg-error-page__graphic {
+    display: flex;
+    justify-content: center;
+    margin-top: utils.rem(40px);
+    max-width: utils.rem(576px);
+    width: 100%;
+
+    svg {
+      height: 100%;
+      width: 100%;
+    }
+  }

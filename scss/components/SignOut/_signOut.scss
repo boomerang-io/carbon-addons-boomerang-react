@@ -1,0 +1,42 @@
+@use '@carbon/themes/scss/tokens' as theme;
+@use "../../styles/config" as *;
+@use "../../styles/utils";
+
+.#{$prefix}--bmrg-signout-container {
+  .#{$prefix}--modal-container {
+    height: utils.rem(226px);
+    width: utils.rem(500px);
+  }
+
+  .#{$prefix}--modal-content {
+    margin-bottom: 0.5rem;
+  }
+
+  .#{$prefix}--bmrg-header-menu-item__img {
+    color: theme.$support-error-inverse;
+  }
+
+  .#{$prefix}--bmrg-header-menu-item__text {
+    color: theme.$support-error-inverse !important;
+  }
+
+  .#{$prefix}--bmrg-signout {
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    &__message {
+      color: theme.$text-on-color;
+      font-size: utils.rem(14px);
+      line-height: utils.rem(18px);
+    }
+  }
+
+  .#{$prefix}--btn {
+    &.#{$prefix}--btn--primary {
+      min-width: 50%;
+    }
+
+    &.#{$prefix}--btn--secondary {
+      max-width: 50%;
+    }
+  }
+}

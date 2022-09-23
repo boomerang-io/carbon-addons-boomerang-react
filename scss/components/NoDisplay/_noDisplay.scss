@@ -1,0 +1,31 @@
+@use "../../styles/config" as *;
+@use '@carbon/themes/scss/tokens' as theme;
+
+  .#{$prefix}--bmrg-no-display {
+    color: theme.$text-primary;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .#{$prefix}--bmrg-no-display__text {
+    text-align: center;
+    font-size: 1.375rem;
+    color: theme.$text-primary;
+    font-weight: 300;
+    line-height: 1.6875rem;
+    margin-bottom: 1.875rem;
+
+    &.--above {
+      margin-bottom: 1.875rem;
+    }
+
+    &.--below {
+      margin-top: 1.875rem;
+    }
+  }
+
+  .#{$prefix}--bmrg-no-display__img {
+    max-width: 31.25rem;
+  }

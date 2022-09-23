@@ -30,7 +30,7 @@ async function build() {
     });
     
     // Copy over SCSS
-    await cpy('**/*.scss', '../styles/scss', {
+    await cpy('**/*.scss', '../scss', {
       parents: true,
       cwd: path.resolve(process.cwd(), 'src'),
     });

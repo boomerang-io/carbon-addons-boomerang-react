@@ -1,0 +1,59 @@
+@use "../../styles/config" as *;
+@use "../../styles/utils";
+@use "../../styles/themes/shell-tokens" as shell;
+
+.#{$prefix}--bmrg-header-menu-item {
+  min-height: utils.rem(48px);
+  height: 100%;
+  width: utils.rem(240px);
+  background-color: shell.$bmrg-tertiary;
+  border: utils.rem(1px) solid transparent;
+  border-radius: 0 !important;
+  cursor: pointer;
+  padding: 0;
+  outline: 2px solid transparent;
+  outline-offset: -2px;
+
+  &:hover {
+    background: shell.$bmrg-header-hover-background;
+    span {
+      color: shell.$bmrg-header-active-text;
+    }
+  }
+  &:active {
+    background: shell.$bmrg-header-hover-background;
+  }
+
+  &:focus {
+    outline: utils.rem(2px) solid shell.$bmrg-header-active-text !important;
+    box-shadow: none;
+  }
+}
+
+.#{$prefix}--bmrg-header-menu-item__content {
+  display: flex;
+  align-items: center;
+  margin-left: utils.rem(16px);
+}
+
+.#{$prefix}--bmrg-header-menu-item__img {
+  line-height: 0;
+  width: 1rem;
+  svg {
+    fill: currentColor;
+  }
+}
+
+.#{$prefix}--bmrg-header-menu-item__text {
+  align-items: center;
+  color: shell.$bmrg-header-active-text;
+  display: flex;
+  font-size: utils.rem(14px);
+  font-weight: 500;
+  line-height: utils.rem(18px);
+  margin-left: utils.rem(16px);
+
+  svg {
+    margin-left: utils.rem(8px);
+  }
+}
