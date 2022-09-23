@@ -1,7 +1,7 @@
 @use "sass:map";
 @use "../config" as *;
 
-/// Boomerang's default color theme
+/// Boomerang's default color theme, defines tokens for v10 and v11 for backwards compat
 /// @type Map
 /// @access public
 /// @group @boomerang/carbon-addons-boomerang
@@ -179,7 +179,7 @@ $shell-tokens: (
   bmrg-header-button-text: #272727,
   bmrg-header-attachment-background: #50565b,
   bmrg-sidenav-active-background: #343a3f,
-  bmrg-active: #009d9a
+  bmrg-active: #009d9a,
 );
 
 $theme: map.merge($v11-tokens, $v10-tokens);

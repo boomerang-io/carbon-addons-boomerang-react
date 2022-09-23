@@ -86,19 +86,19 @@ $use-theme-boomerang: false !default;
 .#{$prefix}--bmrg-signout-container,
 .#{$prefix}--bmrg-redirect-container {
   .#{$prefix}--modal-container {
-    background-color: shell.$bmrg-header-modal-background-color;
+    background-color: shell.$bmrg-header-modal-background;
     border-radius: var(--cds-border-radius, 0);
 
     * {
       &:focus,
       &::before {
-        outline-color: shell.$bmrg-secondary-color !important;
-        border-color: shell.$bmrg-secondary-color !important;
+        outline-color: shell.$bmrg-secondary !important;
+        border-color: shell.$bmrg-secondary !important;
       }
     }
 
     .#{$prefix}--btn:focus {
-      outline-color: shell.$bmrg-primary-color;
+      outline-color: shell.$bmrg-primary;
     }
 
     .#{$prefix}--modal-content {
@@ -113,10 +113,10 @@ $use-theme-boomerang: false !default;
   }
   .#{$prefix}--modal-close {
     &:hover {
-      background-color: shell.$bmrg-header-hover-background-color;
+      background-color: shell.$bmrg-header-hover-background;
     }
     &:focus {
-      outline: utils.rem(1px) solid shell.$bmrg-secondary-color;
+      outline: utils.rem(1px) solid shell.$bmrg-secondary;
     }
   }
 
@@ -143,7 +143,7 @@ $use-theme-boomerang: false !default;
     }
   }
   .#{$prefix}--modal-footer {
-    background-color: shell.$bmrg-primary-color;
+    background-color: shell.$bmrg-primary;
     margin: 0;
     /** carbon 10 override */
     padding: 0;
@@ -172,11 +172,11 @@ $use-theme-boomerang: false !default;
 
   .#{$prefix}--accordion__heading {
     &:hover:before {
-      background-color: shell.$bmrg-header-hover-background-color;
+      background-color: shell.$bmrg-header-hover-background;
     }
 
     &:focus:before {
-      border-color: shell.$bmrg-secondary-color;
+      border-color: shell.$bmrg-secondary;
     }
   }
 }
