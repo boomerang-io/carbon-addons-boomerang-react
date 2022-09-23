@@ -70,7 +70,7 @@
           padding: 1rem 0 0.3125rem;
         }
         a {
-          color: shell.$bmrg-secondary-color;
+          color: shell.$bmrg-secondary;
           text-decoration: none;
         }
       }
@@ -118,7 +118,7 @@
 
     .#{$prefix}--accordion__heading:focus {
       .#{$prefix}--accordion__arrow {
-        outline: utils.rem(1px) solid shell.$bmrg-secondary-color;
+        outline: utils.rem(1px) solid shell.$bmrg-secondary;
       }
     }
 

@@ -71,7 +71,7 @@ $use-theme-boomerang: false !default;
 @use '../components/TooltipHover/tooltip' as addons-tooltip;
 @use '../components/UserRequests/userRequests';
 
-// UIShell tokens
+// UIShell tokens, create css properties for them by default
 :root {
   @include utils.create-properties(theme-default.$shell-tokens);
 }
@@ -186,6 +186,7 @@ $use-theme-boomerang: false !default;
   // Some additional overrides to carbon base styles
   // add :root to have a higher level of specificity and not rely in import order
 
+  // Set at root, only if theme is actually set
   :root[data-carbon-theme="boomerang"] {
     @include utils.create-properties(theme-boomerang.$shell-tokens);
 

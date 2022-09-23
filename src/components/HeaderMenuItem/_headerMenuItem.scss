@@ -6,7 +6,7 @@
   min-height: utils.rem(48px);
   height: 100%;
   width: utils.rem(240px);
-  background-color: shell.$bmrg-tertiary-color;
+  background-color: shell.$bmrg-tertiary;
   border: utils.rem(1px) solid transparent;
   border-radius: 0 !important;
   cursor: pointer;
@@ -15,17 +15,17 @@
   outline-offset: -2px;
 
   &:hover {
-    background: shell.$bmrg-header-hover-background-color;
+    background: shell.$bmrg-header-hover-background;
     span {
-      color: shell.$bmrg-header-active-text-color;
+      color: shell.$bmrg-header-active-text;
     }
   }
   &:active {
-    background: shell.$bmrg-header-hover-background-color;
+    background: shell.$bmrg-header-hover-background;
   }
 
   &:focus {
-    outline: utils.rem(2px) solid shell.$bmrg-header-active-text-color !important;
+    outline: utils.rem(2px) solid shell.$bmrg-header-active-text !important;
     box-shadow: none;
   }
 }
@@ -46,7 +46,7 @@
 
 .#{$prefix}--bmrg-header-menu-item__text {
   align-items: center;
-  color: shell.$bmrg-header-active-text-color;
+  color: shell.$bmrg-header-active-text;
   display: flex;
   font-size: utils.rem(14px);
   font-weight: 500;

@@ -3,8 +3,7 @@ import PropTypes from "prop-types";
 import { ToastContainer, Slide } from "react-toastify";
 import { Close } from "@carbon/react/icons";
 import { prefix } from "../../internal/settings";
-
-
+import "react-toastify/dist/ReactToastify.css";
 
 // eslint-disable-next-line
 const CloseButton = ({ closeToast }) => <Close size={20} onClick={closeToast} />;

@@ -1,7 +1,5 @@
 @use '@carbon/themes/scss/tokens' as theme;
 @use "../../styles/config" as *;
-@use 'tippy.js/dist/tippy.css';
-@use 'tippy.js/dist/svg-arrow.css';
 
   .#{$prefix}--bmrg-tooltip {
     background-color: theme.$background-inverse;

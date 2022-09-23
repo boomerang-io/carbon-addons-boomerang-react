@@ -14,11 +14,11 @@
     width: 100%;
     &:focus {
       outline-offset: -0.125rem !important;
-      outline: 0.125rem solid shell.$bmrg-active-color !important;
+      outline: 0.125rem solid shell.$bmrg-active !important;
     }
     &.#{$prefix}--bmrg-feature-sidenav-active-link {
       background-color: theme.$background-selected;
-      border-left-color: shell.$bmrg-active-color;
+      border-left-color: shell.$bmrg-active;
       color: theme.$text-primary;
       svg {
         fill: initial;

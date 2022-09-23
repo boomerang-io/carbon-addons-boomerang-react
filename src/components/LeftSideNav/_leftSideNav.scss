@@ -32,7 +32,7 @@ $shell-header-bg-01: colors.$gray-100 !default;
 /// @type Color
 /// @access private
 /// @group ui-shell
-$shell-header-text-01: shell.$bmrg-secondary-color !default;
+$shell-header-text-01: shell.$bmrg-secondary !default;
 
 //----------------------------------------------------------------------------
 // Side nav tokens
@@ -41,7 +41,7 @@ $shell-header-text-01: shell.$bmrg-secondary-color !default;
 /// @type Color
 /// @access private
 /// @group ui-shell
-$shell-side-nav-bg-01: shell.$bmrg-primary-color !default;
+$shell-side-nav-bg-01: shell.$bmrg-primary !default;
 
 /// Selected category background
 /// Select L2 flatted item background
@@ -50,24 +50,24 @@ $shell-side-nav-bg-01: shell.$bmrg-primary-color !default;
 /// @type Color
 /// @access private
 /// @group ui-shell
-$shell-side-nav-bg-02: shell.$bmrg-header-active-background-color !default;
+$shell-side-nav-bg-02: shell.$bmrg-header-active-background !default;
 
 /// Selected L2 nested item
 /// @type Color
 /// @access private
 /// @group ui-shell
-$shell-side-nav-bg-03: shell.$bmrg-secondary-color !default;
+$shell-side-nav-bg-03: shell.$bmrg-secondary !default;
 
 /// Side nav item hover background
 /// @type Color
 /// @access private
 /// @group ui-shell
-$shell-side-nav-bg-04: shell.$bmrg-sidenav-active-background-color !default;
+$shell-side-nav-bg-04: shell.$bmrg-sidenav-active-background !default;
 /// Side nav menu item hover background
 /// @type Color
 /// @access private
 /// @group ui-shell
-$shell-side-nav-bg-05: shell.$bmrg-primary-color !default;
+$shell-side-nav-bg-05: shell.$bmrg-primary !default;
 
 /// Primary text in side-nav
 /// L2 Flatten item text
@@ -76,7 +76,7 @@ $shell-side-nav-bg-05: shell.$bmrg-primary-color !default;
 /// @type Color
 /// @access private
 /// @group ui-shell
-$shell-side-nav-text-01: shell.$bmrg-secondary-color !default;
+$shell-side-nav-text-01: shell.$bmrg-secondary !default;
 
 /// Secondary text in side nav
 /// L2 Category label
@@ -89,13 +89,13 @@ $shell-side-nav-text-02: colors.$gray-30 !default;
 /// @type Color
 /// @access private
 /// @group ui-shell
-$shell-side-nav-icon-01: shell.$bmrg-secondary-color !default;
+$shell-side-nav-icon-01: shell.$bmrg-secondary !default;
 
 /// Item highlight bar
 /// @type Color
 /// @access private
 /// @group ui-shell
-$shell-side-nav-accent-01: shell.$bmrg-secondary-color !default;
+$shell-side-nav-accent-01: shell.$bmrg-secondary !default;
 
 /// Helper to add in text overflow styles to a particular node. Useful if we
 /// don't want to have display-inline: block from the text helper classes
@@ -159,16 +159,16 @@ $shell-side-nav-accent-01: shell.$bmrg-secondary-color !default;
   top: 3rem;
   height: 100%;
   width: mini-units(32);
-  background-color: shell.$bmrg-primary-color;
+  background-color: shell.$bmrg-primary;
   border-bottom: rem(2px) solid transparent;
   border-right: rem(2px) solid transparent;
   border-top: rem(2px) solid transparent;
   transition: all motion.$duration-moderate-01 motion.motion("standard");
 
   &:focus {
-    border-bottom: rem(2px) solid shell.$bmrg-accent-color;
-    border-right: rem(2px) solid shell.$bmrg-accent-color;
-    border-top: rem(2px) solid shell.$bmrg-accent-color;
+    border-bottom: rem(2px) solid shell.$bmrg-accent;
+    border-right: rem(2px) solid shell.$bmrg-accent;
+    border-top: rem(2px) solid shell.$bmrg-accent;
     outline: 0;
   }
 
@@ -366,7 +366,7 @@ $shell-side-nav-accent-01: shell.$bmrg-secondary-color !default;
 
   .#{$prefix}--side-nav__select:focus {
     @include focus-outline("outline");
-    outline-color: shell.$bmrg-accent-color;
+    outline-color: shell.$bmrg-accent;
   }
 
   //----------------------------------------------------------------------------
@@ -390,7 +390,7 @@ $shell-side-nav-accent-01: shell.$bmrg-secondary-color !default;
 
   .#{$prefix}--side-nav__toggle:focus {
     @include focus-outline("outline");
-    outline-color: shell.$bmrg-accent-color;
+    outline-color: shell.$bmrg-accent;
   }
 
   //----------------------------------------------------------------------------
@@ -436,7 +436,7 @@ $shell-side-nav-accent-01: shell.$bmrg-secondary-color !default;
     a.#{$prefix}--side-nav__link:not(.#{$prefix}--side-nav__link--current):not([aria-current="page"]):hover,
   .#{$prefix}--side-nav a.#{$prefix}--header__menu-item:hover,
   .#{$prefix}--side-nav .#{$prefix}--header__menu-title[aria-expanded="true"]:hover {
-    color: shell.$bmrg-header-active-text-color;
+    color: shell.$bmrg-header-active-text;
     // TODO: sync color
     background-color: $shell-side-nav-bg-04;
   }
@@ -446,7 +446,7 @@ $shell-side-nav-accent-01: shell.$bmrg-secondary-color !default;
     .#{$prefix}--side-nav__menu-item
     > .#{$prefix}--side-nav__link:hover
     > span {
-    color: shell.$bmrg-header-active-text-color;
+    color: shell.$bmrg-header-active-text;
   }
 
   .#{$prefix}--side-nav__item--large {
@@ -473,13 +473,13 @@ $shell-side-nav-accent-01: shell.$bmrg-secondary-color !default;
   }
 
   .#{$prefix}--side-nav__submenu:hover {
-    color: shell.$bmrg-header-active-text-color;
+    color: shell.$bmrg-header-active-text;
     background-color: $shell-side-nav-bg-04;
   }
 
   .#{$prefix}--side-nav__submenu:focus {
     @include focus-outline("outline");
-    outline-color: shell.$bmrg-accent-color;
+    outline-color: shell.$bmrg-accent;
   }
 
   .#{$prefix}--side-nav__submenu-title {
@@ -507,13 +507,13 @@ $shell-side-nav-accent-01: shell.$bmrg-secondary-color !default;
   }
 
   .#{$prefix}--side-nav__item--active .#{$prefix}--side-nav__submenu:hover {
-    color: shell.$bmrg-header-active-text-color;
+    color: shell.$bmrg-header-active-text;
     background-color: $shell-side-nav-bg-04;
   }
 
   .#{$prefix}--side-nav__item--active .#{$prefix}--side-nav__submenu[aria-expanded="false"] {
     position: relative;
-    color: shell.$bmrg-secondary-color;
+    color: shell.$bmrg-secondary;
     background-color: $shell-side-nav-bg-04;
     &::before {
       position: absolute;
@@ -521,13 +521,13 @@ $shell-side-nav-accent-01: shell.$bmrg-secondary-color !default;
       bottom: 0;
       left: 0;
       width: 4px;
-      background-color: shell.$bmrg-accent-color;
+      background-color: shell.$bmrg-accent;
       content: "";
     }
   }
 
   .#{$prefix}--side-nav__item--active .#{$prefix}--side-nav__submenu-title {
-    color: shell.$bmrg-header-active-text-color;
+    color: shell.$bmrg-header-active-text;
     font-weight: 600;
   }
 
@@ -558,13 +558,13 @@ $shell-side-nav-accent-01: shell.$bmrg-secondary-color !default;
     background-color: $shell-side-nav-bg-04;
 
     > span {
-      color: shell.$bmrg-header-active-text-color;
+      color: shell.$bmrg-header-active-text;
       font-weight: 600;
     }
   }
 
   a.#{$prefix}--side-nav__link--current > span.#{$prefix}--side-nav__link-text {
-    color: shell.$bmrg-header-active-text-color;
+    color: shell.$bmrg-header-active-text;
     font-weight: 600;
   }
   //----------------------------------------------------------------------------
@@ -601,7 +601,7 @@ $shell-side-nav-accent-01: shell.$bmrg-secondary-color !default;
   a.#{$prefix}--side-nav__link:focus,
   .#{$prefix}--side-nav a.#{$prefix}--header__menu-item:focus {
     @include focus-outline("outline");
-    outline-color: shell.$bmrg-accent-color;
+    outline-color: shell.$bmrg-accent;
   }
 
   a.#{$prefix}--side-nav__link[aria-current="page"],
@@ -612,7 +612,7 @@ $shell-side-nav-accent-01: shell.$bmrg-secondary-color !default;
 
   a.#{$prefix}--side-nav__link[aria-current="page"] .#{$prefix}--side-nav__link-text,
   a.#{$prefix}--side-nav__link--current .#{$prefix}--side-nav__link-text {
-    color: shell.$bmrg-secondary-color;
+    color: shell.$bmrg-secondary;
   }
 
   a.#{$prefix}--side-nav__link[aria-current="page"]::before,
@@ -622,7 +622,7 @@ $shell-side-nav-accent-01: shell.$bmrg-secondary-color !default;
     bottom: 0;
     left: 0;
     width: 4px;
-    background-color: shell.$bmrg-accent-color;
+    background-color: shell.$bmrg-accent;
     content: "";
   }
 
@@ -733,7 +733,7 @@ $shell-side-nav-accent-01: shell.$bmrg-secondary-color !default;
     }
 
     a.#{$prefix}--header__menu-item:hover {
-      color: shell.$bmrg-secondary-color;
+      color: shell.$bmrg-secondary;
       background-color: $shell-side-nav-bg-04;
     }
   }

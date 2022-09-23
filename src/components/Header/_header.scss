@@ -7,8 +7,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: shell.$bmrg-header-nav-color;
-  color: shell.$bmrg-secondary-color;
+  background-color: shell.$bmrg-header-nav;
+  color: shell.$bmrg-secondary;
   height: utils.rem(48px);
   width: 100%;
   position: fixed;
@@ -29,11 +29,11 @@
       display: flex;
       align-items: center;
       z-index: 1;
-      color: shell.$bmrg-secondary-color;
+      color: shell.$bmrg-secondary;
       outline: none;
       padding: 0 1rem;
-      background-color: shell.$bmrg-header-nav-color;
-      border: utils.rem(2px) solid shell.$bmrg-header-active-text-color;
+      background-color: shell.$bmrg-header-nav;
+      border: utils.rem(2px) solid shell.$bmrg-header-active-text;
     }
   }
 }
@@ -49,7 +49,7 @@
 }
 
 .#{$prefix}--bmrg-header-brand {
-  color: shell.$bmrg-secondary-color;
+  color: shell.$bmrg-secondary;
   text-decoration: none;
   transition: color motion.$duration-moderate-01 motion.motion("standard");
 }
@@ -65,16 +65,16 @@
   padding-right: utils.rem(16px);
   text-decoration: none;
   &:hover {
-    background-color: shell.$bmrg-header-hover-background-color;
-    color: shell.$bmrg-header-active-text-color;
+    background-color: shell.$bmrg-header-hover-background;
+    color: shell.$bmrg-header-active-text;
   }
 
   &:focus {
-    outline: utils.rem(2px) solid shell.$bmrg-header-active-text-color;
+    outline: utils.rem(2px) solid shell.$bmrg-header-active-text;
     outline-offset: utils.rem(-2px);
 
     &:active {
-      color: shell.$bmrg-header-active-text-color;
+      color: shell.$bmrg-header-active-text;
     }
   }
 }
@@ -94,7 +94,7 @@
 }
 
 .#{$prefix}--bmrg-header-brand__text {
-  color: #12bdba;
+  color: shell.$bmrg-brand-accent;
   font-size: utils.rem(16px);
   font-weight: 600;
   letter-spacing: 0.16px;
@@ -151,7 +151,7 @@
 
 .#{$prefix}--bmrg-header-list__link {
   align-items: center;
-  color: shell.$bmrg-secondary-color;
+  color: shell.$bmrg-secondary;
   display: flex;
   font-size: utils.rem(14px);
   height: 100%;
@@ -164,24 +164,24 @@
     box-shadow motion.$duration-moderate-01 motion.motion("standard");
 
   &:hover {
-    background-color: shell.$bmrg-header-hover-background-color;
-    color: shell.$bmrg-header-active-text-color;
+    background-color: shell.$bmrg-header-hover-background;
+    color: shell.$bmrg-header-active-text;
   }
 
   &.--is-active {
-    box-shadow: inset 0px utils.rem(-4px) 0px 0px shell.$bmrg-header-active-background-color;
-    color: shell.$bmrg-header-active-text-color;
+    box-shadow: inset 0px utils.rem(-4px) 0px 0px shell.$bmrg-header-active-background;
+    color: shell.$bmrg-header-active-text;
     &:focus {
-      box-shadow: inset 0px utils.rem(-7px) 0px 0px shell.$bmrg-header-active-background-color;
-      color: shell.$bmrg-header-active-text-color;
+      box-shadow: inset 0px utils.rem(-7px) 0px 0px shell.$bmrg-header-active-background;
+      color: shell.$bmrg-header-active-text;
     }
   }
   &:focus {
-    outline: utils.rem(2px) solid shell.$bmrg-header-active-text-color;
+    outline: utils.rem(2px) solid shell.$bmrg-header-active-text;
     outline-offset: utils.rem(-2px);
 
     &:active {
-      color: shell.$bmrg-header-active-text-color;
+      color: shell.$bmrg-header-active-text;
     }
   }
 }
@@ -189,7 +189,7 @@
 .#{$prefix}--bmrg-header-list__btn {
   align-items: center;
   border: utils.rem(2px) solid transparent;
-  color: shell.$bmrg-secondary-color;
+  color: shell.$bmrg-secondary;
   cursor: pointer;
   display: flex;
   height: 100%;
@@ -197,28 +197,28 @@
   transition: color motion.$duration-moderate-01 motion.motion("standard"),
     background motion.$duration-moderate-01 motion.motion("standard");
   &:focus {
-    border: utils.rem(2px) solid shell.$bmrg-header-active-text-color;
+    border: utils.rem(2px) solid shell.$bmrg-header-active-text;
     outline: none;
   }
 
   svg {
-    fill: shell.$bmrg-secondary-color;
+    fill: shell.$bmrg-secondary;
     height: utils.rem(20px);
     width: utils.rem(20px);
     transition: fill motion.$duration-moderate-01 motion.motion("standard");
   }
 
   &:hover {
-    color: shell.$bmrg-header-active-text-color;
-    background-color: shell.$bmrg-header-hover-background-color;
+    color: shell.$bmrg-header-active-text;
+    background-color: shell.$bmrg-header-hover-background;
     svg {
-      fill: shell.$bmrg-header-active-text-color;
+      fill: shell.$bmrg-header-active-text;
     }
   }
 
   &[aria-expanded="true"] {
-    background: shell.$bmrg-header-menu-options-accent-color;
-    border: utils.rem(2px) solid shell.$bmrg-header-menu-options-accent-color;
+    background: shell.$bmrg-header-menu-options-accent;
+    border: utils.rem(2px) solid shell.$bmrg-header-menu-options-accent;
   }
 }
 
@@ -233,7 +233,7 @@
   width: 100%;
   left: 0;
   border-top-style: solid;
-  border-top-color: shell.$bmrg-header-menu-options-top-border-color;
+  border-top-color: shell.$bmrg-header-menu-options-top-border;
   border-top-width: 0.375rem;
   cursor: auto;
 }
@@ -263,7 +263,7 @@
 .#{$prefix}-cloud-header-global__text {
   height: 0.9375rem;
   width: 3.875rem;
-  color: shell.$bmrg-secondary-color;
+  color: shell.$bmrg-secondary;
   font-family: "IBM Plex Sans", "Helvetica Neue", Arial, Helvetica, sans-serif;
   font-size: 0.75rem;
   font-weight: 500;
@@ -308,13 +308,13 @@
   line-height: 0;
 
   &:focus {
-    outline: utils.rem(2px) solid shell.$bmrg-header-active-text-color;
+    outline: utils.rem(2px) solid shell.$bmrg-header-active-text;
     outline-offset: utils.rem(-2px);
   }
 
   svg {
     transform: scale(0.5);
-    fill: shell.$bmrg-header-active-text-color;
+    fill: shell.$bmrg-header-active-text;
   }
 
   .bar1 {
@@ -348,7 +348,7 @@
   height: 100%;
   width: 22rem;
   right: 0;
-  background-color: shell.$bmrg-tertiary-color;
+  background-color: shell.$bmrg-tertiary;
   transform: translateX(0);
   transition: transform motion.$duration-moderate-01 motion.motion("standard");
 

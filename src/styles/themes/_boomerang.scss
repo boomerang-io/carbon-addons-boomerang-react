@@ -157,29 +157,29 @@ $v11-button-tokens: (
 );
 
 $shell-tokens: (
-  bmrg-primary-color: #061727,
-  bmrg-secondary-color: #c0c7ce,
-  bmrg-tertiary-color: #061727,
-  bmrg-accent-color: #08bdba,
+  bmrg-primary: #061727,
+  bmrg-secondary: #c0c7ce,
+  bmrg-tertiary: #061727,
+  bmrg-accent: #08bdba,
   bmrg-brand-white: #f2f4f8,
-  bmrg-header-active-background-color: #08bdba,
-  bmrg-header-active-text-color: #f2f4f8,
-  bmrg-header-hover-background-color: #343a3f,
-  bmrg-header-menu-options-accent-color: #343a3f,
-  bmrg-header-menu-options-active-background-color: #002b50,
-  bmrg-header-menu-options-top-border-color: #08bdba,
+  bmrg-header-active-background: #08bdba,
+  bmrg-header-active-text: #f2f4f8,
+  bmrg-header-hover-background: #343a3f,
+  bmrg-header-menu-options-accent: #343a3f,
+  bmrg-header-menu-options-active-background: #002b50,
+  bmrg-header-menu-options-top-border: #08bdba,
   bmrg-header-notification-default: #9fa5ad,
   bmrg-header-notification-icon: #bb8eff,
   bmrg-header-modal-overlay: rgba(39, 39, 39, 0.5),
-  bmrg-header-modal-cancel-color: #b9bfc7,
-  bmrg-header-modal-confirm-color: #08bdba,
-  bmrg-header-modal-link-color: #08bdba,
-  bmrg-header-nav-color: #061727,
-  bmrg-header-modal-background-color: #061727,
-  bmrg-header-button-text-color: #272727,
-  bmrg-header-attachment-background-color: #50565b,
-  bmrg-sidenav-active-background-color: #343a3f,
-  bmrg-active-color: #009d9a
+  bmrg-header-modal-cancel: #b9bfc7,
+  bmrg-header-modal-confirm: #08bdba,
+  bmrg-header-modal-link: #08bdba,
+  bmrg-header-nav: #061727,
+  bmrg-header-modal-background: #061727,
+  bmrg-header-button-text: #272727,
+  bmrg-header-attachment-background: #50565b,
+  bmrg-sidenav-active-background: #343a3f,
+  bmrg-active: #009d9a
 );
 
 $theme: map.merge($v11-tokens, $v10-tokens);
