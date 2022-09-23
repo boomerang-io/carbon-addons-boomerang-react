@@ -49,6 +49,31 @@ Please check out our [Contribution Guidelines](./.github/CONTRIBUTING.md) for mo
 
 ## Release History
 
+### v3
+
+Substantial changes to the library have been made for v3 to adopt Carbon v11, Vite, and Sass Modules to significantly improve the DX of using and writing the library.
+
+## Breaking Changes
+
+- Support Carbon v11
+- Drop Carbon v10
+- Remove exports of Carbon components
+
+## Improvements
+
+ - Significantly reduced build times via Sass modules
+ - Simpler styles architecture
+ - Upgraded to v6 of Storybook
+ - Use Vite as Storybook preprocessor
+ - Use Vitest as test runner
+
+ ## Deprecations
+
+ - LoadingAnimation
+ - NoDisplay
+ - OptionsGrid
+ - Sidenav
+
 ### v2
 
 The big change here is finally supporting tree-shaking properly. This should reduce bundle size and builds times, sometimes drastically based on your use case. [View the migration guide](./documentation/guides/v2-migration.md) for updating to v2.
