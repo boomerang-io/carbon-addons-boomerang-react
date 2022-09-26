@@ -4,7 +4,7 @@
 @use '@carbon/react/scss/reset';
 @use '@carbon/react/scss/motion';
 @use '@carbon/react/scss/type';
-@use "../src/styles/themes/boomerang";
+@use "../src/global/themes/boomerang";
 @use '@carbon/react/scss/compat/themes' as compat;
 @use '@carbon/react/scss/compat/theme' with (
   $theme: map.merge(compat.$white, boomerang.$theme)
@@ -17,7 +17,7 @@
 @use '@carbon/react/scss/components/notification/tokens' as notification;
 @use '@carbon/react/scss/components/tag/tokens' as tag;
 @use '@carbon/react/scss/components';
-@use '../src/styles/index' with ($use-theme-boomerang: true);
+@use '../src/global/index' with ($use-theme-boomerang: true);
 
 [data-carbon-theme="boomerang"] {
   @include theme.add-component-tokens(map.merge(button.$button-tokens, boomerang.$v11-button-tokens));

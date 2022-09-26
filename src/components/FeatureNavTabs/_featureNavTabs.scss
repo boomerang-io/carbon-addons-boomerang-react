@@ -1,7 +1,7 @@
-@use "../../styles/config" as *;
-  .#{$prefix}--bmrg-feature-nav-tabs {
-    align-items: flex-end;
-    display: flex;
-    position: relative;
-    width: fit-content;
-  }
+@use "../../global/config" as *;
+.#{$prefix}--bmrg-feature-nav-tabs {
+  align-items: flex-end;
+  display: flex;
+  position: relative;
+  width: fit-content;
+}

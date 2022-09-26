@@ -1,6 +1,6 @@
 @use '@carbon/react/scss/components/button/tokens';
 @use '@carbon/themes/scss/tokens' as theme;
-@use "../../styles/config" as *;
+@use "../../global/config" as *;
 
 .#{$prefix}--bmrg-sidenav {
   position: fixed;

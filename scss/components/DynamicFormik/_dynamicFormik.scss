@@ -1,4 +1,4 @@
-@use "../../styles/config" as *;
+@use "../../global/config" as *;
   .#{$prefix}--bmrg-dynamic-formik {
     display: flex;
     flex-direction: column;

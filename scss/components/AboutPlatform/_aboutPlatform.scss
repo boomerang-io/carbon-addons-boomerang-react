@@ -1,7 +1,7 @@
 @use "sass:map";
-@use "../../styles/config" as *;
-@use "../../styles/themes/shell-tokens" as shell;
-@use "../../styles/utils";
+@use "../../global/config" as *;
+@use "../../global/themes/shell-tokens" as shell;
+@use "../../global/utils";
 
 .#{$prefix}--bmrg-aboutPlatform-container {
   .#{$prefix}--modal-container {

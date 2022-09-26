@@ -1,60 +1,60 @@
-@use "../../styles/config" as *;
+@use "../../global/config" as *;
 @use '@carbon/themes/scss/tokens' as theme;
-@use "../../styles/utils";
+@use "../../global/utils";
 
-  .#{$prefix}--bmrg-feature-header {
-    background-color: theme.$layer-01;
-    display: flex;
-    justify-content: space-between;
-    min-height: 6.25rem;
-    padding: 1.5rem 1.5rem 0;
-    position: sticky;
-    top: 0;
-    z-index: 999;
-    &.--bordered {
-      border-bottom: 0.0625rem solid theme.$background-active;
-    }
+.#{$prefix}--bmrg-feature-header {
+  background-color: theme.$layer-01;
+  display: flex;
+  justify-content: space-between;
+  min-height: 6.25rem;
+  padding: 1.5rem 1.5rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  &.--bordered {
+    border-bottom: 0.0625rem solid theme.$background-active;
   }
+}
 
-  .#{$prefix}--bmrg-feature-header__nav {
-    margin-bottom: auto;
-  }
+.#{$prefix}--bmrg-feature-header__nav {
+  margin-bottom: auto;
+}
 
-  .#{$prefix}--bmrg-feature-header__loading {
-    height: 3.75rem;
-    margin: 0.5rem 0rem 1.5rem;
-    width: 30rem;
-  }
+.#{$prefix}--bmrg-feature-header__loading {
+  height: 3.75rem;
+  margin: 0.5rem 0rem 1.5rem;
+  width: 30rem;
+}
 
-  .#{$prefix}--bmrg-feature-header__content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
+.#{$prefix}--bmrg-feature-header__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
-  .#{$prefix}--bmrg-feature-header__footer {
-    margin-top: auto;
-  }
+.#{$prefix}--bmrg-feature-header__footer {
+  margin-top: auto;
+}
 
-  .#{$prefix}--bmrg-feature-header__header {
-    margin: 0.5rem 0rem 1.5rem;
-  }
+.#{$prefix}--bmrg-feature-header__header {
+  margin: 0.5rem 0rem 1.5rem;
+}
 
-  h1.#{$prefix}--bmrg-feature-header-title {
-    color: theme.$text-primary;
-    font-size: 2rem;
-    font-weight: 600;
-    letter-spacing: 0;
-    line-height: 1.25;
-    margin: 0;
-    @include utils.text-overflow-ellipsis();
-  }
+h1.#{$prefix}--bmrg-feature-header-title {
+  color: theme.$text-primary;
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1.25;
+  margin: 0;
+  @include utils.text-overflow-ellipsis();
+}
 
-  h2.#{$prefix}--bmrg-feature-header-title {
-    color: theme.$text-secondary;
-    font-size: 1rem;
-    letter-spacing: 0;
-    line-height: 1.25;
-    margin: 0;
-    @include utils.text-overflow-ellipsis();
-  }
+h2.#{$prefix}--bmrg-feature-header-title {
+  color: theme.$text-secondary;
+  font-size: 1rem;
+  letter-spacing: 0;
+  line-height: 1.25;
+  margin: 0;
+  @include utils.text-overflow-ellipsis();
+}

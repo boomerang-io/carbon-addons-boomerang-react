@@ -1,6 +1,6 @@
 @use '@carbon/themes/scss/tokens' as theme;
-@use '../../styles/themes/shell-tokens' as shell;
-@use "../../styles/config" as *;
+@use '../../global/themes/shell-tokens' as shell;
+@use "../../global/config" as *;
 
 .#{$prefix}--bmrg-requests__title {
   color: shell.$bmrg-header-active-text;

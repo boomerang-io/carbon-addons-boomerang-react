@@ -1,7 +1,7 @@
 @use '@carbon/themes/scss/tokens' as theme;
 @use "@carbon/react/scss/motion";
-@use "../../styles/config" as *;
-@use "../../styles/themes/shell-tokens" as shell;
+@use "../../global/config" as *;
+@use "../../global/themes/shell-tokens" as shell;
 
 .#{$prefix}--bmrg-header-drop-down {
   animation: fade-in motion.$duration-moderate-01 motion.motion("standard");

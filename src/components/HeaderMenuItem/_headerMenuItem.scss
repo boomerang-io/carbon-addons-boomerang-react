@@ -1,6 +1,6 @@
-@use "../../styles/config" as *;
-@use "../../styles/utils";
-@use "../../styles/themes/shell-tokens" as shell;
+@use "../../global/config" as *;
+@use "../../global/utils";
+@use "../../global/themes/shell-tokens" as shell;
 
 .#{$prefix}--bmrg-header-menu-item {
   min-height: utils.rem(48px);

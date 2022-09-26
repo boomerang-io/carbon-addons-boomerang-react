@@ -1,158 +1,155 @@
-@use "../../styles/config" as *;
-@use "../../styles/utils";
+@use "../../global/config" as *;
+@use "../../global/utils";
 @use '@carbon/themes/scss/tokens' as theme;
 
-  .#{$prefix}--bmrg-body-modal-is-open,
-  .#{$prefix}--bmrg-html-modal-is-open {
-    overflow: hidden;
+.#{$prefix}--bmrg-body-modal-is-open,
+.#{$prefix}--bmrg-html-modal-is-open {
+  overflow: hidden;
+}
+
+.#{$prefix}--bmrg-modal-overlay {
+  align-items: center;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  transition: background-color 720ms cubic-bezier(0, 0, 0.3, 1), z-index 720ms cubic-bezier(0, 0, 0.3, 1);
+
+  &.--is-open {
+    background-color: rgba(23, 23, 23, 0.5);
+    z-index: 9999;
   }
 
-  .#{$prefix}--bmrg-modal-overlay {
-    align-items: center;
+  &.--is-closed {
     background-color: transparent;
-    display: flex;
-    justify-content: center;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    top: 0;
-    transition: background-color 720ms cubic-bezier(0, 0, 0.3, 1),
-      z-index 720ms cubic-bezier(0, 0, 0.3, 1);
+  }
+}
 
-    &.--is-open {
-      background-color: rgba(23, 23, 23, 0.5);
-      z-index: 9999;
-    }
+.modal-container-fix-width {
+  max-width: 43.125rem;
+  width: 100%;
+}
 
-    &.--is-closed {
-      background-color: transparent;
-    }
+.#{$prefix}--bmrg-modal-container {
+  background: theme.$layer-01;
+  border-radius: var(--cds-border-radius, 0);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-height: 36.5rem;
+  outline: none;
+  position: relative;
+  transform-origin: top center;
+  transform: translate3d(0, -24px, 0);
+  transition: opacity 240ms cubic-bezier(0, 0, 0.3, 1), transform 240ms cubic-bezier(0, 0, 0.3, 1);
+
+  &.--is-open {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
   }
 
-  .modal-container-fix-width {
-     max-width: 43.125rem;
-     width: 100%;
+  &.--is-closed {
+    opacity: 0;
+    transform: translate3d(0, -24px, 0);
   }
 
-  .#{$prefix}--bmrg-modal-container {
-    background: theme.$layer-01;
-    border-radius: var(--cds-border-radius, 0);
+  .#{$prefix}--date-picker__input,
+  .#{$prefix}--list-box,
+  .react-autosuggest__suggestions-container,
+  .#{$prefix}--search-input,
+  .#{$prefix}--select-input,
+  .#{$prefix}--text-input,
+  .#{$prefix}--text-area,
+  .#{$prefix}--number input[type="number"],
+  .#{$prefix}--toggle-input:disabled + .#{$prefix}--toggle-input__label > .#{$prefix}--toggle__switch::before {
+    background: theme.$background;
+  }
+}
+
+// Shared styles for ModalFlow, ModalComposed, ModalFlowForm, ModalForm
+// For simplicity and backwards compatibility
+
+.#{$prefix}--bmrg-modal-flow-container,
+.#{$prefix}--bmrg-modal-composed-container {
+  &.--is-open {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+
+  &.--is-closed {
+    opacity: 0;
+    transform: translate3d(0, -24px, 0);
+  }
+
+  .#{$prefix}--modal-header {
+    margin-bottom: 1rem;
+  }
+
+  .#{$prefix}--progress {
+    padding: 0rem 1rem 1rem 1rem;
+  }
+  .#{$prefix}--progress-step {
+    flex-grow: 1;
+  }
+  .#{$prefix}--progress-line {
+    width: 100%;
+  }
+
+  .#{$prefix}--progress-label {
+    pointer-events: none;
+  }
+
+  .#{$prefix}--bmrg-modal-flow-subtitle,
+  .#{$prefix}--bmrg-modal-composed-subtitle {
+    color: theme.$text-primary;
+    font-size: utils.rem(14px);
+    min-height: utils.rem(20px);
+    letter-spacing: utils.rem(0.16px);
+    line-height: utils.rem(20px);
+    margin-top: utils.rem(12px);
+  }
+
+  .#{$prefix}--bmrg-modal-flow-form,
+  .#{$prefix}--bmrg-modal-form {
     display: flex;
     flex-direction: column;
-    height: 100%;
-    max-height: 36.5rem;
-    outline: none;
-    position: relative;
-    transform-origin: top center;
-    transform: translate3d(0, -24px, 0);
-    transition: opacity 240ms cubic-bezier(0, 0, 0.3, 1), transform 240ms cubic-bezier(0, 0, 0.3, 1);
-
-    &.--is-open {
-      opacity: 1;
-      transform: translate3d(0, 0, 0);
+    flex-grow: 1;
+    min-height: 0;
+    .#{$prefix}--loading-overlay {
+      z-index: 1;
+    }
+    .#{$prefix}--modal-footer {
+      z-index: 2;
     }
 
-    &.--is-closed {
-      opacity: 0;
-      transform: translate3d(0, -24px, 0);
+    .#{$prefix}--modal-content {
+      flex-grow: 1;
+      padding-bottom: 1rem;
+      > * + * {
+        margin-top: 1rem;
+      }
+      .#{$prefix}--inline-notification {
+        bottom: 4rem;
+        padding-bottom: 0;
+        position: absolute;
+        width: 95%;
+      }
     }
 
-    .#{$prefix}--date-picker__input,
-    .#{$prefix}--list-box,
-    .react-autosuggest__suggestions-container,
-    .#{$prefix}--search-input,
-    .#{$prefix}--select-input,
-    .#{$prefix}--text-input,
-    .#{$prefix}--text-area,
-    .#{$prefix}--number input[type='number'],
-    .#{$prefix}--toggle-input:disabled
-      + .#{$prefix}--toggle-input__label
-      > .#{$prefix}--toggle__switch::before {
-      background: theme.$background;
+    .#{$prefix}--modal-content--overflow-indicator {
+      bottom: 7rem;
     }
   }
-
-  // Shared styles for ModalFlow, ModalComposed, ModalFlowForm, ModalForm
-  // For simplicity and backwards compatibility
-
-  .#{$prefix}--bmrg-modal-flow-container,
-  .#{$prefix}--bmrg-modal-composed-container {
-    &.--is-open {
-      opacity: 1;
-      transform: translate3d(0, 0, 0);
-    }
-
-    &.--is-closed {
-      opacity: 0;
-      transform: translate3d(0, -24px, 0);
-    }
-
-    .#{$prefix}--modal-header {
-      margin-bottom: 1rem;
-    }
-
-    .#{$prefix}--progress {
-      padding: 0rem 1rem 1rem 1rem;
-    }
-    .#{$prefix}--progress-step {
-      flex-grow: 1;
-    }
-    .#{$prefix}--progress-line {
-      width: 100%;
-    }
-
-    .#{$prefix}--progress-label {
-      pointer-events: none;
-    }
-
-    .#{$prefix}--bmrg-modal-flow-subtitle,
-    .#{$prefix}--bmrg-modal-composed-subtitle {
-      color: theme.$text-primary;
-      font-size: utils.rem(14px);
-      min-height: utils.rem(20px);
-      letter-spacing: utils.rem(0.16px);
-      line-height: utils.rem(20px);
-      margin-top: utils.rem(12px);
-    }
-
-    .#{$prefix}--bmrg-modal-flow-form,
-    .#{$prefix}--bmrg-modal-form {
-      display: flex;
-      flex-direction: column;
-      flex-grow: 1;
-      min-height: 0;
-      .#{$prefix}--loading-overlay {
-        z-index: 1;
-      }
-      .#{$prefix}--modal-footer {
-        z-index: 2;
-      }
-
-      .#{$prefix}--modal-content {
-        flex-grow: 1;
-        padding-bottom: 1rem;
-        > * + * {
-          margin-top: 1rem;
-        }
-        .#{$prefix}--inline-notification {
-          bottom: 4rem;
-          padding-bottom: 0;
-          position: absolute;
-          width: 95%;
-        }
-      }
-
-      .#{$prefix}--modal-content--overflow-indicator {
-        bottom: 7rem;
-      }
-    }
-    .#{$prefix}--bmrg-modal-flow-form__title,
-    .#{$prefix}--bmrg-modal-form__title {
-      color: theme.$text-primary;
-      font-size: utils.rem(14px);
-      letter-spacing: utils.rem(0.16px);
-      line-height: utils.rem(20px);
-      padding: 0 1rem 1rem;
-    }
+  .#{$prefix}--bmrg-modal-flow-form__title,
+  .#{$prefix}--bmrg-modal-form__title {
+    color: theme.$text-primary;
+    font-size: utils.rem(14px);
+    letter-spacing: utils.rem(0.16px);
+    line-height: utils.rem(20px);
+    padding: 0 1rem 1rem;
   }
+}

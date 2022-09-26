@@ -8,8 +8,8 @@
 @use '@carbon/react/scss/utilities/convert' as *;
 @use '@carbon/react/scss/utilities/focus-outline' as *;
 @use '@carbon/react/scss/utilities/z-index' as *;
-@use "../../styles/config" as *;
-@use "../../styles/themes/shell-tokens" as shell;
+@use "../../global/config" as *;
+@use "../../global/themes/shell-tokens" as shell;
 
 /// Get a `rem` value based for a number of mini-units.
 /// @param {Number} $count

@@ -1,42 +1,41 @@
-@use "../../styles/config" as *;
-  .#{$prefix}--bmrg-creatable {
-    position: relative;
-  }
+@use "../../global/config" as *;
+.#{$prefix}--bmrg-creatable {
+  position: relative;
+}
 
-  .#{$prefix}--bmrg-creatable__input {
-    align-items: flex-start;
-    display: flex;
-  }
+.#{$prefix}--bmrg-creatable__input {
+  align-items: flex-start;
+  display: flex;
+}
 
-  .#{$prefix}--bmrg-creatable__key-value-inputs {
-    align-content: center;;
-    align-items: flex-start;
-    display: flex;
-    height:100%;
-    width: 20rem;
-  }
+.#{$prefix}--bmrg-creatable__key-value-inputs {
+  align-content: center;
+  align-items: flex-start;
+  display: flex;
+  height: 100%;
+  width: 20rem;
+}
 
-  .#{$prefix}--bmrg-creatable__colon {
-    margin: 0 0.5rem;
-  }
+.#{$prefix}--bmrg-creatable__colon {
+  margin: 0 0.5rem;
+}
 
-  .#{$prefix}--bmrg-creatable__button {
-    margin-left: 1rem !important;
-    margin-top: 1.5rem;
-    &.--no-label {
-      margin-top: 0.5rem;
-    }
-  }
-
-  .#{$prefix}--bmrg-creatable__tags {
-    display: flex;
-    flex-wrap: wrap;
+.#{$prefix}--bmrg-creatable__button {
+  margin-left: 1rem !important;
+  margin-top: 1.5rem;
+  &.--no-label {
     margin-top: 0.5rem;
-    width: 100%;
   }
+}
 
-  .#{$prefix}--bmrg-creatable__tooltip {
-    line-height: 0;
-    margin-left: 0.5rem;
-  }
+.#{$prefix}--bmrg-creatable__tags {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+  width: 100%;
+}
 
+.#{$prefix}--bmrg-creatable__tooltip {
+  line-height: 0;
+  margin-left: 0.5rem;
+}
