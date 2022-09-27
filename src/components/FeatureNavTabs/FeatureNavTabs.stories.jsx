@@ -25,7 +25,7 @@ export default {
 
 export const Default = () => {
   return (
-    <Tabs>
+    <Tabs contained ariaLabel="Team navigation">
       <Tab label="Services" to="/services" />
       <Tab label="Members" to="/members" />
       <Tab label="Service Requests" to="/service-requests" />
@@ -37,7 +37,7 @@ export const Default = () => {
 
 export const Loading = () => {
   return (
-    <Tabs>
+    <Tabs contained ariaLabel="Team navigation">
       <Tab label="Services" to="/services" isLoading />
       <Tab label="Members" to="/members" />
       <Tab label="Service Requests" to="/service-requests" />

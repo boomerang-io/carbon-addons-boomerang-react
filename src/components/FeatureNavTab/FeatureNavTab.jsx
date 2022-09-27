@@ -5,18 +5,23 @@ import classnames from "classnames";
 import { SkeletonPlaceholder } from "@carbon/react";
 import { prefix } from "../../internal/settings";
 
-
-
-const FeatureNavTab = ({ activeClassName, className, style, label, isLoading, ...rest }) => {
-  const classNames = classnames(`${prefix}--bmrg-feature-nav-tab`, className);
-  const activeClassNames = classnames(`${prefix}--bmrg-feature-nav-tab--active`, activeClassName);
+const FeatureNavTab = ({ activeClassName, className, disabled, isLoading, label, style, ...rest }) => {
+  const classNames = classnames(
+    `${prefix}--tabs__nav-item`,
+    `${prefix}--tabs__nav-link`,
+    {
+      [`${prefix}--tabs__nav-item--disabled`]: disabled,
+    },
+    className
+  );
+  const activeClassNames = classnames(`${prefix}--tabs__nav-item--selected`, activeClassName);
 
   return isLoading ? (
     <div className={`${prefix}--bmrg-feature-nav-tab--loading`}>
       <SkeletonPlaceholder className={`${prefix}--bmrg-feature-nav-tab--loading__skeleton`} />
     </div>
   ) : (
-    <NavLink className={classNames} activeClassName={activeClassNames} style={style} {...rest}>
+    <NavLink className={classNames} activeClassName={activeClassNames} style={style} disabled={disabled} {...rest}>
       {label}
     </NavLink>
   );
@@ -25,15 +30,17 @@ const FeatureNavTab = ({ activeClassName, className, style, label, isLoading, ..
 FeatureNavTab.defaultProps = {
   activeClassName: "",
   className: "",
-  label: "",
+  disabled: false,
   isLoading: false,
+  label: "",
 };
 
 FeatureNavTab.propTypes = {
   activeClassName: PropTypes.string,
   className: PropTypes.string,
-  label: PropTypes.string,
+  disabled: PropTypes.bool,
   isLoading: PropTypes.bool,
+  label: PropTypes.string,
   style: PropTypes.object,
 };
 
