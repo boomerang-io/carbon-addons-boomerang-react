@@ -1,3 +1,4 @@
+// eslint-disable no-unused-vars
 import React from "react";
 import PropTypes from "prop-types";
 import { ToastNotification as CarbonToastNotification } from "@carbon/react";
@@ -6,7 +7,10 @@ import { prefix } from "../../internal/settings";
 
 
 const ToastNotification = ({
-  closeToast, // eslint-disable-line no-unused-vars
+  iconDescription,
+  closeToast,
+  toastProps,
+  notificationType, 
   ...rest
 }) => {
   return (
@@ -86,7 +90,7 @@ ToastNotification.defaultProps = {
   kind: "info", // altered
   title: "", // altered
   subtitle: "", // altered
-  caption: false, // altered
+  caption: undefined, // altered
   role: "alert",
   notificationType: "toast",
   iconDescription: "closes notification",

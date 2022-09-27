@@ -1,4 +1,4 @@
-import { expect, test } from "vitest";
+import { expect, test, vi } from "vitest";
 import { render, fireEvent, waitFor } from "@testing-library/react";
 
 import PrivacyStatement from "./PrivacyStatement";
@@ -9,6 +9,19 @@ import MockAdapter from "axios-mock-adapter";
 import { PRIVACY_DATA } from "./constants";
 
 const baseServiceUrl = "http://boomerang.com";
+
+const { reload } = window.location;
+
+beforeAll(() => {
+  Object.defineProperty(window, 'location', {
+    writable: true,
+    value: { reload: vi.fn() },
+  });
+});
+
+afterAll(() => {
+  window.location.reload = reload;
+});
 
 test("Privacy Statement error", async () => {
   /**

@@ -88,7 +88,7 @@ export default class MultiSelectComboBox extends React.Component {
 
     this.state = {
       inputValue: getInputValue({}),
-      isOpen: props.open,
+      isOpen: props.open ?? false,
       stateSelectedItems: props.initialSelectedItems || props.selectedItems,
     };
   }
@@ -347,7 +347,6 @@ export default class MultiSelectComboBox extends React.Component {
               <Field
                 id={id}
                 disabled={disabled}
-                translateWithId={translateWithId}
                 {...getToggleButtonProps({
                   disabled,
                   onClick: this.onToggleClick(isOpen),

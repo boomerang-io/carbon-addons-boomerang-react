@@ -69,7 +69,7 @@ function PrivacyStatement({ baseServiceUrl, organization, platformEmail }) {
         setAlertError(false);
         closeAlertModal();
         closeModal();
-        if (window.location) {
+        if (window?.location) {
           window.location.reload(true);
         }
       })

@@ -114,6 +114,8 @@ function ToggleComponent({
   reversed,
   label,
   labelText,
+  labelA = "",
+  labelB = "",
   orientation,
   tooltipClassName,
   tooltipContent,
@@ -147,7 +149,7 @@ function ToggleComponent({
             </div>
           </>
         )}
-        <Toggle id={id} aria-labelledby={labelTextId} labelA="" labelB="" {...toggleProps} />
+        <Toggle id={id} aria-labelledby={labelTextId} labelA={labelA} labelB={labelB} labelText="" {...toggleProps} />
       </div>
       {invalid && (
         <div
