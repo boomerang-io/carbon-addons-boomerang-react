@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import cx from "classnames";
 import Tippy from "@tippyjs/react";
 import { prefix } from "../../internal/settings";
-import 'tippy.js/dist/svg-arrow.css';
 
 /**
  * Wrapper props

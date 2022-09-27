@@ -70,6 +70,9 @@ $use-theme-boomerang: false !default;
 @use '../components/TooltipHover/tooltip' as addons-tooltip;
 @use '../components/UserRequests/userRequests';
 
+// css for external libs
+@import "./tippy";
+
 // UIShell tokens, create css properties for them by default
 :root {
   @include utils.create-properties(theme-default.$shell-tokens);
