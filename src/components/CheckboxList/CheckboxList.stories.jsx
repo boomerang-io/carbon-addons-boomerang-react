@@ -37,7 +37,7 @@ export const Default = (args) => {
 export const KitchenSink = (args) => {
   return (
     <CheckboxList
-      helperText="Testing this"
+      helperText="Pick a good one"
       initialSelectedItems={["peacock"]}
       labelText="Select some animals"
       onChange={() => {}}

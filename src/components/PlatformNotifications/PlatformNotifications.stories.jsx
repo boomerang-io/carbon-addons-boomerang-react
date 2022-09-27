@@ -4,9 +4,9 @@ export default {
   title: "Platform/PlatformNotifications",
   component: PlatformNotificationsContainer,
   decorators: [
-    (Story) => (
+    (story) => (
       <div style={{ position: "absolute", left: "20rem" }}>
-        <Story />
+        {story()}
       </div>
     ),
   ],

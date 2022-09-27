@@ -14,7 +14,7 @@ export default {
 
 export const Default = () => {
   return (
-    <div style={{ width: "16rem", background: "#061727" }}>
+    <div style={{ width: "16rem", background: "var(--cds-bmrg-primary" }}>
       <ProfileSettings
         baseServiceUrl="https://ibm.com"
         src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50"

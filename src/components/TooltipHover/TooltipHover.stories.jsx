@@ -12,9 +12,9 @@ export default {
     },
   },
   decorators: [
-    (Story) => (
+    (story) => (
       <div style={{ height: "10rem", width: "10rem", display: "flex", alignItems: "center", justifyContent: "center" }}>
-        <Story />
+        {story()}
       </div>
     ),
   ],

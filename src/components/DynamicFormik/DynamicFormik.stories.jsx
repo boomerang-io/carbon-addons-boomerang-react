@@ -16,9 +16,9 @@ export default {
     },
   },
   decorators: [
-    (Story) => (
+    (story) => (
       <div style={{ maxWidth: "30rem", padding: "2rem" }}>
-        <Story />
+        {story()}
       </div>
     ),
   ],

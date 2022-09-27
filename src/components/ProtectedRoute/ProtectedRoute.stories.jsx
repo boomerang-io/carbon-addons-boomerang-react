@@ -13,9 +13,9 @@ export default {
     },
   },
   decorators: [
-    (Story) => (
+    (story) => (
       <Router history={history}>
-        <Story />
+       {story()}
       </Router>
     ),
   ],

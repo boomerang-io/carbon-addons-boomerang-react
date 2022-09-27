@@ -12,9 +12,9 @@ export default {
     },
   },
   decorators: [
-    (Story) => (
+    (story) => (
       <div style={{ maxWidth: "25rem", padding: "1rem" }}>
-        <Story />
+        {story()}
       </div>
     ),
   ],

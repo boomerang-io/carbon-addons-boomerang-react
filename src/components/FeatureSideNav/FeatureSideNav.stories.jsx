@@ -18,9 +18,9 @@ export default {
     },
   },
   decorators: [
-    (Story) => (
+    (story) => (
       <Router history={createMemoryHistory({ initialEntries: ["/"] })}>
-        <Story />
+        {story()}
       </Router>
     ),
   ],

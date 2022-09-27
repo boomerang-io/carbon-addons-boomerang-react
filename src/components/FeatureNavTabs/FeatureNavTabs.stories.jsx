@@ -6,26 +6,27 @@ import { default as Tab } from "../FeatureNavTab";
 export default {
   title: "Features/FeatureNavTabs",
   component: Tabs,
+  subcomponents: { Tab },
   parameters: {
     docs: {
       description: {
         component:
-          "Page feature navigation tabs that utilize react-router. Useful for having tabs as pages and linked to the URL path.",
+          "Navigation tabs that utilize react-router NavLinks. Useful for when you want tabs to function as links.",
       },
     },
   },
   decorators: [
-    (Story) => (
+    (story) => (
       <Router history={createMemoryHistory({ initialEntries: ["/"] })}>
-        <Story />
+       {story()}
       </Router>
     ),
   ],
 };
 
-export const Default = () => {
+export const Default = (args) => {
   return (
-    <Tabs contained ariaLabel="Team navigation">
+    <Tabs contained ariaLabel="Team navigation" {...args}>
       <Tab label="Services" to="/services" />
       <Tab label="Members" to="/members" />
       <Tab label="Service Requests" to="/service-requests" />
@@ -35,9 +36,9 @@ export const Default = () => {
   );
 };
 
-export const Loading = () => {
+export const Loading = (args) => {
   return (
-    <Tabs contained ariaLabel="Team navigation">
+    <Tabs contained ariaLabel="Team navigation" {...args}>
       <Tab label="Services" to="/services" isLoading />
       <Tab label="Members" to="/members" />
       <Tab label="Service Requests" to="/service-requests" />
