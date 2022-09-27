@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import FocusTrap from "focus-trap-react";
-import classnames from "classnames";
+import cx from "classnames";
 import { prefix } from "../../internal/settings";
 
 LeftSideNav.propTypes = {
@@ -18,7 +18,7 @@ export default function LeftSideNav(props) {
     ...other
   } = props;
 
-  const classNames = classnames(`${prefix}--bmrg-left-side-nav-container`, className);
+  const classNames = cx(`${prefix}--bmrg-left-side-nav-container`, className);
 
   return (
     <FocusTrap active={isOpen} focusTrapOptions={{ allowOutsideClick: true }}>

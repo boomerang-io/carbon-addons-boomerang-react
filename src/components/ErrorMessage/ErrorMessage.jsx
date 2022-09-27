@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import classnames from "classnames";
+import cx from "classnames";
 import { Warning } from "@carbon/react/icons";
 import { prefix } from "../../internal/settings";
 
@@ -16,7 +16,7 @@ const Error = ({ status, statusText, className, style, ...rest }) => {
     message = <div className={`${prefix}--bmrg-error-message__status`}>{`${statusText}`}</div>;
   }
 
-  const classNames = classnames(`${prefix}--bmrg-error-message`, className);
+  const classNames = cx(`${prefix}--bmrg-error-message`, className);
 
   return (
     <div className={classNames} style={style} {...rest}>

@@ -1,14 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
-import classnames from "classnames";
+import cx from "classnames";
 import { NavLink } from "react-router-dom";
 import { prefix } from "../../internal/settings";
 
 
 
 const SidenavLinks = ({ navItems, theme, ...rest }) => {
-  const linkClassNames = classnames(`${prefix}--bmrg-sidenav-links__link`, `--${theme}`);
-  const textClassNames = classnames(`${prefix}--bmrg-sidenav-links__text`, `--${theme}`);
+  const linkClassNames = cx(`${prefix}--bmrg-sidenav-links__link`, `--${theme}`);
+  const textClassNames = cx(`${prefix}--bmrg-sidenav-links__text`, `--${theme}`);
   return (
     <nav className={`${prefix}--bmrg-sidenav-links`} {...rest}>
       {navItems.map((navItem) => (

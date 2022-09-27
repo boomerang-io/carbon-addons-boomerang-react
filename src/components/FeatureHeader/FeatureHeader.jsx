@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import classnames from "classnames";
+import cx from "classnames";
 import { SkeletonPlaceholder } from "@carbon/react";
 import { prefix } from "../../internal/settings";
 
@@ -52,14 +52,14 @@ export function FeatureHeader({
   skeletonClassName,
   ...rest
 }) {
-  const containerClassNames = classnames(`${prefix}--bmrg-feature-header`, className, {
+  const containerClassNames = cx(`${prefix}--bmrg-feature-header`, className, {
     "--bordered": includeBorder,
   });
-  const contentClassNames = classnames(`${prefix}--bmrg-feature-header__content`, contentClassName);
-  const skeletonClassNames = classnames(`${prefix}--bmrg-feature-header__loading`, skeletonClassName);
-  const navClassNames = classnames(`${prefix}--bmrg-feature-header__nav`, navClassName);
-  const headerClassNames = classnames(`${prefix}--bmrg-feature-header__header`, headerClassName);
-  const footerClassNames = classnames(`${prefix}--bmrg-feature-header__footer`, footerClassName);
+  const contentClassNames = cx(`${prefix}--bmrg-feature-header__content`, contentClassName);
+  const skeletonClassNames = cx(`${prefix}--bmrg-feature-header__loading`, skeletonClassName);
+  const navClassNames = cx(`${prefix}--bmrg-feature-header__nav`, navClassName);
+  const headerClassNames = cx(`${prefix}--bmrg-feature-header__header`, headerClassName);
+  const footerClassNames = cx(`${prefix}--bmrg-feature-header__footer`, footerClassName);
 
   return (
     <header className={containerClassNames} style={style} {...rest}>
@@ -92,7 +92,7 @@ FeatureHeaderTitle.defaultProps = {
 };
 
 export function FeatureHeaderTitle({ element: Element, children, className, style, ...rest }) {
-  const classNames = classnames(`${prefix}--bmrg-feature-header-title`, className);
+  const classNames = cx(`${prefix}--bmrg-feature-header-title`, className);
   return (
     <Element className={classNames} style={style} {...rest}>
       {children}

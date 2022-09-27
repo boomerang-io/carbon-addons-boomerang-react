@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import classnames from "classnames";
+import cx from "classnames";
 import { prefix } from "../../internal/settings";
 
 import ErrorGraphic from "./assets/ErrorGraphic";
@@ -8,7 +8,7 @@ import ErrorGraphic from "./assets/ErrorGraphic";
 
 
 const ErrorDragon = ({ className, header, message, style, statusText, statusUrl, title, ...rest }) => {
-  const classNames = classnames(`${prefix}--bmrg-error-dragon`, className);
+  const classNames = cx(`${prefix}--bmrg-error-dragon`, className);
   return (
     <div className={classNames} style={style} {...rest}>
       <ErrorGraphic className={`${prefix}--bmrg-error-dragon__image`} alt="dragon" />

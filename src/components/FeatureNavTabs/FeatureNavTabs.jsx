@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import classnames from "classnames";
+import cx from "classnames";
 import { prefix } from "../../internal/settings";
 
 const FeatureNavTabs = ({ ariaLabel, children, className, contained, light, style, ...rest }) => {
-  const classNames = classnames(
+  const classNames = cx(
     `${prefix}--tabs`,
     {
       [`${prefix}--tabs--contained`]: contained,

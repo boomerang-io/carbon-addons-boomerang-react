@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import classnames from "classnames";
+import cx from "classnames";
 import { prefix } from "../../internal/settings";
 
 import SidenavHeader from "./SidenavHeader";
@@ -11,7 +11,7 @@ import SidenavLinks from "./SidenavLinks";
 
 
 const Sidenav = ({ header, hidden, content, navItems, footer, theme, ...rest }) => {
-  const classNames = classnames(`${prefix}--bmrg-sidenav`, `--${theme}`, {
+  const classNames = cx(`${prefix}--bmrg-sidenav`, `--${theme}`, {
     "--hidden": hidden,
   });
   return (

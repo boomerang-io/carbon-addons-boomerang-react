@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import classNames from "classnames";
+import cx from "classnames";
 import { prefix } from "../../internal/settings";
 
 
@@ -8,7 +8,7 @@ import { prefix } from "../../internal/settings";
 const HeaderWrapper = (props) => {
   const { children, className, ...other } = props;
 
-  const HeaderWrapperClasses = classNames(`${prefix}--bmrg-header__wrapper`, className);
+  const HeaderWrapperClasses = cx(`${prefix}--bmrg-header__wrapper`, className);
 
   return (
     <div className={HeaderWrapperClasses} {...other}>

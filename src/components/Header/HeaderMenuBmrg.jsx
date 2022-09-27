@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import classNames from "classnames";
+import cx from "classnames";
 import { prefix } from "../../internal/settings";
 
 const HeaderMenuBmrg = React.forwardRef((props, ref) => {
@@ -10,7 +10,7 @@ const HeaderMenuBmrg = React.forwardRef((props, ref) => {
       aria-expanded={isOpen}
       aria-haspopup="true"
       aria-label="header menu button"
-      className={classNames(`${prefix}--bmrg-header__app-menu`, {
+      className={cx(`${prefix}--bmrg-header__app-menu`, {
         "--is-open": isOpen,
       })}
       ref={ref}

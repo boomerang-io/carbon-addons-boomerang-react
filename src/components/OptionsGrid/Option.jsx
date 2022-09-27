@@ -1,13 +1,13 @@
 
 import React from "react";
 import PropTypes from "prop-types";
-import classnames from "classnames";
+import cx from "classnames";
 import { prefix } from "../../internal/settings";
 
 
 
 const Option = ({ className, text, id, selected, onSelect, ...rest }) => {
-  const classNames = classnames(className, { "--selected": selected });
+  const classNames = cx(className, { "--selected": selected });
 
   return (
     <button type="button" className={classNames} onClick={(e) => onSelect(id, e)} {...rest}>

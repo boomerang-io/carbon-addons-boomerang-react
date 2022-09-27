@@ -1,12 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
-import classnames from "classnames";
+import cx from "classnames";
 import { SkeletonPlaceholder } from "@carbon/react";
 import { prefix } from "../../internal/settings";
 
 const FeatureNavTab = ({ activeClassName, className, disabled, isLoading, label, style, ...rest }) => {
-  const classNames = classnames(
+  const classNames = cx(
     `${prefix}--tabs__nav-item`,
     `${prefix}--tabs__nav-link`,
     {
@@ -14,7 +14,7 @@ const FeatureNavTab = ({ activeClassName, className, disabled, isLoading, label,
     },
     className
   );
-  const activeClassNames = classnames(`${prefix}--tabs__nav-item--selected`, activeClassName);
+  const activeClassNames = cx(`${prefix}--tabs__nav-item--selected`, activeClassName);
 
   return isLoading ? (
     <div className={`${prefix}--bmrg-feature-nav-tab--loading`}>
