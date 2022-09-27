@@ -4,7 +4,10 @@ import { ToastContainer, Slide } from "react-toastify";
 import { Close } from "@carbon/react/icons";
 import { prefix } from "../../internal/settings";
 import { injectStyle } from "react-toastify/dist/inject-style";
-injectStyle();
+
+if (typeof window !== "undefined") {
+  injectStyle();
+} 
 
 // eslint-disable-next-line
 const CloseButton = ({ closeToast }) => <Close size={20} onClick={closeToast} />;

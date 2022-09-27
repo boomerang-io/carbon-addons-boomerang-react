@@ -1,6 +1,6 @@
 {
   "name": "@boomerang-io/carbon-addons-boomerang-react",
-  "version": "3.0.0-beta.12",
+  "version": "3.0.0-beta.13",
   "license": "Apache-2",
   "repository": {
     "type": "git",
@@ -54,8 +54,7 @@
     "match-sorter": "6.3.1",
     "react-autosuggest": "10.1.0",
     "react-modal": "3.15.1",
-    "react-toastify": "9.0.7",
-    "window-or-global": "1.0.1"
+    "react-toastify": "9.0.7"
   },
   "peerDependencies": {
     "@carbon/react": "^1.12.0",
