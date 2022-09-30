@@ -10,7 +10,7 @@ const history = createMemoryHistory();
 test("render feature nav tabs", () => {
   const { queryByText } = render(
     <Router history={history}>
-      <FeatureNavTabs>
+      <FeatureNavTabs ariaLabel="Cute animals">
         <FeatureNavTab label="Polar Bear" to="/polar-bear" />
         <FeatureNavTab label="Bee" to="/bee" />
       </FeatureNavTabs>

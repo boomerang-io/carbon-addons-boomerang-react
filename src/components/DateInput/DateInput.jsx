@@ -43,7 +43,7 @@ const DateInputComponent = React.forwardRef(function DateInputComponent(
     const finalValue = typeof value === "string" ? value.split(",") : value;
 
     return (
-      <>
+      <div className={`${prefix}--bmrg-date-input`}>
         {labelValue && (
           <div className={`${prefix}--label ${prefix}--bmrg-date-input__label`}>
             <div>{labelValue}</div>
@@ -59,7 +59,7 @@ const DateInputComponent = React.forwardRef(function DateInputComponent(
         <DatePicker
           key={id}
           allowInput={!readOnly}
-          className={`${prefix}--bmrg-date-input`}
+          className={`${prefix}--bmrg-date-picker`}
           dateFormat={dateFormat}
           datePickerType="range"
           maxDate={max}
@@ -98,15 +98,15 @@ const DateInputComponent = React.forwardRef(function DateInputComponent(
             {helperText}
           </div>
         )}
-      </>
+      </div>
     );
   } else {
     return (
-      <>
+      <div className={`${prefix}--bmrg-date-input`}>
         <DatePicker
           key={id}
           allowInput={!readOnly}
-          className={`${prefix}--bmrg-date-input`}
+          className={`${prefix}--bmrg-date-picker`}
           dateFormat={dateFormat}
           datePickerType="single"
           maxDate={max}
@@ -146,7 +146,7 @@ const DateInputComponent = React.forwardRef(function DateInputComponent(
             {helperText}
           </div>
         )}
-      </>
+      </div>
     );
   }
 });
