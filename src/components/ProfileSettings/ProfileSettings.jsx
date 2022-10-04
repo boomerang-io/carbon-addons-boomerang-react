@@ -105,12 +105,12 @@ function ProfileSettings({ baseServiceUrl, src, userName }) {
     return isConfigDifferent;
   }
 
-  function handleUpdateTeamVisibility(id, isChecked) {
+  function handleUpdateTeamVisibility({ checked, id }) {
     const updatedTeams = [];
     for (let team of teams) {
       const newTeam = { ...team };
       if (newTeam.id === id) {
-        newTeam.visible = isChecked;
+        newTeam.visible = checked;
       }
       updatedTeams.push(newTeam);
     }
@@ -173,8 +173,8 @@ function ProfileSettings({ baseServiceUrl, src, userName }) {
                             checked={visible}
                             labelText={name}
                             id={id}
-                            onChange={(isChecked, id) => {
-                              return handleUpdateTeamVisibility(id, isChecked);
+                            onChange={(e, data) => {
+                              return handleUpdateTeamVisibility(data);
                             }}
                           />
                         </StructuredListCell>
