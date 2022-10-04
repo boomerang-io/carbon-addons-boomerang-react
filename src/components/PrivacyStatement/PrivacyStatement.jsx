@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import axios from "axios";
+import { useQuery, useMutation } from "react-query";
 import dompurify from "dompurify";
 import { Accordion, AccordionItem, Button } from "@carbon/react";
 import { ModalHeader, ModalBody, ModalFooter } from "@carbon/react";
 import { prefix } from "../../internal/settings";
 import HeaderMenuModalWrapper from "../../internal/HeaderMenuModalWrapper";
+import { serviceUrl, resolver } from "../../config/servicesConfig";
 import HeaderMenuItem from "../HeaderMenuItem";
 import notify from "../Notifications/notify";
 import ToastNotification from "../Notifications/ToastNotification";
 
 import CastleImg from "./assets/x_castle_drawbridge";
-
-
 
 /**
  * Helper to format date timestamp
@@ -39,44 +38,37 @@ PrivacyStatement.defaultProps = {
 };
 
 function PrivacyStatement({ baseServiceUrl, organization, platformEmail }) {
-  const [statement, setStatement] = useState();
-  const [error, setError] = useState();
-  const [alertError, setAlertError] = useState();
+  const statementUrl = serviceUrl.getStatement({ baseServiceUrl });
 
-  useEffect(() => {
-    axios(`${baseServiceUrl}/users/consents`)
-      .then((response) => setStatement(response.data))
-      .catch((err) => setError(err));
-  }, [baseServiceUrl]);
+  const { data: statement, error: statementError } = useQuery({
+    queryKey: statementUrl,
+    queryFn: resolver.query(statementUrl),
+  });
 
-  function handleSubmit({ closeAlertModal, closeModal }) {
-    axios
-      .put(`${baseServiceUrl}/users/consent`, {
-        version: statement.version,
-        hasConsented: false,
-      })
-      .then(() => {
-        notify(
-          <ToastNotification
-            subtitle="Successfully requested account deletion"
-            title="Delete Account"
-            kind="success"
-          />,
-          { containerId: `${prefix}--bmrg-header-notifications` }
-        );
-        // want to clear out any error state
-        setError(false);
-        setAlertError(false);
-        closeAlertModal();
-        closeModal();
-        if (window?.location) {
-          window.location.reload(true);
-        }
-      })
-      .catch((err) => {
-        setAlertError(err);
-        closeAlertModal();
-      });
+  const { mutateAsync: mutateUserConsent, error: mutateUserConsentError } = useMutation(resolver.putUserConsent);
+
+  const error = statementError || mutateUserConsentError;
+
+  async function handleSubmit({ closeAlertModal, closeModal }) {
+    const body = {
+      hasConsented: false,
+      version: statement.version,
+    };
+
+    try {
+      await mutateUserConsent({ baseServiceUrl, body });
+      notify(
+        <ToastNotification subtitle="Successfully requested account deletion" title="Delete Account" kind="success" />,
+        { containerId: `${prefix}--bmrg-header-notifications` }
+      );
+      closeAlertModal();
+      closeModal();
+      if (window.location) {
+        window.location.reload(true);
+      }
+    } catch {
+      closeAlertModal();
+    }
   }
 
   // TOOD: decide to do something if there is an error or not
@@ -94,11 +86,7 @@ function PrivacyStatement({ baseServiceUrl, organization, platformEmail }) {
         return (
           <>
             <ModalHeader
-              closeModal={() => {
-                closeModal();
-                setError("");
-                setAlertError("");
-              }}
+              closeModal={closeModal}
               label={`Effective as of ${statement ? formatDateTimestamp(statement.effectiveDate) : ""}`}
               title="Privacy Statement"
             />
@@ -126,9 +114,9 @@ function PrivacyStatement({ baseServiceUrl, organization, platformEmail }) {
                   ${organization}, please contact${" "}`}
                   <a href={`mailto:${platformEmail}?subject=${organization} Privacy Statement`}>{platformEmail}</a>.
                 </p>
-                {alertError && (
+                {mutateUserConsentError && (
                   <p className={`${prefix}--bmrg-privacy-statement__error`}>
-                    Failed to recieve deletion request. Please try again.
+                    Failed to receive deletion request. Please try again.
                   </p>
                 )}
               </div>

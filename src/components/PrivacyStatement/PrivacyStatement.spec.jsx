@@ -1,4 +1,5 @@
 import { expect, test, vi } from "vitest";
+import { QueryClient, QueryClientProvider } from "react-query";
 import { render, fireEvent, waitFor } from "@testing-library/react";
 
 import PrivacyStatement from "./PrivacyStatement";
@@ -12,8 +13,12 @@ const baseServiceUrl = "http://boomerang.com";
 
 const { reload } = window.location;
 
+const queryClient = new QueryClient({
+  defaultOptions: { queries: { refetchOnWindowFocus: false }, mutations: { throwOnError: true } },
+});
+
 beforeAll(() => {
-  Object.defineProperty(window, 'location', {
+  Object.defineProperty(window, "location", {
     writable: true,
     value: { reload: vi.fn() },
   });
@@ -41,7 +46,11 @@ test("Privacy Statement error", async () => {
 
   mock.onPut(`${baseServiceUrl}/users/consent`).networkError();
 
-  const { getByText, getByRole, findByRole } = render(<PrivacyStatement baseServiceUrl={baseServiceUrl} />);
+  const { getByText, getByRole, findByRole } = render(
+    <QueryClientProvider client={queryClient}>
+      <PrivacyStatement baseServiceUrl={baseServiceUrl} />
+    </QueryClientProvider>
+  );
 
   const btn = getByRole("button", { name: /Privacy Statement/i });
   fireEvent.click(btn);
@@ -52,7 +61,7 @@ test("Privacy Statement error", async () => {
   const confirmButton = getByText(/Delete my account/i);
   fireEvent.click(confirmButton);
 
-  await waitFor(() => expect(getByText(/Failed to recieve deletion request. Please try again./i)).toBeInTheDocument());
+  await waitFor(() => expect(getByText(/Failed to receive deletion request. Please try again./i)).toBeInTheDocument());
 });
 
 test("Privacy Statement success", async () => {
@@ -64,7 +73,11 @@ test("Privacy Statement success", async () => {
   mock.onGet(`${baseServiceUrl}/users/consents`).reply(200, PRIVACY_DATA);
   mock.onPut(`${baseServiceUrl}/users/consent`).reply(200);
 
-  const { getByRole, findByRole } = render(<PrivacyStatement baseServiceUrl={baseServiceUrl} />);
+  const { getByRole, findByRole } = render(
+    <QueryClientProvider client={queryClient}>
+      <PrivacyStatement baseServiceUrl={baseServiceUrl} />
+    </QueryClientProvider>
+  );
 
   const btn = getByRole("button", { name: /Privacy Statement/i });
   fireEvent.click(btn);
