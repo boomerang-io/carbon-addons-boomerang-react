@@ -62,7 +62,6 @@ specifiers:
   typescript: ^4.6.3
   vite: ^3.1.3
   vitest: 0.23.4
-  window-or-global: 1.0.1
   yup: ^0.32.11
 
 dependencies:
@@ -81,7 +80,6 @@ dependencies:
   react-autosuggest: 10.1.0_react@16.14.0
   react-modal: 3.15.1_wcqkhtmu7mswc6yz4uyexck3ty
   react-toastify: 9.0.7_wcqkhtmu7mswc6yz4uyexck3ty
-  window-or-global: 1.0.1
 
 devDependencies:
   '@babel/cli': 7.18.10_@babel+core@7.19.1
@@ -15517,6 +15515,7 @@ packages:
 
   /window-or-global/1.0.1:
     resolution: {integrity: sha512-tE12J/NenOv4xdVobD+AD3fT06T4KNqnzRhkv5nBIu7K+pvOH2oLCEgYP+i+5mF2jtI6FEADheOdZkA8YWET9w==}
+    dev: true
 
   /windows-release/5.0.1:
     resolution: {integrity: sha512-y1xFdFvdMiDXI3xiOhMbJwt1Y7dUxidha0CWPs1NgjZIjZANTcX7+7bMqNjuezhzb8s5JGEiBAbQjQQYYy7ulw==}

@@ -17,11 +17,44 @@
       height: 100%;
     }
 
-    .#{$prefix}--modal-container {
-      height: utils.rem(476px);
-      width: utils.rem(500px);
-      padding-left: 0;
-      padding-right: 0;
+    .#{$prefix}--bmrg-privacy-statement-delete {
+      width: 100%;
+
+      .#{$prefix}--modal {
+        width: 100%;
+        height: 100%;
+      }
+
+      .#{$prefix}--modal-container {
+        height: 18rem;
+        width: 36.5rem;
+        padding-left: 0;
+        padding-right: 0;
+      }
+
+      .#{$prefix}--modal-content {
+        overflow-x: hidden;
+      }
+
+      .#{$prefix}--modal-header {
+        padding-left: 2rem;
+      }
+
+      .#{$prefix}--modal-footer {
+        margin-top: 1.125rem;
+      }
+
+      .#{$prefix}--btn--danger {
+        width: 100%;
+      }
+
+      .#{$prefix}--bmrg-privacy-statement-delete__desc {
+        color: #9fa5ad;
+        font-size: rem(14px);
+        line-height: rem(18px);
+        padding-left: 1rem;
+        margin-top: 1rem;
+      }
     }
 
     .#{$prefix}--modal-content {

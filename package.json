@@ -1,6 +1,11 @@
 {
   "name": "@boomerang-io/carbon-addons-boomerang-react",
-  "version": "3.0.0-beta.15",
+  "description": "Carbon Addons for Boomerang apps",
+  "version": "2.0.12",
+  "author": {
+    "name": "Tim Bula",
+    "email": "timrbula@gmail.com"
+  },
   "license": "Apache-2",
   "repository": {
     "type": "git",
