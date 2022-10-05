@@ -1,21 +1,18 @@
 import { expect, test, vi } from "vitest";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { render, fireEvent, waitFor } from "@testing-library/react";
-
+import { serviceUrl } from "../../config/servicesConfig";
 import PrivacyStatement from "./PrivacyStatement";
-
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
-
 import { PRIVACY_DATA } from "./constants";
-
-const baseServiceUrl = "http://boomerang.com";
-
-const { reload } = window.location;
 
 const queryClient = new QueryClient({
   defaultOptions: { queries: { refetchOnWindowFocus: false }, mutations: { throwOnError: true } },
 });
+
+const baseServiceUrl = "http://boomerang.com";
+const { reload } = window.location;
 
 beforeAll(() => {
   Object.defineProperty(window, "location", {
@@ -41,10 +38,8 @@ test("Privacy Statement error", async () => {
    */
 
   const mock = new MockAdapter(axios);
-
-  mock.onGet(`${baseServiceUrl}/users/consents`).reply(200, PRIVACY_DATA);
-
-  mock.onPut(`${baseServiceUrl}/users/consent`).networkError();
+  mock.onGet(serviceUrl.getStatement({ baseServiceUrl})).reply(200, PRIVACY_DATA);
+  mock.onPut(serviceUrl.resourceUserConsent({ baseServiceUrl})).networkError();
 
   const { getByText, getByRole, findByRole } = render(
     <QueryClientProvider client={queryClient}>
@@ -52,7 +47,7 @@ test("Privacy Statement error", async () => {
     </QueryClientProvider>
   );
 
-  const btn = getByRole("button", { name: /Privacy Statement/i });
+  const btn = getByRole("button", { name: /^Privacy Statement$/i });
   fireEvent.click(btn);
 
   const deleteButton = await findByRole("button", { name: /Request account deletion/i });
@@ -69,7 +64,6 @@ test("Privacy Statement success", async () => {
    *
    */
   const mock = new MockAdapter(axios);
-
   mock.onGet(`${baseServiceUrl}/users/consents`).reply(200, PRIVACY_DATA);
   mock.onPut(`${baseServiceUrl}/users/consent`).reply(200);
 
@@ -79,7 +73,7 @@ test("Privacy Statement success", async () => {
     </QueryClientProvider>
   );
 
-  const btn = getByRole("button", { name: /Privacy Statement/i });
+  const btn = getByRole("button", { name: /^Privacy Statement$/i });
   fireEvent.click(btn);
 
   const deleteButton = await findByRole("button", { name: /Request account deletion/i });

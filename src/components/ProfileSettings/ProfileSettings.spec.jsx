@@ -16,7 +16,7 @@ const queryClient = new QueryClient({
 test("Profile Settings success", async () => {
   const mock = new MockAdapter(axios);
   mock.onGet(`${baseServiceUrl}/launchpad/user`).reply(200, PROFILE_SETTINGS_DATA);
-  mock.onPatch(`${baseServiceUrl}/users/profile`).networkError();
+  mock.onPatch(`${baseServiceUrl}/users/profile`).reply(200);
 
   const { findByText, getByLabelText, getByText, queryByText } = render(
     <QueryClientProvider client={queryClient}>
@@ -45,11 +45,10 @@ test("Profile Settings success", async () => {
   );
 });
 
-const mock = new MockAdapter(axios);
-mock.onGet(`${baseServiceUrl}/launchpad/user`).reply(200, PROFILE_SETTINGS_DATA);
-mock.onPatch(`${baseServiceUrl}/users/profile`).reply(500);
-
 test("Profile Settings error", async () => {
+  const mock = new MockAdapter(axios);
+  mock.onGet(`${baseServiceUrl}/launchpad/user`).reply(200, PROFILE_SETTINGS_DATA);
+  mock.onPatch(`${baseServiceUrl}/users/profile`).reply(500);
   const { findByText, findByLabelText, getByText } = render(
     <QueryClientProvider client={queryClient}>
       <ProfileSettings baseServiceUrl={baseServiceUrl} userName="Boomerang Joe" src="joe@ibm.com" />

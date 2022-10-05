@@ -17,10 +17,10 @@
   margin-bottom: 1rem;
 }
 
-.cds--accordion {
+.storybook-welcome .cds--accordion {
   padding-top: 2rem;
 }
 
-.cds--accordion__content {
+.storybook-welcome .cds--accordion__content {
   padding: 1rem;
 }

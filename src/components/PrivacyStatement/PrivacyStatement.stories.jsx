@@ -3,16 +3,12 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import MockAdapter from "axios-mock-adapter";
 import PrivacyStatement from "./PrivacyStatement";
 import { PRIVACY_DATA } from "./constants";
-
-const mock = new MockAdapter(axios);
+import { serviceUrl } from "../../config/servicesConfig";
 
 const queryClient = new QueryClient({
   defaultOptions: { queries: { refetchOnWindowFocus: false }, mutations: { throwOnError: true } },
 });
-
-const props = () => ({
-  baseServiceUrl: "http://ibm.com",
-});
+const baseServiceUrl = "https://boomerang.com";
 
 export default {
   title: "Platform/PrivacyStatement",
@@ -20,10 +16,12 @@ export default {
 };
 
 export const Default = () => {
-  mock.onGet("http://ibm.com/users/consents").reply(200, PRIVACY_DATA);
+  const mock = new MockAdapter(axios);
+  mock.onGet(serviceUrl.getStatement({ baseServiceUrl})).reply(200, PRIVACY_DATA);
+  mock.onPut(serviceUrl.resourceUserConsent({ baseServiceUrl})).reply(200);
   return (
     <QueryClientProvider client={queryClient}>
-      <PrivacyStatement {...props()} />
+      <PrivacyStatement baseServiceUrl={baseServiceUrl} />
     </QueryClientProvider>
   );
 };

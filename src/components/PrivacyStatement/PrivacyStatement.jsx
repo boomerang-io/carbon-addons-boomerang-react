@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { useQuery, useMutation } from "react-query";
 import dompurify from "dompurify";
-import { Accordion, AccordionItem, Button } from "@carbon/react";
-import { ModalHeader, ModalBody, ModalFooter } from "@carbon/react";
+import { Accordion, AccordionItem, Button, ModalHeader, ModalBody, ModalFooter } from "@carbon/react";
+import ErrorMessage from "../ErrorMessage";
+import Loading from "../Loading";
 import { prefix } from "../../internal/settings";
 import HeaderMenuModalWrapper from "../../internal/HeaderMenuModalWrapper";
 import { serviceUrl, resolver } from "../../config/servicesConfig";
@@ -26,34 +27,32 @@ function formatDateTimestamp(timestamp) {
 
 PrivacyStatement.propTypes = {
   baseServiceUrl: PropTypes.string.isRequired,
-  platformName: PropTypes.string,
+  organization: PropTypes.string,
   platformEmail: PropTypes.string,
 };
 
 PrivacyStatement.defaultProps = {
-  platformName: 'the platform',
-  platformEmail: 'isesupp@us.ibm.com',
+  organization: "the platform",
+  platformEmail: "isesupp@us.ibm.com",
 };
 
 function PrivacyStatement({ baseServiceUrl, organization, platformEmail }) {
   const statementUrl = serviceUrl.getStatement({ baseServiceUrl });
-  const { data: statement, error: statementError } = useQuery({
+  const statementQuery = useQuery({
     queryKey: statementUrl,
     queryFn: resolver.query(statementUrl),
   });
 
-  const { mutateAsync: mutateUserConsent, error: mutateUserConsentError } = useMutation(resolver.putUserConsent);
-
-  const error = statementError || mutateUserConsentError;
+  const { mutateAsync, error: mutateUserConsentError } = useMutation(resolver.putUserConsent);
 
   async function handleSubmit({ closeAlertModal, closeModal }) {
     const body = {
       hasConsented: false,
-      version: statement.version,
+      version: statementQuery.data.version,
     };
 
     try {
-      await mutateUserConsent({ baseServiceUrl, body });
+      await mutateAsync({ baseServiceUrl, body });
       notify(
         <ToastNotification subtitle="Successfully requested account deletion" title="Delete Account" kind="success" />,
         { containerId: `${prefix}--bmrg-header-notifications` }
@@ -63,18 +62,14 @@ function PrivacyStatement({ baseServiceUrl, organization, platformEmail }) {
       if (window.location) {
         window.location.reload(true);
       }
-    } catch {
+    } catch (e) {
       closeAlertModal();
     }
   }
 
-  // TOOD: decide to do something if there is an error or not
-  if (error) {
-    // noop
-  }
-
   return (
     <HeaderMenuItem
+      aria-label="Privacy Statement"
       className={`${prefix}--bmrg-privacy-statement-container`}
       iconName="locked"
       text="Privacy Statement"
@@ -84,36 +79,47 @@ function PrivacyStatement({ baseServiceUrl, organization, platformEmail }) {
           <>
             <ModalHeader
               closeModal={closeModal}
-              label={`Effective as of ${statement ? formatDateTimestamp(statement.effectiveDate) : ""}`}
+              label={`Effective as of ${
+                statementQuery.data ? formatDateTimestamp(statementQuery.data.effectiveDate) : ""
+              }`}
               title="Privacy Statement"
             />
 
             <ModalBody>
               <div className={`${prefix}--bmrg-privacy-statement`}>
-                {statement && statement.formContent && statement.formContent.sections.length > 0 && (
-                  <Accordion>
-                    {statement.formContent.sections.map((section) => {
-                      return (
-                        <AccordionItem title={section.title} key={section.title}>
-                          <p
-                            className={`${prefix}--bmrg-privacy-statement__content`}
-                            dangerouslySetInnerHTML={{
-                              __html: dompurify.sanitize(section.content),
-                            }}
-                          />
-                        </AccordionItem>
-                      );
-                    })}
-                  </Accordion>
+                {statementQuery.isLoading ? (
+                  <Loading />
+                ) : statementQuery.error ? (
+                  <ErrorMessage style={{ color: "#F2F4F8" }} />
+                ) : (
+                  statementQuery.data?.formContent?.sections?.length > 0 && (
+                    <>
+                      <Accordion>
+                        {statementQuery.data.formContent.sections.map((section) => {
+                          return (
+                            <AccordionItem title={section.title} key={section.title}>
+                              <p
+                                className={`${prefix}--bmrg-privacy-statement__content`}
+                                dangerouslySetInnerHTML={{
+                                  __html: dompurify.sanitize(section.content),
+                                }}
+                              />
+                            </AccordionItem>
+                          );
+                        })}
+                      </Accordion>
+                      <p className={`${prefix}--bmrg-privacy-statement__message`}>
+                        {`For any questions or concerns about business and personal information captured on
+                    ${organization}, please contact${" "}`}
+                        <a href={`mailto:${platformEmail}?subject=${organization} Privacy Statement`}>
+                          {platformEmail}
+                        </a>
+                        .
+                      </p>
+                    </>
+                  )
                 )}
-                <p className={`${prefix}--bmrg-privacy-statement__message`}>
-                  {`For any questions or concerns about business and personal information captured on
-                  ${platformName}, please contact${' '}`}
-                  <a href={`mailto:${platformEmail}?subject=${platformName} Privacy Statement`}>
-                    {platformEmail}
-                  </a>
-                  .
-                </p>
+
                 {mutateUserConsentError && (
                   <p className={`${prefix}--bmrg-privacy-statement__error`}>
                     Failed to receive deletion request. Please try again.
@@ -129,17 +135,20 @@ function PrivacyStatement({ baseServiceUrl, organization, platformEmail }) {
                       <>
                         <ModalHeader
                           closeModal={closeAlertModal}
-                          // label="Delete Account"
+                          label="Delete Account"
                           title="Request account deletion"
                         />
                         <ModalBody>
-                          <>
-                            <p className={`${prefix}--bmrg-privacy-statement-delete__desc`}>
-                              By selecting to delete your account, your account will be deleted along with all of your user data from our system and we will notify your team(s) that you are no longer a memeber of the platform. Are you sure you want to delete your account?
-                            </p>
-                          </>
+                          <p className={`${prefix}--bmrg-privacy-statement-delete__desc`}>
+                            By selecting to delete your account, your account will be deleted along with all of your
+                            user data from our system and we will notify your team(s) that you are no longer a memeber
+                            of the platform. Are you sure you want to delete your account?
+                          </p>
                         </ModalBody>
-                        <ModalFooter style={{ marginTop: '1.125rem' }}>
+                        <ModalFooter style={{ marginTop: "1.125rem" }}>
+                          <Button kind="secondary" onClick={closeAlertModal}>
+                            No, go back to Privacy Statement
+                          </Button>
                           <Button
                             kind="danger"
                             type="submit"
@@ -148,9 +157,6 @@ function PrivacyStatement({ baseServiceUrl, organization, platformEmail }) {
                             }}
                           >
                             Yes, Delete my account
-                          </Button>
-                          <Button kind="secondary" onClick={closeAlertModal}>
-                            No, go back to Privacy Statement
                           </Button>
                         </ModalFooter>
                       </>

@@ -28,10 +28,6 @@
       overflow-x: hidden;
     }
 
-    .#{$prefix}--modal-header {
-      padding-left: 2rem;
-    }
-
     .#{$prefix}--modal-footer {
       margin-top: 1.125rem;
     }
@@ -44,11 +40,13 @@
       font-size: utils.rem(14px);
       line-height: utils.rem(18px);
       margin-top: 1rem;
-      padding-left: 2rem;
     }
   }
 
   .#{$prefix}--modal-content {
+    p {
+      padding-right: 1rem;
+    }
     .#{$prefix}--bmrg-privacy-statement {
       height: utils.rem(368px);
       margin-top: utils.rem(16px);

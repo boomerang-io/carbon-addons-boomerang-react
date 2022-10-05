@@ -90,7 +90,7 @@ function ProfileSettings({ baseServiceUrl, src, userName }) {
         { containerId: `${prefix}--bmrg-header-notifications` }
       );
       closeModal();
-    } catch {
+    } catch(e) {
       // noop
     }
   }
@@ -127,7 +127,7 @@ function ProfileSettings({ baseServiceUrl, src, userName }) {
   }
 
   return (
-    <HeaderMenuUser className={`${prefix}--bmrg-profile-settings-container`} src={src} userName={userName}>
+    <HeaderMenuUser className={`${prefix}--bmrg-profile-settings-container`} src={src} userName={userName} aria-label="Profile settings">
       {({ closeModal }) => {
         return (
           <>

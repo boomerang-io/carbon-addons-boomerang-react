@@ -20,7 +20,7 @@ export const Default = () => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div style={{ width: "16rem", background: "var(--cds-bmrg-primary" }}>
+      <div style={{ width: "15rem", background: "var(--cds-bmrg-primary" }}>
         <ProfileSettings
           baseServiceUrl="https://ibm.com"
           src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50"
