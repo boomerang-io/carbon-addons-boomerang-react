@@ -101,6 +101,7 @@ $use-theme-boomerang: false !default;
 
     .#{$prefix}--btn:focus {
       outline-color: shell.$bmrg-primary;
+      border: initial !important;
     }
 
     .#{$prefix}--modal-content {
