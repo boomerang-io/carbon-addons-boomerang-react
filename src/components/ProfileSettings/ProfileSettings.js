@@ -1,6 +1,6 @@
 import React , { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { useQuery, useMutation } from 'react-query';
+import { useQuery, useMutation, useQueryClient } from 'react-query';
 import {
   Button,
   Checkbox,
@@ -31,17 +31,27 @@ ProfileSettings.propTypes = {
 };
 
 function ProfileSettings({ baseServiceUrl, src, userName }) {
+  const queryClient = useQueryClient();
+
   const [initialTeams, setInitialTeams] = useState([]);
   const [teams, setTeams] = useState([]);
 
   const userUrl = serviceUrl.getLaunchpadUser({ baseServiceUrl });
+  const profileUrl = serviceUrl.resourceUserProfile({ baseServiceUrl });
 
   const { data: user, isLoading: userIsLoading, error: userError } = useQuery({
     queryKey: userUrl,
     queryFn: resolver.query(userUrl),
   });
 
-  const { mutateAsync: mutateUserProfile, isLoading: mutateUserProfileIsLoading, error: mutateUserProfileError } = useMutation(resolver.patchUserProfile);
+  const { mutateAsync: mutateUserProfile, isLoading: mutateUserProfileIsLoading, error: mutateUserProfileError } = useMutation(resolver.patchUserProfile,
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries(userUrl);
+        queryClient.invalidateQueries(profileUrl);
+      },
+    }
+  );
   
   const disableModal = user?.lowerLevelGroups === undefined;
 
