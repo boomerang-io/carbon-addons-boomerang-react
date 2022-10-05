@@ -18,8 +18,8 @@
     }
 
     .#{$prefix}--modal-container {
-      height: utils.rem(476px);
-      width: utils.rem(500px);
+      height: 18rem;
+      width: 36.5rem;
       padding-left: 0;
       padding-right: 0;
     }
@@ -40,17 +40,11 @@
       width: 100%;
     }
 
-    .#{$prefix}--bmrg-privacy-statement-delete__castle {
-      width: 100%;
-    }
-
     .#{$prefix}--bmrg-privacy-statement-delete__desc {
-      width: utils.rem(420px);
-      font-family: "IBM Plex Sans", "Helvetica Neue", Arial, Helvetica, sans-serif;
       font-size: utils.rem(14px);
       line-height: utils.rem(18px);
-      padding-left: 2rem;
       margin-top: 1rem;
+      padding-left: 2rem;
     }
   }
 

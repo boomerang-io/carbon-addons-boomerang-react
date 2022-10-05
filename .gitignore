@@ -14,6 +14,14 @@ styles
 # Testing
 coverage
 
+# Package Files #
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
 # Logs
 logs
 *.log

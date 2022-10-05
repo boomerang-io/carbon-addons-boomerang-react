@@ -20,15 +20,26 @@ import ErrorMessage from "../ErrorMessage";
 import HeaderMenuUser from "../HeaderMenuUser";
 import notify from "../Notifications/notify";
 import ToastNotification from "../Notifications/ToastNotification";
-import { prefix } from "../../internal/settings";
 import { serviceUrl, resolver } from "../../config/servicesConfig";
 import sortBy from "lodash.sortby";
+import { prefix } from "../../internal/settings";
 
 ProfileSettings.propTypes = {
   baseServiceUrl: PropTypes.string.isRequired,
   src: PropTypes.string.isRequired,
   userName: PropTypes.string.isRequired,
 };
+
+function determineIfConfigIsDifferent(teams, initialTeams) {
+  let isConfigDifferent = false;
+  for (let idx = 0; idx < teams?.length; idx++) {
+    if (teams[idx]?.visible !== initialTeams[idx]?.visible) {
+      isConfigDifferent = true;
+      break;
+    }
+  }
+  return isConfigDifferent;
+}
 
 function ProfileSettings({ baseServiceUrl, src, userName }) {
   const queryClient = useQueryClient();
@@ -89,23 +100,12 @@ function ProfileSettings({ baseServiceUrl, src, userName }) {
   const someTeamsAreChecked = visibleTeamCount > 0 && !allTeamsAreChecked;
   const isConfigDifferent = determineIfConfigIsDifferent(teams, initialTeams);
 
-  function batchChangeTeamVisibility(action) {
+  function batchChangeTeamVisibility() {
     const updatedTeams = teams.map((team) => ({ ...team, visible: !allTeamsAreChecked }));
     setTeams(updatedTeams);
   }
 
-  function determineIfConfigIsDifferent(teams, initialTeams) {
-    let isConfigDifferent = false;
-    for (let idx = 0; idx < teams?.length; idx++) {
-      if (teams[idx]?.visible !== initialTeams[idx]?.visible) {
-        isConfigDifferent = true;
-        break;
-      }
-    }
-    return isConfigDifferent;
-  }
-
-  function handleUpdateTeamVisibility({ checked, id }) {
+  function handleUpdateTeamVisibility(id, checked) {
     const updatedTeams = [];
     for (let team of teams) {
       const newTeam = { ...team };
@@ -146,17 +146,19 @@ function ProfileSettings({ baseServiceUrl, src, userName }) {
               {userIsLoading ? (
                 <StructuredListSkeleton />
               ) : userError ? (
-                <ErrorMessage style={{ color: "#F2F4F8" }} />
+                <ErrorMessage style={{ color: "#F2F4F8", padding: "1rem" }} />
               ) : teams?.length > 0 ? (
-                <StructuredListWrapper className={`${prefix}--bmrg-profile-settings-list`}>
+                <StructuredListWrapper
+                  className={`${prefix}--bmrg-profile-settings-list`}
+                >
                   <StructuredListHead>
                     <StructuredListRow head>
                       <StructuredListCell head>
                         <Checkbox
                           checked={allTeamsAreChecked}
-                          labelText={"Team Name"}
                           id={"team-name-batch-toggle"}
                           indeterminate={someTeamsAreChecked}
+                          labelText={"Team Name"}
                           onChange={batchChangeTeamVisibility}
                         />
                       </StructuredListCell>
@@ -171,10 +173,10 @@ function ProfileSettings({ baseServiceUrl, src, userName }) {
                         <StructuredListCell>
                           <Checkbox
                             checked={visible}
-                            labelText={name}
                             id={id}
-                            onChange={(e, data) => {
-                              return handleUpdateTeamVisibility(data);
+                            labelText={name}
+                            onChange={(_, { checked, id }) => {
+                              return handleUpdateTeamVisibility(id, checked);
                             }}
                           />
                         </StructuredListCell>

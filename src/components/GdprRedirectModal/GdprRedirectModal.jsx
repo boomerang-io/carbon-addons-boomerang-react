@@ -1,12 +1,8 @@
-import React, { Component } from "react";
-import { ComposedModal, Button } from "@carbon/react";
-import PropTypes from "prop-types";
-import { ModalHeader, ModalBody, ModalFooter } from "@carbon/react";
+import React, { Component } from 'react';
+import { ComposedModal, Button, ModalHeader, ModalBody, ModalFooter } from "@carbon/react";
 import { prefix } from "../../internal/settings";
-import { USER_STATUS } from "./constants";
-import CastleDrawBridge from "./assets/CastleDrawBridge";
-import CastleNoDoor from "./assets/CastleNoDoor";
-
+import { USER_STATUS } from './constants';
+import PropTypes from 'prop-types';
 
 
 class GdprRedirectModal extends Component {
@@ -14,10 +10,12 @@ class GdprRedirectModal extends Component {
     isOpen: PropTypes.bool,
     baseLaunchEnvUrl: PropTypes.string.isRequired,
     user: PropTypes.object.isRequired,
+    platformName: PropTypes.string
   };
 
   static defaultProps = {
     isOpen: false,
+    platformName: "the platform"
   };
 
   handleOnSubmit = () => {
@@ -31,22 +29,14 @@ class GdprRedirectModal extends Component {
   };
 
   render() {
-    const { isOpen, user } = this.props;
+    const { isOpen, user, platformName } = this.props;
 
-    const pendingDeletion = user.status === USER_STATUS.PENDING_DELETION;
+    const pendingDeletion = user?.status === USER_STATUS.PENDING_DELETION;
     const contentText = pendingDeletion
-      ? "We’re working on removing your account and personal information from our systems."
-      : "We’re sorry to interrupt, but we need you to agree to our new privacy statement.";
-    const smallText = pendingDeletion
-      ? "Please allow up to 1 month (as mandated by GDPR regulations) for us to process your request."
-      : "We’ll bring you back right here after.";
-    const contentImg = pendingDeletion ? (
-      <CastleNoDoor className={`${prefix}--bmrg-redirect__img`} alt="redirect" />
-    ) : (
-      <CastleDrawBridge className={`${prefix}--bmrg-redirect__img`} alt="redirect" />
-    );
+      ? `We’re working on removing your account and personal information from ${platformName}. Please allow up to 1 month (as mandated by GDPR regulations) for us to complete your request.`
+      : 'Before continuing, we need you to consent to the Privacy Statement.';
 
-    const buttonText = pendingDeletion ? "Boomerang" : "View Consent Form";
+    const buttonText = pendingDeletion ? 'Launchpad' : 'View Privacy Statement';
 
     return (
       <div className={`${prefix}--bmrg-redirect-container`}>
@@ -57,12 +47,11 @@ class GdprRedirectModal extends Component {
           }}
         >
           <div ref={(node) => (this.node = node)}>
-            <ModalHeader title="Hi Mate," />
+            <ModalHeader title="Our Privacy Statement" />
             <ModalBody>
               <span className={`${prefix}--bmrg-redirect__body`}>
-                {contentText} {smallText}
+                {contentText}
               </span>
-              {contentImg}
             </ModalBody>
             <ModalFooter>
               <Button kind="primary" onClick={this.handleOnSubmit}>

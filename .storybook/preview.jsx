@@ -15,10 +15,10 @@ export const globalTypes = {
   theme: {
     name: "Theme",
     description: "Set the global theme for displaying components",
-    defaultValue: "boomerang",
+    defaultValue: "white",
     toolbar: {
       icon: "paintbrush",
-      items: ["boomerang", "white", "g10", "g90", "g100"],
+      items: ["white", "g10", "g90", "g100", "boomerang"],
     },
   },
 };
@@ -32,10 +32,6 @@ export const parameters = {
       opacity: 0.2,
     },
     values: [
-      {
-        name: "boomerang",
-        value: "#f2f4f8",
-      },
       {
         name: "white",
         value: white.background,
@@ -51,6 +47,10 @@ export const parameters = {
       {
         name: "g100",
         value: g100.background,
+      },
+      {
+        name: "boomerang",
+        value: "#f2f4f8",
       },
     ],
   },

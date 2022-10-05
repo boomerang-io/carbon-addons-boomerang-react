@@ -1,5 +1,4 @@
 import CheckboxList from "./CheckboxList";
-import { action } from "@storybook/addon-actions";
 
 const animals = [
   { labelText: "Cat", id: "cat" },

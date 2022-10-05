@@ -8,7 +8,7 @@ installed:
 - [Node.js](https://nodejs.org/en/download/) - the required version is specified in the [`.nvmrc`](/.nvmrc)
   - If you're on macOS or using WSL on Windows, we recommend using [`nvm`](https://github.com/nvm-sh/nvm) as your version manager for Node.
 - Git
-- [Yarn](https://yarnpkg.com/en/docs/install)
+- [pnpm](https://yarnpkg.com/en/docs/install)
 
 You'll also need a code editor to make changes. There are many to
 choose from but some popular options are
@@ -39,18 +39,18 @@ From the root directory of the project, run:
 
 ```sh
 # To install the project's dependencies
-yarn install
+pnpm install
 ```
 
 To get your development server running and to start coding, run:
 
 ```sh
-yarn start
+pnpm start
 ```
 
 This will start a development server where you can see any changes you are making to components in our react components Storybook.
 
-Once it's done building, you can edit source code or create new components. The system is set up to automatically bundle your changes/additions. Visit http://localhost:3000 to see the changes happen on the fly.
+Once it's done building, you can edit source code or create new components. The system is set up to automatically bundle your changes/additions. Visit `http://localhost:3000` to see the changes happen on the fly.
 
 ## Adding a new component or feature
 
@@ -60,7 +60,7 @@ For a component request or feature enhancement to be considered ‘ready to impl
 
 ## Dependencies
 
-Dependencies must be added via `yarn add <packageName>`. Please do not use `npm install <packageName>`.
+Dependencies must be added via `pnpm add <packageName>`. Please do not use `npm install <packageName>` or `yarn install <packageName>`.
 
 When adding new `dependencies` or `devDependencies` to the codebase, the associated pull request should include justification for the package and the alternatives considered.
 

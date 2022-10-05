@@ -11,8 +11,6 @@ import HeaderMenuItem from "../HeaderMenuItem";
 import notify from "../Notifications/notify";
 import ToastNotification from "../Notifications/ToastNotification";
 
-import CastleImg from "./assets/x_castle_drawbridge";
-
 /**
  * Helper to format date timestamp
  * @param {string} timestamp
@@ -28,18 +26,17 @@ function formatDateTimestamp(timestamp) {
 
 PrivacyStatement.propTypes = {
   baseServiceUrl: PropTypes.string.isRequired,
-  organization: PropTypes.string,
+  platformName: PropTypes.string,
   platformEmail: PropTypes.string,
 };
 
 PrivacyStatement.defaultProps = {
-  organization: "IBM Services Essentials",
-  platformEmail: "isesupp@us.ibm.com",
+  platformName: 'the platform',
+  platformEmail: 'isesupp@us.ibm.com',
 };
 
 function PrivacyStatement({ baseServiceUrl, organization, platformEmail }) {
   const statementUrl = serviceUrl.getStatement({ baseServiceUrl });
-
   const { data: statement, error: statementError } = useQuery({
     queryKey: statementUrl,
     queryFn: resolver.query(statementUrl),
@@ -111,8 +108,11 @@ function PrivacyStatement({ baseServiceUrl, organization, platformEmail }) {
                 )}
                 <p className={`${prefix}--bmrg-privacy-statement__message`}>
                   {`For any questions or concerns about business and personal information captured on
-                  ${organization}, please contact${" "}`}
-                  <a href={`mailto:${platformEmail}?subject=${organization} Privacy Statement`}>{platformEmail}</a>.
+                  ${platformName}, please contact${' '}`}
+                  <a href={`mailto:${platformEmail}?subject=${platformName} Privacy Statement`}>
+                    {platformEmail}
+                  </a>
+                  .
                 </p>
                 {mutateUserConsentError && (
                   <p className={`${prefix}--bmrg-privacy-statement__error`}>
@@ -134,35 +134,23 @@ function PrivacyStatement({ baseServiceUrl, organization, platformEmail }) {
                         />
                         <ModalBody>
                           <>
-                            <div className={`${prefix}--bmrg-privacy-statement-delete__castle`}>
-                              <CastleImg style={{ width: "100%" }} />
-                            </div>
                             <p className={`${prefix}--bmrg-privacy-statement-delete__desc`}>
-                              {`We will happily delete your account and all corresponding data from
-                              our systems. Your account will cease to exist, and we will notify your
-                              teams that you are no longer a member of ${organization}. This process can
-                              take up to 1 month, which is in accordance with GDPR.`}
+                              By selecting to delete your account, your account will be deleted along with all of your user data from our system and we will notify your team(s) that you are no longer a memeber of the platform. Are you sure you want to delete your account?
                             </p>
                           </>
                         </ModalBody>
-                        <ModalFooter
-                          style={{
-                            marginTop: "1.125rem",
-                            // display: 'flex',
-                            // justifyContent: 'space-evenly',
-                          }}
-                        >
-                          <Button kind="secondary" onClick={closeAlertModal}>
-                            Cancel
-                          </Button>
+                        <ModalFooter style={{ marginTop: '1.125rem' }}>
                           <Button
-                            kind="primary"
+                            kind="danger"
                             type="submit"
                             onClick={() => {
                               handleSubmit({ closeAlertModal, closeModal });
                             }}
                           >
-                            Delete my account
+                            Yes, Delete my account
+                          </Button>
+                          <Button kind="secondary" onClick={closeAlertModal}>
+                            No, go back to Privacy Statement
                           </Button>
                         </ModalFooter>
                       </>

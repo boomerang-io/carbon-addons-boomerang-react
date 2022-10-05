@@ -20,7 +20,7 @@ export default {
 
 export const Default = (args) => {
   mock.onGet(`${BASE_URL}/users/consents`).reply(200, PRIVACY_DATA);
-  mock.onGet(`${BASE_URL}/launchpad/users`).reply(200, PROFILE_SETTINGS_DATA);
+  mock.onGet(`${BASE_URL}/launchpad/user`).reply(200, PROFILE_SETTINGS_DATA);
   mock.onPost(`${BASE_URL}/support/contact`).reply(200);
   return (
     <UIShell
@@ -84,7 +84,7 @@ export const Default = (args) => {
 
 export const WithCarbonSidenavAndReactRouter = () => {
   mock.onGet(`${BASE_URL}/users/consents`).reply(200, PRIVACY_DATA);
-  mock.onGet(`${BASE_URL}/launchpad/users`).reply(200, PROFILE_SETTINGS_DATA);
+  mock.onGet(`${BASE_URL}/launchpad/user`).reply(200, PROFILE_SETTINGS_DATA);
   mock.onPatch(`${BASE_URL}/users/profile`).reply(200);
   mock.onPost(`${BASE_URL}/support/contact`).reply(200);
   return (
