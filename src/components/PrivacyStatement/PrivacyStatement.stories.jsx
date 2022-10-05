@@ -1,9 +1,14 @@
 import axios from "axios";
+import { QueryClient, QueryClientProvider } from "react-query";
 import MockAdapter from "axios-mock-adapter";
 import PrivacyStatement from "./PrivacyStatement";
 import { PRIVACY_DATA } from "./constants";
 
 const mock = new MockAdapter(axios);
+
+const queryClient = new QueryClient({
+  defaultOptions: { queries: { refetchOnWindowFocus: false }, mutations: { throwOnError: true } },
+});
 
 const props = () => ({
   baseServiceUrl: "http://ibm.com",
@@ -16,7 +21,11 @@ export default {
 
 export const Default = () => {
   mock.onGet("http://ibm.com/users/consents").reply(200, PRIVACY_DATA);
-  return <PrivacyStatement {...props()} />;
+  return (
+    <QueryClientProvider client={queryClient}>
+      <PrivacyStatement {...props()} />
+    </QueryClientProvider>
+  );
 };
 
 Default.story = {

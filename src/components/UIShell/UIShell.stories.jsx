@@ -285,7 +285,6 @@ export const RightPanel = () => {
   );
 };
 
-
 export const UserNotConsented = () => {
   mock.onGet(`${BASE_URL}/users/consents`).reply(200, PRIVACY_DATA);
   return (
@@ -389,7 +388,6 @@ export const UserPendingDeletion = () => {
     />
   );
 };
-
 
 export const EmptyState = () => {
   mock.onGet(`${BASE_URL}/users/consents`).reply(200, PRIVACY_DATA);
