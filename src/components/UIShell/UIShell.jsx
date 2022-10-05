@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { QueryClientProvider } from "react-query";
 import Header from "../Header"; // Using default export
 import HeaderMenuButton from "../HeaderMenuButton";
 import HeaderMenuLink from "../HeaderMenuLink";
@@ -9,6 +10,7 @@ import Feedback from "../Feedback";
 import PrivacyStatement from "../PrivacyStatement";
 import SignOut from "../SignOut";
 import GdprRedirectModal from "../GdprRedirectModal";
+import { queryClient } from "../../config/servicesConfig";
 
 UIShell.propTypes = {
   /**
@@ -211,7 +213,7 @@ function UIShell({
   const isPrivacyStatementDisabled = renderPrivacyStatement === false || features?.["consent.enabled"] === false;
 
   return (
-    <>
+    <QueryClientProvider client={queryClient}>
       <Header
         appName={finalAppName}
         baseLaunchEnvUrl={finalBaseUrl}
@@ -300,7 +302,7 @@ function UIShell({
       {isGdprRedirectDisabled === false && user.hasConsented === false ? (
         <GdprRedirectModal isOpen baseLaunchEnvUrl={finalBaseUrl} user={user} />
       ) : null}
-    </>
+    </QueryClientProvider>
   );
 }
 

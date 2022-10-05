@@ -1,4 +1,9 @@
 import axios from "axios";
+import { QueryClient } from "react-query";
+
+export const queryClient = new QueryClient({
+  defaultOptions: { queries: { refetchOnWindowFocus: false }, mutations: { throwOnError: true } },
+});
 
 export const serviceUrl = {
   getStatement: ({ baseServiceUrl }) => `${baseServiceUrl}/users/consents`,
