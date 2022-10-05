@@ -53,7 +53,7 @@ function ProfileSettings({ baseServiceUrl, src, userName }) {
     isLoading: mutateUserProfileIsLoading,
     error: mutateUserProfileError,
   } = useMutation(resolver.patchUserProfile, {
-    onSucess: () => {
+    onSuccess: () => {
       queryClient.invalidateQueries(userUrl);
       queryClient.invalidateQueries(profileUrl);
     },
