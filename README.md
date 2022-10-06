@@ -4,7 +4,7 @@
 
 ## Getting Started
 
-Install the Carbon, the pacakge itself and all of the required peer-dependencies.
+Install the the addons package, carbon and all of the required peer-dependencies.
 
 Run the following command using [pnpm](https://pnpm.io). Other package managers like `npm` and `yarn` work as well.
 
@@ -14,16 +14,19 @@ pnpm install @carbon/react @boomerang-io/carbon-addons-boomerang-react axios for
 
 ## Styles
 
-You need to import the `.scss` styles. If you are using SASS and a modern bundler, perform the following import. Make sure that file is included in your bundle.
+You need to use Sass, as we are built on top of Carbon and import the entry style sheet for the components.  We recommend using `sass` or `sass-embedded` to compile styles. Configure as required for the bundler you are using. Tools like Vite and Create React App work without additional configuration.
 
-```css
+```scss
+// index.scss
 @use "@carbon/react";
-@import "@boomerang-io/carbon-addons-boomerang-react/scss/global";
+@use "@boomerang-io/carbon-addons-boomerang-react/scss/global";
 ```
+
+Make sure to import this file in the JavaScript code to ensure that it is included in your bundle.
 
 ## Carbon themes
 
-We recommend making use of themes and using the associated CSS Custom Properties in your css. Read the following examples for a few different circumstances.
+We recommend using Carbon theme functionality and the associated CSS Custom Properties in your styles. See the following example for guidance on a few common use cases.
 
 ### Default theme
 
@@ -39,9 +42,9 @@ We recommend making use of themes and using the associated CSS Custom Properties
 }
 ```
 
-### g10 Compatibility theme
+### Gray 10 theme
 
-This is how we import things in our applications. We use a number of Carbon v10 tokens so we use the compatibility g10 theme from Carbon to support both new and old values. We also use Akamai as the host for our fonts instead of self-hosting via the `$use-akamai-cdn: true` argument to the `"@carbon/react"` import.
+This is how we import things in our applications. We use a number of Carbon v10 tokens so we use the compatibility g10 theme from Carbon to support both new and old values. We also use Akamai as the host for our fonts instead of self-hosting via the `$use-akamai-cdn: true` argument to the `@carbon/react` import. View the Carbon docs to see all the arguments you can pass to customize your
 
 ```scss
 @use "@carbon/react" with (
@@ -56,13 +59,15 @@ This is how we import things in our applications. We use a number of Carbon v10 
 }
 ```
 
+> Note: The library does not currently support changing the default class prefix from `cds`.
+
 ## Boomerang theme
 
 Using the Boomerang theme is not as straightforward unfortunately. It takes two steps.
 
 ## Step 1
 
-Set up the Sass imports correctly as follows
+Import the individual Carbon packages individually as follows:
 
 ```scss
 // styles.scss

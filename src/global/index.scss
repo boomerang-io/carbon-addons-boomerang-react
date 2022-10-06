@@ -71,7 +71,7 @@ $use-theme-boomerang: false !default;
 @use '../components/UserRequests/userRequests';
 
 // css for external libs
-@import "./tippy";
+@use "./tippy";
 
 // UIShell tokens, create css properties for them by default
 :root {
