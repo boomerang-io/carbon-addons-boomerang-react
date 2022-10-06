@@ -2,8 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import {
+  Switcher24,
   ChevronDown16,
   ChevronUp16,
+  Close24,
   Collaborate24,
   Help24,
   UserAvatar24,
@@ -12,11 +14,12 @@ import {
 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
 import FocusTrap from 'focus-trap-react';
-import { SkipToContent } from 'carbon-components-react';
+import { Accordion, SkipToContent } from 'carbon-components-react';
 import PlatformNotificationsContainer from '../PlatformNotifications';
 import HeaderMenu from '../HeaderMenu';
 import NotificationsContainer from '../Notifications/NotificationsContainer';
 import UserRequests from '../UserRequests';
+import HeaderAccordionItem from "./HeaderAccordionItem";
 import HeaderList from './HeaderList';
 import HeaderListItem from './HeaderListItem';
 import HeaderMenuLink from '../HeaderMenuLink';
@@ -25,10 +28,12 @@ import HeaderMenuBmrg from './HeaderMenuBmrg';
 import HeaderWrapper from './HeaderWrapper';
 import HeaderRightPanel from './HeaderRightPanel';
 import BoomerangLogo from './assets/BoomerangLogo';
+import { TEAM_TYPES } from "../../constants/TeamTypes";
 
 const { prefix } = settings;
 
 const stateToButtonElemIdMap = {
+  isAppSwitcherActive: 'navigation-switcher-menu-button',
   isHelpActive: 'navigation-help-menu-button',
   isMobileNavActive: 'navigation-mobile-menu-button',
   isNotificationActive: 'navigation-notification-menu-button',
@@ -92,12 +97,17 @@ class Header extends React.Component {
      * Anchor to skip to content
      */
     skipToContentProps: PropTypes.object,
+    /**
+     * Used to display user teams and apps
+     */
+    teams: PropTypes.object,
   };
 
   static defaultProps = {};
 
   state = {
     hasNewNotifications: false,
+    isAppSwitcherActive: false,
     isHelpActive: false,
     isMobileNavActive: false,
     isNotificationActive: false,
@@ -167,6 +177,7 @@ class Header extends React.Component {
 
   handleCloseHeaderMenus = () => {
     this.setState({
+      isAppSwitcherActive: false,
       isHelpActive: false,
       isNotificationActive: false,
       isProfileActive: false,
@@ -267,14 +278,15 @@ class Header extends React.Component {
     const {
       appName,
       baseLaunchEnvUrl,
+      baseServiceUrl,
       className,
       navLinks,
       platformName,
       renderLogo,
       renderRightPanel,
       skipToContentProps,
+      teams,
     } = this.props;
-
     return (
       <header className={`${prefix}--bmrg-header-container`}>
         <div className={cx(`${prefix}--bmrg-header`, className)}>
@@ -442,6 +454,47 @@ class Header extends React.Component {
                     <HeaderMenu>{this.props.profileChildren}</HeaderMenu>
                   )}
                 </li>
+                {teams?.accounts?.length || teams?.standardTeams?.length ? (
+                  <li>
+                    <HeaderListItem
+                      isIcon
+                      aria-expanded={this.state.isAppSwitcherActive}
+                      aria-label="App Switcher menu button"
+                      id={stateToButtonElemIdMap[transformToIsStateKey('AppSwitcher')]}
+                      onClick={this.handleIconClick('AppSwitcher')}
+                      onKeyDown={this.handleIconKeypress('AppSwitcher')}
+                    >
+                      {this.state?.isAppSwitcherActive ?
+                        <Close24 alt="App Switcher icon" /> :
+                        <Switcher24 alt="App Switcher icon" />
+                      }
+                    </HeaderListItem>
+                    <HeaderRightPanel
+                      content={(
+                        <Accordion className={`${prefix}--bmrg-header-teams-container`}>
+                          {teams?.accounts?.map((account) => (
+                            <>
+                              <HeaderAccordionItem team={account} baseServiceUrl={baseServiceUrl} type={TEAM_TYPES.ACCOUNT}/>
+                              {Boolean(account.projects) && account.projects.map((project) => (
+                                <HeaderAccordionItem team={project} baseServiceUrl={baseServiceUrl} type={TEAM_TYPES.PROJECT}/>  
+                              ))}
+                              <div className={`${prefix}--bmrg-header-item-divider`}/>
+                            </>
+                          ))}
+                          {teams?.standardTeams?.map((team) => (
+                            <HeaderAccordionItem team={team} baseServiceUrl={baseServiceUrl} type={TEAM_TYPES.STANDARD}/>
+                          ))}
+                        </Accordion>
+                      )}
+                      className={cx({
+                        '--is-hidden': !this.state.isAppSwitcherActive,
+                        '--app-switcher': true,
+                      })}
+                    />
+                  </li>
+                ) : (
+                  ''
+                )}
                 {renderRightPanel && Object.keys(renderRightPanel).length ? (
                   <li>
                     <HeaderListItem

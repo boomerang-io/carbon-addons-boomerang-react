@@ -11,6 +11,30 @@ const additionalSchema = Yup.object().shape({
 
 const inputs = [
   {
+    required: true,
+    placeholder: "",
+    language: null,
+    disabled: null,
+    defaultValue: "",
+    defaultOptionLabel: null,
+    value: null,
+    values: [ ],
+    readOnly: false,
+    dateFormat: null,
+    pattern: "^([a-zA-Z0-9]([-a-zA-Z0-9]{0,61}[a-zA-Z0-9])?\\.)?([a-zA-Z0-9]{1,2}([-a-zA-Z0-9]{0,252}[a-zA-Z0-9])?)\\.([a-zA-Z]{2,63})\\/?([a-z0-9+\\_\\?\\%\\=\\-.\\/\\&\\$\\(\\)\\+\\,\\;\\!]*)$",
+    patternInvalidText: "Enter the URL without the scheme prefix (http(s))",
+    government: null,
+    order: 0,
+    description: "This fields holds the link/URL that the tile will point to. Do not enter the http(s):// prefix",
+    key: "templateLandingURLsetting",
+    label: "Link to site",
+    type: "text",
+    min: null,
+    max: null,
+    options: null,
+    helperText: "Enter the URL without the http(s):// prefix "
+  },
+  {
     key: 'text',
     label: 'Text',
     value: 'boomerang',
@@ -525,6 +549,7 @@ export const Default = () => {
         validationSchemaExtension={additionalSchema}
       >
         {({ inputs, formikProps }) => {
+          console.log(formikProps.errors);
           return (
             <form>
               {inputs}

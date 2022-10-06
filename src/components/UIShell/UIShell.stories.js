@@ -21,13 +21,57 @@ const mock = new MockAdapter(axios);
 
 const BASE_URL = 'https://www.ibm.com/services';
 
+const TEAMS_DATA = {
+  standardTeams: [
+    {id:"1", name:"Team 1", displayName: "Team 1 display with a loooong long long long display name", isTeamMember: true},
+    {id:"2", name:"Team 2", displayName: null, isTeamMember: true},
+  ],
+  accounts: [
+    // {
+    //   id: "11",
+    //   isTeamMember: true,
+    //   name: "Account 1",
+    //   projects: [
+    //     {accountTeamId: "11", id:"111", name: "Project 1 1", displayName: "Project 1 1 display", isTeamMember: true},
+    //     {accountTeamId: "11", id:"112", name: "Project 1 2", displayName: null, isTeamMember: true},
+    //   ]
+    // },
+    // {
+    //   id: "12",
+    //   isTeamMember: false,
+    //   name: "Account 2",
+    //   projects: [
+    //     {accountTeamId: "12", id:"121", name: "Project 2 1", displayName: null, isTeamMember: true},
+    //   ]
+    // },
+  ]
+};
+
+const SERVICES_DATA = [
+  {name: "Service 1 with a loooong long long long name", url: "http://test.com"},
+  {name: "Service 2", url: "http://test.com"},
+  {name: "Service 3", url: "http://test.com"},
+  {name: "Service 4", url: "http://test.com"},
+];
+
 export default {
   title: 'UIShell',
 };
 
 export const Default = () => {
+  const withDelay = (delay, response) => config => {
+    return new Promise(function(resolve, reject) {
+      setTimeout(function() {
+          resolve(response);
+      }, delay);
+    });
+  };
+
   mock.onGet(`${BASE_URL}/users/consents`).reply(200, PRIVACY_DATA);
   mock.onGet(`${BASE_URL}/launchpad/users`).reply(200, PROFILE_SETTINGS_DATA);
+  mock.onGet(`${BASE_URL}/users/teams`).reply(200, TEAMS_DATA);
+  mock.onGet(`${BASE_URL}/launchpad/teams/1/services`).reply(withDelay(5000,[200, SERVICES_DATA]));
+  mock.onGet(`${BASE_URL}/launchpad/teams/2/services`).reply(withDelay(5000,[200, SERVICES_DATA]));
   mock.onPost(`${BASE_URL}/support/contact`).reply(200);
   return (
     <UIShell
@@ -95,6 +139,7 @@ Default.story = {
 export const WithCarbonSidenavAndReactRouter = () => {
   mock.onGet(`${BASE_URL}/users/consents`).reply(200, PRIVACY_DATA);
   mock.onGet(`${BASE_URL}/launchpad/users`).reply(200, PROFILE_SETTINGS_DATA);
+  mock.onGet(`${BASE_URL}/users/teams`).reply(200, TEAMS_DATA);
   mock.onPatch(`${BASE_URL}/users/profile`).reply(200);
   mock.onPost(`${BASE_URL}/support/contact`).reply(200);
   return (
@@ -227,6 +272,7 @@ export const WithRightPanel = () => {
   return (
     <UIShell
       isFlowApp
+      hasAppSwitcher={false}
       renderLogo={boolean('renderLogo', true)}
       appName={text('appName', '')}
       platformName={text('platformName', 'Boomerang')}
@@ -303,6 +349,7 @@ export const UserNotConsented = () => {
   mock.onGet(`${BASE_URL}/users/consents`).reply(200, PRIVACY_DATA);
   return (
     <UIShell
+      hasAppSwitcher={false}
       renderLogo={boolean('renderLogo', true)}
       appName={text('appName', '')}
       baseServiceUrl={BASE_URL}
@@ -359,6 +406,7 @@ export const UserPendingDeletion = () => {
   mock.onGet(`${BASE_URL}/users/consents`).reply(200, PRIVACY_DATA);
   return (
     <UIShell
+      hasAppSwitcher={false}
       renderLogo={boolean('renderLogo', true)}
       platformName={text('platformName', 'Boomerang')}
       appName={text('appName', '')}

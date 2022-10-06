@@ -375,5 +375,80 @@ $breakpoints: (
     &.--is-hidden {
       transform: translateX(100%);
     }
+
+    &.--app-switcher {
+      width: 16rem;
+    }
+  }
+
+  .#{$prefix}--bmrg-header-teams-container {
+    height: calc(100vh - 3rem);
+    overflow-y: auto;
+    padding-top: 1rem;
+
+    .bx--accordion__title {
+      pointer-events: none;
+      @include text-overflow-ellipsis();
+    }
+    .bx--accordion__item {
+      border: none;
+      &:hover {
+        background-color: $interactive-02 !important;
+      }
+    }
+    .bx--accordion__heading {
+      color: $text-04;
+      flex-direction: row-reverse;
+      padding-right: 1rem;
+      &:hover, &:hover::before {
+        background-color: transparent !important;
+      }
+      path {
+        fill: #c1c7cd;
+        width: 1rem;
+        height: 1rem;
+      }
+    }
+  }
+
+  .#{$prefix}--bmrg-header-item-divider {
+    background-color: #c1c7cd;
+    border: 0;
+    height: 0.0625rem;
+    margin: 0.5625rem 1rem;
+  }
+  .#{$prefix}--bmrg-header-team-container {
+    display: flex;
+    flex-direction: column;
+    padding-left: 2rem;
+  }
+
+  .#{$prefix}--bmrg-header-team {
+    &:hover {
+      background-color: $interactive-02 !important;
+    }
+    &.--disabled {
+      color: $text-disabled;
+    }
+  }
+
+  .#{$prefix}--bmrg-header-team-link-wrapper {
+    align-items: center;
+    display: flex;
+    height: 2rem;
+  }
+
+  .#{$prefix}--bmrg-header-team-link {
+    color: $text-04;
+    display: block;
+    text-decoration: none;
+    min-width: 0;
+    @include text-overflow-ellipsis();
+  }
+  .#{$prefix}--bmrg-header-team-empty {
+    color: $text-disabled;
+    font-size: 0.75rem;
+    letter-spacing: 0.02rem;
+    line-height: 1rem;
   }
 }
