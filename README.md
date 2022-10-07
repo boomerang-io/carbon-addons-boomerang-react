@@ -156,4 +156,4 @@ Please check out our [Contribution Guidelines](./.github/CONTRIBUTING.md) for mo
 
 ## 🚀 Release History
 
-View [all releases](https://github.com/boomerang-io/carbon-addons-boomerang-react/releases) or just the major ones [releases](/docs/releases).
+View [all releases](https://github.com/boomerang-io/carbon-addons-boomerang-react/releases)
