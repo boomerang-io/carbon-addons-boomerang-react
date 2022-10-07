@@ -2,6 +2,7 @@
 @use "../../global/config" as *;
 @use "../../global/utils";
 @use "../../global/themes/shell-tokens" as shell;
+@use "../../global/themes/boomerang" as bmrgTheme;
 
 .#{$prefix}--bmrg-header {
   display: flex;
@@ -355,4 +356,81 @@
   &.--is-hidden {
     transform: translateX(100%);
   }
+  &.--app-switcher {
+    width: 16rem;
+  }
+}
+.#{$prefix}--bmrg-header-teams-container {
+  height: calc(100vh - 3rem);
+  overflow-y: auto;
+  padding-top: 1rem;
+
+  .cds--accordion__title {
+    font-weight: 600;
+    pointer-events: none;
+    @include utils.text-overflow-ellipsis();
+  }
+  .cds--accordion__item {
+    border: none;
+    &:hover {
+      background-color: shell.$bmrg-header-hover-background !important;
+    }
+  }
+  .cds--accordion__heading {
+    color: #ffffff;
+    flex-direction: row-reverse;
+    font-size: 0.875rem;
+    &:hover, &:hover::before {
+      background-color: transparent !important;
+    }
+    path {
+      fill: #c1c7cd;
+      width: 1rem;
+      height: 1rem;
+    }
+  }
+}
+
+.#{$prefix}--bmrg-header-item-divider {
+  background-color: #c1c7cd;
+  border: 0;
+  height: 0.0625rem;
+  margin: 0.5625rem 1rem;
+}
+.#{$prefix}--bmrg-header-team-container {
+  display: flex;
+  flex-direction: column;
+  padding-left: 2rem;
+}
+
+.#{$prefix}--bmrg-header-team {
+  &:hover {
+    background-color: shell.$bmrg-header-hover-background !important;
+  }
+  &.--disabled {
+    color: #c1c7cd;
+  }
+}
+
+.#{$prefix}--bmrg-header-team-link-wrapper {
+  align-items: center;
+  display: flex;
+  height: 2rem;
+}
+
+.#{$prefix}--bmrg-header-team-link {
+  color: #ffffff;
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 400;
+  min-width: 0;
+  text-decoration: none;
+  @include utils.text-overflow-ellipsis();
+}
+
+.#{$prefix}--bmrg-header-team-empty {
+  color: #c1c7cd;
+  font-size: 0.75rem;
+  letter-spacing: 0.02rem;
+  line-height: 1rem;
 }
