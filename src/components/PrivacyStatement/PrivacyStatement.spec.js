@@ -1,4 +1,5 @@
 import React from 'react';
+import { QueryClient, QueryClientProvider } from "react-query";
 import { render, fireEvent, waitFor } from '@testing-library/react';
 
 import PrivacyStatement from './PrivacyStatement.js';
@@ -9,6 +10,10 @@ import MockAdapter from 'axios-mock-adapter';
 import { PRIVACY_DATA } from './constants';
 
 const baseServiceUrl = 'http://boomerang.com';
+
+const queryClient = new QueryClient({
+  defaultOptions: { queries: { refetchOnWindowFocus: false }, mutations: { throwOnError: true } },
+});
 
 test('Privacy Statement error', async () => {
   /**
@@ -29,7 +34,9 @@ test('Privacy Statement error', async () => {
   mock.onPut(`${baseServiceUrl}/users/consent`).networkError();
 
   const { getByText, getByRole, findByRole } = render(
-    <PrivacyStatement baseServiceUrl={baseServiceUrl} />
+    <QueryClientProvider client={queryClient}>
+      <PrivacyStatement baseServiceUrl={baseServiceUrl} />
+    </QueryClientProvider>
   );
 
   const btn = getByRole('button', { name: /Privacy Statement/i });
@@ -42,7 +49,7 @@ test('Privacy Statement error', async () => {
   fireEvent.click(confirmButton);
 
   await waitFor(() =>
-    expect(getByText(/Failed to recieve deletion request. Please try again./i)).toBeInTheDocument()
+    expect(getByText(/Failed to receive deletion request. Please try again./i)).toBeInTheDocument()
   );
 });
 
@@ -55,7 +62,11 @@ test('Privacy Statement success', async () => {
   mock.onGet(`${baseServiceUrl}/users/consents`).reply(200, PRIVACY_DATA);
   mock.onPut(`${baseServiceUrl}/users/consent`).reply(200);
 
-  const { getByRole, findByRole } = render(<PrivacyStatement baseServiceUrl={baseServiceUrl} />);
+  const { getByRole, findByRole } = render(
+    <QueryClientProvider client={queryClient}>
+      <PrivacyStatement baseServiceUrl={baseServiceUrl} />
+    </QueryClientProvider>
+  );
 
   const btn = getByRole('button', { name: /Privacy Statement/i });
   fireEvent.click(btn);

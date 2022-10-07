@@ -1,5 +1,6 @@
 import React from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react';
+import { QueryClient, QueryClientProvider } from "react-query";
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import { axe } from 'jest-axe';
@@ -8,13 +9,19 @@ import { PROFILE_SETTINGS_DATA } from './constants';
 
 const baseServiceUrl = 'http://boomerang.com';
 
+const queryClient = new QueryClient({
+  defaultOptions: { queries: { refetchOnWindowFocus: false }, mutations: { throwOnError: true } },
+});
+
 test('Profile Settings success', async () => {
   const mock = new MockAdapter(axios);
   mock.onGet(`${baseServiceUrl}/launchpad/user`).reply(200, PROFILE_SETTINGS_DATA);
   mock.onPatch(`${baseServiceUrl}/users/profile`).networkError();
 
   const { findByText, getByLabelText, getByText, queryByText } = render(
-    <ProfileSettings baseServiceUrl={baseServiceUrl} userName="Boomerang Joe" src="joe@ibm.com" />
+    <QueryClientProvider client={queryClient}>
+      <ProfileSettings baseServiceUrl={baseServiceUrl} userName="Boomerang Joe" src="joe@ibm.com" />
+    </QueryClientProvider>
   );
 
   const userBtn = getByText('Boomerang Joe');
@@ -46,7 +53,9 @@ mock.onPatch(`${baseServiceUrl}/users/profile`).reply(500);
 
 test('Profile Settings error', async () => {
   const { findByText, findByLabelText, getByText } = render(
-    <ProfileSettings baseServiceUrl={baseServiceUrl} userName="Boomerang Joe" src="joe@ibm.com" />
+    <QueryClientProvider client={queryClient}>
+      <ProfileSettings baseServiceUrl={baseServiceUrl} userName="Boomerang Joe" src="joe@ibm.com" />
+    </QueryClientProvider>
   );
 
   const userBtn = getByText('Boomerang Joe');
@@ -63,7 +72,9 @@ test('Profile Settings error', async () => {
 
 test('Profile Settings accessibility', async () => {
   const { container } = render(
-    <ProfileSettings baseServiceUrl={baseServiceUrl} userName="Boomerang Joe" src="joe@ibm.com" />
+    <QueryClientProvider client={queryClient}>
+      <ProfileSettings baseServiceUrl={baseServiceUrl} userName="Boomerang Joe" src="joe@ibm.com" />
+    </QueryClientProvider>
   );
   const results = await axe(container);
   expect(results).toHaveNoViolations();
