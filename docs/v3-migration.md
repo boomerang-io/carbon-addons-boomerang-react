@@ -1,6 +1,6 @@
 # v3 Migration Guide
 
-Follow the sections below for migrating from v2 to v3. Migrating
+Follow the sections below for migrating from v2 to v3.
 
 ## Prerequisites
 
@@ -21,13 +21,15 @@ You can import the carbon styles and the ours as follows:
 @use "@boomerang-io/carbon-addons-boomerang-react/scss/global";
 ```
 
-There are a few more advanced use-cases documented in the the [readme](../README).
+There are a few more advanced use-cases documented in the the [readme styles](../README#styles).
 
 ## JavaScript
 
-The biggest change here is that you can no longer import Carbon components from our component library. For example, Buttons are no longer exported and you need to updated the imports in your codebase.
+You can no longer import Carbon components from our component library. For example, the `Button` component is not exported and you need to update the imports in your codebase if you used the addons alias.
 
 ```diff
-- import { Button } from "@boomerang-io/carbon-addons-boomerang-react 
+- import { Button } from "@boomerang-io/carbon-addons-boomerang-react
 + import { Button } from "@carbon/react
 ```
+
+That's it though. Our component API has remained unchanged for better or worse.

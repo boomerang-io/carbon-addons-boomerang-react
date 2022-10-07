@@ -12,11 +12,11 @@ Run the following command using [pnpm](https://pnpm.io). Other package managers 
 pnpm install @carbon/react @boomerang-io/carbon-addons-boomerang-react axios formik react-router-dom yup
 ```
 
-Upgrading from a previous version? View our [migration guide](/docs/v3-migration.md);
+Upgrading from a previous version? View our [migration guide](/docs/v3-migration.md).
 
 ## Styles
 
-You need to use Sass, as we are built on top of Carbon and import the entry style sheet for the components.  We recommend using `sass` or `sass-embedded` to compile styles. Configure as required for the bundler you are using. Tools like Vite and Create React App work without additional configuration.
+You need to use Sass, as we are built on top of Carbon and import the entry style sheet for the components. We recommend using `sass` or `sass-embedded` to compile styles. Configure as required for the bundler you are using. Tools like Vite and Create React App work without additional configuration.
 
 ```scss
 // app.scss
@@ -28,7 +28,7 @@ Make sure to import this file in the JavaScript code to ensure that it is includ
 
 ## Carbon themes
 
-We recommend using Carbon theme functionality and the associated CSS Custom Properties in your styles. See the following example for guidance on a few common use cases.
+We recommend using Carbon theme functionality and the associated CSS Custom Properties in your styles. See the following example for guidance on a couple common use cases.
 
 ### Default theme
 
@@ -65,11 +65,11 @@ This is how we import things in our applications. We use a number of Carbon v10 
 
 ## Boomerang theme
 
-Using the Boomerang theme is not as straightforward unfortunately. It takes two steps.
+Do you want to continue using the Boomerang theme? Unfortunately it is not as straightforward but it's not too bad. Follow the following steps
 
-## Step 1
+## Step 1 - Styles
 
-Import the individual Carbon packages individually as follows:
+Import the individual Carbon packages and addons styles as follows:
 
 ```scss
 // app.scss
@@ -98,7 +98,7 @@ Import the individual Carbon packages individually as follows:
 @use '@carbon/react/scss/components/tag/tokens' as tag;
 @use '@carbon/react/scss/components';
 
-// Addons library with use boomerang enabled
+// Addons library with boomerang enabled
 @use '@boomerang-io/carbon-addons-boomerang-react/scss/global' with ($use-theme-boomerang: true);
 
 // Finally include the theme to include all of the css custom properties
@@ -110,17 +110,19 @@ Import the individual Carbon packages individually as follows:
 }
 ```
 
-## Step 2
+## Step 2 - HTLM property
 
 You need to set the `data-carbon-theme="boomerang"` attribute value in your app, at the highest level in the document tree as possible.
 
 ```html
-<html lang="en" data-carbon-theme="boomerang"></html>
+<html lang="en" data-carbon-theme="boomerang">
+  ...
+</html>
 ```
 
 ## Use
 
-You can then import components in the following manner.
+After you have the styles configured, you can then import components as you'd expect.
 
 ```js
 import { UIShell } from "@boomerang-io/carbon-addons-boomerang-react";
@@ -130,15 +132,19 @@ import { UIShell } from "@boomerang-io/carbon-addons-boomerang-react";
 
 ### Integrating with UIShell Notifications
 
-We use [react-toastify](https://github.com/fkhadra/react-toastify) to create notifications for UIShell events. If you want to also use the library in your application for notifications you must configure your `ToastContainer` component to support [multiple containers](https://github.com/fkhadra/react-toastify#multi-container-support) via the `enableMultiContainer={true}` prop. It is _NOT_ required to include a `containerId` on your container or with notifications that you create. Without multi-container support enabled, you will see two notifications created for UIShell events.
+We use [react-toastify](https://github.com/fkhadra/react-toastify) to create notifications for UIShell events. If you are using the UIShell and want to also use react-toastify in your app for own notifications, you need to configure your `ToastContainer` component to support [multiple containers](https://fkhadra.github.io/react-toastify/multi-containers/#multi-containers-support) via the `enableMultiContainer` prop. It is _NOT_ required to include a `containerId` on your container or with notifications that you create. Without multi-container support enabled, you will see two notifications created for UIShell events.
 
 ## 🛟 Version 2 LTS
 
-Because of the potential time and difficulty in a migration to Carbon v11, we will maintain a maintenance v2 of the component library. It will recieve critical functionality and security updates. Please view the support table below.
+Because of the potential time and difficulty involved in a migration to Carbon v11, we will maintain a maintenance v2 of the component library for a period of time. It will recieve critical functionality and security updates. Please view the support table below.
 
-| Release | Status | End-of-life |
-| v2 | **Maintenance** | 2022-04-30 |
-| v3 | **Current** | - |
+## Support Schedule
+
+| Release | Status          | End-of-life |
+| ------- | --------------- | ----------- |
+| v1      | **End-of-Life** | 2022-03-18  |
+| v2      | **Maintenance** | 2022-04-30  |
+| v3      | **Current**     | TBD         |
 
 ## 📚 Docs
 
