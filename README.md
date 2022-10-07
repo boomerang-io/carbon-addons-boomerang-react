@@ -16,7 +16,7 @@ Upgrading from a previous version? View our [migration guide](/docs/v3-migration
 
 ## Styles
 
-You need to use Sass, as we are built on top of Carbon and import the entry style sheet for the components. We recommend using `sass` or `sass-embedded` to compile styles. Configure as required for the bundler you are using. Tools like Vite and Create React App work without additional configuration.
+You need to use Sass, as we are built on top of Carbon and import the entry style sheet for the components. We recommend using `sass` or `sass-embedded` to compile styles. Configure as required for the bundler you are using. Tools like Vite and Create React App work without additional configuration needed.
 
 ```scss
 // app.scss
@@ -28,7 +28,7 @@ Make sure to import this file in the JavaScript code to ensure that it is includ
 
 ## Carbon themes
 
-We recommend using Carbon theme functionality and the associated CSS Custom Properties in your styles. See the following example for guidance on a couple common use cases.
+We recommend using Carbon theme functionality and the associated CSS custom properties in your styles to easily use Carbon theme tokens. See the following example for guidance on a couple common use cases.
 
 ### Default theme
 
