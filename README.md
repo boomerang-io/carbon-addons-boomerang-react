@@ -2,7 +2,7 @@
 
 [Carbon](https://www.carbondesignsystem.com/) addon components for Boomerang written in React. View the [Storybook](https://carbon-addons-boomerang-react.netlify.app/).
 
-## Getting Started
+## Installing
 
 Install the the addons package, carbon and all of the required peer-dependencies.
 
@@ -12,12 +12,14 @@ Run the following command using [pnpm](https://pnpm.io). Other package managers 
 pnpm install @carbon/react @boomerang-io/carbon-addons-boomerang-react axios formik react-router-dom yup
 ```
 
+Upgrading from a previous version? View our [migration guide](/docs/v3-migration.md);
+
 ## Styles
 
 You need to use Sass, as we are built on top of Carbon and import the entry style sheet for the components.  We recommend using `sass` or `sass-embedded` to compile styles. Configure as required for the bundler you are using. Tools like Vite and Create React App work without additional configuration.
 
 ```scss
-// index.scss
+// app.scss
 @use "@carbon/react";
 @use "@boomerang-io/carbon-addons-boomerang-react/scss/global";
 ```
@@ -70,7 +72,7 @@ Using the Boomerang theme is not as straightforward unfortunately. It takes two 
 Import the individual Carbon packages individually as follows:
 
 ```scss
-// styles.scss
+// app.scss
 @use "sass:map";
 
 // Carbon base styles and utilities
@@ -126,17 +128,17 @@ import { UIShell } from "@boomerang-io/carbon-addons-boomerang-react";
 
 > Note: In v3 of the component library we have removed the re-exporting of all of the Carbon components.
 
-## Version 2
+### Integrating with UIShell Notifications
+
+We use [react-toastify](https://github.com/fkhadra/react-toastify) to create notifications for UIShell events. If you want to also use the library in your application for notifications you must configure your `ToastContainer` component to support [multiple containers](https://github.com/fkhadra/react-toastify#multi-container-support) via the `enableMultiContainer={true}` prop. It is _NOT_ required to include a `containerId` on your container or with notifications that you create. Without multi-container support enabled, you will see two notifications created for UIShell events.
+
+## 🛟 Version 2 LTS
 
 Because of the potential time and difficulty in a migration to Carbon v11, we will maintain a maintenance v2 of the component library. It will recieve critical functionality and security updates. Please view the support table below.
 
 | Release | Status | End-of-life |
 | v2 | **Maintenance** | 2022-04-30 |
 | v3 | **Current** | - |
-
-## Integrating with UIShell Notifications
-
-We use [react-toastify](https://github.com/fkhadra/react-toastify) to create notifications for UIShell events. If you want to also use the library in your application for notifications you must configure your `ToastContainer` component to support [multiple containers](https://github.com/fkhadra/react-toastify#multi-container-support) via the `enableMultiContainer={true}` prop. It is _NOT_ required to include a `containerId` on your container or with notifications that you create. Without multi-container support enabled, you will see two notifications created for UIShell events.
 
 ## 📚 Docs
 
@@ -146,51 +148,6 @@ You can find more information about how to use each Component by checking out ou
 
 Please check out our [Contribution Guidelines](./.github/CONTRIBUTING.md) for more info on how you can help out!
 
-## Release History
+## 🚀 Release History
 
-### v3
-
-Substantial changes to the library have been made for v3 to adopt Carbon v11, Vite, and Sass Modules to significantly improve the DX of using and writing the library.
-
-## Breaking Changes
-
-- Support Carbon v11
-- Drop Carbon v10
-- Remove exports of Carbon components
-
-## Improvements
-
-- Significantly reduced build times via Sass modules
-- Simpler styles architecture
-- Upgraded to v6 of Storybook
-- Use Vite as Storybook preprocessor
-- Use Vitest as test runner
-- Update components for improved compatibility with Carbon v11, accessibility and supported props.
-
-## Deprecations
-
-- LoadingAnimation
-- NoDisplay
-- OptionsGrid
-- Sidenav
-
-### v2
-
-The big change here is finally supporting tree-shaking properly. This should reduce bundle size and builds times, sometimes drastically based on your use case. [View the migration guide](./documentation/guides/v2-migration.md) for updating to v2.
-
-**Features**
-
-- Tree-shaking via `ESM` builds
-- Storybook v6 migration
-- Dependency updates and security fixes
-
-**Breaking Changes**
-
-- Move `@carbon/react/icons` to a peer dependency
-- Move `carbon-icons` to a peer dependency
-- Remove `@carbon/elements` as a dependency
-- No longer publish `UMD` builds
-
-```
-
-```
+View [releases](./docs/releases)
