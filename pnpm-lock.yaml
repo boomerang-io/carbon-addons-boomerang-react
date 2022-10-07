@@ -53,7 +53,7 @@ specifiers:
   react-autosuggest: 10.1.0
   react-dom: 16.14.0
   react-modal: 3.15.1
-  react-query: 3.34.12
+  react-query: 3.39.2
   react-router-dom: ^5.3.0
   react-toastify: 9.0.7
   release-it: ^15.4.2
@@ -80,7 +80,7 @@ dependencies:
   match-sorter: 6.3.1
   react-autosuggest: 10.1.0_react@16.14.0
   react-modal: 3.15.1_wcqkhtmu7mswc6yz4uyexck3ty
-  react-query: 3.34.12_wcqkhtmu7mswc6yz4uyexck3ty
+  react-query: 3.39.2_wcqkhtmu7mswc6yz4uyexck3ty
   react-toastify: 9.0.7_wcqkhtmu7mswc6yz4uyexck3ty
 
 devDependencies:
@@ -12788,10 +12788,10 @@ packages:
       warning: 4.0.3
     dev: false
 
-  /react-query/3.34.12_wcqkhtmu7mswc6yz4uyexck3ty:
-    resolution: {integrity: sha512-flDdudQVH4CqE+kNYYYyo4g2Yjek3H/36G3b9bK5oe26jD5gFnx+PPwnq0gayq5z2dcSfr2z4+drvuyeZ3A5QQ==}
+  /react-query/3.39.2_wcqkhtmu7mswc6yz4uyexck3ty:
+    resolution: {integrity: sha512-F6hYDKyNgDQfQOuR1Rsp3VRzJnWHx6aRnnIZHMNGGgbL3SBgpZTDg8MQwmxOgpCAoqZJA+JSNCydF1xGJqKOCA==}
     peerDependencies:
-      react: ^16.8.0 || ^17.0.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
       react-dom: '*'
       react-native: '*'
     peerDependenciesMeta:

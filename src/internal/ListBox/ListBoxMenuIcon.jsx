@@ -7,7 +7,7 @@
  import React from "react";
 import cx from "classnames";
 import PropTypes from "prop-types";
-import { ChevronDown } from "@carbon/icons-react";
+import { ChevronDown } from "@carbon/react/icons";
 import { prefix } from "../settings";
 
 export const translationIds = {
