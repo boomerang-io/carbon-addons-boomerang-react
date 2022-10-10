@@ -57,7 +57,6 @@ const withDelay = (delay, response) => () => {
   });
 };
 
-
 export default {
   title: "Platform/UIShell",
   component: UIShell,
@@ -279,7 +278,6 @@ export const RightPanel = () => {
   return (
     <UIShell
       isFlowApp
-      hasAppSwitcher={false}
       renderLogo={true}
       appName={""}
       platformName={"Boomerang"}
@@ -352,7 +350,6 @@ export const UserNotConsented = () => {
   mock.onGet(`${BASE_URL}/users/consents`).reply(200, PRIVACY_DATA);
   return (
     <UIShell
-      hasAppSwitcher={false}
       renderLogo={true}
       appName={""}
       baseServiceUrl={BASE_URL}
@@ -405,7 +402,6 @@ export const UserPendingDeletion = () => {
   mock.onGet(`${BASE_URL}/users/consents`).reply(200, PRIVACY_DATA);
   return (
     <UIShell
-      hasAppSwitcher={false}
       renderLogo={true}
       platformName={"Boomerang"}
       appName={""}

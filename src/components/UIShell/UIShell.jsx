@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import axios from "axios";
 import { QueryClientProvider } from "react-query";
 import Header from "../Header"; // Using default export
 import HeaderMenuButton from "../HeaderMenuButton";
