@@ -405,6 +405,15 @@
   }
 }
 
+.#{$prefix}--bmrg-header-teams__loading {
+  height: 100%;
+  padding: 1rem;
+}
+
+.#{$prefix}--bmrg-header-teams__skeleton {
+  height: 2rem;
+}
+
 .#{$prefix}--bmrg-header-team__container {
   display: flex;
   flex-direction: column;
@@ -439,10 +448,6 @@
   font-size: 0.75rem;
   font-weight: 300;
   line-height: 0.9375rem;
-}
-
-.#{$prefix}--bmrg-header-team__skeleton {
-  height: 2rem;
 }
 
 .#{$prefix}--bmrg-header-team__loading {
