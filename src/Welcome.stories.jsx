@@ -32,12 +32,12 @@ export const Welcome = () => (
       with added functionality, or custom components to meet the needs of our applications.
     </p>
     <p>
-      <strong>Carbon</strong> - View the base Carbon component library via the
-      <a href="https://react.carbondesignsystem.com/" style={{ marginLeft: "0.15rem" }}>
+      <strong>Carbon</strong> - View the base Carbon component library via the {" "}
+      <a href="https://react.carbondesignsystem.com/">
         Carbon Storybook
       </a>
-      . For additional guidance and information about the Carbon Design System, navigate to the
-      <a href="https://www.carbondesignsystem.com/" style={{ marginLeft: "0.15rem" }}>
+      . For additional guidance and information about the Carbon Design System, navigate to the {" "}
+      <a href="https://www.carbondesignsystem.com/">
         Carbon Design Site
       </a>
       .
