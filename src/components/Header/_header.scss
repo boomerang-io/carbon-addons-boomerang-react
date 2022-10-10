@@ -365,12 +365,20 @@
   overflow-y: auto;
   padding-top: 1rem;
 
-  .cds--accordion__title {
+  .#{$prefix}--accordion__content {
+    padding: 0rem;
+
+    .#{$prefix}--side-nav__link {
+      padding-left: 2rem;
+    }
+  }
+
+  .#{$prefix}--accordion__title {
     font-weight: 600;
     pointer-events: none;
     @include utils.text-overflow-ellipsis();
   }
-  .cds--accordion__item {
+  .#{$prefix}--accordion__item {
     border: none;
     &:hover {
       background-color: shell.$bmrg-header-hover-background !important;
@@ -379,7 +387,7 @@
       border: none;
     }
   }
-  .cds--accordion__heading {
+  .#{$prefix}--accordion__heading {
     color: #ffffff;
     flex-direction: row-reverse;
     font-size: 0.875rem;
@@ -436,7 +444,7 @@
   font-size: 0.75rem;
   letter-spacing: 0.02rem;
   line-height: 1rem;
-  width: 10rem;
+  padding: 1rem;
 }
 
 .#{$prefix}--bmrg-header-team-loading {

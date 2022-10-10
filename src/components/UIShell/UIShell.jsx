@@ -11,7 +11,7 @@ import Feedback from "../Feedback";
 import PrivacyStatement from "../PrivacyStatement";
 import SignOut from "../SignOut";
 import GdprRedirectModal from "../GdprRedirectModal";
-import { queryClient, serviceUrl } from "../../config/servicesConfig";
+import { queryClient } from "../../config/servicesConfig";
 
 UIShell.propTypes = {
   /**
@@ -187,12 +187,6 @@ function UIShell({
   const finalPlatformName = platformName || companyName;
   const finalAppName = appName || productName;
 
-  /**
-   * State for user teams to be shown on Switcher
-   */
-  const userTeamsUrl = serviceUrl.getUserTeams({ baseServiceUrl });
-  const [teams, setTeams] = React.useState();
-
   const { features, navigation, platform, platformMessage } = headerConfig;
   /**
    * Prevent breaking changes. Use the values from the platform object if present.
@@ -201,10 +195,11 @@ function UIShell({
   const finalBaseUrl = platform?.baseEnvUrl || baseLaunchEnvUrl;
   const finalBaseServiceUrl = platform?.baseServicesUrl || baseServiceUrl;
   const finalSendIdeasUrl = platform?.feedbackUrl || "https://ideas.ibm.com";
-  const isLogoEnabled = platform?.displayLogo || renderLogo;
   const isAppSwitcherEnabled = Boolean(features?.["appSwitcher.enabled"]);
-  const isSupportEnabled = Boolean(features?.["support.enabled"]);
   const isFeedbackEnabled = Boolean(features?.["feedback.enabled"]);
+  const isNotificationsEnabled = Boolean(features?.["notifications.enabled"]);
+  const isLogoEnabled = platform?.displayLogo || renderLogo;
+  const isSupportEnabled = Boolean(features?.["support.enabled"]);
 
   /**
    * Checking for conditions when we explicitly set "renderGdprRedirect" to false (it defaults to true) OR
@@ -219,20 +214,14 @@ function UIShell({
    */
   const isPrivacyStatementDisabled = renderPrivacyStatement === false || features?.["consent.enabled"] === false;
 
-  //Need to use axios since is not wrapped on Query Client Provider
-  React.useEffect(() => {
-    isAppSwitcherEnabled && axios(userTeamsUrl)
-      .then((response) => setTeams(response.data))
-      .catch(() => setTeams({standardTeams: [], accounts: []}));
-  }, [userTeamsUrl, isAppSwitcherEnabled]);
-
   return (
     <QueryClientProvider client={queryClient}>
       <Header
         appName={finalAppName}
         baseLaunchEnvUrl={finalBaseUrl}
         baseServiceUrl={finalBaseServiceUrl}
-        enableNotifications={Boolean(features?.["notifications.enabled"])}
+        enableAppSwitcher={isAppSwitcherEnabled}
+        enableNotifications={isNotificationsEnabled}
         navLinks={navigation}
         platformMessage={platformMessage}
         platformName={!isLogoEnabled && finalPlatformName ? finalPlatformName : null}
@@ -241,7 +230,6 @@ function UIShell({
         renderSidenav={onMenuClick || renderSidenav}
         skipToContentProps={skipToContentProps}
         requestSummary={user.requestSummary}
-        teams={teams}
         notificationsConfig={{
           wsUrl: `${finalBaseServiceUrl}/notifications/ws`.replace("https://", "wss://"),
         }}

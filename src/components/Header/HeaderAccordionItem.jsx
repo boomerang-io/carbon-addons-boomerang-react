@@ -1,13 +1,12 @@
 import React from "react";
 import { useQuery } from "react-query";
 import cx from "classnames";
-import { AccordionItem, InlineLoading } from "@carbon/react";
+import { AccordionItem, InlineLoading, SideNavMenuItem } from "@carbon/react";
 import { serviceUrl, resolver } from "../../config/servicesConfig";
 import { TEAM_TYPES } from "../../constants/TeamTypes";
 import { prefix } from "../../internal/settings";
 
-function HeaderAccordionItem({team, baseServiceUrl, type}) {
-
+function HeaderAccordionItem({ team, baseServiceUrl, type }) {
   const { id, name, isAccountTeamMember } = team;
   const [isSelected, setIsSelected] = React.useState(false);
   const teamsServicesUrl = serviceUrl.getTeamServices({ baseServiceUrl, teamId: id });
@@ -37,7 +36,7 @@ function HeaderAccordionItem({team, baseServiceUrl, type}) {
       disabled={disabled}
       open={isOpen}
       title={name}
-      renderExpando={
+      renderToggle={
         // Use undefined when we have data to use the default toggle
         servicesQuery.data
           ? undefined
@@ -46,9 +45,7 @@ function HeaderAccordionItem({team, baseServiceUrl, type}) {
               const chevronElem = children[0];
               const titleElem = children[1];
               const indicatorIcon = isLoading ? (
-                <InlineLoading
-                  className={`${prefix}--bmrg-header-team-loading`}
-                />
+                <InlineLoading className={`${prefix}--bmrg-header-team-loading`} />
               ) : (
                 chevronElem
               );
@@ -59,7 +56,7 @@ function HeaderAccordionItem({team, baseServiceUrl, type}) {
                   onMouseUp={() => !notAccountMember && setIsSelected(true)}
                   onMouseOver={getServices}
                   onFocus={getServices}
-                  className={cx(`${prefix}--bmrg-header-team`, className, {"--disabled": notAccountMember})}
+                  className={cx(`${prefix}--bmrg-header-team`, className, { "--disabled": notAccountMember })}
                 >
                   {!notAccountMember && indicatorIcon}
                   {titleElem}
@@ -68,16 +65,11 @@ function HeaderAccordionItem({team, baseServiceUrl, type}) {
             }
       }
     >
-      <div className={`${prefix}--bmrg-header-team-container`}>
-        {!servicesQuery.error && Boolean(servicesQuery.data?.length) ?
-          servicesQuery.data.map((service) => (
-            <p className={`${prefix}--bmrg-header-team-link-wrapper`}>
-              <a className={`${prefix}--bmrg-header-team-link`} href={service.url}>{service.name}</a>
-            </p>
-          ))
-          : <div className={`${prefix}--bmrg-header-team-empty`}>This team has no services</div>
-        }
-      </div>
+      {!servicesQuery.error && Boolean(servicesQuery.data?.length) ? (
+        servicesQuery.data.map((service) => <SideNavMenuItem href={service.url}>{service.name}</SideNavMenuItem>)
+      ) : (
+        <div className={`${prefix}--bmrg-header-team-empty`}>This team has no services</div>
+      )}
     </AccordionItem>
   );
 }
