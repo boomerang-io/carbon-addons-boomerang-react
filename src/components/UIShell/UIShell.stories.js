@@ -27,23 +27,23 @@ const TEAMS_DATA = {
     {id:"2", name:"Team 2", displayName: null, isTeamMember: true},
   ],
   accounts: [
-    // {
-    //   id: "11",
-    //   isTeamMember: true,
-    //   name: "Account 1",
-    //   projects: [
-    //     {accountTeamId: "11", id:"111", name: "Project 1 1", displayName: "Project 1 1 display", isTeamMember: true},
-    //     {accountTeamId: "11", id:"112", name: "Project 1 2", displayName: null, isTeamMember: true},
-    //   ]
-    // },
-    // {
-    //   id: "12",
-    //   isTeamMember: false,
-    //   name: "Account 2",
-    //   projects: [
-    //     {accountTeamId: "12", id:"121", name: "Project 2 1", displayName: null, isTeamMember: true},
-    //   ]
-    // },
+    {
+      id: "11",
+      isTeamMember: true,
+      name: "Account 1",
+      projects: [
+        {accountTeamId: "11", id:"111", name: "Project 1 1", displayName: "Project 1 1 display", isTeamMember: true},
+        {accountTeamId: "11", id:"112", name: "Project 1 2", displayName: null, isTeamMember: true},
+      ]
+    },
+    {
+      id: "12",
+      isTeamMember: false,
+      name: "Account 2",
+      projects: [
+        {accountTeamId: "12", id:"121", name: "Project 2 1", displayName: null, isTeamMember: true},
+      ]
+    },
   ]
 };
 

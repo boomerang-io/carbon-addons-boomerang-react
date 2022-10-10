@@ -364,13 +364,13 @@ $breakpoints: (
   }
 
   .#{$prefix}--bmrg-right-panel {
-    position: fixed;
-    height: 100%;
-    width: 22rem;
-    right: 0;
     background-color: $bmrg-tertiary-color;
+    height: 100%;
+    position: fixed;
+    right: 0;
     transform: translateX(0);
     transition: transform $carbon-motion--timing--productive $carbon-motion--easing--productive;
+    width: 22rem;
 
     &.--is-hidden {
       transform: translateX(100%);
@@ -381,9 +381,8 @@ $breakpoints: (
     }
   }
 
-  .#{$prefix}--bmrg-header-teams-container {
-    height: calc(100vh - 3rem);
-    overflow-y: auto;
+  .#{$prefix}--bmrg-header-teams__container {
+    height: 100%;
     padding-top: 1rem;
 
     .#{$prefix}--accordion__content {
@@ -414,7 +413,8 @@ $breakpoints: (
       color: $text-04;
       flex-direction: row-reverse;
       padding-right: 1rem;
-      &:hover, &:hover::before {
+      &:hover,
+      &:hover::before {
         background-color: transparent !important;
       }
       path {
@@ -425,13 +425,7 @@ $breakpoints: (
     }
   }
 
-  .#{$prefix}--bmrg-header-item-divider {
-    background-color: #c1c7cd;
-    border: 0;
-    height: 0.0625rem;
-    margin: 0.5625rem 1rem;
-  }
-  .#{$prefix}--bmrg-header-team-container {
+  .#{$prefix}--bmrg-header-team__container {
     display: flex;
     flex-direction: column;
     padding-left: 2rem;
@@ -445,7 +439,7 @@ $breakpoints: (
       color: $text-disabled;
     }
   }
-  .#{$prefix}--bmrg-header-team-empty {
+  .#{$prefix}--bmrg-header-team__empty {
     color: $text-disabled;
     font-size: 0.75rem;
     letter-spacing: 0.02rem;
@@ -453,25 +447,31 @@ $breakpoints: (
     padding: 1rem 1rem 1rem 2rem;
   }
 
-  .#{$prefix}--bmrg-header-team-empty-title {
+  .#{$prefix}--bmrg-header-team__empty-title {
     font-size: 1rem;
     font-weight: 300;
     line-height: 1.25rem;
     margin-bottom: 0.625rem;
   }
 
-  .#{$prefix}--bmrg-header-team-empty-subtitle {
+  .#{$prefix}--bmrg-header-team__empty-subtitle {
     font-size: 0.75rem;
     font-weight: 300;
     line-height: 0.9375rem;
   }
 
-  .#{$prefix}--bmrg-header-team-skeleton {
+  .#{$prefix}--bmrg-header-team__skeleton {
     height: 2rem;
+    margin-bottom: 0.5rem;
+    width: 100%;
+  }
+  .#{$prefix}--bmrg-header-teams__loading {
+    min-height: 1rem;
+    padding: 1rem;
   }
 }
 
-.#{$prefix}--bmrg-header-team-loading {
+.#{$prefix}--bmrg-header-team__loading {
   min-height: 1rem;
   width: fit-content;
 }
