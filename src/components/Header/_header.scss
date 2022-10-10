@@ -345,13 +345,14 @@
 }
 
 .#{$prefix}--bmrg-right-panel {
-  position: fixed;
-  height: 100%;
-  width: 22rem;
-  right: 0;
   background-color: shell.$bmrg-tertiary;
+  height: calc(100vh - 3rem);
+  overflow-y: auto;
+  position: fixed;
+  right: 0;
   transform: translateX(0);
   transition: transform motion.$duration-moderate-01 motion.motion("standard");
+  width: 22rem;
 
   &.--is-hidden {
     transform: translateX(100%);
@@ -361,8 +362,7 @@
   }
 }
 .#{$prefix}--bmrg-header-teams__container {
-  height: calc(100vh - 3rem);
-  overflow-y: auto;
+  height: 100%;
   padding-top: 1rem;
 
   .#{$prefix}--accordion__content {
