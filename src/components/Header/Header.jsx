@@ -499,9 +499,9 @@ function AppSwitcher({ baseServiceUrl, isAppSwitcherActive }) {
       <HeaderRightPanel
         content={
           <div style={{ padding: "1rem" }}>
-            <SkeletonText />
-            <SkeletonText />
-            <SkeletonText />
+            <SkeletonText className={`${prefix}--bmrg-header-team-skeleton`}/>
+            <SkeletonText className={`${prefix}--bmrg-header-team-skeleton`}/>
+            <SkeletonText className={`${prefix}--bmrg-header-team-skeleton`}/>
           </div>
         }
         className={cx({
@@ -545,7 +545,12 @@ function AppSwitcher({ baseServiceUrl, isAppSwitcherActive }) {
 
     return (
       <HeaderRightPanel
-        content={<p style={{ padding: "1rem" }}>You don't have any teams. Join some!</p>}
+        content={
+          <div style={{padding: "1rem"}}>
+            <p className={`${prefix}--bmrg-header-team-empty-title`}>No teams</p>
+            <p className={`${prefix}--bmrg-header-team-empty-subtitle`}>You must be new here</p>
+          </div>
+        }
         className={cx({
           "--is-hidden": !isAppSwitcherActive,
           "--app-switcher": true,

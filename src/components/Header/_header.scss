@@ -367,9 +367,11 @@
 
   .#{$prefix}--accordion__content {
     padding: 0rem;
-
     .#{$prefix}--side-nav__link {
       padding-left: 2rem;
+    }
+    .#{$prefix}--side-nav__link-text {
+      font-weight: 400;
     }
   }
 
@@ -423,28 +425,29 @@
   }
 }
 
-.#{$prefix}--bmrg-header-team-link-wrapper {
-  align-items: center;
-  display: flex;
-  height: 2rem;
-}
-
-.#{$prefix}--bmrg-header-team-link {
-  color: #ffffff;
-  display: block;
-  font-size: 0.875rem;
-  font-weight: 400;
-  min-width: 0;
-  text-decoration: none;
-  @include utils.text-overflow-ellipsis();
-}
-
 .#{$prefix}--bmrg-header-team-empty {
   color: #c1c7cd;
   font-size: 0.75rem;
   letter-spacing: 0.02rem;
   line-height: 1rem;
-  padding: 1rem;
+  padding: 1rem 1rem 1rem 2rem;
+}
+
+.#{$prefix}--bmrg-header-team-empty-title {
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.25rem;
+  margin-bottom: 0.625rem;
+}
+
+.#{$prefix}--bmrg-header-team-empty-subtitle {
+  font-size: 0.75rem;
+  font-weight: 300;
+  line-height: 0.9375rem;
+}
+
+.#{$prefix}--bmrg-header-team-skeleton {
+  height: 2rem;
 }
 
 .#{$prefix}--bmrg-header-team-loading {
