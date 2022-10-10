@@ -1,7 +1,7 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 import cx from 'classnames';
-import { AccordionItem, InlineLoading } from 'carbon-components-react';
+import { AccordionItem, InlineLoading, SideNavMenuItem } from 'carbon-components-react';
 import { settings } from 'carbon-components';
 import { serviceUrl, resolver } from '../../config/servicesConfig';
 import { TEAM_TYPES } from "../../constants/TeamTypes";
@@ -18,7 +18,6 @@ function HeaderAccordionItem({team, baseServiceUrl, type}) {
     queryKey: teamsServicesUrl,
     queryFn: resolver.query(teamsServicesUrl),
     enabled: false,
-    config: {enabled: false},
   });
 
   async function getServices() {
@@ -39,7 +38,7 @@ function HeaderAccordionItem({team, baseServiceUrl, type}) {
       disabled={disabled}
       open={isOpen}
       title={name}
-      renderExpando={
+      renderToggle={
         // Use undefined when we have data to use the default toggle
         servicesQuery.data
           ? undefined
@@ -48,12 +47,7 @@ function HeaderAccordionItem({team, baseServiceUrl, type}) {
               const chevronElem = children[0];
               const titleElem = children[1];
               const indicatorIcon = isLoading ? (
-                <InlineLoading
-                  style={{
-                    width: 'fit-content',
-                    minHeight: '1rem',
-                  }}
-                />
+                <InlineLoading className={`${prefix}--bmrg-header-team-loading`} />
               ) : (
                 chevronElem
               );
@@ -61,13 +55,10 @@ function HeaderAccordionItem({team, baseServiceUrl, type}) {
               return (
                 <button
                   {...rest}
-                  onClick={() => {
-                    console.log("click");
-                    !notAccountMember && setIsSelected(true)
-                  }}
+                  onMouseUp={() => !notAccountMember && setIsSelected(true)}
                   onMouseOver={getServices}
                   onFocus={getServices}
-                  className={cx(`${prefix}--bmrg-header-team`, className, {"--disabled": notAccountMember})}
+                  className={cx(`${prefix}--bmrg-header-team`, className, { "--disabled": notAccountMember })}
                 >
                   {!notAccountMember && indicatorIcon}
                   {titleElem}
@@ -76,16 +67,11 @@ function HeaderAccordionItem({team, baseServiceUrl, type}) {
             }
       }
     >
-      <div className={`${prefix}--bmrg-header-team-container`}>
-        {!servicesQuery.error && Boolean(servicesQuery.data?.length) ?
-          servicesQuery.data.map((service) => (
-            <p className={`${prefix}--bmrg-header-team-link-wrapper`}>
-              <a className={`${prefix}--bmrg-header-team-link`} href={service.url}>{service.name}</a>
-            </p>
-          ))
-          : <div className={`${prefix}--bmrg-header-team-empty`}>This team has no services</div>
-        }
-      </div>
+      {!servicesQuery.error && Boolean(servicesQuery.data?.length) ? (
+        servicesQuery.data.map((service) => <SideNavMenuItem href={service.url}>{service.name}</SideNavMenuItem>)
+      ) : (
+        <div className={`${prefix}--bmrg-header-team-empty`}>This team has no services</div>
+      )}
     </AccordionItem>
   );
 }

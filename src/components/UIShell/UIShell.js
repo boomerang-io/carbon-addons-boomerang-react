@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 import { QueryClientProvider } from "react-query";
 import Header from '../Header'; // Using default export
 import HeaderMenuButton from '../HeaderMenuButton';
@@ -11,7 +10,7 @@ import Feedback from '../Feedback';
 import PrivacyStatement from '../PrivacyStatement';
 import SignOut from '../SignOut';
 import GdprRedirectModal from '../GdprRedirectModal';
-import { queryClient, serviceUrl } from "../../config/servicesConfig";
+import { queryClient } from "../../config/servicesConfig";
 
 UIShell.propTypes = {
   /**
@@ -32,10 +31,6 @@ UIShell.propTypes = {
    * alias for "platformName" for legacy support
    */
   companyName: PropTypes.string,
-  /**
-   * enable/disable App Switcher
-   */
-  hasAppSwitcher: PropTypes.bool,
   /**
    * Pass in whole header config object used for
    * - Feature flagging
@@ -160,7 +155,6 @@ UIShell.propTypes = {
 };
 
 UIShell.defaultProps = {
-  hasAppSwitcher: true,
   headerConfig: {},
   isFlowApp: false,
   renderGdprRedirect: true,
@@ -174,7 +168,6 @@ function UIShell({
   baseLaunchEnvUrl,
   baseServiceUrl,
   companyName,
-  hasAppSwitcher,
   headerConfig,
   isFlowApp,
   onMenuClick,
@@ -194,14 +187,6 @@ function UIShell({
   const finalPlatformName = platformName || companyName;
   const finalAppName = appName || productName;
 
-  const userTeamsUrl = serviceUrl.getUserTeams({ baseServiceUrl });
-
-  const [teams, setTeams] = React.useState();
-
-  /**
-   * State for user teams to be shown on Switcher
-   */
-
   const { features, navigation, platform, platformMessage } = headerConfig;
   /**
    * Prevent breaking changes. Use the values from the platform object if present.
@@ -210,10 +195,11 @@ function UIShell({
   const finalBaseUrl = platform?.baseEnvUrl || baseLaunchEnvUrl;
   const finalBaseServiceUrl = platform?.baseServicesUrl || baseServiceUrl;
   const finalSendIdeasUrl = platform?.feedbackUrl || 'https://ideas.ibm.com';
-  const isLogoEnabled = platform?.displayLogo || renderLogo;
-  const isSupportEnabled = Boolean(features?.['support.enabled']);
+  const isAppSwitcherEnabled = Boolean(features?.["appSwitcher.enabled"]);
   const isFeedbackEnabled = Boolean(features?.['feedback.enabled']);
-
+  const isNotificationsEnabled = Boolean(features?.["notifications.enabled"]);
+  const isLogoEnabled = platform?.displayLogo || renderLogo;
+  const isSupportEnabled = Boolean(features?.["support.enabled"]);
   /**
    * Checking for conditions when we explicitly set "renderGdprRedirect" to false (it defaults to true) OR
    * it's disabled overall for the platform. This lets us toggle the UIShell consent redirect per app as needed
@@ -229,20 +215,14 @@ function UIShell({
   const isPrivacyStatementDisabled =
     renderPrivacyStatement === false || features?.['consent.enabled'] === false;
 
-  //Need to use axios since is not wrapped on Query Client Provider
-  React.useEffect(() => {
-    hasAppSwitcher && axios(userTeamsUrl)
-      .then((response) => setTeams(response.data))
-      .catch(() => setTeams({standardTeams: [], accounts: []}));
-  }, [userTeamsUrl, hasAppSwitcher]);
-
   return (
     <QueryClientProvider client={queryClient}>
       <Header
         appName={finalAppName}
         baseLaunchEnvUrl={finalBaseUrl}
         baseServiceUrl={finalBaseServiceUrl}
-        enableNotifications={Boolean(features?.['notifications.enabled'])}
+        enableAppSwitcher={isAppSwitcherEnabled}
+        enableNotifications={isNotificationsEnabled}
         navLinks={navigation}
         platformMessage={platformMessage}
         platformName={!isLogoEnabled && finalPlatformName ? finalPlatformName : null}
@@ -251,7 +231,6 @@ function UIShell({
         renderSidenav={onMenuClick || renderSidenav}
         skipToContentProps={skipToContentProps}
         requestSummary={user.requestSummary}
-        teams={teams}
         notificationsConfig={{
           wsUrl: `${finalBaseServiceUrl}/notifications/ws`.replace("https://", "wss://"),
         }}

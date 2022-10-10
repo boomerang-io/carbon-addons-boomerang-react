@@ -386,17 +386,31 @@ $breakpoints: (
     overflow-y: auto;
     padding-top: 1rem;
 
-    .bx--accordion__title {
+    .#{$prefix}--accordion__content {
+      padding: 0rem;
+  
+      .#{$prefix}--side-nav__link {
+        padding-left: 2rem;
+      }
+      .#{$prefix}--side-nav__link-text {
+        font-weight: 400;
+      }
+    }
+  
+    .#{$prefix}--accordion__title {
       pointer-events: none;
       @include text-overflow-ellipsis();
     }
-    .bx--accordion__item {
+    .#{$prefix}--accordion__item {
       border: none;
       &:hover {
         background-color: $interactive-02 !important;
       }
+      &:last-of-type {
+        border: none;
+      }
     }
-    .bx--accordion__heading {
+    .#{$prefix}--accordion__heading {
       color: $text-04;
       flex-direction: row-reverse;
       padding-right: 1rem;
@@ -431,24 +445,33 @@ $breakpoints: (
       color: $text-disabled;
     }
   }
-
-  .#{$prefix}--bmrg-header-team-link-wrapper {
-    align-items: center;
-    display: flex;
-    height: 2rem;
-  }
-
-  .#{$prefix}--bmrg-header-team-link {
-    color: $text-04;
-    display: block;
-    text-decoration: none;
-    min-width: 0;
-    @include text-overflow-ellipsis();
-  }
   .#{$prefix}--bmrg-header-team-empty {
     color: $text-disabled;
     font-size: 0.75rem;
     letter-spacing: 0.02rem;
     line-height: 1rem;
+    padding: 1rem 1rem 1rem 2rem;
   }
+
+  .#{$prefix}--bmrg-header-team-empty-title {
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.25rem;
+    margin-bottom: 0.625rem;
+  }
+
+  .#{$prefix}--bmrg-header-team-empty-subtitle {
+    font-size: 0.75rem;
+    font-weight: 300;
+    line-height: 0.9375rem;
+  }
+
+  .#{$prefix}--bmrg-header-team-skeleton {
+    height: 2rem;
+  }
+}
+
+.#{$prefix}--bmrg-header-team-loading {
+  min-height: 1rem;
+  width: fit-content;
 }

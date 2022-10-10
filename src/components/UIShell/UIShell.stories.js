@@ -48,30 +48,31 @@ const TEAMS_DATA = {
 };
 
 const SERVICES_DATA = [
-  {name: "Service 1 with a loooong long long long name", url: "http://test.com"},
-  {name: "Service 2", url: "http://test.com"},
-  {name: "Service 3", url: "http://test.com"},
-  {name: "Service 4", url: "http://test.com"},
+  { name: "Service 1 with a loooong long long long name", url: "https://ibm.com" },
+  { name: "Service 2", url: "https://ibm.com" },
+  { name: "Service 3", url: "https://ibm.com" },
+  { name: "Service 4", url: "https://ibm.com" },
 ];
+
+const withDelay = (delay, response) => () => {
+  return new Promise(function (resolve) {
+    setTimeout(function () {
+      resolve(response);
+    }, delay);
+  });
+};
 
 export default {
   title: 'UIShell',
 };
 
 export const Default = () => {
-  const withDelay = (delay, response) => config => {
-    return new Promise(function(resolve, reject) {
-      setTimeout(function() {
-          resolve(response);
-      }, delay);
-    });
-  };
 
   mock.onGet(`${BASE_URL}/users/consents`).reply(200, PRIVACY_DATA);
   mock.onGet(`${BASE_URL}/launchpad/users`).reply(200, PROFILE_SETTINGS_DATA);
-  mock.onGet(`${BASE_URL}/users/teams`).reply(200, TEAMS_DATA);
-  mock.onGet(`${BASE_URL}/launchpad/teams/1/services`).reply(withDelay(5000,[200, SERVICES_DATA]));
-  mock.onGet(`${BASE_URL}/launchpad/teams/2/services`).reply(withDelay(5000,[200, SERVICES_DATA]));
+  mock.onGet(`${BASE_URL}/users/teams`).reply(withDelay(3000, [200, TEAMS_DATA]));
+  mock.onGet(`${BASE_URL}/launchpad/teams/1/services`).reply(withDelay(3000,[200, SERVICES_DATA]));
+  mock.onGet(`${BASE_URL}/launchpad/teams/2/services`).reply(withDelay(3000,[200, []]));
   mock.onPost(`${BASE_URL}/support/contact`).reply(200);
   return (
     <UIShell
@@ -83,6 +84,7 @@ export const Default = () => {
       baseServiceUrl={BASE_URL}
       headerConfig={{
         features: {
+          'appSwitcher.enabled': true,
           'community.enabled': boolean('community.enabled', true),
           'notifications.enabled': boolean('notifications.enabled', true),
           'support.enabled': boolean('support.enabled', true),
@@ -140,6 +142,8 @@ export const WithCarbonSidenavAndReactRouter = () => {
   mock.onGet(`${BASE_URL}/users/consents`).reply(200, PRIVACY_DATA);
   mock.onGet(`${BASE_URL}/launchpad/users`).reply(200, PROFILE_SETTINGS_DATA);
   mock.onGet(`${BASE_URL}/users/teams`).reply(200, TEAMS_DATA);
+  mock.onGet(`${BASE_URL}/launchpad/teams/1/services`).reply(withDelay(3000, [200, SERVICES_DATA]));
+  mock.onGet(`${BASE_URL}/launchpad/teams/2/services`).reply(withDelay(3000, [200, []]));
   mock.onPatch(`${BASE_URL}/users/profile`).reply(200);
   mock.onPost(`${BASE_URL}/support/contact`).reply(200);
   return (
@@ -151,6 +155,7 @@ export const WithCarbonSidenavAndReactRouter = () => {
         baseServiceUrl={BASE_URL}
         headerConfig={{
           features: {
+            'appSwitcher.enabled': true,
             'community.enabled': boolean('community.enabled', true),
             'notifications.enabled': boolean('notifications.enabled', true),
             'support.enabled': boolean('support.enabled', true),
