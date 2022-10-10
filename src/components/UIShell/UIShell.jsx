@@ -33,10 +33,6 @@ UIShell.propTypes = {
    */
   companyName: PropTypes.string,
   /**
-   * enable/disable App Switcher
-   */
-  hasAppSwitcher: PropTypes.bool,
-  /**
    * Pass in whole header config object used for
    * - Feature flagging
    * - Platform links
@@ -160,7 +156,6 @@ UIShell.propTypes = {
 };
 
 UIShell.defaultProps = {
-  hasAppSwitcher: true,
   headerConfig: {},
   isFlowApp: false,
   renderGdprRedirect: true,
@@ -174,7 +169,6 @@ function UIShell({
   baseLaunchEnvUrl,
   baseServiceUrl,
   companyName,
-  hasAppSwitcher,
   headerConfig,
   isFlowApp,
   onMenuClick,
@@ -208,6 +202,7 @@ function UIShell({
   const finalBaseServiceUrl = platform?.baseServicesUrl || baseServiceUrl;
   const finalSendIdeasUrl = platform?.feedbackUrl || "https://ideas.ibm.com";
   const isLogoEnabled = platform?.displayLogo || renderLogo;
+  const isAppSwitcherEnabled = Boolean(features?.["appSwitcher.enabled"]);
   const isSupportEnabled = Boolean(features?.["support.enabled"]);
   const isFeedbackEnabled = Boolean(features?.["feedback.enabled"]);
 
@@ -226,10 +221,10 @@ function UIShell({
 
   //Need to use axios since is not wrapped on Query Client Provider
   React.useEffect(() => {
-    hasAppSwitcher && axios(userTeamsUrl)
+    isAppSwitcherEnabled && axios(userTeamsUrl)
       .then((response) => setTeams(response.data))
       .catch(() => setTeams({standardTeams: [], accounts: []}));
-  }, [userTeamsUrl, hasAppSwitcher]);
+  }, [userTeamsUrl, isAppSwitcherEnabled]);
 
   return (
     <QueryClientProvider client={queryClient}>

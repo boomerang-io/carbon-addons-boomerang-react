@@ -31,6 +31,7 @@ function HeaderAccordionItem({team, baseServiceUrl, type}) {
   const isLoading = isSelected && servicesQuery.isFetching;
   const notAccountMember = type === TEAM_TYPES.ACCOUNT && !isAccountTeamMember;
   const disabled = isLoading || notAccountMember;
+
   return (
     <AccordionItem
       disabled={disabled}
@@ -46,11 +47,7 @@ function HeaderAccordionItem({team, baseServiceUrl, type}) {
               const titleElem = children[1];
               const indicatorIcon = isLoading ? (
                 <InlineLoading
-                  style={{
-                    width: "fit-content",
-                    marginRight: "1rem",
-                    minHeight: "1rem",
-                  }}
+                  className={`${prefix}--bmrg-header-team-loading`}
                 />
               ) : (
                 chevronElem
@@ -59,10 +56,7 @@ function HeaderAccordionItem({team, baseServiceUrl, type}) {
               return (
                 <button
                   {...rest}
-                  onMouseUp={() => {
-                    console.log("mouseup");
-                    !notAccountMember && setIsSelected(true)
-                  }}
+                  onMouseUp={() => !notAccountMember && setIsSelected(true)}
                   onMouseOver={getServices}
                   onFocus={getServices}
                   className={cx(`${prefix}--bmrg-header-team`, className, {"--disabled": notAccountMember})}
