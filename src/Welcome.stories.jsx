@@ -20,36 +20,30 @@ export default {
 export const Welcome = () => (
   <div className="storybook-welcome">
     <header className="header">
-      <img alt="Boomerang logo" src={BoomerangLogo} style={{height: "6rem", width: "auto" }} />
+      <img alt="Boomerang logo" src={BoomerangLogo} style={{ height: "6rem", width: "auto" }} />
       <h1>Carbon Addons Boomerang React</h1>
     </header>
     <p>
-      Open source components for Boomerang projects. It includes the following:
+      Open source React components for Boomerang projects based on IBM's Carbon Design System. Built for open source and
+      internal applications within IBM.
     </p>
     <p>
-      <strong>Carbon Addons Boomerang</strong> - Components that are either extensions of Carbon components with added functionality,
-      or custom components beyond the functionality that Carbon provides. The components are grouped by function and purpose.
+      <strong>Carbon Addons Boomerang</strong> - Components that are either extensions of existing Carbon components
+      with added functionality, or custom components to meet the needs of our applications.
     </p>
     <p>
-      <strong>Carbon</strong> - Please reference the
+      <strong>Carbon</strong> - View the base Carbon component library via the
       <a href="https://react.carbondesignsystem.com/" style={{ marginLeft: "0.15rem" }}>
         Carbon Storybook
       </a>
-      to see the full component library.
-    </p>
-
-    <p>
-      For additional guidance, see the
+      . For additional guidance and information about the Carbon Design System, navigate to the
       <a href="https://www.carbondesignsystem.com/" style={{ marginLeft: "0.15rem" }}>
         Carbon Design Site
       </a>
+      .
     </p>
     <Accordion>
-      <AccordionItem title={"Component Exports table"} open={false}>
-        <p>
-          The following table displays a list of the total exported components: our custom Boomerang
-          compoonents and re-exported carbon-components
-        </p>
+      <AccordionItem title={"View exported components and functions"} open={false}>
         <StructuredListWrapper>
           <StructuredListHead>
             <StructuredListRow head></StructuredListRow>
