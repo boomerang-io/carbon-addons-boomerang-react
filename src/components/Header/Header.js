@@ -423,18 +423,18 @@ class Header extends React.Component {
                     )}
                   <li>
                   {Array.isArray(this.props.profileChildren) && this.props.profileChildren.length > 0 && (
-                      <HeaderListItem
-                        isIcon
-                        aria-expanded={this.state.isProfileActive}
-                        aria-label="Profile menu button"
-                        id={stateToButtonElemIdMap[transformToIsStateKey("Profile")]}
-                        onClick={this.handleIconClick("Profile")}
-                        onKeyDown={this.handleIconKeypress("Profile")}
-                      >
-                        <UserAvatar24 alt="Profile icon" />
-                      </HeaderListItem>
-                    )}
-                    {this.state.isProfileActive && <HeaderMenu>{this.props.profileChildren}</HeaderMenu>}
+                    <HeaderListItem
+                      isIcon
+                      aria-expanded={this.state.isProfileActive}
+                      aria-label="Profile menu button"
+                      id={stateToButtonElemIdMap[transformToIsStateKey("Profile")]}
+                      onClick={this.handleIconClick("Profile")}
+                      onKeyDown={this.handleIconKeypress("Profile")}
+                    >
+                      <UserAvatar24 alt="Profile icon" />
+                    </HeaderListItem>
+                  )}
+                  {this.state.isProfileActive && <HeaderMenu>{this.props.profileChildren}</HeaderMenu>}
                   </li>
                   {this.props.enableAppSwitcher && (
                     <li>
