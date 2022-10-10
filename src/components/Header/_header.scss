@@ -375,6 +375,9 @@
     &:hover {
       background-color: shell.$bmrg-header-hover-background !important;
     }
+    &:last-of-type {
+      border: none;
+    }
   }
   .cds--accordion__heading {
     color: #ffffff;
@@ -433,4 +436,11 @@
   font-size: 0.75rem;
   letter-spacing: 0.02rem;
   line-height: 1rem;
+  width: 10rem;
+}
+
+.#{$prefix}--bmrg-header-team-loading {
+  margin-right: 0.5rem;
+  min-height: 1rem;
+  width: fit-content;
 }

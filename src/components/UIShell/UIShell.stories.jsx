@@ -19,23 +19,23 @@ const TEAMS_DATA = {
     {id:"2", name:"Team 2", displayName: null, isTeamMember: true},
   ],
   accounts: [
-    // {
-    //   id: "11",
-    //   isTeamMember: true,
-    //   name: "Account 1",
-    //   projects: [
-    //     {accountTeamId: "11", id:"111", name: "Project 1 1", displayName: "Project 1 1 display", isTeamMember: true},
-    //     {accountTeamId: "11", id:"112", name: "Project 1 2", displayName: null, isTeamMember: true},
-    //   ]
-    // },
-    // {
-    //   id: "12",
-    //   isTeamMember: false,
-    //   name: "Account 2",
-    //   projects: [
-    //     {accountTeamId: "12", id:"121", name: "Project 2 1", displayName: null, isTeamMember: true},
-    //   ]
-    // },
+    {
+      id: "11",
+      isTeamMember: true,
+      name: "Account 1",
+      projects: [
+        {accountTeamId: "11", id:"111", name: "Project 1 1", displayName: "Project 1 1 display", isTeamMember: true},
+        {accountTeamId: "11", id:"112", name: "Project 1 2", displayName: null, isTeamMember: true},
+      ]
+    },
+    {
+      id: "12",
+      isTeamMember: false,
+      name: "Account 2",
+      projects: [
+        {accountTeamId: "12", id:"121", name: "Project 2 1", displayName: null, isTeamMember: true},
+      ]
+    },
   ]
 };
 
@@ -65,7 +65,7 @@ export const Default = (args) => {
   mock.onGet(`${BASE_URL}/launchpad/user`).reply(200, PROFILE_SETTINGS_DATA);
   mock.onGet(`${BASE_URL}/users/teams`).reply(200, TEAMS_DATA);
   mock.onGet(`${BASE_URL}/launchpad/teams/1/services`).reply(withDelay(5000,[200, SERVICES_DATA]));
-  mock.onGet(`${BASE_URL}/launchpad/teams/2/services`).reply(withDelay(5000,[200, SERVICES_DATA]));
+  mock.onGet(`${BASE_URL}/launchpad/teams/2/services`).reply(withDelay(5000,[200, []]));
   mock.onPost(`${BASE_URL}/support/contact`).reply(200);
   return (
     <UIShell
