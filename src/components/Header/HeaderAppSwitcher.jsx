@@ -20,12 +20,12 @@ export default function HeaderAppSwitcher({ baseServiceUrl, isActive }) {
     return (
       <HeaderRightPanel
         content={
-          <div style={{ padding: "1rem" }}>
-            <SkeletonText className={`${prefix}--bmrg-header-team__skeleton`} />
-            <SkeletonText className={`${prefix}--bmrg-header-team__skeleton`} />
-            <SkeletonText className={`${prefix}--bmrg-header-team__skeleton`} />
-            <SkeletonText className={`${prefix}--bmrg-header-team__skeleton`} />
-            <SkeletonText className={`${prefix}--bmrg-header-team__skeleton`} />
+          <div className={`${prefix}--bmrg-header-teams__loading`}>
+            <SkeletonText className={`${prefix}--bmrg-header-teams__skeleton`} />
+            <SkeletonText className={`${prefix}--bmrg-header-teams__skeleton`} />
+            <SkeletonText className={`${prefix}--bmrg-header-teams__skeleton`} />
+            <SkeletonText className={`${prefix}--bmrg-header-teams__skeleton`} />
+            <SkeletonText className={`${prefix}--bmrg-header-teams__skeleton`} />
           </div>
         }
         className={classNames}
@@ -34,7 +34,12 @@ export default function HeaderAppSwitcher({ baseServiceUrl, isActive }) {
   }
 
   if (teamsQuery.error) {
-    return <HeaderRightPanel content={<ErrorMessage style={{ marginTop: "1rem" }} />} className={classNames} />;
+    return (
+      <HeaderRightPanel
+        content={<ErrorMessage className={`${prefix}--bmrg-header-teams__container`} />}
+        className={classNames}
+      />
+    );
   }
 
   if (teamsQuery.data) {
@@ -67,7 +72,7 @@ export default function HeaderAppSwitcher({ baseServiceUrl, isActive }) {
     return (
       <HeaderRightPanel
         content={
-          <div style={{ padding: "1rem" }}>
+          <div className={`${prefix}--bmrg-header-teams__container`}>
             <p className={`${prefix}--bmrg-header-team__empty-title`}>No teams</p>
             <p className={`${prefix}--bmrg-header-team__empty-subtitle`}>You must be new here</p>
           </div>
