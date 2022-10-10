@@ -59,8 +59,8 @@ function HeaderAccordionItem({team, baseServiceUrl, type}) {
               return (
                 <button
                   {...rest}
-                  onClick={() => {
-                    console.log("click");
+                  onMouseUp={() => {
+                    console.log("mouseup");
                     !notAccountMember && setIsSelected(true)
                   }}
                   onMouseOver={getServices}
