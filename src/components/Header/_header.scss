@@ -360,7 +360,7 @@
     width: 16rem;
   }
 }
-.#{$prefix}--bmrg-header-teams-container {
+.#{$prefix}--bmrg-header-teams__container {
   height: calc(100vh - 3rem);
   overflow-y: auto;
   padding-top: 1rem;
@@ -393,7 +393,8 @@
     color: #ffffff;
     flex-direction: row-reverse;
     font-size: 0.875rem;
-    &:hover, &:hover::before {
+    &:hover,
+    &:hover::before {
       background-color: transparent !important;
     }
     path {
@@ -404,13 +405,7 @@
   }
 }
 
-.#{$prefix}--bmrg-header-item-divider {
-  background-color: #c1c7cd;
-  border: 0;
-  height: 0.0625rem;
-  margin: 0.5625rem 1rem;
-}
-.#{$prefix}--bmrg-header-team-container {
+.#{$prefix}--bmrg-header-team__container {
   display: flex;
   flex-direction: column;
   padding-left: 2rem;
@@ -425,7 +420,7 @@
   }
 }
 
-.#{$prefix}--bmrg-header-team-empty {
+.#{$prefix}--bmrg-header-team__empty {
   color: #c1c7cd;
   font-size: 0.75rem;
   letter-spacing: 0.02rem;
@@ -433,24 +428,24 @@
   padding: 1rem 1rem 1rem 2rem;
 }
 
-.#{$prefix}--bmrg-header-team-empty-title {
+.#{$prefix}--bmrg-header-team__empty-title {
   font-size: 1rem;
   font-weight: 300;
   line-height: 1.25rem;
   margin-bottom: 0.625rem;
 }
 
-.#{$prefix}--bmrg-header-team-empty-subtitle {
+.#{$prefix}--bmrg-header-team__empty-subtitle {
   font-size: 0.75rem;
   font-weight: 300;
   line-height: 0.9375rem;
 }
 
-.#{$prefix}--bmrg-header-team-skeleton {
+.#{$prefix}--bmrg-header-team__skeleton {
   height: 2rem;
 }
 
-.#{$prefix}--bmrg-header-team-loading {
+.#{$prefix}--bmrg-header-team__loading {
   margin-right: 0.5rem;
   min-height: 1rem;
   width: fit-content;
