@@ -46,7 +46,7 @@ We recommend using Carbon theme functionality and the associated CSS custom prop
 
 ### Gray 10 theme
 
-This is how we import things in our applications. We use a number of Carbon v10 tokens so we use the compatibility g10 theme from Carbon to support both new and old values. We also use Akamai as the host for our fonts instead of self-hosting via the `$use-akamai-cdn: true` argument to the `@carbon/react` import. View the Carbon docs to see all the arguments you can pass to customize your
+This is how we import things in our applications. We use a number of Carbon v10 tokens so we use the compatibility g10 theme from Carbon to support both new and old values. We also use Akamai as the host for our fonts instead of self-hosting via the `$use-akamai-cdn: true` argument to the `@carbon/react` import. View the Carbon docs to see all the arguments you can pass to customize how you use Carbon
 
 ```scss
 @use "@carbon/react" with (
