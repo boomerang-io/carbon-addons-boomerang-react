@@ -1,5 +1,3 @@
-const { mergeConfig } = require("vite");
-
 module.exports = {
   stories: ["../src/**/*.stories.@(js|jsx|ts|tsx)"],
   addons: [
@@ -22,18 +20,8 @@ module.exports = {
   core: {
     builder: "@storybook/builder-vite",
   },
-  // Note: breaking builds
-  // typescript: {
-  //   check: false,
-  //   reactDocgen: "react-docgen",
-  // },
-  async viteFinal(config) {
-    // return the customized config
-    return mergeConfig(config, {
-      define: {
-        // By default, Vite doesn't include shims for Node.js
-        global: {},
-      },
-    });
-  },
+  typescript: {
+    check: false,
+    reactDocgen: "react-docgen",
+  }
 };

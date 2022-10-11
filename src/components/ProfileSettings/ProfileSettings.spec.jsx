@@ -10,7 +10,7 @@ import { PROFILE_SETTINGS_DATA } from "./constants";
 const baseServiceUrl = "http://boomerang.com";
 
 const queryClient = new QueryClient({
-  defaultOptions: { queries: { refetchOnWindowFocus: false }, mutations: { throwOnError: true } },
+  defaultOptions: { queries: { refetchOnWindowFocus: false, throwOnError: false }, mutations: { throwOnError: true } },
 });
 
 test("Profile Settings success", async () => {
@@ -48,7 +48,7 @@ test("Profile Settings success", async () => {
 test("Profile Settings error", async () => {
   const mock = new MockAdapter(axios);
   mock.onGet(`${baseServiceUrl}/launchpad/user`).reply(200, PROFILE_SETTINGS_DATA);
-  mock.onPatch(`${baseServiceUrl}/users/profile`).reply(500);
+  mock.onPatch(`${baseServiceUrl}/users/profile`).networkError();
   const { findByText, findByLabelText, getByText } = render(
     <QueryClientProvider client={queryClient}>
       <ProfileSettings baseServiceUrl={baseServiceUrl} userName="Boomerang Joe" src="joe@ibm.com" />

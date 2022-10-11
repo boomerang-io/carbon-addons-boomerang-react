@@ -22,7 +22,7 @@ export default {
 };
 
 const history = createMemoryHistory();
-const Component = () => <div>Yay, you are authorized for this page.</div>;
+const Component = () => <div>Yay, you are authorized to view this page.</div>;
 
 export const Authorized = (args) => {
   return <ProtectedRoute {...args} />;
