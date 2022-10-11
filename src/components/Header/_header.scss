@@ -434,17 +434,15 @@
 
 .#{$prefix}--bmrg-header-team__empty {
   color: #c1c7cd;
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   letter-spacing: 0.02rem;
   line-height: 1rem;
-  padding: 1rem 1rem 1rem 2rem;
+  padding: 0.5rem 2rem 1rem;
 }
 
 .#{$prefix}--bmrg-header-team__empty-title {
   font-size: 1rem;
   font-weight: 300;
-  line-height: 1.25rem;
-  margin-bottom: 0.625rem;
 }
 
 .#{$prefix}--bmrg-header-team__empty-subtitle {
