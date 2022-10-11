@@ -2,7 +2,6 @@
 @use "../../global/config" as *;
 @use "../../global/utils";
 @use "../../global/themes/shell-tokens" as shell;
-@use "../../global/themes/boomerang" as bmrgTheme;
 
 .#{$prefix}--bmrg-header {
   display: flex;
@@ -367,11 +366,24 @@
 
   .#{$prefix}--accordion__content {
     padding: 0rem;
+    .#{$prefix}--side-nav__menu-item {
+      &:focus, &:hover {
+        .#{$prefix}--side-nav__link-text {
+          color: #ffffff !important;
+        }
+      } 
+    }
     .#{$prefix}--side-nav__link {
       padding-left: 2rem;
+      &:focus, &:hover {
+        color: #ffffff !important;
+      }      
     }
     .#{$prefix}--side-nav__link-text {
       font-weight: 400;
+      &:hover {
+        color: #ffffff !important;
+      }
     }
   }
 
