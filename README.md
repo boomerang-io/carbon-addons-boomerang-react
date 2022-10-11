@@ -67,7 +67,7 @@ This is how we import things in our applications. We use a number of Carbon v10 
 
 Do you want to continue using the Boomerang theme? Follow the steps below.
 
-## Step 1 - Styles
+## Step 1 - Import styles
 
 Import the individual Carbon packages and addons styles as follows:
 
@@ -110,7 +110,7 @@ Import the individual Carbon packages and addons styles as follows:
 }
 ```
 
-## Step 2 - HTLM property
+## Step 2 - Set HTML property
 
 You need to set the `data-carbon-theme="boomerang"` attribute value in your app, at the highest level in the document tree as possible.
 
