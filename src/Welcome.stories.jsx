@@ -24,8 +24,8 @@ export const Welcome = () => (
       <h1>Carbon Addons Boomerang React</h1>
     </header>
     <p>
-      Open source React components for Boomerang projects based on IBM's Carbon Design System. Built for open source and
-      internal applications within IBM.
+      Open source React components based on IBM's Carbon Design System. Built for open source <a href="https://useboomerang.io">Boomerang.io</a> and
+      IBM applications.
     </p>
     <p>
       <strong>Carbon Addons Boomerang</strong> - Components that are either extensions of existing Carbon components
