@@ -31,7 +31,6 @@ package-lock.json
 # Mac OS Specific files
 .DS_Store
 
-.npmrc
 results
 
 .env
