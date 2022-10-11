@@ -143,7 +143,7 @@ Because of the potential time and difficulty involved in a migration to Carbon v
 | Release | Status          | End-of-life |
 | ------- | --------------- | ----------- |
 | v1      | **End-of-Life** | 2022-03-18  |
-| v2      | **Maintenance** | 2022-04-30  |
+| v2      | **Maintenance** | 2023-04-30  |
 | v3      | **Current**     | TBD         |
 
 ## 📚 Docs
