@@ -58,23 +58,23 @@ export const headers = [
 export const comboBoxItems = [
   {
     id: "option-0",
-    text: "Option 1",
+    text: "Carbon",
   },
   {
     id: "option-1",
-    text: "Option 2",
+    text: "React Router",
   },
   {
     id: "option-2",
-    text: "Option 3",
+    text: "React Query",
     selected: true,
   },
   {
     id: "option-3",
-    text: "Option 4",
+    text: "Boomerang",
   },
   {
-    id: "option-4",
+    id: "Lodash",
     text: "An example option that is really long to show what should be done to handle long text",
   },
 ];
@@ -82,41 +82,41 @@ export const comboBoxItems = [
 export const dropdownOptions = [
   {
     id: "option-1",
-    text: "Option 1",
+    text: "The Beatles",
   },
   {
     id: "option-2",
-    text: "Option 2",
+    text: "The Rolling Stones",
   },
   {
     id: "option-3",
-    text: "Option 3",
+    text: "Pink Floyd",
   },
   {
     id: "option-4",
-    text: "Option 4",
+    text: "Bob Dylan",
   },
 ];
 
 export const multiSelectOptions = [
   {
     id: "downshift-1-item-0",
-    text: "Option 1",
+    text: "Paul",
   },
   {
     id: "downshift-1-item-1",
-    text: "Option 2",
+    text: "John",
   },
   {
     id: "downshift-1-item-2",
-    text: "Option 3",
+    text: "George",
   },
   {
     id: "downshift-1-item-3",
-    text: "Option 4",
+    text: "Ringo",
   },
   {
     id: "downshift-1-item-4",
-    text: "An example option that is really long to show what should be done to handle long text",
+    text: "Billy",
   },
 ];

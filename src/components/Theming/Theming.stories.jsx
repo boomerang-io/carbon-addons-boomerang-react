@@ -21,6 +21,13 @@ const Divider = () => <div style={{ margin: "2rem" }} />;
 
 export default {
   title: "Playground/Theming",
+  parameters: {
+    docs: {
+      description: {
+        component: "See how a select set of Carbon components look using different themes",
+      },
+    },
+  },
 };
 
 export const Default = () => {
@@ -28,12 +35,13 @@ export const Default = () => {
     <div
       style={{
         padding: "2rem",
+        background: "var(--cds-background)",
       }}
     >
-      <Button> Button Text </Button>
-      <Button kind="secondary"> Button Text </Button>
-      <Button kind="danger"> Button Text </Button>
-      <Button kind="tertiary"> Button Text </Button>
+      <Button>Carbon</Button>
+      <Button kind="secondary">Carbon</Button>
+      <Button kind="danger">Carbon</Button>
+      <Button kind="tertiary">Carbon</Button>
       <Divider />
       <Accordion>
         <AccordionItem title="Section 1 title" open={false}>
@@ -54,52 +62,52 @@ export const Default = () => {
       </Accordion>
       <Divider />
       <fieldset className="cds--fieldset">
-        <legend className="cds--label">Checkbox heading</legend>
-        <Checkbox id="checkbox-label-1" />
-        <Checkbox id="checkbox-label-2" />
+        <legend className="cds--label">Boomerang</legend>
+        <Checkbox id="checkbox-label-1" labelText="Carbon" />
+        <Checkbox id="checkbox-label-2" labelText="Boomerang" />
       </fieldset>
       <Divider />
-      <TextInput labelText="Test" placeholder="Test" />
+      <TextInput labelText="Library" placeholder="e.g. Boomerang" />
       <Divider />
       <TextInput
-        labelText="Test"
+        labelText="Library"
         helperText="This is required"
-        placeholder="Test"
+        placeholder="e.g. Carbon"
         invalid
         invalidText="Please enter a valid value"
       />
       <Divider />
       <TextArea
-        labelText="Test"
-        helperText="This is required"
-        placeholder="Test"
+        labelText="Thoughts on Phenomenology"
+        helperText="What do you think"
+        placeholder="e.g. I'm not quite sure..."
         invalid
         invalidText="Please enter a valid value"
       />
       <Divider />
-      <Search labelText="Test" placeHolderText="Search" />
+      <Search labelText="Libraries" placeholder="e.g Carbon" />
       <Divider />
       <ComboBox
-        titlText="ComboBox"
+        titlText="Libraries"
         invalid
-        invalidText="Is required"
+        invalidText="It is required"
         items={comboBoxItems}
         itemToString={(item) => (item ? item.text : "")}
-        placeholder="ComboBox"
+        placeholder="e.g. Boomerang"
       />
       <Divider />
       <MultiSelect items={multiSelectOptions} itemToString={(item) => (item ? item.text : "")} label="Multiselect" />
       <Divider />
       <Dropdown
-        style={{ width: "10rem" }}
+        style={{ width: "10rem", marginBottom: "1rem" }}
         label="Test"
         title="Dropdown"
         items={dropdownOptions}
         itemToString={(item) => (item ? item.text : "")}
       />
       <OverflowMenu>
-        <OverflowMenuItem>Test</OverflowMenuItem>
-        <OverflowMenuItem>Test</OverflowMenuItem>
+        <OverflowMenuItem itemText="Carbon" />
+        <OverflowMenuItem itemText="Boomerang" />
       </OverflowMenu>
       <Divider />
       <DataTable />

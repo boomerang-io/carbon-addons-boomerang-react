@@ -1,5 +1,3 @@
-const { mergeConfig } = require("vite");
-
 module.exports = {
   stories: ["../src/**/*.stories.@(js|jsx|ts|tsx)"],
   addons: [
@@ -25,15 +23,5 @@ module.exports = {
   typescript: {
     check: false,
     reactDocgen: "react-docgen",
-  },
-  async viteFinal(config) {
-    // return the customized config
-    return mergeConfig(config, {
-      define: {
-        // By default, Vite doesn't include shims for NodeJS/
-        // necessary for segment analytics lib to work
-        global: {},
-      },
-    });
-  },
+  }
 };

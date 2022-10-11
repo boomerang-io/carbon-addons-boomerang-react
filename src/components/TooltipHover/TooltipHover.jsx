@@ -48,7 +48,13 @@ TooltipHover.propTypes = {
     "auto-start",
     "auto-end",
   ]),
+  /**
+   * Alias for content prop
+   */
   tooltipContent: PropTypes.node,
+  /**
+   * Alias for content prop
+   */
   tooltipText: PropTypes.node,
 };
 

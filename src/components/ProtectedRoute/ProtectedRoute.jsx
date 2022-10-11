@@ -18,11 +18,17 @@ const ProtectedRoute = ({ allowedUserRoles, component, message, title, userRole,
 );
 
 ProtectedRoute.propTypes = {
+  /**
+   * Array of roles that will be checked against the provided userRole
+   */
   allowedUserRoles: PropTypes.array.isRequired,
   component: PropTypes.func.isRequired,
   location: PropTypes.object,
   message: PropTypes.string,
   title: PropTypes.string,
+  /**
+   * Role checked against list of allowedUserRoles to determine access
+   */
   userRole: PropTypes.oneOfType([PropTypes.string, PropTypes.array]).isRequired,
 };
 

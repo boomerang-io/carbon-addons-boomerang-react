@@ -6,6 +6,15 @@ import LeftSideNav from "./LeftSideNav";
 export default {
   title: "Platform/LeftSideNav",
   component: LeftSideNav,
+  parameters: {
+    docs: {
+      inlineStories: false,
+      description: {
+        component:
+          "Sidenav that works in conjunction with the Header. Uses [Carbon UIShell sidenav](https://react.carbondesignsystem.com/?path=/docs/components-ui-shell--fixed-side-nav) components",
+      },
+    },
+  },
 };
 
 export const WithRouter = () => (

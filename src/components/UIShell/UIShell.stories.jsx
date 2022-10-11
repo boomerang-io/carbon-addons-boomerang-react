@@ -60,6 +60,14 @@ const withDelay = (delay, response) => () => {
 export default {
   title: "Platform/UIShell",
   component: UIShell,
+  parameters: {
+    docs: {
+      inlineStories: false,
+      description: {
+        component: "Integrates the Header, Sidenav and Right Panel components among others into a data-driven and flexible application shell for the IBM Services Essentials platform.",
+      },
+    },
+  },
 };
 
 export const Default = (args) => {
@@ -89,22 +97,22 @@ export const Default = (args) => {
         navigation: [
           {
             name: "Launchpad",
-            url: "https://servicesessentials.ibm.com/launchpad",
+            url: "#",
           },
           {
             name: "Admin",
-            url: "https://servicesessentials.ibm.com/launchpad",
+            url: "#",
           },
           {
             name: "Docs",
-            url: "https://servicesessentials.ibm.com/launchpad",
+            url: "#",
           },
         ],
         platform: {
           name: "IBM Boomerang Platform",
           version: "5.0.0",
-          signOutUrl: "https://ibm.com",
-          communityUrl: "https://developer.ibm.com",
+          signOutUrl: "#",
+          communityUrl: "#",
           platformName: "IBM Boomerang",
           platformOrganization: "IBM",
         },
@@ -156,23 +164,23 @@ export const WithCarbonSidenavAndReactRouter = () => {
           navigation: [
             {
               name: "Launchpad",
-              url: "https://servicesessentials.ibm.com/launchpad",
+              url: "#",
             },
             {
               name: "Admin",
-              url: "https://servicesessentials.ibm.com/launchpad",
+              url: "#",
             },
             {
               name: "Docs",
-              url: "https://servicesessentials.ibm.com/launchpad",
+              url: "#",
             },
           ],
           platform: {
             name: "IBM Boomerang Platform",
             sendMail: true,
             version: "5.0.0",
-            signOutUrl: "https://ibm.com",
-            communityUrl: "https://developer.ibm.com",
+            signOutUrl: "#",
+            communityUrl: "#",
           },
           platformMessage: {
             kind: "info",
@@ -283,22 +291,22 @@ export const RightPanel = () => {
         navigation: [
           {
             name: "Launchpad",
-            url: "https://servicesessentials.ibm.com/launchpad",
+            url: "#",
           },
           {
             name: "Admin",
-            url: "https://servicesessentials.ibm.com/launchpad",
+            url: "#",
           },
           {
             name: "Docs",
-            url: "https://servicesessentials.ibm.com/launchpad",
+            url: "#",
           },
         ],
         platform: {
           name: "IBM Boomerang Platform",
           version: "5.0.0",
-          signOutUrl: "https://ibm.com",
-          communityUrl: "https://developer.ibm.com",
+          signOutUrl: "#",
+          communityUrl: "#",
         },
         platformMessage: {
           kind: "info",
@@ -355,22 +363,22 @@ export const UserNotConsented = () => {
         navigation: [
           {
             name: "Launchpad",
-            url: "https://servicesessentials.ibm.com/launchpad",
+            url: "#",
           },
           {
             name: "Admin",
-            url: "https://servicesessentials.ibm.com/launchpad",
+            url: "#",
           },
           {
             name: "Docs",
-            url: "https://servicesessentials.ibm.com/launchpad",
+            url: "#",
           },
         ],
         platform: {
           name: "IBM Boomerang Platform",
           version: "5.0.0",
-          signOutUrl: "https://ibm.com",
-          communityUrl: "https://developer.ibm.com",
+          signOutUrl: "#",
+          communityUrl: "#",
         },
         platformMessage: {
           kind: "info",
@@ -407,22 +415,22 @@ export const UserPendingDeletion = () => {
         navigation: [
           {
             name: "Launchpad",
-            url: "https://servicesessentials.ibm.com/launchpad",
+            url: "#",
           },
           {
             name: "Admin",
-            url: "https://servicesessentials.ibm.com/launchpad",
+            url: "#",
           },
           {
             name: "Docs",
-            url: "https://servicesessentials.ibm.com/launchpad",
+            url: "#",
           },
         ],
         platform: {
           name: "IBM Boomerang Platform",
           version: "5.0.0",
-          signOutUrl: "https://ibm.com",
-          communityUrl: "https://developer.ibm.com",
+          signOutUrl: "#",
+          communityUrl: "#",
         },
         platformMessage: {
           kind: "info",

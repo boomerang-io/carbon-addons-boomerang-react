@@ -3,6 +3,14 @@ import LoadingAnimation from "./LoadingAnimation";
 export default {
   title: "Deprecated/LoadingAnimation",
   component: LoadingAnimation,
+  parameters: {
+    docs: {
+      description: {
+        component:
+          "Deprecated loadding indicator",
+      },
+    },
+  },
 };
 
 export const Default = () => {
