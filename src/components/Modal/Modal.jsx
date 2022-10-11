@@ -4,12 +4,19 @@ import cx from "classnames";
 import ReactModal from "react-modal";
 import { prefix } from "../../internal/settings";
 
-
-
 Modal.propTypes = {
+  /**
+   * The selector for the element that the modal attaches to, usually the #id of the document body
+   */
   appElement: PropTypes.string,
   children: PropTypes.any,
+  /**
+   * Classname to apply to the modal
+   */
   className: PropTypes.string,
+  /**
+   * Classname to apply to the full-screen container element that the modal is inside
+   */
   containerClassName: PropTypes.string,
   isOpen: PropTypes.bool,
 };

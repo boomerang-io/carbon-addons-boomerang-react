@@ -6,6 +6,13 @@ import FlowModalForm from "./FlowModalForm";
 export default {
   title: "Components/FlowModal",
   component: FlowModal,
+  parameters: {
+    docs: {
+      description: {
+        component: "Multi-step modal that display children as steps in a flow. Useful for long, multi-part forms.",
+      },
+    },
+  },
 };
 
 const Component1 = (props) => (
@@ -84,40 +91,4 @@ export const Default = () => {
       <Component3 />
     </FlowModal>
   );
-};
-
-export const InitiallyOpen = () => {
-  return (
-    <FlowModal
-      isOpen
-      appElement="#root"
-      progressSteps={[
-        { label: "Source" },
-        { label: "Repo" },
-        { label: "App Type" },
-        { label: "Name" },
-        { label: "Confirm" },
-      ]}
-      composedModalProps={{ selectorPrimaryFocus: 'input[id="testing"]' }}
-      confirmModalProps={{
-        title: "Close Create Component?",
-        children: <div>Your current progress will not be saved.</div>,
-      }}
-      modalHeaderProps={{
-        subTitle: "Create a new component for IBM Services Engineering",
-        title: "Create Component",
-      }}
-      modalTrigger={({ openModal }) => <Button onClick={openModal}>Open modal flow</Button>}
-    >
-      <Component1 />
-      <Component2 />
-      <Component2 />
-      <Component2 />
-      <Component3 />
-    </FlowModal>
-  );
-};
-
-InitiallyOpen.story = {
-  name: "initially open",
 };

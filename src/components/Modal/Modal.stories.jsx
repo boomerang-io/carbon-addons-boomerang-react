@@ -1,15 +1,15 @@
-
-
+import React from "react";
 import {
-  TextArea,
-  TextInput,
-  ModalBody,
-  Search,
-  MultiSelect,
+  Button,
+  ComboBox,
   Dropdown,
+  ModalBody,
+  MultiSelect,
+  Search,
   Select,
   SelectItem,
-  ComboBox,
+  TextArea,
+  TextInput,
   Toggle,
 } from "@carbon/react";
 import Modal from "./index";
@@ -18,32 +18,42 @@ import { ModalForm } from "../ModalForm";
 export default {
   title: "Components/Modal",
   component: Modal,
+  parameters: {
+    docs: {
+      description: {
+        component: "Base modal component used as the underlying modal for other modal components in the library",
+      },
+    },
+  },
 };
 
-function Component1() {
+function Component1({ setIsOpen }) {
   return (
     <ModalForm>
-      <ModalBody>
-        <TextInput id="input" onChange={() => {}} placeholder="This is an input" />
-        <TextArea id="area" onChange={() => {}} placeholder="This is a text area" />
-        <Search placeHolderText="This is a search" />
+      <ModalBody style={{ display: "flex", flexDirection: "column", gap: "1rem", padding: "1rem", width: "30rem" }}>
+        <TextInput id="input" onChange={() => {}} placeholder="e.g text input" labelText="Text input" />
+        <Search placeholder="e.g. search" labelText="Search" />
         <Select>
-          <SelectItem value="test" text="test" />
-          <SelectItem value="this" text="this" />
+          <SelectItem value="carbon" text="Carbon" />
+          <SelectItem value="boomerang" text="Boomerang" />
         </Select>
-        <MultiSelect items={["test", "this"]} itemToString={(item) => item} label="This is an multi" />
-        <Dropdown items={["test", "this"]} itemToString={(item) => item} label="This is an dropdown" />
-        <ComboBox items={["test", "this"]} itemToString={(item) => item} placeholder="This is an combo" />
-        <Toggle />
+        <MultiSelect items={["Carbon", "Boomerang"]} itemToString={(item) => item} label="Muliselect" />
+        <Dropdown items={["Carbon", "Boomerang"]} itemToString={(item) => item} label="Dropdown" />
+        <ComboBox items={["Carbon", "Boomerang"]} itemToString={(item) => item} placeholder="e.g. Combobox" />
+        <Button onClick={() => setIsOpen(false)}>Close </Button>
       </ModalBody>
     </ModalForm>
   );
 }
 
 export const Default = () => {
+  const [isOpen, setIsOpen] = React.useState(false);
   return (
-    <Modal isOpen appElement="#root">
-      <Component1 />
-    </Modal>
+    <>
+      <Button onClick={() => setIsOpen(true)}>Open Modal</Button>
+      <Modal isOpen={isOpen} appElement="#root">
+        <Component1 setIsOpen={setIsOpen} />
+      </Modal>
+    </>
   );
 };

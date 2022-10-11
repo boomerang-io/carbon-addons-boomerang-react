@@ -64,24 +64,6 @@ export const Default = (args) => {
   );
 };
 
-export const InitiallyOpen = (args) => {
-  return (
-    <ConfirmModal
-      affirmativeAction={action("confirm modal affirmative action")}
-      appElement="#root"
-      label="delete things"
-      title="Huh?"
-      isOpen
-      modalTrigger={({ openModal }) => <Button onClick={openModal}>Open confirm modal</Button>}
-      {...args}
-    />
-  );
-};
-
-InitiallyOpen.story = {
-  name: "initially open",
-};
-
 export const _ExternallyControlled = () => {
   return <ExternallyControlled />;
 };

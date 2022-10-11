@@ -30,8 +30,7 @@ module.exports = {
     // return the customized config
     return mergeConfig(config, {
       define: {
-        // By default, Vite doesn't include shims for NodeJS/
-        // necessary for segment analytics lib to work
+        // By default, Vite doesn't include shims for Node.js
         global: {},
       },
     });

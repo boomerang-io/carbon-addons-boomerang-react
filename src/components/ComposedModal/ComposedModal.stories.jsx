@@ -89,32 +89,6 @@ export const Default = () => {
   );
 };
 
-export const InitiallyOpen = () => {
-  return (
-    <ComposedModal
-      isOpen
-      appElement="#root"
-      composedModalProps={{ selectorPrimaryFocus: 'input[id="testing"]' }}
-      confirmModalProps={{
-        title: "Close Create Component?",
-        children: <div>Your current progress will not be saved.</div>,
-      }}
-      modalHeaderProps={{
-        subTitle: "Create a new component for IBM Services Engineering",
-        title: "Create Component",
-      }}
-      modalTrigger={({ openModal }) => <Button onClick={openModal}>Open modal flow</Button>}
-    >
-      {({ closeModal, setShouldConfirmModalClose }) => (
-        <Component2 closeModal={closeModal} setShouldConfirmModalClose={setShouldConfirmModalClose} />
-      )}
-    </ComposedModal>
-  );
-};
-
-InitiallyOpen.story = {
-  name: "Initially open",
-};
 
 export const Size = () => {
   const [size, setSize] = React.useState("");

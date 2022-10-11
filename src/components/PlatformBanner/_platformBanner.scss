@@ -1,4 +1,5 @@
 @use "../../global/config" as *;
+@use '@carbon/themes/scss/tokens' as theme;
 .#{$prefix}--bmrg-banner-container {
   left: 0;
   position: fixed;
@@ -6,17 +7,17 @@
   width: 100%;
   z-index: 9998;
   .#{$prefix}--inline-notification {
-    background: #1d364d;
+    background: theme.$background-inverse;
     margin: 0;
     max-width: 100%;
   }
   .#{$prefix}--inline-notification__title {
-    color: #ffffff;
+    color: theme.$text-inverse;
   }
   .#{$prefix}--inline-notification__subtitle {
-    color: #ffffff;
+    color: theme.$text-inverse;
   }
   .#{$prefix}--inline-notification__close-icon {
-    fill: #ffffff;
+    fill: theme.$text-inverse;
   }
 }
