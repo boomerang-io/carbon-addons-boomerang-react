@@ -423,6 +423,9 @@ $breakpoints: (
         height: 1rem;
       }
     }
+    .#{$prefix}--switcher__item--divider {
+      width: calc(100% - 2rem);
+    }
   }
 
   .#{$prefix}--bmrg-header-team__container {
