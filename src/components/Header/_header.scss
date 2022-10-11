@@ -388,6 +388,13 @@ $breakpoints: (
     .#{$prefix}--accordion__content {
       padding: 0rem;
   
+      .#{$prefix}--side-nav__menu-item {
+        &:focus, &:hover {
+          .#{$prefix}--side-nav__link-text {
+            color: #ffffff !important;
+          }
+        } 
+      }
       .#{$prefix}--side-nav__link {
         padding-left: 2rem;
       }
