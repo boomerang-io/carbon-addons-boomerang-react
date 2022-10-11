@@ -22,10 +22,11 @@ module.exports = {
   core: {
     builder: "@storybook/builder-vite",
   },
-  typescript: {
-    check: false,
-    reactDocgen: "react-docgen",
-  },
+  // Note: breaking builds
+  // typescript: {
+  //   check: false,
+  //   reactDocgen: "react-docgen",
+  // },
   async viteFinal(config) {
     // return the customized config
     return mergeConfig(config, {

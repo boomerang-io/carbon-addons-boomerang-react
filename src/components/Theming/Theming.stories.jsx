@@ -63,8 +63,8 @@ export const Default = () => {
       <Divider />
       <fieldset className="cds--fieldset">
         <legend className="cds--label">Boomerang</legend>
-        <Checkbox id="checkbox-label-1" labelText="Carbon"/>
-        <Checkbox id="checkbox-label-2" labelText="Boomerang"/>
+        <Checkbox id="checkbox-label-1" labelText="Carbon" />
+        <Checkbox id="checkbox-label-2" labelText="Boomerang" />
       </fieldset>
       <Divider />
       <TextInput labelText="Library" placeholder="e.g. Boomerang" />
@@ -78,22 +78,22 @@ export const Default = () => {
       />
       <Divider />
       <TextArea
-        labelText="Test"
-        helperText="This is required"
-        placeholder="Test"
+        labelText="Thoughts on Phenomenology"
+        helperText="What do you think"
+        placeholder="e.g. I'm not quite sure..."
         invalid
         invalidText="Please enter a valid value"
       />
       <Divider />
-      <Search labelText="Test" placeHolderText="Search" />
+      <Search labelText="Libraries" placeholder="e.g Carbon" />
       <Divider />
       <ComboBox
-        titlText="ComboBox"
+        titlText="Libraries"
         invalid
-        invalidText="Is required"
+        invalidText="It is required"
         items={comboBoxItems}
         itemToString={(item) => (item ? item.text : "")}
-        placeholder="ComboBox"
+        placeholder="e.g. Boomerang"
       />
       <Divider />
       <MultiSelect items={multiSelectOptions} itemToString={(item) => (item ? item.text : "")} label="Multiselect" />
