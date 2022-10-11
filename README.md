@@ -65,7 +65,7 @@ This is how we import things in our applications. We use a number of Carbon v10 
 
 ## Boomerang theme
 
-Do you want to continue using the Boomerang theme? Unfortunately it is not as straightforward but it's not too bad. Follow the following steps
+Do you want to continue using the Boomerang theme? Follow the steps below.
 
 ## Step 1 - Styles
 
