@@ -4,7 +4,6 @@ import cx from "classnames";
 import { prefix } from "../../internal/settings";
 import GenericErrorBackground from "./GenericErrorBackground";
 
-
 ErrorPageCore.propTypes = {
   className: PropTypes.string,
   graphic: PropTypes.node,
@@ -33,7 +32,7 @@ export default function ErrorPageCore({ className, graphic, header, message, sta
           ) : (
             <p>
               Hit the back button to return to your previous page, or if you keep finding yourself here,
-              <a href={statusUrl}>{` navigate to status `}</a>
+              <a href={statusUrl}>{` navigate to Support Center `}</a>
               for help.
             </p>
           )}

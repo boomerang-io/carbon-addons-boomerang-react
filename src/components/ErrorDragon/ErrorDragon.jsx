@@ -5,8 +5,6 @@ import { prefix } from "../../internal/settings";
 
 import ErrorGraphic from "./assets/ErrorGraphic";
 
-
-
 const ErrorDragon = ({ className, header, message, style, statusText, statusUrl, title, ...rest }) => {
   const classNames = cx(`${prefix}--bmrg-error-dragon`, className);
   return (
@@ -26,7 +24,7 @@ ErrorDragon.defaultProps = {
   className: "",
   header: "Don’t lose your daks",
   message: "And if you could be so kind, please send us a bug report.",
-  statusText: "View Boomerang Status",
+  statusText: "View Support Center",
   title: "Cheers! You found an error. Try reloading the page.",
 };
 
