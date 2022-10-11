@@ -1,26 +1,22 @@
-@import '../../styles/mixins/utils';
+@use '@carbon/themes/scss/tokens' as theme;
+@use '../../global/themes/shell-tokens' as shell;
+@use "../../global/config" as *;
 
-@include exports('addons-bmrg-userRequests') {
+.#{$prefix}--bmrg-requests__title {
+  color: shell.$bmrg-header-active-text;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.125rem;
+  margin-left: 1rem;
 
-  .#{$prefix}--bmrg-requests__title {
-    color: $text-04;
-    font-size: 0.875rem;
-    font-weight: bold;
-    letter-spacing: 0.04rem;
-    line-height: 1.125rem;
-    margin-left: 1rem;
-
-    &.#{$prefix}--bmrg-requests-empty__title {
-      color: $text-03;
-      font-weight: initial;
-    }
+  &.#{$prefix}--bmrg-requests-empty__title {
+    font-weight: initial;
   }
+}
 
-  .#{$prefix}--bmrg-requests__text {
-    color: $text-04;
-    font-size: 0.875rem;
-    letter-spacing: 0.04rem;
-    line-height: 1.125rem;
-    margin-left: 1rem;
-  }
+.#{$prefix}--bmrg-requests__text {
+  color: shell.$bmrg-header-active-text;
+  font-size: 0.825rem;
+  line-height: 1.125rem;
+  margin-left: 1rem;
 }

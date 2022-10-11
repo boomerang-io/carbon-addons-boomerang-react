@@ -1,8 +1,0 @@
-@include exports('addons-bmrg-featureNavTabs') {
-  .#{$prefix}--bmrg-feature-nav-tabs {
-    align-items: flex-end;
-    display: flex;
-    position: relative;
-    width: fit-content;
-  }
-}

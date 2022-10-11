@@ -1,6 +1,5 @@
-@include exports('addons-bmrg-confirmModal') {
-  .#{$prefix}--bmrg-confirm-modal-container {
-    height: 16rem !important;
-    width: 30rem !important;
-  }
+@use "../../global/config" as *;
+.#{$prefix}--bmrg-confirm-modal-container {
+  height: 16rem !important;
+  width: 30rem !important;
 }

@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { ArrowLeft, ArrowRight } from './keys';
-import { match } from './match';
+import { ArrowLeft, ArrowRight } from "./keys";
+import { match } from "./match";
 
 /**
  * Various utilities to help with a11y work
@@ -39,7 +39,7 @@ export const getNextIndex = (key, index, arrayLength) => {
  */
 export const DOCUMENT_POSITION_BROAD_PRECEDING =
   // Checks `typeof Node` for `react-docgen`
-  typeof Node !== 'undefined' && Node.DOCUMENT_POSITION_PRECEDING | Node.DOCUMENT_POSITION_CONTAINS;
+  typeof Node !== "undefined" && Node.DOCUMENT_POSITION_PRECEDING | Node.DOCUMENT_POSITION_CONTAINS;
 
 /**
  * A flag `node.compareDocumentPosition(target)` returns,
@@ -47,8 +47,7 @@ export const DOCUMENT_POSITION_BROAD_PRECEDING =
  */
 export const DOCUMENT_POSITION_BROAD_FOLLOWING =
   // Checks `typeof Node` for `react-docgen`
-  typeof Node !== 'undefined' &&
-  Node.DOCUMENT_POSITION_FOLLOWING | Node.DOCUMENT_POSITION_CONTAINED_BY;
+  typeof Node !== "undefined" && Node.DOCUMENT_POSITION_FOLLOWING | Node.DOCUMENT_POSITION_CONTAINED_BY;
 
 /**
  * CSS selector that selects major nodes that are sequential-focusable.

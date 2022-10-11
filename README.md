@@ -2,47 +2,149 @@
 
 [Carbon](https://www.carbondesignsystem.com/) addon components for Boomerang written in React. View the [Storybook](https://carbon-addons-boomerang-react.netlify.app/).
 
-## Getting Started
+## Installing
 
-Install the Carbon peer dependencies in addition to the package itself. We re-export all of the components from `carbon-components-react` but in some cases you may want to import directly from a Carbon library. It is a best practice to have the dependency defined in the `package.json` in that situation and depending on your package manager and node version, a requirement. It also gives consumers more control over the version of the packages they are using without being dependent on our library.
+Install the the addons package, carbon and all of the required peer-dependencies.
 
-Run the following command using [npm](https://www.npmjs.com/):
-
-```bash
-npm install carbon-components carbon-components-react carbon-icons @carbon/icons-react
-npm install @boomerang-io/carbon-addons-boomerang-react
-```
-
-If you prefer [Yarn](https://yarnpkg.com/en/), use the following command instead:
+Run the following command using [pnpm](https://pnpm.io). Other package managers like `npm` and `yarn` work as well.
 
 ```bash
-yarn add carbon-components carbon-components-react carbon-icons @carbon/icons-react
-yarn add @boomerang-io/carbon-addons-boomerang-react
+pnpm install @carbon/react @boomerang-io/carbon-addons-boomerang-react axios formik react-router-dom yup
 ```
 
-## Using
+Upgrading from a previous version? View our [migration guide](/docs/v3-migration.md).
 
-You need to import the `.scss` styles. If you are using SASS and webpack, perform the following import.
+## Styles
 
-```css
-@import '@boomerang-io/carbon-addons-boomerang-react/styles/scss/styles';
+You need to use Sass, as we are built on top of Carbon and import the entry style sheet for the components. We recommend using `sass` or `sass-embedded` to compile styles. Configure as required for the bundler you are using. Tools like Vite and Create React App work without additional configuration needed.
+
+```scss
+// app.scss
+@use "@carbon/react";
+@use "@boomerang-io/carbon-addons-boomerang-react/scss/global";
 ```
 
-You can then import components by the following:
+Make sure to import this file in the JavaScript code to ensure that it is included in your bundle.
+
+## Carbon themes
+
+We recommend using Carbon theme functionality and the associated CSS custom properties in your styles to easily use Carbon theme tokens. See the following example for guidance on a couple common use cases.
+
+### Default theme
+
+```scss
+// styles.scss
+@use "@carbon/react";
+@use '@carbon/themes';
+@use "@boomerang-io/carbon-addons-boomerang-react/scss/global";
+
+// Include theme tokens
+:root {
+  @include themes.theme();
+}
+```
+
+### Gray 10 theme
+
+This is how we import things in our applications. We use a number of Carbon v10 tokens so we use the compatibility g10 theme from Carbon to support both new and old values. We also use Akamai as the host for our fonts instead of self-hosting via the `$use-akamai-cdn: true` argument to the `@carbon/react` import. View the Carbon docs to see all the arguments you can pass to customize how you use Carbon
+
+```scss
+@use "@carbon/react" with (
+  $use-akamai-cdn: true
+);
+@use "@carbon/themes";
+@use "@carbon/react/scss/compat/themes" as compat;
+@use "@boomerang-io/carbon-addons-boomerang-react/scss/global";
+
+:root {
+  @include themes.theme(compat.$g10);
+}
+```
+
+> Note: The library does not currently support changing the default class prefix from `cds`.
+
+## Boomerang theme
+
+Do you want to continue using the Boomerang theme? Follow the steps below.
+
+## Step 1 - Import styles
+
+Import the individual Carbon packages and addons styles as follows:
+
+```scss
+// app.scss
+@use "sass:map";
+
+// Carbon base styles and utilities
+@use '@carbon/react/scss/config' with ($use-akamai-cdn: true);
+@use '@carbon/react/scss/reset';
+@use '@carbon/react/scss/motion';
+@use '@carbon/react/scss/type';
+
+// Themes
+@use "@boomerang-io/carbon-addons-boomerang-react/scss/global/themes/boomerang";
+@use '@carbon/react/scss/compat/themes' as compat;
+@use '@carbon/react/scss/compat/theme' with (
+  $theme: map.merge(compat.$white, boomerang.$theme)
+);
+
+// More base styles, components, and component tokens
+@use '@carbon/react/scss/fonts';
+@use '@carbon/react/scss/grid';
+@use '@carbon/react/scss/layer';
+@use '@carbon/react/scss/zone';
+@use '@carbon/react/scss/components/button/tokens' as button;
+@use '@carbon/react/scss/components/notification/tokens' as notification;
+@use '@carbon/react/scss/components/tag/tokens' as tag;
+@use '@carbon/react/scss/components';
+
+// Addons library with boomerang enabled
+@use '@boomerang-io/carbon-addons-boomerang-react/scss/global' with ($use-theme-boomerang: true);
+
+// Finally include the theme to include all of the css custom properties
+[data-carbon-theme="boomerang"] {
+  @include theme.add-component-tokens(map.merge(button.$button-tokens, boomerang.$v11-button-tokens));
+  @include theme.add-component-tokens(notification.$notification-tokens);
+  @include theme.add-component-tokens(tag.$tag-tokens);
+  @include theme.theme();
+}
+```
+
+## Step 2 - Set HTML property
+
+You need to set the `data-carbon-theme="boomerang"` attribute value in your app, at the highest level in the document tree as possible.
+
+```html
+<html lang="en" data-carbon-theme="boomerang">
+  ...
+</html>
+```
+
+## Use
+
+After you have the styles configured, you can then import components as you'd expect.
 
 ```js
-import { UIShell } from '@boomerang-io/carbon-addons-boomerang-react';
+import { UIShell } from "@boomerang-io/carbon-addons-boomerang-react";
 ```
 
-## Testing a version
+> Note: In v3 of the component library we have removed the re-exporting of all of the Carbon components.
 
-Often times it is useful and necessary to test a published version of the component library via an application that uses it. Linking the project locally isn't always enough of a guarentee.
+### Integrating with UIShell Notifications
 
-We host the npm package for the library on Artifactory. Unlike the npm registry, we can't [tag](https://docs.npmjs.com/cli/dist-tag.html) a version to control the distribution e.g. designating a version as a beta. In Artifactory, whatever has the highest SemVer becomes the latest by default. Their [docs](https://docs.npmjs.com/cli/dist-tag.html) provide more information. To prevent unwanted versions from becoming the latest we following the convention of shifting all of the versioning numbers `MAJOR.MINOR.PATCH` to the `.PATCH`. For example, a new version of `3.4.0` would become `0.0.340`. It's not foolproof, but it works for our situation and is easy enough for developers to do.
+We use [react-toastify](https://github.com/fkhadra/react-toastify) to create notifications for UIShell events. If you are using the UIShell and want to also use react-toastify in your app for own notifications, you need to configure your `ToastContainer` component to support [multiple containers](https://fkhadra.github.io/react-toastify/multi-containers/#multi-containers-support) via the `enableMultiContainer` prop. It is _NOT_ required to include a `containerId` on your container or with notifications that you create. Without multi-container support enabled, you will see two notifications created for UIShell events.
 
-## Integrating with UIShell Notifications
+## 🛟 Version 2 LTS
 
-We use [react-toastify](https://github.com/fkhadra/react-toastify) to create notifications for UIShell events. If you want to also use the library in your application for notifications you must configure your `ToastContainer` component to support [multiple containers](https://github.com/fkhadra/react-toastify#multi-container-support) via the `enableMultiContainer={true}` prop. It is _NOT_ required to include a `containerId` on your container or with notifications that you create. Without multi-container support enabled, you will see two notifications created for UIShell events.
+Because of the potential time and difficulty involved in a migration to Carbon v11, we will maintain a maintenance v2 of the component library for a period of time. It will recieve critical functionality and security updates. Please view the support table below.
+
+## Support Schedule
+
+| Release | Status          | End-of-life |
+| ------- | --------------- | ----------- |
+| v1      | **End-of-Life** | 2022-03-18  |
+| v2      | **Maintenance** | 2023-04-30  |
+| v3      | **Current**     | TBD         |
 
 ## 📚 Docs
 
@@ -52,21 +154,6 @@ You can find more information about how to use each Component by checking out ou
 
 Please check out our [Contribution Guidelines](./.github/CONTRIBUTING.md) for more info on how you can help out!
 
-## Release History
+## 🚀 Release History
 
-### v2
-
-The big change here is finally supporting tree-shaking properly. This should reduce bundle size and builds times, sometimes drastically based on your use case. [View the migration guide](./documentation/guides/v2-migration.md) for updating to v2.
-
-**Features**
-
-- Tree-shaking via `ESM` builds
-- Storybook v6 migration
-- Dependency updates and security fixes
-
-**Breaking Changes**
-
-- Move `@carbon/icons-react` to a peer dependency
-- Move `carbon-icons` to a peer dependency
-- Remove `@carbon/elements` as a dependency
-- No longer publish `UMD` builds
+View [all releases](https://github.com/boomerang-io/carbon-addons-boomerang-react/releases)

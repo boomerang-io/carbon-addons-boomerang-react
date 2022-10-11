@@ -1,62 +1,66 @@
-@include exports('addons-bmrg-errorPageCore') {
-  .#{$prefix}--bmrg-error-page-core {
-    font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, Helvetica, sans-serif;
-    // margin: rem(80px) auto;
-    padding: 0 rem(32px);
-    position: relative;
-  }
+@use '@carbon/react/scss/components/button/tokens';
+@use '@carbon/themes/scss/tokens' as theme;
+@use "../../global/config" as *;
+@use "../../global/utils";
 
+.#{$prefix}--bmrg-error-page-core {
+  font-family: "IBM Plex Sans", "Helvetica Neue", Arial, Helvetica, sans-serif;
+  // margin: utils.rem(80px) auto;
+  padding: 0 utils.rem(32px);
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.#{$prefix}--bmrg-error-page-core__background {
+  height: auto;
+  width: auto;
+  max-height: 100vh;
+}
+
+.#{$prefix}--bmrg-error-page-core__content {
+  margin-top: utils.rem(80px);
+  position: absolute;
+  top: 0;
+}
+
+.#{$prefix}--bmrg-error-page-core__header {
+  color: tokens.$button-danger-primary;
+  font-size: utils.rem(36px);
+  line-height: utils.rem(46px);
+  font-weight: 600;
+  line-height: 42px;
+  margin-bottom: utils.rem(10px);
+}
+
+.#{$prefix}--bmrg-error-page-core__title {
+  color: theme.$text-primary;
+  font-size: utils.rem(20px);
+  font-weight: 600;
+  line-height: utils.rem(25px);
+  margin-bottom: utils.rem(16px);
+  max-width: 30.5rem;
+}
+
+.#{$prefix}--bmrg-error-page-core__message {
+  color: theme.$text-secondary;
+  font-size: utils.rem(16px);
+  line-height: utils.rem(20px);
+  max-width: 27rem;
+
+  a {
+    color: theme.$background-brand;
+    font-weight: 600;
+    text-decoration: none;
+  }
+}
+
+@media (max-width: utils.rem(768px)) {
   .#{$prefix}--bmrg-error-page-core__background {
-    height: auto;
-    width: rem(1440px);
-    max-width: 100%;
+    display: none;
   }
 
   .#{$prefix}--bmrg-error-page-core__content {
-    margin-top: rem(80px);
-    position: absolute;
-    top: 0;
-  }
-
-  .#{$prefix}--bmrg-error-page-core__header {
-    color: $danger-01;
-    font-size: rem(36px);
-    line-height: rem(46px);
-    font-weight: 600;
-    line-height: 42px;
-    margin-bottom: rem(10px);
-  }
-
-  .#{$prefix}--bmrg-error-page-core__title {
-    color: $text-01;
-    font-size: rem(20px);
-    font-weight: 600;
-    line-height: rem(25px);
-    margin-bottom: rem(16px);
-    max-width: 30.5rem;
-  }
-
-  .#{$prefix}--bmrg-error-page-core__message {
-    color: $text-02;
-    font-size: rem(16px);
-    line-height: rem(20px);
-    max-width: 27rem;
-
-    a {
-      color: $interactive-01;
-      font-weight: 600;
-      text-decoration: none;
-    }
-  }
-
-  @media (max-width: rem(768px)) {
-    .#{$prefix}--bmrg-error-page-core__background {
-      display: none;
-    }
-
-    .#{$prefix}--bmrg-error-page-core__content {
-      position: relative;
-      width: calc(100vw - 2rem);
-    }
+    position: relative;
   }
 }

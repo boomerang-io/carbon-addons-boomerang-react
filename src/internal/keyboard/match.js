@@ -57,12 +57,12 @@ export function matches(event, keysToMatch) {
  * @param {Key} key
  * @returns {boolean}
  */
-export function match(eventOrCode, { key, which, keyCode } = {}) {
-  if (typeof eventOrCode === 'string') {
+export function match(eventOrCode, { key, which, keyCode, code } = {}) {
+  if (typeof eventOrCode === "string") {
     return eventOrCode === key;
   }
 
-  if (typeof eventOrCode === 'number') {
+  if (typeof eventOrCode === "number") {
     return eventOrCode === which || eventOrCode === keyCode;
   }
 
@@ -70,7 +70,12 @@ export function match(eventOrCode, { key, which, keyCode } = {}) {
     return key.indexOf(eventOrCode.key) !== -1;
   }
 
-  return eventOrCode.key === key || eventOrCode.which === which || eventOrCode.keyCode === keyCode;
+  return (
+    eventOrCode.key === key ||
+    eventOrCode.which === which ||
+    eventOrCode.keyCode === keyCode ||
+    eventOrCode.code === code
+  );
 }
 
 /**
@@ -81,7 +86,7 @@ export function match(eventOrCode, { key, which, keyCode } = {}) {
  * @returns {string}
  */
 export function getCharacterFor(eventOrCode) {
-  if (typeof eventOrCode === 'number') {
+  if (typeof eventOrCode === "number") {
     return String.fromCharCode(eventOrCode);
   }
 

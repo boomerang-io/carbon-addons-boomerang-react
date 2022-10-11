@@ -1,6 +1,6 @@
-import { ToastNotification } from 'carbon-components-react';
-import PropTypes from 'prop-types';
 import React from 'react';
+import { ToastNotification } from '@carbon/react';
+import PropTypes from 'prop-types';
 
 export const deprecatedStoryTitle = '️⛔ Deprecation Notice ';
 
