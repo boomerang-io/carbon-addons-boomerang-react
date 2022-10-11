@@ -81,7 +81,7 @@ export const Default = () => {
         children: <div>You will need to start from the first component</div>,
       }}
       modalHeaderProps={{
-        title: "MODAL FLOW",
+        title: "Modal Flow",
         label: "Change between components and persisted data",
       }}
       modalTrigger={({ openModal }) => <Button onClick={openModal}>Open modal flow</Button>}
