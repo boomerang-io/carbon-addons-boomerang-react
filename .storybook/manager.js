@@ -7,6 +7,7 @@
 
 import { addons } from '@storybook/addons';
 import theme from './theme';
+import favicon from './favicon.png';
 
 addons.setConfig({
   theme,
@@ -16,3 +17,11 @@ addons.setConfig({
 // conditional panels, or other things that get in the way of our workflow
 localStorage.removeItem('@storybook/ui/store');
 localStorage.removeItem('storybook-layout');
+
+// Hack to set favicon
+// https://github.com/storybookjs/storybook/issues/6155
+const link = document.createElement('link');
+link.setAttribute('rel', 'shortcut icon');
+link.setAttribute('href', favicon);
+document.head.appendChild(link);
+

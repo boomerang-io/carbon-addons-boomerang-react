@@ -4,14 +4,14 @@
 
 Substantial changes to the library have been made for v3 to adopt Carbon v11, Vite, and Sass modules to significantly improve the developer experience both of using and writing the library.
 
-## Breaking Changes
+### Breaking Changes
 
 - Use [Carbon v11](https://medium.com/carbondesign/carbon-v11-72ace7fac01f)
 - Drop support for Carbon v10
 - Remove exports of Carbon components
 - Change style imports and theming
 
-## Improvements
+### Improvements
 
 - Reduce build times significantly via Sass modules, for both consumers and local development
 - Migrate to [Storybook builder for Vite](https://github.com/storybookjs/builder-vite)
@@ -20,7 +20,7 @@ Substantial changes to the library have been made for v3 to adopt Carbon v11, Vi
 - Use [Vitest](https://vitest.dev/) as test runner
 - Reduce number of installed and peer dependencies
 
-## Deprecations
+### Deprecations
 
 The following components are still in the library but have been marked as deprecated and are grouped together in a deprecated section in Storybook
 

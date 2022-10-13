@@ -46,7 +46,7 @@ We recommend using Carbon theme functionality and the associated CSS custom prop
 
 ### Gray 10 theme
 
-This is how we import things in our applications. We use a number of Carbon v10 tokens so we use the compatibility g10 theme from Carbon to support both new and old values. We also use Akamai as the host for our fonts instead of self-hosting via the `$use-akamai-cdn: true` argument to the `@carbon/react` import. View the Carbon docs to see all the arguments you can pass to customize your
+This is how we import things in our applications. We use a number of Carbon v10 tokens so we use the compatibility g10 theme from Carbon to support both new and old values. We also use Akamai as the host for our fonts instead of self-hosting via the `$use-akamai-cdn: true` argument to the `@carbon/react` import. View the Carbon docs to see all the arguments you can pass to customize how you use Carbon
 
 ```scss
 @use "@carbon/react" with (
@@ -65,9 +65,9 @@ This is how we import things in our applications. We use a number of Carbon v10 
 
 ## Boomerang theme
 
-Do you want to continue using the Boomerang theme? Unfortunately it is not as straightforward but it's not too bad. Follow the following steps
+Do you want to continue using the Boomerang theme? Follow the steps below.
 
-## Step 1 - Styles
+## Step 1 - Import styles
 
 Import the individual Carbon packages and addons styles as follows:
 
@@ -110,7 +110,7 @@ Import the individual Carbon packages and addons styles as follows:
 }
 ```
 
-## Step 2 - HTLM property
+## Step 2 - Set HTML property
 
 You need to set the `data-carbon-theme="boomerang"` attribute value in your app, at the highest level in the document tree as possible.
 
@@ -143,7 +143,7 @@ Because of the potential time and difficulty involved in a migration to Carbon v
 | Release | Status          | End-of-life |
 | ------- | --------------- | ----------- |
 | v1      | **End-of-Life** | 2022-03-18  |
-| v2      | **Maintenance** | 2022-04-30  |
+| v2      | **Maintenance** | 2023-04-30  |
 | v3      | **Current**     | TBD         |
 
 ## 📚 Docs
