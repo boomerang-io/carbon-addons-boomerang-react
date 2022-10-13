@@ -43,13 +43,13 @@ export default function HeaderAppSwitcher({ baseServiceUrl, isActive }) {
   }
 
   if (teamsQuery.data) {
-    const { accounts, standardTeams } = teamsQuery.data;
-    if (accounts?.length || standardTeams?.length) {
+    const { accountTeams, standardTeams } = teamsQuery.data;
+    if (accountTeams?.length || standardTeams?.length) {
       return (
         <HeaderRightPanel
           content={
             <Accordion className={`${prefix}--bmrg-header-teams__container`}>
-              {accounts?.map((account) => (
+              {accountTeams?.map((account) => (
                 <>
                   <HeaderAccordionItem team={account} baseServiceUrl={baseServiceUrl} type={TEAM_TYPES.ACCOUNT} />
                   {Boolean(account.projects) &&

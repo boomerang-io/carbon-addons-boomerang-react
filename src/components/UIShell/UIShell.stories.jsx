@@ -23,7 +23,7 @@ const TEAMS_DATA = {
     },
     { id: "2", name: "Team 2", displayName: null, isTeamMember: true },
   ],
-  accounts: [
+  accountTeams: [
     {
       id: "11",
       isTeamMember: true,
@@ -64,14 +64,14 @@ export default {
     docs: {
       inlineStories: false,
       description: {
-        component: "Integrates the Header, Sidenav and Right Panel components among others into a data-driven and flexible application shell for the IBM Services Essentials platform.",
+        component:
+          "Integrates the Header, Sidenav and Right Panel components among others into a data-driven and flexible application shell for the IBM Services Essentials platform.",
       },
     },
   },
 };
 
 export const Default = (args) => {
-
   mock.onGet(`${BASE_URL}/users/consents`).reply(200, PRIVACY_DATA);
   mock.onGet(`${BASE_URL}/launchpad/user`).reply(200, PROFILE_SETTINGS_DATA);
   mock.onGet(`${BASE_URL}/users/teams`).reply(withDelay(3000, [200, TEAMS_DATA]));
