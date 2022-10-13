@@ -52,8 +52,8 @@ export default function HeaderAppSwitcher({ baseServiceUrl, isActive }) {
               {accountTeams?.map((account) => (
                 <>
                   <HeaderAccordionItem team={account} baseServiceUrl={baseServiceUrl} type={TEAM_TYPES.ACCOUNT} />
-                  {Boolean(account.projects) &&
-                    account.projects.map((project) => (
+                  {Boolean(account.projectTeams) &&
+                    account.projectTeams.map((project) => (
                       <HeaderAccordionItem team={project} baseServiceUrl={baseServiceUrl} type={TEAM_TYPES.PROJECT} />
                     ))}
                   <SwitcherDivider />
