@@ -366,24 +366,18 @@
 
   .#{$prefix}--accordion__content {
     padding: 0rem;
-    .#{$prefix}--side-nav__menu-item {
-      &:focus, &:hover {
-        .#{$prefix}--side-nav__link-text {
-          color: #ffffff !important;
-        }
-      } 
-    }
+
     .#{$prefix}--side-nav__link {
       padding-left: 2rem;
+      color: #ffffff !important;
       &:focus, &:hover {
-        color: #ffffff !important;
-      }      
+        background-color: shell.$bmrg-header-hover-background !important;
+      } 
     }
+
     .#{$prefix}--side-nav__link-text {
       font-weight: 400;
-      &:hover {
-        color: #ffffff !important;
-      }
+      color: #ffffff !important;
     }
   }
 
@@ -392,15 +386,14 @@
     pointer-events: none;
     @include utils.text-overflow-ellipsis();
   }
+
   .#{$prefix}--accordion__item {
     border: none;
-    &:hover {
-      background-color: shell.$bmrg-header-hover-background !important;
-    }
     &:last-of-type {
       border: none;
     }
   }
+
   .#{$prefix}--accordion__heading {
     color: #ffffff;
     flex-direction: row-reverse;
@@ -410,11 +403,12 @@
       background-color: transparent !important;
     }
     path {
-      fill: #c1c7cd;
+      fill: #C6C6C6;
       width: 1rem;
       height: 1rem;
     }
   }
+  
   .#{$prefix}--switcher__item--divider {
     width: calc(100% - 2rem);
   }
@@ -440,13 +434,13 @@
     background-color: shell.$bmrg-header-hover-background !important;
   }
   &.--disabled {
-    color: #c1c7cd;
+    color: #C6C6C6;
   }
 }
 
 .#{$prefix}--bmrg-header-team__empty {
-  color: #c1c7cd;
-  font-size: 0.875rem;
+  color: #C6C6C6;
+  font-size: 0.75rem;
   letter-spacing: 0.02rem;
   line-height: 1rem;
   padding: 0.5rem 2rem 1rem;
