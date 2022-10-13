@@ -370,9 +370,10 @@
     .#{$prefix}--side-nav__link {
       padding-left: 2rem;
       color: #ffffff !important;
-      &:focus, &:hover {
+      &:focus,
+      &:hover {
         background-color: shell.$bmrg-header-hover-background !important;
-      } 
+      }
     }
 
     .#{$prefix}--side-nav__link-text {
@@ -402,13 +403,14 @@
       background-color: transparent !important;
     }
     path {
-      fill: #C6C6C6;
+      fill: #c6c6c6;
       width: 1rem;
       height: 1rem;
     }
   }
-  
+
   .#{$prefix}--switcher__item--divider {
+    background-color: #ffffff;
     width: calc(100% - 2rem);
   }
 }
@@ -433,12 +435,12 @@
     background-color: shell.$bmrg-header-hover-background !important;
   }
   &.--disabled {
-    color: #C6C6C6;
+    color: #c6c6c6;
   }
 }
 
 .#{$prefix}--bmrg-header-team__empty {
-  color: #C6C6C6;
+  color: #c6c6c6;
   font-size: 0.75rem;
   letter-spacing: 0.02rem;
   line-height: 1rem;

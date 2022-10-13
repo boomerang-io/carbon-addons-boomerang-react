@@ -8,7 +8,12 @@ import { serviceUrl, resolver } from "../../config/servicesConfig";
 import { TEAM_TYPES } from "../../constants/TeamTypes";
 import { prefix } from "../../internal/settings";
 
-export default function HeaderAppSwitcher({ baseServiceUrl, isActive }) {
+const externalProps = {
+  target: "_blank",
+  rel: "noreferrer noopener",
+};
+
+export default function HeaderAppSwitcher({ baseServiceUrl, baseLaunchEnvUrl, isActive }) {
   const classNames = cx({
     "--is-hidden": !isActive,
     "--app-switcher": true,
@@ -49,18 +54,29 @@ export default function HeaderAppSwitcher({ baseServiceUrl, isActive }) {
         <HeaderRightPanel
           content={
             <Accordion className={`${prefix}--bmrg-header-teams__container`}>
-              {accountTeams?.map((account) => (
-                <>
+              {standardTeams?.map((team, index) => (
+                <HeaderAccordionItem
+                  key={index}
+                  team={team}
+                  baseServiceUrl={baseServiceUrl}
+                  baseLaunchEnvUrl={baseLaunchEnvUrl}
+                  type={TEAM_TYPES.STANDARD}
+                />
+              ))}
+              {accountTeams?.map((account, index) => (
+                <div key={index}>
+                  <SwitcherDivider />
                   <HeaderAccordionItem team={account} baseServiceUrl={baseServiceUrl} type={TEAM_TYPES.ACCOUNT} />
                   {Boolean(account.projectTeams) &&
-                    account.projectTeams.map((project) => (
-                      <HeaderAccordionItem team={project} baseServiceUrl={baseServiceUrl} type={TEAM_TYPES.PROJECT} />
+                    account.projectTeams.map((project, i) => (
+                      <HeaderAccordionItem
+                        key={i}
+                        team={project}
+                        baseServiceUrl={baseServiceUrl}
+                        type={TEAM_TYPES.PROJECT}
+                      />
                     ))}
-                  <SwitcherDivider />
-                </>
-              ))}
-              {standardTeams?.map((team) => (
-                <HeaderAccordionItem team={team} baseServiceUrl={baseServiceUrl} type={TEAM_TYPES.STANDARD} />
+                </div>
               ))}
             </Accordion>
           }
@@ -85,7 +101,7 @@ export default function HeaderAppSwitcher({ baseServiceUrl, isActive }) {
   return null;
 }
 
-function HeaderAccordionItem({ team, baseServiceUrl, type }) {
+function HeaderAccordionItem({ team, baseServiceUrl, baseLaunchEnvUrl, type }) {
   const { id, name, isAccountTeamMember } = team;
   const [isSelected, setIsSelected] = React.useState(false);
   const teamsServicesUrl = serviceUrl.getTeamServices({ baseServiceUrl, teamId: id });
@@ -107,11 +123,13 @@ function HeaderAccordionItem({ team, baseServiceUrl, type }) {
   // Only open or show it is loading when the user has clicked, not for background loading
   const isOpen = Boolean(isSelected && servicesQuery.data);
   const isLoading = isSelected && servicesQuery.isFetching;
-  const notAccountMember = type === TEAM_TYPES.ACCOUNT && !isAccountTeamMember;
+  const isAccount = type === TEAM_TYPES.ACCOUNT;
+  const notAccountMember = isAccount && !isAccountTeamMember;
   const disabled = isLoading || notAccountMember;
 
   return (
     <AccordionItem
+      key={id}
       disabled={disabled}
       open={isOpen}
       title={name}
@@ -132,6 +150,7 @@ function HeaderAccordionItem({ team, baseServiceUrl, type }) {
               return (
                 <button
                   {...rest}
+                  key={id}
                   onMouseUp={() => !notAccountMember && setIsSelected(true)}
                   onMouseOver={getServices}
                   onFocus={getServices}
@@ -145,9 +164,21 @@ function HeaderAccordionItem({ team, baseServiceUrl, type }) {
       }
     >
       {!servicesQuery.error && Boolean(servicesQuery.data?.length) ? (
-        servicesQuery.data.map((service) => <SideNavMenuItem href={service.url}>{service.name}</SideNavMenuItem>)
+        <ul>
+          {servicesQuery.data.map((service, index) => (
+            <SideNavMenuItem
+              key={index}
+              href={service.url}
+              {...(service.url.includes(baseLaunchEnvUrl) ? {} : externalProps)}
+            >
+              {service.name}
+            </SideNavMenuItem>
+          ))}
+        </ul>
       ) : (
-        <div className={`${prefix}--bmrg-header-team__empty`}>This team has no services</div>
+        <div key={id} className={`${prefix}--bmrg-header-team__empty`}>{`This ${
+          isAccount ? "account" : "team"
+        } has no services`}</div>
       )}
     </AccordionItem>
   );

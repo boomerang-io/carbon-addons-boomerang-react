@@ -12,6 +12,7 @@ import UIShell from "./UIShell";
 const mock = new MockAdapter(axios);
 
 const BASE_URL = "https://www.ibm.com/services";
+const BASE_ENV_URL = "ibm.com";
 
 const TEAMS_DATA = {
   standardTeams: [
@@ -46,7 +47,7 @@ const SERVICES_DATA = [
   { name: "Service 1 with a loooong long long long name", url: "https://ibm.com" },
   { name: "Service 2", url: "https://ibm.com" },
   { name: "Service 3", url: "https://ibm.com" },
-  { name: "Service 4", url: "https://ibm.com" },
+  { name: "Service 4", url: "https://google.com" },
 ];
 
 const withDelay = (delay, response) => () => {
@@ -85,6 +86,7 @@ export const Default = (args) => {
       renderRequests={true}
       appName={"Flow"}
       platformName={"Boomerang"}
+      baseLaunchEnvUrl={BASE_ENV_URL}
       baseServiceUrl={BASE_URL}
       headerConfig={{
         features: {

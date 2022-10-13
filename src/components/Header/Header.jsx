@@ -450,6 +450,7 @@ class Header extends React.Component {
                       </HeaderListItem>
                       <HeaderAppSwitcher
                         baseServiceUrl={baseServiceUrl}
+                        baseLaunchEnvUrl={baseLaunchEnvUrl}
                         isActive={this.state.isAppSwitcherActive}
                       />
                     </li>
