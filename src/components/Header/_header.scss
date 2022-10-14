@@ -421,7 +421,7 @@
 
   &.--is-loading {
     .#{$prefix}--side-nav__icon {
-      display: none;
+      visibility: hidden;
     }
   }
 
