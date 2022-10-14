@@ -113,7 +113,6 @@ function HeaderAccordionItem({ baseServiceUrl, baseLaunchEnvUrl, isAccount, isMe
   async function getServices() {
     if (!servicesQuery.isFetching && !servicesQuery.data && !servicesQuery.error) {
       try {
-        console.log("refetching");
         servicesQuery.refetch();
       } catch (e) {
         // no-op on error
