@@ -369,117 +369,91 @@
 /**
 * Start HeaderAppSwitcher styles
 */
-.#{$prefix}--bmrg-header-teams__container {
+.#{$prefix}--bmrg-header-teams {
   height: 100%;
-  padding-top: 1rem;
+  padding: 1rem 0;
 
-  .#{$prefix}--accordion__content {
-    padding: 0rem;
+  &.--is-loading {
+    padding: 1rem;
   }
 
-  .#{$prefix}--side-nav__link {
+  &.--is-empty {
     align-items: center;
     display: flex;
-    gap: 0.5rem;
-    justify-content: space-between;
-    padding-left: 2rem;
-    width: 100%;
-    &:focus,
-    &:hover {
-      background-color: shell.$bmrg-header-hover-background !important;
-      * {
-        color: theme.$text-primary;
-        fill: theme.$text-primary;
-      }
+    flex-direction: column;
+    justify-content: center;
+    h1 {
+      font-size: 1rem;
+      font-weight: 300;
     }
-
-    svg {
-      fill: theme.$text-secondary;
-      min-width: 1rem;
+    p {
+      font-size: 0.75rem;
+      font-weight: 300;
+      line-height: 0.9375rem;
     }
   }
-
-  .#{$prefix}--side-nav__link-text {
-    font-weight: 400;
-  }
-
-  .#{$prefix}--accordion__title {
-    font-weight: 600;
-    pointer-events: none;
-    @include utils.text-overflow-ellipsis();
-  }
-
-  .#{$prefix}--accordion__item {
-    border: none;
-    &:last-of-type {
-      border: none;
-    }
-  }
-  .#{$prefix}--accordion__heading {
-    color: #ffffff;
-    flex-direction: row-reverse;
-    font-size: 0.875rem;
-    &:hover,
-    &:hover::before {
-      background-color: transparent !important;
-    }
-    path {
-      fill: #c6c6c6;
-      width: 1rem;
-      height: 1rem;
-    }
-  }
-}
-
-.#{$prefix}--bmrg-header-teams__loading {
-  height: 100%;
-  padding: 1rem;
 }
 
 .#{$prefix}--bmrg-header-teams__skeleton {
   height: 2rem;
 }
 
-.#{$prefix}--bmrg-header-team__container {
-  display: flex;
-  flex-direction: column;
-  padding-left: 2rem;
+.#{$prefix}--side-nav__submenu:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  &:hover {
+    background-color: initial;
+    color: theme.$text-secondary;
+  }
+}
+
+.#{$prefix}--side-nav__link {
+  gap: 0.5rem;
+  justify-content: space-between;
+  svg {
+    fill: theme.$icon-secondary;
+    min-width: 1rem;
+  }
 }
 
 .#{$prefix}--bmrg-header-team {
-  &:hover {
-    background-color: shell.$bmrg-header-hover-background !important;
+  position: relative;
+
+  &.--is-loading {
+    .#{$prefix}--side-nav__icon {
+      display: none;
+    }
   }
-  &[disabled] {
-    color: #c6c6c6;
+
+  .#{$prefix}--inline-loading {
+    min-height: 1rem;
+    position: absolute;
+    right: 0.5rem;
+    top: 0.5rem;
+    width: fit-content;
+  }
+
+  .#{$prefix}--side-nav__link-text {
+    align-items: center;
+    display: flex;
+    gap: 0.5rem;
+    justify-content: space-between;
+    width: 100%;
+     > span {
+      @include utils.text-overflow-ellipsis();
+     }
   }
 }
 
-.#{$prefix}--bmrg-header-team__empty {
-  color: #c6c6c6;
+.#{$prefix}--bmrg-header-team__service {
+  display: flex;
+  justify-content: space-between;
+}
+
+.#{$prefix}--bmrg-header-team__message {
+  color: theme.$text-secondary;
   font-size: 0.75rem;
   letter-spacing: 0.02rem;
   line-height: 1rem;
   padding: 0.5rem 2rem 1rem;
-}
-
-.#{$prefix}--bmrg-header-team__empty-title {
-  font-size: 1rem;
-  font-weight: 300;
-}
-
-.#{$prefix}--bmrg-header-team__empty-subtitle {
-  font-size: 0.75rem;
-  font-weight: 300;
-  line-height: 0.9375rem;
-}
-
-.#{$prefix}--bmrg-header-team__loading {
-  margin-right: 0.5rem;
-  min-height: 1rem;
-  width: fit-content;
-}
-
-.#{$prefix}--switcher__item--divider {
-  width: calc(100% - 2rem);
 }
