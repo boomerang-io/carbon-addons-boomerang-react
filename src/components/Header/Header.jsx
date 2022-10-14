@@ -443,14 +443,14 @@ class Header extends React.Component {
                         onKeyDown={this.handleIconKeypress("AppSwitcher")}
                       >
                         {this.state?.isAppSwitcherActive ? (
-                          <Close alt="App Switcher icon" />
+                          <Close alt="Close App Switcher" />
                         ) : (
-                          <Switcher alt="App Switcher icon" />
+                          <Switcher alt="Open App Switcher" />
                         )}
                       </HeaderListItem>
                       <HeaderAppSwitcher
-                        baseServiceUrl={baseServiceUrl}
                         baseLaunchEnvUrl={baseLaunchEnvUrl}
+                        baseServiceUrl={baseServiceUrl}
                         isActive={this.state.isAppSwitcherActive}
                       />
                     </li>
@@ -467,12 +467,9 @@ class Header extends React.Component {
                       >
                         {renderRightPanel.icon}
                       </HeaderListItem>
-                      <HeaderRightPanel
-                        content={renderRightPanel.component}
-                        className={cx({
-                          "--is-hidden": !this.state.isRightPanelActive,
-                        })}
-                      />
+                      <HeaderRightPanel isOpen={this.state.isRightPanelActive}>
+                        {renderRightPanel.component}
+                      </HeaderRightPanel>
                     </li>
                   ) : (
                     ""

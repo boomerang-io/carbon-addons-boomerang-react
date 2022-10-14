@@ -2,6 +2,7 @@
 @use "../../global/config" as *;
 @use "../../global/utils";
 @use "../../global/themes/shell-tokens" as shell;
+@use '@carbon/themes/scss/tokens' as theme;
 
 .#{$prefix}--bmrg-header {
   display: flex;
@@ -355,31 +356,51 @@
 
   &.--is-hidden {
     transform: translateX(100%);
+    > * {
+      // Hide content when closed so you can't tab to it
+      display: none;
+    }
   }
   &.--app-switcher {
     width: 16rem;
   }
 }
+
+/**
+* Start HeaderAppSwitcher styles
+*/
 .#{$prefix}--bmrg-header-teams__container {
   height: 100%;
   padding-top: 1rem;
 
   .#{$prefix}--accordion__content {
     padding: 0rem;
+  }
 
-    .#{$prefix}--side-nav__link {
-      padding-left: 2rem;
-      color: #ffffff !important;
-      &:focus,
-      &:hover {
-        background-color: shell.$bmrg-header-hover-background !important;
+  .#{$prefix}--side-nav__link {
+    align-items: center;
+    display: flex;
+    gap: 0.5rem;
+    justify-content: space-between;
+    padding-left: 2rem;
+    width: 100%;
+    &:focus,
+    &:hover {
+      background-color: shell.$bmrg-header-hover-background !important;
+      * {
+        color: theme.$text-primary;
+        fill: theme.$text-primary;
       }
     }
 
-    .#{$prefix}--side-nav__link-text {
-      font-weight: 400;
-      color: #ffffff !important;
+    svg {
+      fill: theme.$text-secondary;
+      min-width: 1rem;
     }
+  }
+
+  .#{$prefix}--side-nav__link-text {
+    font-weight: 400;
   }
 
   .#{$prefix}--accordion__title {
@@ -408,11 +429,6 @@
       height: 1rem;
     }
   }
-
-  .#{$prefix}--switcher__item--divider {
-    background-color: #ffffff;
-    width: calc(100% - 2rem);
-  }
 }
 
 .#{$prefix}--bmrg-header-teams__loading {
@@ -434,7 +450,7 @@
   &:hover {
     background-color: shell.$bmrg-header-hover-background !important;
   }
-  &.--disabled {
+  &[disabled] {
     color: #c6c6c6;
   }
 }

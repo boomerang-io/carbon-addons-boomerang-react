@@ -12,7 +12,7 @@ import UIShell from "./UIShell";
 const mock = new MockAdapter(axios);
 
 const BASE_URL = "https://www.ibm.com/services";
-const BASE_ENV_URL = "ibm.com";
+const BASE_ENV_URL = "https://ibm.com";
 
 const TEAMS_DATA = {
   standardTeams: [
@@ -20,25 +20,23 @@ const TEAMS_DATA = {
       id: "1",
       name: "Team 1",
       displayName: "Team 1 display with a loooong long long long display name",
-      isTeamMember: true,
     },
-    { id: "2", name: "Team 2", displayName: null, isTeamMember: true },
+    { id: "2", name: "Team 2", displayName: null },
   ],
   accountTeams: [
     {
       id: "11",
-      isTeamMember: true,
+      isAccountTeamMember: true,
       name: "Account 1",
       projectTeams: [
-        { accountTeamId: "11", id: "111", name: "Project 1 1", displayName: "Project 1 1 display", isTeamMember: true },
-        { accountTeamId: "11", id: "112", name: "Project 1 2", displayName: null, isTeamMember: true },
+        { accountTeamId: "11", id: "111", name: "Project 1 1", displayName: "Project 1 1 display" },
+        { accountTeamId: "11", id: "112", name: "Project 1 2", displayName: null },
       ],
     },
     {
       id: "12",
-      isTeamMember: false,
       name: "Account 2",
-      projectTeams: [{ accountTeamId: "12", id: "121", name: "Project 2 1", displayName: null, isTeamMember: true }],
+      projectTeams: [{ accountTeamId: "12", id: "121", name: "Project 2 1", displayName: null }],
     },
   ],
 };
@@ -156,6 +154,7 @@ export const WithCarbonSidenavAndReactRouter = () => {
         platformName={"Boomerang"}
         appName={""}
         baseServiceUrl={BASE_URL}
+        baseLaunchEnvUrl={BASE_ENV_URL}
         headerConfig={{
           features: {
             "appSwitcher.enabled": true,
