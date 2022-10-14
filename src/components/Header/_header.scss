@@ -479,3 +479,7 @@
   min-height: 1rem;
   width: fit-content;
 }
+
+.#{$prefix}--switcher__item--divider {
+  width: calc(100% - 2rem);
+}
