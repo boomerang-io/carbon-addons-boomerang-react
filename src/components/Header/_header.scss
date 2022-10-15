@@ -400,7 +400,7 @@
 
 .#{$prefix}--side-nav__submenu:disabled {
   cursor: not-allowed;
-  opacity: 0.5;
+  color: theme.$text-disabled;
   &:hover {
     background-color: initial;
     color: theme.$text-secondary;

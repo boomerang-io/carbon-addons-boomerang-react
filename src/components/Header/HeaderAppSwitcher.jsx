@@ -4,7 +4,8 @@ import cx from "classnames";
 import { InlineLoading, SkeletonText, SideNavMenu, SideNavMenuItem, SwitcherDivider } from "@carbon/react";
 import { Launch } from "@carbon/react/icons";
 import FocusTrap from "focus-trap-react";
-import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import DelayedRender from "../DelayedRender";
+import ErrorMessage from "../ErrorMessage";
 import HeaderRightPanel from "./HeaderRightPanel";
 import { serviceUrl, resolver } from "../../config/servicesConfig";
 import { prefix } from "../../internal/settings";
@@ -50,7 +51,7 @@ export default function HeaderAppSwitcher({ baseServiceUrl, baseLaunchEnvUrl, is
           <FocusTrap active={isActive} focusTrapOptions={{ allowOutsideClick: true }}>
             <ul className={`${prefix}--bmrg-header-teams`}>
               {standardTeams?.map((team) => (
-                <HeaderAccordionItem
+                <TeamServiceListMenu
                   key={team.id}
                   baseLaunchEnvUrl={baseLaunchEnvUrl}
                   baseServiceUrl={baseServiceUrl}
@@ -61,7 +62,7 @@ export default function HeaderAppSwitcher({ baseServiceUrl, baseLaunchEnvUrl, is
               {accountTeams?.map((account) => (
                 <div key={account.id}>
                   <SwitcherDivider />
-                  <HeaderAccordionItem
+                  <TeamServiceListMenu
                     baseLaunchEnvUrl={baseLaunchEnvUrl}
                     baseServiceUrl={baseServiceUrl}
                     isAccount={true}
@@ -70,7 +71,7 @@ export default function HeaderAppSwitcher({ baseServiceUrl, baseLaunchEnvUrl, is
                   />
                   {Boolean(account.projectTeams) &&
                     account.projectTeams.map((project) => (
-                      <HeaderAccordionItem
+                      <TeamServiceListMenu
                         key={project.id}
                         baseLaunchEnvUrl={baseLaunchEnvUrl}
                         baseServiceUrl={baseServiceUrl}
@@ -99,7 +100,7 @@ export default function HeaderAppSwitcher({ baseServiceUrl, baseLaunchEnvUrl, is
   return null;
 }
 
-function HeaderAccordionItem({ baseServiceUrl, baseLaunchEnvUrl, isAccount, isMember, team }) {
+function TeamServiceListMenu({ baseServiceUrl, baseLaunchEnvUrl, isAccount, isMember, team }) {
   const { id, name } = team;
   const [isSelected, setIsSelected] = React.useState(false);
   const teamsServicesUrl = serviceUrl.getTeamServices({ baseServiceUrl, teamId: id });
@@ -154,7 +155,11 @@ function HeaderAccordionItem({ baseServiceUrl, baseLaunchEnvUrl, isAccount, isMe
       <SideNavMenu title={name}>
         <ServiceList baseLaunchEnvUrl={baseLaunchEnvUrl} isAccount={isAccount} servicesQuery={servicesQuery} />
       </SideNavMenu>
-      {isInlineLoadingVisible && <InlineLoading />}
+      {isInlineLoadingVisible && (
+        <DelayedRender delay={200}>
+          <InlineLoading />
+        </DelayedRender>
+      )}
     </li>
   );
 }
