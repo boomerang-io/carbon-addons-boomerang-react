@@ -8,6 +8,7 @@ umd
 build
 styles
 docs
+scss
 
 # Dependency directory
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
@@ -31,7 +32,6 @@ package-lock.json
 # Mac OS Specific files
 .DS_Store
 
-.npmrc
 results
 
 .env
