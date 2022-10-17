@@ -35,7 +35,7 @@ const TEAMS_DATA = {
     },
     {
       id: "12",
-      name: "Account 2",
+      name: "Account 2 has an exceptionally long name",
       projectTeams: [{ accountTeamId: "12", id: "121", name: "Project 2 1", displayName: null }],
     },
   ],
@@ -45,7 +45,7 @@ const SERVICES_DATA = [
   { name: "Service 1 with a loooong long long long name", url: "https://ibm.com" },
   { name: "Service 2", url: "https://ibm.com" },
   { name: "Service 3", url: "https://ibm.com" },
-  { name: "Service 4", url: "https://google.com" },
+  { name: "Service 4 with a loooong long long long name", url: "https://google.com" },
 ];
 
 const withDelay = (delay, response) => () => {

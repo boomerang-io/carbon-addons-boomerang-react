@@ -132,12 +132,13 @@ function TeamServiceListMenu({ baseServiceUrl, baseLaunchEnvUrl, isAccount, isMe
   }
 
   const isInlineLoadingVisible = isSelected && servicesQuery.isLoading;
+  const isNameTruncated = name?.length > 30;
 
   if (!isMember) {
     return (
-      <li className={`${prefix}--side-nav__item`}>
+      <li className={`${prefix}--side-nav__item`} title={isNameTruncated ? name : undefined}>
         <button disabled className={`${prefix}--side-nav__submenu`}>
-          {name}
+          <span className={`${prefix}--side-nav__submenu-title`}>{name}</span>
         </button>
       </li>
     );
@@ -151,6 +152,7 @@ function TeamServiceListMenu({ baseServiceUrl, baseLaunchEnvUrl, isAccount, isMe
       onFocus={getServices}
       onKeyDown={handleOnKeyDown}
       onMouseOver={getServices}
+      title={isNameTruncated ? name : undefined}
     >
       <SideNavMenu title={name}>
         <ServiceList baseLaunchEnvUrl={baseLaunchEnvUrl} isAccount={isAccount} servicesQuery={servicesQuery} />
@@ -179,14 +181,22 @@ function ServiceList(props) {
     if (Boolean(servicesQuery.data?.length)) {
       return (
         <>
-          {servicesQuery.data.map((service) => (
-            <SideNavMenuItem href={service.url} {...(service.url.includes(baseLaunchEnvUrl) ? {} : externalProps)}>
-              <>
-                <span>{service.name}</span>
-                {!service.url.includes(baseLaunchEnvUrl) && <Launch size={16} alt="Opens page in new tab" />}
-              </>
-            </SideNavMenuItem>
-          ))}
+          {servicesQuery.data.map((service) => {
+            const isExternalLink = !service.url.includes(baseLaunchEnvUrl);
+            const isNameTruncated = isExternalLink ? service.name.length > 28 : service.name.length > 32;
+            return (
+              <SideNavMenuItem
+                href={service.url}
+                title={isNameTruncated ? service.name : undefined}
+                {...(isExternalLink ? externalProps : undefined)}
+              >
+                <>
+                  <span>{service.name}</span>
+                  {isExternalLink ? <Launch size={16} alt="Opens page in new tab" /> : undefined}
+                </>
+              </SideNavMenuItem>
+            );
+          })}
         </>
       );
     } else {

@@ -405,6 +405,9 @@
     background-color: initial;
     color: theme.$text-disabled;
   }
+  > span {
+    margin-right: 1rem;
+  }
 }
 
 .#{$prefix}--side-nav__link {
@@ -439,9 +442,9 @@
     gap: 0.5rem;
     justify-content: space-between;
     width: 100%;
-     > span {
+    > span {
       @include utils.text-overflow-ellipsis();
-     }
+    }
   }
 }
 
