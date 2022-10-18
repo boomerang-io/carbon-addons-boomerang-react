@@ -63,7 +63,7 @@ export default function HeaderAppSwitcher({ baseServiceUrl, baseLaunchEnvUrl, is
               ))}
               {accountTeams?.map((account) => (
                 <div key={account.id}>
-                  <SwitcherDivider />
+                  <SwitcherDivider style={{opacity: "0.5"}}/>
                   <TeamServiceListMenu
                     baseLaunchEnvUrl={baseLaunchEnvUrl}
                     baseServiceUrl={baseServiceUrl}
@@ -147,8 +147,8 @@ function TeamServiceListMenu({ baseServiceUrl, baseLaunchEnvUrl, isAccount, isMe
   }
 
   return (
-    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
-    <li
+    // eslint-disable-next-line jsx-a11y/no-static-element-interactions
+    <div
       className={cx(`${prefix}--bmrg-header-team`, { "--is-loading": isInlineLoadingVisible })}
       onClick={handleOnClick}
       onFocus={getServices}
@@ -164,7 +164,7 @@ function TeamServiceListMenu({ baseServiceUrl, baseLaunchEnvUrl, isAccount, isMe
           <InlineLoading />
         </DelayedRender>
       )}
-    </li>
+    </div>
   );
 }
 
