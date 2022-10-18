@@ -15,6 +15,7 @@ const HeaderRightPanel = ({ children, className, isOpen, ...rest }) => {
 HeaderRightPanel.propTypes = {
   content: PropTypes.element,
   className: PropTypes.string,
+  isOpen: PropTypes.bool,
 };
 
 export default HeaderRightPanel;
