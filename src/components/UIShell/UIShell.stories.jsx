@@ -12,6 +12,49 @@ import UIShell from "./UIShell";
 const mock = new MockAdapter(axios);
 
 const BASE_URL = "https://www.ibm.com/services";
+const BASE_ENV_URL = "https://ibm.com";
+
+const TEAMS_DATA = {
+  standardTeams: [
+    {
+      id: "1",
+      name: "Team 1",
+      displayName: "Team 1 display with a loooong long long long display name",
+    },
+    { id: "2", name: "Team 2", displayName: null },
+  ],
+  accountTeams: [
+    {
+      id: "11",
+      isAccountTeamMember: true,
+      name: "Account 1",
+      projectTeams: [
+        { accountTeamId: "11", id: "111", name: "Project 1 1", displayName: "Project 1 1 display" },
+        { accountTeamId: "11", id: "112", name: "Project 1 2", displayName: null },
+      ],
+    },
+    {
+      id: "12",
+      name: "Account 2 has an exceptionally long name",
+      projectTeams: [{ accountTeamId: "12", id: "121", name: "Project 2 1", displayName: null }],
+    },
+  ],
+};
+
+const SERVICES_DATA = [
+  { name: "Service 1 with a loooong long long long name", url: "https://ibm.com" },
+  { name: "Service 2", url: "https://ibm.com" },
+  { name: "Service 3", url: "https://ibm.com" },
+  { name: "Service 4 with a loooong long long long name", url: "https://google.com" },
+];
+
+const withDelay = (delay, response) => () => {
+  return new Promise(function (resolve) {
+    setTimeout(function () {
+      resolve(response);
+    }, delay);
+  });
+};
 
 export default {
   title: "Platform/UIShell",
@@ -20,7 +63,8 @@ export default {
     docs: {
       inlineStories: false,
       description: {
-        component: "Integrates the Header, Sidenav and Right Panel components among others into a data-driven and flexible application shell for the IBM Services Essentials platform.",
+        component:
+          "Integrates the Header, Sidenav and Right Panel components among others into a data-driven and flexible application shell for the IBM Services Essentials platform.",
       },
     },
   },
@@ -29,6 +73,9 @@ export default {
 export const Default = (args) => {
   mock.onGet(`${BASE_URL}/users/consents`).reply(200, PRIVACY_DATA);
   mock.onGet(`${BASE_URL}/launchpad/user`).reply(200, PROFILE_SETTINGS_DATA);
+  mock.onGet(`${BASE_URL}/users/teams`).reply(withDelay(1000, [200, TEAMS_DATA]));
+  mock.onGet(`${BASE_URL}/launchpad/teams/1/services`).reply(withDelay(4000, [200, SERVICES_DATA]));
+  mock.onGet(`${BASE_URL}/launchpad/teams/2/services`).reply(withDelay(4000, [200, []]));
   mock.onPost(`${BASE_URL}/support/contact`).reply(200);
   return (
     <UIShell
@@ -37,9 +84,11 @@ export const Default = (args) => {
       renderRequests={true}
       appName={"Flow"}
       platformName={"Boomerang"}
+      baseLaunchEnvUrl={BASE_ENV_URL}
       baseServiceUrl={BASE_URL}
       headerConfig={{
         features: {
+          "appSwitcher.enabled": true,
           "community.enabled": true,
           "notifications.enabled": true,
           "support.enabled": true,
@@ -93,6 +142,9 @@ export const Default = (args) => {
 export const WithCarbonSidenavAndReactRouter = () => {
   mock.onGet(`${BASE_URL}/users/consents`).reply(200, PRIVACY_DATA);
   mock.onGet(`${BASE_URL}/launchpad/user`).reply(200, PROFILE_SETTINGS_DATA);
+  mock.onGet(`${BASE_URL}/users/teams`).reply(200, TEAMS_DATA);
+  mock.onGet(`${BASE_URL}/launchpad/teams/1/services`).reply(withDelay(3000, [200, SERVICES_DATA]));
+  mock.onGet(`${BASE_URL}/launchpad/teams/2/services`).reply(withDelay(3000, [200, []]));
   mock.onPatch(`${BASE_URL}/users/profile`).reply(200);
   mock.onPost(`${BASE_URL}/support/contact`).reply(200);
   return (
@@ -102,8 +154,10 @@ export const WithCarbonSidenavAndReactRouter = () => {
         platformName={"Boomerang"}
         appName={""}
         baseServiceUrl={BASE_URL}
+        baseLaunchEnvUrl={BASE_ENV_URL}
         headerConfig={{
           features: {
+            "appSwitcher.enabled": true,
             "community.enabled": true,
             "notifications.enabled": true,
             "support.enabled": true,

@@ -16,7 +16,7 @@ $bmrg-header-notification-icon: var(--cds-bmrg-header-notification-icon);
 $bmrg-header-modal-overlay: var(--cds-bmrg-header-modal-overlay);
 $bmrg-header-modal-cancel: var(--cds-bmrg-header-modal-cancel);
 $bmrg-header-modal-confirm: theme.$background-brand;
-$bmrg-header-modal-link: theme.$background-brand;
+$bmrg-header-modal-link: var(--cds-bmrg-header-modal-link);
 $bmrg-header-nav: var(--cds-bmrg-header-nav);
 $bmrg-header-modal-background: var(--cds-bmrg-header-modal-background);
 $bmrg-header-button-text: theme.$text-inverse;

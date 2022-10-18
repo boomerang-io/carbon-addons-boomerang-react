@@ -133,10 +133,11 @@
         margin-top: 1rem;
       }
       .#{$prefix}--inline-notification {
-        bottom: 4rem;
+        bottom: 5rem;
+        max-width: calc(100% - 2rem);
         padding-bottom: 0;
-        position: absolute;
-        width: 95%;
+        position: fixed;
+        width: calc(100% - 2rem);
       }
     }
 

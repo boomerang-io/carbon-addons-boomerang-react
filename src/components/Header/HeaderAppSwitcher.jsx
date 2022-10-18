@@ -1,92 +1,107 @@
 import React from "react";
 import { useQuery } from "react-query";
 import cx from "classnames";
-import { Accordion, AccordionItem, InlineLoading, SideNavMenuItem, SkeletonText, SwitcherDivider } from "@carbon/react";
+import { InlineLoading, SkeletonText, SideNavMenu, SideNavMenuItem, SwitcherDivider } from "@carbon/react";
+import { Launch } from "@carbon/react/icons";
+import FocusTrap from "focus-trap-react";
+import DelayedRender from "../DelayedRender";
+import ErrorMessage from "../ErrorMessage";
 import HeaderRightPanel from "./HeaderRightPanel";
-import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import { serviceUrl, resolver } from "../../config/servicesConfig";
-import { TEAM_TYPES } from "../../constants/TeamTypes";
 import { prefix } from "../../internal/settings";
+import { match, keys } from "../../internal/keyboard";
 
-export default function HeaderAppSwitcher({ baseServiceUrl, isActive }) {
-  const classNames = cx({
-    "--is-hidden": !isActive,
-    "--app-switcher": true,
-  });
+const externalProps = {
+  target: "_blank",
+  rel: "noreferrer noopener",
+};
+const classNames = "--app-switcher";
+
+export default function HeaderAppSwitcher({ baseServiceUrl, baseLaunchEnvUrl, isActive }) {
   const userTeamsUrl = serviceUrl.getUserTeams({ baseServiceUrl });
   const teamsQuery = useQuery(userTeamsUrl, resolver.query(userTeamsUrl));
 
   if (teamsQuery.isLoading) {
     return (
-      <HeaderRightPanel
-        content={
-          <div className={`${prefix}--bmrg-header-teams__loading`}>
-            <SkeletonText className={`${prefix}--bmrg-header-teams__skeleton`} />
-            <SkeletonText className={`${prefix}--bmrg-header-teams__skeleton`} />
-            <SkeletonText className={`${prefix}--bmrg-header-teams__skeleton`} />
-            <SkeletonText className={`${prefix}--bmrg-header-teams__skeleton`} />
-            <SkeletonText className={`${prefix}--bmrg-header-teams__skeleton`} />
-          </div>
-        }
-        className={classNames}
-      />
+      <HeaderRightPanel className={classNames} isOpen={isActive}>
+        <div className={cx(`${prefix}--bmrg-header-teams`, `--is-loading`)}>
+          <SkeletonText className={`${prefix}--bmrg-header-teams__skeleton`} />
+          <SkeletonText className={`${prefix}--bmrg-header-teams__skeleton`} />
+          <SkeletonText className={`${prefix}--bmrg-header-teams__skeleton`} />
+          <SkeletonText className={`${prefix}--bmrg-header-teams__skeleton`} />
+          <SkeletonText className={`${prefix}--bmrg-header-teams__skeleton`} />
+        </div>
+      </HeaderRightPanel>
     );
   }
 
   if (teamsQuery.error) {
     return (
-      <HeaderRightPanel
-        content={<ErrorMessage className={`${prefix}--bmrg-header-teams__container`} />}
-        className={classNames}
-      />
+      <HeaderRightPanel className={classNames} isOpen={isActive}>
+        <ErrorMessage className={`${prefix}--bmrg-header-teams`} />
+      </HeaderRightPanel>
     );
   }
 
   if (teamsQuery.data) {
-    const { accounts, standardTeams } = teamsQuery.data;
-    if (accounts?.length || standardTeams?.length) {
+    const { accountTeams, standardTeams } = teamsQuery.data;
+    if (accountTeams?.length || standardTeams?.length) {
       return (
-        <HeaderRightPanel
-          content={
-            <Accordion className={`${prefix}--bmrg-header-teams__container`}>
-              {accounts?.map((account) => (
-                <>
-                  <HeaderAccordionItem team={account} baseServiceUrl={baseServiceUrl} type={TEAM_TYPES.ACCOUNT} />
-                  {Boolean(account.projects) &&
-                    account.projects.map((project) => (
-                      <HeaderAccordionItem team={project} baseServiceUrl={baseServiceUrl} type={TEAM_TYPES.PROJECT} />
-                    ))}
-                  <SwitcherDivider />
-                </>
-              ))}
+        <HeaderRightPanel className={classNames} isOpen={isActive}>
+          <FocusTrap active={isActive} focusTrapOptions={{ allowOutsideClick: true }}>
+            <ul className={`${prefix}--bmrg-header-teams`}>
               {standardTeams?.map((team) => (
-                <HeaderAccordionItem team={team} baseServiceUrl={baseServiceUrl} type={TEAM_TYPES.STANDARD} />
+                <TeamServiceListMenu
+                  key={team.id}
+                  baseLaunchEnvUrl={baseLaunchEnvUrl}
+                  baseServiceUrl={baseServiceUrl}
+                  isMember={true}
+                  team={team}
+                />
               ))}
-            </Accordion>
-          }
-          className={classNames}
-        />
+              {accountTeams?.map((account) => (
+                <div key={account.id}>
+                  <SwitcherDivider />
+                  <TeamServiceListMenu
+                    baseLaunchEnvUrl={baseLaunchEnvUrl}
+                    baseServiceUrl={baseServiceUrl}
+                    isAccount={true}
+                    isMember={account.isAccountTeamMember}
+                    team={account}
+                  />
+                  {Boolean(account.projectTeams) &&
+                    account.projectTeams.map((project) => (
+                      <TeamServiceListMenu
+                        key={project.id}
+                        baseLaunchEnvUrl={baseLaunchEnvUrl}
+                        baseServiceUrl={baseServiceUrl}
+                        isMember={true}
+                        team={project}
+                      />
+                    ))}
+                </div>
+              ))}
+            </ul>
+          </FocusTrap>
+        </HeaderRightPanel>
       );
     }
 
     return (
-      <HeaderRightPanel
-        content={
-          <div className={`${prefix}--bmrg-header-teams__container`}>
-            <p className={`${prefix}--bmrg-header-team__empty-title`}>No teams</p>
-            <p className={`${prefix}--bmrg-header-team__empty-subtitle`}>You must be new here</p>
-          </div>
-        }
-        className={classNames}
-      />
+      <HeaderRightPanel className={classNames} isOpen={isActive}>
+        <div className={cx(`${prefix}--bmrg-header-teams`, "--is-empty")}>
+          <h1 className={`${prefix}--bmrg-header-teams__empty-title`}>No teams</h1>
+          <p className={`${prefix}--bmrg-header-teams__empty-subtitle`}>You must be new here</p>
+        </div>
+      </HeaderRightPanel>
     );
   }
 
   return null;
 }
 
-function HeaderAccordionItem({ team, baseServiceUrl, type }) {
-  const { id, name, isAccountTeamMember } = team;
+function TeamServiceListMenu({ baseServiceUrl, baseLaunchEnvUrl, isAccount, isMember, team }) {
+  const { id, name } = team;
   const [isSelected, setIsSelected] = React.useState(false);
   const teamsServicesUrl = serviceUrl.getTeamServices({ baseServiceUrl, teamId: id });
 
@@ -97,58 +112,101 @@ function HeaderAccordionItem({ team, baseServiceUrl, type }) {
   });
 
   async function getServices() {
-    try {
-      servicesQuery.refetch();
-    } catch (e) {
-      // handle error
+    if (!servicesQuery.isFetching && !servicesQuery.data && !servicesQuery.error) {
+      try {
+        servicesQuery.refetch();
+      } catch (e) {
+        // no-op on error
+      }
     }
   }
 
-  // Only open or show it is loading when the user has clicked, not for background loading
-  const isOpen = Boolean(isSelected && servicesQuery.data);
-  const isLoading = isSelected && servicesQuery.isFetching;
-  const notAccountMember = type === TEAM_TYPES.ACCOUNT && !isAccountTeamMember;
-  const disabled = isLoading || notAccountMember;
+  function handleOnClick() {
+    setIsSelected(true);
+  }
+
+  function handleOnKeyDown(e) {
+    if (match(e, keys.Enter) || match(e, keys.Space)) {
+      setIsSelected(true);
+    }
+  }
+
+  const isInlineLoadingVisible = isSelected && servicesQuery.isLoading;
+  const isNameTruncated = name?.length > 30;
+
+  if (!isMember) {
+    return (
+      <li className={`${prefix}--side-nav__item`} title={isNameTruncated ? name : undefined}>
+        <button disabled className={`${prefix}--side-nav__submenu`}>
+          <span className={`${prefix}--side-nav__submenu-title`}>{name}</span>
+        </button>
+      </li>
+    );
+  }
 
   return (
-    <AccordionItem
-      disabled={disabled}
-      open={isOpen}
-      title={name}
-      renderToggle={
-        // Use undefined when we have data to use the default toggle
-        servicesQuery.data
-          ? undefined
-          : (props) => {
-              const { children, className, ...rest } = props;
-              const chevronElem = children[0];
-              const titleElem = children[1];
-              const indicatorIcon = isLoading ? (
-                <InlineLoading className={`${prefix}--bmrg-header-team__loading`} />
-              ) : (
-                chevronElem
-              );
-
-              return (
-                <button
-                  {...rest}
-                  onMouseUp={() => !notAccountMember && setIsSelected(true)}
-                  onMouseOver={getServices}
-                  onFocus={getServices}
-                  className={cx(`${prefix}--bmrg-header-team`, className, { "--disabled": notAccountMember })}
-                >
-                  {!notAccountMember && indicatorIcon}
-                  {titleElem}
-                </button>
-              );
-            }
-      }
+    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
+    <li
+      className={cx(`${prefix}--bmrg-header-team`, { "--is-loading": isInlineLoadingVisible })}
+      onClick={handleOnClick}
+      onFocus={getServices}
+      onKeyDown={handleOnKeyDown}
+      onMouseOver={getServices}
+      title={isNameTruncated ? name : undefined}
     >
-      {!servicesQuery.error && Boolean(servicesQuery.data?.length) ? (
-        servicesQuery.data.map((service) => <SideNavMenuItem href={service.url}>{service.name}</SideNavMenuItem>)
-      ) : (
-        <div className={`${prefix}--bmrg-header-team__empty`}>This team has no services</div>
+      <SideNavMenu title={name}>
+        <ServiceList baseLaunchEnvUrl={baseLaunchEnvUrl} isAccount={isAccount} servicesQuery={servicesQuery} />
+      </SideNavMenu>
+      {isInlineLoadingVisible && (
+        <DelayedRender delay={200}>
+          <InlineLoading />
+        </DelayedRender>
       )}
-    </AccordionItem>
+    </li>
   );
+}
+
+function ServiceList(props) {
+  const { baseLaunchEnvUrl, isAccount, servicesQuery } = props;
+
+  if (servicesQuery.error) {
+    return (
+      <div className={`${prefix}--bmrg-header-team__message`}>{`Failed to fetch the services for this ${
+        isAccount ? "account" : "team"
+      }`}</div>
+    );
+  }
+
+  if (Boolean(servicesQuery.data)) {
+    if (Boolean(servicesQuery.data?.length)) {
+      return (
+        <>
+          {servicesQuery.data.map((service) => {
+            const isExternalLink = !service.url.includes(baseLaunchEnvUrl);
+            const isNameTruncated = isExternalLink ? service.name.length > 28 : service.name.length > 32;
+            return (
+              <SideNavMenuItem
+                href={service.url}
+                title={isNameTruncated ? service.name : undefined}
+                {...(isExternalLink ? externalProps : undefined)}
+              >
+                <>
+                  <span>{service.name}</span>
+                  {isExternalLink ? <Launch size={16} alt="Opens page in new tab" /> : undefined}
+                </>
+              </SideNavMenuItem>
+            );
+          })}
+        </>
+      );
+    } else {
+      return (
+        <div className={`${prefix}--bmrg-header-team__message`}>{`This ${
+          isAccount ? "account" : "team"
+        } has no services`}</div>
+      );
+    }
+  }
+
+  return null;
 }

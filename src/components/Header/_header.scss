@@ -2,6 +2,7 @@
 @use "../../global/config" as *;
 @use "../../global/utils";
 @use "../../global/themes/shell-tokens" as shell;
+@use '@carbon/themes/scss/tokens' as theme;
 
 .#{$prefix}--bmrg-header {
   display: flex;
@@ -344,15 +345,118 @@
 }
 
 .#{$prefix}--bmrg-right-panel {
-  position: fixed;
-  height: 100%;
-  width: 22rem;
-  right: 0;
   background-color: shell.$bmrg-tertiary;
+  height: calc(100vh - 3rem);
+  overflow-y: auto;
+  position: fixed;
+  right: 0;
   transform: translateX(0);
   transition: transform motion.$duration-moderate-01 motion.motion("standard");
+  width: 22rem;
 
   &.--is-hidden {
     transform: translateX(100%);
+    > * {
+      // Hide content when closed so you can't tab to it
+      display: none;
+    }
   }
+  &.--app-switcher {
+    width: 16rem;
+  }
+}
+
+/**
+* Start HeaderAppSwitcher styles
+*/
+.#{$prefix}--bmrg-header-teams {
+  height: 100%;
+  padding: 1rem 0;
+
+  &.--is-loading {
+    padding: 1rem;
+  }
+
+  &.--is-empty {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    h1 {
+      font-size: 1rem;
+      font-weight: 300;
+    }
+    p {
+      font-size: 0.75rem;
+      font-weight: 300;
+      line-height: 0.9375rem;
+    }
+  }
+}
+
+.#{$prefix}--bmrg-header-teams__skeleton {
+  height: 2rem;
+}
+
+.#{$prefix}--side-nav__submenu:disabled {
+  cursor: not-allowed;
+  color: theme.$text-disabled;
+  &:hover {
+    background-color: initial;
+    color: theme.$text-disabled;
+  }
+  > span {
+    margin-right: 1rem;
+  }
+}
+
+.#{$prefix}--side-nav__link {
+  gap: 0.5rem;
+  justify-content: space-between;
+  svg {
+    fill: theme.$icon-secondary;
+    min-width: 1rem;
+  }
+}
+
+.#{$prefix}--bmrg-header-team {
+  position: relative;
+
+  &.--is-loading {
+    .#{$prefix}--side-nav__icon {
+      visibility: hidden;
+    }
+  }
+
+  .#{$prefix}--inline-loading {
+    min-height: 1rem;
+    position: absolute;
+    right: 0.5rem;
+    top: 0.5rem;
+    width: fit-content;
+  }
+
+  .#{$prefix}--side-nav__link-text {
+    align-items: center;
+    display: flex;
+    gap: 0.5rem;
+    justify-content: space-between;
+    width: 100%;
+    > span {
+      @include utils.text-overflow-ellipsis();
+    }
+  }
+}
+
+.#{$prefix}--bmrg-header-team__service {
+  display: flex;
+  justify-content: space-between;
+}
+
+.#{$prefix}--bmrg-header-team__message {
+  color: theme.$text-secondary;
+  font-size: 0.75rem;
+  letter-spacing: 0.02rem;
+  line-height: 1rem;
+  padding: 0.5rem 2rem 1rem;
 }

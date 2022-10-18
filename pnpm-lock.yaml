@@ -29,6 +29,7 @@ specifiers:
   babel-loader: ^8.2.5
   classnames: 2.3.1
   core-js: ^3.23.4
+  cpy: 8.1.2
   cross-env: ^7.0.3
   date-fns: 2.29.1
   dompurify: 2.3.10
@@ -108,6 +109,7 @@ devDependencies:
   axios-mock-adapter: 1.21.2_axios@0.27.2
   babel-loader: 8.2.5_wfdvla2jorjoj23kkavho2upde
   core-js: 3.25.5
+  cpy: 8.1.2
   cross-env: 7.0.3
   eslint: 8.25.0
   eslint-config-react-app: 7.0.1_phzljehkof6k3f3te43prkizey
@@ -3028,7 +3030,7 @@ packages:
       '@storybook/theming': 6.5.12_wcqkhtmu7mswc6yz4uyexck3ty
       '@storybook/ui': 6.5.12_wcqkhtmu7mswc6yz4uyexck3ty
       '@types/node': 16.11.65
-      '@types/webpack': 4.41.32
+      '@types/webpack': 4.41.33
       autoprefixer: 9.8.8
       babel-loader: 8.2.5_jeg5564y5etyvi3ajplf6yhqg4
       case-sensitive-paths-webpack-plugin: 2.4.0
@@ -3406,7 +3408,7 @@ packages:
       '@types/node': 16.11.65
       '@types/node-fetch': 2.6.2
       '@types/pretty-hrtime': 1.0.1
-      '@types/webpack': 4.41.32
+      '@types/webpack': 4.41.33
       better-opn: 2.1.1
       boxen: 5.1.2
       chalk: 4.1.2
@@ -3569,7 +3571,7 @@ packages:
       '@storybook/theming': 6.5.12_wcqkhtmu7mswc6yz4uyexck3ty
       '@storybook/ui': 6.5.12_wcqkhtmu7mswc6yz4uyexck3ty
       '@types/node': 16.11.65
-      '@types/webpack': 4.41.32
+      '@types/webpack': 4.41.33
       babel-loader: 8.2.5_jeg5564y5etyvi3ajplf6yhqg4
       case-sensitive-paths-webpack-plugin: 2.4.0
       chalk: 4.1.2
@@ -4067,13 +4069,13 @@ packages:
     resolution: {integrity: sha512-9K4zoImiZc3HlIp6AVUDE4CWYx22a+lhSZMYNpbjW04+YF0KWj4pJXnEMjdnFTiQibFFmElcsasJXDbdI/EPhA==}
     dependencies:
       '@types/eslint': 8.4.6
-      '@types/estree': 0.0.51
+      '@types/estree': 1.0.0
     dev: true
 
   /@types/eslint/8.4.6:
     resolution: {integrity: sha512-/fqTbjxyFUaYNO7VcW5g+4npmqVACz1bB7RTHYuLj+PRjw9hrCwrUXVQFpChUS0JsyEFvMZ7U/PfmvWgxJhI9g==}
     dependencies:
-      '@types/estree': 0.0.51
+      '@types/estree': 1.0.0
       '@types/json-schema': 7.0.11
     dev: true
 
@@ -4081,18 +4083,15 @@ packages:
     resolution: {integrity: sha512-CuPgU6f3eT/XgKKPqKd/gLZV1Xmvf1a2R5POBOGQa6uv82xpls89HU5zKeVoyR8XzHd1RGNOlQlvUe3CFkjWNQ==}
     dev: true
 
+  /@types/estree/1.0.0:
+    resolution: {integrity: sha512-WulqXMDUTYAXCjZnk6JtIHPigp55cVtDgDrO2gHRwhyJto21+1zbVCtOYB2L1F9w4qCQ0rOGWBnBe0FNTiEJIQ==}
+    dev: true
+
   /@types/glob/7.2.0:
     resolution: {integrity: sha512-ZUxbzKl0IfJILTS6t7ip5fQQM/J3TJYubDm3nMbgubNNYS62eXeUpoLUC8/7fJNiFYHTrGPQn7hspDUzIHX3UA==}
     dependencies:
       '@types/minimatch': 5.1.2
       '@types/node': 18.8.4
-    dev: true
-
-  /@types/glob/8.0.0:
-    resolution: {integrity: sha512-l6NQsDDyQUVeoTynNpC9uRvCUint/gSUXQA2euwmTuWGvPY5LSDUu6tkCtJB2SvGQlJQzLaKqcGZP4//7EDveA==}
-    dependencies:
-      '@types/minimatch': 5.1.2
-      '@types/node': 16.11.65
     dev: true
 
   /@types/graceful-fs/4.1.5:
@@ -4181,7 +4180,7 @@ packages:
   /@types/node-fetch/2.6.2:
     resolution: {integrity: sha512-DHqhlq5jeESLy19TYhLakJ07kNumXWjcDdxXsLUMJZ6ue8VZJj4kLPQVE/2mdHh3xZziNF1xppu5lwmS53HR+A==}
     dependencies:
-      '@types/node': 16.11.65
+      '@types/node': 18.8.4
       form-data: 3.0.1
     dev: true
 
@@ -4284,15 +4283,15 @@ packages:
   /@types/webpack-sources/3.2.0:
     resolution: {integrity: sha512-Ft7YH3lEVRQ6ls8k4Ff1oB4jN6oy/XmU6tQISKdhfh+1mR+viZFphS6WL0IrtDOzvefmJg5a0s7ZQoRXwqTEFg==}
     dependencies:
-      '@types/node': 16.11.65
+      '@types/node': 18.8.4
       '@types/source-list-map': 0.1.2
       source-map: 0.7.4
     dev: true
 
-  /@types/webpack/4.41.32:
-    resolution: {integrity: sha512-cb+0ioil/7oz5//7tZUSwbrSAN/NWHrQylz5cW8G0dWTcF/g+/dSdMlKVZspBYuMAN1+WnwHrkxiRrLcwd0Heg==}
+  /@types/webpack/4.41.33:
+    resolution: {integrity: sha512-PPajH64Ft2vWevkerISMtnZ8rTs4YmRbs+23c402J0INmxDKCrhZNvwZYtzx96gY2wAtXdrK1BS2fiC8MlLr3g==}
     dependencies:
-      '@types/node': 16.11.65
+      '@types/node': 18.8.4
       '@types/tapable': 1.0.8
       '@types/uglify-js': 3.17.0
       '@types/webpack-sources': 3.2.0
@@ -8924,7 +8923,7 @@ packages:
     peerDependencies:
       glob: '*'
     dependencies:
-      '@types/glob': 8.0.0
+      '@types/glob': 7.2.0
       glob: 7.2.3
     dev: true
 
@@ -9357,7 +9356,7 @@ packages:
     dependencies:
       '@types/html-minifier-terser': 5.1.2
       '@types/tapable': 1.0.8
-      '@types/webpack': 4.41.32
+      '@types/webpack': 4.41.33
       html-minifier-terser: 5.1.1
       loader-utils: 1.4.0
       lodash: 4.17.21
@@ -10312,7 +10311,7 @@ packages:
     resolution: {integrity: sha512-7vuh85V5cdDofPyxn58nrPjBktZo0u9x1g8WtjQol+jZDaE+fhN+cIvTj11GndBnMnyfrUOG1sZQxCdjKh+DKg==}
     engines: {node: '>= 10.13.0'}
     dependencies:
-      '@types/node': 16.11.65
+      '@types/node': 18.8.4
       merge-stream: 2.0.0
       supports-color: 8.1.1
     dev: true

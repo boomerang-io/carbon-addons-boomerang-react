@@ -1,7 +1,7 @@
 {
   "name": "@boomerang-io/carbon-addons-boomerang-react",
   "description": "Carbon Addons for Boomerang apps",
-  "version": "3.0.0",
+  "version": "3.1.0-beta.6",
   "author": {
     "name": "Tim Bula",
     "email": "timrbula@gmail.com"
@@ -98,6 +98,7 @@
     "axios-mock-adapter": "^1.20.0",
     "babel-loader": "^8.2.5",
     "core-js": "^3.23.4",
+    "cpy": "8.1.2",
     "cross-env": "^7.0.3",
     "eslint": "^8.19.0",
     "eslint-config-react-app": "^7.0.1",

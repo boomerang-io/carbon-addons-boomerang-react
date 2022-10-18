@@ -4,18 +4,21 @@ import cx from "classnames";
 import {
   ChevronDown,
   ChevronUp,
+  Close,
   Collaborate,
   Help,
   UserAvatar,
   Notification,
   NotificationNew,
+  Switcher,
 } from "@carbon/react/icons";
 import { prefix } from "../../internal/settings";
-import { SkipToContent } from "@carbon/react";
+import { SkipToContent, Theme } from "@carbon/react";
 import PlatformNotificationsContainer from "../PlatformNotifications";
 import HeaderMenu from "../HeaderMenu";
 import NotificationsContainer from "../Notifications/NotificationsContainer";
 import UserRequests from "../UserRequests";
+import HeaderAppSwitcher from "./HeaderAppSwitcher";
 import HeaderList from "./HeaderList";
 import HeaderListItem from "./HeaderListItem";
 import HeaderMenuLink from "../HeaderMenuLink";
@@ -26,6 +29,7 @@ import HeaderRightPanel from "./HeaderRightPanel";
 import BoomerangLogo from "./assets/BoomerangLogo";
 
 const stateToButtonElemIdMap = {
+  isAppSwitcherActive: "navigation-switcher-menu-button",
   isHelpActive: "navigation-help-menu-button",
   isMobileNavActive: "navigation-mobile-menu-button",
   isNotificationActive: "navigation-notification-menu-button",
@@ -43,6 +47,7 @@ class Header extends React.Component {
   static propTypes = {
     appName: PropTypes.string,
 
+    enableAppSwitcher: PropTypes.bool,
     enableNotifications: PropTypes.bool,
     /*
      * an array of objects. Each object has a name and url property.
@@ -95,6 +100,7 @@ class Header extends React.Component {
 
   state = {
     hasNewNotifications: false,
+    isAppSwitcherActive: false,
     isHelpActive: false,
     isMobileNavActive: false,
     isNotificationActive: false,
@@ -164,6 +170,7 @@ class Header extends React.Component {
 
   handleCloseHeaderMenus = () => {
     this.setState({
+      isAppSwitcherActive: false,
       isHelpActive: false,
       isNotificationActive: false,
       isProfileActive: false,
@@ -260,6 +267,7 @@ class Header extends React.Component {
     const {
       appName,
       baseLaunchEnvUrl,
+      baseServiceUrl,
       className,
       navLinks,
       platformName,
@@ -267,194 +275,225 @@ class Header extends React.Component {
       renderRightPanel,
       skipToContentProps,
     } = this.props;
-
     return (
-      <header className={`${prefix}--bmrg-header-container`}>
-        <div className={cx(`${prefix}--bmrg-header`, className)}>
-          <HeaderWrapper>
-            <div className={`${prefix}--bmrg-header-brand-container`}>
-              {skipToContentProps ? <SkipToContent {...skipToContentProps} /> : null}
-              {this.props.renderSidenav && (
-                <HeaderMenuBmrg
-                  id={stateToButtonElemIdMap["isSidenavActive"]}
-                  isOpen={this.state.isSidenavActive}
-                  onClick={this.handleIconClick("Sidenav")}
-                  onKeyDown={this.handleIconKeypress("Sidenav")}
-                  ref={this.sideNavButtonRef}
-                />
-              )}
-              <HeaderLogo appName={appName} href={baseLaunchEnvUrl} navLinks={navLinks} platformName={platformName}>
-                {renderLogo && <BoomerangLogo alt="Boomerang Logo" className={`${prefix}--bmrg-header-brand__icon`} />}
-              </HeaderLogo>
-            </div>
-            <nav aria-label="Main navigation menu">
-              <HeaderList className={`${prefix}--bmrg-header-list--link`}>
-                {Array.isArray(navLinks) &&
-                  navLinks.map((link, i) => (
-                    <li key={`${link.url}-${i}`}>
-                      <HeaderListItem aria-label={`link for ${link.name}`} href={link.url}>
-                        {link.name}
-                      </HeaderListItem>
-                    </li>
-                  ))}
-              </HeaderList>
-            </nav>
-            <div ref={this.mobileNavRef}>
-              <HeaderList className={`${prefix}--bmrg-header-list--mobile-nav`}>
-                <li>
-                  <HeaderListItem
-                    isIcon
-                    aria-label="Mobile navigation menu"
-                    aria-expanded={this.state.isMobileNavActive}
-                    id={stateToButtonElemIdMap[transformToIsStateKey("MobileNavActive")]}
-                    onClick={this.handleIconClick("MobileNav")}
-                    onKeyDown={this.handleIconKeypress("MobileNav")}
-                  >
-                    <span
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        color: this.state.isMobileNavActive ? "#343a3f" : "inherit",
-                        fontSize: "0.875rem",
-                      }}
-                    >
-                      Navigation{" "}
-                      {this.state.isMobileNavActive ? (
-                        <ChevronUp alt="Close mobile navigation" />
-                      ) : (
-                        <ChevronDown alt="Open mobile navigation" />
-                      )}
-                    </span>
-                  </HeaderListItem>
-                  {this.state.isMobileNavActive && (
-                    <HeaderMenu>
-                      {Array.isArray(navLinks) &&
-                        navLinks.map((link, i) => (
-                          <HeaderMenuLink external={false} href={link.url} text={link.name} key={`${link.url}-${i}`} />
-                        ))}
-                    </HeaderMenu>
+      <Theme theme="g100">
+        <header className={`${prefix}--bmrg-header-container`}>
+          <div className={cx(`${prefix}--bmrg-header`, className)}>
+            <HeaderWrapper>
+              <div className={`${prefix}--bmrg-header-brand-container`}>
+                {skipToContentProps ? <SkipToContent {...skipToContentProps} /> : null}
+                {this.props.renderSidenav && (
+                  <HeaderMenuBmrg
+                    id={stateToButtonElemIdMap["isSidenavActive"]}
+                    isOpen={this.state.isSidenavActive}
+                    onClick={this.handleIconClick("Sidenav")}
+                    onKeyDown={this.handleIconKeypress("Sidenav")}
+                    ref={this.sideNavButtonRef}
+                  />
+                )}
+                <HeaderLogo appName={appName} href={baseLaunchEnvUrl} navLinks={navLinks} platformName={platformName}>
+                  {renderLogo && (
+                    <BoomerangLogo alt="Boomerang Logo" className={`${prefix}--bmrg-header-brand__icon`} />
                   )}
-                </li>
-              </HeaderList>
-            </div>
-          </HeaderWrapper>
-          <HeaderWrapper>
-            <div ref={this.navRef}>
-              <HeaderList className={`${prefix}--bmrg-header-list--icon`}>
-                {Boolean(this.props.requestSummary) && (
+                </HeaderLogo>
+              </div>
+              <nav aria-label="Main navigation menu">
+                <HeaderList className={`${prefix}--bmrg-header-list--link`}>
+                  {Array.isArray(navLinks) &&
+                    navLinks.map((link, i) => (
+                      <li key={`${link.url}-${i}`}>
+                        <HeaderListItem aria-label={`link for ${link.name}`} href={link.url}>
+                          {link.name}
+                        </HeaderListItem>
+                      </li>
+                    ))}
+                </HeaderList>
+              </nav>
+              <div ref={this.mobileNavRef}>
+                <HeaderList className={`${prefix}--bmrg-header-list--mobile-nav`}>
                   <li>
                     <HeaderListItem
                       isIcon
-                      aria-expanded={this.state.isRequestsActive}
-                      aria-label="Requests menu button"
-                      id={stateToButtonElemIdMap[transformToIsStateKey("Requests")]}
-                      onClick={this.handleIconClick("Requests")}
-                      onKeyDown={this.handleIconKeypress("Requests")}
+                      aria-label="Mobile navigation menu"
+                      aria-expanded={this.state.isMobileNavActive}
+                      id={stateToButtonElemIdMap[transformToIsStateKey("MobileNavActive")]}
+                      onClick={this.handleIconClick("MobileNav")}
+                      onKeyDown={this.handleIconKeypress("MobileNav")}
                     >
-                      <Collaborate alt="Requests icon" />
+                      <span
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          color: this.state.isMobileNavActive ? "#343a3f" : "inherit",
+                          fontSize: "0.875rem",
+                        }}
+                      >
+                        Navigation{" "}
+                        {this.state.isMobileNavActive ? (
+                          <ChevronUp alt="Close mobile navigation" />
+                        ) : (
+                          <ChevronDown alt="Open mobile navigation" />
+                        )}
+                      </span>
                     </HeaderListItem>
-                    {this.state.isRequestsActive && (
+                    {this.state.isMobileNavActive && (
                       <HeaderMenu>
-                        <UserRequests baseLaunchEnvUrl={baseLaunchEnvUrl} requestSummary={this.props.requestSummary} />
+                        {Array.isArray(navLinks) &&
+                          navLinks.map((link, i) => (
+                            <HeaderMenuLink
+                              external={false}
+                              href={link.url}
+                              text={link.name}
+                              key={`${link.url}-${i}`}
+                            />
+                          ))}
                       </HeaderMenu>
                     )}
                   </li>
-                )}
-                {this.props.enableNotifications && this.props.notificationsConfig && (
-                  <li>
-                    <HeaderListItem
-                      isIcon
-                      aria-expanded={this.state.isNotificationActive}
-                      aria-label="Notification menu button"
-                      id={stateToButtonElemIdMap[transformToIsStateKey("Notification")]}
-                      onClick={this.handleIconClick("Notification")}
-                      onKeyDown={this.handleIconKeypress("Notification")}
-                    >
-                      {this.state.hasNewNotifications ? (
-                        <NotificationNew alt="New notifications icon" />
-                      ) : (
-                        <Notification alt="No new notifications icon" />
+                </HeaderList>
+              </div>
+            </HeaderWrapper>
+            <HeaderWrapper>
+              <div ref={this.navRef}>
+                <HeaderList className={`${prefix}--bmrg-header-list--icon`}>
+                  {Boolean(this.props.requestSummary) && (
+                    <li>
+                      <HeaderListItem
+                        isIcon
+                        aria-expanded={this.state.isRequestsActive}
+                        aria-label="Requests menu button"
+                        id={stateToButtonElemIdMap[transformToIsStateKey("Requests")]}
+                        onClick={this.handleIconClick("Requests")}
+                        onKeyDown={this.handleIconKeypress("Requests")}
+                      >
+                        <Collaborate alt="Requests icon" />
+                      </HeaderListItem>
+                      {this.state.isRequestsActive && (
+                        <HeaderMenu>
+                          <UserRequests
+                            baseLaunchEnvUrl={baseLaunchEnvUrl}
+                            requestSummary={this.props.requestSummary}
+                          />
+                        </HeaderMenu>
                       )}
-                      <PlatformNotificationsContainer
-                        baseLaunchEnvUrl={baseLaunchEnvUrl}
-                        config={this.props.notificationsConfig}
-                        isNotificationActive={this.state.isNotificationActive}
-                        setHasNewNotifications={this.handleUpdateStateKey("hasNewNotifications")}
-                      />
-                    </HeaderListItem>
-                  </li>
-                )}
-                {Array.isArray(this.props.onHelpClick) && this.props.onHelpClick.length > 0 && (
-                  <li>
-                    <HeaderListItem
-                      isIcon
-                      aria-expanded={this.state.isHelpActive}
-                      aria-label="Help menu button"
-                      id={stateToButtonElemIdMap[transformToIsStateKey("Help")]}
-                      onClick={this.handleIconClick("Help")}
-                      onKeyDown={this.handleIconKeypress("Help")}
-                    >
-                      <Help size={24} alt="Help icon" />
-                    </HeaderListItem>
-                    {this.state.isHelpActive && <HeaderMenu>{this.props.onHelpClick}</HeaderMenu>}
-                  </li>
-                )}
-                <li>
-                  {Array.isArray(this.props.profileChildren) && this.props.profileChildren.length > 0 && (
-                    <HeaderListItem
-                      isIcon
-                      aria-expanded={this.state.isProfileActive}
-                      aria-label="Profile menu button"
-                      id={stateToButtonElemIdMap[transformToIsStateKey("Profile")]}
-                      onClick={this.handleIconClick("Profile")}
-                      onKeyDown={this.handleIconKeypress("Profile")}
-                    >
-                      <UserAvatar alt="Profile icon" />
-                    </HeaderListItem>
+                    </li>
                   )}
-                  {this.state.isProfileActive && <HeaderMenu>{this.props.profileChildren}</HeaderMenu>}
-                </li>
-                {renderRightPanel && Object.keys(renderRightPanel).length ? (
+                  {this.props.enableNotifications && this.props.notificationsConfig && (
+                    <li>
+                      <HeaderListItem
+                        isIcon
+                        aria-expanded={this.state.isNotificationActive}
+                        aria-label="Notification menu button"
+                        id={stateToButtonElemIdMap[transformToIsStateKey("Notification")]}
+                        onClick={this.handleIconClick("Notification")}
+                        onKeyDown={this.handleIconKeypress("Notification")}
+                      >
+                        {this.state.hasNewNotifications ? (
+                          <NotificationNew alt="New notifications icon" />
+                        ) : (
+                          <Notification alt="No new notifications icon" />
+                        )}
+                        <PlatformNotificationsContainer
+                          baseLaunchEnvUrl={baseLaunchEnvUrl}
+                          config={this.props.notificationsConfig}
+                          isNotificationActive={this.state.isNotificationActive}
+                          setHasNewNotifications={this.handleUpdateStateKey("hasNewNotifications")}
+                        />
+                      </HeaderListItem>
+                    </li>
+                  )}
+                  {Array.isArray(this.props.onHelpClick) && this.props.onHelpClick.length > 0 && (
+                    <li>
+                      <HeaderListItem
+                        isIcon
+                        aria-expanded={this.state.isHelpActive}
+                        aria-label="Help menu button"
+                        id={stateToButtonElemIdMap[transformToIsStateKey("Help")]}
+                        onClick={this.handleIconClick("Help")}
+                        onKeyDown={this.handleIconKeypress("Help")}
+                      >
+                        <Help size={24} alt="Help icon" />
+                      </HeaderListItem>
+                      {this.state.isHelpActive && <HeaderMenu>{this.props.onHelpClick}</HeaderMenu>}
+                    </li>
+                  )}
                   <li>
-                    <HeaderListItem
-                      isIcon
-                      aria-expanded={this.state.isRightPanelActive}
-                      aria-label={`Right panel button`}
-                      id={stateToButtonElemIdMap[transformToIsStateKey("RightPanel")]}
-                      onClick={this.handleIconClick("RightPanel")}
-                      onKeyDown={this.handleIconKeypress("RightPanel")}
-                    >
-                      {renderRightPanel.icon}
-                    </HeaderListItem>
-                    <HeaderRightPanel
-                      content={renderRightPanel.component}
-                      className={cx({
-                        "--is-hidden": !this.state.isRightPanelActive,
-                      })}
-                    />
+                    {Array.isArray(this.props.profileChildren) && this.props.profileChildren.length > 0 && (
+                      <HeaderListItem
+                        isIcon
+                        aria-expanded={this.state.isProfileActive}
+                        aria-label="Profile menu button"
+                        id={stateToButtonElemIdMap[transformToIsStateKey("Profile")]}
+                        onClick={this.handleIconClick("Profile")}
+                        onKeyDown={this.handleIconKeypress("Profile")}
+                      >
+                        <UserAvatar alt="Profile icon" />
+                      </HeaderListItem>
+                    )}
+                    {this.state.isProfileActive && <HeaderMenu>{this.props.profileChildren}</HeaderMenu>}
                   </li>
-                ) : (
-                  ""
-                )}
-              </HeaderList>
-            </div>
-          </HeaderWrapper>
-          {this.props.renderSidenav && (
-            <div
-              className={cx(`${prefix}--bmrg-header__app-menu-wrapper`, {
-                "--is-hidden": !this.state.isSidenavActive,
-              })}
-              ref={this.sideNavRef}
-            >
-              {this.props.renderSidenav({
-                isOpen: this.state.isSidenavActive,
-                onMenuClose: this.onMenuClose,
-              })}
-            </div>
-          )}
-        </div>
-        <NotificationsContainer enableMultiContainer containerId={`${prefix}--bmrg-header-notifications`} />
-      </header>
+                  {this.props.enableAppSwitcher && (
+                    <li>
+                      <HeaderListItem
+                        isIcon
+                        aria-expanded={this.state.isAppSwitcherActive}
+                        aria-label="App Switcher menu button"
+                        id={stateToButtonElemIdMap[transformToIsStateKey("AppSwitcher")]}
+                        onClick={this.handleIconClick("AppSwitcher")}
+                        onKeyDown={this.handleIconKeypress("AppSwitcher")}
+                      >
+                        {this.state?.isAppSwitcherActive ? (
+                          <Close alt="Close App Switcher" />
+                        ) : (
+                          <Switcher alt="Open App Switcher" />
+                        )}
+                      </HeaderListItem>
+                      <HeaderAppSwitcher
+                        baseLaunchEnvUrl={baseLaunchEnvUrl}
+                        baseServiceUrl={baseServiceUrl}
+                        isActive={this.state.isAppSwitcherActive}
+                      />
+                    </li>
+                  )}
+                  {renderRightPanel && Object.keys(renderRightPanel).length ? (
+                    <li>
+                      <HeaderListItem
+                        isIcon
+                        aria-expanded={this.state.isRightPanelActive}
+                        aria-label={`Right panel button`}
+                        id={stateToButtonElemIdMap[transformToIsStateKey("RightPanel")]}
+                        onClick={this.handleIconClick("RightPanel")}
+                        onKeyDown={this.handleIconKeypress("RightPanel")}
+                      >
+                        {renderRightPanel.icon}
+                      </HeaderListItem>
+                      <HeaderRightPanel isOpen={this.state.isRightPanelActive}>
+                        {renderRightPanel.component}
+                      </HeaderRightPanel>
+                    </li>
+                  ) : (
+                    ""
+                  )}
+                </HeaderList>
+              </div>
+            </HeaderWrapper>
+            {this.props.renderSidenav && (
+              <div
+                className={cx(`${prefix}--bmrg-header__app-menu-wrapper`, {
+                  "--is-hidden": !this.state.isSidenavActive,
+                })}
+                ref={this.sideNavRef}
+              >
+                {this.props.renderSidenav({
+                  isOpen: this.state.isSidenavActive,
+                  onMenuClose: this.onMenuClose,
+                })}
+              </div>
+            )}
+          </div>
+          <NotificationsContainer enableMultiContainer containerId={`${prefix}--bmrg-header-notifications`} />
+        </header>
+      </Theme>
     );
   }
 }
