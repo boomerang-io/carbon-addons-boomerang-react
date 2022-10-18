@@ -364,7 +364,7 @@ $breakpoints: (
   }
 
   .#{$prefix}--bmrg-right-panel {
-    background-color: $bmrg-tertiary-color;
+    background-color: $bmrg-primary-color;
     height: 100%;
     position: fixed;
     right: 0;
@@ -380,108 +380,105 @@ $breakpoints: (
       width: 16rem;
     }
   }
+}
 
-  .#{$prefix}--bmrg-header-teams__container {
-    height: 100%;
-    padding-top: 1rem;
+/**
+* Start HeaderAppSwitcher styles
+*/
+.#{$prefix}--bmrg-header-teams {
+  height: 100%;
+  padding: 1rem 0;
 
-    .#{$prefix}--accordion__content {
-      padding: 0rem;
-  
-      .#{$prefix}--side-nav__menu-item {
-        &:focus, &:hover {
-          .#{$prefix}--side-nav__link-text {
-            color: #ffffff !important;
-          }
-        } 
-      }
-      .#{$prefix}--side-nav__link {
-        padding-left: 2rem;
-      }
-      .#{$prefix}--side-nav__link-text {
-        font-weight: 400;
-      }
-    }
-  
-    .#{$prefix}--accordion__title {
-      pointer-events: none;
-      @include text-overflow-ellipsis();
-    }
-    .#{$prefix}--accordion__item {
-      border: none;
-      &:hover {
-        background-color: $interactive-02 !important;
-      }
-      &:last-of-type {
-        border: none;
-      }
-    }
-    .#{$prefix}--accordion__heading {
-      color: $text-04;
-      flex-direction: row-reverse;
-      padding-right: 1rem;
-      &:hover,
-      &:hover::before {
-        background-color: transparent !important;
-      }
-      path {
-        fill: #c1c7cd;
-        width: 1rem;
-        height: 1rem;
-      }
-    }
-    .#{$prefix}--switcher__item--divider {
-      width: calc(100% - 2rem);
-    }
-  }
-
-  .#{$prefix}--bmrg-header-team__container {
-    display: flex;
-    flex-direction: column;
-    padding-left: 2rem;
-  }
-
-  .#{$prefix}--bmrg-header-team {
-    &:hover {
-      background-color: $interactive-02 !important;
-    }
-    &.--disabled {
-      color: $text-disabled;
-    }
-  }
-  .#{$prefix}--bmrg-header-team__empty {
-    color: $text-disabled;
-    font-size: 0.75rem;
-    letter-spacing: 0.02rem;
-    line-height: 1rem;
-    padding: 1rem 1rem 1rem 2rem;
-  }
-
-  .#{$prefix}--bmrg-header-team__empty-title {
-    font-size: 1rem;
-    font-weight: 300;
-    line-height: 1.25rem;
-    margin-bottom: 0.625rem;
-  }
-
-  .#{$prefix}--bmrg-header-team__empty-subtitle {
-    font-size: 0.75rem;
-    font-weight: 300;
-    line-height: 0.9375rem;
-  }
-
-  .#{$prefix}--bmrg-header-team__skeleton {
-    height: 2rem;
-    margin-bottom: 0.5rem;
+  .#{$prefix}--side-nav__item {
+    height: fit-content;
     width: 100%;
   }
-  .#{$prefix}--bmrg-header-teams__loading {
-    min-height: 1rem;
+
+  &.--is-loading {
     padding: 1rem;
+  }
+
+  &.--is-empty {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    h1 {
+      font-size: 1rem;
+      font-weight: 300;
+    }
+    p {
+      font-size: 0.75rem;
+      font-weight: 300;
+      line-height: 0.9375rem;
+    }
   }
 }
 
-.#{$prefix}--bmrg-header-team__loading {
-  min-height: 1rem;
-  width: fit-content;
+.#{$prefix}--bmrg-header-teams__skeleton {
+  height: 2rem;
+}
+
+.#{$prefix}--side-nav__submenu:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  &:hover {
+    background-color: initial;
+    color: #c0c7ce;
+    opacity: 0.5;
+    
+  }
+  > span {
+    margin-right: 1rem;
+  }
+}
+
+.#{$prefix}--side-nav__link {
+  gap: 0.5rem;
+  justify-content: space-between;
+  svg {
+    min-width: 1rem;
+  }
+}
+
+.#{$prefix}--bmrg-header-team {
+  position: relative;
+
+  &.--is-loading {
+    .#{$prefix}--side-nav__icon {
+      visibility: hidden;
+    }
+  }
+
+  .#{$prefix}--inline-loading {
+    min-height: 1rem;
+    position: absolute;
+    right: 1rem;
+    top: 0.5rem;
+    width: fit-content;
+  }
+
+  .#{$prefix}--side-nav__link-text {
+    align-items: center;
+    display: flex;
+    gap: 0.5rem;
+    justify-content: space-between;
+    width: 100%;
+    > span {
+      @include text-overflow-ellipsis();
+    }
+  }
+}
+
+.#{$prefix}--bmrg-header-team__service {
+  display: flex;
+  justify-content: space-between;
+}
+
+.#{$prefix}--bmrg-header-team__message {
+  color: #c0c7ce;
+  font-size: 0.75rem;
+  letter-spacing: 0.02rem;
+  line-height: 1rem;
+  padding: 0.5rem 2rem 1rem;
 }

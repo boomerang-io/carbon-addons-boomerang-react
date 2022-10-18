@@ -19,39 +19,41 @@ import UIShell from './UIShell';
 
 const mock = new MockAdapter(axios);
 
-const BASE_URL = 'https://www.ibm.com/services';
+const BASE_URL = "https://www.ibm.com/services";
+const BASE_ENV_URL = "https://ibm.com";
 
 const TEAMS_DATA = {
   standardTeams: [
-    {id:"1", name:"Team 1", displayName: "Team 1 display with a loooong long long long display name", isTeamMember: true},
-    {id:"2", name:"Team 2", displayName: null, isTeamMember: true},
+    {
+      id: "1",
+      name: "Team 1",
+      displayName: "Team 1 display with a loooong long long long display name",
+    },
+    { id: "2", name: "Team 2", displayName: null },
   ],
-  accounts: [
+  accountTeams: [
     {
       id: "11",
-      isTeamMember: true,
+      isAccountTeamMember: true,
       name: "Account 1",
-      projects: [
-        {accountTeamId: "11", id:"111", name: "Project 1 1", displayName: "Project 1 1 display", isTeamMember: true},
-        {accountTeamId: "11", id:"112", name: "Project 1 2", displayName: null, isTeamMember: true},
-      ]
+      projectTeams: [
+        { accountTeamId: "11", id: "111", name: "Project 1 1", displayName: "Project 1 1 display" },
+        { accountTeamId: "11", id: "112", name: "Project 1 2", displayName: null },
+      ],
     },
     {
       id: "12",
-      isTeamMember: false,
-      name: "Account 2",
-      projects: [
-        {accountTeamId: "12", id:"121", name: "Project 2 1", displayName: null, isTeamMember: true},
-      ]
+      name: "Account 2 has an exceptionally long name",
+      projectTeams: [{ accountTeamId: "12", id: "121", name: "Project 2 1", displayName: null }],
     },
-  ]
+  ],
 };
 
 const SERVICES_DATA = [
   { name: "Service 1 with a loooong long long long name", url: "https://ibm.com" },
   { name: "Service 2", url: "https://ibm.com" },
   { name: "Service 3", url: "https://ibm.com" },
-  { name: "Service 4", url: "https://ibm.com" },
+  { name: "Service 4 with a loooong long long long name", url: "https://google.com" },
 ];
 
 const withDelay = (delay, response) => () => {
