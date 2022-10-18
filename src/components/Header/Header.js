@@ -482,10 +482,9 @@ class Header extends React.Component {
                     >
                       {renderRightPanel.icon}
                     </HeaderListItem>
-                    <HeaderRightPanel
-                      content={renderRightPanel.component}
-                      isOpen={this.state.isRightPanelActive}
-                    />
+                    <HeaderRightPanel isOpen={this.state.isRightPanelActive}>
+                      {renderRightPanel.component}
+                    </HeaderRightPanel>
                   </li>
                 ) : (
                   ''

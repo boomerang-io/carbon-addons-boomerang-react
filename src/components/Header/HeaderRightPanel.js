@@ -15,7 +15,7 @@ const HeaderRightPanel = ({ children, className, isOpen, ...rest }) => {
 };
 
 HeaderRightPanel.propTypes = {
-  content: PropTypes.element,
+  children: PropTypes.element,
   className: PropTypes.string,
   isOpen: PropTypes.bool
 };

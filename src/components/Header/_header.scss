@@ -365,7 +365,8 @@ $breakpoints: (
 
   .#{$prefix}--bmrg-right-panel {
     background-color: $bmrg-primary-color;
-    height: 100%;
+    height: calc(100vh - 3rem);
+    overflow-y: auto;
     position: fixed;
     right: 0;
     transform: translateX(0);
@@ -386,6 +387,7 @@ $breakpoints: (
 * Start HeaderAppSwitcher styles
 */
 .#{$prefix}--bmrg-header-teams {
+  color: $bmrg-brand-white;
   height: 100%;
   padding: 1rem 0;
 
@@ -416,6 +418,7 @@ $breakpoints: (
 }
 
 .#{$prefix}--bmrg-header-teams__skeleton {
+  background: $bmrg-primary-color;
   height: 2rem;
 }
 
@@ -426,7 +429,6 @@ $breakpoints: (
     background-color: initial;
     color: #c0c7ce;
     opacity: 0.5;
-    
   }
   > span {
     margin-right: 1rem;

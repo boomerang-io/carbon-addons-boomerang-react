@@ -83,6 +83,7 @@ export const Default = () => {
       renderRequests={boolean('renderRequests', true)}
       appName={text('appName', 'Flow')}
       platformName={text('platformName', 'Boomerang')}
+      baseLaunchEnvUrl={BASE_ENV_URL}
       baseServiceUrl={BASE_URL}
       headerConfig={{
         features: {
@@ -154,6 +155,7 @@ export const WithCarbonSidenavAndReactRouter = () => {
         renderLogo={boolean('renderLogo', true)}
         platformName={text('platformName', 'Boomerang')}
         appName={text('appName', '')}
+        baseLaunchEnvUrl={BASE_ENV_URL}
         baseServiceUrl={BASE_URL}
         headerConfig={{
           features: {
