@@ -31,7 +31,6 @@ UIShell.propTypes = {
    * alias for "platformName" for legacy support
    */
   companyName: PropTypes.string,
-
   /**
    * Pass in whole header config object used for
    * - Feature flagging
@@ -184,6 +183,7 @@ function UIShell({
   skipToContentProps,
   user,
 }) {
+
   const finalPlatformName = platformName || companyName;
   const finalAppName = appName || productName;
 
@@ -195,10 +195,11 @@ function UIShell({
   const finalBaseUrl = platform?.baseEnvUrl || baseLaunchEnvUrl;
   const finalBaseServiceUrl = platform?.baseServicesUrl || baseServiceUrl;
   const finalSendIdeasUrl = platform?.feedbackUrl || 'https://ideas.ibm.com';
-  const isLogoEnabled = platform?.displayLogo || renderLogo;
-  const isSupportEnabled = Boolean(features?.['support.enabled']);
+  const isAppSwitcherEnabled = Boolean(features?.["appSwitcher.enabled"]);
   const isFeedbackEnabled = Boolean(features?.['feedback.enabled']);
-
+  const isNotificationsEnabled = Boolean(features?.["notifications.enabled"]);
+  const isLogoEnabled = platform?.displayLogo || renderLogo;
+  const isSupportEnabled = Boolean(features?.["support.enabled"]);
   /**
    * Checking for conditions when we explicitly set "renderGdprRedirect" to false (it defaults to true) OR
    * it's disabled overall for the platform. This lets us toggle the UIShell consent redirect per app as needed
@@ -219,7 +220,9 @@ function UIShell({
       <Header
         appName={finalAppName}
         baseLaunchEnvUrl={finalBaseUrl}
-        enableNotifications={Boolean(features?.['notifications.enabled'])}
+        baseServiceUrl={finalBaseServiceUrl}
+        enableAppSwitcher={isAppSwitcherEnabled}
+        enableNotifications={isNotificationsEnabled}
         navLinks={navigation}
         platformMessage={platformMessage}
         platformName={!isLogoEnabled && finalPlatformName ? finalPlatformName : null}

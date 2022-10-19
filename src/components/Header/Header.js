@@ -2,8 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import {
+  Switcher24,
   ChevronDown16,
   ChevronUp16,
+  Close24,
   Collaborate24,
   Help24,
   UserAvatar24,
@@ -11,12 +13,12 @@ import {
   NotificationNew24,
 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
-import FocusTrap from 'focus-trap-react';
 import { SkipToContent } from 'carbon-components-react';
 import PlatformNotificationsContainer from '../PlatformNotifications';
 import HeaderMenu from '../HeaderMenu';
 import NotificationsContainer from '../Notifications/NotificationsContainer';
 import UserRequests from '../UserRequests';
+import HeaderAppSwitcher from './HeaderAppSwitcher';
 import HeaderList from './HeaderList';
 import HeaderListItem from './HeaderListItem';
 import HeaderMenuLink from '../HeaderMenuLink';
@@ -29,6 +31,7 @@ import BoomerangLogo from './assets/BoomerangLogo';
 const { prefix } = settings;
 
 const stateToButtonElemIdMap = {
+  isAppSwitcherActive: 'navigation-switcher-menu-button',
   isHelpActive: 'navigation-help-menu-button',
   isMobileNavActive: 'navigation-mobile-menu-button',
   isNotificationActive: 'navigation-notification-menu-button',
@@ -45,7 +48,7 @@ function transformToIsStateKey(key) {
 class Header extends React.Component {
   static propTypes = {
     appName: PropTypes.string,
-
+    enableAppSwitcher: PropTypes.bool,
     enableNotifications: PropTypes.bool,
     /*
      * an array of objects. Each object has a name and url property.
@@ -98,6 +101,7 @@ class Header extends React.Component {
 
   state = {
     hasNewNotifications: false,
+    isAppSwitcherActive: false,
     isHelpActive: false,
     isMobileNavActive: false,
     isNotificationActive: false,
@@ -167,6 +171,7 @@ class Header extends React.Component {
 
   handleCloseHeaderMenus = () => {
     this.setState({
+      isAppSwitcherActive: false,
       isHelpActive: false,
       isNotificationActive: false,
       isProfileActive: false,
@@ -267,6 +272,7 @@ class Header extends React.Component {
     const {
       appName,
       baseLaunchEnvUrl,
+      baseServiceUrl,
       className,
       navLinks,
       platformName,
@@ -274,7 +280,6 @@ class Header extends React.Component {
       renderRightPanel,
       skipToContentProps,
     } = this.props;
-
     return (
       <header className={`${prefix}--bmrg-header-container`}>
         <div className={cx(`${prefix}--bmrg-header`, className)}>
@@ -419,7 +424,7 @@ class Header extends React.Component {
                       onClick={this.handleIconClick('Help')}
                       onKeyDown={this.handleIconKeypress('Help')}
                     >
-                      <Help24 alt="Help icon" />
+                      <Help24 size={24} alt="Help icon" />
                     </HeaderListItem>
                     {this.state.isHelpActive && <HeaderMenu>{this.props.onHelpClick}</HeaderMenu>}
                   </li>
@@ -442,6 +447,29 @@ class Header extends React.Component {
                     <HeaderMenu>{this.props.profileChildren}</HeaderMenu>
                   )}
                 </li>
+                {this.props.enableAppSwitcher && (
+                  <li>
+                    <HeaderListItem
+                      isIcon
+                      aria-expanded={this.state.isAppSwitcherActive}
+                      aria-label="App Switcher menu button"
+                      id={stateToButtonElemIdMap[transformToIsStateKey('AppSwitcher')]}
+                      onClick={this.handleIconClick('AppSwitcher')}
+                      onKeyDown={this.handleIconKeypress('AppSwitcher')}
+                    >
+                      {this.state?.isAppSwitcherActive ? (
+                        <Close24 alt="Close App Switcher" />
+                      ) : (
+                        <Switcher24 alt="Open App Switcher" />
+                      )}
+                    </HeaderListItem>
+                    <HeaderAppSwitcher
+                      baseLaunchEnvUrl={baseLaunchEnvUrl}
+                      baseServiceUrl={baseServiceUrl}
+                      isActive={this.state.isAppSwitcherActive}
+                    />
+                  </li>
+                )}
                 {renderRightPanel && Object.keys(renderRightPanel).length ? (
                   <li>
                     <HeaderListItem
@@ -454,12 +482,9 @@ class Header extends React.Component {
                     >
                       {renderRightPanel.icon}
                     </HeaderListItem>
-                    <HeaderRightPanel
-                      content={renderRightPanel.component}
-                      className={cx({
-                        '--is-hidden': !this.state.isRightPanelActive,
-                      })}
-                    />
+                    <HeaderRightPanel isOpen={this.state.isRightPanelActive}>
+                      {renderRightPanel.component}
+                    </HeaderRightPanel>
                   </li>
                 ) : (
                   ''
@@ -474,15 +499,10 @@ class Header extends React.Component {
               })}
               ref={this.sideNavRef}
             >
-              <FocusTrap
-                active={this.state.isSidenavActive}
-                focusTrapOptions={{ allowOutsideClick: true }}
-              >
-                {this.props.renderSidenav({
-                  isOpen: this.state.isSidenavActive,
-                  onMenuClose: this.onMenuClose,
-                })}
-              </FocusTrap>
+              {this.props.renderSidenav({
+                isOpen: this.state.isSidenavActive,
+                onMenuClose: this.onMenuClose,
+              })}
             </div>
           )}
         </div>

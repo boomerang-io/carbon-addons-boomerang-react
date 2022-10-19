@@ -6,8 +6,10 @@ export const queryClient = new QueryClient({
 });
 
 export const serviceUrl = {
-  getStatement: ({ baseServiceUrl }) => `${baseServiceUrl}/users/consents`,
   getLaunchpadUser: ({ baseServiceUrl }) => `${baseServiceUrl}/launchpad/user`,
+  getStatement: ({ baseServiceUrl }) => `${baseServiceUrl}/users/consents`,
+  getTeamServices: ({ baseServiceUrl, teamId }) => `${baseServiceUrl}/launchpad/teams/${teamId}/services`,
+  getUserTeams: ({ baseServiceUrl }) => `${baseServiceUrl}/users/teams`,
   resourceUserConsent: ({ baseServiceUrl }) => `${baseServiceUrl}/users/consent`,
   resourceUserProfile: ({ baseServiceUrl }) => `${baseServiceUrl}/users/profile`,
 }

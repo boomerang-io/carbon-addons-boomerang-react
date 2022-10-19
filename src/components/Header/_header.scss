@@ -364,16 +364,133 @@ $breakpoints: (
   }
 
   .#{$prefix}--bmrg-right-panel {
+    background-color: $bmrg-primary-color;
+    height: calc(100vh - 3rem);
+    overflow-y: auto;
     position: fixed;
-    height: 100%;
-    width: 22rem;
     right: 0;
-    background-color: $bmrg-tertiary-color;
     transform: translateX(0);
     transition: transform $carbon-motion--timing--productive $carbon-motion--easing--productive;
+    width: 22rem;
 
     &.--is-hidden {
       transform: translateX(100%);
     }
+
+    &.--app-switcher {
+      width: 16rem;
+    }
   }
 }
+
+/**
+* Start HeaderAppSwitcher styles
+*/
+.#{$prefix}--bmrg-header-teams {
+  color: $bmrg-brand-white;
+  height: 100%;
+  padding: 1rem 0;
+
+  .#{$prefix}--side-nav__item {
+    height: fit-content;
+    width: 100%;
+  }
+
+  &.--is-loading {
+    padding: 1rem;
+  }
+
+  &.--is-empty {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    h1 {
+      font-size: 1rem;
+      font-weight: 300;
+    }
+    p {
+      font-size: 0.75rem;
+      font-weight: 300;
+      line-height: 0.9375rem;
+    }
+  }
+}
+
+.#{$prefix}--bmrg-header-teams__skeleton {
+  background: $bmrg-primary-color;
+  height: 2rem;
+}
+
+.#{$prefix}--side-nav__submenu:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  &:hover {
+    background-color: initial;
+    color: #c0c7ce;
+    opacity: 0.5;
+  }
+  > span {
+    margin-right: 1rem;
+  }
+}
+
+.#{$prefix}--side-nav__link {
+  gap: 0.5rem;
+  justify-content: space-between;
+  svg {
+    min-width: 1rem;
+  }
+}
+
+.#{$prefix}--bmrg-header-team {
+  position: relative;
+
+  &.--is-loading {
+    .#{$prefix}--side-nav__icon {
+      visibility: hidden;
+    }
+  }
+
+  .#{$prefix}--inline-loading {
+    min-height: 1rem;
+    position: absolute;
+    right: 1rem;
+    top: 0.5rem;
+    width: fit-content;
+  }
+
+  .#{$prefix}--side-nav__link-text {
+    align-items: center;
+    display: flex;
+    gap: 0.5rem;
+    justify-content: space-between;
+    width: 100%;
+    > span {
+      @include text-overflow-ellipsis();
+    }
+  }
+}
+
+.#{$prefix}--bmrg-switcher-divider {
+  border: none;
+  background: #c0c7ce;
+  height: 1px;
+  margin: 1rem;
+  opacity: 0.5;
+}
+
+.#{$prefix}--bmrg-header-team__service {
+  display: flex;
+  justify-content: space-between;
+}
+
+.#{$prefix}--bmrg-header-team__message {
+  color: #c0c7ce;
+  font-size: 0.75rem;
+  letter-spacing: 0.02rem;
+  line-height: 1rem;
+  padding: 0.5rem 2rem 1rem;
+}
+
+

@@ -1,7 +1,7 @@
 {
   "name": "@boomerang-io/carbon-addons-boomerang-react",
   "description": "Carbon Addons for Boomerang apps",
-  "version": "2.0.14",
+  "version": "2.1.0",
   "author": {
     "name": "Tim Bula",
     "email": "timrbula@gmail.com"
@@ -57,7 +57,7 @@
     "date-fns": "2.28.0",
     "dompurify": "2.3.8",
     "downshift": "6.1.7",
-    "focus-trap-react": "8.9.1",
+    "focus-trap-react": "9.0.2",
     "js-file-download": "0.4.12",
     "lodash.get": "4.4.2",
     "lodash.isequal": "4.5.0",
@@ -123,6 +123,7 @@
     "carbon-icons": "^7.0.7",
     "cpy": "^8.0.0",
     "cross-env": "^7.0.3",
+    "eslint": "^8.25.0",
     "formik": "^2.2.9",
     "in-publish": "^2.0.1",
     "jest-axe": "^5.0.1",
