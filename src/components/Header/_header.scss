@@ -472,6 +472,14 @@ $breakpoints: (
   }
 }
 
+.#{$prefix}--bmrg-switcher-divider {
+  border: none;
+  background: #c0c7ce;
+  height: 1px;
+  margin: 1rem;
+  opacity: 0.5;
+}
+
 .#{$prefix}--bmrg-header-team__service {
   display: flex;
   justify-content: space-between;
@@ -483,13 +491,6 @@ $breakpoints: (
   letter-spacing: 0.02rem;
   line-height: 1rem;
   padding: 0.5rem 2rem 1rem;
-}
-
-.#{prefix}--bmrg-switcher-divider {
-  background: #c0c7ce;
-  margin: 1rem;
-  border: none;
-  height: 1px;
 }
 
 
