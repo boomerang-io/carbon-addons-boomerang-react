@@ -484,3 +484,12 @@ $breakpoints: (
   line-height: 1rem;
   padding: 0.5rem 2rem 1rem;
 }
+
+.#{prefix}--bmrg-switcher-divider {
+  background: #c0c7ce;
+  margin: 1rem;
+  border: none;
+  height: 1px;
+}
+
+

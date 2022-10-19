@@ -1,23 +1,23 @@
-import React from "react";
-import { useQuery } from "react-query";
-import cx from "classnames";
-import { InlineLoading, SkeletonText, SideNavMenu, SideNavMenuItem, SwitcherDivider } from "carbon-components-react";
-import { Launch16 } from "@carbon/icons-react";
-import FocusTrap from "focus-trap-react";
-import DelayedRender from "../DelayedRender";
-import ErrorMessage from "../ErrorMessage";
-import HeaderRightPanel from "./HeaderRightPanel";
-import { serviceUrl, resolver } from "../../config/servicesConfig";
+import React from 'react';
+import { useQuery } from 'react-query';
+import cx from 'classnames';
+import { InlineLoading, SkeletonText, SideNavMenu, SideNavMenuItem } from 'carbon-components-react';
+import { Launch16 } from '@carbon/icons-react';
+import FocusTrap from 'focus-trap-react';
+import DelayedRender from '../DelayedRender';
+import ErrorMessage from '../ErrorMessage';
+import HeaderRightPanel from './HeaderRightPanel';
+import { serviceUrl, resolver } from '../../config/servicesConfig';
 import { settings } from 'carbon-components';
-import { match, keys } from "../../internal/keyboard";
+import { match, keys } from '../../internal/keyboard';
 
 const { prefix } = settings;
 
 const externalProps = {
-  target: "_blank",
-  rel: "noreferrer noopener",
+  target: '_blank',
+  rel: 'noreferrer noopener',
 };
-const classNames = "--app-switcher";
+const classNames = '--app-switcher';
 
 export default function HeaderAppSwitcher({ baseServiceUrl, baseLaunchEnvUrl, isActive }) {
   const userTeamsUrl = serviceUrl.getUserTeams({ baseServiceUrl });
@@ -63,7 +63,7 @@ export default function HeaderAppSwitcher({ baseServiceUrl, baseLaunchEnvUrl, is
               ))}
               {accountTeams?.map((account) => (
                 <div key={account.id}>
-                  <SwitcherDivider style={{opacity: "0.5"}}/>
+                  <hr className={`${prefix}--bmrg-switcher-divider`} />
                   <TeamServiceListMenu
                     baseLaunchEnvUrl={baseLaunchEnvUrl}
                     baseServiceUrl={baseServiceUrl}
@@ -91,7 +91,7 @@ export default function HeaderAppSwitcher({ baseServiceUrl, baseLaunchEnvUrl, is
 
     return (
       <HeaderRightPanel className={classNames} isOpen={isActive}>
-        <div className={cx(`${prefix}--bmrg-header-teams`, "--is-empty")}>
+        <div className={cx(`${prefix}--bmrg-header-teams`, '--is-empty')}>
           <h1 className={`${prefix}--bmrg-header-teams__empty-title`}>No teams</h1>
           <p className={`${prefix}--bmrg-header-teams__empty-subtitle`}>You must be new here</p>
         </div>
@@ -149,7 +149,7 @@ function TeamServiceListMenu({ baseServiceUrl, baseLaunchEnvUrl, isAccount, isMe
   return (
     // eslint-disable-next-line jsx-a11y/no-static-element-interactions
     <div
-      className={cx(`${prefix}--bmrg-header-team`, { "--is-loading": isInlineLoadingVisible })}
+      className={cx(`${prefix}--bmrg-header-team`, { '--is-loading': isInlineLoadingVisible })}
       onClick={handleOnClick}
       onFocus={getServices}
       onKeyDown={handleOnKeyDown}
@@ -157,7 +157,11 @@ function TeamServiceListMenu({ baseServiceUrl, baseLaunchEnvUrl, isAccount, isMe
       title={isNameTruncated ? name : undefined}
     >
       <SideNavMenu title={name}>
-        <ServiceList baseLaunchEnvUrl={baseLaunchEnvUrl} isAccount={isAccount} servicesQuery={servicesQuery} />
+        <ServiceList
+          baseLaunchEnvUrl={baseLaunchEnvUrl}
+          isAccount={isAccount}
+          servicesQuery={servicesQuery}
+        />
       </SideNavMenu>
       {isInlineLoadingVisible && (
         <DelayedRender delay={200}>
@@ -173,9 +177,9 @@ function ServiceList(props) {
 
   if (servicesQuery.error) {
     return (
-      <div className={`${prefix}--bmrg-header-team__message`}>{`Failed to fetch the services for this ${
-        isAccount ? "account" : "team"
-      }`}</div>
+      <div
+        className={`${prefix}--bmrg-header-team__message`}
+      >{`Failed to fetch the services for this ${isAccount ? 'account' : 'team'}`}</div>
     );
   }
 
@@ -185,7 +189,9 @@ function ServiceList(props) {
         <>
           {servicesQuery.data.map((service) => {
             const isExternalLink = !service.url.includes(baseLaunchEnvUrl);
-            const isNameTruncated = isExternalLink ? service.name.length > 28 : service.name.length > 32;
+            const isNameTruncated = isExternalLink
+              ? service.name.length > 28
+              : service.name.length > 32;
             return (
               <SideNavMenuItem
                 href={service.url}
@@ -204,7 +210,7 @@ function ServiceList(props) {
     } else {
       return (
         <div className={`${prefix}--bmrg-header-team__message`}>{`This ${
-          isAccount ? "account" : "team"
+          isAccount ? 'account' : 'team'
         } has no services`}</div>
       );
     }
