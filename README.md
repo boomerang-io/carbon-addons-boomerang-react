@@ -136,7 +136,9 @@ We use [react-toastify](https://github.com/fkhadra/react-toastify) to create not
 
 ## 🛟 Version 2 LTS
 
-Because of the potential time and difficulty involved in a migration to Carbon v11, we will maintain a maintenance v2 of the component library for a period of time. It will recieve critical functionality and security updates. The code is found on the [v2 branch](https://github.com/boomerang-io/carbon-addons-boomerang-react/tree/v2). Please view the support table below. 
+Because of the potential time and difficulty involved in a migration to Carbon v11, we will maintain a maintenance v2 of the component library that is compatible with Carbon v10 for a period of time. It will recieve critical functionality and security updates. The code is found on the [v2 branch](https://github.com/boomerang-io/carbon-addons-boomerang-react/tree/v2) and is published under the v2.x.x semantic version and `classic` tag.
+
+Please view the support table below. 
 
 ## Support Schedule
 
