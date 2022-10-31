@@ -220,6 +220,10 @@
   &[aria-expanded="true"] {
     background: shell.$bmrg-header-menu-options-accent;
     border: utils.rem(2px) solid shell.$bmrg-header-menu-options-accent;
+
+    svg {
+      fill: shell.$bmrg-header-nav;
+    }
   }
 }
 
