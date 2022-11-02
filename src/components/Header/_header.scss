@@ -126,7 +126,7 @@
 .#{$prefix}--bmrg-header-list--mobile-nav {
   display: flex;
 
-  @include utils.breakpoint("sm") {
+  @include utils.breakpoint("md") {
     display: none;
   }
 }
@@ -134,7 +134,7 @@
 .#{$prefix}--bmrg-header-list--link {
   display: none;
 
-  @include utils.breakpoint("sm") {
+  @include utils.breakpoint("md") {
     display: flex;
   }
 }
