@@ -2,7 +2,7 @@
 $breakpoints: (
   bp--xs--major: 500px,
   bp--sm--major: 768px,
-  bp--md--major: 992px,
+  bp--md--major: 960px,
   bp--lg--major: 1200px,
 );
 
@@ -141,7 +141,7 @@ $breakpoints: (
   .#{$prefix}--bmrg-header-list--mobile-nav {
     display: flex;
 
-    @include breakpoint('bp--sm--major') {
+    @include breakpoint('bp--md--major') {
       display: none;
     }
   }
@@ -149,7 +149,7 @@ $breakpoints: (
   .#{$prefix}--bmrg-header-list--link {
     display: none;
 
-    @include breakpoint('bp--sm--major') {
+    @include breakpoint('bp--md--major') {
       display: flex;
     }
   }
