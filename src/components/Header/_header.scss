@@ -414,15 +414,6 @@
   }
 }
 
-.#{$prefix}--side-nav__link {
-  gap: 0.5rem;
-  justify-content: space-between;
-  svg {
-    fill: theme.$icon-secondary;
-    min-width: 1rem;
-  }
-}
-
 .#{$prefix}--bmrg-header-team {
   position: relative;
 
@@ -438,6 +429,15 @@
     right: 0.5rem;
     top: 0.5rem;
     width: fit-content;
+  }
+
+  .#{$prefix}--side-nav__link {
+    gap: 0.5rem;
+    justify-content: space-between;
+    svg {
+      fill: theme.$icon-secondary;
+      min-width: 1rem;
+    }
   }
 
   .#{$prefix}--side-nav__link-text {
