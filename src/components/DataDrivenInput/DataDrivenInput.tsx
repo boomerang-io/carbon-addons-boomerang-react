@@ -1,3 +1,4 @@
+//@ts-nocheck
 import React from "react";
 import CheckboxList from "../CheckboxList";
 import Creatable from "../Creatable";
@@ -63,12 +64,10 @@ const determineInitialValues = (input: any) => {
   if (valueToCheck) {
     switch (valueToCheck) {
       case "false": {
-        // @ts-expect-error TS(2322): Type 'boolean' is not assignable to type 'string'.
         value = false;
         break;
       }
       case "true": {
-        // @ts-expect-error TS(2322): Type 'boolean' is not assignable to type 'string'.
         value = true;
         break;
       }
@@ -114,67 +113,38 @@ function DataDrivenInput(props: DataDrivenInputProps) {
   } = props;
 
   const {
-    // @ts-expect-error TS(2339): Property 'conditionallyRender' does not exist on t... Remove this comment to see the full error message
     // eslint-disable-next-line no-unused-vars
     conditionallyRender,
-    // @ts-expect-error TS(2339): Property 'customComponent' does not exist on type ... Remove this comment to see the full error message
     customComponent,
-    // @ts-expect-error TS(2339): Property 'disabled' does not exist on type '{ Cust... Remove this comment to see the full error message
     disabled,
-    // @ts-expect-error TS(2339): Property 'description' does not exist on type '{ C... Remove this comment to see the full error message
     description = "",
-    // @ts-expect-error TS(2339): Property 'defaultValue' does not exist on type '{ ... Remove this comment to see the full error message
     defaultValue,
-    // @ts-expect-error TS(2339): Property 'defaultValues' does not exist on type '{... Remove this comment to see the full error message
     defaultValues,
-    // @ts-expect-error TS(2339): Property 'label' does not exist on type '{ CustomC... Remove this comment to see the full error message
     label,
-    // @ts-expect-error TS(2339): Property 'helperText' does not exist on type '{ Cu... Remove this comment to see the full error message
     helperText = "",
-    // @ts-expect-error TS(2339): Property 'pattern' does not exist on type '{ Custo... Remove this comment to see the full error message
     pattern,
-    // @ts-expect-error TS(2339): Property 'patternInvalidText' does not exist on ty... Remove this comment to see the full error message
     patternInvalidText,
-    // @ts-expect-error TS(2339): Property 'invalid' does not exist on type '{ Custo... Remove this comment to see the full error message
     invalid,
-    // @ts-expect-error TS(2339): Property 'invalidText' does not exist on type '{ C... Remove this comment to see the full error message
     invalidText,
-    // @ts-expect-error TS(2339): Property 'invalidValues' does not exist on type '{... Remove this comment to see the full error message
     // eslint-disable-next-line no-unused-vars
     invalidValues,
-    // @ts-expect-error TS(2339): Property 'key' does not exist on type '{ CustomCom... Remove this comment to see the full error message
     key,
-    // @ts-expect-error TS(2339): Property 'governingOptions' does not exist on type... Remove this comment to see the full error message
     governingOptions,
-    // @ts-expect-error TS(2339): Property 'governingDisabled' does not exist on typ... Remove this comment to see the full error message
     governingDisabled,
-    // @ts-expect-error TS(2339): Property 'minValueLength' does not exist on type '... Remove this comment to see the full error message
     minValueLength,
-    // @ts-expect-error TS(2339): Property 'maxValueLength' does not exist on type '... Remove this comment to see the full error message
     maxValueLength,
-    // @ts-expect-error TS(2339): Property 'onBlur' does not exist on type '{ Custom... Remove this comment to see the full error message
     onBlur,
-    // @ts-expect-error TS(2339): Property 'onChange' does not exist on type '{ Cust... Remove this comment to see the full error message
     onChange,
-    // @ts-expect-error TS(2339): Property 'options' does not exist on type '{ Custo... Remove this comment to see the full error message
     options,
-    // @ts-expect-error TS(2339): Property 'placeholder' does not exist on type '{ C... Remove this comment to see the full error message
     placeholder,
-    // @ts-expect-error TS(2339): Property 'readOnly' does not exist on type '{ Cust... Remove this comment to see the full error message
     readOnly,
-    // @ts-expect-error TS(2339): Property 'required' does not exist on type '{ Cust... Remove this comment to see the full error message
     required,
-    // @ts-expect-error TS(2339): Property 'requiredForKey' does not exist on type '... Remove this comment to see the full error message
     // eslint-disable-next-line no-unused-vars
     requiredForKey,
-    // @ts-expect-error TS(2339): Property 'requiredValueOf' does not exist on type ... Remove this comment to see the full error message
     // eslint-disable-next-line no-unused-vars
     requiredValueOf,
-    // @ts-expect-error TS(2339): Property 'type' does not exist on type '{ CustomCo... Remove this comment to see the full error message
     type,
-    // @ts-expect-error TS(2339): Property 'value' does not exist on type '{ CustomC... Remove this comment to see the full error message
     value,
-    // @ts-expect-error TS(2339): Property 'values' does not exist on type '{ Custom... Remove this comment to see the full error message
     values,
     ...restInputProps
   } = inputProps;
@@ -350,7 +320,6 @@ function DataDrivenInput(props: DataDrivenInputProps) {
     );
   } else {
     if (Component) {
-      // @ts-expect-error TS(2322): Type '{}' is not assignable to type 'IntrinsicAttr... Remove this comment to see the full error message
       return <Component {...componentProps} />;
     }
   }

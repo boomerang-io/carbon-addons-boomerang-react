@@ -1,3 +1,4 @@
+// @ts-nocheck
 import * as yup from "yup";
 
 import { getCustomValidator } from "./customValidators";
@@ -48,15 +49,12 @@ function getYupFunction(functionName: any, previousInstance = yup) {
   }
 
   const yupName = getSubString(functionName, "yup.");
-  // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
+
   if (yupName && previousInstance[yupName] instanceof Function) {
-    // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
     return previousInstance[yupName].bind(previousInstance);
   }
 
-  // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
   if (yupName && yup[yupName] instanceof Function) {
-    // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
     return yup[yupName].bind(yup);
   }
 
@@ -69,10 +67,9 @@ function getYupFunction(functionName: any, previousInstance = yup) {
  * @param {any} item.functionName - We'll check this, and perhaps it's a prefix function name.
  * @returns {boolean} True if we are actually looking at prefix notation.
  */
-// @ts-expect-error TS(7031): Binding element 'functionName' implicitly has an '... Remove this comment to see the full error message
+
 function isPrefixNotation([functionName]) {
   if (functionName instanceof Array) {
-    // @ts-expect-error TS(2345): Argument of type 'any[]' is not assignable to para... Remove this comment to see the full error message
     if (isPrefixNotation(functionName)) return true;
   }
 
@@ -119,7 +116,7 @@ function isSchema(item: any) {
  * i.e. an object schema validation set
  * @returns {Function} generated yup validator
  */
-// @ts-expect-error TS(7023): 'convertArray' implicitly has return type 'any' be... Remove this comment to see the full error message
+
 function convertArray(arrayArgument: any, previousInstance = yup) {
   const [functionName, ...argsToPass] = ensureArray(arrayArgument);
 
@@ -130,7 +127,6 @@ function convertArray(arrayArgument: any, previousInstance = yup) {
     return transformArray(arrayArgument);
   }
 
-  // @ts-expect-error TS(2554): Expected 1-2 arguments, but got 3.
   const gotFunc = getYupFunction(functionName, previousInstance, arrayArgument);
 
   // Here we'll actually call the function
@@ -165,9 +161,8 @@ function convertArray(arrayArgument: any, previousInstance = yup) {
  * @param {Array} jsonArray - array in JSON to be transformed.
  * @returns {Array} Array with same keys, but values as yup validators.
  */
-// @ts-expect-error TS(7023): 'transformArray' implicitly has return type 'any' ... Remove this comment to see the full error message
+
 function transformArray(jsonArray: any, previousInstance = yup) {
-  // @ts-expect-error TS(7022): 'toReturn' implicitly has type 'any' because it do... Remove this comment to see the full error message
   let toReturn = convertArray(jsonArray[0]);
 
   jsonArray.slice(1).forEach((item: any) => {
@@ -209,19 +204,16 @@ export function transformObject(jsonObject: any, previousInstance = yup) {
   Object.entries(jsonObject).forEach(([key, value]) => {
     // Found an array move to array extraction
     if (value instanceof Array) {
-      // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       toReturn[key] = transformArray(value, previousInstance);
       return;
     }
 
     // Found an object recursive extraction
     if (value instanceof Object) {
-      // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       toReturn[key] = transformObject(value, previousInstance);
       return;
     }
 
-    // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
     toReturn[key] = value;
   });
 
@@ -233,13 +225,12 @@ export function transformObject(jsonObject: any, previousInstance = yup) {
  * @param {Any} jsonObjectOrArray - Object to be transformed.
  * @returns {yup.Validator}
  */
-// @ts-expect-error TS(7023): 'transformAll' implicitly has return type 'any' be... Remove this comment to see the full error message
+
 export function transformAll(jsonObjectOrArray: any, previousInstance = yup) {
   // We're dealing with an array
   // This could be a prefix notation function
   // If so, we'll call the converter
   if (jsonObjectOrArray instanceof Array) {
-    // @ts-expect-error TS(2345): Argument of type 'any[]' is not assignable to para... Remove this comment to see the full error message
     if (isPrefixNotation(jsonObjectOrArray)) {
       return transformArray(jsonObjectOrArray, previousInstance);
     }
