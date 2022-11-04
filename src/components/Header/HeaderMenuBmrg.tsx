@@ -3,6 +3,7 @@ import cx from "classnames";
 import { prefix } from "../../internal/settings";
 
 type Props = {
+  id: string;
   isOpen?: boolean;
   onClick?: (...args: any[]) => any;
   onKeyDown?: (...args: any[]) => any;

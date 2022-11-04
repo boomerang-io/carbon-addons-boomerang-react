@@ -16,6 +16,8 @@ type CloseButtonProps = {
 const CloseButton = ({ closeToast }: CloseButtonProps) => <Close size={20} onClick={closeToast} />;
 
 type OwnNotificationsContainerProps = {
+  containerId: string;
+  enableMultiContainer?: boolean;
   transition?: (...args: any[]) => any;
   autoClose?: number;
   closeOnClick?: boolean;

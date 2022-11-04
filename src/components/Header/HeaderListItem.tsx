@@ -10,13 +10,13 @@ type OwnProps = {
   id?: string;
   isIcon?: boolean;
   newNotifications?: boolean;
+  onClick?: (...args: any[]) => any;
+  onKeyDown?: (...args: any[]) => any;
 };
 
-// @ts-expect-error TS(2456): Type alias 'Props' circularly references itself.
-type Props = OwnProps & typeof HeaderListItem.defaultProps;
+//type Props = OwnProps & typeof HeaderListItem.defaultProps;
 
-// @ts-expect-error TS(7022): 'HeaderListItem' implicitly has type 'any' because... Remove this comment to see the full error message
-const HeaderListItem = (props: Props) => {
+const HeaderListItem = (props: OwnProps) => {
   const { children, className, href, isIcon, ariaExpanded, newNotifications, id, ...other } = props;
 
   const headerListItemClasses = cx(`${prefix}--bmrg-header-list__item`, className);
@@ -28,7 +28,7 @@ const HeaderListItem = (props: Props) => {
           aria-expanded={ariaExpanded}
           aria-haspopup="true"
           role="button"
-          tabIndex="0"
+          tabIndex={0}
           className={`${prefix}--bmrg-header-list__btn`}
           {...other}
         >
@@ -40,7 +40,7 @@ const HeaderListItem = (props: Props) => {
             "--is-active": window?.location?.href && href ? window.location.href.startsWith(href) : false,
           })}
           href={href}
-          tabIndex="0"
+          tabIndex={0}
           {...other}
         >
           {children}

@@ -116,7 +116,7 @@ function UIShell({
    * Default to the legacy props to support backwards compatibility
    */
   const finalBaseUrl = platform?.baseEnvUrl || baseLaunchEnvUrl;
-  const finalBaseServiceUrl = platform?.baseServicesUrl || baseServiceUrl;
+  const finalBaseServiceUrl = platform?.baseServicesUrl || baseServiceUrl || "";
   const finalSendIdeasUrl = platform?.feedbackUrl || "https://ideas.ibm.com";
   // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
   const isAppSwitcherEnabled = Boolean(features?.["appSwitcher.enabled"]);
@@ -140,7 +140,6 @@ function UIShell({
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* @ts-expect-error TS(2769): No overload matches this call. */}
       <Header
         appName={finalAppName}
         baseLaunchEnvUrl={finalBaseUrl}
@@ -149,7 +148,7 @@ function UIShell({
         enableNotifications={isNotificationsEnabled}
         navLinks={navigation}
         platformMessage={platformMessage}
-        platformName={!isLogoEnabled && finalPlatformName ? finalPlatformName : null}
+        platformName={!isLogoEnabled && finalPlatformName ? finalPlatformName : undefined}
         renderLogo={isLogoEnabled}
         renderRightPanel={renderRightPanel}
         renderSidenav={onMenuClick || renderSidenav}
@@ -170,33 +169,27 @@ function UIShell({
               text="Support Center"
             />
           ),
-          // @ts-expect-error TS(2322): Type 'string | undefined' is not assignable to typ... Remove this comment to see the full error message
           Boolean(platform?.communityUrl) && (
-            <HeaderMenuLink href={platform.communityUrl} iconName="forum" text="Community" />
+            <HeaderMenuLink href={platform?.communityUrl as string} iconName="forum" text="Community" />
           ),
-          // @ts-expect-error TS(2322): Type '{ external: true; target: string; rel: strin... Remove this comment to see the full error message
           renderFlowDocs && (
             <HeaderMenuLink
-              external
-              target="_blank"
-              rel="noopener noreferrer"
+              external={true}
               href={`https://useboomerang.io/docs/boomerang-flow/introduction/overview/`}
               iconName="information"
               text="Flow Documentation"
             />
           ),
-          // @ts-expect-error TS(2532): Object is possibly 'undefined'.
           isFeedbackEnabled && (
             <Feedback
               key="Feedback"
-              platformName={platform.platformName}
-              platformOrganization={platform.platformOrganization}
+              platformName={platform?.platformName}
+              platformOrganization={platform?.platformOrganization}
               sendIdeasUrl={finalSendIdeasUrl}
             />
           ),
         ].filter(Boolean)}
         profileChildren={[
-          // @ts-expect-error TS(2322): Type 'string | undefined' is not assignable to typ... Remove this comment to see the full error message
           Boolean((user as any)?.id) && (
             <ProfileSettings
               baseServiceUrl={finalBaseServiceUrl}
@@ -205,7 +198,6 @@ function UIShell({
               userName={user.name}
             />
           ),
-          // @ts-expect-error TS(2322): Type 'string | undefined' is not assignable to typ... Remove this comment to see the full error message
           platform && (
             <AboutPlatform
               key="About Platform"
@@ -222,12 +214,10 @@ function UIShell({
               text="Email Preferences"
             />
           ),
-          // @ts-expect-error TS(2322): Type 'string | undefined' is not assignable to typ... Remove this comment to see the full error message
           baseServiceUrl && isPrivacyStatementDisabled === false && (
             <PrivacyStatement
               key="Privacy Statement"
               baseServiceUrl={finalBaseServiceUrl}
-              platformName={platform?.name}
               platformEmail={(platform as any)?.platformEmail}
             />
           ),
@@ -235,9 +225,8 @@ function UIShell({
           Boolean(platform?.signOutUrl) && <SignOut key="Sign Out" signOutLink={platform.signOutUrl} />,
         ].filter(Boolean)}
       />
-      {/* @ts-expect-error TS(2769): No overload matches this call. */}
       {isGdprRedirectDisabled === false && user.hasConsented === false ? (
-        <GdprRedirectModal isOpen baseLaunchEnvUrl={finalBaseUrl} user={user} platformName={platform?.name} />
+        <GdprRedirectModal isOpen baseLaunchEnvUrl={finalBaseUrl as string} user={user} platformName={platform?.name} />
       ) : null}
     </QueryClientProvider>
   );

@@ -33,11 +33,11 @@ type OwnProps = {
   style?: any;
   text: string;
   disabled?: boolean;
+  preventCloseOnClickOutside: boolean;
 };
 
 type Props = OwnProps & typeof HeaderMenuItem.defaultProps;
 
-// @ts-expect-error TS(2339): Property 'preventCloseOnClickOutside' does not exi... Remove this comment to see the full error message
 function HeaderMenuItem({
   children,
   className,

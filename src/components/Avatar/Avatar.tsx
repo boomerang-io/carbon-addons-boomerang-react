@@ -6,7 +6,7 @@ interface AvatarProps {
   size?: "small" | "medium" | "large";
   src: string;
   style?: React.CSSProperties;
-  userName: string;
+  userName?: string;
 }
 
 const UserIcon = (props: React.SVGProps<SVGAElement> & { description?: string; userName: string }) => {

@@ -38,7 +38,7 @@ function determineIfConfigIsDifferent(teams: any, initialTeams: any) {
 type Props = {
   baseServiceUrl: string;
   src: string;
-  userName: string;
+  userName?: string;
 };
 
 function ProfileSettings({ baseServiceUrl, src, userName }: Props) {

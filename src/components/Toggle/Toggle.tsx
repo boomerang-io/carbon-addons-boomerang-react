@@ -31,11 +31,12 @@ type OwnProps = {
   onToggle?: (...args: any[]) => any;
   size?: "sm" | "md";
   toggled?: boolean;
+  invalid?: boolean;
+  invalidText?: string;
 };
 
 type Props = OwnProps & typeof ToggleComponent.defaultProps;
 
-// @ts-expect-error TS(2339): Property 'invalid' does not exist on type 'Props'.
 function ToggleComponent({
   helperText,
   id,

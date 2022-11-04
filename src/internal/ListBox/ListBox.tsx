@@ -34,9 +34,7 @@ type ListBoxProps = {
   invalidText?: React.ReactNode;
   isOpen?: boolean;
   light?: boolean;
-  // @ts-expect-error TS(2749): 'ListBoxSize' refers to a value, but is being used... Remove this comment to see the full error message
   size?: ListBoxSize;
-  // @ts-expect-error TS(2749): 'ListBoxType' refers to a value, but is being used... Remove this comment to see the full error message
   type: ListBoxType;
   warn?: boolean;
   warnText?: React.ReactNode;

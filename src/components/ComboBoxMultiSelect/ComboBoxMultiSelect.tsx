@@ -35,11 +35,13 @@ type OwnProps = {
   tooltipClassName?: string;
   tooltipContent?: React.ReactNode;
   tooltipProps?: any;
+  initialSelectedItems: any;
+  items: any;
+  selectedItems: any;
 };
 
 type Props = OwnProps & typeof ComboBoxMultiSelect.defaultProps;
 
-// @ts-expect-error TS(2339): Property 'initialSelectedItems' does not exist on ... Remove this comment to see the full error message
 function ComboBoxMultiSelect({
   disableClear,
   id,

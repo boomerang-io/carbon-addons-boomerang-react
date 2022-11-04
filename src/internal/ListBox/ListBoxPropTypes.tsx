@@ -5,7 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import PropTypes from "prop-types";
-
-export const ListBoxType = PropTypes.oneOf(["default", "inline"]);
-export const ListBoxSize = PropTypes.oneOf(["sm", "md", "lg"]);
+export type ListBoxType = "default" | "inline";
+export type ListBoxSize = "sm" | "md" | "lg";

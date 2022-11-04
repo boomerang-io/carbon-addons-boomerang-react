@@ -16,8 +16,8 @@ const iconClassName = `${prefix}--bmrg-aboutPlatform-images__img`;
 
 interface AboutPlatformContainerProps {
   isFlowApp?: boolean;
-  version: string;
-  organization: string;
+  version?: string;
+  organization?: string;
 }
 
 const AboutPlatformContainer = ({ version = "", organization = "IBM", isFlowApp }: AboutPlatformContainerProps) => {

@@ -66,14 +66,17 @@ function HeaderMenuLink({ className, external = true, href, iconName, style, tex
   // @ts-expect-error TS(2538): Type 'undefined' cannot be used as an index type.
   const iconToRender = iconMapping[iconName];
 
+  const externalProps = external ? { target: "_blank", rel: "noopener noreferrer" } : {};
+
   return (
     <div className={wrapperClassNames} style={style} role="presentation">
       <Button
+        aria-label={`link for ${text}`}
         className={`${prefix}--bmrg-header-menu-item`}
         href={href}
         role="link"
+        {...externalProps}
         {...rest}
-        aria-label={`link for ${text}`}
       >
         <div className={`${prefix}--bmrg-header-menu-item__content`}>
           {Boolean(iconToRender) && (

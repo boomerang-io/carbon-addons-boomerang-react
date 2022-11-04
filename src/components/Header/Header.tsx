@@ -27,7 +27,7 @@ import HeaderWrapper from "./HeaderWrapper";
 import HeaderRightPanel from "./HeaderRightPanel";
 import BoomerangLogo from "./assets/BoomerangLogo";
 
-const stateToButtonElemIdMap = {
+const stateToButtonElemIdMap: Record<string, string> = {
   isAppSwitcherActive: "navigation-switcher-menu-button",
   isHelpActive: "navigation-help-menu-button",
   isMobileNavActive: "navigation-mobile-menu-button",
@@ -38,12 +38,15 @@ const stateToButtonElemIdMap = {
   isSidenavActive: "navigation-sidenav-menu-button",
 };
 
-function transformToIsStateKey(key: any) {
+function transformToIsStateKey(key: keyof typeof stateToButtonElemIdMap) {
   return `is${key}Active`;
 }
 
 type OwnProps = {
   appName?: string;
+  baseServiceUrl: string;
+  baseLaunchEnvUrl?: string;
+  className?: string;
   enableAppSwitcher?: boolean;
   enableNotifications?: boolean;
   navLinks?: any[];
@@ -57,16 +60,15 @@ type OwnProps = {
   renderLogo?: boolean;
   renderRightPanel?: any;
   renderSidenav?: (...args: any[]) => any;
-  baseLaunchEnvUrl?: string;
   requestSummary?: any;
   skipToContentProps?: any;
 };
 
 type State = any;
 
-type Props = OwnProps & typeof Header.defaultProps;
+//type Props = OwnProps & typeof Header.defaultProps;
 
-class Header extends React.Component<Props, State> {
+class Header extends React.Component<OwnProps, State> {
   static defaultProps = {};
 
   state = {
@@ -81,10 +83,10 @@ class Header extends React.Component<Props, State> {
     isSidenavActive: false,
   };
 
-  navRef = React.createRef();
-  mobileNavRef = React.createRef();
-  sideNavRef = React.createRef();
-  sideNavButtonRef = React.createRef();
+  navRef = React.createRef<HTMLDivElement>();
+  mobileNavRef = React.createRef<HTMLDivElement>();
+  sideNavRef = React.createRef<HTMLDivElement>();
+  sideNavButtonRef = React.createRef<HTMLDivElement>();
 
   componentDidMount() {
     document.addEventListener("mousedown", this.handleClickoutsideEvent);
@@ -163,7 +165,7 @@ class Header extends React.Component<Props, State> {
   };
 
   handleCloseViaEsc = () => {
-    // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
+    //@ts-ignore
     const activeMenuStateKey = Object.keys(this.state).find((key) => key.startsWith("is") && this.state[key]);
 
     if (activeMenuStateKey) {
@@ -171,7 +173,6 @@ class Header extends React.Component<Props, State> {
         [activeMenuStateKey]: false,
       });
 
-      // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       const elemToReceiveFocus = document.getElementById(stateToButtonElemIdMap[activeMenuStateKey]);
       if (elemToReceiveFocus) {
         elemToReceiveFocus.focus();
@@ -183,7 +184,7 @@ class Header extends React.Component<Props, State> {
    * 13 - corresponds to return/enter key
    * 32 - corresponds to space key
    * @param {string} type - Passes in the type of click (i.e. profile, notification)
-   * @returns {Function} - if the appropriate type of click, calls handleIconClick with specified params
+   * @returns {(...args: any[]) => any} - if the appropriate type of click, calls handleIconClick with specified params
    */
   handleIconKeypress = (type: any) => (evt: any) => {
     if (evt.which === 13 || evt.which === 32) {
@@ -193,38 +194,40 @@ class Header extends React.Component<Props, State> {
 
   /**
    * @param {string} type - Passes in the type of click (i.e. profile, notification)
-   * @returns {Function} - finds the appropriate click type to trigger function, sets all other state items that have
+   * @returns {(...args: any[]) => any} - finds the appropriate click type to trigger function, sets all other state items that have
    * 'is' prefix to false (in order to only have one active item at a time)
    */
-  handleIconClick = (type: any) => (evt: any) => {
-    Object.keys(this.state)
-      .filter((key) => key.startsWith("is"))
-      .forEach((key) => {
-        const clickType = transformToIsStateKey(type);
-        if (key === clickType) {
-          this.setState({
-            // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-            [clickType]: !this.state[clickType],
-          });
+  handleIconClick =
+    (type: any): ((...args: any[]) => any) =>
+    (evt: any) => {
+      Object.keys(this.state)
+        .filter((key) => key.startsWith("is"))
+        .forEach((key) => {
+          const clickType = transformToIsStateKey(type);
+          if (key === clickType) {
+            this.setState({
+              // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
+              [clickType]: !this.state[clickType],
+            });
 
-          // Add callback if parent wants event emitted
-          // Match prop name for handling on element click
-          // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-          const propFunc = this.props[`on${type}Click`];
-          if (typeof propFunc === "function") {
-            propFunc(evt);
+            // Add callback if parent wants event emitted
+            // Match prop name for handling on element click
+            // @ts-ignore
+            const propFunc = this.props[`on${type}Click`];
+            if (typeof propFunc === "function") {
+              propFunc(evt);
+            }
+          } else {
+            this.setState({
+              [key]: false,
+            });
           }
-        } else {
-          this.setState({
-            [key]: false,
-          });
-        }
-      });
-  };
+        });
+    };
 
   /**
    * @param {string} key - key in state to update
-   * @returns {Function} - pass in value for key
+   * @returns {(...args: any[]) => any} - pass in value for key
    */
   handleUpdateStateKey = (key: any) => (value: any) => {
     this.setState({
@@ -242,9 +245,7 @@ class Header extends React.Component<Props, State> {
     const {
       appName,
       baseLaunchEnvUrl,
-      // @ts-expect-error TS(2339): Property 'baseServiceUrl' does not exist on type '... Remove this comment to see the full error message
       baseServiceUrl,
-      // @ts-expect-error TS(2339): Property 'className' does not exist on type 'Reado... Remove this comment to see the full error message
       className,
       navLinks,
       platformName,
@@ -261,7 +262,6 @@ class Header extends React.Component<Props, State> {
                 {skipToContentProps ? <SkipToContent {...skipToContentProps} /> : null}
                 {this.props.renderSidenav && (
                   <HeaderMenuBmrg
-                    // @ts-expect-error TS(2322): Type '{ id: string; isOpen: boolean; onClick: (evt... Remove this comment to see the full error message
                     id={stateToButtonElemIdMap["isSidenavActive"]}
                     isOpen={this.state.isSidenavActive}
                     onClick={this.handleIconClick("Sidenav")}
@@ -287,7 +287,6 @@ class Header extends React.Component<Props, State> {
                     ))}
                 </HeaderList>
               </nav>
-              {/* @ts-expect-error TS(2322): Type 'RefObject<unknown>' is not assignable to typ... Remove this comment to see the full error message */}
               <div ref={this.mobileNavRef}>
                 <HeaderList className={`${prefix}--bmrg-header-list--mobile-nav`}>
                   <li>
@@ -295,7 +294,6 @@ class Header extends React.Component<Props, State> {
                       isIcon
                       aria-label="Mobile navigation menu"
                       aria-expanded={this.state.isMobileNavActive}
-                      // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
                       id={stateToButtonElemIdMap[transformToIsStateKey("MobileNavActive")]}
                       onClick={this.handleIconClick("MobileNav")}
                       onKeyDown={this.handleIconKeypress("MobileNav")}
@@ -334,7 +332,6 @@ class Header extends React.Component<Props, State> {
               </div>
             </HeaderWrapper>
             <HeaderWrapper>
-              {/* @ts-expect-error TS(2322): Type 'RefObject<unknown>' is not assignable to typ... Remove this comment to see the full error message */}
               <div ref={this.navRef}>
                 <HeaderList className={`${prefix}--bmrg-header-list--icon`}>
                   {Boolean(this.props.requestSummary) && (
@@ -343,7 +340,6 @@ class Header extends React.Component<Props, State> {
                         isIcon
                         aria-expanded={this.state.isRequestsActive}
                         aria-label="Requests menu button"
-                        // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
                         id={stateToButtonElemIdMap[transformToIsStateKey("Requests")]}
                         onClick={this.handleIconClick("Requests")}
                         onKeyDown={this.handleIconKeypress("Requests")}
@@ -366,7 +362,6 @@ class Header extends React.Component<Props, State> {
                         isIcon
                         aria-expanded={this.state.isNotificationActive}
                         aria-label="Notification menu button"
-                        // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
                         id={stateToButtonElemIdMap[transformToIsStateKey("Notification")]}
                         onClick={this.handleIconClick("Notification")}
                         onKeyDown={this.handleIconKeypress("Notification")}
@@ -391,7 +386,6 @@ class Header extends React.Component<Props, State> {
                         isIcon
                         aria-expanded={this.state.isHelpActive}
                         aria-label="Help menu button"
-                        // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
                         id={stateToButtonElemIdMap[transformToIsStateKey("Help")]}
                         onClick={this.handleIconClick("Help")}
                         onKeyDown={this.handleIconKeypress("Help")}
@@ -407,7 +401,6 @@ class Header extends React.Component<Props, State> {
                         isIcon
                         aria-expanded={this.state.isProfileActive}
                         aria-label="Profile menu button"
-                        // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
                         id={stateToButtonElemIdMap[transformToIsStateKey("Profile")]}
                         onClick={this.handleIconClick("Profile")}
                         onKeyDown={this.handleIconKeypress("Profile")}
@@ -423,7 +416,6 @@ class Header extends React.Component<Props, State> {
                         isIcon
                         aria-expanded={this.state.isAppSwitcherActive}
                         aria-label="App Switcher menu button"
-                        // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
                         id={stateToButtonElemIdMap[transformToIsStateKey("AppSwitcher")]}
                         onClick={this.handleIconClick("AppSwitcher")}
                         onKeyDown={this.handleIconKeypress("AppSwitcher")}
@@ -447,14 +439,12 @@ class Header extends React.Component<Props, State> {
                         isIcon
                         aria-expanded={this.state.isRightPanelActive}
                         aria-label={`Right panel button`}
-                        // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
                         id={stateToButtonElemIdMap[transformToIsStateKey("RightPanel")]}
                         onClick={this.handleIconClick("RightPanel")}
                         onKeyDown={this.handleIconKeypress("RightPanel")}
                       >
                         {renderRightPanel.icon}
                       </HeaderListItem>
-                      {/* @ts-expect-error TS(2322): Type '{ children: any; isOpen: boolean; }' is not ... Remove this comment to see the full error message */}
                       <HeaderRightPanel isOpen={this.state.isRightPanelActive}>
                         {renderRightPanel.component}
                       </HeaderRightPanel>
@@ -470,7 +460,6 @@ class Header extends React.Component<Props, State> {
                 className={cx(`${prefix}--bmrg-header__app-menu-wrapper`, {
                   "--is-hidden": !this.state.isSidenavActive,
                 })}
-                // @ts-expect-error TS(2322): Type 'RefObject<unknown>' is not assignable to typ... Remove this comment to see the full error message
                 ref={this.sideNavRef}
               >
                 {this.props.renderSidenav({
@@ -480,7 +469,6 @@ class Header extends React.Component<Props, State> {
               </div>
             )}
           </div>
-          {/* @ts-expect-error TS(2769): No overload matches this call. */}
           <NotificationsContainer enableMultiContainer containerId={`${prefix}--bmrg-header-notifications`} />
         </header>
       </Theme>
