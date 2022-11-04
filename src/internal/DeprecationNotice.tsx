@@ -1,15 +1,15 @@
-import React from 'react';
-import { ToastNotification } from '@carbon/react';
+import React from "react";
+import { ToastNotification } from "@carbon/react";
 
-export const deprecatedStoryTitle = '️⛔ Deprecation Notice ';
+export const deprecatedStoryTitle = "️⛔ Deprecation Notice ";
 
 type OwnProps = {
-    deprecatedComponentName: string;
-    replacementComponentName?: string;
+  deprecatedComponentName: string;
+  replacementComponentName?: string;
 };
 
 const defaultProps = {
-  replacementComponentName: '',
+  replacementComponentName: "",
 };
 
 type Props = OwnProps & typeof defaultProps;
@@ -27,8 +27,8 @@ const DeprecationNotice = ({ deprecatedComponentName, replacementComponentName }
     notificationType="toast"
     role="alert"
     style={{
-      marginBottom: '.5rem',
-      minWidth: '30rem',
+      marginBottom: ".5rem",
+      minWidth: "30rem",
     }}
     subtitle={`${deprecatedComponentName} has been deprecated and will be removed in the next major version of carbon-addons-boomerang-react.`}
     timeout={0}

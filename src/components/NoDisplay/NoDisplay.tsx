@@ -4,18 +4,16 @@ import { prefix } from "../../internal/settings";
 
 import ShipSharks from "./assets/ShipSharks";
 
-
-
 const TEXT_LOCATIONS = {
   ABOVE: "above",
   BELOW: "below",
 };
 
 type OwnProps = {
-    className?: string;
-    style?: any;
-    text?: string;
-    textLocation?: "above" | "below";
+  className?: string;
+  style?: any;
+  text?: string;
+  textLocation?: "above" | "below";
 };
 
 // @ts-expect-error TS(2456): Type alias 'Props' circularly references itself.

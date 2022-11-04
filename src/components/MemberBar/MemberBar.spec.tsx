@@ -9,7 +9,7 @@ const props = {
 };
 
 test("render member bar", () => {
-    const { queryByText } = render(<MemberBar {...props}/>);
-    (expect(queryByText(/Mister Owl/i)) as any).toBeInTheDocument();
-    (expect(queryByText(/owl@email.com/i)) as any).toBeInTheDocument();
+  const { queryByText } = render(<MemberBar {...props} />);
+  (expect(queryByText(/Mister Owl/i)) as any).toBeInTheDocument();
+  (expect(queryByText(/owl@email.com/i)) as any).toBeInTheDocument();
 });

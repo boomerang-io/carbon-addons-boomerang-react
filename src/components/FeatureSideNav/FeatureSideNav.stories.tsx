@@ -19,11 +19,7 @@ export default {
       },
     },
   },
-  decorators: [
-    (story: any) => <Router history={createMemoryHistory({ initialEntries: ["/"] })}>
-      {story()}
-    </Router>,
-  ],
+  decorators: [(story: any) => <Router history={createMemoryHistory({ initialEntries: ["/"] })}>{story()}</Router>],
 };
 
 export const SidenavLinks = (args: any) => {

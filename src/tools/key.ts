@@ -71,7 +71,7 @@ export function match(eventOrCode: any, key: any) {
  * @returns {string}
  */
 export function getCharacterFor(eventOrCode: any) {
-  if (typeof eventOrCode === 'number') {
+  if (typeof eventOrCode === "number") {
     return String.fromCharCode(eventOrCode);
   }
 

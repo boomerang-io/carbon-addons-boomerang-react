@@ -11,13 +11,13 @@ import { match, keys } from "../keyboard";
 import { prefix } from "../settings";
 
 type OwnProps = {
-    clearSelection: (...args: any[]) => any;
-    disabled?: boolean;
-    onClearSelection?: (...args: any[]) => any;
-    onClick?: (...args: any[]) => any;
-    onKeyDown?: (...args: any[]) => any;
-    selectionCount?: number;
-    translateWithId: (...args: any[]) => any;
+  clearSelection: (...args: any[]) => any;
+  disabled?: boolean;
+  onClearSelection?: (...args: any[]) => any;
+  onClick?: (...args: any[]) => any;
+  onKeyDown?: (...args: any[]) => any;
+  selectionCount?: number;
+  translateWithId: (...args: any[]) => any;
 };
 
 // @ts-expect-error TS(2565): Property 'defaultProps' is used before being assig... Remove this comment to see the full error message

@@ -1,4 +1,4 @@
-import { object as yupObject } from 'yup';
+import { object as yupObject } from "yup";
 
 const CUSTOM_VALIDATORS = {};
 
@@ -23,4 +23,4 @@ export function getCustomValidator(name: any) {
 // Handle the case when we have an array of objects
 // but the previous instance of yup.shape is the yup.array
 // @ts-expect-error TS(2345): Argument of type 'OptionalObjectSchema<ObjectShape... Remove this comment to see the full error message
-addCustomValidator('yup.shape', yupObject().shape, yupObject());
+addCustomValidator("yup.shape", yupObject().shape, yupObject());

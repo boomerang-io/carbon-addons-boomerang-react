@@ -12,31 +12,46 @@ ToggleComponent.defaultProps = {
 };
 
 type OwnProps = {
-    helperText?: React.ReactNode;
-    label?: React.ReactNode;
-    orientation?: "vertical" | "horizontal";
-    reversed?: boolean;
-    tooltipClassName?: string;
-    tooltipContent?: React.ReactNode;
-    tooltipProps?: any;
-    className?: string;
-    defaultToggled?: boolean;
-    disabled?: boolean;
-    hideLabel?: boolean;
-    id: string;
-    labelA?: React.ReactNode;
-    labelB?: React.ReactNode;
-    labelText?: React.ReactNode;
-    onClick?: (...args: any[]) => any;
-    onToggle?: (...args: any[]) => any;
-    size?: "sm" | "md";
-    toggled?: boolean;
+  helperText?: React.ReactNode;
+  label?: React.ReactNode;
+  orientation?: "vertical" | "horizontal";
+  reversed?: boolean;
+  tooltipClassName?: string;
+  tooltipContent?: React.ReactNode;
+  tooltipProps?: any;
+  className?: string;
+  defaultToggled?: boolean;
+  disabled?: boolean;
+  hideLabel?: boolean;
+  id: string;
+  labelA?: React.ReactNode;
+  labelB?: React.ReactNode;
+  labelText?: React.ReactNode;
+  onClick?: (...args: any[]) => any;
+  onToggle?: (...args: any[]) => any;
+  size?: "sm" | "md";
+  toggled?: boolean;
 };
 
 type Props = OwnProps & typeof ToggleComponent.defaultProps;
 
 // @ts-expect-error TS(2339): Property 'invalid' does not exist on type 'Props'.
-function ToggleComponent({ helperText, id, invalid, invalidText, reversed, label, labelText, labelA = "", labelB = "", orientation, tooltipClassName, tooltipContent, tooltipProps, ...toggleProps }: Props) {
+function ToggleComponent({
+  helperText,
+  id,
+  invalid,
+  invalidText,
+  reversed,
+  label,
+  labelText,
+  labelA = "",
+  labelB = "",
+  orientation,
+  tooltipClassName,
+  tooltipContent,
+  tooltipProps,
+  ...toggleProps
+}: Props) {
   const labelValue = label || labelText;
   const labelTextId = !labelValue ? undefined : `${id}-label`;
   return (

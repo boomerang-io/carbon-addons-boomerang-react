@@ -24,23 +24,18 @@ export const Welcome = () => (
       <h1>Carbon Addons Boomerang React</h1>
     </header>
     <p>
-      Open source React components based on IBM's Carbon Design System. Built for open source <a href="https://useboomerang.io">Boomerang.io</a> and
-      IBM applications.
+      Open source React components based on IBM's Carbon Design System. Built for open source{" "}
+      <a href="https://useboomerang.io">Boomerang.io</a> and IBM applications.
     </p>
     <p>
       <strong>Carbon Addons Boomerang</strong> - Components that are either extensions of existing Carbon components
       with added functionality, or custom components to meet the needs of our applications.
     </p>
     <p>
-      <strong>Carbon</strong> - View the base Carbon component library via the {" "}
-      <a href="https://react.carbondesignsystem.com/">
-        Carbon Storybook
-      </a>
-      . For additional guidance and information about the Carbon Design System, navigate to the {" "}
-      <a href="https://www.carbondesignsystem.com/">
-        Carbon Design Site
-      </a>
-      .
+      <strong>Carbon</strong> - View the base Carbon component library via the{" "}
+      <a href="https://react.carbondesignsystem.com/">Carbon Storybook</a>. For additional guidance and information
+      about the Carbon Design System, navigate to the{" "}
+      <a href="https://www.carbondesignsystem.com/">Carbon Design Site</a>.
     </p>
     <Accordion>
       <AccordionItem title={"View exported components and functions"} open={false}>

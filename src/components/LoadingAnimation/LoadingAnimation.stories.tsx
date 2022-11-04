@@ -6,8 +6,7 @@ export default {
   parameters: {
     docs: {
       description: {
-        component:
-          "Deprecated loadding indicator",
+        component: "Deprecated loadding indicator",
       },
     },
   },

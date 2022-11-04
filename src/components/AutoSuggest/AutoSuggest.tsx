@@ -6,10 +6,10 @@ import AutoSuggestInput from "./AutoSuggestInput";
 const SELECT_METHODS = ["up", "down", "click"];
 
 type OwnProps = {
-    autoSuggestions: any[];
-    initialValue?: string;
-    inputProps?: any;
-    onChange?: (...args: any[]) => any;
+  autoSuggestions: any[];
+  initialValue?: string;
+  inputProps?: any;
+  onChange?: (...args: any[]) => any;
 };
 
 type State = any;
@@ -17,7 +17,6 @@ type State = any;
 type Props = OwnProps & typeof AutoSuggest.defaultProps;
 
 class AutoSuggest extends Component<Props, State> {
-
   static defaultProps = {
     onChange: () => {},
     initialValue: "",
@@ -38,7 +37,7 @@ class AutoSuggest extends Component<Props, State> {
   componentDidUpdate(prevProps: Props, prevState: State) {
     if (this.state.value && prevState.value !== this.state.value) {
       // prevent it from focusing on initial render / empty
-(this as any).inputRef.current?.focus();
+      (this as any).inputRef.current?.focus();
       (this as any).inputRef.current?.setSelectionRange(this.state.caretIndex, this.state.caretIndex);
     }
   }
@@ -57,16 +56,13 @@ class AutoSuggest extends Component<Props, State> {
    * Shift based on the change in length of the value b/c of different length suggestions
    */
 
-  onInputChange = (event: any, {
-    newValue,
-    method
-  }: any) => {
+  onInputChange = (event: any, { newValue, method }: any) => {
     this.setState((prevState: any) => ({
-    value: newValue,
-    caretIndex: SELECT_METHODS.includes(method)
+      value: newValue,
+      caretIndex: SELECT_METHODS.includes(method)
         ? prevState.caretIndex + (newValue.length - prevState.value.length)
-        : (this as any).inputRef.current.selectionStart
-}));
+        : (this as any).inputRef.current.selectionStart,
+    }));
     this.props.onChange(newValue);
   };
 
@@ -100,11 +96,11 @@ class AutoSuggest extends Component<Props, State> {
     // Prevent empty string from matching everyhing
     const inputWord = inputWords.length ? inputWords[inputWords.length - 1] : "";
     return !inputWord
-    ? []
-    : ms(this.props.autoSuggestions, inputWord, {
-        // Use match-sorter for matching inputs
-        keys: [{ key: "value", threshold: (ms.rankings as any).SIMPLE }],
-    });
+      ? []
+      : ms(this.props.autoSuggestions, inputWord, {
+          // Use match-sorter for matching inputs
+          keys: [{ key: "value", threshold: (ms.rankings as any).SIMPLE }],
+        });
   };
 
   // Get array of distinct words prior to the current location of entered text

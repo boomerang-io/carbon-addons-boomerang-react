@@ -7,14 +7,17 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: "Informational tooltip shown on hover over children element. Built with [Tippy.js](https://github.com/atomiks/tippyjs)",
+        component:
+          "Informational tooltip shown on hover over children element. Built with [Tippy.js](https://github.com/atomiks/tippyjs)",
       },
     },
   },
   decorators: [
-    (story: any) => <div style={{ height: "10rem", width: "10rem", display: "flex", alignItems: "center", justifyContent: "center" }}>
-      {story()}
-    </div>,
+    (story: any) => (
+      <div style={{ height: "10rem", width: "10rem", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        {story()}
+      </div>
+    ),
   ],
   argTypes: {
     children: {

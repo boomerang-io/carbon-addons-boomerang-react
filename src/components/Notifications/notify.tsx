@@ -1,10 +1,7 @@
-
 import { toast } from "react-toastify";
 import { prefix } from "../../internal/settings";
 
 import ToastNotification from "./ToastNotification";
-
-
 
 /** Create notifcation wrapper around react-toastify with default component for basic notification
  * @param {*} notification notifcation content

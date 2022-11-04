@@ -3,7 +3,7 @@ import ErrorDragon from "../ErrorDragon";
 import ErrorPageCore from "../ErrorPageCore";
 
 type OwnProps = {
-    theme?: "core" | "boomerang";
+  theme?: "core" | "boomerang";
 };
 
 // @ts-expect-error TS(2565): Property 'defaultProps' is used before being assig... Remove this comment to see the full error message

@@ -8,7 +8,7 @@ import HeaderMenuItem from "../HeaderMenuItem";
 SignOutContainer.defaultProps = {};
 
 type OwnProps = {
-    signOutLink: string;
+  signOutLink: string;
 };
 
 type Props = OwnProps & typeof SignOutContainer.defaultProps;
@@ -16,9 +16,7 @@ type Props = OwnProps & typeof SignOutContainer.defaultProps;
 function SignOutContainer({ signOutLink }: Props) {
   return (
     <HeaderMenuItem text="Sign out" iconName="power" className={`${prefix}--bmrg-signout-container`}>
-      {({
-        closeModal
-      }: any) => {
+      {({ closeModal }: any) => {
         return (
           <>
             <ModalHeader title="Sign out" closeModal={closeModal} />

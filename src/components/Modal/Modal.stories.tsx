@@ -27,9 +27,7 @@ export default {
   },
 };
 
-function Component1({
-  setIsOpen
-}: any) {
+function Component1({ setIsOpen }: any) {
   return (
     <ModalForm>
       <ModalBody style={{ display: "flex", flexDirection: "column", gap: "1rem", padding: "1rem", width: "30rem" }}>

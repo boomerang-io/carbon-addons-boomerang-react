@@ -7,14 +7,18 @@ import ToastNotification from "./ToastNotification";
 import notify from "./notify";
 
 test("toast notification displays correctly when triggered", async () => {
-    const { getByText, findByText } = render(<div>
+  const { getByText, findByText } = render(
+    <div>
       {/* @ts-expect-error TS(2554): Expected 2 arguments, but got 1. */}
-      <Button onClick={() => notify(<ToastNotification subtitle="This happened" title="Something happened" kind="success"/>)}>
+      <Button
+        onClick={() => notify(<ToastNotification subtitle="This happened" title="Something happened" kind="success" />)}
+      >
         Try Me
       </Button>
       <NotificationsContainer />
-    </div>);
-    const notificationButton = getByText(/Try Me/);
-    fireEvent.click(notificationButton);
-    (expect(await findByText(/something happened/i)) as any).toBeInTheDocument();
+    </div>
+  );
+  const notificationButton = getByText(/Try Me/);
+  fireEvent.click(notificationButton);
+  (expect(await findByText(/something happened/i)) as any).toBeInTheDocument();
 });

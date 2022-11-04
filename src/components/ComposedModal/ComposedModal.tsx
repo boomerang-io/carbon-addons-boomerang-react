@@ -15,17 +15,17 @@ ComposedModal.defaultProps = {
 };
 
 type OwnProps = {
-    appElement?: string;
-    children?: (...args: any[]) => any;
-    composedModalProps?: any;
-    confirmModalProps?: any;
-    initialState?: any;
-    isOpen?: boolean;
-    modalHeaderChildren?: React.ReactElement;
-    modalHeaderProps?: any;
-    modalTrigger?: (...args: any[]) => any;
-    onCloseModal?: (...args: any[]) => any;
-    size?: "xs" | "sm" | "md" | "lg";
+  appElement?: string;
+  children?: (...args: any[]) => any;
+  composedModalProps?: any;
+  confirmModalProps?: any;
+  initialState?: any;
+  isOpen?: boolean;
+  modalHeaderChildren?: React.ReactElement;
+  modalHeaderProps?: any;
+  modalTrigger?: (...args: any[]) => any;
+  onCloseModal?: (...args: any[]) => any;
+  size?: "xs" | "sm" | "md" | "lg";
 };
 
 type Props = OwnProps & typeof ComposedModal.defaultProps;
@@ -106,24 +106,45 @@ export function ComposedModal(props: Props) {
 
   const { subtitle, ...restModalHeaderProps } = props.modalHeaderProps;
 
-  return (<>
+  return (
+    <>
       {props.modalTrigger({ openModal: handleOpenModal })}
-      <Modal appElement={props.appElement} containerClassName={cx(`${prefix}--bmrg-modal-composed-container`, `${prefix}--modal-container`, props.size ? `${prefix}--modal-container--${props.size}` : "modal-container-fix-width", containerClassName)} isOpen={(state as any).isOpen} onRequestClose={handleShouldCloseModal} shouldCloseOnOverlayClick={false} {...restComposedModalProps}>
+      <Modal
+        appElement={props.appElement}
+        containerClassName={cx(
+          `${prefix}--bmrg-modal-composed-container`,
+          `${prefix}--modal-container`,
+          props.size ? `${prefix}--modal-container--${props.size}` : "modal-container-fix-width",
+          containerClassName
+        )}
+        isOpen={(state as any).isOpen}
+        onRequestClose={handleShouldCloseModal}
+        shouldCloseOnOverlayClick={false}
+        {...restComposedModalProps}
+      >
         <ModalHeader closeModal={handleShouldCloseModal} {...restModalHeaderProps}>
           {subtitle && <p className={`${prefix}--bmrg-modal-composed-subtitle`}>{subtitle}</p>}
         </ModalHeader>
         {(state as any).isOpen &&
-        typeof props.children === "function" &&
-        props.children({
+          typeof props.children === "function" &&
+          props.children({
             closeModal: handleShouldCloseModal,
             forceCloseModal: handleCloseModal,
             resetInitialState: resetInitialState,
             setShouldConfirmModalClose: handleSetShouldConfirmModalClose,
             shouldConfirmModalClose: (state as any).shouldConfirmModalClose,
-        })}
-        <ConfirmModal affirmativeAction={handleCloseModal} appElement={props.appElement} negativeAction={closeConfirmModal} isOpen={(state as any).isConfirmModalOpen} onCloseModal={closeConfirmModal} {...props.confirmModalProps}/>
+          })}
+        <ConfirmModal
+          affirmativeAction={handleCloseModal}
+          appElement={props.appElement}
+          negativeAction={closeConfirmModal}
+          isOpen={(state as any).isConfirmModalOpen}
+          onCloseModal={closeConfirmModal}
+          {...props.confirmModalProps}
+        />
       </Modal>
-    </>);
+    </>
+  );
 }
 
 export default ComposedModal;

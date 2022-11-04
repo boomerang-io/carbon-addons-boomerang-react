@@ -3,12 +3,12 @@ import cx from "classnames";
 import { prefix } from "../../internal/settings";
 
 type Props = {
-    className?: string;
-    graphic?: React.ReactNode;
-    header?: React.ReactNode;
-    message?: React.ReactNode;
-    style?: any;
-    title?: React.ReactNode;
+  className?: string;
+  graphic?: React.ReactNode;
+  header?: React.ReactNode;
+  message?: React.ReactNode;
+  style?: any;
+  title?: React.ReactNode;
 };
 
 export default function ErrorPage({ className, graphic, header, message, style, title }: Props) {

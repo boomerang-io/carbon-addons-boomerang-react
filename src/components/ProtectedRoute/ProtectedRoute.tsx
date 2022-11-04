@@ -12,12 +12,12 @@ const checkAuth = (userRole: any, allowedUserRoles: any) => {
 };
 
 type OwnProtectedRouteProps = {
-    allowedUserRoles: any[];
-    component: (...args: any[]) => any;
-    location?: any;
-    message?: string;
-    title?: string;
-    userRole: string | any[];
+  allowedUserRoles: any[];
+  component: (...args: any[]) => any;
+  location?: any;
+  message?: string;
+  title?: string;
+  userRole: string | any[];
 };
 
 // @ts-expect-error TS(2456): Type alias 'ProtectedRouteProps' circularly refere... Remove this comment to see the full error message

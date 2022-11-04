@@ -1,43 +1,43 @@
 export const COLORS = {
-  RED: 'rgb(217,3,103)',
-  BLUE: 'rgb(25,98,253)',
-  YELLOW: 'rgb(254,213,34)',
-  PURPLE: '#8A3FFC',
-  TEAL: '#009C98',
-  MAGENTA: '#EE538B',
-  CYAN: '#0072C3',
+  RED: "rgb(217,3,103)",
+  BLUE: "rgb(25,98,253)",
+  YELLOW: "rgb(254,213,34)",
+  PURPLE: "#8A3FFC",
+  TEAL: "#009C98",
+  MAGENTA: "#EE538B",
+  CYAN: "#0072C3",
 };
 
 export const CARD_SIZES = {
-  XSMALL: 'XSMALL',
-  XSMALLWIDE: 'XSMALLWIDE',
-  SMALL: 'SMALL',
-  TALL: 'TALL',
-  MEDIUM: 'MEDIUM',
-  WIDE: 'WIDE',
-  LARGE: 'LARGE',
-  XLARGE: 'XLARGE',
+  XSMALL: "XSMALL",
+  XSMALLWIDE: "XSMALLWIDE",
+  SMALL: "SMALL",
+  TALL: "TALL",
+  MEDIUM: "MEDIUM",
+  WIDE: "WIDE",
+  LARGE: "LARGE",
+  XLARGE: "XLARGE",
 };
 
 export const CARD_TYPES = {
-  TIMESERIES: 'TIMESERIES',
-  VALUE: 'VALUE',
-  IMAGE: 'IMAGE',
-  TABLE: 'TABLE',
-  DONUT: 'DONUT',
-  PIE: 'PIE',
-  BAR: 'BAR',
-  CUSTOM: 'CUSTOM',
-  LIST: 'LIST',
+  TIMESERIES: "TIMESERIES",
+  VALUE: "VALUE",
+  IMAGE: "IMAGE",
+  TABLE: "TABLE",
+  DONUT: "DONUT",
+  PIE: "PIE",
+  BAR: "BAR",
+  CUSTOM: "CUSTOM",
+  LIST: "LIST",
 };
 
 export const DASHBOARD_SIZES = {
-  MAX: 'max',
-  XLARGE: 'xl',
-  LARGE: 'lg',
-  MEDIUM: 'md',
-  SMALL: 'sm',
-  XSMALL: 'xs',
+  MAX: "max",
+  XLARGE: "xl",
+  LARGE: "lg",
+  MEDIUM: "md",
+  SMALL: "sm",
+  XSMALL: "xs",
 };
 
 export const DASHBOARD_COLUMNS = {
@@ -142,14 +142,14 @@ export const CARD_DIMENSIONS = {
 };
 
 export const CARD_LAYOUTS = {
-  HORIZONTAL: 'HORIZONTAL',
-  VERTICAL: 'VERTICAL',
+  HORIZONTAL: "HORIZONTAL",
+  VERTICAL: "VERTICAL",
 };
 
 export const CARD_TITLE_HEIGHT = 48;
 export const CARD_CONTENT_PADDING = 16;
 
 export const TIME_SERIES_TYPES = {
-  BAR: 'BAR',
-  LINE: 'LINE',
+  BAR: "BAR",
+  LINE: "LINE",
 };

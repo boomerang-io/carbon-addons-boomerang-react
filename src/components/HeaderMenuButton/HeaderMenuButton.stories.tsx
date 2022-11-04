@@ -14,5 +14,5 @@ export default {
 };
 
 export const Default = (args: any) => {
-  return <HeaderMenuButton text="Header Button" iconName="workspace" onClick={action("click")} {...args}/>;
+  return <HeaderMenuButton text="Header Button" iconName="workspace" onClick={action("click")} {...args} />;
 };

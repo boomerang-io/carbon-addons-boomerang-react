@@ -10,12 +10,14 @@ import FeatureNavTabs from "./FeatureNavTabs";
 const history = createMemoryHistory();
 
 test("render feature nav tabs", () => {
-    const { queryByText } = render(<Router history={history}>
+  const { queryByText } = render(
+    <Router history={history}>
       <FeatureNavTabs ariaLabel="Cute animals">
-        <FeatureNavTab label="Polar Bear" to="/polar-bear"/>
-        <FeatureNavTab label="Bee" to="/bee"/>
+        <FeatureNavTab label="Polar Bear" to="/polar-bear" />
+        <FeatureNavTab label="Bee" to="/bee" />
       </FeatureNavTabs>
-    </Router>);
-    (expect(queryByText(/Polar Bear/i)) as any).toBeInTheDocument();
-    (expect(queryByText(/Bee/i)) as any).toBeInTheDocument();
+    </Router>
+  );
+  (expect(queryByText(/Polar Bear/i)) as any).toBeInTheDocument();
+  (expect(queryByText(/Bee/i)) as any).toBeInTheDocument();
 });

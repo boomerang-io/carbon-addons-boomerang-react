@@ -92,18 +92,22 @@ export const Default = () => {
         invalid
         invalidText="It is required"
         items={comboBoxItems}
-        itemToString={(item: any) => item ? item.text : ""}
+        itemToString={(item: any) => (item ? item.text : "")}
         placeholder="e.g. Boomerang"
       />
       <Divider />
-      <MultiSelect items={multiSelectOptions} itemToString={(item: any) => item ? item.text : ""} label="Multiselect" />
+      <MultiSelect
+        items={multiSelectOptions}
+        itemToString={(item: any) => (item ? item.text : "")}
+        label="Multiselect"
+      />
       <Divider />
       <Dropdown
         style={{ width: "10rem", marginBottom: "1rem" }}
         label="Test"
         title="Dropdown"
         items={dropdownOptions}
-        itemToString={(item: any) => item ? item.text : ""}
+        itemToString={(item: any) => (item ? item.text : "")}
       />
       <OverflowMenu>
         <OverflowMenuItem itemText="Carbon" />

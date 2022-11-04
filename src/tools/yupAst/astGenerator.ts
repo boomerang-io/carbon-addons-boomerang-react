@@ -1,6 +1,6 @@
-import * as yup from 'yup';
+import * as yup from "yup";
 
-import { getCustomValidator } from './customValidators';
+import { getCustomValidator } from "./customValidators";
 
 class ValidationError {
   message: any;
@@ -47,7 +47,7 @@ function getYupFunction(functionName: any, previousInstance = yup) {
     return customValidator;
   }
 
-  const yupName = getSubString(functionName, 'yup.');
+  const yupName = getSubString(functionName, "yup.");
   // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
   if (yupName && previousInstance[yupName] instanceof Function) {
     // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
@@ -76,8 +76,8 @@ function isPrefixNotation([functionName]) {
     if (isPrefixNotation(functionName)) return true;
   }
 
-  if (typeof functionName !== 'string') return false;
-  if (functionName.indexOf('yup.') < 0) return false;
+  if (typeof functionName !== "string") return false;
+  if (functionName.indexOf("yup.") < 0) return false;
 
   return true;
 }
@@ -143,7 +143,7 @@ function convertArray(arrayArgument: any, previousInstance = yup) {
   // Handle the case when we've got an array of empty elements
   if (convertedArguments instanceof Array) {
     if (convertedArguments.filter((i) => i).length < 1) {
-      if (typeof gotFunc === 'function') {
+      if (typeof gotFunc === "function") {
         return gotFunc();
       }
       if (isSchema(gotFunc)) {
@@ -271,9 +271,9 @@ export function transform(jsonObjectOrArray: any) {
       return transformAll([
         // build a custom validator which takes an object as parameter
         // If we don't do this, we'll get back an object of validators
-        ['yup.object'],
-        ['yup.required'],
-        ['yup.shape', jsonObjectOrArray],
+        ["yup.object"],
+        ["yup.required"],
+        ["yup.shape", jsonObjectOrArray],
       ]);
     }
 
@@ -281,9 +281,7 @@ export function transform(jsonObjectOrArray: any) {
     return transformAll(jsonObjectOrArray);
   } catch (error) {
     if (error instanceof ValidationError) {
-      throw new Error(
-        `Could not validate ${JSON.stringify(jsonObjectOrArray, null, 4)}\n${error.message}`
-      );
+      throw new Error(`Could not validate ${JSON.stringify(jsonObjectOrArray, null, 4)}\n${error.message}`);
     }
 
     throw error;

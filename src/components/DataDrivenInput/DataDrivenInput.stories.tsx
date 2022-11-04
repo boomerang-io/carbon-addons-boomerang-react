@@ -35,10 +35,7 @@ const customInput = {
   helperText: "custom",
   required: true,
   // eslint-disable-next-line
-  customComponent: ({
-    formikProps,
-    ...rest
-  }: any) => <TextInput {...rest} />,
+  customComponent: ({ formikProps, ...rest }: any) => <TextInput {...rest} />,
 };
 
 export const Default = () => {

@@ -1,90 +1,92 @@
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
-import { CARD_SIZES, CARD_LAYOUTS, DASHBOARD_SIZES, TIME_SERIES_TYPES } from './LayoutConstants';
+import { CARD_SIZES, CARD_LAYOUTS, DASHBOARD_SIZES, TIME_SERIES_TYPES } from "./LayoutConstants";
 
 type AttributePropTypes = {
-    label?: string;
+  label?: string;
+  dataSourceId: string;
+  secondaryValue?: {
     dataSourceId: string;
-    secondaryValue?: {
-        dataSourceId: string;
-        color?: string;
-        trend?: 'up' | 'down';
-    };
-    thresholds?: {
-        comparison: '<' | '>' | '=' | '<=' | '>=';
-        value: string | number;
-        color?: string;
-        icon?: string;
-    }[];
-    unit?: string;
+    color?: string;
+    trend?: "up" | "down";
+  };
+  thresholds?: {
+    comparison: "<" | ">" | "=" | "<=" | ">=";
+    value: string | number;
+    color?: string;
+    icon?: string;
+  }[];
+  unit?: string;
 };
 
 // @ts-expect-error TS(2322): Type 'Requireable<InferProps<{ label: Requireable<... Remove this comment to see the full error message
 const AttributePropTypes: PropTypes.Requireable<AttributePropTypes> = PropTypes.shape({
-    label: PropTypes.string,
+  label: PropTypes.string,
+  /** the key to load the value from the values object */
+  dataSourceId: PropTypes.string.isRequired,
+  secondaryValue: PropTypes.shape({
     /** the key to load the value from the values object */
     dataSourceId: PropTypes.string.isRequired,
-    secondaryValue: PropTypes.shape({
-        /** the key to load the value from the values object */
-        dataSourceId: PropTypes.string.isRequired,
-        color: PropTypes.string,
-        trend: PropTypes.oneOf(['up', 'down']),
-    }),
-    thresholds: PropTypes.arrayOf(PropTypes.shape({
-        comparison: PropTypes.oneOf(['<', '>', '=', '<=', '>=']).isRequired,
-        value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-        color: PropTypes.string,
-        icon: PropTypes.string,
-    })),
-    unit: PropTypes.string,
+    color: PropTypes.string,
+    trend: PropTypes.oneOf(["up", "down"]),
+  }),
+  thresholds: PropTypes.arrayOf(
+    PropTypes.shape({
+      comparison: PropTypes.oneOf(["<", ">", "=", "<=", ">="]).isRequired,
+      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+      color: PropTypes.string,
+      icon: PropTypes.string,
+    })
+  ),
+  unit: PropTypes.string,
 });
 export { AttributePropTypes };
 
 type RowHeightPropTypes = {
-    lg?: number;
-    md?: number;
-    sm?: number;
-    xs?: number;
+  lg?: number;
+  md?: number;
+  sm?: number;
+  xs?: number;
 };
 
 // @ts-expect-error TS(2322): Type 'Requireable<InferProps<{ lg: Requireable<num... Remove this comment to see the full error message
 const RowHeightPropTypes: PropTypes.Requireable<RowHeightPropTypes> = PropTypes.shape({
-    lg: PropTypes.number,
-    md: PropTypes.number,
-    sm: PropTypes.number,
-    xs: PropTypes.number,
+  lg: PropTypes.number,
+  md: PropTypes.number,
+  sm: PropTypes.number,
+  xs: PropTypes.number,
 });
 export { RowHeightPropTypes };
 
 type DashboardBreakpointsPropTypes = {
-    lg?: number;
-    md?: number;
-    sm?: number;
-    xs?: number;
+  lg?: number;
+  md?: number;
+  sm?: number;
+  xs?: number;
 };
 
 // @ts-expect-error TS(2322): Type 'Requireable<InferProps<{ lg: Requireable<num... Remove this comment to see the full error message
 const DashboardBreakpointsPropTypes: PropTypes.Requireable<DashboardBreakpointsPropTypes> = PropTypes.shape({
-    lg: PropTypes.number,
-    md: PropTypes.number,
-    sm: PropTypes.number,
-    xs: PropTypes.number,
+  lg: PropTypes.number,
+  md: PropTypes.number,
+  sm: PropTypes.number,
+  xs: PropTypes.number,
 });
 export { DashboardBreakpointsPropTypes };
 
 type DashboardColumnsPropTypes = {
-    lg?: number;
-    md?: number;
-    sm?: number;
-    xs?: number;
+  lg?: number;
+  md?: number;
+  sm?: number;
+  xs?: number;
 };
 
 // @ts-expect-error TS(2322): Type 'Requireable<InferProps<{ lg: Requireable<num... Remove this comment to see the full error message
 const DashboardColumnsPropTypes: PropTypes.Requireable<DashboardColumnsPropTypes> = PropTypes.shape({
-    lg: PropTypes.number,
-    md: PropTypes.number,
-    sm: PropTypes.number,
-    xs: PropTypes.number,
+  lg: PropTypes.number,
+  md: PropTypes.number,
+  sm: PropTypes.number,
+  xs: PropTypes.number,
 });
 export { DashboardColumnsPropTypes };
 
@@ -95,30 +97,27 @@ export const ValueCardPropTypes = {
 };
 
 type TimeSeriesDatasetPropTypes = {
-    label: string;
-    dataSourceId: string;
-    unit?: string;
-    color?: string;
+  label: string;
+  dataSourceId: string;
+  unit?: string;
+  color?: string;
 };
 
 // @ts-expect-error TS(2322): Type 'Requireable<InferProps<{ label: Validator<st... Remove this comment to see the full error message
 const TimeSeriesDatasetPropTypes: PropTypes.Requireable<TimeSeriesDatasetPropTypes> = PropTypes.shape({
-    label: PropTypes.string.isRequired,
-    /** the attribute in values to map to */
-    dataSourceId: PropTypes.string.isRequired,
-    /** optional units to put in the legend */
-    unit: PropTypes.string,
-    /** optional param to set the colors */
-    color: PropTypes.string,
+  label: PropTypes.string.isRequired,
+  /** the attribute in values to map to */
+  dataSourceId: PropTypes.string.isRequired,
+  /** optional units to put in the legend */
+  unit: PropTypes.string,
+  /** optional param to set the colors */
+  color: PropTypes.string,
 });
 export { TimeSeriesDatasetPropTypes };
 
 export const TimeSeriesCardPropTypes = {
   content: PropTypes.shape({
-    series: PropTypes.oneOfType([
-      TimeSeriesDatasetPropTypes,
-      PropTypes.arrayOf(TimeSeriesDatasetPropTypes),
-    ]).isRequired,
+    series: PropTypes.oneOfType([TimeSeriesDatasetPropTypes, PropTypes.arrayOf(TimeSeriesDatasetPropTypes)]).isRequired,
     xLabel: PropTypes.string,
     yLabel: PropTypes.string,
     /** Which attribute is the time attribute */
@@ -157,14 +156,14 @@ export const TableCardPropTypes = {
     thresholds: PropTypes.arrayOf(
       PropTypes.shape({
         dataSourceId: PropTypes.string.isRequired,
-        comparison: PropTypes.oneOf(['<', '>', '=', '<=', '>=']).isRequired,
+        comparison: PropTypes.oneOf(["<", ">", "=", "<=", ">="]).isRequired,
         value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
         severity: PropTypes.oneOf([1, 2, 3]),
         label: PropTypes.string,
         showOnContent: PropTypes.bool,
       })
     ),
-    sort: PropTypes.oneOf(['ASC', 'DESC']),
+    sort: PropTypes.oneOf(["ASC", "DESC"]),
     emptyMessage: PropTypes.string,
   }).isRequired,
   value: PropTypes.arrayOf(
@@ -200,22 +199,24 @@ export const TableCardPropTypes = {
 };
 
 type BarChartDatasetPropTypes = {
-    label: string;
-    values?: {
-        x: number;
-        y: number;
-    }[];
-    color?: string;
+  label: string;
+  values?: {
+    x: number;
+    y: number;
+  }[];
+  color?: string;
 };
 
 // @ts-expect-error TS(2322): Type 'Requireable<InferProps<{ label: Validator<st... Remove this comment to see the full error message
 const BarChartDatasetPropTypes: PropTypes.Requireable<BarChartDatasetPropTypes> = PropTypes.shape({
-    label: PropTypes.string.isRequired,
-    values: PropTypes.arrayOf(PropTypes.shape({
-        x: PropTypes.number.isRequired,
-        y: PropTypes.number.isRequired,
-    })),
-    color: PropTypes.string,
+  label: PropTypes.string.isRequired,
+  values: PropTypes.arrayOf(
+    PropTypes.shape({
+      x: PropTypes.number.isRequired,
+      y: PropTypes.number.isRequired,
+    })
+  ),
+  color: PropTypes.string,
 });
 export { BarChartDatasetPropTypes };
 
@@ -251,70 +252,70 @@ export const ImageCardPropTypes = {
 export const PieCardPropTypes = DonutCardPropTypes;
 
 type DashboardLayoutPropTypes = {
-    i?: any;
-    x?: number;
-    y?: number;
-    w?: number;
-    h?: number;
+  i?: any;
+  x?: number;
+  y?: number;
+  w?: number;
+  h?: number;
 };
 
 // @ts-expect-error TS(2322): Type 'Requireable<InferProps<{ i: Requireable<any>... Remove this comment to see the full error message
 const DashboardLayoutPropTypes: PropTypes.Requireable<DashboardLayoutPropTypes> = PropTypes.shape({
-    i: PropTypes.any,
-    x: PropTypes.number,
-    y: PropTypes.number,
-    w: PropTypes.number,
-    h: PropTypes.number,
+  i: PropTypes.any,
+  x: PropTypes.number,
+  y: PropTypes.number,
+  w: PropTypes.number,
+  h: PropTypes.number,
 });
 export { DashboardLayoutPropTypes };
 
 type CardDimensionPropTypes = {
-    w?: number;
-    h?: number;
+  w?: number;
+  h?: number;
 };
 
 // @ts-expect-error TS(2322): Type 'Requireable<InferProps<{ w: Requireable<numb... Remove this comment to see the full error message
 const CardDimensionPropTypes: PropTypes.Requireable<CardDimensionPropTypes> = PropTypes.shape({
-    w: PropTypes.number,
-    h: PropTypes.number,
+  w: PropTypes.number,
+  h: PropTypes.number,
 });
 export { CardDimensionPropTypes };
 
 type CardDimensionsPropTypes = {
-    lg?: CardDimensionPropTypes;
-    md?: CardDimensionPropTypes;
-    sm?: CardDimensionPropTypes;
-    xs?: CardDimensionPropTypes;
+  lg?: CardDimensionPropTypes;
+  md?: CardDimensionPropTypes;
+  sm?: CardDimensionPropTypes;
+  xs?: CardDimensionPropTypes;
 };
 
 // @ts-expect-error TS(2322): Type 'Requireable<InferProps<{ lg: Requireable<Car... Remove this comment to see the full error message
 const CardDimensionsPropTypes: PropTypes.Requireable<CardDimensionsPropTypes> = PropTypes.shape({
-    lg: CardDimensionPropTypes,
-    md: CardDimensionPropTypes,
-    sm: CardDimensionPropTypes,
-    xs: CardDimensionPropTypes,
+  lg: CardDimensionPropTypes,
+  md: CardDimensionPropTypes,
+  sm: CardDimensionPropTypes,
+  xs: CardDimensionPropTypes,
 });
 export { CardDimensionsPropTypes };
 
 type CardSizesToDimensionsPropTypes = {
-    XSMALL?: CardDimensionsPropTypes;
-    SMALL?: CardDimensionsPropTypes;
-    TALL?: CardDimensionsPropTypes;
-    MEDIUM?: CardDimensionsPropTypes;
-    WIDE?: CardDimensionsPropTypes;
-    LARGE?: CardDimensionsPropTypes;
-    XLARGE?: CardDimensionsPropTypes;
+  XSMALL?: CardDimensionsPropTypes;
+  SMALL?: CardDimensionsPropTypes;
+  TALL?: CardDimensionsPropTypes;
+  MEDIUM?: CardDimensionsPropTypes;
+  WIDE?: CardDimensionsPropTypes;
+  LARGE?: CardDimensionsPropTypes;
+  XLARGE?: CardDimensionsPropTypes;
 };
 
 // @ts-expect-error TS(2322): Type 'Requireable<InferProps<{ XSMALL: Requireable... Remove this comment to see the full error message
 const CardSizesToDimensionsPropTypes: PropTypes.Requireable<CardSizesToDimensionsPropTypes> = PropTypes.shape({
-    XSMALL: CardDimensionsPropTypes,
-    SMALL: CardDimensionsPropTypes,
-    TALL: CardDimensionsPropTypes,
-    MEDIUM: CardDimensionsPropTypes,
-    WIDE: CardDimensionsPropTypes,
-    LARGE: CardDimensionsPropTypes,
-    XLARGE: CardDimensionsPropTypes,
+  XSMALL: CardDimensionsPropTypes,
+  SMALL: CardDimensionsPropTypes,
+  TALL: CardDimensionsPropTypes,
+  MEDIUM: CardDimensionsPropTypes,
+  WIDE: CardDimensionsPropTypes,
+  LARGE: CardDimensionsPropTypes,
+  XLARGE: CardDimensionsPropTypes,
 });
 export { CardSizesToDimensionsPropTypes };
 
@@ -331,19 +332,19 @@ export const CardPropTypes = {
   breakpoint: PropTypes.oneOf(Object.values(DASHBOARD_SIZES)),
   /** Optional range to pass at the card level */
   timeRange: PropTypes.oneOf([
-    'last24Hours',
-    'last7Days',
-    'lastMonth',
-    'lastQuarter',
-    'lastYear',
-    'thisWeek',
-    'thisMonth',
-    'thisQuarter',
-    'thisYear',
-    '',
+    "last24Hours",
+    "last7Days",
+    "lastMonth",
+    "lastQuarter",
+    "lastYear",
+    "thisWeek",
+    "thisMonth",
+    "thisQuarter",
+    "thisYear",
+    "",
   ]),
   /** Interval for time series configuration */
-  interval: PropTypes.oneOf(['minute', 'hour', 'day', 'week', 'quarter', 'month', 'year']),
+  interval: PropTypes.oneOf(["minute", "hour", "day", "week", "quarter", "month", "year"]),
   availableActions: PropTypes.shape({
     edit: PropTypes.bool,
     clone: PropTypes.bool,

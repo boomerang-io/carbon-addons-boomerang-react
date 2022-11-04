@@ -7,9 +7,7 @@ import SidenavComponent from "./index";
 
 const header = () => <div style={{ fontSize: "5rem", color: "#047cc0" }}>title</div>;
 
-const SidenavOutstandingTeams = ({
-  outstandingTeamRequests
-}: any) => {
+const SidenavOutstandingTeams = ({ outstandingTeamRequests }: any) => {
   const numberOfOutstandingTeamRequests = outstandingTeamRequests.length;
 
   if (numberOfOutstandingTeamRequests === 0) {

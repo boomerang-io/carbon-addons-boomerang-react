@@ -11,32 +11,43 @@ CheckboxListComponent.defaultProps = {
 };
 
 type OwnProps = {
-    checkboxProps?: any;
-    disabled?: boolean;
-    helperText?: string;
-    id?: string;
-    initialSelectedItems?: any[];
-    label?: string;
-    labelText?: string;
-    onChange?: (...args: any[]) => any;
-    options: any[];
-    selectedItems?: any[];
-    tooltipClassName?: string;
-    tooltipContent?: React.ReactNode;
-    tooltipProps?: any;
+  checkboxProps?: any;
+  disabled?: boolean;
+  helperText?: string;
+  id?: string;
+  initialSelectedItems?: any[];
+  label?: string;
+  labelText?: string;
+  onChange?: (...args: any[]) => any;
+  options: any[];
+  selectedItems?: any[];
+  tooltipClassName?: string;
+  tooltipContent?: React.ReactNode;
+  tooltipProps?: any;
 };
 
 type Props = OwnProps & typeof CheckboxListComponent.defaultProps;
 
-function CheckboxListComponent({ checkboxProps, disabled, helperText, id, initialSelectedItems, label, labelText, onChange, options, selectedItems: propsSelectedItems, tooltipClassName, tooltipContent, tooltipProps, }: Props) {
+function CheckboxListComponent({
+  checkboxProps,
+  disabled,
+  helperText,
+  id,
+  initialSelectedItems,
+  label,
+  labelText,
+  onChange,
+  options,
+  selectedItems: propsSelectedItems,
+  tooltipClassName,
+  tooltipContent,
+  tooltipProps,
+}: Props) {
   const [stateSelectedItems, setSelectedItems] = useState(initialSelectedItems);
 
   const selectedItems = propsSelectedItems || stateSelectedItems; // Externally controlled if selectedItems props exists
 
-  const handleCheckboxChange = (event: any, {
-    checked: value,
-    id
-  }: any) => {
+  const handleCheckboxChange = (event: any, { checked: value, id }: any) => {
     let newSelectedItems = [...stateSelectedItems];
 
     if (value) {

@@ -5,15 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import cx from 'classnames';
+import React from "react";
+import PropTypes from "prop-types";
+import cx from "classnames";
 
-const wrapComponent = ({
-  name,
-  className,
-  type
-}: any) => {
+const wrapComponent = ({ name, className, type }: any) => {
   // @ts-expect-error TS(7031): Binding element 'baseClassName' implicitly has an ... Remove this comment to see the full error message
   const Component = ({ className: baseClassName, ...other }) => {
     const componentClass = cx(className, baseClassName);

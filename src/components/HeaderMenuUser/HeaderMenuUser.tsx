@@ -5,11 +5,9 @@ import Avatar from "../Avatar";
 import HeaderMenuModalWrapper from "../../internal/HeaderMenuModalWrapper";
 
 type Props = {
-    userName?: string;
-    src?: string;
+  userName?: string;
+  src?: string;
 };
-
-
 
 // @ts-expect-error TS(2339): Property 'children' does not exist on type 'Props'... Remove this comment to see the full error message
 const UserHeaderMenuItem = ({ children, className, forwardRef, src, style, userName, ...rest }: Props) => {

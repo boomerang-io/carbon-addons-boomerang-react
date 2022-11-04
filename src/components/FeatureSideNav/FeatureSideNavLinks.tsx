@@ -3,8 +3,6 @@ import cx from "classnames";
 import { ButtonSkeleton } from "@carbon/react";
 import { prefix } from "../../internal/settings";
 
-
-
 const LoadingSkeleton = () => {
   return (
     <div className={`${prefix}--bmrg-feature-sidenav-links-skeleton`}>
@@ -16,8 +14,8 @@ const LoadingSkeleton = () => {
 };
 
 type FeatureSideNavLinksProps = {
-    children?: any;
-    className?: string;
+  children?: any;
+  className?: string;
 };
 
 export function FeatureSideNavLinks(props: FeatureSideNavLinksProps) {

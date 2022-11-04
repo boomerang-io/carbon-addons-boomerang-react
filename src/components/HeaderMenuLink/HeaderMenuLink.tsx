@@ -35,15 +35,26 @@ const iconMapping = {
 };
 
 type Props = {
-    altIconText?: string;
-    className?: string;
-    children?: any;
-    href: string;
-    iconName?: "chat" | "debug" | "email" | "forum" | "group" | "information" | "launch" | "locked" | "power" | "support" | "workspace";
-    style?: any;
-    text: string;
-    disabled?: boolean;
-    external?: boolean;
+  altIconText?: string;
+  className?: string;
+  children?: any;
+  href: string;
+  iconName?:
+    | "chat"
+    | "debug"
+    | "email"
+    | "forum"
+    | "group"
+    | "information"
+    | "launch"
+    | "locked"
+    | "power"
+    | "support"
+    | "workspace";
+  style?: any;
+  text: string;
+  disabled?: boolean;
+  external?: boolean;
 };
 
 function HeaderMenuLink({ className, external = true, href, iconName, style, text, ...rest }: Props) {

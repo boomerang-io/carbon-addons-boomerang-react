@@ -80,7 +80,7 @@ export const assertMenuClosed = () => {
 export const generateGenericItem = (index: any) => ({
   id: `id-${index}`,
   label: `Item ${index}`,
-  value: index
+  value: index,
 });
 
 /**
@@ -93,7 +93,7 @@ export const generateGenericItem = (index: any) => ({
  */
 export const generateCustomItem = (index: any) => ({
   field: `Item ${index}`,
-  value: `Custom value ${index}`
+  value: `Custom value ${index}`,
 });
 
 /**
@@ -107,6 +107,4 @@ export const generateItems = (amount: any, generator: any) =>
     .fill(null)
     .map((_, i) => generator(i));
 
-export const customItemToString = ({
-  field
-}: any) => field;
+export const customItemToString = ({ field }: any) => field;

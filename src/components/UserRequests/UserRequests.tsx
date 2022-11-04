@@ -11,8 +11,8 @@ UserRequests.defaultProps = {
 };
 
 type OwnProps = {
-    baseLaunchEnvUrl?: string;
-    requestSummary?: any;
+  baseLaunchEnvUrl?: string;
+  requestSummary?: any;
 };
 
 type Props = OwnProps & typeof UserRequests.defaultProps;

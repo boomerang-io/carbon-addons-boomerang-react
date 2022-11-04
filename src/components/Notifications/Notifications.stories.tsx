@@ -1,5 +1,3 @@
-
-
 import { Button } from "@carbon/react";
 
 import NotificationsContainer from "./NotificationsContainer";

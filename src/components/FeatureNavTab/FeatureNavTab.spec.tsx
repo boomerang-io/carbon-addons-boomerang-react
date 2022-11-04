@@ -14,8 +14,10 @@ const props = {
 };
 
 test("render feature nav tab", () => {
-    const { queryByText } = render(<Router history={history}>
-      <FeatureNavTab {...props}/>
-    </Router>);
-    (expect(queryByText(/Red Panda/i)) as any).toBeInTheDocument();
+  const { queryByText } = render(
+    <Router history={history}>
+      <FeatureNavTab {...props} />
+    </Router>
+  );
+  (expect(queryByText(/Red Panda/i)) as any).toBeInTheDocument();
 });

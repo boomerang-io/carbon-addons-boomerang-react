@@ -6,7 +6,7 @@ import { axe } from "jest-axe";
 import UIShell from "./UIShell";
 
 test("accessibility of UIShell", async () => {
-    const { container } = render(<UIShell />);
-    const results = await axe(container);
-    (expect(results) as any).toHaveNoViolations();
+  const { container } = render(<UIShell />);
+  const results = await axe(container);
+  (expect(results) as any).toHaveNoViolations();
 });

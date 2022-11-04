@@ -27,11 +27,7 @@ import {
  *
  * @param {string} value - value to test for valid property syntax
  */
-function isPropertySyntaxValid({
-  value,
-  customPropertySyntaxPattern,
-  propsSyntaxFound
-}: any) {
+function isPropertySyntaxValid({ value, customPropertySyntaxPattern, propsSyntaxFound }: any) {
   // Look property pattern and capture group for the property itself
   let match = value.match(customPropertySyntaxPattern);
   // if the first matched group is truthy, then a property has been entered
@@ -44,7 +40,7 @@ function isPropertySyntaxValid({
 }
 
 function validateUrlWithProperties(customPropertySyntaxPattern: any, customPropertyStartsWithPattern: any) {
-  return function(this: any) {
+  return function (this: any) {
     return this.transform(function (value: any, originalValue: any) {
       const propsSyntaxFound = value.match(customPropertyStartsWithPattern)?.length ?? 0;
       if (
@@ -59,7 +55,7 @@ function validateUrlWithProperties(customPropertySyntaxPattern: any, customPrope
 }
 
 function validateEmailWithProperties(customPropertySyntaxPattern: any, customPropertyStartsWithPattern: any) {
-  return function(this: any) {
+  return function (this: any) {
     return this.transform(function (value: any, originalValue: any) {
       // Simple pattern for emails
       const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
@@ -92,12 +88,7 @@ function registerCustomPropertyMethods(customPropertySyntaxPattern: any, customP
  * @returns keys of all governing selects above the current one
  */
 // @ts-expect-error TS(7023): 'getGoverningSelectKeysMap' implicitly has return ... Remove this comment to see the full error message
-function getGoverningSelectKeysMap({
-  governingKey,
-  governingJsonKey,
-  governingKeys,
-  inputs
-}: any) {
+function getGoverningSelectKeysMap({ governingKey, governingJsonKey, governingKeys, inputs }: any) {
   if (Boolean(governingKey) && governingKey !== governingJsonKey) governingKeys.unshift(governingKey);
   const governingInput = inputs.find((input: any) => input.key === governingKey);
 
@@ -124,13 +115,7 @@ function getGoverningSelectKeysMap({
  * @returns the input's deep options already formatted
  */
 // @ts-expect-error TS(7023): 'getGoverningSelectDeepOptions' implicitly has ret... Remove this comment to see the full error message
-function getGoverningSelectDeepOptions({
-  formikValues,
-  governingInputJsonObject,
-  governingKeys,
-  input,
-  inputs
-}: any) {
+function getGoverningSelectDeepOptions({ formikValues, governingInputJsonObject, governingKeys, input, inputs }: any) {
   const nextKey = governingKeys.shift();
 
   if (Boolean(nextKey)) {
@@ -149,7 +134,7 @@ function getGoverningSelectDeepOptions({
   } else {
     return governingInputJsonObject[input.key].map((option: any) => ({
       label: option[input.jsonLabel],
-      value: option[input.jsonKey]
+      value: option[input.jsonKey],
     }));
   }
 }
@@ -161,13 +146,7 @@ function getGoverningSelectDeepOptions({
  * @param {array} inputs - all the dynamic formik inputs
  * @param {string} selectedItem - new value of the select input
  */
-async function handleGoverningSelectChange({
-  formikProps,
-  input,
-  inputs,
-  isInputBeingChanged,
-  selectedItem
-}: any) {
+async function handleGoverningSelectChange({ formikProps, input, inputs, isInputBeingChanged, selectedItem }: any) {
   const { key } = input;
   const inputsGovernedByCurrentOne = inputs.filter((formikInput: any) => formikInput.governingKey === key);
 
@@ -194,7 +173,7 @@ function generateYupAst({
   allowCustomPropertySyntax,
   customPropertySyntaxPattern,
   customPropertyStartsWithPattern,
-  useCSVforArrays
+  useCSVforArrays,
 }: any) {
   if (allowCustomPropertySyntax) {
     registerCustomPropertyMethods(customPropertySyntaxPattern, customPropertyStartsWithPattern);
@@ -249,7 +228,7 @@ function generateYupAst({
             (value) => {
               if (!input.required && !Boolean(value)) {
                 return true;
-              // @ts-expect-error TS(2345): Argument of type 'string | undefined' is not assig... Remove this comment to see the full error message
+                // @ts-expect-error TS(2345): Argument of type 'string | undefined' is not assig... Remove this comment to see the full error message
               } else return new RegExp(input.pattern).test(value);
             }
           )
@@ -395,7 +374,7 @@ function generateYupSchema({
   customPropertySyntaxPattern,
   customPropertyStartsWithPattern,
   useCSVforArrays,
-  validationSchemaExtension
+  validationSchemaExtension,
 }: any) {
   let validationSchema = transformAll(
     generateYupAst({
@@ -500,9 +479,7 @@ const TYPE_PROPS = {
   [INPUT_GROUPS.CHECKBOX]: (
     // @ts-expect-error TS(7006): Parameter 'formikProps' implicitly has an 'any' ty... Remove this comment to see the full error message
     formikProps,
-    {
-      key
-    }: any,
+    { key }: any,
     // @ts-expect-error TS(7006): Parameter 'inputs' implicitly has an 'any' type.
     inputs,
     // @ts-expect-error TS(7006): Parameter 'useCSVforArrays' implicitly has an 'any... Remove this comment to see the full error message
@@ -514,15 +491,13 @@ const TYPE_PROPS = {
       } else {
         formikProps.setFieldValue(`['${key}']`, selectedItems);
       }
-    }
+    },
   }),
 
   [INPUT_GROUPS.CREATABLE]: (
     // @ts-expect-error TS(7006): Parameter 'formikProps' implicitly has an 'any' ty... Remove this comment to see the full error message
     formikProps,
-    {
-      key
-    }: any,
+    { key }: any,
     // @ts-expect-error TS(7006): Parameter 'inputs' implicitly has an 'any' type.
     inputs,
     // @ts-expect-error TS(7006): Parameter 'useCSVforArrays' implicitly has an 'any... Remove this comment to see the full error message
@@ -538,19 +513,17 @@ const TYPE_PROPS = {
       }
     },
 
-    onInputBlur: () => formikProps.setFieldTouched(`['${key}']`, true, true)
+    onInputBlur: () => formikProps.setFieldTouched(`['${key}']`, true, true),
   }),
 
-  [INPUT_GROUPS.DATE]: (formikProps: any, {
-    key,
-    type
-  }: any) =>
+  [INPUT_GROUPS.DATE]: (formikProps: any, { key, type }: any) =>
     type === DATE_TYPES.DATE_RANGE
       ? {
-          onChange: (dateArray: any) => formikProps.setFieldValue(
-            `['${key}']`,
-            dateArray?.map((date: any) => date.toISOString())
-          ),
+          onChange: (dateArray: any) =>
+            formikProps.setFieldValue(
+              `['${key}']`,
+              dateArray?.map((date: any) => date.toISOString())
+            ),
         }
       : {
           onChange: formikProps.handleChange,
@@ -560,17 +533,13 @@ const TYPE_PROPS = {
   [INPUT_GROUPS.MULTI_SELECT]: (
     // @ts-expect-error TS(7006): Parameter 'formikProps' implicitly has an 'any' ty... Remove this comment to see the full error message
     formikProps,
-    {
-      key
-    }: any,
+    { key }: any,
     // @ts-expect-error TS(7006): Parameter 'inputs' implicitly has an 'any' type.
     inputs,
     // @ts-expect-error TS(7006): Parameter 'useCSVforArrays' implicitly has an 'any... Remove this comment to see the full error message
     useCSVforArrays
   ) => ({
-    onChange: async ({
-      selectedItems
-    }: any) => {
+    onChange: async ({ selectedItems }: any) => {
       await formikProps.setFieldTouched(`['${key}']`, true);
 
       if (useCSVforArrays) {
@@ -586,26 +555,22 @@ const TYPE_PROPS = {
       }
     },
 
-    onInputBlur: () => formikProps.setFieldTouched(`['${key}']`, true, true)
+    onInputBlur: () => formikProps.setFieldTouched(`['${key}']`, true, true),
   }),
 
   [INPUT_GROUPS.RADIO]: (
     // @ts-expect-error TS(7006): Parameter 'formikProps' implicitly has an 'any' ty... Remove this comment to see the full error message
     formikProps,
-    {
-      key
-    }: any
+    { key }: any
   ) => ({
-    onChange: (value: any) => formikProps.setFieldValue(`['${key}']`, value)
+    onChange: (value: any) => formikProps.setFieldValue(`['${key}']`, value),
   }),
 
   [INPUT_GROUPS.SELECT]: (formikProps: any, input: any, inputs: any) => {
     const { key } = input;
 
     let typeProps = {
-      onChange: async ({
-        selectedItem
-      }: any) => {
+      onChange: async ({ selectedItem }: any) => {
         await formikProps.setFieldTouched(`['${key}']`, true);
         formikProps.setFieldValue(`['${key}']`, selectedItem ? selectedItem.value : "");
       },
@@ -633,7 +598,7 @@ const TYPE_PROPS = {
         if (key === governingJsonKey) {
           governingOptions = governingJson.map((option: any) => ({
             label: option[jsonLabel],
-            value: option[jsonKey]
+            value: option[jsonKey],
           }));
         } else {
           /** Check if the select that governs this one has a value and disable if it doesn't */
@@ -674,28 +639,26 @@ const TYPE_PROPS = {
   },
 
   [INPUT_GROUPS.TEXT_AREA]: (formikProps: any) => ({
-    onChange: formikProps.handleChange
+    onChange: formikProps.handleChange,
   }),
 
   [INPUT_GROUPS.TEXT_EDITOR]: (formikProps: any) => ({
-    onChange: formikProps.handleChange
+    onChange: formikProps.handleChange,
   }),
 
   [INPUT_GROUPS.TEXT_INPUT]: (formikProps: any) => ({
-    onChange: formikProps.handleChange
+    onChange: formikProps.handleChange,
   }),
 
   [INPUT_GROUPS.BOOLEAN]: (
     // @ts-expect-error TS(7006): Parameter 'formikProps' implicitly has an 'any' ty... Remove this comment to see the full error message
     formikProps,
-    {
-      key
-    }: any
+    { key }: any
   ) => ({
     onChange: (value: any) => {
       formikProps.setFieldTouched(`['${key}']`, true, true);
       formikProps.setFieldValue(`['${key}']`, value);
-    }
+    },
   }),
 };
 
@@ -812,35 +775,50 @@ DynamicFormik.defaultProps = {
 };
 
 type OwnDynamicFormikProps = {
-    children: (...args: any[]) => any;
-    dataDrivenInputProps?: any;
-    customPropertySyntaxPattern?: any; // TODO: PropTypes.instanceOf(RegExp)
-    customPropertyStartsWithPattern?: any; // TODO: PropTypes.instanceOf(RegExp)
-    additionalInitialValues?: any;
-    allowCustomPropertySyntax?: boolean;
-    inputProps?: any;
-    initialValues?: any;
-    inputs: any[];
-    onSubmit?: (...args: any[]) => any;
-    useCSVforArrays?: boolean;
-    validationSchema?: any;
-    validationSchemaExtension?: any;
-    allProps?: (...args: any[]) => any;
-    checkboxListProps?: (...args: any[]) => any;
-    creatableProps?: (...args: any[]) => any;
-    dateProps?: (...args: any[]) => any;
-    multiSelectProps?: (...args: any[]) => any;
-    radioProps?: (...args: any[]) => any;
-    selectProps?: (...args: any[]) => any;
-    textAreaProps?: (...args: any[]) => any;
-    textEditorProps?: (...args: any[]) => any;
-    textInputProps?: (...args: any[]) => any;
-    toggleProps?: (...args: any[]) => any;
+  children: (...args: any[]) => any;
+  dataDrivenInputProps?: any;
+  customPropertySyntaxPattern?: any; // TODO: PropTypes.instanceOf(RegExp)
+  customPropertyStartsWithPattern?: any; // TODO: PropTypes.instanceOf(RegExp)
+  additionalInitialValues?: any;
+  allowCustomPropertySyntax?: boolean;
+  inputProps?: any;
+  initialValues?: any;
+  inputs: any[];
+  onSubmit?: (...args: any[]) => any;
+  useCSVforArrays?: boolean;
+  validationSchema?: any;
+  validationSchemaExtension?: any;
+  allProps?: (...args: any[]) => any;
+  checkboxListProps?: (...args: any[]) => any;
+  creatableProps?: (...args: any[]) => any;
+  dateProps?: (...args: any[]) => any;
+  multiSelectProps?: (...args: any[]) => any;
+  radioProps?: (...args: any[]) => any;
+  selectProps?: (...args: any[]) => any;
+  textAreaProps?: (...args: any[]) => any;
+  textEditorProps?: (...args: any[]) => any;
+  textInputProps?: (...args: any[]) => any;
+  toggleProps?: (...args: any[]) => any;
 };
 
 type DynamicFormikProps = OwnDynamicFormikProps & typeof DynamicFormik.defaultProps;
 
-export default function DynamicFormik({ additionalInitialValues, allowCustomPropertySyntax, customPropertySyntaxPattern, customPropertyStartsWithPattern, children, dataDrivenInputProps, inputProps, initialValues, inputs, onSubmit, useCSVforArrays, validationSchema, validationSchemaExtension, ...otherProps }: DynamicFormikProps) {
+export default function DynamicFormik({
+  additionalInitialValues,
+  allowCustomPropertySyntax,
+  customPropertySyntaxPattern,
+  customPropertyStartsWithPattern,
+  children,
+  dataDrivenInputProps,
+  inputProps,
+  initialValues,
+  inputs,
+  onSubmit,
+  useCSVforArrays,
+  validationSchema,
+  validationSchemaExtension,
+  ...otherProps
+}: DynamicFormikProps) {
   return (
     <Formik
       initialValues={

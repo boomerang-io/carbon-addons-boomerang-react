@@ -4,21 +4,46 @@ import Tippy from "@tippyjs/react";
 import { prefix } from "../../internal/settings";
 
 type Props = {
-    align?: "start" | "end";
-    children?: React.ReactNode;
-    className?: string;
-    content?: React.ReactNode;
-    direction?: "auto" | "top" | "bottom" | "left" | "right";
-    placement?: "top" | "top-start" | "top-end" | "right" | "right-start" | "right-end" | "bottom" | "bottom-start" | "bottom-end" | "left" | "left-start" | "left-end" | "auto" | "auto-start" | "auto-end";
-    tooltipContent?: React.ReactNode;
-    tooltipText?: React.ReactNode;
+  align?: "start" | "end";
+  children?: React.ReactNode;
+  className?: string;
+  content?: React.ReactNode;
+  direction?: "auto" | "top" | "bottom" | "left" | "right";
+  placement?:
+    | "top"
+    | "top-start"
+    | "top-end"
+    | "right"
+    | "right-start"
+    | "right-end"
+    | "bottom"
+    | "bottom-start"
+    | "bottom-end"
+    | "left"
+    | "left-start"
+    | "left-end"
+    | "auto"
+    | "auto-start"
+    | "auto-end";
+  tooltipContent?: React.ReactNode;
+  tooltipText?: React.ReactNode;
 };
 
 /**
  * TooltipHover to replace TooltipDefintion in most situations.
  * Uses https://github.com/atomiks/tippyjs-react
  */
-function TooltipHover({ align, direction, children, className, content, placement, tooltipContent, tooltipText, ...restProps }: Props) {
+function TooltipHover({
+  align,
+  direction,
+  children,
+  className,
+  content,
+  placement,
+  tooltipContent,
+  tooltipText,
+  ...restProps
+}: Props) {
   // support all three for compat with both tippy props and carbon
   const contentToRender = content || tooltipContent || tooltipText;
 

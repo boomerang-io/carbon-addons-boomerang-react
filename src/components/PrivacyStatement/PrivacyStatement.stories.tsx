@@ -18,8 +18,8 @@ export default {
 
 export const Default = () => {
   const mock = new MockAdapter(axios);
-  mock.onGet(serviceUrl.getStatement({ baseServiceUrl})).reply(200, PRIVACY_DATA);
-  mock.onPut(serviceUrl.resourceUserConsent({ baseServiceUrl})).reply(200);
+  mock.onGet(serviceUrl.getStatement({ baseServiceUrl })).reply(200, PRIVACY_DATA);
+  mock.onPut(serviceUrl.resourceUserConsent({ baseServiceUrl })).reply(200);
   return (
     <QueryClientProvider client={queryClient}>
       <PrivacyStatement baseServiceUrl={baseServiceUrl} />

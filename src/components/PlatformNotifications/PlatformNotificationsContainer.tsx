@@ -6,13 +6,13 @@ import { prefix } from "../../internal/settings";
 import Notification from "./PlatformNotifications";
 
 type OwnProps = {
-    config?: {
-        wsUrl: string;
-    };
-    initialNotifications?: any[];
-    isNotificationActive: boolean;
-    setHasNewNotifications: (...args: any[]) => any;
-    baseLaunchEnvUrl?: string;
+  config?: {
+    wsUrl: string;
+  };
+  initialNotifications?: any[];
+  isNotificationActive: boolean;
+  setHasNewNotifications: (...args: any[]) => any;
+  baseLaunchEnvUrl?: string;
 };
 
 type State = any;
@@ -64,7 +64,7 @@ export default class PlatformNotificationsContainer extends React.Component<Prop
       }
       this.setState((prevState: any) => ({
         currentNotifications: [...data, ...prevState.currentNotifications],
-        numNotifications: prevState.numNotifications + data.length
+        numNotifications: prevState.numNotifications + data.length,
       }));
     } else {
       this.setState({
@@ -106,7 +106,7 @@ export default class PlatformNotificationsContainer extends React.Component<Prop
     this.setState(
       (prevState: any) => ({
         currentNotifications: prevState.currentNotifications.filter((el: any) => readIdList.indexOf(el.id) === -1),
-        numNotifications: prevState.numNotifications - readIdList.length
+        numNotifications: prevState.numNotifications - readIdList.length,
       }),
       () => {
         if (this.state.numNotifications === 0) {

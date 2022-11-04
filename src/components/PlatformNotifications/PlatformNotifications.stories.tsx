@@ -3,11 +3,7 @@ import PlatformNotificationsContainer from "./index";
 export default {
   title: "Platform/PlatformNotifications",
   component: PlatformNotificationsContainer,
-  decorators: [
-    (story: any) => <div style={{ position: "absolute", left: "20rem" }}>
-      {story()}
-    </div>,
-  ],
+  decorators: [(story: any) => <div style={{ position: "absolute", left: "20rem" }}>{story()}</div>],
 };
 
 export const Default = (args: any) => {

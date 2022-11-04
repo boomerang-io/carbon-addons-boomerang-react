@@ -1,3 +1,3 @@
 export interface ModalFunctionChildrenProps {
-    closeModal: () => void;
+  closeModal: () => void;
 }

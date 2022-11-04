@@ -6,15 +6,12 @@ import { ModalHeader, ModalBody, ModalFooter } from "@carbon/react";
 import HeaderMenuItem from "../HeaderMenuItem";
 
 type Props = {
-    platformName?: string;
-    platformOrganization?: string;
-    sendIdeasUrl?: string;
+  platformName?: string;
+  platformOrganization?: string;
+  sendIdeasUrl?: string;
 };
 
-
-
 class Feedback extends Component<Props> {
-
   render() {
     return (
       <HeaderMenuItem
@@ -23,9 +20,7 @@ class Feedback extends Component<Props> {
         iconName="idea"
         className={`${prefix}--bmrg-feedback-container`}
       >
-        {({
-          closeModal
-        }: any) => {
+        {({ closeModal }: any) => {
           return (
             <>
               <ModalHeader title="Submit an Idea" closeModal={closeModal} />

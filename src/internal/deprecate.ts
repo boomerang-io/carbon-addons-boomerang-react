@@ -1,5 +1,5 @@
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'warn... Remove this comment to see the full error message
-import warning from 'warning';
+import warning from "warning";
 
 const didWarnAboutDeprecation = {};
 

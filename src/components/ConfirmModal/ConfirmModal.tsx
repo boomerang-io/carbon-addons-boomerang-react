@@ -14,22 +14,22 @@ ConfirmModal.defaultProps = {
 };
 
 type OwnProps = {
-    affirmativeAction?: (...args: any[]) => any;
-    affirmativeButtonProps?: any;
-    affirmativeText?: string;
-    appElement?: string;
-    children?: React.ReactNode;
-    containerClassName?: string;
-    isOpen?: boolean;
-    label?: string;
-    modalProps?: any;
-    modalTrigger?: (...args: any[]) => any;
-    negativeAction?: (...args: any[]) => any;
-    negativeButtonProps?: any;
-    negativeText?: string;
-    onCloseModal?: (...args: any[]) => any;
-    selectorPrimaryFocus?: string;
-    title?: string;
+  affirmativeAction?: (...args: any[]) => any;
+  affirmativeButtonProps?: any;
+  affirmativeText?: string;
+  appElement?: string;
+  children?: React.ReactNode;
+  containerClassName?: string;
+  isOpen?: boolean;
+  label?: string;
+  modalProps?: any;
+  modalTrigger?: (...args: any[]) => any;
+  negativeAction?: (...args: any[]) => any;
+  negativeButtonProps?: any;
+  negativeText?: string;
+  onCloseModal?: (...args: any[]) => any;
+  selectorPrimaryFocus?: string;
+  title?: string;
 };
 
 type Props = OwnProps & typeof ConfirmModal.defaultProps;

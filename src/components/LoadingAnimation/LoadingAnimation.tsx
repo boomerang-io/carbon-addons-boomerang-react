@@ -6,16 +6,14 @@ import loadingMessages from "./loadingMessages";
 import LoadingAnimationContent from "./LoadingAnimationContent";
 
 type OwnProps = {
-    centered?: boolean;
-    message?: string | any[];
-    loading?: boolean;
-    wait?: number;
+  centered?: boolean;
+  message?: string | any[];
+  loading?: boolean;
+  wait?: number;
 };
 
 // @ts-expect-error TS(2456): Type alias 'Props' circularly references itself.
 type Props = OwnProps & typeof LoadingAnimation.defaultProps;
-
-
 
 /** Loading animation with integrated loading svg, and messages to be randomly selected by default and
  * configurable time to wait to render to prevent flickering on quickly resolved requests */

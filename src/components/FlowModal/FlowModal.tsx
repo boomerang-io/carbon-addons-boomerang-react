@@ -15,21 +15,21 @@ FlowModalContainer.defaultProps = {
 };
 
 type OwnProps = {
-    appElement?: string;
-    children?: React.ReactNode;
-    components?: any[];
-    composedModalProps?: any;
-    confirmModalProps?: any;
-    initialState?: any;
-    isOpen?: boolean;
-    modalHeaderChildren?: React.ReactElement;
-    modalHeaderProps?: any;
-    modalTrigger?: (...args: any[]) => any;
-    onCloseModal?: (...args: any[]) => any;
-    onFormDataChange?: (...args: any[]) => any;
-    progressSteps?: {
-        label?: string;
-    }[];
+  appElement?: string;
+  children?: React.ReactNode;
+  components?: any[];
+  composedModalProps?: any;
+  confirmModalProps?: any;
+  initialState?: any;
+  isOpen?: boolean;
+  modalHeaderChildren?: React.ReactElement;
+  modalHeaderProps?: any;
+  modalTrigger?: (...args: any[]) => any;
+  onCloseModal?: (...args: any[]) => any;
+  onFormDataChange?: (...args: any[]) => any;
+  progressSteps?: {
+    label?: string;
+  }[];
 };
 
 type Props = OwnProps & typeof FlowModalContainer.defaultProps;
@@ -172,19 +172,36 @@ export function FlowModalContainer(props: Props) {
   const { subtitle, ...restModalHeaderProps } = props.modalHeaderProps;
 
   const childToRender = determineChildToRender();
-  return (<>
+  return (
+    <>
       {props.modalTrigger({ openModal: handleOpenModal })}
-      <Modal appElement={props.appElement} containerClassName={cx(`${prefix}--bmrg-modal-flow-container`, `${prefix}--modal-container`, (props as any).size ? `${prefix}--modal-container--${(props as any).size}` : "modal-container-fix-width", containerClassName)} isOpen={(state as any).isOpen} onRequestClose={handleShouldCloseModal} shouldCloseOnOverlayClick={false} {...restComposedModalProps}>
+      <Modal
+        appElement={props.appElement}
+        containerClassName={cx(
+          `${prefix}--bmrg-modal-flow-container`,
+          `${prefix}--modal-container`,
+          (props as any).size ? `${prefix}--modal-container--${(props as any).size}` : "modal-container-fix-width",
+          containerClassName
+        )}
+        isOpen={(state as any).isOpen}
+        onRequestClose={handleShouldCloseModal}
+        shouldCloseOnOverlayClick={false}
+        {...restComposedModalProps}
+      >
         <ModalHeader closeModal={handleShouldCloseModal} {...restModalHeaderProps}>
           {subtitle && <p className={`${prefix}--bmrg-modal-flow-subtitle`}>{subtitle}</p>}
         </ModalHeader>
 
-        {Array.isArray(props.progressSteps) && (<ProgressIndicator currentIndex={(state as any).step}>
-            {props.progressSteps.map((stepProps, index) => (<ProgressStep key={index} {...stepProps}/>))}
-          </ProgressIndicator>)}
+        {Array.isArray(props.progressSteps) && (
+          <ProgressIndicator currentIndex={(state as any).step}>
+            {props.progressSteps.map((stepProps, index) => (
+              <ProgressStep key={index} {...stepProps} />
+            ))}
+          </ProgressIndicator>
+        )}
         {childToRender &&
-        (state as any).isOpen &&
-        React.cloneElement(childToRender, {
+          (state as any).isOpen &&
+          React.cloneElement(childToRender, {
             closeModal: handleShouldCloseModal,
             forceCloseModal: handleCloseModal,
             formData: (state as any).formData,
@@ -196,10 +213,18 @@ export function FlowModalContainer(props: Props) {
             setShouldConfirmModalClose: handleSetShouldConfirmModalClose,
             shouldConfirmModalClose: (state as any).shouldConfirmModalClose,
             step: (state as any).step,
-        })}
-        <ConfirmModal affirmativeAction={handleCloseModal} appElement={props.appElement} negativeAction={closeConfirmModal} isOpen={(state as any).isConfirmModalOpen} onCloseModal={closeConfirmModal} {...props.confirmModalProps}/>
+          })}
+        <ConfirmModal
+          affirmativeAction={handleCloseModal}
+          appElement={props.appElement}
+          negativeAction={closeConfirmModal}
+          isOpen={(state as any).isConfirmModalOpen}
+          onCloseModal={closeConfirmModal}
+          {...props.confirmModalProps}
+        />
       </Modal>
-    </>);
+    </>
+  );
 }
 
 export default FlowModalContainer;

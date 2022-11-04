@@ -15,11 +15,7 @@ export default {
       },
     },
   },
-  decorators: [
-    (story: any) => <div style={{ maxWidth: "30rem", padding: "2rem" }}>
-      {story()}
-    </div>,
-  ],
+  decorators: [(story: any) => <div style={{ maxWidth: "30rem", padding: "2rem" }}>{story()}</div>],
 };
 
 const additionalSchema = Yup.object().shape({
@@ -273,10 +269,7 @@ const inputs = [
     helperText: "text",
     description: "text",
     // eslint-disable-next-line
-    customComponent: ({
-      formikProps,
-      ...rest
-    }: any) => <TextInput {...rest} />,
+    customComponent: ({ formikProps, ...rest }: any) => <TextInput {...rest} />,
   },
   {
     key: "general.worker.nextgen.enable",

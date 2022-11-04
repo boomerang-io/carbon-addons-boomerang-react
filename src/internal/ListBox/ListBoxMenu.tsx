@@ -10,11 +10,15 @@ import ListBoxMenuItem from "./ListBoxMenuItem";
 import { prefix } from "../settings";
 
 type Props = {
-    // @ts-expect-error TS(2749): 'ListBoxMenuItem' refers to a value, but is being ... Remove this comment to see the full error message
-    children?: React.ReactNode | ListBoxMenuItem[] | {
+  // @ts-expect-error TS(2749): 'ListBoxMenuItem' refers to a value, but is being ... Remove this comment to see the full error message
+  children?:
+    | React.ReactNode
+    | ListBoxMenuItem[]
+    | {
         type?: any; // TODO: PropTypes.oneOf([ListBoxMenuItem])
-    } | boolean;
-    id: string;
+      }
+    | boolean;
+  id: string;
 };
 
 /**

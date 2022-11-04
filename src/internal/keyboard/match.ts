@@ -57,12 +57,7 @@ export function matches(event: any, keysToMatch: any) {
  * @param {Key} key
  * @returns {boolean}
  */
-export function match(eventOrCode: any, {
-  key,
-  which,
-  keyCode,
-  code
-}: any = {}) {
+export function match(eventOrCode: any, { key, which, keyCode, code }: any = {}) {
   if (typeof eventOrCode === "string") {
     return eventOrCode === key;
   }

@@ -4,23 +4,31 @@ import { prefix } from "../../internal/settings";
 import Option from "./Option";
 
 type OwnProps = {
-    className?: string;
-    columns: number;
-    data: any[];
-    displayProperty: string;
-    onSelect: (...args: any[]) => any;
-    selectedItems: any[];
-    selectProperty: string;
-    style?: any;
+  className?: string;
+  columns: number;
+  data: any[];
+  displayProperty: string;
+  onSelect: (...args: any[]) => any;
+  selectedItems: any[];
+  selectProperty: string;
+  style?: any;
 };
 
 // @ts-expect-error TS(2456): Type alias 'Props' circularly references itself.
 type Props = OwnProps & typeof OptionsGrid.defaultProps;
 
-
-
 // @ts-expect-error TS(7022): 'OptionsGrid' implicitly has type 'any' because it... Remove this comment to see the full error message
-const OptionsGrid = ({ className, columns, data, displayProperty, onSelect, selectedItems, selectProperty, style, ...rest }: Props) => {
+const OptionsGrid = ({
+  className,
+  columns,
+  data,
+  displayProperty,
+  onSelect,
+  selectedItems,
+  selectProperty,
+  style,
+  ...rest
+}: Props) => {
   let rowItems: any = [];
   const grid = [];
 

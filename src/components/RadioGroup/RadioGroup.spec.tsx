@@ -21,9 +21,9 @@ const props = {
 };
 
 test("render label, helperText, tooltip and options", () => {
-    const { queryByText } = render(<RadioGroup {...props}/>);
-    (expect(queryByText(/helper text/i)) as any).toBeInTheDocument();
-    (expect(queryByText(/label text/i)) as any).toBeInTheDocument();
-    (expect(queryByText(/One/i)) as any).toBeInTheDocument();
-    (expect(queryByText(/Two/i)) as any).toBeInTheDocument();
+  const { queryByText } = render(<RadioGroup {...props} />);
+  (expect(queryByText(/helper text/i)) as any).toBeInTheDocument();
+  (expect(queryByText(/label text/i)) as any).toBeInTheDocument();
+  (expect(queryByText(/One/i)) as any).toBeInTheDocument();
+  (expect(queryByText(/Two/i)) as any).toBeInTheDocument();
 });

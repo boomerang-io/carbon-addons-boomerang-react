@@ -5,32 +5,31 @@ import { Information } from "@carbon/react/icons";
 import { prefix } from "../../internal/settings";
 
 type Props = {
-    tooltipClassName?: string;
-    tooltipContent?: React.ReactNode;
-    tooltipProps?: any;
-    className?: string;
-    defaultValue?: string | number;
-    disabled?: boolean;
-    helperText?: React.ReactNode;
-    hideLabel?: boolean;
-    id: string;
-    inline?: boolean;
-    invalid?: boolean;
-    invalidText?: React.ReactNode;
-    label?: React.ReactNode;
-    labelText?: React.ReactNode;
-    light?: boolean;
-    onChange?: (...args: any[]) => any;
-    onClick?: (...args: any[]) => any;
-    placeholder?: string;
-    readOnly?: boolean;
-    size?: "sm" | "md" | "lg";
-    type?: string;
-    value?: string | number;
-    warn?: boolean;
-    warnText?: React.ReactNode;
+  tooltipClassName?: string;
+  tooltipContent?: React.ReactNode;
+  tooltipProps?: any;
+  className?: string;
+  defaultValue?: string | number;
+  disabled?: boolean;
+  helperText?: React.ReactNode;
+  hideLabel?: boolean;
+  id: string;
+  inline?: boolean;
+  invalid?: boolean;
+  invalidText?: React.ReactNode;
+  label?: React.ReactNode;
+  labelText?: React.ReactNode;
+  light?: boolean;
+  onChange?: (...args: any[]) => any;
+  onClick?: (...args: any[]) => any;
+  placeholder?: string;
+  readOnly?: boolean;
+  size?: "sm" | "md" | "lg";
+  type?: string;
+  value?: string | number;
+  warn?: boolean;
+  warnText?: React.ReactNode;
 };
-
 
 const TextInputComponent = React.forwardRef<any, Props>(function TextInputComponent(
   { id, label, labelText, tooltipClassName, tooltipContent, tooltipProps, ...textInputProps },

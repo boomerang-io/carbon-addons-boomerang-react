@@ -5,8 +5,6 @@ import { Edit } from "@carbon/react/icons";
 import ModalConfirmDetails from "./ModalConfirmDetails";
 import ModalConfirmArray from "./ModalConfirmArray";
 
-
-
 const TYPES = {
   DETAILS: "details",
   ARRAY: "array",
@@ -18,11 +16,11 @@ ModalConfirmEdit.defaultProps = {
 };
 
 type OwnProps = {
-    onEdit?: (...args: any[]) => any;
-    items?: any[];
-    style?: any;
-    title?: string;
-    type?: any; // TODO: PropTypes.oneOf(Object.values(TYPES))
+  onEdit?: (...args: any[]) => any;
+  items?: any[];
+  style?: any;
+  title?: string;
+  type?: any; // TODO: PropTypes.oneOf(Object.values(TYPES))
 };
 
 type Props = OwnProps & typeof ModalConfirmEdit.defaultProps;

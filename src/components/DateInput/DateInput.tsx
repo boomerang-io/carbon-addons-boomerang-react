@@ -7,23 +7,23 @@ import { DATE_TYPES } from "../../internal/DataDrivenInputTypes";
 import { prefix } from "../../internal/settings";
 
 type Props = {
-    id: string;
-    dateFormat?: string;
-    datePickerProps?: any;
-    disabled?: boolean;
-    helperText?: string;
-    invalid?: boolean;
-    max?: string;
-    min?: string;
-    label?: string;
-    labelText?: string;
-    onCalendarChange?: (...args: any[]) => any;
-    onChange?: (...args: any[]) => any;
-    readOnly?: boolean;
-    tooltipClassName?: string;
-    tooltipContent?: React.ReactNode;
-    tooltipProps?: any;
-    type?: any; // TODO: PropTypes.oneOf([DATE_TYPES.DATE, DATE_TYPES.DATE_RANGE])
+  id: string;
+  dateFormat?: string;
+  datePickerProps?: any;
+  disabled?: boolean;
+  helperText?: string;
+  invalid?: boolean;
+  max?: string;
+  min?: string;
+  label?: string;
+  labelText?: string;
+  onCalendarChange?: (...args: any[]) => any;
+  onChange?: (...args: any[]) => any;
+  readOnly?: boolean;
+  tooltipClassName?: string;
+  tooltipContent?: React.ReactNode;
+  tooltipProps?: any;
+  type?: any; // TODO: PropTypes.oneOf([DATE_TYPES.DATE, DATE_TYPES.DATE_RANGE])
 };
 
 const DateInputComponent = React.forwardRef<any, Props>(function DateInputComponent(

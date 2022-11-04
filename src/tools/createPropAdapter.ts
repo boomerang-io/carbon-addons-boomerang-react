@@ -42,6 +42,6 @@ function createPropAdapter(spec: any) {
  *
  * @see https://github.com/downshift-js/downshift/releases/tag/v3.0.0
  */
-const mapDownshiftProps = createPropAdapter([[/^default/g, 'initial']]);
+const mapDownshiftProps = createPropAdapter([[/^default/g, "initial"]]);
 
 export { mapDownshiftProps };

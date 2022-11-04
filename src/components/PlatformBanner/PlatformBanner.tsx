@@ -3,9 +3,9 @@ import { InlineNotification as CarbonInlineNotification } from "@carbon/react";
 import { prefix } from "../../internal/settings";
 
 type Props = {
-    kind?: "error" | "info" | "success" | "warning";
-    message?: string;
-    title?: string;
+  kind?: "error" | "info" | "success" | "warning";
+  message?: string;
+  title?: string;
 };
 
 function PlatformBanner({ kind, message, title }: Props) {

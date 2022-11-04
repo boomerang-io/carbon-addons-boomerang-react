@@ -4,14 +4,12 @@ import Downshift from "downshift";
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'loda... Remove this comment to see the full error message
 import isEqual from "lodash.isequal";
 import { prefix } from "../../internal/settings";
-import { WarningFilled} from "@carbon/react/icons";
+import { WarningFilled } from "@carbon/react/icons";
 import { Tag } from "@carbon/react";
 import ListBox, { PropTypes as ListBoxPropTypes } from "../../internal/ListBox";
 import { isAccessibleKeyDownEvent } from "../../tools/accessibility";
 import { mapDownshiftProps } from "../../tools/createPropAdapter";
 import setupGetInstanceId from "../../tools/setupGetInstanceId";
-
-
 
 const defaultItemToString = (item: any) => {
   if (typeof item === "string") {
@@ -21,12 +19,7 @@ const defaultItemToString = (item: any) => {
   return item && item.label;
 };
 
-const defaultShouldFilterItem = ({
-  item,
-  selectedItems,
-  itemToString,
-  inputValue
-}: any) => {
+const defaultShouldFilterItem = ({ item, selectedItems, itemToString, inputValue }: any) => {
   let keepItem = true;
   const itemString = itemToString(item);
   if (
@@ -46,30 +39,30 @@ const getInputValue = (state: any) => {
 const getInstanceId = setupGetInstanceId();
 
 type OwnMultiSelectComboBoxProps = {
-    ariaLabel?: string;
-    className?: string;
-    disabled?: boolean;
-    id: string;
-    initialSelectedItems?: any[];
-    selectedItems?: any[];
-    items: any[];
-    itemToString?: (...args: any[]) => any;
-    itemToElement?: (...args: any[]) => any;
-    titleText?: any;
-    helperText?: string;
-    tagProps?: any;
-    onInputBlur?: (...args: any[]) => any;
-    onChange: (...args: any[]) => any;
-    open?: boolean;
-    placeholder: string;
-    shouldFilterItem?: (...args: any[]) => any;
-    invalid?: boolean;
-    invalidText?: string;
-    translateWithId?: (...args: any[]) => any;
-    onInputChange?: (...args: any[]) => any;
-    type?: any; // TODO: ListBoxPropTypes.ListBoxType
-    light?: boolean;
-    downshiftProps?: any; // TODO: PropTypes.shape(Downshift.propTypes)
+  ariaLabel?: string;
+  className?: string;
+  disabled?: boolean;
+  id: string;
+  initialSelectedItems?: any[];
+  selectedItems?: any[];
+  items: any[];
+  itemToString?: (...args: any[]) => any;
+  itemToElement?: (...args: any[]) => any;
+  titleText?: any;
+  helperText?: string;
+  tagProps?: any;
+  onInputBlur?: (...args: any[]) => any;
+  onChange: (...args: any[]) => any;
+  open?: boolean;
+  placeholder: string;
+  shouldFilterItem?: (...args: any[]) => any;
+  invalid?: boolean;
+  invalidText?: string;
+  translateWithId?: (...args: any[]) => any;
+  onInputChange?: (...args: any[]) => any;
+  type?: any; // TODO: ListBoxPropTypes.ListBoxType
+  light?: boolean;
+  downshiftProps?: any; // TODO: PropTypes.shape(Downshift.propTypes)
 };
 
 type MultiSelectComboBoxState = any;
@@ -100,10 +93,10 @@ export default class MultiSelectComboBox extends React.Component<MultiSelectComb
     this.comboBoxInstanceId = getInstanceId();
 
     this.state = {
-    inputValue: getInputValue({}),
-    isOpen: (props as any).open ?? false,
-    stateSelectedItems: (props as any).initialSelectedItems || (props as any).selectedItems,
-};
+      inputValue: getInputValue({}),
+      isOpen: (props as any).open ?? false,
+      stateSelectedItems: (props as any).initialSelectedItems || (props as any).selectedItems,
+    };
   }
 
   //eslint disable-next-line
@@ -127,12 +120,13 @@ export default class MultiSelectComboBox extends React.Component<MultiSelectComb
 
     return shouldFilterItem
       ? // @ts-expect-error TS(2349): This expression is not callable.
-        items.filter((item: any) => shouldFilterItem({
-      item,
-      selectedItems,
-      itemToString,
-      inputValue,
-    })
+        items.filter((item: any) =>
+          shouldFilterItem({
+            item,
+            selectedItems,
+            itemToString,
+            inputValue,
+          })
         )
       : items;
   };
@@ -299,55 +293,133 @@ export default class MultiSelectComboBox extends React.Component<MultiSelectComb
     const inputClasses = cx(`${prefix}--text-input`, {
       [`${prefix}--text-input--empty`]: !this.state.inputValue,
     });
-    const ItemToElement = itemToElement; return (<Downshift {...mapDownshiftProps(downshiftProps)} onChange={this.handleOnChange} onInputValueChange={this.handleOnInputValueChange} inputValue={this.state.inputValue || ""} isOpen={isOpen} itemToString={itemToString} onStateChange={this.handleOnStateChange} onOuterClick={this.closeMenu} selectedItem={selectedItems}>
-        {({ getInputProps, getItemProps, getLabelProps, getMenuProps, getToggleButtonProps, isOpen, inputValue, selectedItem, highlightedIndex, clearSelection, }) => (<div className={wrapperClasses}>
-            {titleText && (<label htmlFor={id} className={titleClasses} {...getLabelProps()}>
+    const ItemToElement = itemToElement;
+    return (
+      <Downshift
+        {...mapDownshiftProps(downshiftProps)}
+        onChange={this.handleOnChange}
+        onInputValueChange={this.handleOnInputValueChange}
+        inputValue={this.state.inputValue || ""}
+        isOpen={isOpen}
+        itemToString={itemToString}
+        onStateChange={this.handleOnStateChange}
+        onOuterClick={this.closeMenu}
+        selectedItem={selectedItems}
+      >
+        {({
+          getInputProps,
+          getItemProps,
+          getLabelProps,
+          getMenuProps,
+          getToggleButtonProps,
+          isOpen,
+          inputValue,
+          selectedItem,
+          highlightedIndex,
+          clearSelection,
+        }) => (
+          <div className={wrapperClasses}>
+            {titleText && (
+              <label htmlFor={id} className={titleClasses} {...getLabelProps()}>
                 {titleText}
-              </label>)}
+              </label>
+            )}
             {/* @ts-expect-error TS(2741): Property 'type' is missing in type '{ children: (f... Remove this comment to see the full error message */}
-            <ListBox className={className} disabled={disabled} invalid={invalid} aria-label={ariaLabel} invalidText={invalidText} isOpen={isOpen} light={light} size={size}>
+            <ListBox
+              className={className}
+              disabled={disabled}
+              invalid={invalid}
+              aria-label={ariaLabel}
+              invalidText={invalidText}
+              isOpen={isOpen}
+              light={light}
+              size={size}
+            >
               <div className={`${prefix}--bmrg-multi-select-selected`}>
                 {Array.isArray(selectedItems) &&
-            (selectedItems as any).map((item: any, index: any) => {
-                // @ts-expect-error TS(2349): This expression is not callable.
-                const itemString = itemToString(item);
-                // @ts-expect-error TS(2698): Spread types may only be created from object types... Remove this comment to see the full error message
-                return (<Tag key={`${itemString}-${index}`} disabled={disabled} type="teal" onClick={() => this.handleOnChange(item)} onKeyDown={(e: any) => isAccessibleKeyDownEvent(e) && this.handleOnChange(item)} filter {...tagProps}>
+                  (selectedItems as any).map((item: any, index: any) => {
+                    // @ts-expect-error TS(2349): This expression is not callable.
+                    const itemString = itemToString(item);
+                    // @ts-expect-error TS(2698): Spread types may only be created from object types... Remove this comment to see the full error message
+                    return (
+                      <Tag
+                        key={`${itemString}-${index}`}
+                        disabled={disabled}
+                        type="teal"
+                        onClick={() => this.handleOnChange(item)}
+                        onKeyDown={(e: any) => isAccessibleKeyDownEvent(e) && this.handleOnChange(item)}
+                        filter
+                        {...tagProps}
+                      >
                         {itemString}
-                      </Tag>);
-            })}
+                      </Tag>
+                    );
+                  })}
               </div>
-              <Field id={id} disabled={disabled} {...getToggleButtonProps({
-        disabled,
-        onClick: this.onToggleClick(isOpen),
-    })}>
-                <input className={inputClasses} aria-label={ariaLabel} aria-controls={`${id}__menu`} aria-autocomplete="list" tabIndex="0" ref={this.textInput} {...rest} {...getInputProps({
-        disabled,
-        id,
-        placeholder,
-        onKeyDown: this.handleOnInputKeyDown,
-        onFocus: this.openMenu,
-        onBlur: this.handleInputBlur,
-    })}/>
-                {invalid && <WarningFilled size={16} className={`${prefix}--list-box__invalid-icon`}/>}
-                {(inputValue || (selectedItems as any).length > 0) && (<Selection clearSelection={clearSelection} onClearSelection={this.handleClearSelection} disabled={disabled} translateWithId={translateWithId}/>)}
-                <MenuIcon isOpen={isOpen} translateWithId={translateWithId}/>
+              <Field
+                id={id}
+                disabled={disabled}
+                {...getToggleButtonProps({
+                  disabled,
+                  onClick: this.onToggleClick(isOpen),
+                })}
+              >
+                <input
+                  className={inputClasses}
+                  aria-label={ariaLabel}
+                  aria-controls={`${id}__menu`}
+                  aria-autocomplete="list"
+                  tabIndex="0"
+                  ref={this.textInput}
+                  {...rest}
+                  {...getInputProps({
+                    disabled,
+                    id,
+                    placeholder,
+                    onKeyDown: this.handleOnInputKeyDown,
+                    onFocus: this.openMenu,
+                    onBlur: this.handleInputBlur,
+                  })}
+                />
+                {invalid && <WarningFilled size={16} className={`${prefix}--list-box__invalid-icon`} />}
+                {(inputValue || (selectedItems as any).length > 0) && (
+                  <Selection
+                    clearSelection={clearSelection}
+                    onClearSelection={this.handleClearSelection}
+                    disabled={disabled}
+                    translateWithId={translateWithId}
+                  />
+                )}
+                <MenuIcon isOpen={isOpen} translateWithId={translateWithId} />
               </Field>
-              {isOpen && (<Menu id={id} {...getMenuProps({ "aria-label": ariaLabel })}>
+              {isOpen && (
+                <Menu id={id} {...getMenuProps({ "aria-label": ariaLabel })}>
                   {this.filterItems(items, selectedItem, itemToString, inputValue).map((item: any, index: any) => {
-                const itemProps = getItemProps({ item, index });
-                // @ts-expect-error TS(2349): This expression is not callable.
-                return (<MenuItem key={itemProps.id} isHighlighted={highlightedIndex === index} title={itemToElement ? item.text : itemToString(item)} {...itemProps}>
+                    const itemProps = getItemProps({ item, index });
+                    // @ts-expect-error TS(2349): This expression is not callable.
+                    return (
+                      <MenuItem
+                        key={itemProps.id}
+                        isHighlighted={highlightedIndex === index}
+                        title={itemToElement ? item.text : itemToString(item)}
+                        {...itemProps}
+                      >
                         {/* @ts-expect-error TS(2604): JSX element type 'ItemToElement' does not have any... Remove this comment to see the full error message */}
-                        {itemToElement ? <ItemToElement key={itemToString(item)} {...item}/> : itemToString(item)}
-                      </MenuItem>);
-            })}
-                </Menu>)}
+                        {itemToElement ? <ItemToElement key={itemToString(item)} {...item} /> : itemToString(item)}
+                      </MenuItem>
+                    );
+                  })}
+                </Menu>
+              )}
             </ListBox>
-            {helperText && !invalid && (<div id={comboBoxHelperId} className={helperClasses}>
+            {helperText && !invalid && (
+              <div id={comboBoxHelperId} className={helperClasses}>
                 {helperText}
-              </div>)}
-          </div>)}
-      </Downshift>);
+              </div>
+            )}
+          </div>
+        )}
+      </Downshift>
+    );
   }
 }

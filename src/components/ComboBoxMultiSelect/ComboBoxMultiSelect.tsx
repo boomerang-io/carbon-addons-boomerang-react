@@ -16,11 +16,9 @@ ComboBoxMultiSelect.defaultProps = {
  * then the items would be either in the key:value or value:label format.
  * The prop value would contain either the keys in the key:value or values in the value:label.
  */
-function getFilteredItems({
-  items,
-  selectedItems
-}: any) {
-  return items.filter((item: any) => selectedItems.some((selectedItem: any) => selectedItem === item.key || selectedItem === item.value)
+function getFilteredItems({ items, selectedItems }: any) {
+  return items.filter((item: any) =>
+    selectedItems.some((selectedItem: any) => selectedItem === item.key || selectedItem === item.value)
   );
 }
 
@@ -29,20 +27,33 @@ function getFilteredItems({
 ...MultiSelect.propTypes
 */
 type OwnProps = {
-    disableClear?: boolean;
-    id: string;
-    labelText?: string;
-    label?: string;
-    titleText?: string;
-    tooltipClassName?: string;
-    tooltipContent?: React.ReactNode;
-    tooltipProps?: any;
+  disableClear?: boolean;
+  id: string;
+  labelText?: string;
+  label?: string;
+  titleText?: string;
+  tooltipClassName?: string;
+  tooltipContent?: React.ReactNode;
+  tooltipProps?: any;
 };
 
 type Props = OwnProps & typeof ComboBoxMultiSelect.defaultProps;
 
 // @ts-expect-error TS(2339): Property 'initialSelectedItems' does not exist on ... Remove this comment to see the full error message
-function ComboBoxMultiSelect({ disableClear, id, initialSelectedItems, items, label, labelText, selectedItems, titleText, tooltipClassName, tooltipContent, tooltipProps, ...multiSelectProps }: Props) {
+function ComboBoxMultiSelect({
+  disableClear,
+  id,
+  initialSelectedItems,
+  items,
+  label,
+  labelText,
+  selectedItems,
+  titleText,
+  tooltipClassName,
+  tooltipContent,
+  tooltipProps,
+  ...multiSelectProps
+}: Props) {
   const labelValue = titleText || label || labelText;
   let finalInitialSelectedItems = initialSelectedItems;
   let finalSelectedItems = selectedItems;

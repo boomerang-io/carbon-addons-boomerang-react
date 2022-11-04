@@ -18,28 +18,45 @@ DecisionButtons.defaultProps = {
 };
 
 type OwnProps = {
-    canUncheck?: boolean;
-    children?: React.ReactNode;
-    className?: string;
-    defaultSelected?: string | number;
-    disabled?: boolean;
-    helperText?: string;
-    id?: string;
-    items?: any[];
-    label?: string;
-    labelText?: string;
-    name: string;
-    onChange?: (...args: any[]) => any;
-    orientation?: "horizontal" | "vertical";
-    tooltipClassName?: string;
-    tooltipContent?: React.ReactNode;
-    tooltipProps?: any;
-    selectedItem?: string | number;
+  canUncheck?: boolean;
+  children?: React.ReactNode;
+  className?: string;
+  defaultSelected?: string | number;
+  disabled?: boolean;
+  helperText?: string;
+  id?: string;
+  items?: any[];
+  label?: string;
+  labelText?: string;
+  name: string;
+  onChange?: (...args: any[]) => any;
+  orientation?: "horizontal" | "vertical";
+  tooltipClassName?: string;
+  tooltipContent?: React.ReactNode;
+  tooltipProps?: any;
+  selectedItem?: string | number;
 };
 
 type Props = OwnProps & typeof DecisionButtons.defaultProps;
 
-function DecisionButtons({ canUncheck, className, defaultSelected, disabled, helperText, id, items, label, labelText, name, onChange, orientation, tooltipClassName, tooltipContent, tooltipProps, selectedItem: propsSelectedItem, }: Props) {
+function DecisionButtons({
+  canUncheck,
+  className,
+  defaultSelected,
+  disabled,
+  helperText,
+  id,
+  items,
+  label,
+  labelText,
+  name,
+  onChange,
+  orientation,
+  tooltipClassName,
+  tooltipContent,
+  tooltipProps,
+  selectedItem: propsSelectedItem,
+}: Props) {
   const [stateSelected, setSelected] = useState(propsSelectedItem || defaultSelected);
 
   const selectedItem = propsSelectedItem ?? stateSelected; // Externally controlled if value props exists

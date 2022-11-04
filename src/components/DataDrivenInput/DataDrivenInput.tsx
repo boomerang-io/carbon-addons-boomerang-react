@@ -46,7 +46,7 @@ function formatRadioGroupOptions(options = []) {
   return options.map((option) => ({
     labelText: (option as any).value,
     value: (option as any).key,
-}));
+  }));
 }
 
 function validateRegex(pattern: any, value: any) {
@@ -81,18 +81,18 @@ const determineInitialValues = (input: any) => {
 };
 
 type OwnDataDrivenInputProps = {
-    CheckboxList?: React.ReactElement;
-    Creatable?: React.ReactElement;
-    CustomComponent?: React.ReactElement;
-    DateInput?: React.ReactElement;
-    MultiSelect?: React.ReactElement;
-    RadioGroup?: React.ReactElement;
-    Select?: React.ReactElement;
-    TextArea?: React.ReactElement;
-    TextEditor?: React.ReactElement;
-    TextInput?: React.ReactElement;
-    Toggle?: React.ReactElement;
-    formikProps?: any;
+  CheckboxList?: React.ReactElement;
+  Creatable?: React.ReactElement;
+  CustomComponent?: React.ReactElement;
+  DateInput?: React.ReactElement;
+  MultiSelect?: React.ReactElement;
+  RadioGroup?: React.ReactElement;
+  Select?: React.ReactElement;
+  TextArea?: React.ReactElement;
+  TextEditor?: React.ReactElement;
+  TextInput?: React.ReactElement;
+  Toggle?: React.ReactElement;
+  formikProps?: any;
 };
 
 type DataDrivenInputProps = OwnDataDrivenInputProps & typeof DataDrivenInput.defaultProps;

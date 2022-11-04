@@ -2,10 +2,8 @@ import React from "react";
 import { prefix } from "../../internal/settings";
 
 type Props = {
-    children?: React.ReactNode;
+  children?: React.ReactNode;
 };
-
-
 
 const SidenavFooter = ({ children, ...rest }: Props) => {
   return (

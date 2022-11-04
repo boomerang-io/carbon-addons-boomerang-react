@@ -21,10 +21,10 @@ function useIsTruncated(ref: any) {
 }
 
 type Props = {
-    children?: React.ReactNode;
-    isActive: boolean;
-    isHighlighted: boolean;
-    title?: string;
+  children?: React.ReactNode;
+  isActive: boolean;
+  isHighlighted: boolean;
+  title?: string;
 };
 
 /**
@@ -43,11 +43,13 @@ const ListBoxMenuItem = React.forwardRef<any, Props>(function ListBoxMenuItem(
     [`${prefix}--list-box__menu-item--highlighted`]: isHighlighted,
   });
 
-  return (<div {...rest} className={className} title={isTruncated ? title : undefined}>
+  return (
+    <div {...rest} className={className} title={isTruncated ? title : undefined}>
       <div className={`${prefix}--list-box__menu-item__option`} ref={(forwardedRef as any)?.menuItemOptionRef || ref}>
         {children}
       </div>
-    </div>);
+    </div>
+  );
 });
 
 ListBoxMenuItem.displayName = "ListBoxMenuItem";

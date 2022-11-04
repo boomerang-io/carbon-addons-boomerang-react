@@ -27,11 +27,7 @@ export default {
       },
     },
   },
-  decorators: [
-    (story: any) => <div style={{ maxWidth: "25rem", minHeight: "20rem" }}>
-      {story()}
-    </div>,
-  ],
+  decorators: [(story: any) => <div style={{ maxWidth: "25rem", minHeight: "20rem" }}>{story()}</div>],
   argTypes: {
     autoSuggestions: { control: "array", defaultValue: animals },
     inputProps: {

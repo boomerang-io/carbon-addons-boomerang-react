@@ -3,19 +3,17 @@ import cx from "classnames";
 import { prefix } from "../../internal/settings";
 
 type OwnProps = {
-    ariaExpanded?: boolean;
-    children?: React.ReactNode;
-    className?: string;
-    href?: string;
-    id?: string;
-    isIcon?: boolean;
-    newNotifications?: boolean;
+  ariaExpanded?: boolean;
+  children?: React.ReactNode;
+  className?: string;
+  href?: string;
+  id?: string;
+  isIcon?: boolean;
+  newNotifications?: boolean;
 };
 
 // @ts-expect-error TS(2456): Type alias 'Props' circularly references itself.
 type Props = OwnProps & typeof HeaderListItem.defaultProps;
-
-
 
 // @ts-expect-error TS(7022): 'HeaderListItem' implicitly has type 'any' because... Remove this comment to see the full error message
 const HeaderListItem = (props: Props) => {

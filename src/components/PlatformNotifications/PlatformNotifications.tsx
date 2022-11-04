@@ -5,19 +5,17 @@ import { formatDistance, format, parseISO } from "date-fns";
 import { prefix } from "../../internal/settings";
 
 type Props = {
-    readNotification?: (...args: any[]) => any;
-    notificationInfo?: {
-        creator?: string;
-        date?: string;
-        detail?: string;
-        id?: string;
-        location?: string;
-        title?: string;
-        type?: string;
-    };
+  readNotification?: (...args: any[]) => any;
+  notificationInfo?: {
+    creator?: string;
+    date?: string;
+    detail?: string;
+    id?: string;
+    location?: string;
+    title?: string;
+    type?: string;
+  };
 };
-
-
 
 /**
  * @param {Function} readNotification - function to be used on the delete button associated with a notification

@@ -37,7 +37,6 @@ export const Icon = () => {
   );
 };
 
-
 export const CustomContent = () => {
   return (
     <Router history={history}>

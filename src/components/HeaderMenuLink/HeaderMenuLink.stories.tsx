@@ -13,5 +13,5 @@ export default {
 };
 
 export const Default = (args: any) => {
-  return <HeaderMenuLink text="Navigate from Platform" iconName="workspace" href="https://www.ibm.com" {...args}/>;
+  return <HeaderMenuLink text="Navigate from Platform" iconName="workspace" href="https://www.ibm.com" {...args} />;
 };

@@ -6,11 +6,11 @@ export {
   addCustomValidator,
   getCustomValidator,
   delCustomValidator,
-} from './customValidators';
+} from "./customValidators";
 
 export {
   // Allows the user to parse JSON AST to Yup
   transform,
   transformAll,
   transformObject,
-} from './astGenerator';
+} from "./astGenerator";

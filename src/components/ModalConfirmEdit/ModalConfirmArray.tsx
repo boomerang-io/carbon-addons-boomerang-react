@@ -1,8 +1,6 @@
 import React from "react";
 import { prefix } from "../../internal/settings";
 
-
-
 const showCommaSeparatedValues = (items: any) => {
   const commaSeparatedValues = items.join(", ");
 
@@ -12,7 +10,7 @@ const showCommaSeparatedValues = (items: any) => {
 };
 
 type ModalConfirmArrayProps = {
-    items: any[];
+  items: any[];
 };
 
 function ModalConfirmArray({ items, ...rest }: ModalConfirmArrayProps) {

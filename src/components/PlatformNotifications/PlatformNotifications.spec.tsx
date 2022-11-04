@@ -19,8 +19,12 @@ const notificationsObj = {
 
 // @ts-expect-error TS(2582): Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe("Platform notification", () => {
-    test("Renders correctly", async () => {
-        render(<PlatformNotifications notificationInfo={notificationsObj} readNotification={() => { }}/>);
-        (expect(screen.getByText("Outage description test for the following service(s): Boomerang Flow,Boomerang CICD")) as any).toBeInTheDocument();
-    });
+  test("Renders correctly", async () => {
+    render(<PlatformNotifications notificationInfo={notificationsObj} readNotification={() => {}} />);
+    (
+      expect(
+        screen.getByText("Outage description test for the following service(s): Boomerang Flow,Boomerang CICD")
+      ) as any
+    ).toBeInTheDocument();
+  });
 });

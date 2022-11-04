@@ -3,12 +3,12 @@ import cx from "classnames";
 import { prefix } from "../../internal/settings";
 
 type OwnProps = {
-    ariaLabel: string;
-    children?: React.ReactNode;
-    className?: string;
-    contained?: boolean;
-    light?: boolean;
-    style?: any;
+  ariaLabel: string;
+  children?: React.ReactNode;
+  className?: string;
+  contained?: boolean;
+  light?: boolean;
+  style?: any;
 };
 
 // @ts-expect-error TS(2456): Type alias 'Props' circularly references itself.

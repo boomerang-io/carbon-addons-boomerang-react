@@ -11,11 +11,7 @@ export default {
       },
     },
   },
-  decorators: [
-    (story: any) => <div style={{ maxWidth: "25rem", padding: "1rem" }}>
-      {story()}
-    </div>,
-  ],
+  decorators: [(story: any) => <div style={{ maxWidth: "25rem", padding: "1rem" }}>{story()}</div>],
 };
 
 const animals = [

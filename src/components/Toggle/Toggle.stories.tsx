@@ -11,11 +11,7 @@ export default {
       },
     },
   },
-  decorators: [
-    (story: any) => <div style={{ maxWidth: "16rem", padding: "1rem" }}>
-      {story()}
-    </div>,
-  ],
+  decorators: [(story: any) => <div style={{ maxWidth: "16rem", padding: "1rem" }}>{story()}</div>],
 };
 
 export const Default = (args: any) => {

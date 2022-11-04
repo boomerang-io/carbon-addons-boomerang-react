@@ -1,12 +1,12 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect } from "react";
 
 /**
  * Creates DOM element to be used as React root.
  * @returns {HTMLElement}
  */
 function createRootElement(id: any) {
-  const rootContainer = document.createElement('div');
-  rootContainer.setAttribute('id', id);
+  const rootContainer = document.createElement("div");
+  rootContainer.setAttribute("id", id);
   return rootContainer;
 }
 
@@ -73,7 +73,7 @@ function usePortal(id: any) {
   function getRootElem() {
     if (!rootElemRef.current) {
       // @ts-expect-error TS(2322): Type 'HTMLDivElement' is not assignable to type 'n... Remove this comment to see the full error message
-      rootElemRef.current = document.createElement('div');
+      rootElemRef.current = document.createElement("div");
     }
     return rootElemRef.current;
   }

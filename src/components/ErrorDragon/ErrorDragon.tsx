@@ -5,13 +5,13 @@ import { prefix } from "../../internal/settings";
 import ErrorGraphic from "./assets/ErrorGraphic";
 
 type OwnProps = {
-    className?: string;
-    header?: string;
-    message?: string;
-    style?: any;
-    statusText?: string;
-    statusUrl: string;
-    title?: string;
+  className?: string;
+  header?: string;
+  message?: string;
+  style?: any;
+  statusText?: string;
+  statusUrl: string;
+  title?: string;
 };
 
 // @ts-expect-error TS(2456): Type alias 'Props' circularly references itself.

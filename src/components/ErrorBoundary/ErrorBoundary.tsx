@@ -4,10 +4,10 @@ import { prefix } from "../../internal/settings";
 import ErrorMessage from "../ErrorMessage";
 
 type OwnProps = {
-    className?: string;
-    style?: string;
-    errorProps?: any;
-    errorComponent?: (...args: any[]) => any;
+  className?: string;
+  style?: string;
+  errorProps?: any;
+  errorComponent?: (...args: any[]) => any;
 };
 
 type State = any;

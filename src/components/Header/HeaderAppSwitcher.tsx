@@ -17,11 +17,7 @@ const externalProps = {
 };
 const classNames = "--app-switcher";
 
-export default function HeaderAppSwitcher({
-  baseServiceUrl,
-  baseLaunchEnvUrl,
-  isActive
-}: any) {
+export default function HeaderAppSwitcher({ baseServiceUrl, baseLaunchEnvUrl, isActive }: any) {
   const userTeamsUrl = serviceUrl.getUserTeams({ baseServiceUrl });
   // @ts-expect-error TS(2554): Expected 2 arguments, but got 1.
   const teamsQuery = useQuery(userTeamsUrl, resolver.query(userTeamsUrl));
@@ -58,31 +54,37 @@ export default function HeaderAppSwitcher({
         <HeaderRightPanel className={classNames} isOpen={isActive}>
           <FocusTrap active={isActive} focusTrapOptions={{ allowOutsideClick: true }}>
             <ul className={`${prefix}--bmrg-header-teams`}>
-              {standardTeams?.map((team: any) => <TeamServiceListMenu
-                key={team.id}
-                baseLaunchEnvUrl={baseLaunchEnvUrl}
-                baseServiceUrl={baseServiceUrl}
-                isMember={true}
-                team={team}
-              />)}
-              {accountTeams?.map((account: any) => <div key={account.id}>
-                <SwitcherDivider />
+              {standardTeams?.map((team: any) => (
                 <TeamServiceListMenu
+                  key={team.id}
                   baseLaunchEnvUrl={baseLaunchEnvUrl}
                   baseServiceUrl={baseServiceUrl}
-                  isAccount={true}
-                  isMember={account.isAccountTeamMember}
-                  team={account}
+                  isMember={true}
+                  team={team}
                 />
-                {Boolean(account.projectTeams) &&
-                  account.projectTeams.map((project: any) => <TeamServiceListMenu
-                    key={project.id}
+              ))}
+              {accountTeams?.map((account: any) => (
+                <div key={account.id}>
+                  <SwitcherDivider />
+                  <TeamServiceListMenu
                     baseLaunchEnvUrl={baseLaunchEnvUrl}
                     baseServiceUrl={baseServiceUrl}
-                    isMember={true}
-                    team={project}
-                  />)}
-              </div>)}
+                    isAccount={true}
+                    isMember={account.isAccountTeamMember}
+                    team={account}
+                  />
+                  {Boolean(account.projectTeams) &&
+                    account.projectTeams.map((project: any) => (
+                      <TeamServiceListMenu
+                        key={project.id}
+                        baseLaunchEnvUrl={baseLaunchEnvUrl}
+                        baseServiceUrl={baseServiceUrl}
+                        isMember={true}
+                        team={project}
+                      />
+                    ))}
+                </div>
+              ))}
             </ul>
           </FocusTrap>
         </HeaderRightPanel>
@@ -103,13 +105,7 @@ export default function HeaderAppSwitcher({
   return null;
 }
 
-function TeamServiceListMenu({
-  baseServiceUrl,
-  baseLaunchEnvUrl,
-  isAccount,
-  isMember,
-  team
-}: any) {
+function TeamServiceListMenu({ baseServiceUrl, baseLaunchEnvUrl, isAccount, isMember, team }: any) {
   const { id, name } = team;
   const [isSelected, setIsSelected] = React.useState(false);
   const teamsServicesUrl = serviceUrl.getTeamServices({ baseServiceUrl, teamId: id });
@@ -190,24 +186,26 @@ function ServiceList(props: any) {
 
   if (Boolean(servicesQuery.data)) {
     if (Boolean(servicesQuery.data?.length)) {
-      return <>
-        {servicesQuery.data.map((service: any) => {
-          const isExternalLink = !service.url.includes(baseLaunchEnvUrl);
-          const isNameTruncated = isExternalLink ? service.name.length > 28 : service.name.length > 32;
-          return (
-            <SideNavMenuItem
-              href={service.url}
-              title={isNameTruncated ? service.name : undefined}
-              {...(isExternalLink ? externalProps : undefined)}
-            >
-              <>
-                <span>{service.name}</span>
-                {isExternalLink ? <Launch size={16} alt="Opens page in new tab" /> : undefined}
-              </>
-            </SideNavMenuItem>
-          );
-        })}
-      </>;
+      return (
+        <>
+          {servicesQuery.data.map((service: any) => {
+            const isExternalLink = !service.url.includes(baseLaunchEnvUrl);
+            const isNameTruncated = isExternalLink ? service.name.length > 28 : service.name.length > 32;
+            return (
+              <SideNavMenuItem
+                href={service.url}
+                title={isNameTruncated ? service.name : undefined}
+                {...(isExternalLink ? externalProps : undefined)}
+              >
+                <>
+                  <span>{service.name}</span>
+                  {isExternalLink ? <Launch size={16} alt="Opens page in new tab" /> : undefined}
+                </>
+              </SideNavMenuItem>
+            );
+          })}
+        </>
+      );
     } else {
       return (
         <div className={`${prefix}--bmrg-header-team__message`}>{`This ${

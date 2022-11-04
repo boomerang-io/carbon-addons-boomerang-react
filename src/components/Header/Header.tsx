@@ -43,23 +43,23 @@ function transformToIsStateKey(key: any) {
 }
 
 type OwnProps = {
-    appName?: string;
-    enableAppSwitcher?: boolean;
-    enableNotifications?: boolean;
-    navLinks?: any[];
-    notificationsConfig?: {
-        wsUrl: string;
-    };
-    onHelpClick?: any[];
-    platformName?: string;
-    platformMessage?: any;
-    profileChildren?: any[];
-    renderLogo?: boolean;
-    renderRightPanel?: any;
-    renderSidenav?: (...args: any[]) => any;
-    baseLaunchEnvUrl?: string;
-    requestSummary?: any;
-    skipToContentProps?: any;
+  appName?: string;
+  enableAppSwitcher?: boolean;
+  enableNotifications?: boolean;
+  navLinks?: any[];
+  notificationsConfig?: {
+    wsUrl: string;
+  };
+  onHelpClick?: any[];
+  platformName?: string;
+  platformMessage?: any;
+  profileChildren?: any[];
+  renderLogo?: boolean;
+  renderRightPanel?: any;
+  renderSidenav?: (...args: any[]) => any;
+  baseLaunchEnvUrl?: string;
+  requestSummary?: any;
+  skipToContentProps?: any;
 };
 
 type State = any;
@@ -67,7 +67,6 @@ type State = any;
 type Props = OwnProps & typeof Header.defaultProps;
 
 class Header extends React.Component<Props, State> {
-
   static defaultProps = {};
 
   state = {
@@ -112,8 +111,8 @@ class Header extends React.Component<Props, State> {
 
     if (
       this.sideNavRef &&
-    !(this as any).sideNavRef.current?.contains(event.target) &&
-    !(this as any).sideNavButtonRef.current?.contains(event.target)
+      !(this as any).sideNavRef.current?.contains(event.target) &&
+      !(this as any).sideNavButtonRef.current?.contains(event.target)
     ) {
       this.handleCloseSidenav();
     }

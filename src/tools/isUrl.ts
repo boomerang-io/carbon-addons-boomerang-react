@@ -22,7 +22,7 @@ const nonLocalhostDomainRE = /^[^\s\.]+\.\S{2,}$/;
  */
 
 export default function isUrl(string: any) {
-  if (typeof string !== 'string') {
+  if (typeof string !== "string") {
     return false;
   }
 
@@ -36,10 +36,7 @@ export default function isUrl(string: any) {
     return false;
   }
 
-  if (
-    localhostDomainRE.test(everythingAfterProtocol) ||
-    nonLocalhostDomainRE.test(everythingAfterProtocol)
-  ) {
+  if (localhostDomainRE.test(everythingAfterProtocol) || nonLocalhostDomainRE.test(everythingAfterProtocol)) {
     return true;
   }
 

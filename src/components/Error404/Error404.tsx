@@ -8,11 +8,11 @@ import ErrorPageCore from "../ErrorPageCore";
 import { prefix } from "../../internal/settings";
 
 type OwnProps = {
-    header?: string;
-    title?: string;
-    message?: string;
-    graphic?: React.ReactNode;
-    theme?: "core" | "boomerang";
+  header?: string;
+  title?: string;
+  message?: string;
+  graphic?: React.ReactNode;
+  theme?: "core" | "boomerang";
 };
 
 // @ts-expect-error TS(2565): Property 'defaultProps' is used before being assig... Remove this comment to see the full error message

@@ -3,11 +3,9 @@ import cx from "classnames";
 import { prefix } from "../../internal/settings";
 
 type Props = {
-    children?: React.ReactNode;
-    className?: string;
+  children?: React.ReactNode;
+  className?: string;
 };
-
-
 
 const HeaderList = (props: Props) => {
   const { children, className, ...other } = props;

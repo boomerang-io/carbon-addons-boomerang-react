@@ -6,12 +6,12 @@ import { SkeletonPlaceholder } from "@carbon/react";
 import { prefix } from "../../internal/settings";
 
 type OwnProps = {
-    activeClassName?: string;
-    className?: string;
-    disabled?: boolean;
-    isLoading?: boolean;
-    label?: string;
-    style?: any;
+  activeClassName?: string;
+  className?: string;
+  disabled?: boolean;
+  isLoading?: boolean;
+  label?: string;
+  style?: any;
 };
 
 // @ts-expect-error TS(2456): Type alias 'Props' circularly references itself.

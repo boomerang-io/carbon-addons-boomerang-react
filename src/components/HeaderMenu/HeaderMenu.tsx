@@ -3,7 +3,7 @@ import { prefix } from "../../internal/settings";
 import FocusTrap from "focus-trap-react";
 
 type Props = {
-    children?: any;
+  children?: any;
 };
 
 function HeaderMenu({ children }: Props) {

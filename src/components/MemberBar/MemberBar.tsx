@@ -5,25 +5,38 @@ import { CloseOutline } from "@carbon/react/icons";
 import { prefix } from "../../internal/settings";
 
 type Props = {
-    addUser?: (...args: any[]) => any;
-    avatarProps?: any;
-    avatarSrc?: string;
-    buttonClassName?: string;
-    buttonProps?: any;
-    email?: string;
-    id?: string;
-    isDetail?: boolean;
-    isPartner?: boolean;
-    isUserNotAllowed?: boolean;
-    liProps?: any;
-    name?: string;
-    notAllowedMessage?: string;
-    removeUser?: (...args: any[]) => any;
+  addUser?: (...args: any[]) => any;
+  avatarProps?: any;
+  avatarSrc?: string;
+  buttonClassName?: string;
+  buttonProps?: any;
+  email?: string;
+  id?: string;
+  isDetail?: boolean;
+  isPartner?: boolean;
+  isUserNotAllowed?: boolean;
+  liProps?: any;
+  name?: string;
+  notAllowedMessage?: string;
+  removeUser?: (...args: any[]) => any;
 };
 
-
-
-function MemberBar({ addUser, avatarProps = {}, avatarSrc, buttonClassName = "", buttonProps = {}, email, id, isDetail = false, isPartner = false, isUserNotAllowed = false, liProps = {}, name, notAllowedMessage = "This Partner User is not on the allow-list", removeUser, }: Props) {
+function MemberBar({
+  addUser,
+  avatarProps = {},
+  avatarSrc,
+  buttonClassName = "",
+  buttonProps = {},
+  email,
+  id,
+  isDetail = false,
+  isPartner = false,
+  isUserNotAllowed = false,
+  liProps = {},
+  name,
+  notAllowedMessage = "This Partner User is not on the allow-list",
+  removeUser,
+}: Props) {
   const avatarOpacity = isUserNotAllowed ? "0.5" : "1";
   return (
     <li {...liProps}>
@@ -50,7 +63,7 @@ function MemberBar({ addUser, avatarProps = {}, avatarSrc, buttonClassName = "",
             )}
             {removeUser && (
               <CloseOutline
-              size={32}
+                size={32}
                 className={`${prefix}--bmrg-member-bar__close-icon`}
                 alt="remove user"
                 data-testid="remove-user-button"

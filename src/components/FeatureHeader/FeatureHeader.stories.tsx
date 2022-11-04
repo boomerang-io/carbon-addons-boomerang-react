@@ -19,11 +19,11 @@ export default {
     },
   },
   decorators: [
-    (story: any) => <Router history={createMemoryHistory({ initialEntries: ["/"] })}>
-      <div style={{ backgroundColor: "#f2f4f8", height: "20rem", width: "100%" }}>
-      {story()}
-      </div>
-    </Router>,
+    (story: any) => (
+      <Router history={createMemoryHistory({ initialEntries: ["/"] })}>
+        <div style={{ backgroundColor: "#f2f4f8", height: "20rem", width: "100%" }}>{story()}</div>
+      </Router>
+    ),
   ],
 };
 
@@ -181,7 +181,6 @@ export const WithNav = (args: any) => {
 WithNav.story = {
   name: "Breadcrumb",
 };
-
 
 export const WithActions = () => {
   return (

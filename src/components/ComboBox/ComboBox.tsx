@@ -14,44 +14,57 @@ ComboBoxComponent.defaultProps = {
 };
 
 type OwnProps = {
-    disableClear?: boolean;
-    labelText?: React.ReactNode;
-    label?: React.ReactNode;
-    shouldFilterItem?: ((...args: any[]) => any) | boolean;
-    tooltipClassName?: string;
-    tooltipContent?: React.ReactNode;
-    tooltipProps?: any;
-    ariaLabel?: string;
-    className?: string;
-    direction?: "top" | "bottom";
-    disabled?: boolean;
-    downshiftProps?: any; // TODO: PropTypes.shape(Downshift.propTypes)
-    helperText?: string;
-    id: string;
-    initialSelectedItem?: any | string | number;
-    invalid?: boolean;
-    invalidText?: React.ReactNode;
-    itemToElement?: (...args: any[]) => any;
-    itemToString?: (...args: any[]) => any;
-    items: any[];
-    light?: boolean;
-    onChange: (...args: any[]) => any;
-    onInputChange?: (...args: any[]) => any;
-    onStateChange?: (...args: any[]) => any;
-    onToggleClick?: (...args: any[]) => any;
-    placeholder?: string;
-    selectedItem?: any | string | number;
-    size?: any; // TODO: ListBoxPropTypes.ListBoxSize
-    titleText?: React.ReactNode;
-    translateWithId?: (...args: any[]) => any;
-    type?: any; // TODO: ListBoxPropTypes.ListBoxType
-    warn?: boolean;
-    warnText?: React.ReactNode;
+  disableClear?: boolean;
+  labelText?: React.ReactNode;
+  label?: React.ReactNode;
+  shouldFilterItem?: ((...args: any[]) => any) | boolean;
+  tooltipClassName?: string;
+  tooltipContent?: React.ReactNode;
+  tooltipProps?: any;
+  ariaLabel?: string;
+  className?: string;
+  direction?: "top" | "bottom";
+  disabled?: boolean;
+  downshiftProps?: any; // TODO: PropTypes.shape(Downshift.propTypes)
+  helperText?: string;
+  id: string;
+  initialSelectedItem?: any | string | number;
+  invalid?: boolean;
+  invalidText?: React.ReactNode;
+  itemToElement?: (...args: any[]) => any;
+  itemToString?: (...args: any[]) => any;
+  items: any[];
+  light?: boolean;
+  onChange: (...args: any[]) => any;
+  onInputChange?: (...args: any[]) => any;
+  onStateChange?: (...args: any[]) => any;
+  onToggleClick?: (...args: any[]) => any;
+  placeholder?: string;
+  selectedItem?: any | string | number;
+  size?: any; // TODO: ListBoxPropTypes.ListBoxSize
+  titleText?: React.ReactNode;
+  translateWithId?: (...args: any[]) => any;
+  type?: any; // TODO: ListBoxPropTypes.ListBoxType
+  warn?: boolean;
+  warnText?: React.ReactNode;
 };
 
 type Props = OwnProps & typeof ComboBoxComponent.defaultProps;
 
-function ComboBoxComponent({ disableClear, id, label, labelText, titleText, tooltipClassName, tooltipContent, tooltipProps, onChange, onInputChange, shouldFilterItem, ...restComboBoxProps }: Props) {
+function ComboBoxComponent({
+  disableClear,
+  id,
+  label,
+  labelText,
+  titleText,
+  tooltipClassName,
+  tooltipContent,
+  tooltipProps,
+  onChange,
+  onInputChange,
+  shouldFilterItem,
+  ...restComboBoxProps
+}: Props) {
   // Set the initial selected item to the label or single value passed
   const selectedItemRef = React.useRef(
     restComboBoxProps.initialSelectedItem?.label ?? restComboBoxProps.initialSelectedItem
@@ -127,10 +140,7 @@ function ComboBoxComponent({ disableClear, id, label, labelText, titleText, tool
    * No point in optimizing this because re-renders will only occur on query changes
    * and we need fresh values on those events to determine how to filter
    */
-  const defaultShouldFilterItem = ({
-    item,
-    inputValue
-  }: any) => {
+  const defaultShouldFilterItem = ({ item, inputValue }: any) => {
     if (selectedItemRef.current && !hasQuery) {
       return true;
     }

@@ -1,7 +1,6 @@
 import * as React from "react";
 import { SVGProps } from "react";
 
-
 function SvgComponent(props: SVGProps<SVGElement>) {
   return (
     // @ts-expect-error TS(2322): Type '{ children: Element[]; className?: string | ... Remove this comment to see the full error message

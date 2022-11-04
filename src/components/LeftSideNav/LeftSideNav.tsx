@@ -4,9 +4,9 @@ import cx from "classnames";
 import { prefix } from "../../internal/settings";
 
 type Props = {
-    children?: React.ReactNode;
-    className?: string;
-    isOpen?: boolean;
+  children?: React.ReactNode;
+  className?: string;
+  isOpen?: boolean;
 };
 
 export default function LeftSideNav(props: Props) {

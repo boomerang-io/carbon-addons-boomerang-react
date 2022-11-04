@@ -9,19 +9,19 @@ import React from "react";
 import { Button, ComposedModal } from "@carbon/react";
 
 type OwnProps = {
-    status?: string;
-    handleOpen?: (...args: any[]) => any;
-    id?: string;
-    buttonTriggerText?: React.ReactNode;
-    buttonTriggerClassName?: string;
-    disabled?: boolean;
-    onKeyDown?: (...args: any[]) => any;
-    selectorPrimaryFocus?: string;
-    renderTriggerButtonIcon?: ((...args: any[]) => any) | any;
-    secondaryButtonText?: string;
-    triggerButtonIcon?: string;
-    triggerButtonIconDescription?: string;
-    triggerButtonKind?: "primary" | "secondary" | "danger" | "ghost" | "tertiary";
+  status?: string;
+  handleOpen?: (...args: any[]) => any;
+  id?: string;
+  buttonTriggerText?: React.ReactNode;
+  buttonTriggerClassName?: string;
+  disabled?: boolean;
+  onKeyDown?: (...args: any[]) => any;
+  selectorPrimaryFocus?: string;
+  renderTriggerButtonIcon?: ((...args: any[]) => any) | any;
+  secondaryButtonText?: string;
+  triggerButtonIcon?: string;
+  triggerButtonIconDescription?: string;
+  triggerButtonKind?: "primary" | "secondary" | "danger" | "ghost" | "tertiary";
 };
 
 type State = any;
@@ -29,7 +29,6 @@ type State = any;
 type Props = OwnProps & typeof HeaderMenuModalWrapper.defaultProps;
 
 export default class HeaderMenuModalWrapper extends React.Component<Props, State> {
-
   static defaultProps = {
     triggerButtonIconDescription: "Provide icon description if icon is used",
     triggerButtonKind: "primary",

@@ -3,12 +3,11 @@ import cx from "classnames";
 import { prefix } from "../../internal/settings";
 
 type Props = {
-    children?: React.ReactNode;
-    className?: string;
-    element?: React.ReactElement;
-    title?: string;
+  children?: React.ReactNode;
+  className?: string;
+  element?: React.ReactElement;
+  title?: string;
 };
-
 
 const FlowModalForm = React.forwardRef<any, Props>(function FlowModalForm(
   { children, className, element: Element, title, ...rest },

@@ -4,16 +4,14 @@ import { Warning } from "@carbon/react/icons";
 import { prefix } from "../../internal/settings";
 
 type OwnProps = {
-    className?: string;
-    style?: any;
-    status?: string;
-    statusText?: string;
+  className?: string;
+  style?: any;
+  status?: string;
+  statusText?: string;
 };
 
 // @ts-expect-error TS(2456): Type alias 'Props' circularly references itself.
 type Props = OwnProps & typeof Error.defaultProps;
-
-
 
 // @ts-expect-error TS(7022): 'Error' implicitly has type 'any' because it does ... Remove this comment to see the full error message
 const Error = ({ status, statusText, className, style, ...rest }: Props) => {

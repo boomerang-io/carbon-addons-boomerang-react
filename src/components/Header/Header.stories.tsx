@@ -17,70 +17,71 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: "Platform header that is used by the UIShell. Exported to allow composibility of Header in place of UIShell.",
+        component:
+          "Platform header that is used by the UIShell. Exported to allow composibility of Header in place of UIShell.",
       },
     },
   },
 };
 
 export const Default = () => (
-  <div style={{display: "block"}}>
-  <Header
-    renderLogo={false}
-    appName={"App"}
-    platformName={"Boomerang"}
-    enableNotifications={true}
-    navLinks={[
-      {
-        name: "Launchpad",
-        url: "https://servicesessentials.ibm.com/launchpad/",
-      },
-      {
-        name: "Next",
-        url: "https://servicesessentials.ibm.com/next/",
-      },
-      {
-        name: "Status",
-        url: "https://servicesessentials.ibm.com/status/",
-      },
-      {
-        name: "Docs",
-        url: "https://servicesessentials.ibm.com/docs/",
-      },
-      {
-        name: "Admin",
-        url: "https://servicesessentials.ibm.com/admin/",
-      },
-    ]}
-    notificationsConfig={{
-      wsUrl: mockSocketUrl,
-    }}
-    onHelpClick={[
-      <HeaderMenuItem key="Tutorial" text="Tutorial" iconName="workspace">
-        {() => <Modal passiveModal />}
-      </HeaderMenuItem>,
-      <HeaderMenuItem key="FAQ + Contacts" text="FAQ + Contacts" iconName="group">
-        {() => <Modal passiveModal />}
-      </HeaderMenuItem>,
-      <HeaderMenuItem key="Send Feedback" text="Send Feedback" iconName="chat">
-        {() => <Modal passiveModal />}
-      </HeaderMenuItem>,
-      <HeaderMenuItem key="Report a bug" text="Report a bug" iconName="debug">
-        {() => <Modal passiveModal />}
-      </HeaderMenuItem>,
-    ]}
-    profileChildren={[
-      <HeaderMenuItem key="About the Platform" text="About the Platform">
-        {() => <Modal passiveModal />}
-      </HeaderMenuItem>,
-      <HeaderMenuItem key="GDPR agreement" text="GDPR agreement">
-        {() => <Modal passiveModal />}
-      </HeaderMenuItem>,
-      <HeaderMenuItem key="Sign out" text="Sign out" iconName="power">
-        {() => <Modal passiveModal />}
-      </HeaderMenuItem>,
-    ]}
-  />
+  <div style={{ display: "block" }}>
+    <Header
+      renderLogo={false}
+      appName={"App"}
+      platformName={"Boomerang"}
+      enableNotifications={true}
+      navLinks={[
+        {
+          name: "Launchpad",
+          url: "https://servicesessentials.ibm.com/launchpad/",
+        },
+        {
+          name: "Next",
+          url: "https://servicesessentials.ibm.com/next/",
+        },
+        {
+          name: "Status",
+          url: "https://servicesessentials.ibm.com/status/",
+        },
+        {
+          name: "Docs",
+          url: "https://servicesessentials.ibm.com/docs/",
+        },
+        {
+          name: "Admin",
+          url: "https://servicesessentials.ibm.com/admin/",
+        },
+      ]}
+      notificationsConfig={{
+        wsUrl: mockSocketUrl,
+      }}
+      onHelpClick={[
+        <HeaderMenuItem key="Tutorial" text="Tutorial" iconName="workspace">
+          {() => <Modal passiveModal />}
+        </HeaderMenuItem>,
+        <HeaderMenuItem key="FAQ + Contacts" text="FAQ + Contacts" iconName="group">
+          {() => <Modal passiveModal />}
+        </HeaderMenuItem>,
+        <HeaderMenuItem key="Send Feedback" text="Send Feedback" iconName="chat">
+          {() => <Modal passiveModal />}
+        </HeaderMenuItem>,
+        <HeaderMenuItem key="Report a bug" text="Report a bug" iconName="debug">
+          {() => <Modal passiveModal />}
+        </HeaderMenuItem>,
+      ]}
+      profileChildren={[
+        <HeaderMenuItem key="About the Platform" text="About the Platform">
+          {() => <Modal passiveModal />}
+        </HeaderMenuItem>,
+        <HeaderMenuItem key="GDPR agreement" text="GDPR agreement">
+          {() => <Modal passiveModal />}
+        </HeaderMenuItem>,
+        <HeaderMenuItem key="Sign out" text="Sign out" iconName="power">
+          {() => <Modal passiveModal />}
+        </HeaderMenuItem>,
+      ]}
+    />
   </div>
 );
 
@@ -88,8 +89,8 @@ export const WithIntegratedSidenav = () => (
   <Router history={createMemoryHistory({ initialEntries: ["/"] })}>
     {/* @ts-expect-error TS(2769): No overload matches this call. */}
     <Header
-     appName={"App"}
-     platformName={"Boomerang"}
+      appName={"App"}
+      platformName={"Boomerang"}
       renderLogo={false}
       enableNotifications={true}
       companyName={"Boomerang"}

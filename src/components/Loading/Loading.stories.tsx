@@ -11,7 +11,7 @@ export default {
           "Light wrapper around the Carbon loading component that includes optional delayed rendering to help prevent a waterfalls of spinners.",
       },
     },
-  }
+  },
 };
 
 export const Default = () => {

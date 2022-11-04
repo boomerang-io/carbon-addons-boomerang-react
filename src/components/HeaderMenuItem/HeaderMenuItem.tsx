@@ -25,20 +25,29 @@ HeaderMenuItem.defaultProps = {
 };
 
 type OwnProps = {
-    altIconText?: string;
-    className?: string;
-    children?: any;
-    forwardRef?: any;
-    iconName?: "workspace" | "group" | "chat" | "debug" | "power" | "information" | "locked" | "launch" | "idea";
-    style?: any;
-    text: string;
-    disabled?: boolean;
+  altIconText?: string;
+  className?: string;
+  children?: any;
+  forwardRef?: any;
+  iconName?: "workspace" | "group" | "chat" | "debug" | "power" | "information" | "locked" | "launch" | "idea";
+  style?: any;
+  text: string;
+  disabled?: boolean;
 };
 
 type Props = OwnProps & typeof HeaderMenuItem.defaultProps;
 
 // @ts-expect-error TS(2339): Property 'preventCloseOnClickOutside' does not exi... Remove this comment to see the full error message
-function HeaderMenuItem({ children, className, forwardRef, iconName, preventCloseOnClickOutside, style, text, ...rest }: Props) {
+function HeaderMenuItem({
+  children,
+  className,
+  forwardRef,
+  iconName,
+  preventCloseOnClickOutside,
+  style,
+  text,
+  ...rest
+}: Props) {
   const wrapperClassNames = cx(`${prefix}--bmrg-header-menu-item-wrapper`, {
     // @ts-expect-error TS(2464): A computed property name must be of type 'string',... Remove this comment to see the full error message
     [className]: !!className,

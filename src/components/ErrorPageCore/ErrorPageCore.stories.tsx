@@ -14,14 +14,7 @@ export default {
 };
 
 export const Default = (args: any) => {
-  return (
-    <ErrorPageCore
-      header={"Header"}
-      title={"Title"}
-      message={"Message"}
-      {...args}
-    />
-  );
+  return <ErrorPageCore header={"Header"} title={"Title"} message={"Message"} {...args} />;
 };
 
 export const MessageLink = (args: any) => {

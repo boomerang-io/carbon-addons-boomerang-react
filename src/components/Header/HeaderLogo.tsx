@@ -2,12 +2,12 @@ import React from "react";
 import { prefix } from "../../internal/settings";
 
 type OwnProps = {
-    appName?: string;
-    children?: React.ReactNode;
-    className?: string;
-    href?: string;
-    navLinks?: any[];
-    platformName?: string;
+  appName?: string;
+  children?: React.ReactNode;
+  className?: string;
+  href?: string;
+  navLinks?: any[];
+  platformName?: string;
 };
 
 // @ts-expect-error TS(2456): Type alias 'Props' circularly references itself.

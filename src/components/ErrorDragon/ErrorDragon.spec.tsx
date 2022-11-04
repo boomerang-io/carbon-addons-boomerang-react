@@ -6,7 +6,7 @@ import ErrorDragon from "./ErrorDragon";
 const statusUrl = "/test";
 
 test("render Error with Message", async () => {
-    const { findByText } = render(<ErrorDragon statusUrl={statusUrl}/>);
-    const title = await findByText(/Don’t lose your daks/i);
-    (expect(title) as any).toBeInTheDocument();
+  const { findByText } = render(<ErrorDragon statusUrl={statusUrl} />);
+  const title = await findByText(/Don’t lose your daks/i);
+  (expect(title) as any).toBeInTheDocument();
 });

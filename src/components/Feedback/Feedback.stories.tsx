@@ -16,7 +16,7 @@ const Template = (args: any) => <Component {...args} />;
 
 export const Feedback = Template.bind({});
 (Feedback as any).args = {
-    platformName: "Boomerang",
-    sendIdeasUrl: "https://ideas.ibm.com",
-    platformOrganization: "IBM",
+  platformName: "Boomerang",
+  sendIdeasUrl: "https://ideas.ibm.com",
+  platformOrganization: "IBM",
 };

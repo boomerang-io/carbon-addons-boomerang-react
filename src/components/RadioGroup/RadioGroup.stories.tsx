@@ -7,7 +7,8 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: "Manage radio inputs with optional label, helper and tooltip text and use as a data driven component",
+        component:
+          "Manage radio inputs with optional label, helper and tooltip text and use as a data driven component",
       },
     },
   },

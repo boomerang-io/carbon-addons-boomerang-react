@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 
 type OwnProps = {
-    children?: React.ReactNode;
+  children?: React.ReactNode;
 };
 
 // @ts-expect-error TS(2456): Type alias 'Props' circularly references itself.
@@ -12,9 +12,7 @@ type Props = OwnProps & typeof FullWidthWrapper.defaultProps;
 const FullWidthWrapper = ({ children }: Props) => (
   <div
     style={
-      children && children.type && children.type.name !== 'DeprecationNotice'
-        ? { width: 'calc(100vw - 6rem)' }
-        : {}
+      children && children.type && children.type.name !== "DeprecationNotice" ? { width: "calc(100vw - 6rem)" } : {}
     }
   >
     {children}

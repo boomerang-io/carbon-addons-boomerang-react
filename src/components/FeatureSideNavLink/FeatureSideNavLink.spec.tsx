@@ -10,30 +10,36 @@ import { prefix } from "../../internal/settings";
 
 const history = createBrowserHistory();
 test("render FeatureSideNavLink with correct class", async () => {
-    const { container, getByText } = render(<Router history={history}>
+  const { container, getByText } = render(
+    <Router history={history}>
       {/* @ts-expect-error TS(2322): Type '{ children: string; to: string; }' is not as... Remove this comment to see the full error message */}
       <FeatureSideNavLink to="/testlink">Test Link</FeatureSideNavLink>
-    </Router>);
-    (expect(container.firstChild) as any).toHaveClass(`${prefix}--bmrg-feature-sidenav-link`);
-    (expect(getByText("Test Link")) as any).toHaveClass(`${prefix}--bmrg-feature-sidenav-link-content`);
+    </Router>
+  );
+  (expect(container.firstChild) as any).toHaveClass(`${prefix}--bmrg-feature-sidenav-link`);
+  (expect(getByText("Test Link")) as any).toHaveClass(`${prefix}--bmrg-feature-sidenav-link-content`);
 });
 
 test("render FeatureSideNavLink with Divider", async () => {
-    const { container } = render(<Router history={history}>
+  const { container } = render(
+    <Router history={history}>
       {/* @ts-expect-error TS(2322): Type '{ children: string; to: string; hasDivider: ... Remove this comment to see the full error message */}
       <FeatureSideNavLink to="/testlink" hasDivider>
         Test Link
       </FeatureSideNavLink>
-    </Router>);
-    (expect(container.lastChild) as any).toHaveClass(`${prefix}--bmrg-feature-sidenav-link-divider`);
+    </Router>
+  );
+  (expect(container.lastChild) as any).toHaveClass(`${prefix}--bmrg-feature-sidenav-link-divider`);
 });
 
 test("render FeatureSideNavLink with Icon", async () => {
-    const { getByTestId } = render(<Router history={history}>
+  const { getByTestId } = render(
+    <Router history={history}>
       {/* @ts-expect-error TS(2322): Type '{ children: string; to: string; icon: any; i... Remove this comment to see the full error message */}
       <FeatureSideNavLink to="/testlink" icon={Rocket} iconProps={{ "data-testid": "rocket-icon" }} hasDivider>
         Test Link
       </FeatureSideNavLink>
-    </Router>);
-    (expect(getByTestId("rocket-icon")) as any).toBeInTheDocument();
+    </Router>
+  );
+  (expect(getByTestId("rocket-icon")) as any).toBeInTheDocument();
 });

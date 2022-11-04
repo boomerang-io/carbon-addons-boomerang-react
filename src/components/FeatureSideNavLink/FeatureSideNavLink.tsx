@@ -9,14 +9,13 @@ FeatureSideNavLink.defaultProps = {
 };
 
 type OwnProps = {
-    activeClassName?: string;
-    className?: string;
-    children?: string | number | ((...args: any[]) => any) | any | React.ReactNode;
-    iconProps?: any;
+  activeClassName?: string;
+  className?: string;
+  children?: string | number | ((...args: any[]) => any) | any | React.ReactNode;
+  iconProps?: any;
 };
 
 type Props = OwnProps & typeof FeatureSideNavLink.defaultProps;
-
 
 function FeatureSideNavLink(props: Props) {
   // @ts-expect-error TS(2339): Property 'icon' does not exist on type 'Props'.

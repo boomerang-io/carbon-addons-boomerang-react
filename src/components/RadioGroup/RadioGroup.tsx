@@ -12,30 +12,49 @@ RadioGroupComponent.defaultProps = {
 };
 
 type OwnProps = {
-    columnHeight?: string;
-    defaultSelected?: string;
-    disabled?: boolean;
-    helperText?: string;
-    id?: string;
-    key?: string;
-    label?: string;
-    labelText?: string;
-    name: string;
-    onChange: (...args: any[]) => any;
-    options: any[];
-    orientation?: string;
-    radioGroupProps?: any;
-    radioButtonProps?: any;
-    tooltipClassName?: string;
-    tooltipContent?: React.ReactNode;
-    tooltipProps?: any;
-    value?: string;
-    verticalWrapped?: boolean;
+  columnHeight?: string;
+  defaultSelected?: string;
+  disabled?: boolean;
+  helperText?: string;
+  id?: string;
+  key?: string;
+  label?: string;
+  labelText?: string;
+  name: string;
+  onChange: (...args: any[]) => any;
+  options: any[];
+  orientation?: string;
+  radioGroupProps?: any;
+  radioButtonProps?: any;
+  tooltipClassName?: string;
+  tooltipContent?: React.ReactNode;
+  tooltipProps?: any;
+  value?: string;
+  verticalWrapped?: boolean;
 };
 
 type Props = OwnProps & typeof RadioGroupComponent.defaultProps;
 
-function RadioGroupComponent({ defaultSelected, disabled, helperText, id, label, labelText, name, onChange, options, orientation, radioGroupProps, radioButtonProps, tooltipClassName, tooltipContent, tooltipProps, value, columnHeight, verticalWrapped, }: Props) {
+function RadioGroupComponent({
+  defaultSelected,
+  disabled,
+  helperText,
+  id,
+  label,
+  labelText,
+  name,
+  onChange,
+  options,
+  orientation,
+  radioGroupProps,
+  radioButtonProps,
+  tooltipClassName,
+  tooltipContent,
+  tooltipProps,
+  value,
+  columnHeight,
+  verticalWrapped,
+}: Props) {
   const labelValue = label || labelText;
   const labelTextId = !labelValue ? undefined : `${id}-label`;
 

@@ -4,7 +4,7 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
- import React from "react";
+import React from "react";
 import cx from "classnames";
 import { ChevronDown } from "@carbon/react/icons";
 import { prefix } from "../settings";
@@ -20,8 +20,8 @@ const defaultTranslations = {
 };
 
 type OwnProps = {
-    isOpen: boolean;
-    translateWithId: (...args: any[]) => any;
+  isOpen: boolean;
+  translateWithId: (...args: any[]) => any;
 };
 
 // @ts-expect-error TS(2456): Type alias 'Props' circularly references itself.

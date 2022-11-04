@@ -3,9 +3,9 @@ import cx from "classnames";
 import { prefix } from "../../internal/settings";
 
 type Props = {
-    isOpen?: boolean;
-    onClick?: (...args: any[]) => any;
-    onKeyDown?: (...args: any[]) => any;
+  isOpen?: boolean;
+  onClick?: (...args: any[]) => any;
+  onKeyDown?: (...args: any[]) => any;
 };
 
 const HeaderMenuBmrg = React.forwardRef<any, Props>((props, ref) => {

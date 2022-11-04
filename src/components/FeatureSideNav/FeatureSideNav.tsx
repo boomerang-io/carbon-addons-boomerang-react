@@ -4,11 +4,11 @@ import { SkeletonPlaceholder } from "@carbon/react";
 import { prefix } from "../../internal/settings";
 
 type Props = {
-    border?: any; // TODO: PropTypes.oneOf(["left", "right", undefined])
-    children?: any;
-    className?: string;
-    isLoading?: boolean;
-    small?: boolean;
+  border?: any; // TODO: PropTypes.oneOf(["left", "right", undefined])
+  children?: any;
+  className?: string;
+  isLoading?: boolean;
+  small?: boolean;
 };
 
 export function FeatureSideNav(props: Props) {

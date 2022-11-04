@@ -2,7 +2,7 @@ import React from "react";
 import { prefix } from "../../internal/settings";
 
 type Props = {
-    items: any[];
+  items: any[];
 };
 
 function ModalConfirmDetails({ items, ...rest }: Props) {

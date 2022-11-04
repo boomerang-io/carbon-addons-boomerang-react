@@ -28,27 +28,27 @@ const props = {
 };
 
 test("render label, helperText and tooltip", () => {
-    const { queryByText } = render(<ComboBoxMultiSelect {...props}/>);
-    (expect(queryByText(/helper text/i)) as any).toBeInTheDocument();
-    (expect(queryByText(/label text/i)) as any).toBeInTheDocument();
+  const { queryByText } = render(<ComboBoxMultiSelect {...props} />);
+  (expect(queryByText(/helper text/i)) as any).toBeInTheDocument();
+  (expect(queryByText(/label text/i)) as any).toBeInTheDocument();
 });
 
 test("select and remove items", async () => {
-    const { getByRole, getByPlaceholderText, getByText, queryByLabelText } = render(<ComboBoxMultiSelect {...props}/>);
-    const input = getByPlaceholderText(/select some animals/i);
-    fireEvent.click(getByText(/panda/i));
-    fireEvent.click(input);
-    fireEvent.click(getByText(/cat/i));
-    fireEvent.click(input);
-    await waitFor(() => {
-        (expect(queryByLabelText(/Clear filter dog/i)) as any).toBeInTheDocument();
-        (expect(queryByLabelText(/Clear filter cat/i)) as any).toBeInTheDocument();
-    });
-    const clearButton = getByRole("button", { name: "Clear selected item" });
-    fireEvent.click(clearButton);
-    await waitFor(() => {
-        (expect(queryByLabelText(/Clear filter panda/i)).not as any).toBeInTheDocument();
-        (expect(queryByLabelText(/Clear filter dog/i)).not as any).toBeInTheDocument();
-        (expect(queryByLabelText(/Clear filter cat/i)).not as any).toBeInTheDocument();
-    });
+  const { getByRole, getByPlaceholderText, getByText, queryByLabelText } = render(<ComboBoxMultiSelect {...props} />);
+  const input = getByPlaceholderText(/select some animals/i);
+  fireEvent.click(getByText(/panda/i));
+  fireEvent.click(input);
+  fireEvent.click(getByText(/cat/i));
+  fireEvent.click(input);
+  await waitFor(() => {
+    (expect(queryByLabelText(/Clear filter dog/i)) as any).toBeInTheDocument();
+    (expect(queryByLabelText(/Clear filter cat/i)) as any).toBeInTheDocument();
+  });
+  const clearButton = getByRole("button", { name: "Clear selected item" });
+  fireEvent.click(clearButton);
+  await waitFor(() => {
+    (expect(queryByLabelText(/Clear filter panda/i)).not as any).toBeInTheDocument();
+    (expect(queryByLabelText(/Clear filter dog/i)).not as any).toBeInTheDocument();
+    (expect(queryByLabelText(/Clear filter cat/i)).not as any).toBeInTheDocument();
+  });
 });

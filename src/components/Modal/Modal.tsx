@@ -10,11 +10,11 @@ Modal.defaultProps = {
 };
 
 type OwnProps = {
-    appElement?: string;
-    children?: any;
-    className?: string;
-    containerClassName?: string;
-    isOpen?: boolean;
+  appElement?: string;
+  children?: any;
+  className?: string;
+  containerClassName?: string;
+  isOpen?: boolean;
 };
 
 type Props = OwnProps & typeof Modal.defaultProps;

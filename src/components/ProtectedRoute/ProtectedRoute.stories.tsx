@@ -14,11 +14,7 @@ export default {
       },
     },
   },
-  decorators: [
-    (story: any) => <Router history={history}>
-     {story()}
-    </Router>,
-  ],
+  decorators: [(story: any) => <Router history={history}>{story()}</Router>],
 };
 
 const history = createMemoryHistory();

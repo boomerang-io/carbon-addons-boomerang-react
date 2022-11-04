@@ -20,17 +20,21 @@ const props = {
 };
 
 test("render component for authorized user", () => {
-    const { queryByText } = render(<Router history={history}>
-      <ProtectedRoute userRole="admin" {...props}/>
-    </Router>);
-    (expect(queryByText(/Test/i)) as any).toBeInTheDocument();
-    (expect(queryByText(/Sorry mate, you are not allowed here/i)).not as any).toBeInTheDocument();
+  const { queryByText } = render(
+    <Router history={history}>
+      <ProtectedRoute userRole="admin" {...props} />
+    </Router>
+  );
+  (expect(queryByText(/Test/i)) as any).toBeInTheDocument();
+  (expect(queryByText(/Sorry mate, you are not allowed here/i)).not as any).toBeInTheDocument();
 });
 
 test("block access to unauthorized user", () => {
-    const { queryByText } = render(<Router history={history}>
-      <ProtectedRoute userRole={["user, member"]} {...props}/>
-    </Router>);
-    (expect(queryByText(/Test/i)).not as any).toBeInTheDocument();
-    (expect(queryByText(/Sorry mate, you are not allowed here/i)) as any).toBeInTheDocument();
+  const { queryByText } = render(
+    <Router history={history}>
+      <ProtectedRoute userRole={["user, member"]} {...props} />
+    </Router>
+  );
+  (expect(queryByText(/Test/i)).not as any).toBeInTheDocument();
+  (expect(queryByText(/Sorry mate, you are not allowed here/i)) as any).toBeInTheDocument();
 });

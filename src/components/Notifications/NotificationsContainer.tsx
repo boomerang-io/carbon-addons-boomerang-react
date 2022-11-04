@@ -9,25 +9,24 @@ if (typeof window !== "undefined") {
 }
 
 type CloseButtonProps = {
-    closeToast?: (...args: any[]) => any;
-}; 
+  closeToast?: (...args: any[]) => any;
+};
 
 // eslint-disable-next-line
 const CloseButton = ({ closeToast }: CloseButtonProps) => <Close size={20} onClick={closeToast} />;
 
 type OwnNotificationsContainerProps = {
-    transition?: (...args: any[]) => any;
-    autoClose?: number;
-    closeOnClick?: boolean;
-    pauseOnHover?: boolean;
-    draggablePercent?: number;
-    hideProgressBar?: boolean;
+  transition?: (...args: any[]) => any;
+  autoClose?: number;
+  closeOnClick?: boolean;
+  pauseOnHover?: boolean;
+  draggablePercent?: number;
+  hideProgressBar?: boolean;
 };
 
 type NotificationsContainerProps = OwnNotificationsContainerProps & typeof NotificationsContainer.defaultProps;
 
 class NotificationsContainer extends Component<NotificationsContainerProps> {
-
   static defaultProps = {
     autoClose: 3000,
     closeOnClick: true,

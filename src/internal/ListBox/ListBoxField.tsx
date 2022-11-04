@@ -11,11 +11,11 @@ import { prefix } from "../settings";
 export const translationIds = {};
 
 type Props = {
-    "aria-haspopup"?: string | boolean;
-    children?: React.ReactNode;
-    disabled?: boolean;
-    role?: string;
-    tabIndex?: number | string;
+  "aria-haspopup"?: string | boolean;
+  children?: React.ReactNode;
+  disabled?: boolean;
+  role?: string;
+  tabIndex?: number | string;
 };
 
 /**

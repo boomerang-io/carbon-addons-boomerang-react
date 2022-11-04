@@ -23,14 +23,14 @@ HeaderMenuButton.defaultProps = {
 };
 
 type OwnProps = {
-    altIconText?: string;
-    className?: string;
-    children?: any;
-    iconName?: "workspace" | "group" | "chat" | "debug" | "power" | "information" | "locked" | "launch";
-    onClick?: (...args: any[]) => any;
-    style?: any;
-    text: string;
-    disabled?: boolean;
+  altIconText?: string;
+  className?: string;
+  children?: any;
+  iconName?: "workspace" | "group" | "chat" | "debug" | "power" | "information" | "locked" | "launch";
+  onClick?: (...args: any[]) => any;
+  style?: any;
+  text: string;
+  disabled?: boolean;
 };
 
 type Props = OwnProps & typeof HeaderMenuButton.defaultProps;

@@ -9,13 +9,13 @@ ErrorPageCore.defaultProps = {
 };
 
 type OwnProps = {
-    className?: string;
-    graphic?: React.ReactNode;
-    header?: React.ReactNode;
-    message?: React.ReactNode;
-    statusUrl?: string;
-    style?: any;
-    title?: React.ReactNode;
+  className?: string;
+  graphic?: React.ReactNode;
+  header?: React.ReactNode;
+  message?: React.ReactNode;
+  statusUrl?: string;
+  style?: any;
+  title?: React.ReactNode;
 };
 
 type Props = OwnProps & typeof ErrorPageCore.defaultProps;

@@ -5,6 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export * as keys from './keys';
-export { match, matches, getCharacterFor } from './match';
-export { getNextIndex } from './navigation';
+export * as keys from "./keys";
+export { match, matches, getCharacterFor } from "./match";
+export { getNextIndex } from "./navigation";

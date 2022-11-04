@@ -3,8 +3,6 @@ import cx from "classnames";
 import { SkeletonPlaceholder } from "@carbon/react";
 import { prefix } from "../../internal/settings";
 
-
-
 FeatureHeader.defaultProps = {
   className: "",
   contentClassName: "",
@@ -17,26 +15,42 @@ FeatureHeader.defaultProps = {
 };
 
 type OwnFeatureHeaderProps = {
-    actions?: React.ReactNode;
-    children?: React.ReactNode;
-    className?: string;
-    footer?: React.ReactNode;
-    header?: React.ReactNode;
-    includeBorder?: boolean;
-    isLoading?: boolean;
-    nav?: React.ReactNode;
-    style?: any;
-    title?: React.ReactNode;
-    contentClassName?: string;
-    skeletonClassName?: string;
-    navClassName?: string;
-    headerClassName?: string;
-    footerClassName?: string;
+  actions?: React.ReactNode;
+  children?: React.ReactNode;
+  className?: string;
+  footer?: React.ReactNode;
+  header?: React.ReactNode;
+  includeBorder?: boolean;
+  isLoading?: boolean;
+  nav?: React.ReactNode;
+  style?: any;
+  title?: React.ReactNode;
+  contentClassName?: string;
+  skeletonClassName?: string;
+  navClassName?: string;
+  headerClassName?: string;
+  footerClassName?: string;
 };
 
 type FeatureHeaderProps = OwnFeatureHeaderProps & typeof FeatureHeader.defaultProps;
 
-export function FeatureHeader({ actions, children, className, footer, header, includeBorder, isLoading, nav, style, contentClassName, footerClassName, headerClassName, navClassName, skeletonClassName, ...rest }: FeatureHeaderProps) {
+export function FeatureHeader({
+  actions,
+  children,
+  className,
+  footer,
+  header,
+  includeBorder,
+  isLoading,
+  nav,
+  style,
+  contentClassName,
+  footerClassName,
+  headerClassName,
+  navClassName,
+  skeletonClassName,
+  ...rest
+}: FeatureHeaderProps) {
   const containerClassNames = cx(`${prefix}--bmrg-feature-header`, className, {
     "--bordered": includeBorder,
   });
@@ -72,9 +86,9 @@ FeatureHeaderTitle.defaultProps = {
 };
 
 type OwnFeatureHeaderTitleProps = {
-    children?: React.ReactNode;
-    className?: string;
-    element?: string;
+  children?: React.ReactNode;
+  className?: string;
+  element?: string;
 };
 
 type FeatureHeaderTitleProps = OwnFeatureHeaderTitleProps & typeof FeatureHeaderTitle.defaultProps;

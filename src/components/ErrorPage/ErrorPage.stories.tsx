@@ -15,15 +15,7 @@ export default {
 };
 
 export const Default = (args: any) => {
-  return (
-    <ErrorPage
-      header={"Header"}
-      title={"Title"}
-      message={"Message"}
-      graphic={<GraphicWrangler />}
-      {...args}
-    />
-  );
+  return <ErrorPage header={"Header"} title={"Title"} message={"Message"} graphic={<GraphicWrangler />} {...args} />;
 };
 
 export const MessageLink = (args: any) => {
