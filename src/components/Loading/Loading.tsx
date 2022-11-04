@@ -1,14 +1,14 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Loading as CarbonLoading } from "@carbon/react";
 import DelayedRender from "../DelayedRender";
 
-Loading.propTypes = {
+interface LoadingProps {
   /** Time to delay in milliseconds before rendering the component */
-  delay: PropTypes.number,
-};
+  delay?: number;
+  [k: string]: any;
+}
 
-function Loading({ delay, ...rest }) {
+function Loading({ delay, ...rest }: LoadingProps) {
   return (
     <DelayedRender delay={delay}>
       <CarbonLoading {...rest} />
