@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { prefix } from "../../internal/settings";
 import { ModalHeader, ModalBody } from "@carbon/react";
 import IBMCloudIcon from "./assets/IBMCloudIcon";
@@ -11,15 +10,24 @@ import OpenShiftIcon from "./assets/OpenShiftIcon";
 import ReactIcon from "./assets/ReactIcon";
 import SpringIcon from "./assets/SpringIcon";
 import TektonIcon from "./assets/TektonIcon";
+import { ModalFunctionChildrenProps } from "../../types";
 
-const AboutPlatformContainer = ({ version, organization, isFlowApp }) => {
+const iconClassName = `${prefix}--bmrg-aboutPlatform-images__img`;
+
+interface AboutPlatformContainerProps {
+  isFlowApp?: boolean;
+  version: string;
+  organization: string;
+}
+
+const AboutPlatformContainer = ({ version = "", organization = "IBM", isFlowApp }: AboutPlatformContainerProps) => {
   return (
     <HeaderMenuItem
       text="About the Platform"
       iconName="information"
       className={`${prefix}--bmrg-aboutPlatform-container`}
     >
-      {({ closeModal }) => {
+      {({ closeModal }: ModalFunctionChildrenProps) => {
         return (
           <>
             <ModalHeader
@@ -35,12 +43,12 @@ const AboutPlatformContainer = ({ version, organization, isFlowApp }) => {
                     <>
                       <li key="tekton-icon">
                         <a href="https://tekton.dev/" target="_blank" rel="noopener noreferrer">
-                          <TektonIcon alt="Tekton Icon" className={`${prefix}--bmrg-aboutPlatform-images__img`} />
+                          <TektonIcon className={iconClassName} />
                         </a>
                       </li>
                       <li key="nats-icon">
                         <a href="https://nats.io/" target="_blank" rel="noopener noreferrer">
-                          <NATSIcon alt="NATS Icon" className={`${prefix}--bmrg-aboutPlatform-images__img`} />
+                          <NATSIcon className={iconClassName} />
                         </a>
                       </li>
                     </>
@@ -48,7 +56,7 @@ const AboutPlatformContainer = ({ version, organization, isFlowApp }) => {
                     <>
                       <li key="ibm-cloud-icon">
                         <a href="https://www.ibm.com/cloud" target="_blank" rel="noopener noreferrer">
-                          <IBMCloudIcon alt="IBM Cloud Icon" className={`${prefix}--bmrg-aboutPlatform-images__img`} />
+                          <IBMCloudIcon className={iconClassName} />
                         </a>
                       </li>
                       <li key="openshift-icon">
@@ -57,29 +65,29 @@ const AboutPlatformContainer = ({ version, organization, isFlowApp }) => {
                           target="_blank"
                           rel="noopener noreferrer"
                         >
-                          <OpenShiftIcon alt="Openshift Icon" className={`${prefix}--bmrg-aboutPlatform-images__img`} />
+                          <OpenShiftIcon className={iconClassName} />
                         </a>
                       </li>
                     </>
                   )}
                   <li key="kubernetes-icon">
                     <a href="https://kubernetes.io/" target="_blank" rel="noopener noreferrer">
-                      <KubernetesIcon alt="Kubernetes Icon" className={`${prefix}--bmrg-aboutPlatform-images__img`} />
+                      <KubernetesIcon className={iconClassName} />
                     </a>
                   </li>
                   <li key="spring-icon">
                     <a href="https://spring.io/" target="_blank" rel="noopener noreferrer">
-                      <SpringIcon alt="Spring Icon" className={`${prefix}--bmrg-aboutPlatform-images__img`} />
+                      <SpringIcon className={iconClassName} />
                     </a>
                   </li>
                   <li key="react-icon">
                     <a href="https://reactjs.org/" target="_blank" rel="noopener noreferrer">
-                      <ReactIcon alt="React Icon" className={`${prefix}--bmrg-aboutPlatform-images__img`} />
+                      <ReactIcon className={iconClassName} />
                     </a>
                   </li>
                   <li key="mongodb-icon">
                     <a href="https://www.mongodb.com/" target="_blank" rel="noopener noreferrer">
-                      <MongoDbIcon alt="Mongodb Icon" className={`${prefix}--bmrg-aboutPlatform-images__img`} />
+                      <MongoDbIcon className={iconClassName} />
                     </a>
                   </li>
                 </ul>
@@ -90,17 +98,6 @@ const AboutPlatformContainer = ({ version, organization, isFlowApp }) => {
       }}
     </HeaderMenuItem>
   );
-};
-
-AboutPlatformContainer.propTypes = {
-  version: PropTypes.string,
-  organization: PropTypes.string,
-  isFlowApp: PropTypes.bool,
-};
-
-AboutPlatformContainer.defaultProps = {
-  organization: "IBM",
-  version: "",
 };
 
 export default AboutPlatformContainer;

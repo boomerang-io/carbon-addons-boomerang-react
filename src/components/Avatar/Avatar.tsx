@@ -1,9 +1,16 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
 import { prefix } from "../../internal/settings";
 
-const UserIcon = (props) => {
-  const { userName, ...rest } = props;
+interface AvatarProps {
+  className?: string;
+  size?: "small" | "medium" | "large";
+  src: string;
+  style?: React.CSSProperties;
+  userName: string;
+}
+
+const UserIcon = (props: React.SVGProps<SVGAElement> & { description?: string; userName: string }) => {
+  const { description, userName, ...rest } = props;
   return (
     <svg
       version="1.1"
@@ -17,7 +24,8 @@ const UserIcon = (props) => {
       role="img"
       {...rest}
     >
-      <title>{`User icon for ${userName}`}</title>
+      <title>{`User icon for ${userName ?? "user"}`}</title>
+      {description && <desc>{description}</desc>}
       <g id="user">
         <path
           id="Combined-Shape"
@@ -36,13 +44,13 @@ const UserIcon = (props) => {
   );
 };
 
-function Avatar({ className, size, src, style, userName, ...rest }) {
+function Avatar({ className = `${prefix}--bmrg-avatar`, size = "medium", src, style, userName, ...rest }: AvatarProps) {
   const [error, setError] = useState(false);
 
   const altText = `Avatar for ${userName}`;
 
   return error || !src ? (
-    <UserIcon alt={altText} className={`${className} --${size || ""}`} style={style} title={altText} />
+    <UserIcon className={`${className} --${size || ""}`} description={altText} style={style} />
   ) : (
     <img
       alt={altText}
@@ -55,18 +63,5 @@ function Avatar({ className, size, src, style, userName, ...rest }) {
     />
   );
 }
-
-Avatar.propTypes = {
-  className: PropTypes.string,
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-  src: PropTypes.string.isRequired,
-  style: PropTypes.object,
-  userName: PropTypes.string,
-};
-
-Avatar.defaultProps = {
-  className: `${prefix}--bmrg-avatar`,
-  size: "medium",
-};
 
 export default Avatar;

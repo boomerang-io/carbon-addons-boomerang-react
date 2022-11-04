@@ -1,9 +1,11 @@
-import React from "react";
+import * as React from "react";
+import { SVGProps } from "react";
 
-function MongoDbIcon(props) {
+function MongoDbIcon(props: SVGProps<SVGElement>) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="2500" height="2500" viewBox="0 0 75 150" {...props}>
       <title>MongoDB</title>
+      <desc>Mongodb icon</desc>
       <g fill="none" fillRule="evenodd">
         <path
           fill="#FFF"
