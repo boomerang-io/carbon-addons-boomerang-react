@@ -60,7 +60,7 @@ type OwnMultiSelectComboBoxProps = {
   invalidText?: string;
   translateWithId?: (...args: any[]) => any;
   onInputChange?: (...args: any[]) => any;
-  type?: any; // TODO: ListBoxPropTypes.ListBoxType
+  type?: ListBoxPropTypes.ListBoxType;
   light?: boolean;
   downshiftProps?: any; // TODO: PropTypes.shape(Downshift.propTypes)
 };

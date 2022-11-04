@@ -64,7 +64,6 @@ export default class HeaderMenuModalWrapper extends React.Component<Props, State
       triggerButtonIconDescription,
       triggerButtonKind,
       disabled,
-      // @ts-expect-error TS(2339): Property 'preventCloseOnClickOutside' does not exi... Remove this comment to see the full error message
       preventCloseOnClickOutside,
       selectorPrimaryFocus,
       ...other
@@ -100,7 +99,6 @@ export default class HeaderMenuModalWrapper extends React.Component<Props, State
         >
           {buttonTriggerText}
         </Button>
-        {/* @ts-expect-error TS(2349): This expression is not callable. */}
         <ComposedModal {...props}>{children({ closeModal: this.handleClose })}</ComposedModal>
       </div>
     );
