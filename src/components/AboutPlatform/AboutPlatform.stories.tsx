@@ -17,11 +17,11 @@ export default {
   },
 };
 
-export const Default = (args) => {
+export const Default = (args: any) => {
   return <AboutPlatform {...args} />;
 };
 
-export const Flow = (args) => {
+export const Flow = (args: any) => {
   return <AboutPlatform {...args} />;
 };
 

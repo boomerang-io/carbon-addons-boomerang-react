@@ -10,6 +10,7 @@ interface LoadingProps {
 
 function Loading({ delay, ...rest }: LoadingProps) {
   return (
+    // @ts-expect-error TS(2786): 'DelayedRender' cannot be used as a JSX component.
     <DelayedRender delay={delay}>
       <CarbonLoading {...rest} />
     </DelayedRender>

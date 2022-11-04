@@ -4,6 +4,7 @@ import { SVGProps } from "react";
 
 function SvgComponent(props: SVGProps<SVGElement>) {
   return (
+    // @ts-expect-error TS(2322): Type '{ children: Element[]; className?: string | ... Remove this comment to see the full error message
     <svg viewBox="0 0 230 210" {...props}>
       <title>IBM Cloud</title>
       <desc>IBM Cloud icon</desc>

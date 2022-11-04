@@ -3,6 +3,7 @@ import { SVGProps } from "react";
 
 function ReactIcon(props: SVGProps<SVGElement>) {
   return (
+    // @ts-expect-error TS(2322): Type '{ children: Element[]; className?: string | ... Remove this comment to see the full error message
     <svg viewBox="0 0 841.9 595.3" {...props}>
       <title>React</title>
       <desc>React icon</desc>

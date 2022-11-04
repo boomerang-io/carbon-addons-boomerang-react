@@ -3,6 +3,7 @@ import { SVGProps } from "react";
 
 function KubernetesIcon(props: SVGProps<SVGElement>) {
   return (
+    // @ts-expect-error TS(2322): Type '{ children: Element[]; className?: string | ... Remove this comment to see the full error message
     <svg viewBox="0 0 32 32" {...props}>
       <title>Kubernetes</title>
       <desc>Kubernetes icon</desc>

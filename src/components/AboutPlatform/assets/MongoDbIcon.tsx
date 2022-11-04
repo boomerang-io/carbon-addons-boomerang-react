@@ -3,6 +3,7 @@ import { SVGProps } from "react";
 
 function MongoDbIcon(props: SVGProps<SVGElement>) {
   return (
+    // @ts-expect-error TS(2322): Type '{ children: Element[]; className?: string | ... Remove this comment to see the full error message
     <svg xmlns="http://www.w3.org/2000/svg" width="2500" height="2500" viewBox="0 0 75 150" {...props}>
       <title>MongoDB</title>
       <desc>Mongodb icon</desc>

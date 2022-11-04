@@ -7,6 +7,7 @@ function NATSIcon(props: SVGProps<SVGElement>) {
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 63 65"
       fill="#fff"
+      // @ts-expect-error TS(2322): Type '{ children: Element[]; className?: string | ... Remove this comment to see the full error message
       filRule="evenodd"
       stroke="#000"
       strokeLinecap="round"
