@@ -1,7 +1,6 @@
 import React from "react";
 import * as Yup from "yup";
 import { Formik } from "formik";
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'loda... Remove this comment to see the full error message
 import get from "lodash.get";
 import { transformAll, addCustomValidator } from "../../tools/yupAst";
 import isUrl from "../../tools/isUrl";
@@ -22,6 +21,7 @@ import {
   INPUT_TYPES_ARRAY,
   INPUT_GROUPS,
 } from "../../internal/DataDrivenInputTypes";
+import { DynamicInput, } from "../../types";
 
 /**
  *
@@ -39,7 +39,7 @@ function isPropertySyntaxValid({ value, customPropertySyntaxPattern, propsSyntax
   }
 }
 
-function validateUrlWithProperties(customPropertySyntaxPattern: any, customPropertyStartsWithPattern: any) {
+function validateUrlWithProperties(customPropertySyntaxPattern: string | RegExp, customPropertyStartsWithPattern: string | RegExp) {
   return function (this: any) {
     return this.transform(function (value: any, originalValue: any) {
       const propsSyntaxFound = value.match(customPropertyStartsWithPattern)?.length ?? 0;
@@ -54,7 +54,7 @@ function validateUrlWithProperties(customPropertySyntaxPattern: any, customPrope
   };
 }
 
-function validateEmailWithProperties(customPropertySyntaxPattern: any, customPropertyStartsWithPattern: any) {
+function validateEmailWithProperties(customPropertySyntaxPattern: string | RegExp, customPropertyStartsWithPattern: string | RegExp) {
   return function (this: any) {
     return this.transform(function (value: any, originalValue: any) {
       // Simple pattern for emails
@@ -72,7 +72,7 @@ function validateEmailWithProperties(customPropertySyntaxPattern: any, customPro
   };
 }
 
-function registerCustomPropertyMethods(customPropertySyntaxPattern: any, customPropertyStartsWithPattern: any) {
+function registerCustomPropertyMethods(customPropertySyntaxPattern: string | RegExp, customPropertyStartsWithPattern: string | RegExp) {
   const validateUrl = validateUrlWithProperties(customPropertySyntaxPattern, customPropertyStartsWithPattern);
   const validateEmail = validateEmailWithProperties(customPropertySyntaxPattern, customPropertyStartsWithPattern);
   Yup.addMethod(Yup.string, "urlWithCustomProperty", validateUrl);
@@ -87,10 +87,17 @@ function registerCustomPropertyMethods(customPropertySyntaxPattern: any, customP
  * @param {array} inputs - all the dynamic formik inputs
  * @returns keys of all governing selects above the current one
  */
-// @ts-expect-error TS(7023): 'getGoverningSelectKeysMap' implicitly has return ... Remove this comment to see the full error message
-function getGoverningSelectKeysMap({ governingKey, governingJsonKey, governingKeys, inputs }: any) {
+
+type  GetGoverningSelectKeysMapType = {
+  governingKey: string; 
+  governingJsonKey: string; 
+  governingKeys: string[];
+  inputs: DynamicInput[];
+}
+
+function getGoverningSelectKeysMap({ governingKey, governingJsonKey, governingKeys, inputs }: GetGoverningSelectKeysMapType): string[] {
   if (Boolean(governingKey) && governingKey !== governingJsonKey) governingKeys.unshift(governingKey);
-  const governingInput = inputs.find((input: any) => input.key === governingKey);
+  const governingInput = inputs.find((input) => input.key === governingKey) ?? ({} as DynamicInput);
 
   /** Continue recursion if the governing select has a governingKey */
   if (Boolean(governingInput.governingKey)) {
@@ -114,12 +121,20 @@ function getGoverningSelectKeysMap({ governingKey, governingJsonKey, governingKe
  * @param {array} inputs - all the dynamic formik inputs
  * @returns the input's deep options already formatted
  */
-// @ts-expect-error TS(7023): 'getGoverningSelectDeepOptions' implicitly has ret... Remove this comment to see the full error message
-function getGoverningSelectDeepOptions({ formikValues, governingInputJsonObject, governingKeys, input, inputs }: any) {
+
+type GetGoverningSelectDeepOptionsType = {
+  formikValues: { [index: string]: any }; 
+  governingInputJsonObject: any; 
+  governingKeys: string[]; 
+  input: DynamicInput; 
+  inputs: DynamicInput[];
+}
+
+function getGoverningSelectDeepOptions({ formikValues, governingInputJsonObject, governingKeys, input, inputs }: GetGoverningSelectDeepOptionsType): { label: string; value: string }[] {
   const nextKey = governingKeys.shift();
 
-  if (Boolean(nextKey)) {
-    const nextKeyInput = inputs.find((input: any) => input.key === nextKey);
+  if (nextKey) {
+    const nextKeyInput = inputs.find((input) => input.key === nextKey) ?? ({} as DynamicInput);
     const nextInputJsonObject = governingInputJsonObject[nextKey].find(
       (jsonElement: any) => jsonElement[nextKeyInput.jsonKey] === formikValues[nextKey]
     );
@@ -146,14 +161,22 @@ function getGoverningSelectDeepOptions({ formikValues, governingInputJsonObject,
  * @param {array} inputs - all the dynamic formik inputs
  * @param {string} selectedItem - new value of the select input
  */
-async function handleGoverningSelectChange({ formikProps, input, inputs, isInputBeingChanged, selectedItem }: any) {
+type HandleGoverningSelectChangeType = {
+  formikProps: any; 
+  isInputBeingChanged: boolean; 
+  selectedItem: DynamicInput | null;
+  input: DynamicInput; 
+  inputs: DynamicInput[];
+}
+
+async function handleGoverningSelectChange({ formikProps, input, inputs, isInputBeingChanged, selectedItem }: HandleGoverningSelectChangeType) {
   const { key } = input;
-  const inputsGovernedByCurrentOne = inputs.filter((formikInput: any) => formikInput.governingKey === key);
+  const inputsGovernedByCurrentOne = inputs.filter((formikInput) => formikInput.governingKey === key);
 
   /** Erase value of governed inputs */
   if (inputsGovernedByCurrentOne.length) {
-    await inputsGovernedByCurrentOne.forEach(async (input: any) => {
-      await handleGoverningSelectChange({ formikProps, input, inputs, isInputBeingChanged: false, selectedItem: "" });
+    await inputsGovernedByCurrentOne.forEach(async (input) => {
+      await handleGoverningSelectChange({ formikProps, input, inputs, isInputBeingChanged: false, selectedItem: null });
     });
   }
 
@@ -168,18 +191,27 @@ async function handleGoverningSelectChange({ formikProps, input, inputs, isInput
  * @param {Array} inputs
  * @returns {Array: Yup AST} validation schema AST
  */
+
+type generateYupAstType = {
+  inputs: DynamicInput[];
+  allowCustomPropertySyntax: boolean;
+  customPropertySyntaxPattern: string | RegExp;
+  customPropertyStartsWithPattern: string | RegExp;
+  useCSVforArrays: boolean;
+}
+
 function generateYupAst({
   inputs,
   allowCustomPropertySyntax,
   customPropertySyntaxPattern,
   customPropertyStartsWithPattern,
   useCSVforArrays,
-}: any) {
+}: generateYupAstType) {
   if (allowCustomPropertySyntax) {
     registerCustomPropertyMethods(customPropertySyntaxPattern, customPropertyStartsWithPattern);
   }
-  let yupShape = {};
-  inputs.forEach((input: any) => {
+  let yupShape: any = {};
+  inputs.forEach((input) => {
     let yupValidationArray = [];
     const inputType = input.type ?? "";
 
@@ -228,7 +260,6 @@ function generateYupAst({
             (value) => {
               if (!input.required && !Boolean(value)) {
                 return true;
-                // @ts-expect-error TS(2345): Argument of type 'string | undefined' is not assig... Remove this comment to see the full error message
               } else return new RegExp(input.pattern).test(value);
             }
           )
@@ -288,7 +319,6 @@ function generateYupAst({
               input.patternInvalidText || `Enter values that matches pattern: ${input.pattern}`,
               (csv) => {
                 const regexTester = new RegExp(input.pattern);
-                // @ts-expect-error TS(2532): Object is possibly 'undefined'.
                 return csv.split(",").every((val) => regexTester.test(val));
               }
             )
@@ -306,8 +336,7 @@ function generateYupAst({
               input.patternInvalidText || `Enter values that matches pattern: ${input.pattern}`,
               (values) => {
                 const regexTester = new RegExp(input.pattern);
-                // @ts-expect-error TS(2532): Object is possibly 'undefined'.
-                return values.every((val) => regexTester.test(val));
+                return values?.every((val) => regexTester.test(val));
               }
             )
           );
@@ -353,7 +382,6 @@ function generateYupAst({
     }
 
     if (yupValidationArray.length > 0) {
-      // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       yupShape[input.key] = yupValidationArray;
     }
   });
@@ -368,6 +396,16 @@ function generateYupAst({
  * @param {Object: Yup Schema} validationSchemaExtension
  * @returns {Object: Yup Schema} validation schema
  */
+
+type GenerateYupSchemaType = {
+  inputs: DynamicInput[];
+  allowCustomPropertySyntax: boolean;
+  customPropertySyntaxPattern: string | RegExp;
+  customPropertyStartsWithPattern: string | RegExp;
+  useCSVforArrays: boolean;
+  validationSchemaExtension: any;
+}
+
 function generateYupSchema({
   inputs,
   allowCustomPropertySyntax,
@@ -375,7 +413,7 @@ function generateYupSchema({
   customPropertyStartsWithPattern,
   useCSVforArrays,
   validationSchemaExtension,
-}: any) {
+}: GenerateYupSchemaType) {
   let validationSchema = transformAll(
     generateYupAst({
       inputs,
@@ -394,10 +432,10 @@ function generateYupSchema({
 /**
  * Get initial values of each input in array of inputs
  */
-const determineInitialValues = (inputs: any, useCSVforArrays: any) => {
-  const values = {};
-  inputs.forEach((input: any) => {
-    let value = "";
+const determineInitialValues = (inputs: DynamicInput[], useCSVforArrays: boolean) => {
+  const values: { [index: string]: any } = {};
+  inputs.forEach((input) => {
+    let value: any = "";
     let valueToCheck = input.value || input.defaultValue;
     const isArrayInput = !useCSVforArrays && Object.values(ARRAY_INPUT_TYPES).includes(input.type);
 
@@ -408,12 +446,10 @@ const determineInitialValues = (inputs: any, useCSVforArrays: any) => {
     if (valueToCheck) {
       switch (valueToCheck) {
         case "false": {
-          // @ts-expect-error TS(2322): Type 'boolean' is not assignable to type 'string'.
           value = false;
           break;
         }
         case "true": {
-          // @ts-expect-error TS(2322): Type 'boolean' is not assignable to type 'string'.
           value = true;
           break;
         }
@@ -423,7 +459,6 @@ const determineInitialValues = (inputs: any, useCSVforArrays: any) => {
       }
     }
 
-    // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
     values[input.key] = value;
   });
   return values;
@@ -434,42 +469,44 @@ const determineInitialValues = (inputs: any, useCSVforArrays: any) => {
  * If it does, then find an input Y in the same section that has key equal to the input X's requiredForKey
  * If input Y has a value that is present in input X's requiredValueOf array, then render X
  */
-const conditionallyRenderInput = (input: any, values: any) => {
+const conditionallyRenderInput = (input: DynamicInput, values: any) => {
   if (!input.conditionallyRender) {
     return true;
   }
 
-  /**
-   * Check which input in this section has the key equal to requiredForKey and get its value
-   */
-  const requiredForKeyInputValue = values[input.requiredForKey];
-  const valuesInputIsRenderedFor = input.requiredValueOf;
+  if (input.requiredForKey && input.requiredValueOf) {
+    /**
+       * Check which input in this section has the key equal to requiredForKey and get its value
+       */
+    const requiredForKeyInputValue = values[input.requiredForKey];
+    const valuesInputIsRenderedFor = input.requiredValueOf;
 
-  /**
-   * If the value of the input this input is required for is an array loop through those values to find a matching one
-   * by going through all of configured values for the input  - the "requiredValueOf" of property
-   * Check for the value and the string of the value bc of how the services work. "true" and "false" are strings not boolean values
-   */
-  if (Array.isArray(requiredForKeyInputValue)) {
-    for (let requiredForValue of valuesInputIsRenderedFor) {
-      for (let singleRequiredForKeyInputValue of requiredForKeyInputValue) {
-        if (
-          requiredForValue === singleRequiredForKeyInputValue ||
-          requiredForValue === String(singleRequiredForKeyInputValue)
-        ) {
+    /**
+      * If the value of the input this input is required for is an array loop through those values to find a matching one
+      * by going through all of configured values for the input  - the "requiredValueOf" of property
+      * Check for the value and the string of the value bc of how the services work. "true" and "false" are strings not boolean values
+      */
+    if (Array.isArray(requiredForKeyInputValue)) {
+      for (let requiredForValue of valuesInputIsRenderedFor) {
+        for (let singleRequiredForKeyInputValue of requiredForKeyInputValue) {
+          if (
+            requiredForValue === singleRequiredForKeyInputValue ||
+            requiredForValue === String(singleRequiredForKeyInputValue)
+          ) {
+            return true;
+          }
+        }
+      }
+    } else {
+      for (let requiredForValue of valuesInputIsRenderedFor) {
+        if (requiredForValue === requiredForKeyInputValue || requiredForValue === String(requiredForKeyInputValue)) {
           return true;
         }
       }
     }
   } else {
-    for (let requiredForValue of valuesInputIsRenderedFor) {
-      if (requiredForValue === requiredForKeyInputValue || requiredForValue === String(requiredForKeyInputValue)) {
-        return true;
-      }
-    }
+    return false;
   }
-
-  return false;
 };
 
 /**
@@ -477,15 +514,12 @@ const conditionallyRenderInput = (input: any, values: any) => {
  */
 const TYPE_PROPS = {
   [INPUT_GROUPS.CHECKBOX]: (
-    // @ts-expect-error TS(7006): Parameter 'formikProps' implicitly has an 'any' ty... Remove this comment to see the full error message
-    formikProps,
-    { key }: any,
-    // @ts-expect-error TS(7006): Parameter 'inputs' implicitly has an 'any' type.
-    inputs,
-    // @ts-expect-error TS(7006): Parameter 'useCSVforArrays' implicitly has an 'any... Remove this comment to see the full error message
-    useCSVforArrays
+    formikProps: any,
+    { key }: DynamicInput,
+    inputs: DynamicInput[],
+    useCSVforArrays: boolean,
   ) => ({
-    onChange: (value: any, id: any, event: any, selectedItems: any) => {
+    onChange: (value: string, id: string, event: any, selectedItems: string[]) => {
       if (useCSVforArrays) {
         formikProps.setFieldValue(`['${key}']`, selectedItems?.join() ?? "");
       } else {
@@ -495,15 +529,12 @@ const TYPE_PROPS = {
   }),
 
   [INPUT_GROUPS.CREATABLE]: (
-    // @ts-expect-error TS(7006): Parameter 'formikProps' implicitly has an 'any' ty... Remove this comment to see the full error message
-    formikProps,
-    { key }: any,
-    // @ts-expect-error TS(7006): Parameter 'inputs' implicitly has an 'any' type.
-    inputs,
-    // @ts-expect-error TS(7006): Parameter 'useCSVforArrays' implicitly has an 'any... Remove this comment to see the full error message
-    useCSVforArrays
+    formikProps: any,
+    { key }: DynamicInput,
+    inputs: DynamicInput[],
+    useCSVforArrays: boolean,
   ) => ({
-    onChange: (createdItems: any) => {
+    onChange: (createdItems: any[]) => {
       formikProps.setFieldTouched(`['${key}']`, true);
 
       if (useCSVforArrays) {
@@ -531,26 +562,23 @@ const TYPE_PROPS = {
         },
 
   [INPUT_GROUPS.MULTI_SELECT]: (
-    // @ts-expect-error TS(7006): Parameter 'formikProps' implicitly has an 'any' ty... Remove this comment to see the full error message
-    formikProps,
-    { key }: any,
-    // @ts-expect-error TS(7006): Parameter 'inputs' implicitly has an 'any' type.
-    inputs,
-    // @ts-expect-error TS(7006): Parameter 'useCSVforArrays' implicitly has an 'any... Remove this comment to see the full error message
-    useCSVforArrays
+    formikProps: any,
+    { key }: DynamicInput,
+    inputs: DynamicInput[],
+    useCSVforArrays: boolean,
   ) => ({
-    onChange: async ({ selectedItems }: any) => {
+    onChange: async ({ selectedItems }: { selectedItems: any[] }) => {
       await formikProps.setFieldTouched(`['${key}']`, true);
 
       if (useCSVforArrays) {
         formikProps.setFieldValue(
           `['${key}']`,
-          selectedItems ? selectedItems.map((item: any) => item && item.value).join() : ""
+          selectedItems ? selectedItems.map((item) => item && item.value).join() : ""
         );
       } else {
         formikProps.setFieldValue(
           `['${key}']`,
-          selectedItems.map((item: any) => item && item.value)
+          selectedItems.map((item) => item && item.value)
         );
       }
     },
@@ -559,17 +587,16 @@ const TYPE_PROPS = {
   }),
 
   [INPUT_GROUPS.RADIO]: (
-    // @ts-expect-error TS(7006): Parameter 'formikProps' implicitly has an 'any' ty... Remove this comment to see the full error message
-    formikProps,
-    { key }: any
+    formikProps: any,
+    { key }: DynamicInput,
   ) => ({
     onChange: (value: any) => formikProps.setFieldValue(`['${key}']`, value),
   }),
 
-  [INPUT_GROUPS.SELECT]: (formikProps: any, input: any, inputs: any) => {
+  [INPUT_GROUPS.SELECT]: (formikProps: any, input: DynamicInput, inputs: DynamicInput[]) => {
     const { key } = input;
 
-    let typeProps = {
+    let typeProps: any = {
       onChange: async ({ selectedItem }: any) => {
         await formikProps.setFieldTouched(`['${key}']`, true);
         formikProps.setFieldValue(`['${key}']`, selectedItem ? selectedItem.value : "");
@@ -582,13 +609,13 @@ const TYPE_PROPS = {
      */
     if (Boolean(input.governingJsonKey)) {
       const { governingJsonKey, governingKey, jsonKey, jsonLabel } = input;
-      const governingJsonInput = inputs.find((input: any) => input.key === governingJsonKey);
+      const governingJsonInput = inputs.find((input) => input.key === governingJsonKey);
 
       /** Check if governingJson with all governing selects data exists as an array */
-      if (Array.isArray(governingJsonInput?.governingJson)) {
+      if (governingJsonInput && Array.isArray(governingJsonInput.governingJson)) {
         const { governingJson } = governingJsonInput;
 
-        let governingOptions = [];
+        let governingOptions: { label: string, value: string }[] = [];
         let governingDisabled = false;
 
         /**
@@ -596,7 +623,7 @@ const TYPE_PROPS = {
          * If current select is the top level governing select, just get the top level options from the json
          */
         if (key === governingJsonKey) {
-          governingOptions = governingJson.map((option: any) => ({
+          governingOptions = governingJson.map((option) => ({
             label: option[jsonLabel],
             value: option[jsonKey],
           }));
@@ -613,7 +640,7 @@ const TYPE_PROPS = {
             governingOptions = getGoverningSelectDeepOptions({
               formikValues: formikProps.values,
               governingInputJsonObject: governingJson.find(
-                (jsonElement: any) => jsonElement[governingJsonInput.jsonKey] === formikProps.values[governingJsonKey]
+                (jsonElement) => jsonElement[governingJsonInput.jsonKey] === formikProps.values[governingJsonKey]
               ),
               governingKeys: [...governingKeys],
               input,
@@ -626,9 +653,8 @@ const TYPE_PROPS = {
 
         typeProps = {
           ...typeProps,
-          onChange: ({ selectedItem }) =>
+          onChange: ({ selectedItem }: { selectedItem: DynamicInput | null }) =>
             handleGoverningSelectChange({ formikProps, input, inputs, selectedItem, isInputBeingChanged: true }),
-          // @ts-expect-error TS(2322): Type '{ onChange: ({ selectedItem }: any) => Promi... Remove this comment to see the full error message
           governingOptions,
           governingDisabled,
         };
@@ -651,9 +677,8 @@ const TYPE_PROPS = {
   }),
 
   [INPUT_GROUPS.BOOLEAN]: (
-    // @ts-expect-error TS(7006): Parameter 'formikProps' implicitly has an 'any' ty... Remove this comment to see the full error message
-    formikProps,
-    { key }: any
+    formikProps: any,
+    { key }: DynamicInput
   ) => ({
     onChange: (value: any) => {
       formikProps.setFieldTouched(`['${key}']`, true, true);
@@ -668,7 +693,7 @@ const TYPE_PROPS = {
  * @param {Object} otherProps - additional functions to pass props to inputs
  * @returns {Function}
  */
-function determineTypeProps(type: any, otherProps: any) {
+function determineTypeProps(type: string, otherProps: any): { typeProps: Function; additionalTypeProps: Function } {
   const {
     checkboxListProps,
     creatableProps,
@@ -752,7 +777,7 @@ function determineTypeProps(type: any, otherProps: any) {
     };
   }
 
-  return () => {};
+  return { typeProps: () => {}, additionalTypeProps: () => {} };
 }
 
 DynamicFormik.defaultProps = {
@@ -777,14 +802,14 @@ DynamicFormik.defaultProps = {
 type OwnDynamicFormikProps = {
   children: (...args: any[]) => any;
   dataDrivenInputProps?: any;
-  customPropertySyntaxPattern?: any; // TODO: PropTypes.instanceOf(RegExp)
-  customPropertyStartsWithPattern?: any; // TODO: PropTypes.instanceOf(RegExp)
+  customPropertySyntaxPattern?: string | RegExp;
+  customPropertyStartsWithPattern?: string | RegExp;
   additionalInitialValues?: any;
   allowCustomPropertySyntax?: boolean;
   inputProps?: any;
   initialValues?: any;
-  inputs: any[];
-  onSubmit?: (...args: any[]) => any;
+  inputs: DynamicInput[];
+  onSubmit: (...args: any[]) => any;
   useCSVforArrays?: boolean;
   validationSchema?: any;
   validationSchemaExtension?: any;
@@ -838,7 +863,6 @@ export default function DynamicFormik({
           validationSchemaExtension,
         })
       }
-      // @ts-expect-error TS(2722): Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
       onSubmit={(values, actions) => onSubmit(values, actions)}
       {...otherProps}
     >
@@ -865,7 +889,6 @@ export default function DynamicFormik({
           const invalidText = get(errors, key);
           const invalid = invalidText && get(touched, key);
 
-          // @ts-expect-error TS(2339): Property 'typeProps' does not exist on type '(() =... Remove this comment to see the full error message
           const { typeProps = () => {}, additionalTypeProps = () => {} } = determineTypeProps(type, otherProps);
 
           return (

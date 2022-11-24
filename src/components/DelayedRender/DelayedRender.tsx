@@ -5,7 +5,7 @@ DelayedRender.defaultProps = {
 };
 
 type OwnProps = {
-  children: React.ReactNode;
+  children: React.ReactElement;
   delay?: number;
 };
 

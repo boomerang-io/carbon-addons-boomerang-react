@@ -1,9 +1,8 @@
 import * as React from "react";
 import { SVGProps } from "react";
 
-function SpringIcon(props: SVGProps<SVGElement>) {
+function SpringIcon(props: SVGProps<SVGSVGElement>) {
   return (
-    // @ts-expect-error TS(2322): Type '{ children: Element[]; className?: string | ... Remove this comment to see the full error message
     <svg
       width={66}
       height={66}

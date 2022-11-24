@@ -9,10 +9,9 @@ interface AvatarProps {
   userName?: string;
 }
 
-const UserIcon = (props: React.SVGProps<SVGAElement> & { description?: string; userName: string }) => {
+const UserIcon = (props: React.SVGProps<SVGSVGElement> & { description?: string; userName?: string }) => {
   const { description, userName, ...rest } = props;
   return (
-    // @ts-expect-error TS(2322): Type '{ children: ("" | Element | undefined)[]; cl... Remove this comment to see the full error message
     <svg
       version="1.1"
       id="Layer_1"
@@ -51,7 +50,6 @@ function Avatar({ className = `${prefix}--bmrg-avatar`, size = "medium", src, st
   const altText = `Avatar for ${userName}`;
 
   return error || !src ? (
-    // @ts-expect-error TS(2741): Property 'userName' is missing in type '{ classNam... Remove this comment to see the full error message
     <UserIcon className={`${className} --${size || ""}`} description={altText} style={style} />
   ) : (
     <img

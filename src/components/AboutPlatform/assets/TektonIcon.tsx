@@ -1,9 +1,8 @@
 import * as React from "react";
 import { SVGProps } from "react";
 
-function TektonIcon(props: SVGProps<SVGElement>) {
+function TektonIcon(props: SVGProps<SVGSVGElement>) {
   return (
-    // @ts-expect-error TS(2322): Type '{ children: Element[]; className?: string | ... Remove this comment to see the full error message
     <svg id="Layer_1" x="0px" y="0px" viewBox="150 0 290 360" width="60" height="60" {...props}>
       <title>Tekton</title>
       <desc>Tekton icon</desc>

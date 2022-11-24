@@ -21,6 +21,7 @@ import {
   TEXT_INPUT_TYPES,
   BOOLEAN_TYPES,
 } from "../../internal/DataDrivenInputTypes";
+import { FormInput } from "../../types";
 
 DataDrivenInput.defaultProps = {
   CheckboxList: CheckboxList,
@@ -80,9 +81,10 @@ const determineInitialValues = (input: any) => {
 };
 
 type OwnDataDrivenInputProps = {
+  id?: string;
   CheckboxList?: React.ReactElement;
   Creatable?: React.ReactElement;
-  CustomComponent?: React.ReactElement;
+  CustomComponent?: React.ReactElement | Function;
   DateInput?: React.ReactElement;
   MultiSelect?: React.ReactElement;
   RadioGroup?: React.ReactElement;
@@ -92,9 +94,10 @@ type OwnDataDrivenInputProps = {
   TextInput?: React.ReactElement;
   Toggle?: React.ReactElement;
   formikProps?: any;
+  onChange?: Function;
 };
 
-type DataDrivenInputProps = OwnDataDrivenInputProps & typeof DataDrivenInput.defaultProps;
+type DataDrivenInputProps = OwnDataDrivenInputProps & FormInput & typeof DataDrivenInput.defaultProps;
 
 function DataDrivenInput(props: DataDrivenInputProps) {
   const {

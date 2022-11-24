@@ -26,7 +26,6 @@ export const Default = (args: any) => {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
       <Button onClick={() => setIndex(index + 1)}>Restart</Button>
-      {/* @ts-expect-error TS(2786): 'DelayedRender' cannot be used as a JSX component. */}
       <DelayedRender {...args} key={index} />
     </div>
   );

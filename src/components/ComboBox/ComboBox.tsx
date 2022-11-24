@@ -1,6 +1,4 @@
 import React from "react";
-import Downshift from "downshift";
-import { PropTypes as ListBoxPropTypes } from "../../internal/ListBox";
 import cx from "classnames";
 import TooltipHover from "../TooltipHover";
 import { Information } from "@carbon/react/icons";

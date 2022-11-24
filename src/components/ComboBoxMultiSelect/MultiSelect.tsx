@@ -1,7 +1,6 @@
 import React from "react";
 import cx from "classnames";
 import Downshift from "downshift";
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'loda... Remove this comment to see the full error message
 import isEqual from "lodash.isequal";
 import { prefix } from "../../internal/settings";
 import { WarningFilled } from "@carbon/react/icons";
@@ -119,7 +118,7 @@ export default class MultiSelectComboBox extends React.Component<MultiSelectComb
     const { shouldFilterItem } = this.props;
 
     return shouldFilterItem
-      ? // @ts-expect-error TS(2349): This expression is not callable.
+      ?
         items.filter((item: any) =>
           shouldFilterItem({
             item,
@@ -144,7 +143,6 @@ export default class MultiSelectComboBox extends React.Component<MultiSelectComb
       }),
       () => {
         if (onInputChange) {
-          // @ts-expect-error TS(2349): This expression is not callable.
           onInputChange(inputValue);
         }
       }
@@ -270,11 +268,9 @@ export default class MultiSelectComboBox extends React.Component<MultiSelectComb
       downshiftProps,
       tagProps,
       direction,
-      // @ts-expect-error TS(2700): Rest types may only be created from object types.
       ...rest
     } = this.props;
     const { stateSelectedItems, isOpen } = this.state;
-    // @ts-expect-error TS(2339): Property 'Field' does not exist on type 'ForwardRe... Remove this comment to see the full error message
     const { Field, Selection, Menu, MenuItem, MenuIcon } = ListBox;
 
     const selectedItems = propsSelectedItems || stateSelectedItems; // externally controlled if selectedItems props exist
@@ -324,7 +320,6 @@ export default class MultiSelectComboBox extends React.Component<MultiSelectComb
                 {titleText}
               </label>
             )}
-            {/* @ts-expect-error TS(2741): Property 'type' is missing in type '{ children: (f... Remove this comment to see the full error message */}
             <ListBox
               className={className}
               disabled={disabled}
@@ -338,9 +333,7 @@ export default class MultiSelectComboBox extends React.Component<MultiSelectComb
               <div className={`${prefix}--bmrg-multi-select-selected`}>
                 {Array.isArray(selectedItems) &&
                   (selectedItems as any).map((item: any, index: any) => {
-                    // @ts-expect-error TS(2349): This expression is not callable.
                     const itemString = itemToString(item);
-                    // @ts-expect-error TS(2698): Spread types may only be created from object types... Remove this comment to see the full error message
                     return (
                       <Tag
                         key={`${itemString}-${index}`}
@@ -396,7 +389,6 @@ export default class MultiSelectComboBox extends React.Component<MultiSelectComb
                 <Menu id={id} {...getMenuProps({ "aria-label": ariaLabel })}>
                   {this.filterItems(items, selectedItem, itemToString, inputValue).map((item: any, index: any) => {
                     const itemProps = getItemProps({ item, index });
-                    // @ts-expect-error TS(2349): This expression is not callable.
                     return (
                       <MenuItem
                         key={itemProps.id}
@@ -404,7 +396,6 @@ export default class MultiSelectComboBox extends React.Component<MultiSelectComb
                         title={itemToElement ? item.text : itemToString(item)}
                         {...itemProps}
                       >
-                        {/* @ts-expect-error TS(2604): JSX element type 'ItemToElement' does not have any... Remove this comment to see the full error message */}
                         {itemToElement ? <ItemToElement key={itemToString(item)} {...item} /> : itemToString(item)}
                       </MenuItem>
                     );

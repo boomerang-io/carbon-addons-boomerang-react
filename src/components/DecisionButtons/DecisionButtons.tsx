@@ -25,7 +25,7 @@ type OwnProps = {
   disabled?: boolean;
   helperText?: string;
   id?: string;
-  items?: any[];
+  items: any[];
   label?: string;
   labelText?: string;
   name: string;
@@ -62,7 +62,6 @@ function DecisionButtons({
   const selectedItem = propsSelectedItem ?? stateSelected; // Externally controlled if value props exists
 
   const getDecisionButtons = () => {
-    // @ts-expect-error TS(2532): Object is possibly 'undefined'.
     const children = items.map((item, index) => {
       const { icon: Icon, label, type, value } = item;
       const selected = value === selectedItem;
@@ -114,6 +113,7 @@ function DecisionButtons({
 
   const wrapperClasses = cx(`${prefix}--radio-button-group`, className, {
     [`${prefix}--radio-button-group--${orientation}`]: isVertical,
+    [`${prefix}--radio-button-group--disabled`]: disabled,
   });
 
   const labelValue = label || labelText;
@@ -137,8 +137,7 @@ function DecisionButtons({
       )}
       {hasVerticalHelperText && <div className={`${prefix}--form__helper-text`}>{helperText}</div>}
       <div className={`${prefix}--form-item`}>
-        {/* @ts-expect-error TS(2322): Type '{ children: Element[]; className: string; di... Remove this comment to see the full error message */}
-        <div className={wrapperClasses} disabled={disabled}>
+        <div className={wrapperClasses}>
           {getDecisionButtons()}
         </div>
       </div>

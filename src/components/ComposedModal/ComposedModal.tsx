@@ -11,7 +11,6 @@ ComposedModal.defaultProps = {
   composedModalProps: {},
   isOpen: false,
   modalHeaderProps: {},
-  modalTrigger: () => {},
 };
 
 type OwnProps = {
@@ -23,7 +22,7 @@ type OwnProps = {
   isOpen?: boolean;
   modalHeaderChildren?: React.ReactElement;
   modalHeaderProps?: any;
-  modalTrigger?: (...args: any[]) => any;
+  modalTrigger?: ({ openModal }: { openModal: Function }) => React.ReactElement;
   onCloseModal?: (...args: any[]) => any;
   size?: "xs" | "sm" | "md" | "lg";
 };
@@ -42,7 +41,6 @@ export function ComposedModal(props: Props) {
   // Let it be externally controlled
   const { isOpen } = props;
   useEffect(() => {
-    // @ts-expect-error TS(2349): This expression is not callable.
     setState({ isOpen });
     // eslint-disable-next-line
   }, [isOpen]);
@@ -52,7 +50,6 @@ export function ComposedModal(props: Props) {
    * and let parent know
    */
   const resetInitialState = (stateUpdate: any) => {
-    // @ts-expect-error TS(2349): This expression is not callable.
     setState({
       isConfirmModalOpen: false,
       shouldConfirmModalClose: false,
@@ -62,7 +59,6 @@ export function ComposedModal(props: Props) {
   };
 
   const handleOpenModal = () => {
-    // @ts-expect-error TS(2349): This expression is not callable.
     setState({ isOpen: true });
   };
 
@@ -81,7 +77,6 @@ export function ComposedModal(props: Props) {
    */
   const handleShouldCloseModal = () => {
     if ((state as any).shouldConfirmModalClose) {
-      // @ts-expect-error TS(2349): This expression is not callable.
       setState({ isConfirmModalOpen: true });
     } else {
       handleCloseModal();
@@ -89,7 +84,6 @@ export function ComposedModal(props: Props) {
   };
 
   const closeConfirmModal = () => {
-    // @ts-expect-error TS(2349): This expression is not callable.
     setState({ isConfirmModalOpen: false });
   };
 
@@ -98,7 +92,6 @@ export function ComposedModal(props: Props) {
    * @param {bool} shouldConfirmModalClose - boolean of current component
    */
   const handleSetShouldConfirmModalClose = (shouldConfirmModalClose: any) => {
-    // @ts-expect-error TS(2349): This expression is not callable.
     setState({ shouldConfirmModalClose });
   };
 
@@ -108,7 +101,7 @@ export function ComposedModal(props: Props) {
 
   return (
     <>
-      {props.modalTrigger({ openModal: handleOpenModal })}
+      {props.modalTrigger && props.modalTrigger({ openModal: handleOpenModal })}
       <Modal
         appElement={props.appElement}
         containerClassName={cx(

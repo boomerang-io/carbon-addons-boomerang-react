@@ -3,6 +3,10 @@ import cx from "classnames";
 import { Warning } from "@carbon/react/icons";
 import { prefix } from "../../internal/settings";
 
+Error.defaultProps = {
+  className: "",
+};
+
 type OwnProps = {
   className?: string;
   style?: any;
@@ -10,11 +14,9 @@ type OwnProps = {
   statusText?: string;
 };
 
-// @ts-expect-error TS(2456): Type alias 'Props' circularly references itself.
 type Props = OwnProps & typeof Error.defaultProps;
 
-// @ts-expect-error TS(7022): 'Error' implicitly has type 'any' because it does ... Remove this comment to see the full error message
-const Error = ({ status, statusText, className, style, ...rest }: Props) => {
+function Error({ status, statusText, className, style, ...rest }: Props) {
   let message;
   if (status && statusText) {
     message = <div className={`${prefix}--bmrg-error-message__status`}>{`Status: ${status} ${statusText}`}</div>;
@@ -36,10 +38,6 @@ const Error = ({ status, statusText, className, style, ...rest }: Props) => {
       </p>
     </div>
   );
-};
-
-Error.defaultProps = {
-  className: "",
 };
 
 export default Error;

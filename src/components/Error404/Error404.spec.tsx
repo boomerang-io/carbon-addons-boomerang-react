@@ -11,7 +11,6 @@ test("render Error404 with defaults", async () => {
 });
 
 test("render Error404 without text", async () => {
-  // @ts-expect-error TS(2322): Type 'null' is not assignable to type 'string | un... Remove this comment to see the full error message
   const { queryByText } = render(<Error404 header={null} title={null} message={null} />);
   (expect(queryByText("404 Page Not Found")).not as any).toBeInTheDocument();
   (expect(queryByText("We spaced out and couldn’t find your page.")).not as any).toBeInTheDocument();

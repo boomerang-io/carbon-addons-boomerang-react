@@ -47,27 +47,6 @@ function Component1(props: any) {
   );
 }
 
-function Component2(props: any) {
-  React.useEffect(() => {
-    props.setShouldConfirmModalClose(true);
-    // eslint-disable-next-line
-  }, []);
-
-  return (
-    <ModalForm title="Testing some text here">
-      <ModalBody>
-        <TextInput tooltipContent="testing" id="testing" onChange={() => {}} placeholder="This is an input" />
-      </ModalBody>
-      <ModalFooter>
-        <Button kind="secondary" onClick={props.closeModal}>
-          Cancel
-        </Button>
-        <Button onClick={props.closeModal}>Done</Button>
-      </ModalFooter>
-    </ModalForm>
-  );
-}
-
 export const Default = () => {
   return (
     <ComposedModal
@@ -82,7 +61,6 @@ export const Default = () => {
         label: "Single child as a function",
         subtitle: "Even more info here",
       }}
-      // @ts-expect-error TS(2322): Type '({ openModal }: any) => Element' is not assi... Remove this comment to see the full error message
       modalTrigger={({ openModal }) => <Button onClick={openModal}>Open modal composed</Button>}
     >
       {({ closeModal }) => <Component1 closeModal={closeModal} />}
@@ -91,13 +69,13 @@ export const Default = () => {
 };
 
 export const Size = () => {
-  const [size, setSize] = React.useState("");
+  const [size, setSize] = React.useState<"xs" | "sm" | "md" | "lg">("md");
   return (
     <div>
       <div style={{ marginBottom: "1rem" }}>
-        {/* @ts-expect-error TS(2741): Property 'name' is missing in type '{ id: string; ... Remove this comment to see the full error message */}
         <RadioGroup
           id="testSize"
+          name="testSize"
           //defaultSelected={"md"}
           labelText={"Size"}
           onChange={(value) => setSize(value)}
@@ -111,7 +89,6 @@ export const Size = () => {
         />
       </div>
       <ComposedModal
-        // @ts-expect-error TS(2322): Type 'string' is not assignable to type '"xs" | "s... Remove this comment to see the full error message
         size={size}
         appElement="#root"
         composedModalProps={{ selectorPrimaryFocus: 'input[id="testing"]' }}
@@ -124,7 +101,6 @@ export const Size = () => {
           label: "Single child as a function",
           subtitle: "Even more info here",
         }}
-        // @ts-expect-error TS(2322): Type '({ openModal }: any) => Element' is not assi... Remove this comment to see the full error message
         modalTrigger={({ openModal }) => <Button onClick={openModal}>Open modal composed</Button>}
       >
         {({ closeModal }) => <Component1 closeModal={closeModal} />}

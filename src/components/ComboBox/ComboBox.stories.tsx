@@ -47,13 +47,13 @@ const singleItems = [
 export const Default = () => {
   return (
     <div style={{ width: "25rem" }}>
-      {/* @ts-expect-error TS(2741): Property 'onChange' is missing in type '{ id: stri... Remove this comment to see the full error message */}
       <ComboBox
         id="select-default"
         items={items}
         placeholder="Search for something"
         titleText="Should filter item"
         helperText="Default behavior"
+        onChange={() => {}}
       />
     </div>
   );
@@ -62,13 +62,13 @@ export const Default = () => {
 export const SingleItems = () => {
   return (
     <div style={{ width: "25rem" }}>
-      {/* @ts-expect-error TS(2741): Property 'onChange' is missing in type '{ id: stri... Remove this comment to see the full error message */}
       <ComboBox
         id="select-default"
         items={singleItems}
         placeholder="Search for something"
         titleText="Should filter item"
         helperText="Default behavior"
+        onChange={() => {}}
       />
     </div>
   );
@@ -77,13 +77,13 @@ export const SingleItems = () => {
 export const WithoutFilter = () => {
   return (
     <div style={{ width: "25rem" }}>
-      {/* @ts-expect-error TS(2741): Property 'onChange' is missing in type '{ id: stri... Remove this comment to see the full error message */}
       <ComboBox
         id="select-filter"
         items={items}
         placeholder="Select something"
         titleText="Should not filter, only highlight"
         shouldFilterItem={false}
+        onChange={() => {}}
       />
     </div>
   );
@@ -92,7 +92,6 @@ export const WithoutFilter = () => {
 export const ItemToElement = () => {
   return (
     <div style={{ width: "25rem" }}>
-      {/* @ts-expect-error TS(2741): Property 'onChange' is missing in type '{ disableC... Remove this comment to see the full error message */}
       <ComboBox
         disableClear
         id="select-tooltip-helper"
@@ -103,6 +102,7 @@ export const ItemToElement = () => {
         itemToElement={(item) => item.value + " 😊"}
         tooltipContent="Tooltip for select"
         tooltipProps={{ direction: "top" }}
+        onChange={() => {}}
       />
     </div>
   );
@@ -111,24 +111,23 @@ export const ItemToElement = () => {
 export const MenuOpenUpwards = () => {
   return (
     <div style={{ width: "25rem", height: "15rem", display: "flex", alignItems: "flex-end" }}>
-      {/* @ts-expect-error TS(2741): Property 'onChange' is missing in type '{ id: stri... Remove this comment to see the full error message */}
       <ComboBox
         id="select-default"
         items={items}
         placeholder="Search for something"
         titleText="Menu should open upwards"
         direction="top"
+        onChange={() => {}}
       />
     </div>
   );
 };
 
 const ComboBoxExternallyControlled = () => {
-  const [selectedItem, setSelectedItem] = React.useState([]);
+  const [selectedItem, setSelectedItem] = React.useState<{ label: string; value: string; }>(({} as any));
 
   return (
     <ComboBox
-      // @ts-expect-error TS(2345): Argument of type '{ label: string; value: string; ... Remove this comment to see the full error message
       onChange={({ selectedItem }) => (selectedItem ? setSelectedItem({ label: "Penguin", value: "penguin" }) : null)}
       id="select-default"
       items={items}
@@ -150,7 +149,6 @@ export const ExternalControl = () => {
 export const KitchenSink = () => {
   return (
     <div style={{ width: "25rem" }}>
-      {/* @ts-expect-error TS(2741): Property 'onChange' is missing in type '{ disableC... Remove this comment to see the full error message */}
       <ComboBox
         disableClear
         id="select-tooltip-helper"
@@ -160,6 +158,7 @@ export const KitchenSink = () => {
         helperText="My items are filtered internally"
         tooltipContent="Tooltip for select"
         tooltipProps={{ direction: "top" }}
+        onChange={() => {}}
       />
     </div>
   );

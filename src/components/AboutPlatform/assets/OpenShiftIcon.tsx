@@ -1,9 +1,8 @@
 import * as React from "react";
 import { SVGProps } from "react";
 
-function OpenShiftIcon(props: SVGProps<SVGElement>) {
+function OpenShiftIcon(props: SVGProps<SVGSVGElement>) {
   return (
-    // @ts-expect-error TS(2322): Type '{ children: Element[]; className?: string | ... Remove this comment to see the full error message
     <svg id="prefix__icon" viewBox="0 0 100 100" {...props}>
       <defs>
         <style>{".prefix__cls-3{fill:#fff}.prefix__cls-4{fill:#c3c3c3}.prefix__cls-5{fill:#d5d5d5}"}</style>

@@ -20,6 +20,7 @@ type OwnProps = {
   appElement?: string;
   children?: React.ReactNode;
   containerClassName?: string;
+  isExternallyControlled?: boolean;
   isOpen?: boolean;
   label?: string;
   modalProps?: any;
@@ -42,7 +43,6 @@ function ConfirmModal(props: Props) {
     appElement,
     children,
     containerClassName,
-    // @ts-expect-error TS(2339): Property 'isExternallyControlled' does not exist o... Remove this comment to see the full error message
     isExternallyControlled,
     label,
     modalProps,

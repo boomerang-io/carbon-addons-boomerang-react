@@ -12,7 +12,6 @@ test("render Error403 with defaults", async () => {
 });
 
 test("render Error403 without text", async () => {
-  // @ts-expect-error TS(2322): Type 'null' is not assignable to type 'string | un... Remove this comment to see the full error message
   const { queryByText } = render(<Error403 header={null} title={null} message={null} />);
   (expect(queryByText("403 Access Forbidden")).not as any).toBeInTheDocument();
   (expect(queryByText(`Looks like you've taken a wrong turn.`)).not as any).toBeInTheDocument();

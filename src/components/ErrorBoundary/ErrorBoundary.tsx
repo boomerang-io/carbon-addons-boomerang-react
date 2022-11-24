@@ -3,9 +3,9 @@ import { prefix } from "../../internal/settings";
 
 import ErrorMessage from "../ErrorMessage";
 
-type OwnProps = {
+interface OwnProps {
   className?: string;
-  style?: string;
+  style?: React.CSSProperties;
   errorProps?: any;
   errorComponent?: (...args: any[]) => any;
 };
@@ -44,7 +44,6 @@ class ErrorBoundary extends Component<Props, State> {
     const { errorComponent: ErrorComponent, className, style, errorProps, ...rest } = this.props;
     if (this.state.hasError) {
       return (
-        // @ts-expect-error TS(2322): Type 'string | undefined' is not assignable to typ... Remove this comment to see the full error message
         <div className={className} style={style} {...rest}>
           <ErrorComponent {...this.props.errorProps} />
         </div>

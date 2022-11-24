@@ -42,7 +42,7 @@ type OwnProps = {
   onKeyBlur?: (...args: any[]) => any;
   onValueBlur?: (...args: any[]) => any;
   onInputBlur?: (...args: any[]) => any;
-  onChange?: (...args: any[]) => any;
+  onChange: (...args: any[]) => any;
   placeholder?: string;
   tagProps?: any;
   tagType?: string;
@@ -55,7 +55,7 @@ type OwnProps = {
   valueLabel?: string;
   valueLabelText?: string;
   valuePlaceholder?: string;
-  value?: React.ReactNode;
+  value?: any;
   values?: any[];
 };
 
@@ -108,7 +108,7 @@ function CreatableComponent({
   const inputKeyLabel = keyLabelText || keyLabel;
   const inputValueLabel = valueLabelText || valueLabel;
 
-  const [createdItems, setCreatedItems] = useState([]);
+  const [createdItems, setCreatedItems] = useState<any[]>([]);
   const createButtonClassName = cx(buttonClassName, {
     "--no-label":
       (!createKeyValuePair && !inputLabel && !tooltipContent) ||
@@ -141,10 +141,8 @@ function CreatableComponent({
   const hasBothHelperText = keyHelperText && valueHelperText;
   const hasBothLabelText = inputKeyLabel && inputValueLabel;
 
-  // @ts-expect-error TS(2488): Type '{} | null | undefined' must have a '[Symbol.... Remove this comment to see the full error message
   const tagsToShow = finalExternalInitialValues ? [...initialTagItems, ...tagItems] : [...tagItems];
-  // @ts-expect-error TS(2532): Object is possibly 'undefined'.
-  const disableInputs = disabled || (tagsToShow.length >= max && max > 0);
+  const disableInputs = disabled || (max && tagsToShow.length >= max && max > 0);
 
   const onInputChange = (e: any) => {
     setInput(e.target.value);
@@ -170,16 +168,13 @@ function CreatableComponent({
       setInput("");
     }
 
-    // @ts-expect-error TS(2345): Argument of type 'any[]' is not assignable to para... Remove this comment to see the full error message
     setCreatedItems(items);
-    // @ts-expect-error TS(2722): Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     onChange(items);
   };
 
   const removeValue = (value: any) => {
     const items = (tagItems as any).filter((item: any) => item !== value);
     setCreatedItems(items);
-    // @ts-expect-error TS(2722): Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     onChange(items);
   };
 

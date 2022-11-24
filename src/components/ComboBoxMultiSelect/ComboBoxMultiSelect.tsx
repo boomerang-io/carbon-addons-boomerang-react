@@ -74,9 +74,7 @@ function ComboBoxMultiSelect({
   return (
     <div key={id} className={cx(`${prefix}--bmrg-multi-select`, { "--disableClear": disableClear })}>
       <MultiSelect
-        // @ts-expect-error TS(2322): Type 'string' is not assignable to type 'never'.
         id={id}
-        // @ts-expect-error TS(2322): Type '"" | Element | undefined' is not assignable ... Remove this comment to see the full error message
         titleText={
           labelValue && (
             <div style={{ display: "flex" }}>
@@ -91,11 +89,8 @@ function ComboBoxMultiSelect({
             </div>
           )
         }
-        // @ts-expect-error TS(2322): Type 'any' is not assignable to type 'never'.
         initialSelectedItems={finalInitialSelectedItems}
-        // @ts-expect-error TS(2322): Type 'any' is not assignable to type 'never'.
         selectedItems={finalSelectedItems}
-        // @ts-expect-error TS(2322): Type 'any' is not assignable to type 'never'.
         items={items}
         {...multiSelectProps}
       />

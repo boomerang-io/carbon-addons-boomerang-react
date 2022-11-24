@@ -37,7 +37,6 @@ function ExternallyControlled() {
         }, 1000)
       }
       onCloseModal={() => setIsOpen(false)}
-      // @ts-expect-error TS(2322): Type '{ children: Element; affirmativeAction: () =... Remove this comment to see the full error message
       isExternallyControlled
       appElement="#root"
       label="do things"

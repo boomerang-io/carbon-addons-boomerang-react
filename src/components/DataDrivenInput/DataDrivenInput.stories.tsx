@@ -34,7 +34,6 @@ const customInput = {
   placeholder: "custom",
   helperText: "custom",
   required: true,
-  // eslint-disable-next-line
   customComponent: ({ formikProps, ...rest }: any) => <TextInput {...rest} />,
 };
 
@@ -44,7 +43,6 @@ export const Default = () => {
     <DataDrivenInput
       id="dynamic-formik-form-id"
       {...input}
-      // @ts-expect-error TS(2322): Type '{ value: string; onChange: (e: any) => void;... Remove this comment to see the full error message
       value={testValue}
       onChange={(e: any) => setTestValue(e.target.value)}
     />
@@ -52,6 +50,5 @@ export const Default = () => {
 };
 
 export const CustomComponentInput = () => {
-  // @ts-expect-error TS(2322): Type '{ key: string; label: string; value: string;... Remove this comment to see the full error message
   return <DataDrivenInput id="dynamic-formik-form-id" {...customInput} />;
 };

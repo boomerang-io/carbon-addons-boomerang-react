@@ -43,7 +43,7 @@ function CheckboxListComponent({
   tooltipContent,
   tooltipProps,
 }: Props) {
-  const [stateSelectedItems, setSelectedItems] = useState(initialSelectedItems);
+  const [stateSelectedItems, setSelectedItems] = useState<any[]>(initialSelectedItems);
 
   const selectedItems = propsSelectedItems || stateSelectedItems; // Externally controlled if selectedItems props exists
 
@@ -51,7 +51,6 @@ function CheckboxListComponent({
     let newSelectedItems = [...stateSelectedItems];
 
     if (value) {
-      // @ts-expect-error TS(2345): Argument of type 'any' is not assignable to parame... Remove this comment to see the full error message
       newSelectedItems.push(id);
     } else {
       newSelectedItems = newSelectedItems.filter((item) => item !== id);

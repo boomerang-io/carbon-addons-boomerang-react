@@ -1,14 +1,13 @@
 import * as React from "react";
 import { SVGProps } from "react";
 
-function NATSIcon(props: SVGProps<SVGElement>) {
+function NATSIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 63 65"
       fill="#fff"
-      // @ts-expect-error TS(2322): Type '{ children: Element[]; className?: string | ... Remove this comment to see the full error message
-      filRule="evenodd"
+      fillRule="evenodd"
       stroke="#000"
       strokeLinecap="round"
       strokeLinejoin="round"

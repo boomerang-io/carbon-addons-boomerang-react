@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import AutoSuggest from "react-autosuggest";
 import { prefix } from "../../internal/settings";
 
@@ -14,6 +13,8 @@ const getSuggestions = (values: any, value: any) => {
 
 type OwnAutoSuggestInputProps = {
   autoSuggestions?: any[];
+  children: any;
+  focusInputOnSuggestionClick: boolean;
   getSuggestions?: (...args: any[]) => any;
   getSuggestionValue?: (...args: any[]) => any;
   inputProps?: any;
@@ -70,7 +71,6 @@ class AutoSuggestInput extends Component<AutoSuggestInputProps, AutoSuggestInput
           inputProps={inputProps}
           onSuggestionsClearRequested={this.onSuggestionsClearRequested}
           onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-          // @ts-expect-error TS(2349): This expression is not callable.
           renderInputComponent={
             children ? (inputProps: any) => children(inputProps) : renderInputComponent || undefined
           }

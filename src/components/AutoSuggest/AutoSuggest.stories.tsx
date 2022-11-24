@@ -44,8 +44,7 @@ export default {
 export const Default = (args: any) => {
   return (
     <AutoSuggest onChange={action("Auto suggest change")} {...args}>
-      {/* @ts-expect-error TS(2741): Property 'id' is missing in type '{}' but required... Remove this comment to see the full error message */}
-      <TextInput />
+      <TextInput id="default-text-input" />
     </AutoSuggest>
   );
 };

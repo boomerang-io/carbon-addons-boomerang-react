@@ -24,6 +24,7 @@ type Props = {
   tooltipContent?: React.ReactNode;
   tooltipProps?: any;
   type?: any; // TODO: PropTypes.oneOf([DATE_TYPES.DATE, DATE_TYPES.DATE_RANGE])
+  value: string | string[];
 };
 
 const DateInputComponent = React.forwardRef<any, Props>(function DateInputComponent(
@@ -45,7 +46,6 @@ const DateInputComponent = React.forwardRef<any, Props>(function DateInputCompon
     tooltipContent,
     tooltipProps,
     type,
-    // @ts-expect-error TS(2339): Property 'value' does not exist on type 'PropsWith... Remove this comment to see the full error message
     value,
     ...dateInputProps
   },

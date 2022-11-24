@@ -5,8 +5,9 @@ import AutoSuggestInput from "./AutoSuggestInput";
 
 const SELECT_METHODS = ["up", "down", "click"];
 
-type OwnProps = {
+interface OwnProps {
   autoSuggestions: any[];
+  children: any;
   initialValue?: string;
   inputProps?: any;
   onChange?: (...args: any[]) => any;
@@ -43,12 +44,6 @@ class AutoSuggest extends Component<Props, State> {
   }
 
   renderSuggestion = (suggestion: any) => <div>{suggestion.label}</div>;
-
-  onSuggestionsFetchRequested = () => {
-    this.setState(() => ({
-      suggestions: this.getSuggestions(),
-    }));
-  };
 
   /**
    * More logic here for handling a user cycling through suggestions
@@ -120,14 +115,11 @@ class AutoSuggest extends Component<Props, State> {
       <AutoSuggestInput
         getSuggestionValue={this.getSuggestionValue}
         inputProps={finalInputProps}
-        // @ts-expect-error TS(2769): No overload matches this call.
-        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
         renderSuggestion={this.renderSuggestion}
         suggestions={this.state.suggestions}
         focusInputOnSuggestionClick={false}
         {...rest}
       >
-        {/* @ts-expect-error TS(2769): No overload matches this call. */}
         {(inputProps: any) => React.cloneElement(children, { ...inputProps, ref: this.inputRef })}
       </AutoSuggestInput>
     );

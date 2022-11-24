@@ -18,6 +18,10 @@
   margin-left: 0.5rem;
 }
 
+.#{$prefix}--radio-button-group--disabled {
+  pointer-events: none;
+}
+
 .#{$prefix}--bmrg-decision-button-wrapper {
   margin: 0 1rem 0 0;
 
