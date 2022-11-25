@@ -7,6 +7,10 @@ import SidenavContent from "./SidenavContent";
 import SidenavFooter from "./SidenavFooter";
 import SidenavLinks from "./SidenavLinks";
 
+Sidenav.defaultProps = {
+  theme: "bmrg-black",
+};
+
 type OwnProps = {
   content?: (...args: any[]) => any;
   footer?: (...args: any[]) => any;
@@ -16,11 +20,9 @@ type OwnProps = {
   theme?: string;
 };
 
-// @ts-expect-error TS(2456): Type alias 'Props' circularly references itself.
 type Props = OwnProps & typeof Sidenav.defaultProps;
 
-// @ts-expect-error TS(7022): 'Sidenav' implicitly has type 'any' because it doe... Remove this comment to see the full error message
-const Sidenav = ({ header, hidden, content, navItems, footer, theme, ...rest }: Props) => {
+function Sidenav ({ header, hidden, content, navItems, footer, theme, ...rest }: Props) {
   const classNames = cx(`${prefix}--bmrg-sidenav`, `--${theme}`, {
     "--hidden": hidden,
   });
@@ -32,10 +34,6 @@ const Sidenav = ({ header, hidden, content, navItems, footer, theme, ...rest }: 
       {footer && <SidenavFooter>{footer()}</SidenavFooter>}
     </aside>
   );
-};
-
-Sidenav.defaultProps = {
-  theme: "bmrg-black",
 };
 
 export default Sidenav;

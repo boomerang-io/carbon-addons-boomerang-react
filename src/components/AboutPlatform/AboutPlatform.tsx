@@ -20,7 +20,7 @@ interface AboutPlatformContainerProps {
   organization?: string;
 }
 
-const AboutPlatformContainer = ({ version = "", organization = "IBM", isFlowApp }: AboutPlatformContainerProps) => {
+function AboutPlatformContainer ({ version = "", organization = "IBM", isFlowApp }: AboutPlatformContainerProps) {
   return (
     <HeaderMenuItem
       text="About the Platform"

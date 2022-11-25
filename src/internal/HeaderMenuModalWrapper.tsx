@@ -16,6 +16,7 @@ type OwnProps = {
   buttonTriggerClassName?: string;
   disabled?: boolean;
   onKeyDown?: (...args: any[]) => any;
+  preventCloseOnClickOutside?: any;
   selectorPrimaryFocus?: string;
   renderTriggerButtonIcon?: ((...args: any[]) => any) | any;
   secondaryButtonText?: string;

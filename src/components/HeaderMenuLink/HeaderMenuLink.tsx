@@ -57,13 +57,11 @@ type Props = {
   external?: boolean;
 };
 
-function HeaderMenuLink({ className, external = true, href, iconName, style, text, ...rest }: Props) {
+function HeaderMenuLink({ className = "", external = true, href, iconName = "information", style, text, ...rest }: Props) {
   const wrapperClassNames = cx(`${prefix}--bmrg-header-menu-item-wrapper`, {
-    // @ts-expect-error TS(2464): A computed property name must be of type 'string',... Remove this comment to see the full error message
     [className]: !!className,
   });
 
-  // @ts-expect-error TS(2538): Type 'undefined' cannot be used as an index type.
   const iconToRender = iconMapping[iconName];
 
   const externalProps = external ? { target: "_blank", rel: "noopener noreferrer" } : {};
@@ -80,7 +78,6 @@ function HeaderMenuLink({ className, external = true, href, iconName, style, tex
       >
         <div className={`${prefix}--bmrg-header-menu-item__content`}>
           {Boolean(iconToRender) && (
-            // @ts-expect-error TS(2538): Type 'undefined' cannot be used as an index type.
             <div className={`${prefix}--bmrg-header-menu-item__img`}>{iconMapping[iconName]}</div>
           )}
           <span className={`${prefix}--bmrg-header-menu-item__text`}>

@@ -1,6 +1,5 @@
 import React from "react";
 import { useQuery, useMutation } from "react-query";
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'domp... Remove this comment to see the full error message
 import dompurify from "dompurify";
 import { Accordion, AccordionItem, Button, ModalHeader, ModalBody, ModalFooter } from "@carbon/react";
 import ErrorMessage from "../ErrorMessage";
@@ -42,7 +41,6 @@ function PrivacyStatement({ baseServiceUrl, organization, platformEmail }: Props
   const statementUrl = serviceUrl.getStatement({ baseServiceUrl });
   const statementQuery = useQuery({
     queryKey: statementUrl,
-    // @ts-expect-error TS(2554): Expected 2 arguments, but got 1.
     queryFn: resolver.query(statementUrl),
   });
 
@@ -63,8 +61,7 @@ function PrivacyStatement({ baseServiceUrl, organization, platformEmail }: Props
       closeAlertModal();
       closeModal();
       if (window.location) {
-        // @ts-expect-error TS(2554): Expected 0 arguments, but got 1.
-        window.location.reload(true);
+        window.location.reload();
       }
     } catch (e) {
       closeAlertModal();
@@ -134,8 +131,7 @@ function PrivacyStatement({ baseServiceUrl, organization, platformEmail }: Props
             <ModalFooter>
               <div className={`${prefix}--bmrg-privacy-statement-delete`}>
                 <HeaderMenuModalWrapper buttonTriggerText="Request account deletion" triggerButtonKind="danger">
-                  {/* @ts-expect-error TS(7031): Binding element 'closeAlertModal' implicitly has a... Remove this comment to see the full error message */}
-                  {({ closeModal: closeAlertModal }) => {
+                  {({ closeModal: closeAlertModal }: any) => {
                     return (
                       <>
                         <ModalHeader

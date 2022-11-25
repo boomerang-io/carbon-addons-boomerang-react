@@ -7,7 +7,7 @@ import ToastNotification from "./ToastNotification";
  * @param {*} notification notifcation content
  * @param {Object} config custom configuration for ToastContainer
  */
-const notify = (notification: any, config: any) => {
+const notify = (notification: any, config?: any) => {
   // Check to see if they pass in a component or function
   // Default passing prop to Notification component
 

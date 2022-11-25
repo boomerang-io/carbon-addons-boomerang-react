@@ -11,11 +11,11 @@ ErrorPageCore.defaultProps = {
 type OwnProps = {
   className?: string;
   graphic?: React.ReactNode;
-  header?: React.ReactNode;
+  header?: any;
   message?: React.ReactNode;
   statusUrl?: string;
   style?: any;
-  title?: React.ReactNode;
+  title?: any;
 };
 
 type Props = OwnProps & typeof ErrorPageCore.defaultProps;

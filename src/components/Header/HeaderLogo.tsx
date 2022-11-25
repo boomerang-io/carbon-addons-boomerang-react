@@ -1,6 +1,10 @@
 import React from "react";
 import { prefix } from "../../internal/settings";
 
+HeaderLogo.defaultProps = {
+  href: "/",
+};
+
 type OwnProps = {
   appName?: string;
   children?: React.ReactNode;
@@ -10,18 +14,15 @@ type OwnProps = {
   platformName?: string;
 };
 
-// @ts-expect-error TS(2456): Type alias 'Props' circularly references itself.
 type Props = OwnProps & typeof HeaderLogo.defaultProps;
 
-// @ts-expect-error TS(7022): 'HeaderLogo' implicitly has type 'any' because it ... Remove this comment to see the full error message
-const HeaderLogo = (props: Props) => {
+function HeaderLogo (props: Props) {
   const { appName, children, href, navLinks, platformName } = props;
 
   return (
     <div className={`${prefix}--bmrg-header-brand`}>
       {(children || platformName || appName) && (
-        // @ts-expect-error TS(2322): Type 'string' is not assignable to type 'number'.
-        <a alt="Home" aria-label="Home" className={`${prefix}--bmrg-header-brand__link`} href={href} tabIndex="0">
+        <a aria-label="Home" className={`${prefix}--bmrg-header-brand__link`} href={href} tabIndex={0}>
           {children}
           <div className={`${prefix}--bmrg-header-brand__wrapper`}>
             {(platformName || appName) && <h1 className={`${prefix}--bmrg-header-brand__title`}>{platformName}</h1>}
@@ -34,10 +35,6 @@ const HeaderLogo = (props: Props) => {
       ) : null}
     </div>
   );
-};
-
-HeaderLogo.defaultProps = {
-  href: "/",
 };
 
 export default HeaderLogo;

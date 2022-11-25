@@ -12,7 +12,10 @@ UserRequests.defaultProps = {
 
 type OwnProps = {
   baseLaunchEnvUrl?: string;
-  requestSummary?: any;
+  requestSummary?: {
+    requireUserAction: number;
+    submittedByUser: number;
+  };
 };
 
 type Props = OwnProps & typeof UserRequests.defaultProps;

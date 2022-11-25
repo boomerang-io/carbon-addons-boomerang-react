@@ -11,7 +11,6 @@ FlowModalContainer.defaultProps = {
   composedModalProps: {},
   isOpen: false,
   modalHeaderProps: {},
-  modalTrigger: () => {},
 };
 
 type OwnProps = {
@@ -24,7 +23,7 @@ type OwnProps = {
   isOpen?: boolean;
   modalHeaderChildren?: React.ReactElement;
   modalHeaderProps?: any;
-  modalTrigger?: (...args: any[]) => any;
+  modalTrigger?: ({ openModal }: { openModal: Function }) => any;
   onCloseModal?: (...args: any[]) => any;
   onFormDataChange?: (...args: any[]) => any;
   progressSteps?: {
@@ -46,7 +45,6 @@ export function FlowModalContainer(props: Props) {
 
   // Let it be externally controlled
   useEffect(() => {
-    // @ts-expect-error TS(2349): This expression is not callable.
     setState({ isOpen: props.isOpen });
   }, [props.isOpen, setState]);
 
@@ -55,7 +53,6 @@ export function FlowModalContainer(props: Props) {
    * @param {number} stepRequested - requested value
    */
   function goToStep(stepRequested: any) {
-    // @ts-expect-error TS(2349): This expression is not callable.
     setState({ step: stepRequested });
   }
 
@@ -78,11 +75,8 @@ export function FlowModalContainer(props: Props) {
    * @param {obj} data - the new data to be saved
    */
   function saveValues(data: any) {
-    // @ts-expect-error TS(2349): This expression is not callable.
     setState({ formData: { ...(state as any).formData, ...data } });
-    // @ts-expect-error TS(2304): Cannot find name 'onFormDataChange'.
-    if (typeof onFormDataChange === "function") {
-      // @ts-expect-error TS(2722): Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
+    if (typeof props.onFormDataChange === "function") {
       props.onFormDataChange((state as any).formData);
     }
   }
@@ -92,7 +86,6 @@ export function FlowModalContainer(props: Props) {
    * and let parent know
    */
   function resetInitialState(stateUpdate: any) {
-    // @ts-expect-error TS(2349): This expression is not callable.
     setState({
       formData: new Map(),
       isConfirmModalOpen: false,
@@ -102,15 +95,12 @@ export function FlowModalContainer(props: Props) {
       ...stateUpdate,
     });
 
-    // @ts-expect-error TS(2304): Cannot find name 'onFormDataChange'.
-    if (typeof onFormDataChange === "function") {
-      // @ts-expect-error TS(2722): Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
+    if (typeof props.onFormDataChange === "function") {
       props.onFormDataChange((state as any).formData);
     }
   }
 
   function handleOpenModal() {
-    // @ts-expect-error TS(2349): This expression is not callable.
     setState({ isOpen: true });
   }
 
@@ -129,7 +119,6 @@ export function FlowModalContainer(props: Props) {
    */
   function handleShouldCloseModal() {
     if ((state as any).shouldConfirmModalClose) {
-      // @ts-expect-error TS(2349): This expression is not callable.
       setState({ isConfirmModalOpen: true });
     } else {
       handleCloseModal();
@@ -137,7 +126,6 @@ export function FlowModalContainer(props: Props) {
   }
 
   function closeConfirmModal() {
-    // @ts-expect-error TS(2349): This expression is not callable.
     setState({ isConfirmModalOpen: false });
   }
 
@@ -146,7 +134,6 @@ export function FlowModalContainer(props: Props) {
    * @param {bool} shouldConfirmModalClose - boolean of current component
    */
   function handleSetShouldConfirmModalClose(shouldConfirmModalClose: any) {
-    // @ts-expect-error TS(2349): This expression is not callable.
     setState({ shouldConfirmModalClose });
   }
 
@@ -154,7 +141,6 @@ export function FlowModalContainer(props: Props) {
    * Determine which child to render based on the current step in the flow
    */
   function determineChildToRender() {
-    // @ts-expect-error TS(2339): Property 'step' does not exist on type '{}'.
     const { step } = state;
     let childToRender;
     if (React.Children.count(props.children) > 0) {
@@ -174,7 +160,7 @@ export function FlowModalContainer(props: Props) {
   const childToRender = determineChildToRender();
   return (
     <>
-      {props.modalTrigger({ openModal: handleOpenModal })}
+      {props.modalTrigger && props.modalTrigger({ openModal: handleOpenModal })}
       <Modal
         appElement={props.appElement}
         containerClassName={cx(

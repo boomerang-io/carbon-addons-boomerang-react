@@ -1,5 +1,4 @@
 import { Fragment } from "react";
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { BrowserRouter } from "react-router-dom";
 import SidenavComponent from "./index";
 
@@ -331,8 +330,7 @@ export const WithTitleFooter = (args: any) => {
 WithTitleFooter.args = {
   header: header,
   navItems: navItems,
-  // @ts-expect-error TS(2304): Cannot find name 'args'.
-  footer: () => <SidenavOutstandingTeams outstandingTeamRequests={outstandingTeamRequests} {...args} />,
+  footer: () => <SidenavOutstandingTeams outstandingTeamRequests={outstandingTeamRequests} />,
 };
 
 WithTitleFooter.story = {
@@ -352,8 +350,7 @@ export const OnlyTitleFooter = (args: any) => {
 
 OnlyTitleFooter.args = {
   header: header,
-  // @ts-expect-error TS(2304): Cannot find name 'args'.
-  footer: () => <SidenavOutstandingTeams outstandingTeamRequests={outstandingTeamRequests} {...args} />,
+  footer: () => <SidenavOutstandingTeams outstandingTeamRequests={outstandingTeamRequests} />,
 };
 
 OnlyTitleFooter.story = {

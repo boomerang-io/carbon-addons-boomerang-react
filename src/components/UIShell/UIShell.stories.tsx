@@ -1,7 +1,6 @@
 import { action } from "@storybook/addon-actions";
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import { SideNav, SideNavLink, SideNavItems, SideNavMenu, SideNavMenuItem } from "@carbon/react";
 import { Help, ServiceDesk } from "@carbon/react/icons";
@@ -49,7 +48,7 @@ const SERVICES_DATA = [
   { name: "Service 4 with a loooong long long long name", url: "https://google.com" },
 ];
 
-const withDelay = (delay: any, response: any) => () => {
+const withDelay = (delay: any, response: any) => (): any => {
   return new Promise(function (resolve) {
     setTimeout(function () {
       resolve(response);
@@ -74,11 +73,8 @@ export default {
 export const Default = (args: any) => {
   mock.onGet(`${BASE_URL}/users/consents`).reply(200, PRIVACY_DATA);
   mock.onGet(`${BASE_URL}/launchpad/user`).reply(200, PROFILE_SETTINGS_DATA);
-  // @ts-expect-error TS(2345): Argument of type '() => Promise<unknown>' is not a... Remove this comment to see the full error message
   mock.onGet(`${BASE_URL}/users/teams`).reply(withDelay(1000, [200, TEAMS_DATA]));
-  // @ts-expect-error TS(2345): Argument of type '() => Promise<unknown>' is not a... Remove this comment to see the full error message
   mock.onGet(`${BASE_URL}/launchpad/teams/1/services`).reply(withDelay(4000, [200, SERVICES_DATA]));
-  // @ts-expect-error TS(2345): Argument of type '() => Promise<unknown>' is not a... Remove this comment to see the full error message
   mock.onGet(`${BASE_URL}/launchpad/teams/2/services`).reply(withDelay(4000, [200, []]));
   mock.onPost(`${BASE_URL}/support/contact`).reply(200);
   return (
@@ -147,9 +143,7 @@ export const WithCarbonSidenavAndReactRouter = () => {
   mock.onGet(`${BASE_URL}/users/consents`).reply(200, PRIVACY_DATA);
   mock.onGet(`${BASE_URL}/launchpad/user`).reply(200, PROFILE_SETTINGS_DATA);
   mock.onGet(`${BASE_URL}/users/teams`).reply(200, TEAMS_DATA);
-  // @ts-expect-error TS(2345): Argument of type '() => Promise<unknown>' is not a... Remove this comment to see the full error message
   mock.onGet(`${BASE_URL}/launchpad/teams/1/services`).reply(withDelay(3000, [200, SERVICES_DATA]));
-  // @ts-expect-error TS(2345): Argument of type '() => Promise<unknown>' is not a... Remove this comment to see the full error message
   mock.onGet(`${BASE_URL}/launchpad/teams/2/services`).reply(withDelay(3000, [200, []]));
   mock.onPatch(`${BASE_URL}/users/profile`).reply(200);
   mock.onPost(`${BASE_URL}/support/contact`).reply(200);
@@ -163,9 +157,7 @@ export const WithCarbonSidenavAndReactRouter = () => {
         baseLaunchEnvUrl={BASE_ENV_URL}
         headerConfig={{
           features: {
-            // @ts-expect-error TS(2322): Type '{ "appSwitcher.enabled": true; "community.en... Remove this comment to see the full error message
             "appSwitcher.enabled": true,
-            "community.enabled": true,
             "notifications.enabled": true,
             "support.enabled": true,
           },
@@ -246,8 +238,8 @@ export const WithCarbonSidenavAndReactRouter = () => {
           </LeftSideNav>
         )}
         onTutorialClick={action("Tutorial")}
+        ///@ts-ignore
         user={{
-          // @ts-expect-error TS(2322): Type '{ id: string; name: string; email: string; r... Remove this comment to see the full error message
           id: "1",
           name: "test user",
           email: "test.user@ibm.com",
@@ -293,8 +285,6 @@ export const RightPanel = () => {
       baseServiceUrl={BASE_URL}
       headerConfig={{
         features: {
-          // @ts-expect-error TS(2322): Type '{ "community.enabled": true; "notifications.... Remove this comment to see the full error message
-          "community.enabled": true,
           "notifications.enabled": true,
           "support.enabled": true,
         },
@@ -341,8 +331,8 @@ export const RightPanel = () => {
           </div>
         ),
       }}
+      ///@ts-ignore
       user={{
-        // @ts-expect-error TS(2322): Type '{ id: string; name: string; email: string; h... Remove this comment to see the full error message
         id: "1",
         name: "test user",
         email: "test.user@ibm.com",
@@ -367,8 +357,6 @@ export const UserNotConsented = () => {
       platformName={"Boomerang"}
       headerConfig={{
         features: {
-          // @ts-expect-error TS(2322): Type '{ "community.enabled": true; "notifications.... Remove this comment to see the full error message
-          "community.enabled": true,
           "notifications.enabled": true,
           "support.enabled": true,
         },
@@ -399,8 +387,8 @@ export const UserNotConsented = () => {
         },
       }}
       onTutorialClick={action("Tutorial")}
+      ///@ts-ignore
       user={{
-        // @ts-expect-error TS(2322): Type '{ id: string; name: string; email: string; h... Remove this comment to see the full error message
         id: "1",
         name: "test user",
         email: "test.user@ibm.com",
@@ -421,8 +409,6 @@ export const UserPendingDeletion = () => {
       baseServiceUrl={BASE_URL}
       headerConfig={{
         features: {
-          // @ts-expect-error TS(2322): Type '{ "community.enabled": true; "notifications.... Remove this comment to see the full error message
-          "community.enabled": true,
           "notifications.enabled": true,
           "support.enabled": true,
         },
@@ -453,8 +439,8 @@ export const UserPendingDeletion = () => {
         },
       }}
       onTutorialClick={action("Tutorial")}
+      ///@ts-ignore
       user={{
-        // @ts-expect-error TS(2322): Type '{ id: string; name: string; email: string; h... Remove this comment to see the full error message
         id: "1",
         name: "test user",
         email: "test.user@ibm.com",

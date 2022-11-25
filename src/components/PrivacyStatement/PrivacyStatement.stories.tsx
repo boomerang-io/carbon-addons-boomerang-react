@@ -6,8 +6,7 @@ import { PRIVACY_DATA } from "./constants";
 import { serviceUrl } from "../../config/servicesConfig";
 
 const queryClient = new QueryClient({
-  // @ts-expect-error TS(2322): Type '{ throwOnError: true; }' is not assignable t... Remove this comment to see the full error message
-  defaultOptions: { queries: { refetchOnWindowFocus: false }, mutations: { throwOnError: true } },
+  defaultOptions: { queries: { refetchOnWindowFocus: false } },
 });
 const baseServiceUrl = "https://boomerang.com";
 

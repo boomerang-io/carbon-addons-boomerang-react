@@ -4,7 +4,7 @@ import { SkeletonPlaceholder } from "@carbon/react";
 import { prefix } from "../../internal/settings";
 
 type Props = {
-  border?: any; // TODO: PropTypes.oneOf(["left", "right", undefined])
+  border?: "left" | "right";
   children?: any;
   className?: string;
   isLoading?: boolean;

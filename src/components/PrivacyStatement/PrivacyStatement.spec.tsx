@@ -8,14 +8,12 @@ import MockAdapter from "axios-mock-adapter";
 import { PRIVACY_DATA } from "./constants";
 
 const queryClient = new QueryClient({
-  // @ts-expect-error TS(2322): Type '{ throwOnError: true; }' is not assignable t... Remove this comment to see the full error message
-  defaultOptions: { queries: { refetchOnWindowFocus: false }, mutations: { throwOnError: true } },
+  defaultOptions: { queries: { refetchOnWindowFocus: false } },
 });
 
 const baseServiceUrl = "http://boomerang.com";
 const { reload } = window.location;
 
-// @ts-expect-error TS(2304): Cannot find name 'beforeAll'.
 beforeAll(() => {
   Object.defineProperty(window, "location", {
     writable: true,
@@ -23,7 +21,6 @@ beforeAll(() => {
   });
 });
 
-// @ts-expect-error TS(2304): Cannot find name 'afterAll'.
 afterAll(() => {
   window.location.reload = reload;
 });

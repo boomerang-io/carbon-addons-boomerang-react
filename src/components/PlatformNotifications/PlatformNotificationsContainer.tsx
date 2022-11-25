@@ -8,6 +8,7 @@ import Notification from "./PlatformNotifications";
 type OwnProps = {
   config?: {
     wsUrl: string;
+    httpUrl?: string;
   };
   initialNotifications?: any[];
   isNotificationActive: boolean;
@@ -33,8 +34,7 @@ export default class PlatformNotificationsContainer extends React.Component<Prop
 
   componentDidMount() {
     this.ws = new Client({
-      // @ts-expect-error TS(2532): Object is possibly 'undefined'.
-      brokerURL: this.props.config.wsUrl,
+      brokerURL: this.props.config?.wsUrl,
       reconnectDelay: 10000,
     });
     this.ws.onConnect = this.connect;

@@ -9,8 +9,7 @@ import usePortal from "../../hooks/usePortal";
  * </Portal>
  */
 const Portal = ({ id, children }: any) => {
-  const target = usePortal(id);
-  // @ts-expect-error TS(2345): Argument of type 'null' is not assignable to param... Remove this comment to see the full error message
+  const target: any = usePortal(id);
   return createPortal(children, target);
 };
 

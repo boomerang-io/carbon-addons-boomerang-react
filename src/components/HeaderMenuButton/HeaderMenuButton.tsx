@@ -19,6 +19,7 @@ const iconMapping = {
 };
 
 HeaderMenuButton.defaultProps = {
+  className: "",
   iconName: "launch",
 };
 
@@ -37,7 +38,6 @@ type Props = OwnProps & typeof HeaderMenuButton.defaultProps;
 
 function HeaderMenuButton({ className, iconName, onClick, style, text, ...rest }: Props) {
   const wrapperClassNames = cx(`${prefix}--bmrg-header-menu-item-wrapper`, {
-    // @ts-expect-error TS(2464): A computed property name must be of type 'string',... Remove this comment to see the full error message
     [className]: !!className,
   });
 

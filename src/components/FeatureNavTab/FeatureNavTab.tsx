@@ -1,9 +1,16 @@
 import React from "react";
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { NavLink } from "react-router-dom";
 import cx from "classnames";
 import { SkeletonPlaceholder } from "@carbon/react";
 import { prefix } from "../../internal/settings";
+
+FeatureNavTab.defaultProps = {
+  activeClassName: "",
+  className: "",
+  disabled: false,
+  isLoading: false,
+  label: "",
+};
 
 type OwnProps = {
   activeClassName?: string;
@@ -12,13 +19,12 @@ type OwnProps = {
   isLoading?: boolean;
   label?: string;
   style?: any;
+  to: string;
 };
 
-// @ts-expect-error TS(2456): Type alias 'Props' circularly references itself.
 type Props = OwnProps & typeof FeatureNavTab.defaultProps;
 
-// @ts-expect-error TS(7022): 'FeatureNavTab' implicitly has type 'any' because ... Remove this comment to see the full error message
-const FeatureNavTab = ({ activeClassName, className, disabled, isLoading, label, style, ...rest }: Props) => {
+function FeatureNavTab ({ activeClassName, className, disabled, isLoading, label, style, ...rest }: Props) {
   const classNames = cx(
     `${prefix}--tabs__nav-item`,
     `${prefix}--tabs__nav-link`,
@@ -38,14 +44,6 @@ const FeatureNavTab = ({ activeClassName, className, disabled, isLoading, label,
       {label}
     </NavLink>
   );
-};
-
-FeatureNavTab.defaultProps = {
-  activeClassName: "",
-  className: "",
-  disabled: false,
-  isLoading: false,
-  label: "",
 };
 
 export default FeatureNavTab;

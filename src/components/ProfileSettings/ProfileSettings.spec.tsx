@@ -3,7 +3,6 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { render, fireEvent, waitFor } from "@testing-library/react";
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'jest... Remove this comment to see the full error message
 import { axe } from "jest-axe";
 import ProfileSettings from "./ProfileSettings";
 import { PROFILE_SETTINGS_DATA } from "./constants";
@@ -11,8 +10,7 @@ import { PROFILE_SETTINGS_DATA } from "./constants";
 const baseServiceUrl = "http://boomerang.com";
 
 const queryClient = new QueryClient({
-  // @ts-expect-error TS(2322): Type '{ refetchOnWindowFocus: false; throwOnError:... Remove this comment to see the full error message
-  defaultOptions: { queries: { refetchOnWindowFocus: false, throwOnError: false }, mutations: { throwOnError: true } },
+  defaultOptions: { queries: { refetchOnWindowFocus: false } },
 });
 
 test("Profile Settings success", async () => {

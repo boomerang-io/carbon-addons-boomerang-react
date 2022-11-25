@@ -3,6 +3,12 @@ import { prefix } from "../../internal/settings";
 
 import Option from "./Option";
 
+OptionsGrid.defaultProps = {
+  className: `${prefix}--bmrg-optionsGrid`,
+  displayProperty: "name",
+  selectProperty: "id",
+};
+
 type OwnProps = {
   className?: string;
   columns: number;
@@ -12,13 +18,12 @@ type OwnProps = {
   selectedItems: any[];
   selectProperty: string;
   style?: any;
+  width?: string;
 };
 
-// @ts-expect-error TS(2456): Type alias 'Props' circularly references itself.
 type Props = OwnProps & typeof OptionsGrid.defaultProps;
 
-// @ts-expect-error TS(7022): 'OptionsGrid' implicitly has type 'any' because it... Remove this comment to see the full error message
-const OptionsGrid = ({
+function OptionsGrid ({
   className,
   columns,
   data,
@@ -28,14 +33,14 @@ const OptionsGrid = ({
   selectProperty,
   style,
   ...rest
-}: Props) => {
+}: Props) {
   let rowItems: any = [];
   const grid = [];
 
   /**
    * Return a grid of tags based on the data provided and specified number of columns
    */
-  data.forEach((item: any, index: any) => {
+  data.forEach((item, index) => {
     const isSelected =
       selectedItems && selectedItems.find((selectedItem: any) => selectedItem[selectProperty] === item[selectProperty]);
 
@@ -75,12 +80,6 @@ const OptionsGrid = ({
       {grid}
     </ul>
   );
-};
-
-OptionsGrid.defaultProps = {
-  className: `${prefix}--bmrg-optionsGrid`,
-  displayProperty: "name",
-  selectProperty: "id",
 };
 
 export default OptionsGrid;

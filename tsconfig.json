@@ -15,6 +15,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
+    "types": ["jest", "@testing-library/jest-dom"],
     "declaration": true,
     "emitDeclarationOnly": true,
   },

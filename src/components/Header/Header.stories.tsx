@@ -1,10 +1,8 @@
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { Link, Router } from "react-router-dom";
 import { ServiceDesk } from "@carbon/react/icons";
 import { Modal, SideNav, SideNavLink, SideNavItems, SideNavMenu, SideNavMenuItem } from "@carbon/react";
 import HeaderMenuItem from "../HeaderMenuItem";
 import LeftSideNav from "../LeftSideNav";
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'hist... Remove this comment to see the full error message
 import { createMemoryHistory } from "history";
 import Header from "./index"; // Using default export
 
@@ -27,6 +25,7 @@ export default {
 export const Default = () => (
   <div style={{ display: "block" }}>
     <Header
+      baseServiceUrl=""
       renderLogo={false}
       appName={"App"}
       platformName={"Boomerang"}
@@ -87,9 +86,9 @@ export const Default = () => (
 
 export const WithIntegratedSidenav = () => (
   <Router history={createMemoryHistory({ initialEntries: ["/"] })}>
-    {/* @ts-expect-error TS(2769): No overload matches this call. */}
     <Header
       appName={"App"}
+      baseServiceUrl=""
       platformName={"Boomerang"}
       renderLogo={false}
       enableNotifications={true}
@@ -145,8 +144,7 @@ export const WithIntegratedSidenav = () => (
           <Modal passiveModal />
         </HeaderMenuItem>,
       ]}
-      renderSidenav={({ isOpen, onMenuClose }) => (
-        // @ts-expect-error TS(2322): Type '{ children: Element; isOpen: any; onMenuClos... Remove this comment to see the full error message
+      renderSidenav={({ isOpen, onMenuClose }: any) => (
         <LeftSideNav isOpen={isOpen} onMenuClose={onMenuClose}>
           <SideNav aria-label="sidenav" expanded isChildOfHeader>
             <SideNavItems>

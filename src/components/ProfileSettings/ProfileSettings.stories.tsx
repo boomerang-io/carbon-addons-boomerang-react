@@ -5,8 +5,7 @@ import MockAdapter from "axios-mock-adapter";
 import { PROFILE_SETTINGS_DATA } from "./constants";
 
 const queryClient = new QueryClient({
-  // @ts-expect-error TS(2322): Type '{ throwOnError: true; }' is not assignable t... Remove this comment to see the full error message
-  defaultOptions: { queries: { refetchOnWindowFocus: false }, mutations: { throwOnError: true } },
+  defaultOptions: { queries: { refetchOnWindowFocus: false } },
 });
 
 export default {

@@ -20,11 +20,11 @@ import HeaderMenuUser from "../HeaderMenuUser";
 import notify from "../Notifications/notify";
 import ToastNotification from "../Notifications/ToastNotification";
 import { serviceUrl, resolver } from "../../config/servicesConfig";
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'loda... Remove this comment to see the full error message
 import sortBy from "lodash.sortby";
 import { prefix } from "../../internal/settings";
+import { LowerLevelGroup, User } from "../../types";
 
-function determineIfConfigIsDifferent(teams: any, initialTeams: any) {
+function determineIfConfigIsDifferent(teams: LowerLevelGroup[], initialTeams: LowerLevelGroup[]) {
   let isConfigDifferent = false;
   for (let idx = 0; idx < teams?.length; idx++) {
     if (teams[idx]?.visible !== initialTeams[idx]?.visible) {
@@ -44,8 +44,8 @@ type Props = {
 function ProfileSettings({ baseServiceUrl, src, userName }: Props) {
   const queryClient = useQueryClient();
 
-  const [initialTeams, setInitialTeams] = useState([]);
-  const [teams, setTeams] = useState([]);
+  const [initialTeams, setInitialTeams] = useState<LowerLevelGroup[]>([]);
+  const [teams, setTeams] = useState<LowerLevelGroup[]>([]);
 
   const userUrl = serviceUrl.getLaunchpadUser({ baseServiceUrl });
   const profileUrl = serviceUrl.resourceUserProfile({ baseServiceUrl });
@@ -54,9 +54,8 @@ function ProfileSettings({ baseServiceUrl, src, userName }: Props) {
     data: user,
     isLoading: userIsLoading,
     error: userError,
-  } = useQuery({
+  } = useQuery<User>({
     queryKey: userUrl,
-    // @ts-expect-error TS(2554): Expected 2 arguments, but got 1.
     queryFn: resolver.query(userUrl),
   });
 
@@ -96,29 +95,25 @@ function ProfileSettings({ baseServiceUrl, src, userName }: Props) {
     }
   }
 
-  const visibleTeamCount = teams?.filter((team) => (team as any)?.visible)?.length ?? 0;
+  const visibleTeamCount = teams?.filter((team) => team?.visible)?.length ?? 0;
   const allTeamsAreChecked = teams?.length === visibleTeamCount;
   const someTeamsAreChecked = visibleTeamCount > 0 && !allTeamsAreChecked;
   const isConfigDifferent = determineIfConfigIsDifferent(teams, initialTeams);
 
   function batchChangeTeamVisibility() {
-    // @ts-expect-error TS(2698): Spread types may only be created from object types... Remove this comment to see the full error message
     const updatedTeams = teams.map((team) => ({ ...team, visible: !allTeamsAreChecked }));
-    // @ts-expect-error TS(2345): Argument of type 'any[]' is not assignable to para... Remove this comment to see the full error message
     setTeams(updatedTeams);
   }
 
-  function handleUpdateTeamVisibility(id: any, checked: any) {
+  function handleUpdateTeamVisibility(id: string, checked: boolean) {
     const updatedTeams = [];
     for (let team of teams) {
-      // @ts-expect-error TS(2698): Spread types may only be created from object types... Remove this comment to see the full error message
       const newTeam = { ...team };
       if (newTeam.id === id) {
         newTeam.visible = checked;
       }
       updatedTeams.push(newTeam);
     }
-    // @ts-expect-error TS(2345): Argument of type 'any[]' is not assignable to para... Remove this comment to see the full error message
     setTeams(updatedTeams);
   }
 
@@ -132,7 +127,6 @@ function ProfileSettings({ baseServiceUrl, src, userName }: Props) {
   }
 
   return (
-    // @ts-expect-error TS(2322): Type '{ children: ({ closeModal }: any) => Element... Remove this comment to see the full error message
     <HeaderMenuUser
       className={`${prefix}--bmrg-profile-settings-container`}
       src={src}
@@ -174,7 +168,7 @@ function ProfileSettings({ baseServiceUrl, src, userName }: Props) {
                     </StructuredListRow>
                   </StructuredListHead>
                   <StructuredListBody>
-                    {sortBy(teams, "name").map(({ name, id, visible }: any) => (
+                    {(sortBy(teams, "name") as LowerLevelGroup[]).map(({ name, id, visible }) => (
                       <StructuredListRow
                         key={id}
                         className={!visible ? `${prefix}--bmrg-profile-settings-list__row--disabled` : ""}
@@ -184,7 +178,7 @@ function ProfileSettings({ baseServiceUrl, src, userName }: Props) {
                             checked={visible}
                             id={id}
                             labelText={name}
-                            onChange={(_: any, { checked, id }: any) => {
+                            onChange={(_: any, { checked, id }: { checked: boolean, id: string }) => {
                               return handleUpdateTeamVisibility(id, checked);
                             }}
                           />

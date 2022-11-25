@@ -10,6 +10,7 @@ import PrivacyStatement from "../PrivacyStatement";
 import SignOut from "../SignOut";
 import GdprRedirectModal from "../GdprRedirectModal";
 import { queryClient } from "../../config/servicesConfig";
+import { User } from "../../types";
 
 UIShell.defaultProps = {
   headerConfig: {},
@@ -27,9 +28,13 @@ type OwnProps = {
   companyName?: string;
   headerConfig?: {
     features?: {
+      "appSwitcher.enabled"?: boolean;
       "consent.enabled"?: boolean;
       "docs.enabled"?: boolean;
+      "eventing.enabled"?: boolean;
       "feedback.enabled"?: boolean;
+      "homePage.enabled"?: boolean;
+      "partner.enabled"?: boolean;
       "metering.enabled"?: boolean;
       "notifications.enabled"?: boolean;
       "support.enabled"?: boolean;
@@ -67,11 +72,7 @@ type OwnProps = {
   renderGdprRedirect?: boolean;
   renderPrivacyStatement?: boolean;
   renderRequests?: boolean;
-  user?: {
-    email?: string;
-    hasConsented?: boolean;
-    name?: string;
-  };
+  user?: User;
   userRequests?: any[];
   renderRightPanel?: {
     icon?: React.ReactElement;
@@ -118,7 +119,6 @@ function UIShell({
   const finalBaseUrl = platform?.baseEnvUrl || baseLaunchEnvUrl;
   const finalBaseServiceUrl = platform?.baseServicesUrl || baseServiceUrl || "";
   const finalSendIdeasUrl = platform?.feedbackUrl || "https://ideas.ibm.com";
-  // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
   const isAppSwitcherEnabled = Boolean(features?.["appSwitcher.enabled"]);
   const isFeedbackEnabled = Boolean(features?.["feedback.enabled"]);
   const isNotificationsEnabled = Boolean(features?.["notifications.enabled"]);
@@ -153,7 +153,7 @@ function UIShell({
         renderRightPanel={renderRightPanel}
         renderSidenav={onMenuClick || renderSidenav}
         skipToContentProps={skipToContentProps}
-        requestSummary={(user as any).requestSummary}
+        requestSummary={user.requestSummary}
         notificationsConfig={{
           wsUrl: `${finalBaseServiceUrl}/notifications/ws`.replace("https://", "wss://"),
         }}
@@ -221,8 +221,7 @@ function UIShell({
               platformEmail={(platform as any)?.platformEmail}
             />
           ),
-          // @ts-expect-error TS(2322): Type 'string | undefined' is not assignable to typ... Remove this comment to see the full error message
-          Boolean(platform?.signOutUrl) && <SignOut key="Sign Out" signOutLink={platform.signOutUrl} />,
+          !!platform?.signOutUrl && <SignOut key="Sign Out" signOutLink={platform.signOutUrl} />,
         ].filter(Boolean)}
       />
       {isGdprRedirectDisabled === false && user.hasConsented === false ? (

@@ -16,10 +16,10 @@ const LoadingSkeleton = () => {
 type FeatureSideNavLinksProps = {
   children?: any;
   className?: string;
+  isLoading?: boolean;
 };
 
 export function FeatureSideNavLinks(props: FeatureSideNavLinksProps) {
-  // @ts-expect-error TS(2339): Property 'isLoading' does not exist on type 'Featu... Remove this comment to see the full error message
   const { children, className, isLoading, ...rest } = props;
   return (
     <section className={cx(`${prefix}--bmrg-feature-sidenav-links`, className)} {...rest}>

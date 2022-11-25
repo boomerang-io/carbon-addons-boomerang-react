@@ -5,7 +5,7 @@ import { prefix } from "../../internal/settings";
 type Props = {
   children?: React.ReactNode;
   className?: string;
-  element?: React.ReactElement;
+  element?: any;
   title?: string;
 };
 
@@ -14,7 +14,6 @@ const FlowModalForm = React.forwardRef<any, Props>(function FlowModalForm(
   ref
 ) {
   return (
-    // @ts-expect-error TS(2604): JSX element type 'Element' does not have any const... Remove this comment to see the full error message
     <Element className={cx(`${prefix}--bmrg-modal-flow-form`, className)} {...rest} ref={ref}>
       {title && <p className={`${prefix}--bmrg-modal-flow-form__title`}>{title}</p>}
       {children}
@@ -23,7 +22,6 @@ const FlowModalForm = React.forwardRef<any, Props>(function FlowModalForm(
 });
 
 FlowModalForm.defaultProps = {
-  // @ts-expect-error TS(2322): Type 'string' is not assignable to type 'ReactElem... Remove this comment to see the full error message
   element: "form",
 };
 

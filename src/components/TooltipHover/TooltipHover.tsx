@@ -5,7 +5,7 @@ import { prefix } from "../../internal/settings";
 
 type Props = {
   align?: "start" | "end";
-  children?: React.ReactNode;
+  children?: React.ReactElement;
   className?: string;
   content?: React.ReactNode;
   direction?: "auto" | "top" | "bottom" | "left" | "right";
@@ -77,13 +77,11 @@ function TooltipHover({
       animation="fade"
       className={cx(`${prefix}--bmrg-tooltip`, className)}
       content={contentToRender}
-      // @ts-expect-error TS(2322): Type 'string' is not assignable to type 'number | ... Remove this comment to see the full error message
-      duration="100"
+      duration={100}
       // @ts-expect-error TS(2322): Type 'string' is not assignable to type 'Placement... Remove this comment to see the full error message
       placement={computedPlacement}
       {...restProps}
     >
-      {/* @ts-expect-error TS(2322): Type 'ReactNode' is not assignable to type 'ReactE... Remove this comment to see the full error message */}
       {children}
     </Tippy>
   );

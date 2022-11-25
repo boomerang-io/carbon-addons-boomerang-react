@@ -2,8 +2,7 @@ import axios from "axios";
 import { QueryClient } from "react-query";
 
 export const queryClient = new QueryClient({
-  // @ts-expect-error TS(2322): Type '{ throwOnError: true; }' is not assignable t... Remove this comment to see the full error message
-  defaultOptions: { queries: { refetchOnWindowFocus: false }, mutations: { throwOnError: true } },
+  defaultOptions: { queries: { refetchOnWindowFocus: false } },
 });
 
 export const serviceUrl = {
@@ -16,7 +15,7 @@ export const serviceUrl = {
 };
 
 export const resolver = {
-  query: (url: any, config: any) => () => axios.get(url, config).then((response) => response.data),
+  query: (url: any, config?: any) => () => axios.get(url, config).then((response) => response.data),
   patchUserProfile: ({ baseServiceUrl, body }: any) =>
     axios.patch(serviceUrl.resourceUserProfile({ baseServiceUrl }), body),
   putUserConsent: ({ baseServiceUrl, body }: any) =>

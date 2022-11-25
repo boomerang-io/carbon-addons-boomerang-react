@@ -1,6 +1,4 @@
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { Router, Link } from "react-router-dom";
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'hist... Remove this comment to see the full error message
 import { createMemoryHistory } from "history";
 import { FeatureHeader, FeatureHeaderTitle, FeatureHeaderSubtitle } from "./index";
 import { default as Tabs } from "../FeatureNavTabs";
@@ -42,7 +40,7 @@ const Nav = () => {
 
 const Footer = () => {
   return (
-    <Tabs>
+    <Tabs ariaLabel="feature-header-tabs">
       <Tab label="Services" to="/services" />
       <Tab label="Members" to="/members" />
       <Tab label="Service Requests" to="/service-requests" />
@@ -104,7 +102,6 @@ export const SubtitleFirst = (args: any) => {
           <FeatureHeaderSubtitle style={{ fontSize: "0.875rem", fontWeight: "300" }}>
             Subtitle as label
           </FeatureHeaderSubtitle>
-          {/* @ts-expect-error TS(2322): Type '{ children: string; style: { fontSize: strin... Remove this comment to see the full error message */}
           <FeatureHeaderTitle style={{ fontSize: "1.5rem" }}>I'm smaller</FeatureHeaderTitle>
         </>
       }

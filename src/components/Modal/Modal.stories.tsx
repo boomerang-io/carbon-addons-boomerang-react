@@ -8,9 +8,7 @@ import {
   Search,
   Select,
   SelectItem,
-  TextArea,
   TextInput,
-  Toggle,
 } from "@carbon/react";
 import Modal from "./index";
 import { ModalForm } from "../ModalForm";

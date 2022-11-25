@@ -21,7 +21,6 @@ export default {
 export const Default = () => {
   return (
     <div style={styleProp}>
-      {/* @ts-expect-error TS(2322): Type '{ children: () => Element; src: string; user... Remove this comment to see the full error message */}
       <HeaderMenuUser
         src={"https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50"}
         userName={"Gravatar User"}

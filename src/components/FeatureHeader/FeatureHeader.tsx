@@ -24,7 +24,7 @@ type OwnFeatureHeaderProps = {
   isLoading?: boolean;
   nav?: React.ReactNode;
   style?: any;
-  title?: React.ReactNode;
+  title?: string;
   contentClassName?: string;
   skeletonClassName?: string;
   navClassName?: string;
@@ -61,7 +61,6 @@ export function FeatureHeader({
   const footerClassNames = cx(`${prefix}--bmrg-feature-header__footer`, footerClassName);
 
   return (
-    // @ts-expect-error TS(2322): Type '{ children: (Element | ReactNode)[]; title?:... Remove this comment to see the full error message
     <header className={containerClassNames} style={style} {...rest}>
       <section className={contentClassNames}>
         {nav && <div className={navClassNames}>{nav}</div>}
@@ -86,18 +85,17 @@ FeatureHeaderTitle.defaultProps = {
 };
 
 type OwnFeatureHeaderTitleProps = {
-  children?: React.ReactNode;
+  children?: React.ReactElement | string;
   className?: string;
-  element?: string;
+  element?: any;
+  style?: React.CSSProperties;
 };
 
 type FeatureHeaderTitleProps = OwnFeatureHeaderTitleProps & typeof FeatureHeaderTitle.defaultProps;
 
-// @ts-expect-error TS(2339): Property 'style' does not exist on type 'FeatureHe... Remove this comment to see the full error message
 export function FeatureHeaderTitle({ element: Element, children, className, style, ...rest }: FeatureHeaderTitleProps) {
   const classNames = cx(`${prefix}--bmrg-feature-header-title`, className);
   return (
-    // @ts-expect-error TS(2322): Type '{ children: ReactNode; className: string; st... Remove this comment to see the full error message
     <Element className={classNames} style={style} {...rest}>
       {children}
     </Element>

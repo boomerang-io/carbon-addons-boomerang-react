@@ -36,7 +36,6 @@ const Component1 = (props: any) => (
   </FlowModalForm>
 );
 
-// @ts-expect-error TS(2322): Type 'string' is not assignable to type 'ReactElem... Remove this comment to see the full error message
 const Component2 = (props: any) => (
   <FlowModalForm element="div" title="Another title here">
     <ModalBody>
@@ -85,7 +84,6 @@ export const Default = () => {
         title: "Modal Flow",
         label: "Change between components and persisted data",
       }}
-      // @ts-expect-error TS(2322): Type '({ openModal }: any) => Element' is not assi... Remove this comment to see the full error message
       modalTrigger={({ openModal }) => <Button onClick={openModal}>Open modal flow</Button>}
     >
       <Component1 />

@@ -21,6 +21,7 @@ const iconMapping = {
 };
 
 HeaderMenuItem.defaultProps = {
+  className: "",
   iconName: "launch",
 };
 
@@ -49,14 +50,12 @@ function HeaderMenuItem({
   ...rest
 }: Props) {
   const wrapperClassNames = cx(`${prefix}--bmrg-header-menu-item-wrapper`, {
-    // @ts-expect-error TS(2464): A computed property name must be of type 'string',... Remove this comment to see the full error message
     [className]: !!className,
   });
 
   return (
     <div className={wrapperClassNames} style={style} role="presentation" ref={forwardRef}>
       <HeaderMenuModalWrapper
-        // @ts-expect-error TS(2769): No overload matches this call.
         preventCloseOnClickOutside={preventCloseOnClickOutside}
         buttonTriggerClassName={`${prefix}--bmrg-header-menu-item`}
         buttonTriggerText={

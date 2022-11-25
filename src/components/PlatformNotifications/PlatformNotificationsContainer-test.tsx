@@ -2,14 +2,13 @@ import { render } from "@testing-library/react";
 import { action } from "@storybook/addon-actions";
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
-// @ts-expect-error TS(2307): Cannot find module 'mock-socket' or its correspond... Remove this comment to see the full error message
 import { Server } from "mock-socket";
 
 import PlatformNotificationsContainer from "./PlatformNotificationsContainer";
 
 const mockSocketUrl = "ws://localhost:8081/ws";
 const mockServer = new Server(mockSocketUrl);
-const notificationsObj = {
+const notificationsObj: any = {
   notifications: [
     {
       creator: "Boomerang CICD",
@@ -35,31 +34,25 @@ mock.onPut(mockEndptURL).reply(200, {});
 mockServer.on("connection", (socket: any) => {
   socket.on("message", () => {
     setInterval(() => {
-      // @ts-expect-error TS(2322): Type 'number' is not assignable to type 'string'.
       notificationsObj.notifications[0].id = Math.round(Math.random() * 100000000); // Change for each one
       socket.send(JSON.stringify(notificationsObj));
     }, 10000);
   });
 });
 
-// @ts-expect-error TS(2582): Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe("Default Notification Container", () => {
-  // @ts-expect-error TS(2582): Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe("Renders as expected", () => {
     const wrapper = render(
       <PlatformNotificationsContainer
         config={{
           wsUrl: "ws://localhost:8081/ws",
-          // @ts-expect-error TS(2769): No overload matches this call.
           httpUrl: "http://localhost:8000/notifications",
         }}
         isNotificationActive
         setHasNewNotifications={action("setHasNewNotifications")}
       />
     );
-    // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("Should Render at top level", () => {
-      // @ts-expect-error TS(2304): Cannot find name 'expect'.
       expect((wrapper as any).hasClass("cds--bmrg-notifications")).toEqual(true);
     });
   });

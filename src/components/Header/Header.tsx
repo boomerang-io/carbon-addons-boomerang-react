@@ -47,20 +47,26 @@ type OwnProps = {
   baseServiceUrl: string;
   baseLaunchEnvUrl?: string;
   className?: string;
+  companyName?: string;
   enableAppSwitcher?: boolean;
   enableNotifications?: boolean;
   navLinks?: any[];
   notificationsConfig?: {
     wsUrl: string;
+    httpUrl?: string;
   };
-  onHelpClick?: any[];
+  onHelpClick?: Function | any[];
   platformName?: string;
   platformMessage?: any;
-  profileChildren?: any[];
+  profileChildren?: Function | any[];
+  productName?: string;
   renderLogo?: boolean;
   renderRightPanel?: any;
-  renderSidenav?: (...args: any[]) => any;
-  requestSummary?: any;
+  renderSidenav?: Function;
+  requestSummary?: {
+    requireUserAction: number;
+    submittedByUser: number;
+  };
   skipToContentProps?: any;
 };
 
@@ -71,7 +77,7 @@ type State = any;
 class Header extends React.Component<OwnProps, State> {
   static defaultProps = {};
 
-  state = {
+  state: any = {
     hasNewNotifications: false,
     isAppSwitcherActive: false,
     isHelpActive: false,
@@ -206,7 +212,6 @@ class Header extends React.Component<OwnProps, State> {
           const clickType = transformToIsStateKey(type);
           if (key === clickType) {
             this.setState({
-              // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
               [clickType]: !this.state[clickType],
             });
 

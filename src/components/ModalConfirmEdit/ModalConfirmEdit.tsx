@@ -17,10 +17,10 @@ ModalConfirmEdit.defaultProps = {
 
 type OwnProps = {
   onEdit?: (...args: any[]) => any;
-  items?: any[];
-  style?: any;
+  items?: string[] | { name: string; value: string }[];
+  style?: React.CSSProperties;
   title?: string;
-  type?: any; // TODO: PropTypes.oneOf(Object.values(TYPES))
+  type?: "details" | "array"; // TODO: PropTypes.oneOf(Object.values(TYPES))
 };
 
 type Props = OwnProps & typeof ModalConfirmEdit.defaultProps;
@@ -32,10 +32,8 @@ function ModalConfirmEdit({ items, onEdit, style, title, type, ...rest }: Props)
       <section className={`${prefix}--bmrg-modal-confirm-edit__section`}>
         <div className={`${prefix}--bmrg-modal-confirm-edit__content`}>
           {type === TYPES.DETAILS ? (
-            // @ts-expect-error TS(2322): Type 'any[] | undefined' is not assignable to type... Remove this comment to see the full error message
             <ModalConfirmDetails items={items} />
           ) : type === TYPES.ARRAY ? (
-            // @ts-expect-error TS(2322): Type 'any[] | undefined' is not assignable to type... Remove this comment to see the full error message
             <ModalConfirmArray items={items} />
           ) : null}
           {typeof onEdit === "function" && (

@@ -1,6 +1,4 @@
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'hist... Remove this comment to see the full error message
 import { createMemoryHistory } from "history";
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { Router } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute";
 

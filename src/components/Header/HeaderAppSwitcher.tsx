@@ -1,5 +1,5 @@
 import React from "react";
-import { useQuery } from "react-query";
+import { useQuery, UseQueryResult } from "react-query";
 import cx from "classnames";
 import { InlineLoading, SkeletonText, SideNavMenu, SideNavMenuItem, SwitcherDivider } from "@carbon/react";
 import { Launch } from "@carbon/react/icons";
@@ -10,6 +10,7 @@ import HeaderRightPanel from "./HeaderRightPanel";
 import { serviceUrl, resolver } from "../../config/servicesConfig";
 import { prefix } from "../../internal/settings";
 import { match, keys } from "../../internal/keyboard";
+import { SimpleIdNameObj, SimpleTeamService, UserTeams } from "../../types";
 
 const externalProps = {
   target: "_blank",
@@ -17,14 +18,18 @@ const externalProps = {
 };
 const classNames = "--app-switcher";
 
-export default function HeaderAppSwitcher({ baseServiceUrl, baseLaunchEnvUrl, isActive }: any) {
+type HeaderAppSwitcherProps = {
+  baseServiceUrl: string;
+  baseLaunchEnvUrl?: string;
+  isActive?: boolean;
+}
+
+export default function HeaderAppSwitcher({ baseServiceUrl, baseLaunchEnvUrl, isActive }: HeaderAppSwitcherProps) {
   const userTeamsUrl = serviceUrl.getUserTeams({ baseServiceUrl });
-  // @ts-expect-error TS(2554): Expected 2 arguments, but got 1.
-  const teamsQuery = useQuery(userTeamsUrl, resolver.query(userTeamsUrl));
+  const teamsQuery = useQuery<UserTeams>(userTeamsUrl, resolver.query(userTeamsUrl));
 
   if (teamsQuery.isLoading) {
     return (
-      // @ts-expect-error TS(2322): Type '{ children: Element; className: string; isOp... Remove this comment to see the full error message
       <HeaderRightPanel className={classNames} isOpen={isActive}>
         <div className={cx(`${prefix}--bmrg-header-teams`, `--is-loading`)}>
           <SkeletonText className={`${prefix}--bmrg-header-teams__skeleton`} />
@@ -39,7 +44,6 @@ export default function HeaderAppSwitcher({ baseServiceUrl, baseLaunchEnvUrl, is
 
   if (teamsQuery.error) {
     return (
-      // @ts-expect-error TS(2322): Type '{ children: Element; className: string; isOp... Remove this comment to see the full error message
       <HeaderRightPanel className={classNames} isOpen={isActive}>
         <ErrorMessage className={`${prefix}--bmrg-header-teams`} />
       </HeaderRightPanel>
@@ -50,11 +54,10 @@ export default function HeaderAppSwitcher({ baseServiceUrl, baseLaunchEnvUrl, is
     const { accountTeams, standardTeams } = teamsQuery.data;
     if (accountTeams?.length || standardTeams?.length) {
       return (
-        // @ts-expect-error TS(2322): Type '{ children: Element; className: string; isOp... Remove this comment to see the full error message
         <HeaderRightPanel className={classNames} isOpen={isActive}>
           <FocusTrap active={isActive} focusTrapOptions={{ allowOutsideClick: true }}>
             <ul className={`${prefix}--bmrg-header-teams`}>
-              {standardTeams?.map((team: any) => (
+              {standardTeams?.map((team) => (
                 <TeamServiceListMenu
                   key={team.id}
                   baseLaunchEnvUrl={baseLaunchEnvUrl}
@@ -63,7 +66,7 @@ export default function HeaderAppSwitcher({ baseServiceUrl, baseLaunchEnvUrl, is
                   team={team}
                 />
               ))}
-              {accountTeams?.map((account: any) => (
+              {accountTeams?.map((account) => (
                 <div key={account.id}>
                   <SwitcherDivider />
                   <TeamServiceListMenu
@@ -74,7 +77,7 @@ export default function HeaderAppSwitcher({ baseServiceUrl, baseLaunchEnvUrl, is
                     team={account}
                   />
                   {Boolean(account.projectTeams) &&
-                    account.projectTeams.map((project: any) => (
+                    account.projectTeams.map((project) => (
                       <TeamServiceListMenu
                         key={project.id}
                         baseLaunchEnvUrl={baseLaunchEnvUrl}
@@ -92,7 +95,6 @@ export default function HeaderAppSwitcher({ baseServiceUrl, baseLaunchEnvUrl, is
     }
 
     return (
-      // @ts-expect-error TS(2322): Type '{ children: Element; className: string; isOp... Remove this comment to see the full error message
       <HeaderRightPanel className={classNames} isOpen={isActive}>
         <div className={cx(`${prefix}--bmrg-header-teams`, "--is-empty")}>
           <h1 className={`${prefix}--bmrg-header-teams__empty-title`}>No teams</h1>
@@ -105,14 +107,21 @@ export default function HeaderAppSwitcher({ baseServiceUrl, baseLaunchEnvUrl, is
   return null;
 }
 
-function TeamServiceListMenu({ baseServiceUrl, baseLaunchEnvUrl, isAccount, isMember, team }: any) {
+type TeamServiceListMenuProps = {
+  baseServiceUrl: string;
+  baseLaunchEnvUrl?: string;
+  isAccount?: boolean;
+  isMember: boolean;
+  team: SimpleIdNameObj;
+}
+
+function TeamServiceListMenu({ baseServiceUrl, baseLaunchEnvUrl, isAccount, isMember, team }: TeamServiceListMenuProps) {
   const { id, name } = team;
   const [isSelected, setIsSelected] = React.useState(false);
   const teamsServicesUrl = serviceUrl.getTeamServices({ baseServiceUrl, teamId: id });
 
-  const servicesQuery = useQuery({
+  const servicesQuery = useQuery<SimpleTeamService[]>({
     queryKey: teamsServicesUrl,
-    // @ts-expect-error TS(2554): Expected 2 arguments, but got 1.
     queryFn: resolver.query(teamsServicesUrl),
     enabled: false,
   });
@@ -164,7 +173,6 @@ function TeamServiceListMenu({ baseServiceUrl, baseLaunchEnvUrl, isAccount, isMe
         <ServiceList baseLaunchEnvUrl={baseLaunchEnvUrl} isAccount={isAccount} servicesQuery={servicesQuery} />
       </SideNavMenu>
       {isInlineLoadingVisible && (
-        // @ts-expect-error TS(2786): 'DelayedRender' cannot be used as a JSX component.
         <DelayedRender delay={200}>
           <InlineLoading />
         </DelayedRender>
@@ -173,8 +181,14 @@ function TeamServiceListMenu({ baseServiceUrl, baseLaunchEnvUrl, isAccount, isMe
   );
 }
 
-function ServiceList(props: any) {
-  const { baseLaunchEnvUrl, isAccount, servicesQuery } = props;
+type ServiceListProps = {
+  baseLaunchEnvUrl?: string; 
+  isAccount?: boolean;
+  servicesQuery: UseQueryResult<SimpleTeamService[], unknown>;
+}
+
+function ServiceList(props: ServiceListProps) {
+  const { baseLaunchEnvUrl = "", isAccount, servicesQuery } = props;
 
   if (servicesQuery.error) {
     return (
@@ -184,11 +198,11 @@ function ServiceList(props: any) {
     );
   }
 
-  if (Boolean(servicesQuery.data)) {
+  if (!!servicesQuery.data) {
     if (Boolean(servicesQuery.data?.length)) {
       return (
         <>
-          {servicesQuery.data.map((service: any) => {
+          {servicesQuery.data.map((service) => {
             const isExternalLink = !service.url.includes(baseLaunchEnvUrl);
             const isNameTruncated = isExternalLink ? service.name.length > 28 : service.name.length > 32;
             return (

@@ -5,20 +5,25 @@ import { prefix } from "../../internal/settings";
 import loadingMessages from "./loadingMessages";
 import LoadingAnimationContent from "./LoadingAnimationContent";
 
+LoadingAnimation.defaultProps = {
+  centered: false,
+  loading: true,
+  wait: 200,
+};
+
 type OwnProps = {
   centered?: boolean;
+  className?: string;
   message?: string | any[];
   loading?: boolean;
   wait?: number;
 };
 
-// @ts-expect-error TS(2456): Type alias 'Props' circularly references itself.
 type Props = OwnProps & typeof LoadingAnimation.defaultProps;
 
 /** Loading animation with integrated loading svg, and messages to be randomly selected by default and
  * configurable time to wait to render to prevent flickering on quickly resolved requests */
-// @ts-expect-error TS(7022): 'LoadingAnimation' implicitly has type 'any' becau... Remove this comment to see the full error message
-const LoadingAnimation = ({ centered, className, loading, message, wait, ...rest }: Props) => {
+function LoadingAnimation ({ centered, className, loading, message, wait, ...rest }: Props) {
   const [shouldRender, setShouldRender] = useState(false);
 
   useEffect(() => {
@@ -50,12 +55,6 @@ const LoadingAnimation = ({ centered, className, loading, message, wait, ...rest
   }
 
   return null;
-};
-
-LoadingAnimation.defaultProps = {
-  centered: false,
-  loading: true,
-  wait: 200,
 };
 
 export default LoadingAnimation;

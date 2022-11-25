@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Activity, Calendar, Document, Rocket, Settings } from "@carbon/react/icons";
 import { prefix } from "../../internal/settings";
 
@@ -56,10 +55,10 @@ const HeaderGlobalSwitcher = () => {
   );
 };
 
-HeaderGlobalSwitcher.propTypes = {
-  links: PropTypes.object,
-};
+// HeaderGlobalSwitcher.propTypes = {
+//   links: PropTypes.object,
+// };
 
-HeaderGlobalSwitcher.defaultProps = {};
+// HeaderGlobalSwitcher.defaultProps = {};
 
 export default HeaderGlobalSwitcher;

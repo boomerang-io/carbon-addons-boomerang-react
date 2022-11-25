@@ -9,6 +9,11 @@ const TEXT_LOCATIONS = {
   BELOW: "below",
 };
 
+NoDisplay.defaultProps = {
+  text: "Nothing to display here",
+  textLocation: TEXT_LOCATIONS.ABOVE
+};
+
 type OwnProps = {
   className?: string;
   style?: any;
@@ -16,11 +21,9 @@ type OwnProps = {
   textLocation?: "above" | "below";
 };
 
-// @ts-expect-error TS(2456): Type alias 'Props' circularly references itself.
 type Props = OwnProps & typeof NoDisplay.defaultProps;
 
-// @ts-expect-error TS(7022): 'NoDisplay' implicitly has type 'any' because it d... Remove this comment to see the full error message
-const NoDisplay = ({ className, text, textLocation = TEXT_LOCATIONS.ABOVE, style, ...rest }: Props) => {
+function NoDisplay ({ className, text, textLocation, style, ...rest }: Props) {
   const classNames = cx(`${prefix}--bmrg-no-display`, className);
   return (
     <div className={classNames} style={style} {...rest}>
@@ -33,10 +36,6 @@ const NoDisplay = ({ className, text, textLocation = TEXT_LOCATIONS.ABOVE, style
       )}
     </div>
   );
-};
-
-NoDisplay.defaultProps = {
-  text: "Nothing to display here",
 };
 
 export default NoDisplay;

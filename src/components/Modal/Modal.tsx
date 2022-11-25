@@ -1,6 +1,5 @@
 import React from "react";
 import cx from "classnames";
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import ReactModal from "react-modal";
 import { prefix } from "../../internal/settings";
 
@@ -20,7 +19,7 @@ type OwnProps = {
 type Props = OwnProps & typeof Modal.defaultProps;
 
 export function Modal(props: Props) {
-  const { appElement, className, containerClassName, children, ...rest } = props;
+  const { appElement, className, containerClassName, children, isOpen, ...rest } = props;
 
   React.useEffect(() => {
     ReactModal.setAppElement(appElement);
@@ -31,8 +30,7 @@ export function Modal(props: Props) {
       <ReactModal
         shouldCloseOnOverlayClick
         closeTimeoutMS={240}
-        // @ts-expect-error TS(2783): 'isOpen' is specified more than once, so this usag... Remove this comment to see the full error message
-        isOpen={props.isOpen}
+        isOpen={isOpen}
         htmlOpenClassName={`${prefix}--bmrg-html-modal-is-open`}
         bodyOpenClassName={`${prefix}--bmrg-body-modal-is-open`}
         className={{

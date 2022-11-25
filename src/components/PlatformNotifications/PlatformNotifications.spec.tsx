@@ -8,6 +8,7 @@ const notificationsObj = {
   detail: "Outage description test for the following service(s): Boomerang Flow,Boomerang CICD",
   eventId: "620b9f7e99fcb715cbc222b3",
   id: "620ba0f354f1b83f5077dec6",
+  location: "",
   priority: "highest",
   read: false,
   severity: "INFO",
@@ -17,7 +18,6 @@ const notificationsObj = {
   userId: "61730018ae92414d2bd15b4c",
 };
 
-// @ts-expect-error TS(2582): Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe("Platform notification", () => {
   test("Renders correctly", async () => {
     render(<PlatformNotifications notificationInfo={notificationsObj} readNotification={() => {}} />);

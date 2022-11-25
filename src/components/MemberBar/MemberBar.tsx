@@ -5,7 +5,7 @@ import { CloseOutline } from "@carbon/react/icons";
 import { prefix } from "../../internal/settings";
 
 type Props = {
-  addUser?: (...args: any[]) => any;
+  addUser?: (id?: string) => any;
   avatarProps?: any;
   avatarSrc?: string;
   buttonClassName?: string;
@@ -18,7 +18,7 @@ type Props = {
   liProps?: any;
   name?: string;
   notAllowedMessage?: string;
-  removeUser?: (...args: any[]) => any;
+  removeUser?: (id?: string) => any;
 };
 
 function MemberBar({

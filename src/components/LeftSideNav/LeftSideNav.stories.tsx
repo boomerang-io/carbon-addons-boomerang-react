@@ -1,6 +1,5 @@
 import { ServiceDesk } from "@carbon/react/icons";
 import { SideNav, SideNavLink, SideNavItems, SideNavMenu, SideNavMenuItem } from "@carbon/react";
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import LeftSideNav from "./LeftSideNav";
 
