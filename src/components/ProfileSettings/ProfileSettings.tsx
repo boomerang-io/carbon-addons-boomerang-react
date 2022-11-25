@@ -178,7 +178,7 @@ function ProfileSettings({ baseServiceUrl, src, userName }: Props) {
                             checked={visible}
                             id={id}
                             labelText={name}
-                            onChange={(_: any, { checked, id }: { checked: boolean, id: string }) => {
+                            onChange={(_: any, { checked, id }: { checked: boolean; id: string }) => {
                               return handleUpdateTeamVisibility(id, checked);
                             }}
                           />

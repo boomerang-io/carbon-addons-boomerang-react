@@ -15,7 +15,7 @@ type OwnProps = {
 
 type Props = OwnProps & typeof LoadingAnimationContent.defaultProps;
 
-function LoadingAnimationContent ({ className, messages, ...rest }: Props) {
+function LoadingAnimationContent({ className, messages, ...rest }: Props) {
   return (
     <div className={cx(`${prefix}--bmrg-loading-animation`, className)} {...rest}>
       <Loading className={`${prefix}--bmrg-loading-animation__img`} />
@@ -26,6 +26,6 @@ function LoadingAnimationContent ({ className, messages, ...rest }: Props) {
       ))}
     </div>
   );
-};
+}
 
 export default LoadingAnimationContent;

@@ -22,7 +22,7 @@ type OwnProps = {
 
 type Props = OwnProps & typeof Sidenav.defaultProps;
 
-function Sidenav ({ header, hidden, content, navItems, footer, theme, ...rest }: Props) {
+function Sidenav({ header, hidden, content, navItems, footer, theme, ...rest }: Props) {
   const classNames = cx(`${prefix}--bmrg-sidenav`, `--${theme}`, {
     "--hidden": hidden,
   });
@@ -34,6 +34,6 @@ function Sidenav ({ header, hidden, content, navItems, footer, theme, ...rest }:
       {footer && <SidenavFooter>{footer()}</SidenavFooter>}
     </aside>
   );
-};
+}
 
 export default Sidenav;

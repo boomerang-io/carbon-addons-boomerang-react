@@ -35,12 +35,12 @@ type OwnProps = {
 
 type Props = OwnProps & typeof ToastNotification.defaultProps;
 
-function ToastNotification ({ iconDescription, closeToast, toastProps, notificationType, ...rest }: Props) {
+function ToastNotification({ iconDescription, closeToast, toastProps, notificationType, ...rest }: Props) {
   return (
     <div className={`${prefix}--bmrg-toast-notification-container`}>
       <CarbonToastNotification {...rest} />
     </div>
   );
-};
+}
 
 export default ToastNotification;

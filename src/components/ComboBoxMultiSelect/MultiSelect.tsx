@@ -118,8 +118,7 @@ export default class MultiSelectComboBox extends React.Component<MultiSelectComb
     const { shouldFilterItem } = this.props;
 
     return shouldFilterItem
-      ?
-        items.filter((item: any) =>
+      ? items.filter((item: any) =>
           shouldFilterItem({
             item,
             selectedItems,

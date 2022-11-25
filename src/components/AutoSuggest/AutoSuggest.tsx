@@ -11,7 +11,7 @@ interface OwnProps {
   initialValue?: string;
   inputProps?: any;
   onChange?: (...args: any[]) => any;
-};
+}
 
 type State = any;
 

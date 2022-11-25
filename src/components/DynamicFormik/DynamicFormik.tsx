@@ -21,7 +21,7 @@ import {
   INPUT_TYPES_ARRAY,
   INPUT_GROUPS,
 } from "../../internal/DataDrivenInputTypes";
-import { DynamicInput, } from "../../types";
+import { DynamicInput } from "../../types";
 
 /**
  *
@@ -39,7 +39,10 @@ function isPropertySyntaxValid({ value, customPropertySyntaxPattern, propsSyntax
   }
 }
 
-function validateUrlWithProperties(customPropertySyntaxPattern: string | RegExp, customPropertyStartsWithPattern: string | RegExp) {
+function validateUrlWithProperties(
+  customPropertySyntaxPattern: string | RegExp,
+  customPropertyStartsWithPattern: string | RegExp
+) {
   return function (this: any) {
     return this.transform(function (value: any, originalValue: any) {
       const propsSyntaxFound = value.match(customPropertyStartsWithPattern)?.length ?? 0;
@@ -54,7 +57,10 @@ function validateUrlWithProperties(customPropertySyntaxPattern: string | RegExp,
   };
 }
 
-function validateEmailWithProperties(customPropertySyntaxPattern: string | RegExp, customPropertyStartsWithPattern: string | RegExp) {
+function validateEmailWithProperties(
+  customPropertySyntaxPattern: string | RegExp,
+  customPropertyStartsWithPattern: string | RegExp
+) {
   return function (this: any) {
     return this.transform(function (value: any, originalValue: any) {
       // Simple pattern for emails
@@ -72,7 +78,10 @@ function validateEmailWithProperties(customPropertySyntaxPattern: string | RegEx
   };
 }
 
-function registerCustomPropertyMethods(customPropertySyntaxPattern: string | RegExp, customPropertyStartsWithPattern: string | RegExp) {
+function registerCustomPropertyMethods(
+  customPropertySyntaxPattern: string | RegExp,
+  customPropertyStartsWithPattern: string | RegExp
+) {
   const validateUrl = validateUrlWithProperties(customPropertySyntaxPattern, customPropertyStartsWithPattern);
   const validateEmail = validateEmailWithProperties(customPropertySyntaxPattern, customPropertyStartsWithPattern);
   Yup.addMethod(Yup.string, "urlWithCustomProperty", validateUrl);
@@ -88,14 +97,19 @@ function registerCustomPropertyMethods(customPropertySyntaxPattern: string | Reg
  * @returns keys of all governing selects above the current one
  */
 
-type  GetGoverningSelectKeysMapType = {
-  governingKey: string; 
-  governingJsonKey: string; 
+type GetGoverningSelectKeysMapType = {
+  governingKey: string;
+  governingJsonKey: string;
   governingKeys: string[];
   inputs: DynamicInput[];
-}
+};
 
-function getGoverningSelectKeysMap({ governingKey, governingJsonKey, governingKeys, inputs }: GetGoverningSelectKeysMapType): string[] {
+function getGoverningSelectKeysMap({
+  governingKey,
+  governingJsonKey,
+  governingKeys,
+  inputs,
+}: GetGoverningSelectKeysMapType): string[] {
   if (Boolean(governingKey) && governingKey !== governingJsonKey) governingKeys.unshift(governingKey);
   const governingInput = inputs.find((input) => input.key === governingKey) ?? ({} as DynamicInput);
 
@@ -123,14 +137,20 @@ function getGoverningSelectKeysMap({ governingKey, governingJsonKey, governingKe
  */
 
 type GetGoverningSelectDeepOptionsType = {
-  formikValues: { [index: string]: any }; 
-  governingInputJsonObject: any; 
-  governingKeys: string[]; 
-  input: DynamicInput; 
+  formikValues: { [index: string]: any };
+  governingInputJsonObject: any;
+  governingKeys: string[];
+  input: DynamicInput;
   inputs: DynamicInput[];
-}
+};
 
-function getGoverningSelectDeepOptions({ formikValues, governingInputJsonObject, governingKeys, input, inputs }: GetGoverningSelectDeepOptionsType): { label: string; value: string }[] {
+function getGoverningSelectDeepOptions({
+  formikValues,
+  governingInputJsonObject,
+  governingKeys,
+  input,
+  inputs,
+}: GetGoverningSelectDeepOptionsType): { label: string; value: string }[] {
   const nextKey = governingKeys.shift();
 
   if (nextKey) {
@@ -162,14 +182,20 @@ function getGoverningSelectDeepOptions({ formikValues, governingInputJsonObject,
  * @param {string} selectedItem - new value of the select input
  */
 type HandleGoverningSelectChangeType = {
-  formikProps: any; 
-  isInputBeingChanged: boolean; 
+  formikProps: any;
+  isInputBeingChanged: boolean;
   selectedItem: DynamicInput | null;
-  input: DynamicInput; 
+  input: DynamicInput;
   inputs: DynamicInput[];
-}
+};
 
-async function handleGoverningSelectChange({ formikProps, input, inputs, isInputBeingChanged, selectedItem }: HandleGoverningSelectChangeType) {
+async function handleGoverningSelectChange({
+  formikProps,
+  input,
+  inputs,
+  isInputBeingChanged,
+  selectedItem,
+}: HandleGoverningSelectChangeType) {
   const { key } = input;
   const inputsGovernedByCurrentOne = inputs.filter((formikInput) => formikInput.governingKey === key);
 
@@ -198,7 +224,7 @@ type generateYupAstType = {
   customPropertySyntaxPattern: string | RegExp;
   customPropertyStartsWithPattern: string | RegExp;
   useCSVforArrays: boolean;
-}
+};
 
 function generateYupAst({
   inputs,
@@ -404,7 +430,7 @@ type GenerateYupSchemaType = {
   customPropertyStartsWithPattern: string | RegExp;
   useCSVforArrays: boolean;
   validationSchemaExtension: any;
-}
+};
 
 function generateYupSchema({
   inputs,
@@ -476,16 +502,16 @@ const conditionallyRenderInput = (input: DynamicInput, values: any) => {
 
   if (input.requiredForKey && input.requiredValueOf) {
     /**
-       * Check which input in this section has the key equal to requiredForKey and get its value
-       */
+     * Check which input in this section has the key equal to requiredForKey and get its value
+     */
     const requiredForKeyInputValue = values[input.requiredForKey];
     const valuesInputIsRenderedFor = input.requiredValueOf;
 
     /**
-      * If the value of the input this input is required for is an array loop through those values to find a matching one
-      * by going through all of configured values for the input  - the "requiredValueOf" of property
-      * Check for the value and the string of the value bc of how the services work. "true" and "false" are strings not boolean values
-      */
+     * If the value of the input this input is required for is an array loop through those values to find a matching one
+     * by going through all of configured values for the input  - the "requiredValueOf" of property
+     * Check for the value and the string of the value bc of how the services work. "true" and "false" are strings not boolean values
+     */
     if (Array.isArray(requiredForKeyInputValue)) {
       for (let requiredForValue of valuesInputIsRenderedFor) {
         for (let singleRequiredForKeyInputValue of requiredForKeyInputValue) {
@@ -517,7 +543,7 @@ const TYPE_PROPS = {
     formikProps: any,
     { key }: DynamicInput,
     inputs: DynamicInput[],
-    useCSVforArrays: boolean,
+    useCSVforArrays: boolean
   ) => ({
     onChange: (value: string, id: string, event: any, selectedItems: string[]) => {
       if (useCSVforArrays) {
@@ -532,7 +558,7 @@ const TYPE_PROPS = {
     formikProps: any,
     { key }: DynamicInput,
     inputs: DynamicInput[],
-    useCSVforArrays: boolean,
+    useCSVforArrays: boolean
   ) => ({
     onChange: (createdItems: any[]) => {
       formikProps.setFieldTouched(`['${key}']`, true);
@@ -565,7 +591,7 @@ const TYPE_PROPS = {
     formikProps: any,
     { key }: DynamicInput,
     inputs: DynamicInput[],
-    useCSVforArrays: boolean,
+    useCSVforArrays: boolean
   ) => ({
     onChange: async ({ selectedItems }: { selectedItems: any[] }) => {
       await formikProps.setFieldTouched(`['${key}']`, true);
@@ -586,10 +612,7 @@ const TYPE_PROPS = {
     onInputBlur: () => formikProps.setFieldTouched(`['${key}']`, true, true),
   }),
 
-  [INPUT_GROUPS.RADIO]: (
-    formikProps: any,
-    { key }: DynamicInput,
-  ) => ({
+  [INPUT_GROUPS.RADIO]: (formikProps: any, { key }: DynamicInput) => ({
     onChange: (value: any) => formikProps.setFieldValue(`['${key}']`, value),
   }),
 
@@ -615,7 +638,7 @@ const TYPE_PROPS = {
       if (governingJsonInput && Array.isArray(governingJsonInput.governingJson)) {
         const { governingJson } = governingJsonInput;
 
-        let governingOptions: { label: string, value: string }[] = [];
+        let governingOptions: { label: string; value: string }[] = [];
         let governingDisabled = false;
 
         /**
@@ -676,10 +699,7 @@ const TYPE_PROPS = {
     onChange: formikProps.handleChange,
   }),
 
-  [INPUT_GROUPS.BOOLEAN]: (
-    formikProps: any,
-    { key }: DynamicInput
-  ) => ({
+  [INPUT_GROUPS.BOOLEAN]: (formikProps: any, { key }: DynamicInput) => ({
     onChange: (value: any) => {
       formikProps.setFieldTouched(`['${key}']`, true, true);
       formikProps.setFieldValue(`['${key}']`, value);

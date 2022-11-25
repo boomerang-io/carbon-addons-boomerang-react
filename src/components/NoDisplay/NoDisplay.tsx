@@ -11,7 +11,7 @@ const TEXT_LOCATIONS = {
 
 NoDisplay.defaultProps = {
   text: "Nothing to display here",
-  textLocation: TEXT_LOCATIONS.ABOVE
+  textLocation: TEXT_LOCATIONS.ABOVE,
 };
 
 type OwnProps = {
@@ -23,7 +23,7 @@ type OwnProps = {
 
 type Props = OwnProps & typeof NoDisplay.defaultProps;
 
-function NoDisplay ({ className, text, textLocation, style, ...rest }: Props) {
+function NoDisplay({ className, text, textLocation, style, ...rest }: Props) {
   const classNames = cx(`${prefix}--bmrg-no-display`, className);
   return (
     <div className={classNames} style={style} {...rest}>
@@ -36,6 +36,6 @@ function NoDisplay ({ className, text, textLocation, style, ...rest }: Props) {
       )}
     </div>
   );
-};
+}
 
 export default NoDisplay;

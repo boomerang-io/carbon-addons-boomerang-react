@@ -20,7 +20,7 @@ interface AboutPlatformContainerProps {
   organization?: string;
 }
 
-function AboutPlatformContainer ({ version = "", organization = "IBM", isFlowApp }: AboutPlatformContainerProps) {
+function AboutPlatformContainer({ version = "", organization = "IBM", isFlowApp }: AboutPlatformContainerProps) {
   return (
     <HeaderMenuItem
       text="About the Platform"
@@ -98,6 +98,6 @@ function AboutPlatformContainer ({ version = "", organization = "IBM", isFlowApp
       }}
     </HeaderMenuItem>
   );
-};
+}
 
 export default AboutPlatformContainer;

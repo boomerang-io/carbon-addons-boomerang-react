@@ -23,7 +23,7 @@ type Props = OwnProps & typeof LoadingAnimation.defaultProps;
 
 /** Loading animation with integrated loading svg, and messages to be randomly selected by default and
  * configurable time to wait to render to prevent flickering on quickly resolved requests */
-function LoadingAnimation ({ centered, className, loading, message, wait, ...rest }: Props) {
+function LoadingAnimation({ centered, className, loading, message, wait, ...rest }: Props) {
   const [shouldRender, setShouldRender] = useState(false);
 
   useEffect(() => {
@@ -55,6 +55,6 @@ function LoadingAnimation ({ centered, className, loading, message, wait, ...res
   }
 
   return null;
-};
+}
 
 export default LoadingAnimation;

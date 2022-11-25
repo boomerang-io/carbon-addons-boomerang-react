@@ -124,7 +124,7 @@ export const MenuOpenUpwards = () => {
 };
 
 const ComboBoxExternallyControlled = () => {
-  const [selectedItem, setSelectedItem] = React.useState<{ label: string; value: string; }>(({} as any));
+  const [selectedItem, setSelectedItem] = React.useState<{ label: string; value: string }>({} as any);
 
   return (
     <ComboBox

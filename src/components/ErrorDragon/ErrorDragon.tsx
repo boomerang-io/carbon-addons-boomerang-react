@@ -19,7 +19,7 @@ interface OwnProps {
   statusText?: string;
   statusUrl: string;
   title?: string;
-};
+}
 
 type Props = OwnProps & typeof ErrorDragon.defaultProps;
 
@@ -36,6 +36,6 @@ function ErrorDragon({ className, header, message, style, statusText, statusUrl,
       </a>
     </div>
   );
-};
+}
 
 export default ErrorDragon;

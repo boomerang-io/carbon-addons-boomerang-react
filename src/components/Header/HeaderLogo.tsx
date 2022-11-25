@@ -16,7 +16,7 @@ type OwnProps = {
 
 type Props = OwnProps & typeof HeaderLogo.defaultProps;
 
-function HeaderLogo (props: Props) {
+function HeaderLogo(props: Props) {
   const { appName, children, href, navLinks, platformName } = props;
 
   return (
@@ -35,6 +35,6 @@ function HeaderLogo (props: Props) {
       ) : null}
     </div>
   );
-};
+}
 
 export default HeaderLogo;

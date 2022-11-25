@@ -137,9 +137,7 @@ function DecisionButtons({
       )}
       {hasVerticalHelperText && <div className={`${prefix}--form__helper-text`}>{helperText}</div>}
       <div className={`${prefix}--form-item`}>
-        <div className={wrapperClasses}>
-          {getDecisionButtons()}
-        </div>
+        <div className={wrapperClasses}>{getDecisionButtons()}</div>
       </div>
       {hasHorizontalHelperText && <div className={`${prefix}--form__helper-text`}>{helperText}</div>}
     </div>

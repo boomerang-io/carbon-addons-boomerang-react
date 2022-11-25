@@ -5,7 +5,7 @@ import Avatar from "../Avatar";
 import HeaderMenuModalWrapper from "../../internal/HeaderMenuModalWrapper";
 
 type Props = {
-  children?: any; 
+  children?: any;
   className?: string;
   forwardRef?: any;
   src: string;

@@ -38,6 +38,6 @@ function Error({ status, statusText, className, style, ...rest }: Props) {
       </p>
     </div>
   );
-};
+}
 
 export default Error;

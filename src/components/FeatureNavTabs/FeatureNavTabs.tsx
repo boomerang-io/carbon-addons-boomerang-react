@@ -19,7 +19,7 @@ type OwnProps = {
 
 type Props = OwnProps & typeof FeatureNavTabs.defaultProps;
 
-function FeatureNavTabs ({ ariaLabel, children, className, contained, light, style, ...rest }: Props) {
+function FeatureNavTabs({ ariaLabel, children, className, contained, light, style, ...rest }: Props) {
   const classNames = cx(
     `${prefix}--tabs`,
     {
@@ -34,6 +34,6 @@ function FeatureNavTabs ({ ariaLabel, children, className, contained, light, sty
       <ul className={`${prefix}--tab--list`}>{children}</ul>
     </nav>
   );
-};
+}
 
 export default FeatureNavTabs;

@@ -24,7 +24,7 @@ type OwnProps = {
 
 type Props = OwnProps & typeof FeatureNavTab.defaultProps;
 
-function FeatureNavTab ({ activeClassName, className, disabled, isLoading, label, style, ...rest }: Props) {
+function FeatureNavTab({ activeClassName, className, disabled, isLoading, label, style, ...rest }: Props) {
   const classNames = cx(
     `${prefix}--tabs__nav-item`,
     `${prefix}--tabs__nav-link`,
@@ -44,6 +44,6 @@ function FeatureNavTab ({ activeClassName, className, disabled, isLoading, label
       {label}
     </NavLink>
   );
-};
+}
 
 export default FeatureNavTab;

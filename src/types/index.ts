@@ -1,6 +1,6 @@
 import React from "react";
 
-export interface DynamicInput extends FormInput, Government {};
+export interface DynamicInput extends FormInput, Government {}
 
 export interface FormInput {
   conditionallyRender?: boolean;
@@ -29,14 +29,14 @@ export interface FormInput {
   dateFormat?: string;
   pattern?: string;
   patternInvalidText?: string;
-  government?: Government,
+  government?: Government;
   description?: string;
   key: string;
   label?: string;
   type: string;
   min?: string;
   max?: string;
-  options?: { key: string; value: string }[],
+  options?: { key: string; value: string }[];
   helperText?: string;
   helperTextOff?: string;
   isDefaultLabel?: boolean;
@@ -99,7 +99,7 @@ export interface Team {
   restrictInvitationByDomain: boolean;
   domains: string[];
   allowInvitationToPartner: boolean;
-  userProperties: FormInput[],
+  userProperties: FormInput[];
   displayName: string;
   sidebarSelectedKey: string;
   pendingRemoval: boolean;
@@ -114,7 +114,7 @@ export interface Team {
   hero: {
     id: string;
     name: string;
-  },
+  };
   statements: TeamStatement[];
   allowMembersCreateProjectTeam: boolean;
   canLeaveTeam: boolean;
@@ -128,7 +128,7 @@ export interface TeamStatement {
   image: {
     id: string;
     name: string;
-  }
+  };
 }
 
 export interface TeamOwner {
@@ -145,12 +145,14 @@ export interface User {
     receiveNewMemberInvite: boolean;
     receiveRequestLeaveTeam: boolean;
   };
-  favouriteCatalogItems: [{
-    catalogItemId: string;
-    order: number;
-  }];
+  favouriteCatalogItems: [
+    {
+      catalogItemId: string;
+      order: number;
+    }
+  ];
   firstLoginDate: string;
-  globalServices?: [any]
+  globalServices?: [any];
   hasConsented: boolean;
   id: string;
   isFirstVisit: boolean | null;

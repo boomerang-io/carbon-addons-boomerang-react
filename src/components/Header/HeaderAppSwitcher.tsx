@@ -22,7 +22,7 @@ type HeaderAppSwitcherProps = {
   baseServiceUrl: string;
   baseLaunchEnvUrl?: string;
   isActive?: boolean;
-}
+};
 
 export default function HeaderAppSwitcher({ baseServiceUrl, baseLaunchEnvUrl, isActive }: HeaderAppSwitcherProps) {
   const userTeamsUrl = serviceUrl.getUserTeams({ baseServiceUrl });
@@ -113,9 +113,15 @@ type TeamServiceListMenuProps = {
   isAccount?: boolean;
   isMember: boolean;
   team: SimpleIdNameObj;
-}
+};
 
-function TeamServiceListMenu({ baseServiceUrl, baseLaunchEnvUrl, isAccount, isMember, team }: TeamServiceListMenuProps) {
+function TeamServiceListMenu({
+  baseServiceUrl,
+  baseLaunchEnvUrl,
+  isAccount,
+  isMember,
+  team,
+}: TeamServiceListMenuProps) {
   const { id, name } = team;
   const [isSelected, setIsSelected] = React.useState(false);
   const teamsServicesUrl = serviceUrl.getTeamServices({ baseServiceUrl, teamId: id });
@@ -182,10 +188,10 @@ function TeamServiceListMenu({ baseServiceUrl, baseLaunchEnvUrl, isAccount, isMe
 }
 
 type ServiceListProps = {
-  baseLaunchEnvUrl?: string; 
+  baseLaunchEnvUrl?: string;
   isAccount?: boolean;
   servicesQuery: UseQueryResult<SimpleTeamService[], unknown>;
-}
+};
 
 function ServiceList(props: ServiceListProps) {
   const { baseLaunchEnvUrl = "", isAccount, servicesQuery } = props;

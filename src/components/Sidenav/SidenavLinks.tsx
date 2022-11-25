@@ -14,7 +14,7 @@ type OwnProps = {
 
 type Props = OwnProps & typeof SidenavLinks.defaultProps;
 
-function SidenavLinks ({ navItems, theme, ...rest }: Props) {
+function SidenavLinks({ navItems, theme, ...rest }: Props) {
   const linkClassNames = cx(`${prefix}--bmrg-sidenav-links__link`, `--${theme}`);
   const textClassNames = cx(`${prefix}--bmrg-sidenav-links__text`, `--${theme}`);
   return (
@@ -32,6 +32,6 @@ function SidenavLinks ({ navItems, theme, ...rest }: Props) {
       ))}
     </nav>
   );
-};
+}
 
 export default SidenavLinks;

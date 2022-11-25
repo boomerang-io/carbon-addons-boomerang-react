@@ -23,7 +23,7 @@ type OwnProps = {
 
 type Props = OwnProps & typeof OptionsGrid.defaultProps;
 
-function OptionsGrid ({
+function OptionsGrid({
   className,
   columns,
   data,
@@ -80,6 +80,6 @@ function OptionsGrid ({
       {grid}
     </ul>
   );
-};
+}
 
 export default OptionsGrid;

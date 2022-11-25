@@ -17,7 +17,7 @@ type OwnProps = {
 
 type Props = OwnProps & typeof Option.defaultProps;
 
-function Option ({ className, text, id, selected, onSelect, ...rest }: Props) {
+function Option({ className, text, id, selected, onSelect, ...rest }: Props) {
   const classNames = cx(className, { "--selected": selected });
 
   return (
@@ -25,6 +25,6 @@ function Option ({ className, text, id, selected, onSelect, ...rest }: Props) {
       {text}
     </button>
   );
-};
+}
 
 export default Option;

@@ -26,7 +26,7 @@ type OwnProtectedRouteProps = {
 
 type ProtectedRouteProps = OwnProtectedRouteProps & typeof ProtectedRoute.defaultProps;
 
-function ProtectedRoute ({ allowedUserRoles, component, message, title, userRole, ...rest }: ProtectedRouteProps) {
+function ProtectedRoute({ allowedUserRoles, component, message, title, userRole, ...rest }: ProtectedRouteProps) {
   return (
     <Route {...rest}>
       {checkAuth(userRole, allowedUserRoles) ? component : <Error403 message={message} title={title} />}

@@ -8,7 +8,7 @@ interface OwnProps {
   style?: React.CSSProperties;
   errorProps?: any;
   errorComponent?: (...args: any[]) => any;
-};
+}
 
 type State = any;
 

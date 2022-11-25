@@ -57,7 +57,15 @@ type Props = {
   external?: boolean;
 };
 
-function HeaderMenuLink({ className = "", external = true, href, iconName = "information", style, text, ...rest }: Props) {
+function HeaderMenuLink({
+  className = "",
+  external = true,
+  href,
+  iconName = "information",
+  style,
+  text,
+  ...rest
+}: Props) {
   const wrapperClassNames = cx(`${prefix}--bmrg-header-menu-item-wrapper`, {
     [className]: !!className,
   });
