@@ -6,7 +6,7 @@ import { prefix } from "../../internal/settings";
 import { ComboBox } from "@carbon/react";
 
 type Props = {
-  disableClear: boolean;
+  disableClear?: boolean;
   labelText?: React.ReactNode;
   label?: React.ReactNode;
   shouldFilterItem?: ((...args: any[]) => any) | boolean;

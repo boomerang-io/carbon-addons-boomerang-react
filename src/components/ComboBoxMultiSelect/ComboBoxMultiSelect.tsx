@@ -4,34 +4,31 @@ import TooltipHover from "../TooltipHover";
 import { Information } from "@carbon/react/icons";
 import { prefix } from "../../internal/settings";
 import MultiSelect from "./MultiSelect";
+import type { MultiSelectComboBoxProps } from "./MultiSelect";
 
 /**
  * For now we expect that if the prop value is a csv string,
  * then the items would be either in the key:value or value:label format.
  * The prop value would contain either the keys in the key:value or values in the value:label.
  */
-function getFilteredItems({ items, selectedItems }: any) {
+function getFilteredItems({ items, selectedItems }: { items: any[]; selectedItems: any[] }) {
   return items.filter((item: any) =>
     selectedItems.some((selectedItem: any) => selectedItem === item.key || selectedItem === item.value)
   );
 }
 
-/*
-(ts-migrate) TODO: Migrate the remaining prop types
-...MultiSelect.propTypes
-*/
-type Props = {
+type Props = Omit<MultiSelectComboBoxProps, "initialSelectedItems"> & {
   disableClear?: boolean;
   id: string;
   labelText?: string;
   label?: string;
+  initialSelectedItems?: string | any[];
+  items: any;
+  selectedItems?: string | any[];
   titleText?: string;
   tooltipClassName?: string;
   tooltipContent?: React.ReactNode;
   tooltipProps?: any;
-  initialSelectedItems: any;
-  items: any;
-  selectedItems: any;
 };
 
 function ComboBoxMultiSelect({
@@ -53,13 +50,13 @@ function ComboBoxMultiSelect({
   let finalSelectedItems = selectedItems;
 
   /** Add support for csv strings */
-  if (typeof initialSelectedItems === "string") {
-    const initialSelectedItemsArray = initialSelectedItems.split(",");
+  if (typeof finalInitialSelectedItems === "string") {
+    const initialSelectedItemsArray = finalInitialSelectedItems.split(",");
     finalInitialSelectedItems = getFilteredItems({ items, selectedItems: initialSelectedItemsArray });
   }
 
-  if (typeof selectedItems === "string") {
-    const selectedItemsArray = selectedItems.split(",");
+  if (typeof finalSelectedItems === "string") {
+    const selectedItemsArray = finalSelectedItems.split(",");
     finalSelectedItems = getFilteredItems({ items, selectedItems: selectedItemsArray });
   }
 

@@ -3,12 +3,11 @@ import { NavLink } from "react-router-dom";
 import { prefix } from "../../internal/settings";
 import cx from "classnames";
 
-
 type Props = {
   activeClassName?: string;
   className?: string;
   children?: string | number | ((...args: any[]) => any) | any | React.ReactNode;
-  hasDivider: boolean
+  hasDivider?: boolean;
   icon?: Function;
   iconProps?: any;
   to: string;

@@ -7,10 +7,10 @@ type Props = {
   className?: string;
   columns: number;
   data: any[];
-  displayProperty: string;
+  displayProperty?: string;
   onSelect: (...args: any[]) => any;
   selectedItems: any[];
-  selectProperty: string;
+  selectProperty?: string;
   style?: any;
   width?: string;
 };

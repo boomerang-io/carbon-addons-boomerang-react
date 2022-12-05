@@ -7,13 +7,8 @@
 
 import React from "react";
 import cx from "classnames";
-import { ListBoxType, ListBoxSize } from "./ListBoxPropTypes";
-import ListBoxField from "./ListBoxField";
-import ListBoxMenu from "./ListBoxMenu";
-import ListBoxMenuIcon from "./ListBoxMenuIcon";
-import ListBoxMenuItem from "./ListBoxMenuItem";
-import ListBoxSelection from "./ListBoxSelection";
 import { prefix } from "../settings";
+import type { ListBoxType, ListBoxSize } from "./ListBoxTypes";
 
 const handleOnKeyDown = (event: any) => {
   if (event.keyCode === 27) {
@@ -29,15 +24,16 @@ const handleClick = (event: any) => {
 type ListBoxProps = {
   children?: React.ReactNode;
   className?: string;
-  disabled: boolean;
+  disabled?: boolean;
   invalid?: boolean;
   invalidText?: React.ReactNode;
   isOpen?: boolean;
   light?: boolean;
   size?: ListBoxSize;
-  type: ListBoxType;
+  type?: ListBoxType;
   warn?: boolean;
   warnText?: React.ReactNode;
+
 };
 
 /**
@@ -48,8 +44,8 @@ const ListBox = React.forwardRef<any, ListBoxProps>(function ListBox(
   {
     children,
     className: containerClassName,
-    disabled,
-    type,
+    disabled = false,
+    type = "default",
     size,
     invalid,
     invalidText,
@@ -94,16 +90,5 @@ const ListBox = React.forwardRef<any, ListBoxProps>(function ListBox(
 });
 
 ListBox.displayName = "ListBox";
-
-ListBox.defaultProps = {
-  disabled: false,
-  type: "default",
-};
-
-(ListBox as any).Field = ListBoxField;
-(ListBox as any).Menu = ListBoxMenu;
-(ListBox as any).MenuIcon = ListBoxMenuIcon;
-(ListBox as any).MenuItem = ListBoxMenuItem;
-(ListBox as any).Selection = ListBoxSelection;
 
 export default ListBox;

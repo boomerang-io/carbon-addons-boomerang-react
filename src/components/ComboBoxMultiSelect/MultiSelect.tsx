@@ -1,11 +1,12 @@
 import React from "react";
 import cx from "classnames";
-import Downshift from "downshift";
+import Downshift, { DownshiftProps } from "downshift";
 import isEqual from "lodash.isequal";
 import { prefix } from "../../internal/settings";
 import { WarningFilled } from "@carbon/react/icons";
 import { Tag } from "@carbon/react";
-import ListBox, { PropTypes as ListBoxPropTypes } from "../../internal/ListBox";
+import * as ListBoxComponents from "../../internal/ListBox";
+import type { ListBoxType, ListBoxSize } from "../../internal/ListBox/ListBoxTypes";
 import { isAccessibleKeyDownEvent } from "../../tools/accessibility";
 import { mapDownshiftProps } from "../../tools/createPropAdapter";
 import setupGetInstanceId from "../../tools/setupGetInstanceId";
@@ -37,21 +38,23 @@ const getInputValue = (state: any) => {
 
 const getInstanceId = setupGetInstanceId();
 
-type OwnMultiSelectComboBoxProps = {
+export type MultiSelectComboBoxProps = Pick<typeof MultiSelectComboBox.defaultProps, "itemToString"> & {
   ariaLabel?: string;
   className?: string;
   disabled?: boolean;
+  direction?: "top" | "bottom";
   id: string;
   initialSelectedItems?: any[];
   selectedItems?: any[];
   items: any[];
   itemToString?: (...args: any[]) => any;
-  itemToElement?: (...args: any[]) => any;
+  itemToElement?: React.FC;
   titleText?: any;
   helperText?: string;
   tagProps?: any;
   onInputBlur?: (...args: any[]) => any;
   onChange: (...args: any[]) => any;
+  onToggleClick?: (event: any) => any;
   open?: boolean;
   placeholder: string;
   shouldFilterItem?: (...args: any[]) => any;
@@ -59,22 +62,16 @@ type OwnMultiSelectComboBoxProps = {
   invalidText?: string;
   translateWithId?: (...args: any[]) => any;
   onInputChange?: (...args: any[]) => any;
-  type?: ListBoxPropTypes.ListBoxType;
+  type?: ListBoxType;
   light?: boolean;
-  downshiftProps?: any; // TODO: PropTypes.shape(Downshift.propTypes)
+  downshiftProps?: DownshiftProps<any>;
+  size?: ListBoxSize;
 };
-
-type MultiSelectComboBoxState = any;
-
-type MultiSelectComboBoxProps = OwnMultiSelectComboBoxProps & typeof MultiSelectComboBox.defaultProps;
-
-export default class MultiSelectComboBox extends React.Component<MultiSelectComboBoxProps, MultiSelectComboBoxState> {
+export default class MultiSelectComboBox extends React.Component<MultiSelectComboBoxProps, any> {
   static defaultProps = {
     disabled: false,
     itemToString: defaultItemToString,
     shouldFilterItem: defaultShouldFilterItem,
-    initialSelectedItems: [],
-    itemToElement: null,
     type: "default",
     ariaLabel: "Choose an item",
     light: false,
@@ -93,8 +90,8 @@ export default class MultiSelectComboBox extends React.Component<MultiSelectComb
 
     this.state = {
       inputValue: getInputValue({}),
-      isOpen: (props as any).open ?? false,
-      stateSelectedItems: (props as any).initialSelectedItems || (props as any).selectedItems,
+      isOpen: props.open ?? false,
+      stateSelectedItems: props.initialSelectedItems || props.selectedItems || [],
     };
   }
 
@@ -170,14 +167,14 @@ export default class MultiSelectComboBox extends React.Component<MultiSelectComb
 
     this.setState({ stateSelectedItems: selectedItems });
 
-    if (typeof (this.props as any).onChange === "function") {
-      (this.props as any).onChange({ selectedItems });
+    if (typeof this.props.onChange === "function") {
+      this.props.onChange({ selectedItems });
     }
   };
 
   onToggleClick = (isOpen: any) => (event: any) => {
-    if ((this.props as any).onToggleClick) {
-      (this.props as any).onToggleClick(event);
+    if (this.props.onToggleClick) {
+      this.props.onToggleClick(event);
     }
 
     if (event.target === this.textInput.current && isOpen) {
@@ -197,13 +194,13 @@ export default class MultiSelectComboBox extends React.Component<MultiSelectComb
   handleClearSelection = () => {
     this.setState({ stateSelectedItems: [] });
 
-    if (typeof (this.props as any).onChange === "function") {
-      (this.props as any).onChange({ selectedItems: [] });
+    if (typeof this.props.onChange === "function") {
+      this.props.onChange({ selectedItems: [] });
     }
   };
 
   handleInputBlur = (e: any) => {
-    (this.props as any).onInputBlur && (this.props as any).onInputBlur(e);
+    this.props.onInputBlur && this.props.onInputBlur(e);
     this.closeMenu();
   };
 
@@ -270,7 +267,14 @@ export default class MultiSelectComboBox extends React.Component<MultiSelectComb
       ...rest
     } = this.props;
     const { stateSelectedItems, isOpen } = this.state;
-    const { Field, Selection, Menu, MenuItem, MenuIcon } = ListBox;
+    const {
+      ListBox,
+      ListBoxField: Field,
+      ListBoxSelection: Selection,
+      ListBoxMenu: Menu,
+      ListBoxMenuItem: MenuItem,
+      ListBoxMenuIcon: MenuIcon,
+    } = ListBoxComponents;
 
     const selectedItems = propsSelectedItems || stateSelectedItems; // externally controlled if selectedItems props exist
 
@@ -327,6 +331,7 @@ export default class MultiSelectComboBox extends React.Component<MultiSelectComb
               invalidText={invalidText}
               isOpen={isOpen}
               light={light}
+              type={type}
               size={size}
             >
               <div className={`${prefix}--bmrg-multi-select-selected`}>
@@ -361,7 +366,7 @@ export default class MultiSelectComboBox extends React.Component<MultiSelectComb
                   aria-label={ariaLabel}
                   aria-controls={`${id}__menu`}
                   aria-autocomplete="list"
-                  tabIndex="0"
+                  tabIndex={0}
                   ref={this.textInput}
                   {...rest}
                   {...getInputProps({
@@ -395,7 +400,11 @@ export default class MultiSelectComboBox extends React.Component<MultiSelectComb
                         title={itemToElement ? item.text : itemToString(item)}
                         {...itemProps}
                       >
-                        {itemToElement ? <ItemToElement key={itemToString(item)} {...item} /> : itemToString(item)}
+                        {typeof ItemToElement !== "undefined" ? (
+                          <ItemToElement key={itemToString(item)} {...item} />
+                        ) : (
+                          itemToString(item)
+                        )}
                       </MenuItem>
                     );
                   })}
