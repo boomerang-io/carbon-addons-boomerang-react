@@ -10,12 +10,7 @@ const checkAuth = (userRole: string | string[], allowedUserRoles: string[]) => {
   return allowedUserRoles.some((allowedRole) => allowedRole === userRole);
 };
 
-ProtectedRoute.defaultProps = {
-  message: "If you think you should be, contact your friendly neighborhood platform admin.",
-  title: "Sorry mate, you are not allowed here.",
-};
-
-type OwnProtectedRouteProps = {
+type Props = {
   allowedUserRoles: string[];
   component: (...args: any[]) => any;
   location?: any;
@@ -24,9 +19,14 @@ type OwnProtectedRouteProps = {
   userRole: string | string[];
 };
 
-type ProtectedRouteProps = OwnProtectedRouteProps & typeof ProtectedRoute.defaultProps;
-
-function ProtectedRoute({ allowedUserRoles, component, message, title, userRole, ...rest }: ProtectedRouteProps) {
+function ProtectedRoute({
+  allowedUserRoles,
+  component,
+  message = "If you think you should be, contact your friendly neighborhood platform admin.",
+  title = "Sorry mate, you are not allowed here.",
+  userRole,
+  ...rest
+}: Props) {
   return (
     <Route {...rest}>
       {checkAuth(userRole, allowedUserRoles) ? component : <Error403 message={message} title={title} />}

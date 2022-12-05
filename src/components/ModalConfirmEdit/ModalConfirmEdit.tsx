@@ -8,24 +8,19 @@ import ModalConfirmArray from "./ModalConfirmArray";
 const TYPES = {
   DETAILS: "details",
   ARRAY: "array",
-};
+} as const;
 
-ModalConfirmEdit.defaultProps = {
-  title: "Confirm Your Details",
-  type: "details",
-};
+type TYPE = typeof TYPES[keyof typeof TYPES];
 
-type OwnProps = {
+type Props = {
   onEdit?: (...args: any[]) => any;
   items?: string[] | { name: string; value: string }[];
   style?: React.CSSProperties;
   title?: string;
-  type?: "details" | "array"; // TODO: PropTypes.oneOf(Object.values(TYPES))
+  type?: TYPE;
 };
 
-type Props = OwnProps & typeof ModalConfirmEdit.defaultProps;
-
-function ModalConfirmEdit({ items, onEdit, style, title, type, ...rest }: Props) {
+function ModalConfirmEdit({ items, onEdit, style, title = "Confirm Your Details", type = "details", ...rest }: Props) {
   return (
     <div className={`${prefix}--bmrg-modal-confirm-edit`} style={style} {...rest}>
       <p className={`${prefix}--bmrg-modal-confirm-edit__title`}>{title}</p>

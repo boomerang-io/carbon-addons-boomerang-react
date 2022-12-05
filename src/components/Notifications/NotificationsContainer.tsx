@@ -12,7 +12,6 @@ type CloseButtonProps = {
   closeToast?: (...args: any[]) => any;
 };
 
-// eslint-disable-next-line
 const CloseButton = ({ closeToast }: CloseButtonProps) => <Close size={20} onClick={closeToast} />;
 
 type OwnNotificationsContainerProps = {

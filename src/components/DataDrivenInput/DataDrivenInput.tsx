@@ -1,14 +1,14 @@
 //@ts-nocheck
 import React from "react";
-import CheckboxList from "../CheckboxList";
-import Creatable from "../Creatable";
-import MultiSelect from "../ComboBoxMultiSelect";
-import DateInput from "../DateInput";
-import RadioGroup from "../RadioGroup";
-import Select from "../ComboBox";
-import TextArea from "../TextArea";
-import TextInput from "../TextInput";
-import Toggle from "../Toggle";
+import CheckboxListComponent from "../CheckboxList";
+import CreatableComponent from "../Creatable";
+import MultiSelectComponent from "../ComboBoxMultiSelect";
+import DateInputComponent from "../DateInput";
+import RadioGroupComponent from "../RadioGroup";
+import SelectComponent from "../ComboBox";
+import TextAreaComponent from "../TextArea";
+import TextInputComponent from "../TextInput";
+import ToggleComponent from "../Toggle";
 import {
   CHECKBOX_TYPES,
   CREATABLE_TYPES,
@@ -22,19 +22,6 @@ import {
   BOOLEAN_TYPES,
 } from "../../internal/DataDrivenInputTypes";
 import { FormInput } from "../../types";
-
-DataDrivenInput.defaultProps = {
-  CheckboxList: CheckboxList,
-  Creatable: Creatable,
-  DateInput: DateInput,
-  MultiSelect: MultiSelect,
-  RadioGroup: RadioGroup,
-  Select: Select,
-  TextArea: TextArea,
-  TextEditor: TextArea,
-  TextInput: TextInput,
-  Toggle: Toggle,
-};
 
 function formatSelectOptions(options = []) {
   return options.map((option) => ({ label: (option as any).value, value: (option as any).key }));
@@ -97,20 +84,20 @@ type OwnDataDrivenInputProps = {
   onChange?: Function;
 };
 
-type DataDrivenInputProps = OwnDataDrivenInputProps & FormInput & typeof DataDrivenInput.defaultProps;
+type DataDrivenInputProps = OwnDataDrivenInputProps & FormInput;
 
 function DataDrivenInput(props: DataDrivenInputProps) {
   const {
-    CheckboxList,
-    Creatable,
-    DateInput,
-    MultiSelect,
-    RadioGroup,
-    Select,
-    TextArea,
-    TextEditor,
-    TextInput,
-    Toggle,
+    CheckboxList = CheckboxListComponent,
+    Creatable = CreatableComponent,
+    DateInput = DateInputComponent,
+    MultiSelect = MultiSelectComponent,
+    RadioGroup = RadioGroupComponent,
+    Select = SelectComponent,
+    TextArea = TextAreaComponent,
+    TextEditor = TextAreaComponent,
+    TextInput = TextInputComponent,
+    Toggle = ToggleComponent,
     formikProps,
     ...inputProps
   } = props;

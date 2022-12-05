@@ -7,23 +7,24 @@ import ShipSharks from "./assets/ShipSharks";
 const TEXT_LOCATIONS = {
   ABOVE: "above",
   BELOW: "below",
-};
+} as const;
 
-NoDisplay.defaultProps = {
-  text: "Nothing to display here",
-  textLocation: TEXT_LOCATIONS.ABOVE,
-};
+type TextLocation = typeof TEXT_LOCATIONS[keyof typeof TEXT_LOCATIONS];
 
-type OwnProps = {
+type Props = {
   className?: string;
   style?: any;
   text?: string;
-  textLocation?: "above" | "below";
+  textLocation?: TextLocation;
 };
 
-type Props = OwnProps & typeof NoDisplay.defaultProps;
-
-function NoDisplay({ className, text, textLocation, style, ...rest }: Props) {
+function NoDisplay({
+  className,
+  text = "Nothing to display here",
+  textLocation = TEXT_LOCATIONS.ABOVE,
+  style,
+  ...rest
+}: Props) {
   const classNames = cx(`${prefix}--bmrg-no-display`, className);
   return (
     <div className={classNames} style={style} {...rest}>

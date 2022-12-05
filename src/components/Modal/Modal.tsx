@@ -3,12 +3,7 @@ import cx from "classnames";
 import ReactModal from "react-modal";
 import { prefix } from "../../internal/settings";
 
-Modal.defaultProps = {
-  appElement: "#app",
-  isOpen: false,
-};
-
-type OwnProps = {
+type Props = {
   appElement?: string;
   children?: any;
   className?: string;
@@ -16,10 +11,8 @@ type OwnProps = {
   isOpen?: boolean;
 };
 
-type Props = OwnProps & typeof Modal.defaultProps;
-
 export function Modal(props: Props) {
-  const { appElement, className, containerClassName, children, isOpen, ...rest } = props;
+  const { appElement = "#app", className, containerClassName, children, isOpen = false, ...rest } = props;
 
   React.useEffect(() => {
     ReactModal.setAppElement(appElement);

@@ -23,6 +23,7 @@ type OwnProps = {
   triggerButtonIcon?: string;
   triggerButtonIconDescription?: string;
   triggerButtonKind?: "primary" | "secondary" | "danger" | "ghost" | "tertiary";
+  children: ({ closeModal}: { closeModal: () => void}) => React.ReactNode
 };
 
 type State = any;

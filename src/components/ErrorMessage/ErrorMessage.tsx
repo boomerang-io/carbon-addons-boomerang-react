@@ -3,20 +3,14 @@ import cx from "classnames";
 import { Warning } from "@carbon/react/icons";
 import { prefix } from "../../internal/settings";
 
-Error.defaultProps = {
-  className: "",
-};
-
-type OwnProps = {
+type Props = {
   className?: string;
   style?: any;
   status?: string;
   statusText?: string;
 };
 
-type Props = OwnProps & typeof Error.defaultProps;
-
-function Error({ status, statusText, className, style, ...rest }: Props) {
+function Error({ status, statusText, className = "", style, ...rest }: Props) {
   let message;
   if (status && statusText) {
     message = <div className={`${prefix}--bmrg-error-message__status`}>{`Status: ${status} ${statusText}`}</div>;

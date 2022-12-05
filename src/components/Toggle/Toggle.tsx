@@ -5,13 +5,7 @@ import TooltipHover from "../TooltipHover";
 import { Information } from "@carbon/react/icons";
 import { prefix } from "../../internal/settings";
 
-ToggleComponent.defaultProps = {
-  orientation: "horizontal",
-  tooltipClassName: `${prefix}--bmrg-toggle__tooltip`,
-  tooltipProps: { direction: "top" },
-};
-
-type OwnProps = {
+type Props = {
   helperText?: React.ReactNode;
   label?: React.ReactNode;
   orientation?: "vertical" | "horizontal";
@@ -35,8 +29,6 @@ type OwnProps = {
   invalidText?: string;
 };
 
-type Props = OwnProps & typeof ToggleComponent.defaultProps;
-
 function ToggleComponent({
   helperText,
   id,
@@ -47,10 +39,10 @@ function ToggleComponent({
   labelText,
   labelA = "",
   labelB = "",
-  orientation,
-  tooltipClassName,
+  orientation = "horizontal",
+  tooltipClassName = `${prefix}--bmrg-toggle__tooltip`,
   tooltipContent,
-  tooltipProps,
+  tooltipProps = { direction: "top" },
   ...toggleProps
 }: Props) {
   const labelValue = label || labelText;

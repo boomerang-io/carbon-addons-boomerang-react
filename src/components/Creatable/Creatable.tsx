@@ -7,19 +7,7 @@ import { prefix } from "../../internal/settings";
 
 import { isAccessibleKeyDownEvent } from "../../tools/accessibility";
 
-CreatableComponent.defaultProps = {
-  buttonClassName: `${prefix}--bmrg-creatable__button`,
-  buttonContent: "Add",
-  createKeyValuePair: false,
-  labelText: "",
-  nonDeletable: false,
-  tagType: "teal",
-  tooltipClassName: `${prefix}--bmrg-creatable__tooltip`,
-  tooltipProps: { direction: "top" },
-  type: "text",
-};
-
-type OwnProps = {
+type Props = {
   buttonClassName?: string;
   buttonContent?: string;
   buttonProps?: any;
@@ -59,13 +47,11 @@ type OwnProps = {
   values?: any[];
 };
 
-type Props = OwnProps & typeof CreatableComponent.defaultProps;
-
 function CreatableComponent({
-  buttonClassName,
-  buttonContent,
+  buttonClassName = `${prefix}--bmrg-creatable__button`,
+  buttonContent =  "Add",
   buttonProps,
-  createKeyValuePair,
+  createKeyValuePair = false,
   disabled,
   id,
   initialValues: externalInitialValues,
@@ -78,8 +64,8 @@ function CreatableComponent({
   keyLabelText,
   keyPlaceholder,
   label,
-  labelText,
-  nonDeletable,
+  labelText = "",
+  nonDeletable = false,
   max,
   onKeyBlur,
   onValueBlur,
@@ -87,12 +73,12 @@ function CreatableComponent({
   onChange,
   placeholder,
   tagProps,
-  tagType,
+  tagType = "teal",
   textInputProps,
-  tooltipClassName,
+  tooltipClassName = `${prefix}--bmrg-creatable__tooltip`,
   tooltipContent,
-  tooltipProps,
-  type,
+  tooltipProps = { direction: "top" },
+  type = "text",
   valueHelperText,
   valueLabel,
   valueLabelText,

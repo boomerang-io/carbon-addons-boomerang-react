@@ -2,7 +2,7 @@ import React from "react";
 import cx from "classnames";
 import { prefix } from "../../internal/settings";
 
-type OwnProps = {
+type Props = {
   ariaExpanded?: boolean;
   children?: React.ReactNode;
   className?: string;
@@ -14,10 +14,8 @@ type OwnProps = {
   onKeyDown?: (...args: any[]) => any;
 };
 
-//type Props = OwnProps & typeof HeaderListItem.defaultProps;
-
-const HeaderListItem = (props: OwnProps) => {
-  const { children, className, href, isIcon, ariaExpanded, newNotifications, id, ...other } = props;
+const HeaderListItem = (props: Props) => {
+  const { children, className, href = "", isIcon, ariaExpanded, newNotifications, id, ...other } = props;
 
   const headerListItemClasses = cx(`${prefix}--bmrg-header-list__item`, className);
 
@@ -48,10 +46,6 @@ const HeaderListItem = (props: OwnProps) => {
       )}
     </div>
   );
-};
-
-HeaderListItem.defaultProps = {
-  href: "",
 };
 
 export default HeaderListItem;

@@ -1,6 +1,6 @@
 import React from "react";
 
-const GraphicWrangler = (props: any) => (
+const GraphicWrangler = (props: React.SVGProps<SVGSVGElement>) => (
   <svg id="graphic-wrangler" data-name="graphic-wrangler" viewBox="0 0 1073.71 838.38" {...props}>
     <defs>
       <style>

@@ -1,6 +1,6 @@
 import React from "react";
 
-function ForbiddenErrorBackground(props: any) {
+function ForbiddenErrorBackground(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
       id="prefix__Isometric_Graphics"

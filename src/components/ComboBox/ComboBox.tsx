@@ -5,14 +5,8 @@ import { Information } from "@carbon/react/icons";
 import { prefix } from "../../internal/settings";
 import { ComboBox } from "@carbon/react";
 
-ComboBoxComponent.defaultProps = {
-  disableClear: false,
-  tooltipClassName: `${prefix}--bmrg-select__tooltip`,
-  tooltipProps: { direction: "top" },
-};
-
-type OwnProps = {
-  disableClear?: boolean;
+type Props = {
+  disableClear: boolean;
   labelText?: React.ReactNode;
   label?: React.ReactNode;
   shouldFilterItem?: ((...args: any[]) => any) | boolean;
@@ -47,17 +41,15 @@ type OwnProps = {
   warnText?: React.ReactNode;
 };
 
-type Props = OwnProps & typeof ComboBoxComponent.defaultProps;
-
 function ComboBoxComponent({
-  disableClear,
+  disableClear = false,
   id,
   label,
   labelText,
   titleText,
-  tooltipClassName,
+  tooltipClassName = `${prefix}--bmrg-select__tooltip`,
   tooltipContent,
-  tooltipProps,
+  tooltipProps = { direction: "top" },
   onChange,
   onInputChange,
   shouldFilterItem,

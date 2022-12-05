@@ -3,13 +3,7 @@ import { prefix } from "../../internal/settings";
 
 import Option from "./Option";
 
-OptionsGrid.defaultProps = {
-  className: `${prefix}--bmrg-optionsGrid`,
-  displayProperty: "name",
-  selectProperty: "id",
-};
-
-type OwnProps = {
+type Props = {
   className?: string;
   columns: number;
   data: any[];
@@ -21,16 +15,14 @@ type OwnProps = {
   width?: string;
 };
 
-type Props = OwnProps & typeof OptionsGrid.defaultProps;
-
 function OptionsGrid({
-  className,
+  className = `${prefix}--bmrg-optionsGrid`,
   columns,
   data,
-  displayProperty,
+  displayProperty = "name",
   onSelect,
   selectedItems,
-  selectProperty,
+  selectProperty = "id",
   style,
   ...rest
 }: Props) {

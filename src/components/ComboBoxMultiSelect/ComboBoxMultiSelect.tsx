@@ -5,12 +5,6 @@ import { Information } from "@carbon/react/icons";
 import { prefix } from "../../internal/settings";
 import MultiSelect from "./MultiSelect";
 
-ComboBoxMultiSelect.defaultProps = {
-  disableClear: false,
-  tooltipClassName: `${prefix}--bmrg-multi-select__tooltip`,
-  tooltipProps: { direction: "top" },
-};
-
 /**
  * For now we expect that if the prop value is a csv string,
  * then the items would be either in the key:value or value:label format.
@@ -26,7 +20,7 @@ function getFilteredItems({ items, selectedItems }: any) {
 (ts-migrate) TODO: Migrate the remaining prop types
 ...MultiSelect.propTypes
 */
-type OwnProps = {
+type Props = {
   disableClear?: boolean;
   id: string;
   labelText?: string;
@@ -40,10 +34,8 @@ type OwnProps = {
   selectedItems: any;
 };
 
-type Props = OwnProps & typeof ComboBoxMultiSelect.defaultProps;
-
 function ComboBoxMultiSelect({
-  disableClear,
+  disableClear = false,
   id,
   initialSelectedItems,
   items,
@@ -51,9 +43,9 @@ function ComboBoxMultiSelect({
   labelText,
   selectedItems,
   titleText,
-  tooltipClassName,
+  tooltipClassName = `${prefix}--bmrg-multi-select__tooltip`,
   tooltipContent,
-  tooltipProps,
+  tooltipProps = { direction: "top" },
   ...multiSelectProps
 }: Props) {
   const labelValue = titleText || label || labelText;

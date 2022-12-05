@@ -1,17 +1,11 @@
 import React from "react";
 import ForbiddenErrorBackground from "./ForbiddenErrorBackground";
 import GraphicWrangler from "../GraphicWrangler";
-
 import ErrorPage from "../ErrorPage";
 import ErrorPageCore from "../ErrorPageCore";
-
 import { prefix } from "../../internal/settings";
 
-Error403.defaultProps = {
-  theme: "core",
-};
-
-type OwnProps = {
+type Props = {
   header?: string | null;
   title?: string | null;
   message?: string | null;
@@ -19,16 +13,14 @@ type OwnProps = {
   theme?: "core" | "boomerang";
 };
 
-type Props = OwnProps & typeof Error403.defaultProps;
-
-export default function Error403(props: Props) {
-  return props?.theme === "boomerang" ? (
+export default function Error403({ theme = "core", ...rest }: Props) {
+  return theme === "boomerang" ? (
     <ErrorPage
       header="403 - Access Forbidden"
       title="You’ve found yourself in deep water."
       message="You shouldn’t be here - contact the local authorities if you disagree."
       graphic={<GraphicWrangler />}
-      {...props}
+      {...rest}
     />
   ) : (
     <ErrorPageCore
@@ -36,7 +28,7 @@ export default function Error403(props: Props) {
       title="Looks like you've taken a wrong turn."
       message="You shouldn’t be here - contact the local authorities if you disagree."
       graphic={<ForbiddenErrorBackground className={`${prefix}--bmrg-error-page-core__background`} />}
-      {...props}
+      {...rest}
     />
   );
 }

@@ -13,10 +13,8 @@ import ToastNotification from "../Notifications/ToastNotification";
 
 /**
  * Helper to format date timestamp
- * @param {string} timestamp
- * @returns formatted date string
  */
-function formatDateTimestamp(timestamp: any) {
+function formatDateTimestamp(timestamp: string) {
   return new Date(timestamp).toLocaleDateString("en-us", {
     year: "numeric",
     month: "long",
@@ -24,20 +22,17 @@ function formatDateTimestamp(timestamp: any) {
   });
 }
 
-PrivacyStatement.defaultProps = {
-  organization: "the platform",
-  platformEmail: "isesupp@us.ibm.com",
-};
-
-type OwnProps = {
+type Props = {
   baseServiceUrl: string;
   organization?: string;
   platformEmail?: string;
 };
 
-type Props = OwnProps & typeof PrivacyStatement.defaultProps;
-
-function PrivacyStatement({ baseServiceUrl, organization, platformEmail }: Props) {
+function PrivacyStatement({
+  baseServiceUrl,
+  organization = "the platform",
+  platformEmail = "isesupp@us.ibm.com",
+}: Props) {
   const statementUrl = serviceUrl.getStatement({ baseServiceUrl });
   const statementQuery = useQuery({
     queryKey: statementUrl,
@@ -46,7 +41,7 @@ function PrivacyStatement({ baseServiceUrl, organization, platformEmail }: Props
 
   const { mutateAsync, error: mutateUserConsentError } = useMutation(resolver.putUserConsent);
 
-  async function handleSubmit({ closeAlertModal, closeModal }: any) {
+  async function handleSubmit({ closeAlertModal, closeModal }: { closeAlertModal: () => void, closeModal: () => void }) {
     const body = {
       hasConsented: false,
       version: statementQuery.data.version,

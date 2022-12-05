@@ -34,7 +34,13 @@ type OwnProps = {
 type Props = OwnProps & typeof FlowModalContainer.defaultProps;
 
 export function FlowModalContainer(props: Props) {
-  const [state, setState] = useSetState({
+  const [state, setState] = useSetState<{
+    isConfirmModalOpen: boolean;
+    isOpen: boolean;
+    shouldConfirmModalClose: boolean;
+    step: number;
+    [key: string]: any;
+  }>({
     formData: new Map(),
     isConfirmModalOpen: false,
     isOpen: props.isOpen,
@@ -60,14 +66,14 @@ export function FlowModalContainer(props: Props) {
    * Change step to next one
    */
   function requestNextStep() {
-    goToStep((state as any).step + 1);
+    goToStep(state.step + 1);
   }
 
   /**
    * Change step to previous one
    */
   function requestPreviousStep() {
-    goToStep((state as any).step - 1);
+    goToStep(state.step - 1);
   }
 
   /**
@@ -75,9 +81,9 @@ export function FlowModalContainer(props: Props) {
    * @param {obj} data - the new data to be saved
    */
   function saveValues(data: any) {
-    setState({ formData: { ...(state as any).formData, ...data } });
+    setState({ formData: { ...state.formData, ...data } });
     if (typeof props.onFormDataChange === "function") {
-      props.onFormDataChange((state as any).formData);
+      props.onFormDataChange(state.formData);
     }
   }
 
@@ -96,7 +102,7 @@ export function FlowModalContainer(props: Props) {
     });
 
     if (typeof props.onFormDataChange === "function") {
-      props.onFormDataChange((state as any).formData);
+      props.onFormDataChange(state.formData);
     }
   }
 
@@ -118,7 +124,7 @@ export function FlowModalContainer(props: Props) {
    * Check if should confirm exit with confirm modal or just exit modal flow
    */
   function handleShouldCloseModal() {
-    if ((state as any).shouldConfirmModalClose) {
+    if (state.shouldConfirmModalClose) {
       setState({ isConfirmModalOpen: true });
     } else {
       handleCloseModal();
@@ -169,7 +175,7 @@ export function FlowModalContainer(props: Props) {
           (props as any).size ? `${prefix}--modal-container--${(props as any).size}` : "modal-container-fix-width",
           containerClassName
         )}
-        isOpen={(state as any).isOpen}
+        isOpen={state.isOpen}
         onRequestClose={handleShouldCloseModal}
         shouldCloseOnOverlayClick={false}
         {...restComposedModalProps}
@@ -179,32 +185,32 @@ export function FlowModalContainer(props: Props) {
         </ModalHeader>
 
         {Array.isArray(props.progressSteps) && (
-          <ProgressIndicator currentIndex={(state as any).step}>
+          <ProgressIndicator currentIndex={state.step}>
             {props.progressSteps.map((stepProps, index) => (
               <ProgressStep key={index} {...stepProps} />
             ))}
           </ProgressIndicator>
         )}
         {childToRender &&
-          (state as any).isOpen &&
+          state.isOpen &&
           React.cloneElement(childToRender, {
             closeModal: handleShouldCloseModal,
             forceCloseModal: handleCloseModal,
-            formData: (state as any).formData,
+            formData: state.formData,
             goToStep,
             requestNextStep,
             requestPreviousStep,
             resetInitialState,
             saveValues,
             setShouldConfirmModalClose: handleSetShouldConfirmModalClose,
-            shouldConfirmModalClose: (state as any).shouldConfirmModalClose,
-            step: (state as any).step,
+            shouldConfirmModalClose: state.shouldConfirmModalClose,
+            step: state.step,
           })}
         <ConfirmModal
           affirmativeAction={handleCloseModal}
           appElement={props.appElement}
           negativeAction={closeConfirmModal}
-          isOpen={(state as any).isConfirmModalOpen}
+          isOpen={state.isConfirmModalOpen}
           onCloseModal={closeConfirmModal}
           {...props.confirmModalProps}
         />

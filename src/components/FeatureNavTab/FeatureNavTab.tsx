@@ -4,15 +4,7 @@ import cx from "classnames";
 import { SkeletonPlaceholder } from "@carbon/react";
 import { prefix } from "../../internal/settings";
 
-FeatureNavTab.defaultProps = {
-  activeClassName: "",
-  className: "",
-  disabled: false,
-  isLoading: false,
-  label: "",
-};
-
-type OwnProps = {
+type Props = {
   activeClassName?: string;
   className?: string;
   disabled?: boolean;
@@ -22,9 +14,15 @@ type OwnProps = {
   to: string;
 };
 
-type Props = OwnProps & typeof FeatureNavTab.defaultProps;
-
-function FeatureNavTab({ activeClassName, className, disabled, isLoading, label, style, ...rest }: Props) {
+function FeatureNavTab({
+  activeClassName = "",
+  className = "",
+  disabled = false,
+  isLoading = false,
+  label = "",
+  style,
+  ...rest
+}: Props) {
   const classNames = cx(
     `${prefix}--tabs__nav-item`,
     `${prefix}--tabs__nav-link`,

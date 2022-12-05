@@ -1,5 +1,4 @@
 import React from "react";
-
 export interface DynamicInput extends FormInput, Government {}
 
 export interface FormInput {

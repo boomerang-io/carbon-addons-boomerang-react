@@ -3,18 +3,12 @@ import cx from "classnames";
 import { NavLink } from "react-router-dom";
 import { prefix } from "../../internal/settings";
 
-SidenavLinks.defaultProps = {
-  theme: "bmrg-black",
-};
-
-type OwnProps = {
+type Props = {
   navItems: any[];
   theme?: string;
 };
 
-type Props = OwnProps & typeof SidenavLinks.defaultProps;
-
-function SidenavLinks({ navItems, theme, ...rest }: Props) {
+function SidenavLinks({ navItems, theme = "bmrg-black", ...rest }: Props) {
   const linkClassNames = cx(`${prefix}--bmrg-sidenav-links__link`, `--${theme}`);
   const textClassNames = cx(`${prefix}--bmrg-sidenav-links__text`, `--${theme}`);
   return (

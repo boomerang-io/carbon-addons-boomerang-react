@@ -2,17 +2,11 @@ import React from "react";
 import ErrorDragon from "../ErrorDragon";
 import ErrorPageCore from "../ErrorPageCore";
 
-ErrorFullPage.defaultProps = {
-  theme: "core",
-};
-
-type OwnProps = {
+type Props = {
   theme?: "core" | "boomerang";
   statusUrl: string;
 };
 
-type Props = OwnProps & typeof ErrorFullPage.defaultProps;
-
-export default function ErrorFullPage(props: Props) {
-  return props?.theme === "boomerang" ? <ErrorDragon {...props} /> : <ErrorPageCore {...props} />;
+export default function ErrorFullPage({ theme = "core", ...rest }: Props) {
+  return theme === "boomerang" ? <ErrorDragon {...rest} /> : <ErrorPageCore {...rest} />;
 }

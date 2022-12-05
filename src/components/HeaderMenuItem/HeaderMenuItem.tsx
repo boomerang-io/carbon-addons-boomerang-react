@@ -20,12 +20,7 @@ const iconMapping = {
   idea: <Idea size={16} fill={iconFill} className={iconClassName} />,
 };
 
-HeaderMenuItem.defaultProps = {
-  className: "",
-  iconName: "launch",
-};
-
-type OwnProps = {
+type Props = {
   altIconText?: string;
   className?: string;
   children?: any;
@@ -37,13 +32,11 @@ type OwnProps = {
   preventCloseOnClickOutside: boolean;
 };
 
-type Props = OwnProps & typeof HeaderMenuItem.defaultProps;
-
 function HeaderMenuItem({
   children,
-  className,
+  className = "",
   forwardRef,
-  iconName,
+  iconName = "launch",
   preventCloseOnClickOutside,
   style,
   text,

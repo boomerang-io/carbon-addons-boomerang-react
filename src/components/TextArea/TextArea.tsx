@@ -31,7 +31,18 @@ type Props = {
 };
 
 const TextAreaComponent = React.forwardRef<any, Props>(function TextAreaComponent(
-  { id, label, labelText, max, maxCount, tooltipClassName, tooltipContent, tooltipProps, value, ...textAreaProps },
+  {
+    id,
+    label,
+    labelText,
+    max,
+    maxCount,
+    tooltipClassName = `${prefix}--bmrg-text-area__tooltip`,
+    tooltipContent,
+    tooltipProps = { direction: "top" },
+    value,
+    ...textAreaProps
+  },
   ref
 ) {
   const labelValue = label || labelText;
@@ -67,10 +78,5 @@ const TextAreaComponent = React.forwardRef<any, Props>(function TextAreaComponen
     </div>
   );
 });
-
-TextAreaComponent.defaultProps = {
-  tooltipClassName: `${prefix}--bmrg-text-area__tooltip`,
-  tooltipProps: { direction: "top" },
-};
 
 export default TextAreaComponent;

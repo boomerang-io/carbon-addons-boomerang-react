@@ -7,11 +7,7 @@ import SidenavContent from "./SidenavContent";
 import SidenavFooter from "./SidenavFooter";
 import SidenavLinks from "./SidenavLinks";
 
-Sidenav.defaultProps = {
-  theme: "bmrg-black",
-};
-
-type OwnProps = {
+type Props = {
   content?: (...args: any[]) => any;
   footer?: (...args: any[]) => any;
   header?: (...args: any[]) => any;
@@ -20,9 +16,7 @@ type OwnProps = {
   theme?: string;
 };
 
-type Props = OwnProps & typeof Sidenav.defaultProps;
-
-function Sidenav({ header, hidden, content, navItems, footer, theme, ...rest }: Props) {
+function Sidenav({ header, hidden, content, navItems, footer, theme = "bmrg-black", ...rest }: Props) {
   const classNames = cx(`${prefix}--bmrg-sidenav`, `--${theme}`, {
     "--hidden": hidden,
   });

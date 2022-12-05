@@ -4,13 +4,7 @@ import TooltipHover from "../TooltipHover";
 import { Information } from "@carbon/react/icons";
 import { prefix } from "../../internal/settings";
 
-CheckboxListComponent.defaultProps = {
-  initialSelectedItems: [],
-  tooltipClassName: `${prefix}--bmrg-checkbox-list__tooltip`,
-  tooltipProps: { direction: "top" },
-};
-
-type OwnProps = {
+type Props = {
   checkboxProps?: any;
   disabled?: boolean;
   helperText?: string;
@@ -26,22 +20,20 @@ type OwnProps = {
   tooltipProps?: any;
 };
 
-type Props = OwnProps & typeof CheckboxListComponent.defaultProps;
-
 function CheckboxListComponent({
   checkboxProps,
   disabled,
   helperText,
   id,
-  initialSelectedItems,
+  initialSelectedItems = [],
   label,
   labelText,
   onChange,
   options,
   selectedItems: propsSelectedItems,
-  tooltipClassName,
+  tooltipClassName = `${prefix}--bmrg-checkbox-list__tooltip`,
   tooltipContent,
-  tooltipProps,
+  tooltipProps = { direction: "top" },
 }: Props) {
   const [stateSelectedItems, setSelectedItems] = useState<any[]>(initialSelectedItems);
 

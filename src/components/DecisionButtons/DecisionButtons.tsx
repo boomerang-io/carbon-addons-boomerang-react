@@ -9,15 +9,7 @@ const ButtonTypes = {
   Positive: "positive",
 };
 
-DecisionButtons.defaultProps = {
-  canUncheck: false,
-  orientation: "horizontal",
-  labelPosition: "right",
-  onChange: () => {},
-  tooltipClassName: `${prefix}--bmrg-radio-group__tooltip`,
-};
-
-type OwnProps = {
+type Props = {
   canUncheck?: boolean;
   children?: React.ReactNode;
   className?: string;
@@ -27,6 +19,7 @@ type OwnProps = {
   id?: string;
   items: any[];
   label?: string;
+  labelPosition?: string;
   labelText?: string;
   name: string;
   onChange?: (...args: any[]) => any;
@@ -37,10 +30,8 @@ type OwnProps = {
   selectedItem?: string | number;
 };
 
-type Props = OwnProps & typeof DecisionButtons.defaultProps;
-
 function DecisionButtons({
-  canUncheck,
+  canUncheck = false,
   className,
   defaultSelected,
   disabled,
@@ -48,11 +39,12 @@ function DecisionButtons({
   id,
   items,
   label,
+  labelPosition = "right",
   labelText,
   name,
-  onChange,
-  orientation,
-  tooltipClassName,
+  onChange = () => void 0,
+  orientation = "horizontal",
+  tooltipClassName = `${prefix}--bmrg-radio-group__tooltip`,
   tooltipContent,
   tooltipProps,
   selectedItem: propsSelectedItem,

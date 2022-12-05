@@ -1,6 +1,6 @@
 import React from "react";
 
-function GenericErrorBackground(props: any) {
+function GenericErrorBackground(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
       id="prefix__Isometric_Graphics"

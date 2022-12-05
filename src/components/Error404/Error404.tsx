@@ -1,17 +1,11 @@
 import React from "react";
 import NotFoundErrorBackground from "./NotFoundErrorBackground";
 import GraphicLoch from "../GraphicLoch";
-
 import ErrorPage from "../ErrorPage";
 import ErrorPageCore from "../ErrorPageCore";
-
 import { prefix } from "../../internal/settings";
 
-Error404.defaultProps = {
-  theme: "core",
-};
-
-type OwnProps = {
+type Props = {
   header?: string | null;
   title?: string | null;
   message?: string | null;
@@ -19,16 +13,14 @@ type OwnProps = {
   theme?: "core" | "boomerang";
 };
 
-type Props = OwnProps & typeof Error404.defaultProps;
-
-export default function Error404(props: Props) {
-  return props?.theme === "boomerang" ? (
+export default function Error404({ theme = "core", ...rest }: Props) {
+  return theme === "boomerang" ? (
     <ErrorPage
       header="404 - Page Not Found"
       title="Crikey. Something seems to have swam off with this page."
       message="Try refreshing, or contact the local authorities."
       graphic={<GraphicLoch />}
-      {...props}
+      {...rest}
     />
   ) : (
     <ErrorPageCore
@@ -36,7 +28,7 @@ export default function Error404(props: Props) {
       title="We spaced out and couldn’t find your page."
       message="Try refreshing, or contact the local authorities."
       graphic={<NotFoundErrorBackground className={`${prefix}--bmrg-error-page-core__background`} />}
-      {...props}
+      {...rest}
     />
   );
 }

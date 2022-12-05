@@ -277,7 +277,8 @@ function generateYupAst({
 
       // Create a customValidator for each input b/c regex deserialization
       // does not work currently
-      if (input.pattern) {
+      const { pattern } = input;
+      if (typeof pattern === "string") {
         addCustomValidator(
           `${input.key}-matches`,
           Yup.string().test(
@@ -286,7 +287,7 @@ function generateYupAst({
             (value) => {
               if (!input.required && !Boolean(value)) {
                 return true;
-              } else return new RegExp(input.pattern).test(value);
+              } else return new RegExp(pattern).test(value as string);
             }
           )
         );
@@ -336,16 +337,16 @@ function generateYupAst({
     ) {
       if (useCSVforArrays) {
         yupValidationArray.push(["yup.string"]);
-
-        if (input.pattern) {
+        const { pattern } = input;
+        if (pattern === typeof "string") {
           addCustomValidator(
             `${input.key}-matches`,
             Yup.string().test(
               `${input.key}-matches`,
               input.patternInvalidText || `Enter values that matches pattern: ${input.pattern}`,
               (csv) => {
-                const regexTester = new RegExp(input.pattern);
-                return csv.split(",").every((val) => regexTester.test(val));
+                const regexTester = new RegExp(pattern);
+                return csv?.split(",").every((val) => regexTester.test(val)) ?? false;
               }
             )
           );
@@ -354,15 +355,16 @@ function generateYupAst({
       } else {
         yupValidationArray.push(["yup.array"]);
 
-        if (input.pattern) {
+        const { pattern } = input;
+        if (typeof pattern === "string") {
           addCustomValidator(
             `${input.key}-matches`,
             Yup.array().test(
               `${input.key}-matches`,
-              input.patternInvalidText || `Enter values that matches pattern: ${input.pattern}`,
+              input.patternInvalidText || `Enter values that matches pattern: ${pattern}`,
               (values) => {
-                const regexTester = new RegExp(input.pattern);
-                return values?.every((val) => regexTester.test(val));
+                const regexTester = new RegExp(pattern);
+                return values?.every((val) => regexTester.test(val)) ?? false;
               }
             )
           );
@@ -707,13 +709,10 @@ const TYPE_PROPS = {
   }),
 };
 
-/**
- *  Determine the addition type props to pass the component
- * @param {string} type - type of input
- * @param {Object} otherProps - additional functions to pass props to inputs
- * @returns {Function}
- */
-function determineTypeProps(type: string, otherProps: any): { typeProps: Function; additionalTypeProps: Function } {
+function determineTypeProps(
+  type: DynamicInput["type"],
+  otherProps: any
+): { typeProps: Function; additionalTypeProps: Function } {
   const {
     checkboxListProps,
     creatableProps,

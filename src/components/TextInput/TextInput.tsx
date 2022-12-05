@@ -32,7 +32,15 @@ type Props = {
 };
 
 const TextInputComponent = React.forwardRef<any, Props>(function TextInputComponent(
-  { id, label, labelText, tooltipClassName, tooltipContent, tooltipProps, ...textInputProps },
+  {
+    id,
+    label,
+    labelText,
+    tooltipClassName = `${prefix}--bmrg-text-input__tooltip`,
+    tooltipContent,
+    tooltipProps = { direction: "top" },
+    ...textInputProps
+  },
   ref
 ) {
   const labelValue = label || labelText;
@@ -60,10 +68,5 @@ const TextInputComponent = React.forwardRef<any, Props>(function TextInputCompon
     </div>
   );
 });
-
-TextInputComponent.defaultProps = {
-  tooltipClassName: `${prefix}--bmrg-text-input__tooltip`,
-  tooltipProps: { direction: "top" },
-};
 
 export default TextInputComponent;

@@ -3,12 +3,7 @@ import cx from "classnames";
 import { prefix } from "../../internal/settings";
 import GenericErrorBackground from "./GenericErrorBackground";
 
-ErrorPageCore.defaultProps = {
-  header: "Oops!",
-  title: "Something looks off, but we're getting a handle of it.",
-};
-
-type OwnProps = {
+type Props = {
   className?: string;
   graphic?: React.ReactNode;
   header?: any;
@@ -18,9 +13,15 @@ type OwnProps = {
   title?: any;
 };
 
-type Props = OwnProps & typeof ErrorPageCore.defaultProps;
-
-export default function ErrorPageCore({ className, graphic, header, message, statusUrl, style, title }: Props) {
+export default function ErrorPageCore({
+  className,
+  graphic,
+  header = "Oops!",
+  message,
+  statusUrl,
+  style,
+  title = "Something looks off, but we're getting a handle of it.",
+}: Props) {
   return (
     <div className={cx(`${prefix}--bmrg-error-page-core`, className)} style={style}>
       {graphic ?? <GenericErrorBackground className={`${prefix}--bmrg-error-page-core__background`} />}

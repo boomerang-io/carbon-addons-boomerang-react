@@ -3,18 +3,7 @@ import cx from "classnames";
 import { SkeletonPlaceholder } from "@carbon/react";
 import { prefix } from "../../internal/settings";
 
-FeatureHeader.defaultProps = {
-  className: "",
-  contentClassName: "",
-  skeletonClassName: "",
-  navClassName: "",
-  headerClassName: "",
-  footerClassName: "",
-  includeBorder: true,
-  isLoading: false,
-};
-
-type OwnFeatureHeaderProps = {
+type FeatureHeaderProps = {
   actions?: React.ReactNode;
   children?: React.ReactNode;
   className?: string;
@@ -32,23 +21,21 @@ type OwnFeatureHeaderProps = {
   footerClassName?: string;
 };
 
-type FeatureHeaderProps = OwnFeatureHeaderProps & typeof FeatureHeader.defaultProps;
-
 export function FeatureHeader({
   actions,
   children,
-  className,
+  className = "",
   footer,
   header,
-  includeBorder,
-  isLoading,
+  includeBorder = true,
+  isLoading = false,
   nav,
   style,
-  contentClassName,
-  footerClassName,
-  headerClassName,
-  navClassName,
-  skeletonClassName,
+  contentClassName = "",
+  footerClassName = "",
+  headerClassName = "",
+  navClassName = "",
+  skeletonClassName = "",
   ...rest
 }: FeatureHeaderProps) {
   const containerClassNames = cx(`${prefix}--bmrg-feature-header`, className, {
@@ -79,21 +66,20 @@ export function FeatureHeader({
   );
 }
 
-FeatureHeaderTitle.defaultProps = {
-  className: "",
-  element: "h1",
-};
-
-type OwnFeatureHeaderTitleProps = {
+type FeatureHeaderTitleProps = {
   children?: React.ReactElement | string;
   className?: string;
   element?: any;
   style?: React.CSSProperties;
 };
 
-type FeatureHeaderTitleProps = OwnFeatureHeaderTitleProps & typeof FeatureHeaderTitle.defaultProps;
-
-export function FeatureHeaderTitle({ element: Element, children, className, style, ...rest }: FeatureHeaderTitleProps) {
+export function FeatureHeaderTitle({
+  element: Element = "h1",
+  children,
+  className = "",
+  style,
+  ...rest
+}: FeatureHeaderTitleProps) {
   const classNames = cx(`${prefix}--bmrg-feature-header-title`, className);
   return (
     <Element className={classNames} style={style} {...rest}>

@@ -5,13 +5,7 @@ import { prefix } from "../../internal/settings";
 import loadingMessages from "./loadingMessages";
 import LoadingAnimationContent from "./LoadingAnimationContent";
 
-LoadingAnimation.defaultProps = {
-  centered: false,
-  loading: true,
-  wait: 200,
-};
-
-type OwnProps = {
+type Props = {
   centered?: boolean;
   className?: string;
   message?: string | any[];
@@ -19,11 +13,9 @@ type OwnProps = {
   wait?: number;
 };
 
-type Props = OwnProps & typeof LoadingAnimation.defaultProps;
-
 /** Loading animation with integrated loading svg, and messages to be randomly selected by default and
  * configurable time to wait to render to prevent flickering on quickly resolved requests */
-function LoadingAnimation({ centered, className, loading, message, wait, ...rest }: Props) {
+function LoadingAnimation({ centered = false, className, loading = true, message, wait = 200, ...rest }: Props) {
   const [shouldRender, setShouldRender] = useState(false);
 
   useEffect(() => {

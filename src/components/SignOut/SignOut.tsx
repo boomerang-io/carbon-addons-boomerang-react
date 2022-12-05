@@ -5,13 +5,9 @@ import { ModalHeader, ModalBody, ModalFooter } from "@carbon/react";
 
 import HeaderMenuItem from "../HeaderMenuItem";
 
-SignOutContainer.defaultProps = {};
-
-type OwnProps = {
+type Props = {
   signOutLink: string;
 };
-
-type Props = OwnProps & typeof SignOutContainer.defaultProps;
 
 function SignOutContainer({ signOutLink }: Props) {
   return (

@@ -1,13 +1,15 @@
 import { useCallback, useState } from "react";
 
-const useSetState = (initialState = {}) => {
-  const [state, set] = useState<any>(initialState);
-  const setState = useCallback(
-    (patch) => {
-      set((prevState: any) => Object.assign({}, prevState, patch instanceof Function ? patch(prevState) : patch));
-    },
-    [set]
-  );
+// https://github.com/streamich/react-use/blob/master/src/useSetState.ts
+const useSetState = <T extends object>(
+  initialState: T = {} as T
+): [T, (patch: Partial<T> | ((prevState: T) => Partial<T>)) => void] => {
+  const [state, set] = useState<T>(initialState);
+  const setState = useCallback((patch) => {
+    set((prevState) => Object.assign({}, prevState, patch instanceof Function ? patch(prevState) : patch));
+  }, []);
+
   return [state, setState];
 };
+
 export default useSetState;

@@ -1,17 +1,11 @@
 import React, { useState, useEffect } from "react";
 
-DelayedRender.defaultProps = {
-  delay: 300,
-};
-
-type OwnProps = {
+type Props = {
   children: React.ReactElement;
   delay?: number;
 };
 
-type Props = OwnProps & typeof DelayedRender.defaultProps;
-
-function DelayedRender({ children, delay }: Props) {
+function DelayedRender({ children, delay = 300 }: Props) {
   const [shouldRender, setShouldRender] = useState(false);
 
   useEffect(() => {

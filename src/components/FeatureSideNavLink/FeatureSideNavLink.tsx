@@ -3,23 +3,19 @@ import { NavLink } from "react-router-dom";
 import { prefix } from "../../internal/settings";
 import cx from "classnames";
 
-FeatureSideNavLink.defaultProps = {
-  hasDivider: false,
-};
 
-type OwnProps = {
+type Props = {
   activeClassName?: string;
   className?: string;
   children?: string | number | ((...args: any[]) => any) | any | React.ReactNode;
+  hasDivider: boolean
   icon?: Function;
   iconProps?: any;
   to: string;
 };
 
-type Props = OwnProps & typeof FeatureSideNavLink.defaultProps;
-
 function FeatureSideNavLink(props: Props) {
-  const { children, className, activeClassName, iconProps, icon: Icon, hasDivider, ...rest } = props;
+  const { children, className, activeClassName, iconProps, icon: Icon, hasDivider = false, ...rest } = props;
   return (
     <>
       <NavLink

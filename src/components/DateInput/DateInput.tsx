@@ -6,6 +6,8 @@ import { Information } from "@carbon/react/icons";
 import { DATE_TYPES } from "../../internal/DataDrivenInputTypes";
 import { prefix } from "../../internal/settings";
 
+type DATE_TYPE = typeof DATE_TYPES[keyof typeof DATE_TYPES];
+
 type Props = {
   id: string;
   dateFormat?: string;
@@ -23,7 +25,7 @@ type Props = {
   tooltipClassName?: string;
   tooltipContent?: React.ReactNode;
   tooltipProps?: any;
-  type?: any; // TODO: PropTypes.oneOf([DATE_TYPES.DATE, DATE_TYPES.DATE_RANGE])
+  type?: DATE_TYPE;
   value: string | string[];
 };
 
@@ -31,7 +33,7 @@ const DateInputComponent = React.forwardRef<any, Props>(function DateInputCompon
   {
     id,
     dateFormat,
-    datePickerProps,
+    datePickerProps = {},
     disabled,
     helperText,
     invalid,
@@ -42,10 +44,10 @@ const DateInputComponent = React.forwardRef<any, Props>(function DateInputCompon
     onCalendarChange,
     onChange,
     readOnly,
-    tooltipClassName,
+    tooltipClassName = `${prefix}--bmrg-date-input__tooltip`,
     tooltipContent,
-    tooltipProps,
-    type,
+    tooltipProps = { direction: "top" },
+    type = DATE_TYPES.DATE,
     value,
     ...dateInputProps
   },
@@ -170,12 +172,5 @@ const DateInputComponent = React.forwardRef<any, Props>(function DateInputCompon
     );
   }
 });
-
-DateInputComponent.defaultProps = {
-  datePickerProps: {},
-  tooltipClassName: `${prefix}--bmrg-date-input__tooltip`,
-  tooltipProps: { direction: "top" },
-  type: DATE_TYPES.DATE,
-};
 
 export default DateInputComponent;

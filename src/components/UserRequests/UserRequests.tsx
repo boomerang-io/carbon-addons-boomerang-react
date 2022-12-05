@@ -3,14 +3,7 @@ import cx from "classnames";
 import { Button } from "@carbon/react";
 import { prefix } from "../../internal/settings";
 
-UserRequests.defaultProps = {
-  requestSummary: {
-    requireUserAction: 0,
-    submittedByUser: 0,
-  },
-};
-
-type OwnProps = {
+type Props = {
   baseLaunchEnvUrl?: string;
   requestSummary?: {
     requireUserAction: number;
@@ -18,10 +11,8 @@ type OwnProps = {
   };
 };
 
-type Props = OwnProps & typeof UserRequests.defaultProps;
-
 function UserRequests(props: Props) {
-  const { baseLaunchEnvUrl, requestSummary } = props;
+  const { baseLaunchEnvUrl, requestSummary = { requireUserAction: 0, submittedByUser: 0 } } = props;
   const { requireUserAction, submittedByUser } = requestSummary;
   const existOwnedRequests = requireUserAction > 0;
   const existUserRequests = submittedByUser > 0;

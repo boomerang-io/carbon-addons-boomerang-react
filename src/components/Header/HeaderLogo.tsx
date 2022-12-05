@@ -1,11 +1,7 @@
 import React from "react";
 import { prefix } from "../../internal/settings";
 
-HeaderLogo.defaultProps = {
-  href: "/",
-};
-
-type OwnProps = {
+type Props = {
   appName?: string;
   children?: React.ReactNode;
   className?: string;
@@ -14,10 +10,8 @@ type OwnProps = {
   platformName?: string;
 };
 
-type Props = OwnProps & typeof HeaderLogo.defaultProps;
-
 function HeaderLogo(props: Props) {
-  const { appName, children, href, navLinks, platformName } = props;
+  const { appName, children, href = "/", navLinks, platformName } = props;
 
   return (
     <div className={`${prefix}--bmrg-header-brand`}>

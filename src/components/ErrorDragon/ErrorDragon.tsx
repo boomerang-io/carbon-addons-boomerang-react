@@ -4,14 +4,7 @@ import { prefix } from "../../internal/settings";
 
 import ErrorGraphic from "./assets/ErrorGraphic";
 
-ErrorDragon.defaultProps = {
-  className: "",
-  header: "Don’t lose your daks",
-  message: "And if you could be so kind, please send us a bug report.",
-  statusText: "View Support Center",
-  title: "Cheers! You found an error. Try reloading the page.",
-};
-interface OwnProps {
+type Props = {
   className?: string;
   header?: string;
   message?: string;
@@ -19,11 +12,18 @@ interface OwnProps {
   statusText?: string;
   statusUrl: string;
   title?: string;
-}
+};
 
-type Props = OwnProps & typeof ErrorDragon.defaultProps;
-
-function ErrorDragon({ className, header, message, style, statusText, statusUrl, title, ...rest }: Props) {
+function ErrorDragon({
+  className = "",
+  header = "Don’t lose your daks",
+  message = "And if you could be so kind, please send us a bug report.",
+  statusText = "View Support Center",
+  title = "Cheers! You found an error. Try reloading the page.",
+  statusUrl,
+  style,
+  ...rest
+}: Props) {
   const classNames = cx(`${prefix}--bmrg-error-dragon`, className);
   return (
     <div className={classNames} style={style} {...rest}>

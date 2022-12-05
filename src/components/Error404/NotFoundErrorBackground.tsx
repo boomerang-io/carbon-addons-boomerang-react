@@ -1,6 +1,6 @@
 import React from "react";
 
-function NotFoundErrorBackground(props: any) {
+function NotFoundErrorBackground(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
       id="prefix__Isometric_Graphics"

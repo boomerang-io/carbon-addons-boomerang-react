@@ -4,14 +4,7 @@ import TooltipHover from "../TooltipHover";
 import { Information } from "@carbon/react/icons";
 import { prefix } from "../../internal/settings";
 
-RadioGroupComponent.defaultProps = {
-  columnHeight: "6rem",
-  tooltipClassName: `${prefix}--bmrg-radio-group__tooltip`,
-  tooltipProps: { direction: "top" },
-  verticalWrapped: false,
-};
-
-type OwnProps = {
+type Props = {
   columnHeight?: string;
   defaultSelected?: string;
   disabled?: boolean;
@@ -33,8 +26,6 @@ type OwnProps = {
   verticalWrapped?: boolean;
 };
 
-type Props = OwnProps & typeof RadioGroupComponent.defaultProps;
-
 function RadioGroupComponent({
   defaultSelected,
   disabled,
@@ -48,12 +39,12 @@ function RadioGroupComponent({
   orientation,
   radioGroupProps,
   radioButtonProps,
-  tooltipClassName,
+  tooltipClassName = `${prefix}--bmrg-radio-group__tooltip`,
   tooltipContent,
-  tooltipProps,
+  tooltipProps = { direction: "top" },
   value,
-  columnHeight,
-  verticalWrapped,
+  columnHeight = "6rem",
+  verticalWrapped = false,
 }: Props) {
   const labelValue = label || labelText;
   const labelTextId = !labelValue ? undefined : `${id}-label`;

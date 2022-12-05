@@ -2,18 +2,9 @@ import React, { useState, useEffect } from "react";
 import cx from "classnames";
 import { prefix } from "../../internal/settings";
 import { Button, ModalHeader, ModalBody, ModalFooter } from "@carbon/react";
-
 import Modal from "../Modal";
 
-ConfirmModal.defaultProps = {
-  affirmativeText: "Yes",
-  modalTrigger: () => {},
-  negativeText: "No",
-  selectorPrimaryFocus: `button[id="${prefix}--bmrg-confirm-modal-primary-button"]`,
-  title: "Are you sure?",
-};
-
-type OwnProps = {
+type Props = {
   affirmativeAction?: (...args: any[]) => any;
   affirmativeButtonProps?: any;
   affirmativeText?: string;
@@ -33,26 +24,24 @@ type OwnProps = {
   title?: string;
 };
 
-type Props = OwnProps & typeof ConfirmModal.defaultProps;
-
 function ConfirmModal(props: Props) {
   const {
     affirmativeAction,
     affirmativeButtonProps,
-    affirmativeText,
+    affirmativeText = "Yes",
     appElement,
     children,
     containerClassName,
     isExternallyControlled,
     label,
     modalProps,
-    modalTrigger,
+    modalTrigger = () => void 0,
     negativeAction,
     negativeButtonProps,
-    negativeText,
+    negativeText = "No",
     onCloseModal,
-    selectorPrimaryFocus,
-    title,
+    selectorPrimaryFocus = `button[id="${prefix}--bmrg-confirm-modal-primary-button"]`,
+    title = "Are you sure?",
   } = props;
 
   const [isOpen, setIsOpen] = useState(props.isOpen);

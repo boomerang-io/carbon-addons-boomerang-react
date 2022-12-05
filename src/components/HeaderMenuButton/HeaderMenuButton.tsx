@@ -18,12 +18,7 @@ const iconMapping = {
   launch: <Launch size={16} fill={iconFill} className={iconClassName} />,
 };
 
-HeaderMenuButton.defaultProps = {
-  className: "",
-  iconName: "launch",
-};
-
-type OwnProps = {
+type Props = {
   altIconText?: string;
   className?: string;
   children?: any;
@@ -34,9 +29,7 @@ type OwnProps = {
   disabled?: boolean;
 };
 
-type Props = OwnProps & typeof HeaderMenuButton.defaultProps;
-
-function HeaderMenuButton({ className, iconName, onClick, style, text, ...rest }: Props) {
+function HeaderMenuButton({ className = "", iconName = "launch", onClick, style, text, ...rest }: Props) {
   const wrapperClassNames = cx(`${prefix}--bmrg-header-menu-item-wrapper`, {
     [className]: !!className,
   });

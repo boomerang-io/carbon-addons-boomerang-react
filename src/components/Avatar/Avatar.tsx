@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { prefix } from "../../internal/settings";
 
-interface AvatarProps {
+interface Props {
   className?: string;
   size?: "small" | "medium" | "large";
   src: string;
@@ -44,7 +44,7 @@ const UserIcon = (props: React.SVGProps<SVGSVGElement> & { description?: string;
   );
 };
 
-function Avatar({ className = `${prefix}--bmrg-avatar`, size = "medium", src, style, userName, ...rest }: AvatarProps) {
+function Avatar({ className = `${prefix}--bmrg-avatar`, size = "medium", src, style, userName, ...rest }: Props) {
   const [error, setError] = useState(false);
 
   const altText = `Avatar for ${userName}`;

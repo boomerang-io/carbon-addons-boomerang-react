@@ -14,13 +14,13 @@ import { ModalFunctionChildrenProps } from "../../types";
 
 const iconClassName = `${prefix}--bmrg-aboutPlatform-images__img`;
 
-interface AboutPlatformContainerProps {
+type Props = {
   isFlowApp?: boolean;
   version?: string;
   organization?: string;
-}
+};
 
-function AboutPlatformContainer({ version = "", organization = "IBM", isFlowApp }: AboutPlatformContainerProps) {
+function AboutPlatformContainer({ version = "", organization = "IBM", isFlowApp }: Props) {
   return (
     <HeaderMenuItem
       text="About the Platform"
