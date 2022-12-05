@@ -36,7 +36,7 @@
     "build:styles": "node scripts/build.js",
     "build:storybook": "build-storybook",
     "lint": "eslint src",
-    "prebuild": "rimraf lib styles es docs",
+    "prebuild": "rimraf dist styles",
     "prepare": "husky install",
     "precommit": "lint-staged",
     "start": "start-storybook -p 6006",
