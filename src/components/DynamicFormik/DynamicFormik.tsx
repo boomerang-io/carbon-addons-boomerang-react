@@ -800,22 +800,16 @@ function determineTypeProps(
 }
 
 DynamicFormik.defaultProps = {
-  additionalInitialValues: {},
-  allowCustomPropertySyntax: false,
-  customPropertySyntaxPattern: /\$\{p:([a-zA-Z0-9_.-]+)\}|\$\(([a-zA-Z0-9_.-\s]+)\)/g,
-  customPropertyStartsWithPattern: /\$\{|\$\(/g,
-  children: () => ({}),
-  checkboxListProps: () => ({}),
-  creatableProps: () => ({}),
-  dateProps: () => ({}),
-  multiSelectProps: () => ({}),
-  radioProps: () => ({}),
-  selectProps: () => ({}),
-  textAreaProps: () => ({}),
-  textEditorProps: () => ({}),
-  textInputProps: () => ({}),
-  toggleProps: () => ({}),
-  useCSVforArrays: false,
+  checkboxListProps: (...args: any[]) => ({}),
+  creatableProps: (...args: any[]) => ({}),
+  dateProps: (...args: any[]) => ({}),
+  multiSelectProps: (...args: any[]) => ({}),
+  radioProps: (...args: any[]) => ({}),
+  selectProps: (...args: any[]) => ({}),
+  textAreaProps: (...args: any[]) => ({}),
+  textEditorProps: (...args: any[]) => ({}),
+  textInputProps: (...args: any[]) => ({}),
+  toggleProps: (...args: any[]) => ({}),
 };
 
 type OwnDynamicFormikProps = {
@@ -823,7 +817,7 @@ type OwnDynamicFormikProps = {
   dataDrivenInputProps?: any;
   customPropertySyntaxPattern?: string | RegExp;
   customPropertyStartsWithPattern?: string | RegExp;
-  additionalInitialValues?: any;
+  additionalInitialValues?: { [key: string]: any };
   allowCustomPropertySyntax?: boolean;
   inputProps?: any;
   initialValues?: any;
@@ -848,17 +842,17 @@ type OwnDynamicFormikProps = {
 type DynamicFormikProps = OwnDynamicFormikProps & typeof DynamicFormik.defaultProps;
 
 export default function DynamicFormik({
-  additionalInitialValues,
-  allowCustomPropertySyntax,
-  customPropertySyntaxPattern,
-  customPropertyStartsWithPattern,
+  additionalInitialValues = {},
+  allowCustomPropertySyntax = false,
+  customPropertySyntaxPattern = /\$\{p:([a-zA-Z0-9_.-]+)\}|\$\(([a-zA-Z0-9_.-\s]+)\)/g,
+  customPropertyStartsWithPattern = /\$\{|\$\(/g,
   children,
   dataDrivenInputProps,
   inputProps,
   initialValues,
   inputs,
   onSubmit,
-  useCSVforArrays,
+  useCSVforArrays = false,
   validationSchema,
   validationSchemaExtension,
   ...otherProps

@@ -5,6 +5,7 @@ export interface FormInput {
   conditionallyRender?: boolean;
   customComponent?: Function | React.ReactElement;
   defaultValues?: any[];
+  id?: string;
   invalid?: boolean;
   invalidText?: string;
   invalidValues?: any[];

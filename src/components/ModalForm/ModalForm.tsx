@@ -7,6 +7,7 @@ type Props = {
   className?: string;
   element?: any;
   title?: string;
+  [key: string]: any;
 };
 
 const ModalForm = React.forwardRef<any, Props>(function ModalForm(

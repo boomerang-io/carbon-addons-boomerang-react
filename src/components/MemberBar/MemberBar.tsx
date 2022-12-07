@@ -11,14 +11,14 @@ type Props = {
   buttonClassName?: string;
   buttonProps?: any;
   email?: string;
-  id?: string;
+  id: string;
   isDetail?: boolean;
   isPartner?: boolean;
   isUserNotAllowed?: boolean;
   liProps?: any;
   name?: string;
   notAllowedMessage?: string;
-  removeUser?: (id?: string) => any;
+  removeUser?: (id: string) => any;
 };
 
 function MemberBar({
@@ -44,7 +44,7 @@ function MemberBar({
         className={cx(`${prefix}--bmrg-member-bar`, buttonClassName, {
           [`${prefix}--bmrg-member-bar--detail`]: isDetail,
         })}
-        onClick={addUser && !isUserNotAllowed ? () => addUser(id) : removeUser ? () => removeUser(id) : () => {}}
+        onClick={addUser && !isUserNotAllowed ? () => addUser(id) : removeUser ? () => removeUser(id) : undefined}
         type="button"
         {...buttonProps}
       >
