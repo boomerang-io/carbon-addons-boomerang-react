@@ -12,12 +12,10 @@ const config = {
     {
       dir: pkg.main,
       format: "cjs",
-      sourcemap: true,
     },
     {
       dir: pkg.module,
       format: "esm",
-      sourcemap: true,
       preserveModules: true,
     },
   ],
