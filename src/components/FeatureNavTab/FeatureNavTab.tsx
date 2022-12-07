@@ -38,6 +38,7 @@ function FeatureNavTab({
       <SkeletonPlaceholder className={`${prefix}--bmrg-feature-nav-tab--loading__skeleton`} />
     </div>
   ) : (
+    //@ts-ignore
     <NavLink className={classNames} activeClassName={activeClassNames} style={style} disabled={disabled} {...rest}>
       {label}
     </NavLink>

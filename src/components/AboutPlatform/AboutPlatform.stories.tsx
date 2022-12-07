@@ -1,3 +1,4 @@
+import React from "react";
 import AboutPlatform from "./AboutPlatform";
 
 export default {

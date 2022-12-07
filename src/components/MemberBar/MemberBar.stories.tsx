@@ -1,3 +1,4 @@
+import React from "react";
 import MemberBar from "./index";
 
 export default {

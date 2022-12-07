@@ -5,9 +5,9 @@ module.exports = {
     {
       files: ["**/*.stories.*"],
       rules: {
-        "import/no-anonymous-default-export": "off",
+        "import/no-anonymous-default-export": 0,
       },
     },
   ],
-  ignorePatterns: ["node_modules", "coverage", "config", "lib", "docs", "storybook-static", "results"],
+  ignorePatterns: ["node_modules", "coverage", "config", "lib", "docs", "storybook-static", "results", "rollup.config.mjs"],
 };

@@ -1,3 +1,4 @@
+import React from "react";
 import HeaderMenuItem from "./HeaderMenuItem"; // Using default export
 
 export default {
