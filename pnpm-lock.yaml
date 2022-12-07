@@ -30,7 +30,6 @@ specifiers:
   axios: 0.27.2
   axios-mock-adapter: ^1.20.0
   classnames: 2.3.2
-  core-js: ^3.23.4
   cpy: 8.1.2
   cross-env: ^7.0.3
   date-fns: 2.29.3
@@ -50,8 +49,6 @@ specifiers:
   lodash.isequal: 4.5.0
   lodash.sortby: 4.7.0
   match-sorter: 6.3.1
-  npm-which: ^3.0.1
-  postcss: ^8.4.19
   react: ^16.14.0
   react-autosuggest: 10.1.0
   react-dom: 16.14.0
@@ -63,7 +60,6 @@ specifiers:
   rimraf: ^3.0.2
   rollup: ^3.6.0
   rollup-plugin-peer-deps-external: ^2.2.4
-  rollup-plugin-terser: ^7.0.2
   sass: ^1.56.1
   storybook: ^6.5.12
   typescript: ^4.6.3
@@ -115,7 +111,6 @@ devDependencies:
   '@vitejs/plugin-react': 2.2.0_vite@3.2.5
   axios: 0.27.2
   axios-mock-adapter: 1.21.2_axios@0.27.2
-  core-js: 3.26.0
   cpy: 8.1.2
   cross-env: 7.0.3
   eslint: 8.26.0
@@ -127,8 +122,6 @@ devDependencies:
   jest-axe: 6.0.1
   jsdom: 20.0.2
   lint-staged: 13.0.3
-  npm-which: 3.0.1
-  postcss: 8.4.19
   react: 16.14.0
   react-dom: 16.14.0_react@16.14.0
   react-router-dom: 5.3.4_react@16.14.0
@@ -136,7 +129,6 @@ devDependencies:
   rimraf: 3.0.2
   rollup: 3.6.0
   rollup-plugin-peer-deps-external: 2.2.4_rollup@3.6.0
-  rollup-plugin-terser: 7.0.2_rollup@3.6.0
   sass: 1.56.1
   storybook: 6.5.13_hitzuu5lvjbgls57et6djsr2wa
   typescript: 4.8.4
@@ -11731,14 +11723,6 @@ packages:
     engines: {node: '>=12.20'}
     dev: true
 
-  /npm-path/2.0.4:
-    resolution: {integrity: sha512-IFsj0R9C7ZdR5cP+ET342q77uSRdtWOlWpih5eC+lu29tIDbNEgDbzgVJ5UFvYHWhxDZ5TFkJafFioO0pPQjCw==}
-    engines: {node: '>=0.8'}
-    hasBin: true
-    dependencies:
-      which: 1.3.1
-    dev: true
-
   /npm-run-path/2.0.2:
     resolution: {integrity: sha512-lJxZYlT4DW/bRUtFh1MQIWqmLwQfAxnqWG4HhEdjMlkrJYnJn0Jrr2u3mgxqaWsdiBc76TYkTG/mhrnYTuzfHw==}
     engines: {node: '>=4'}
@@ -11758,16 +11742,6 @@ packages:
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     dependencies:
       path-key: 4.0.0
-    dev: true
-
-  /npm-which/3.0.1:
-    resolution: {integrity: sha512-CM8vMpeFQ7MAPin0U3wzDhSGV0hMHNwHU0wjo402IVizPDrs45jSfSuoC+wThevY88LQti8VvaAnqYAeVy3I1A==}
-    engines: {node: '>=4.2.0'}
-    hasBin: true
-    dependencies:
-      commander: 2.20.3
-      npm-path: 2.0.4
-      which: 1.3.1
     dev: true
 
   /npmlog/5.0.1:
@@ -13665,19 +13639,6 @@ packages:
       rollup: '*'
     dependencies:
       rollup: 3.6.0
-    dev: true
-
-  /rollup-plugin-terser/7.0.2_rollup@3.6.0:
-    resolution: {integrity: sha512-w3iIaU4OxcF52UUXiZNsNeuXIMDvFrr+ZXK6bFZ0Q60qyVfq4uLptoS4bbq3paG3x216eQllFZX7zt6TIImguQ==}
-    deprecated: This package has been deprecated and is no longer maintained. Please use @rollup/plugin-terser
-    peerDependencies:
-      rollup: ^2.0.0
-    dependencies:
-      '@babel/code-frame': 7.18.6
-      jest-worker: 26.6.2
-      rollup: 3.6.0
-      serialize-javascript: 4.0.0
-      terser: 5.15.1
     dev: true
 
   /rollup/2.79.1:

@@ -21,6 +21,7 @@ type Props = {
   labelA?: React.ReactNode;
   labelB?: React.ReactNode;
   labelText?: React.ReactNode;
+  name?: string;
   onClick?: (...args: any[]) => any;
   onToggle?: (...args: any[]) => any;
   size?: "sm" | "md";

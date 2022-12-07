@@ -4,14 +4,14 @@ import cx from "classnames";
 import { SkeletonPlaceholder } from "@carbon/react";
 import { prefix } from "../../internal/settings";
 
-type Props = {
+type Props = NavLink & {
   activeClassName?: string;
   className?: string;
   disabled?: boolean;
   isLoading?: boolean;
   label?: string;
-  style?: any;
-  to: string;
+  style?: React.CSSProperties;
+  [key: string]: any;
 };
 
 function FeatureNavTab({

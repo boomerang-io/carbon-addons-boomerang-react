@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
-type Props = {
-  children: React.ReactElement;
+export type Props = {
+  children: React.ReactNode;
   delay?: number;
 };
 
@@ -17,7 +17,7 @@ function DelayedRender({ children, delay = 300 }: Props) {
   }, [delay]);
 
   if (shouldRender) {
-    return children;
+    return <>{children}</>
   }
 
   return null;

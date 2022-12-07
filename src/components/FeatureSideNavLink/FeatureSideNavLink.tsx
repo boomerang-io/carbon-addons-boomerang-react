@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { prefix } from "../../internal/settings";
 import cx from "classnames";
 
-type Props = {
+type Props = NavLink & {
   activeClassName?: string;
   className?: string;
   children?: string | number | ((...args: any[]) => any) | any | React.ReactNode;
@@ -11,6 +11,8 @@ type Props = {
   icon?: Function;
   iconProps?: any;
   to: string;
+  style?: React.CSSProperties;
+  [key: string]: any;
 };
 
 function FeatureSideNavLink(props: Props) {

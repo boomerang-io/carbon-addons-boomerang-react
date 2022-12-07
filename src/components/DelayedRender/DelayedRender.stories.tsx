@@ -1,5 +1,5 @@
 import React from "react";
-import DelayedRender from "./DelayedRender";
+import DelayedRender, { Props } from "./DelayedRender";
 import { Button } from "@carbon/react";
 
 export default {
@@ -21,12 +21,15 @@ export default {
   },
 };
 
-export const Default = (args: any) => {
+export const Default = (args: Props) => {
   const [index, setIndex] = React.useState(0);
+  const { children, ...rest } = args;
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
       <Button onClick={() => setIndex(index + 1)}>Restart</Button>
-      <DelayedRender {...args} key={index} />
+      <DelayedRender {...rest} key={index}>
+        {children}
+      </DelayedRender>
     </div>
   );
 };

@@ -7,7 +7,7 @@ interface OwnProps {
   className?: string;
   style?: React.CSSProperties;
   errorProps?: any;
-  errorComponent?: (...args: any[]) => any;
+  errorComponent?: JSX.Element
 }
 
 type State = any;

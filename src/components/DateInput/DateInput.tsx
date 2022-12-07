@@ -19,6 +19,7 @@ type Props = {
   min?: string;
   label?: string;
   labelText?: string;
+  name?: string;
   onCalendarChange?: (...args: any[]) => any;
   onChange?: (...args: any[]) => any;
   readOnly?: boolean;

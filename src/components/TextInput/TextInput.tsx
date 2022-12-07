@@ -4,7 +4,8 @@ import { TextInput } from "@carbon/react";
 import { Information } from "@carbon/react/icons";
 import { prefix } from "../../internal/settings";
 
-type Props = {
+type Props = React.InputHTMLAttributes<HTMLInputElement> & {
+  autoComplete?: string;
   tooltipClassName?: string;
   tooltipContent?: React.ReactNode;
   tooltipProps?: any;
@@ -20,6 +21,8 @@ type Props = {
   label?: React.ReactNode;
   labelText?: React.ReactNode;
   light?: boolean;
+  name?: string;
+  onBlur?: (...args: any[]) => any;
   onChange?: (...args: any[]) => any;
   onClick?: (...args: any[]) => any;
   placeholder?: string;

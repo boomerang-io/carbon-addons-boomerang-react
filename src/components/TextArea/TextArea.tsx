@@ -4,7 +4,7 @@ import TooltipHover from "../TooltipHover";
 import { Information } from "@carbon/react/icons";
 import { prefix } from "../../internal/settings";
 
-type Props = {
+type Props = React.InputHTMLAttributes<HTMLInputElement> & {
   tooltipClassName?: string;
   tooltipContent?: React.ReactNode;
   tooltipProps?: any;
@@ -23,6 +23,8 @@ type Props = {
   light?: boolean;
   max?: string | number;
   maxCount?: number;
+  name?: string;
+  onBlur?: (...args: any[]) => any;
   onChange?: (...args: any[]) => any;
   onClick?: (...args: any[]) => any;
   placeholder?: string;

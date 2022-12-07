@@ -12,7 +12,7 @@ const checkAuth = (userRole: string | string[], allowedUserRoles: string[]) => {
 
 type Props = {
   allowedUserRoles: string[];
-  component: (...args: any[]) => any;
+  component?: React.ReactNode;
   location?: any;
   message?: string;
   title?: string;

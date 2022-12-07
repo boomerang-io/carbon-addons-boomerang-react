@@ -7,6 +7,7 @@ type Props = {
   className?: string;
   element?: any;
   title?: string;
+  [k: string]: any;
 };
 
 const FlowModalForm = React.forwardRef<any, Props>(function FlowModalForm(

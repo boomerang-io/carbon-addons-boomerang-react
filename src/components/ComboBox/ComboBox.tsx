@@ -27,6 +27,7 @@ type Props = {
   itemToString?: (...args: any[]) => any;
   items: any[];
   light?: boolean;
+  name?: string;
   onChange: (...args: any[]) => any;
   onInputChange?: (...args: any[]) => any;
   onStateChange?: (...args: any[]) => any;
@@ -34,6 +35,7 @@ type Props = {
   placeholder?: string;
   selectedItem?: any | string | number;
   size?: any; // TODO: ListBoxPropTypes.ListBoxSize
+  style?: React.CSSProperties
   titleText?: React.ReactNode;
   translateWithId?: (...args: any[]) => any;
   type?: any; // TODO: ListBoxPropTypes.ListBoxType

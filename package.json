@@ -1,7 +1,7 @@
 {
   "name": "@boomerang-io/carbon-addons-boomerang-react",
   "description": "Carbon Addons for Boomerang apps",
-  "version": "3.2.0-alpha.3",
+  "version": "3.2.0-alpha.6",
   "author": {
     "name": "Tim Bula",
     "email": "timrbula@gmail.com"
@@ -32,7 +32,7 @@
   ],
   "scripts": {
     "build": "rimraf scss dist && pnpm build:components && pnpm build:styles && pnpm build:types",
-    "build:components": "rollup -c",
+    "build:components": "rollup -c --bundleConfigAsCjs",
     "build:styles": "node scripts/build.js",
     "build:storybook": "build-storybook",
     "build:types": "tsc -d --declarationDir dist/types --emitDeclarationOnly",
@@ -100,7 +100,6 @@
     "@vitejs/plugin-react": "^2.2.0",
     "axios": "0.27.2",
     "axios-mock-adapter": "^1.20.0",
-    "core-js": "^3.23.4",
     "cpy": "8.1.2",
     "cross-env": "^7.0.3",
     "eslint": "^8.19.0",
@@ -112,8 +111,6 @@
     "jest-axe": "^6.0.0",
     "jsdom": "^20.0.0",
     "lint-staged": "^13.0.3",
-    "npm-which": "^3.0.1",
-    "postcss": "^8.4.19",
     "react": "^16.14.0",
     "react-dom": "16.14.0",
     "react-router-dom": "^5.3.0",

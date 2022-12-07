@@ -819,7 +819,7 @@ DynamicFormik.defaultProps = {
 };
 
 type OwnDynamicFormikProps = {
-  children: (...args: any[]) => any;
+  children: React.ReactNode;
   dataDrivenInputProps?: any;
   customPropertySyntaxPattern?: string | RegExp;
   customPropertyStartsWithPattern?: string | RegExp;
@@ -832,17 +832,17 @@ type OwnDynamicFormikProps = {
   useCSVforArrays?: boolean;
   validationSchema?: any;
   validationSchemaExtension?: any;
-  allProps?: (...args: any[]) => any;
-  checkboxListProps?: (...args: any[]) => any;
-  creatableProps?: (...args: any[]) => any;
-  dateProps?: (...args: any[]) => any;
-  multiSelectProps?: (...args: any[]) => any;
-  radioProps?: (...args: any[]) => any;
-  selectProps?: (...args: any[]) => any;
-  textAreaProps?: (...args: any[]) => any;
-  textEditorProps?: (...args: any[]) => any;
-  textInputProps?: (...args: any[]) => any;
-  toggleProps?: (...args: any[]) => any;
+  allProps?: (...args: any[]) => { [key: string]: any };
+  checkboxListProps?: (...args: any[]) => { [key: string]: any };
+  creatableProps?: (...args: any[]) => { [key: string]: any };
+  dateProps?: (...args: any[]) => { [key: string]: any };
+  multiSelectProps?: (...args: any[]) => { [key: string]: any };
+  radioProps?: (...args: any[]) => { [key: string]: any };
+  selectProps?: (...args: any[]) => { [key: string]: any };
+  textAreaProps?: (...args: any[]) => { [key: string]: any };
+  textEditorProps?: (...args: any[]) => { [key: string]: any };
+  textInputProps?: (...args: any[]) => { [key: string]: any };
+  toggleProps?: (...args: any[]) => { [key: string]: any };
 };
 
 type DynamicFormikProps = OwnDynamicFormikProps & typeof DynamicFormik.defaultProps;
