@@ -1,10 +1,10 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, NavLinkProps } from "react-router-dom";
 import cx from "classnames";
 import { SkeletonPlaceholder } from "@carbon/react";
 import { prefix } from "../../internal/settings";
 
-type Props = NavLink & {
+type Props = NavLinkProps & {
   activeClassName?: string;
   className?: string;
   disabled?: boolean;

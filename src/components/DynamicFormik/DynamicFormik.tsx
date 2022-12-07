@@ -1,6 +1,6 @@
 import React from "react";
 import * as Yup from "yup";
-import { Formik } from "formik";
+import { Formik, FormikProps } from "formik";
 import get from "lodash.get";
 import { transformAll, addCustomValidator } from "../../tools/yupAst";
 import isUrl from "../../tools/isUrl";
@@ -182,7 +182,7 @@ function getGoverningSelectDeepOptions({
  * @param {string} selectedItem - new value of the select input
  */
 type HandleGoverningSelectChangeType = {
-  formikProps: any;
+  formikProps: FormikProps<any>;
   isInputBeingChanged: boolean;
   selectedItem: DynamicInput | null;
   input: DynamicInput;
@@ -819,7 +819,7 @@ DynamicFormik.defaultProps = {
 };
 
 type OwnDynamicFormikProps = {
-  children: React.ReactNode;
+  children: (args: { inputs: React.ReactNode[]; formikProps: FormikProps<any> }) => React.ReactNode;
   dataDrivenInputProps?: any;
   customPropertySyntaxPattern?: string | RegExp;
   customPropertyStartsWithPattern?: string | RegExp;

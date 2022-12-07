@@ -1,9 +1,9 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, NavLinkProps } from "react-router-dom";
 import { prefix } from "../../internal/settings";
 import cx from "classnames";
 
-type Props = NavLink & {
+type Props = NavLinkProps & {
   activeClassName?: string;
   className?: string;
   children?: string | number | ((...args: any[]) => any) | any | React.ReactNode;

@@ -19,6 +19,7 @@ type FeatureHeaderProps = {
   navClassName?: string;
   headerClassName?: string;
   footerClassName?: string;
+  [key: string]: any;
 };
 
 export function FeatureHeader({
@@ -71,6 +72,7 @@ type FeatureHeaderTitleProps = {
   className?: string;
   element?: any;
   style?: React.CSSProperties;
+  [key: string]: any;
 };
 
 export function FeatureHeaderTitle({
