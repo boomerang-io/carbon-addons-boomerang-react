@@ -1,5 +1,5 @@
 import React from "react";
-import { Route } from "react-router-dom";
+import { Route, RouteProps } from "react-router-dom";
 
 import Error403 from "../Error403";
 
@@ -10,10 +10,9 @@ const checkAuth = (userRole: string | string[], allowedUserRoles: string[]) => {
   return allowedUserRoles.some((allowedRole) => allowedRole === userRole);
 };
 
-type Props = {
+type Props = RouteProps & {
   allowedUserRoles: string[];
   component?: React.ReactNode;
-  location?: any;
   message?: string;
   title?: string;
   userRole: string | string[];

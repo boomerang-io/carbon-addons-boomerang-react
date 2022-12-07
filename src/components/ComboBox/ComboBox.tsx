@@ -28,6 +28,7 @@ type Props = {
   items: any[];
   light?: boolean;
   name?: string;
+  onBlur?: (...args: any[]) => any;
   onChange: (...args: any[]) => any;
   onInputChange?: (...args: any[]) => any;
   onStateChange?: (...args: any[]) => any;
