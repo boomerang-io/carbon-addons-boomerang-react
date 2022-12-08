@@ -1,3 +1,4 @@
+import React from "react";
 import NoDisplayComponent from "./index";
 
 export default {

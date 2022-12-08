@@ -46,13 +46,13 @@ export type MultiSelectComboBoxProps = Pick<typeof MultiSelectComboBox.defaultPr
   id: string;
   initialSelectedItems?: any[];
   selectedItems?: any[];
-  items: any[];
+  items?: any[];
   itemToString?: (...args: any[]) => any;
   itemToElement?: React.FC;
   titleText?: any;
   helperText?: string;
   tagProps?: any;
-  onChange: (...args: any[]) => any;
+  onChange?: (...args: any[]) => any;
   onKeyUp?: (...args: any[]) => any;
   onInputBlur?: (...args: any[]) => any;
   onToggleClick?: (event: any) => any;

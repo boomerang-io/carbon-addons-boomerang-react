@@ -1,3 +1,4 @@
+import React from "react";
 import { expect, test } from "vitest";
 import PlatformNotifications from "./PlatformNotifications";
 import { screen, render } from "@testing-library/react";

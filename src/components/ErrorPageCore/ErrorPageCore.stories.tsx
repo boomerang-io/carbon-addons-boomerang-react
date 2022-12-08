@@ -1,3 +1,4 @@
+import React from "react";
 import ErrorPageCore from "./ErrorPageCore";
 
 export default {

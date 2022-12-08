@@ -3,16 +3,15 @@ import { prefix } from "../../internal/settings";
 
 import ErrorMessage from "../ErrorMessage";
 
-interface OwnProps {
+interface Props {
   className?: string;
   style?: React.CSSProperties;
   errorProps?: any;
-  errorComponent?: JSX.Element
+  [key: string]: any;
+  errorComponent?: React.FC<Pick<Props, "errorProps">>;
 }
 
-type State = any;
-
-type Props = OwnProps & typeof ErrorBoundary.defaultProps;
+type State = { hasError: boolean, error: any}
 
 /**
  * todo: convert this to hooks in the future.
@@ -26,7 +25,6 @@ class ErrorBoundary extends Component<Props, State> {
   };
 
   static defaultProps = {
-    errorComponent: ErrorMessage,
     className: `${prefix}--bmrg-error-boundary`,
   };
 
@@ -36,12 +34,11 @@ class ErrorBoundary extends Component<Props, State> {
   }
 
   componentDidCatch(error: any, info: any) {
-    // You can also log the error to an error reporting service
     console.error(error, info); //eslint-disable-line
   }
 
   render() {
-    const { errorComponent: ErrorComponent, className, style, errorProps, ...rest } = this.props;
+    const { errorComponent: ErrorComponent = ErrorMessage, className, style, errorProps, ...rest } = this.props;
     if (this.state.hasError) {
       return (
         <div className={className} style={style} {...rest}>
@@ -49,7 +46,7 @@ class ErrorBoundary extends Component<Props, State> {
         </div>
       );
     }
-    return this.props.children;
+    return <>{this.props.children}</>;
   }
 }
 

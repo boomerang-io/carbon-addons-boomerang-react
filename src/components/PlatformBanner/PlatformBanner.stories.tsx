@@ -1,3 +1,4 @@
+import React from "react";
 import PlatformBanner from "./PlatformBanner";
 
 export default {

@@ -1,3 +1,4 @@
+import React from "react";
 import PlatformNotificationsContainer from "./index";
 
 export default {

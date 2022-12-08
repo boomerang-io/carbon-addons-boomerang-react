@@ -1,3 +1,4 @@
+import React from "react";
 import { expect, test } from "vitest";
 import { Router } from "react-router-dom";
 import { createMemoryHistory } from "history";

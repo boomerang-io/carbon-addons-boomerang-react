@@ -812,21 +812,19 @@ DynamicFormik.defaultProps = {
   toggleProps: (...args: any[]) => ({}),
 };
 
-type OwnDynamicFormikProps = {
+type OwnDynamicFormikProps<Values> = FormikProps<Values> & {
   children: (args: { inputs: React.ReactNode[]; formikProps: FormikProps<any> }) => React.ReactNode;
   additionalInitialValues?: { [key: string]: any };
   allowCustomPropertySyntax?: boolean;
   customPropertyStartsWithPattern?: string | RegExp;
   customPropertySyntaxPattern?: string | RegExp;
   dataDrivenInputProps?: any;
-  enableReinitialize?: boolean;
   inputProps?: any;
-  initialValues?: any;
   initialErrors?: { [key: string]: any };
+  initialValues?: Partial<Values>;
   inputs: DynamicInput[];
-  onSubmit: (...args: any[]) => any;
+  onSubmit?: (...args: any[]) => any;
   useCSVforArrays?: boolean;
-  validateOnMount?: boolean;
   validationSchema?: any;
   validationSchemaExtension?: any;
   allProps?: (...args: any[]) => { [key: string]: any };
@@ -842,9 +840,9 @@ type OwnDynamicFormikProps = {
   toggleProps?: (...args: any[]) => { [key: string]: any };
 };
 
-type DynamicFormikProps = OwnDynamicFormikProps & typeof DynamicFormik.defaultProps;
+type DynamicFormikProps<Values> = OwnDynamicFormikProps<Values> & typeof DynamicFormik.defaultProps;
 
-export default function DynamicFormik({
+export default function DynamicFormik<Values = any>({
   additionalInitialValues = {},
   allowCustomPropertySyntax = false,
   customPropertySyntaxPattern = /\$\{p:([a-zA-Z0-9_.-]+)\}|\$\(([a-zA-Z0-9_.-\s]+)\)/g,
@@ -859,7 +857,7 @@ export default function DynamicFormik({
   validationSchema,
   validationSchemaExtension,
   ...otherProps
-}: DynamicFormikProps) {
+}: DynamicFormikProps<Values>) {
   return (
     <Formik
       initialValues={
@@ -879,7 +877,9 @@ export default function DynamicFormik({
           validationSchemaExtension,
         })
       }
-      onSubmit={(values, actions) => onSubmit(values, actions)}
+      onSubmit={(values, actions) => {
+        if (onSubmit) onSubmit(values, actions);
+      }}
       {...otherProps}
     >
       {(formikProps) => {

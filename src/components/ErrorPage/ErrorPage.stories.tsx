@@ -1,3 +1,4 @@
+import React from "react";
 import GraphicWrangler from "../GraphicWrangler";
 import ErrorPage from "./ErrorPage";
 

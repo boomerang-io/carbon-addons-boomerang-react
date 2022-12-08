@@ -1,3 +1,4 @@
+import React from "react";
 import axios from "axios";
 import { QueryClient, QueryClientProvider } from "react-query";
 import ProfileSettings from "./ProfileSettings";

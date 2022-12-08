@@ -35,6 +35,7 @@ type Props = {
   onStateChange?: (...args: any[]) => any;
   onToggleClick?: (...args: any[]) => any;
   placeholder?: string;
+  readOnly?: boolean;
   selectedItem?: any | string | number;
   size?: any; // TODO: ListBoxPropTypes.ListBoxSize
   style?: React.CSSProperties;
