@@ -1,3 +1,4 @@
+import React from "react";
 import ErrorPageCore from "../ErrorPageCore";
 import ErrorDragon from "../ErrorDragon";
 import ErrorBoundary from "./index";

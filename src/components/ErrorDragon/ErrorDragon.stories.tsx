@@ -1,3 +1,4 @@
+import React from "react";
 import ErrorDragon from "./ErrorDragon";
 
 const statusUrl = "/status";

@@ -1,3 +1,4 @@
+import React from "react";
 import { expect, test, vi } from "vitest";
 import { render, fireEvent, waitFor } from "@testing-library/react";
 import ComboBoxMultiSelect from "./ComboBoxMultiSelect";

@@ -6,8 +6,8 @@ import { prefix } from "../../internal/settings";
 type Props = {
   className?: string;
   style?: React.CSSProperties;
-  status?: string;
-  statusText?: string;
+  status?: React.ReactNode;
+  statusText?: React.ReactNode;
 };
 
 function Error({ status, statusText, className = "", style, ...rest }: Props) {

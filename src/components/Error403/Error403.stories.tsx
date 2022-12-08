@@ -1,3 +1,4 @@
+import React from "react";
 import Error403Component from "./index";
 
 export default {

@@ -1,3 +1,4 @@
+import React from "react";
 import ErrorFullPage from "./ErrorFullPage";
 
 const statusUrl = "/support/status";

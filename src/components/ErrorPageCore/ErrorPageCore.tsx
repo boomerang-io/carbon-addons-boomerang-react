@@ -6,11 +6,11 @@ import GenericErrorBackground from "./GenericErrorBackground";
 type Props = {
   className?: string;
   graphic?: React.ReactNode;
-  header?: any;
+  header?: React.ReactNode;
   message?: React.ReactNode;
   statusUrl?: string;
   style?: React.CSSProperties;
-  title?: any;
+  title?: React.ReactNode;
 };
 
 export default function ErrorPageCore({

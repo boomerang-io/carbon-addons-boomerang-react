@@ -6,12 +6,12 @@ import ErrorGraphic from "./assets/ErrorGraphic";
 
 type Props = {
   className?: string;
-  header?: string;
-  message?: string;
+  header?: React.ReactNode;
+  message?: React.ReactNode;
   style?: React.CSSProperties;
-  statusText?: string;
+  statusText?: React.ReactNode;
   statusUrl: string;
-  title?: string;
+  title?:  React.ReactNode;
 };
 
 function ErrorDragon({
