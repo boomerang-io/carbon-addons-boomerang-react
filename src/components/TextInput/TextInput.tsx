@@ -14,7 +14,7 @@ type Props = React.InputHTMLAttributes<HTMLInputElement> & {
   disabled?: boolean;
   helperText?: React.ReactNode;
   hideLabel?: boolean;
-  id: string;
+  id?: string;
   inline?: boolean;
   invalid?: boolean;
   invalidText?: React.ReactNode;

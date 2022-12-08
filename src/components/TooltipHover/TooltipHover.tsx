@@ -27,6 +27,7 @@ type Props = {
     | "auto-end";
   tooltipContent?: React.ReactNode;
   tooltipText?: React.ReactNode;
+  [key: string]: any;
 };
 
 /**

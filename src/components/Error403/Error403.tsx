@@ -11,6 +11,7 @@ type Props = {
   message?: React.ReactNode;
   graphic?: React.ReactNode;
   theme?: "core" | "boomerang";
+  [key: string]: any;
 };
 
 export default function Error403({ theme = "core", ...rest }: Props) {

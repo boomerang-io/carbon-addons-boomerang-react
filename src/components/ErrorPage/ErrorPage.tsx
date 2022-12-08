@@ -9,6 +9,7 @@ type Props = {
   message?: React.ReactNode;
   style?: React.CSSProperties;
   title?: React.ReactNode;
+  [key: string]: any;
 };
 
 export default function ErrorPage({ className, graphic, header, message, style, title }: Props) {

@@ -814,16 +814,19 @@ DynamicFormik.defaultProps = {
 
 type OwnDynamicFormikProps = {
   children: (args: { inputs: React.ReactNode[]; formikProps: FormikProps<any> }) => React.ReactNode;
-  dataDrivenInputProps?: any;
-  customPropertySyntaxPattern?: string | RegExp;
-  customPropertyStartsWithPattern?: string | RegExp;
   additionalInitialValues?: { [key: string]: any };
   allowCustomPropertySyntax?: boolean;
+  customPropertyStartsWithPattern?: string | RegExp;
+  customPropertySyntaxPattern?: string | RegExp;
+  dataDrivenInputProps?: any;
+  enableReinitialize?: boolean;
   inputProps?: any;
   initialValues?: any;
+  initialErrors?: { [key: string]: any };
   inputs: DynamicInput[];
   onSubmit: (...args: any[]) => any;
   useCSVforArrays?: boolean;
+  validateOnMount?: boolean;
   validationSchema?: any;
   validationSchemaExtension?: any;
   allProps?: (...args: any[]) => { [key: string]: any };

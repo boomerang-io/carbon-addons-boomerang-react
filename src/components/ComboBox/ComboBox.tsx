@@ -31,12 +31,13 @@ type Props = {
   onBlur?: (...args: any[]) => any;
   onChange: (...args: any[]) => any;
   onInputChange?: (...args: any[]) => any;
+  onKeyUp?: (...args: any[]) => any;
   onStateChange?: (...args: any[]) => any;
   onToggleClick?: (...args: any[]) => any;
   placeholder?: string;
   selectedItem?: any | string | number;
   size?: any; // TODO: ListBoxPropTypes.ListBoxSize
-  style?: React.CSSProperties
+  style?: React.CSSProperties;
   titleText?: React.ReactNode;
   translateWithId?: (...args: any[]) => any;
   type?: any; // TODO: ListBoxPropTypes.ListBoxType

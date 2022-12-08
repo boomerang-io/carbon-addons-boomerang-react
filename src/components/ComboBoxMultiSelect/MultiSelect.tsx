@@ -52,8 +52,9 @@ export type MultiSelectComboBoxProps = Pick<typeof MultiSelectComboBox.defaultPr
   titleText?: any;
   helperText?: string;
   tagProps?: any;
-  onInputBlur?: (...args: any[]) => any;
   onChange: (...args: any[]) => any;
+  onKeyUp?: (...args: any[]) => any;
+  onInputBlur?: (...args: any[]) => any;
   onToggleClick?: (event: any) => any;
   open?: boolean;
   placeholder: string;

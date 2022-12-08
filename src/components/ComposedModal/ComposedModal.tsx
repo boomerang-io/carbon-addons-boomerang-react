@@ -15,7 +15,7 @@ type Props = {
   isOpen?: boolean;
   modalHeaderChildren?: React.ReactElement;
   modalHeaderProps?: any;
-  modalTrigger?: ({ openModal }: { openModal: Function }) => React.ReactElement;
+  modalTrigger?: (argTypes: { openModal: () => void }) => React.ReactNode;
   onCloseModal?: (...args: any[]) => any;
   size?: "xs" | "sm" | "md" | "lg";
 };

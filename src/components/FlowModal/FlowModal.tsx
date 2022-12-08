@@ -23,7 +23,7 @@ type OwnProps = {
   isOpen?: boolean;
   modalHeaderChildren?: React.ReactElement;
   modalHeaderProps?: any;
-  modalTrigger?: ({ openModal }: { openModal: Function }) => any;
+  modalTrigger?: (props: { openModal: () => void }) => React.ReactNode;
   onCloseModal?: (...args: any[]) => any;
   onFormDataChange?: (...args: any[]) => any;
   progressSteps?: {

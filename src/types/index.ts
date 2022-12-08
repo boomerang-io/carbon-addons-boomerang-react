@@ -2,6 +2,7 @@ import React from "react";
 export interface DynamicInput extends FormInput, Government {}
 
 export interface FormInput {
+  acceptsUserInput?: boolean;
   conditionallyRender?: boolean;
   customComponent?: Function | React.ReactElement;
   defaultValues?: any[];

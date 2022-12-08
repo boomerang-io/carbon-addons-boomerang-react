@@ -11,6 +11,7 @@ type Props = {
   statusUrl?: string;
   style?: React.CSSProperties;
   title?: React.ReactNode;
+  [key: string]: any;
 };
 
 export default function ErrorPageCore({

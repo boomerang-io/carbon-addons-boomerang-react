@@ -30,7 +30,7 @@ type Props = {
   onKeyBlur?: (...args: any[]) => any;
   onValueBlur?: (...args: any[]) => any;
   onInputBlur?: (...args: any[]) => any;
-  onChange: (...args: any[]) => any;
+  onChange?: (...args: any[]) => any;
   placeholder?: string;
   tagProps?: any;
   tagType?: string;
@@ -49,7 +49,7 @@ type Props = {
 
 function CreatableComponent({
   buttonClassName = `${prefix}--bmrg-creatable__button`,
-  buttonContent =  "Add",
+  buttonContent = "Add",
   buttonProps,
   createKeyValuePair = false,
   disabled,
