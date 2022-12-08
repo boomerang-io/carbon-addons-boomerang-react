@@ -32,6 +32,7 @@ type Props = {
   onInputBlur?: (...args: any[]) => any;
   onChange?: (...args: any[]) => any;
   placeholder?: string;
+  readOnly?: boolean;
   tagProps?: any;
   tagType?: string;
   textInputProps?: any;
@@ -155,13 +156,13 @@ function CreatableComponent({
     }
 
     setCreatedItems(items);
-    onChange(items);
+    if (onChange) onChange(items);
   };
 
   const removeValue = (value: any) => {
     const items = (tagItems as any).filter((item: any) => item !== value);
     setCreatedItems(items);
-    onChange(items);
+    if (onChange) onChange(items);
   };
 
   return (

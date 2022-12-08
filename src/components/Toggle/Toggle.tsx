@@ -23,7 +23,7 @@ type Props = {
   labelText?: React.ReactNode;
   name?: string;
   onClick?: (...args: any[]) => any;
-  onChange: (...args: any[]) => any;
+  onChange?: (...args: any[]) => any;
   onToggle?: (...args: any[]) => any;
   readOnly?: boolean;
   size?: "sm" | "md";
