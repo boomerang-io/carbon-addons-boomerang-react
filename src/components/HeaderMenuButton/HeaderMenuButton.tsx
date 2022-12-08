@@ -24,7 +24,7 @@ type Props = {
   children?: any;
   iconName?: "workspace" | "group" | "chat" | "debug" | "power" | "information" | "locked" | "launch";
   onClick?: (...args: any[]) => any;
-  style?: any;
+  style?: React.CSSProperties;
   text: string;
   disabled?: boolean;
 };

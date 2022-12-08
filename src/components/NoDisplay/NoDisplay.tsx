@@ -13,7 +13,7 @@ type TextLocation = typeof TEXT_LOCATIONS[keyof typeof TEXT_LOCATIONS];
 
 type Props = {
   className?: string;
-  style?: any;
+  style?: React.CSSProperties;
   text?: string;
   textLocation?: TextLocation;
 };

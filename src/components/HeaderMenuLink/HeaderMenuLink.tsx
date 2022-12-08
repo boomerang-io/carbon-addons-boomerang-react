@@ -51,7 +51,7 @@ type Props = {
     | "power"
     | "support"
     | "workspace";
-  style?: any;
+  style?: React.CSSProperties;
   text: string;
   disabled?: boolean;
   external?: boolean;

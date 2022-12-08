@@ -6,9 +6,9 @@ import ErrorPageCore from "../ErrorPageCore";
 import { prefix } from "../../internal/settings";
 
 type Props = {
-  header?: string | null;
-  title?: string | null;
-  message?: string | null;
+  header?: React.ReactNode;
+  title?: React.ReactNode;
+  message?: React.ReactNode;
   graphic?: React.ReactNode;
   theme?: "core" | "boomerang";
 };

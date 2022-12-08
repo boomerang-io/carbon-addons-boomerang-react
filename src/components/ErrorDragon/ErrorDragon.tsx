@@ -8,7 +8,7 @@ type Props = {
   className?: string;
   header?: string;
   message?: string;
-  style?: any;
+  style?: React.CSSProperties;
   statusText?: string;
   statusUrl: string;
   title?: string;

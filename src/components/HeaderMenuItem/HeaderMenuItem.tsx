@@ -26,7 +26,7 @@ type Props = {
   children?: any;
   forwardRef?: any;
   iconName?: "workspace" | "group" | "chat" | "debug" | "power" | "information" | "locked" | "launch" | "idea";
-  style?: any;
+  style?: React.CSSProperties;
   text: string;
   disabled?: boolean;
   preventCloseOnClickOutside: boolean;

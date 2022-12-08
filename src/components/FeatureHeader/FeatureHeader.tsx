@@ -12,7 +12,7 @@ type FeatureHeaderProps = {
   includeBorder?: boolean;
   isLoading?: boolean;
   nav?: React.ReactNode;
-  style?: any;
+  style?: React.CSSProperties;
   title?: string;
   contentClassName?: string;
   skeletonClassName?: string;

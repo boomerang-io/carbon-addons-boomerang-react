@@ -8,7 +8,7 @@ type Props = {
   className?: string;
   contained?: boolean;
   light?: boolean;
-  style?: any;
+  style?: React.CSSProperties;
 };
 
 function FeatureNavTabs({

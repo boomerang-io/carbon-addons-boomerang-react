@@ -11,7 +11,7 @@ type Props = {
   onSelect: (...args: any[]) => any;
   selectedItems: any[];
   selectProperty?: string;
-  style?: any;
+  style?: React.CSSProperties;
   width?: string;
 };
 

@@ -5,7 +5,7 @@ import { prefix } from "../../internal/settings";
 
 type Props = {
   className?: string;
-  style?: any;
+  style?: React.CSSProperties;
   status?: string;
   statusText?: string;
 };

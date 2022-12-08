@@ -9,7 +9,7 @@ type Props = {
   header?: any;
   message?: React.ReactNode;
   statusUrl?: string;
-  style?: any;
+  style?: React.CSSProperties;
   title?: any;
 };
 

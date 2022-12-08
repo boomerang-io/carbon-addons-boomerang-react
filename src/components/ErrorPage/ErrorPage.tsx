@@ -7,7 +7,7 @@ type Props = {
   graphic?: React.ReactNode;
   header?: React.ReactNode;
   message?: React.ReactNode;
-  style?: any;
+  style?: React.CSSProperties;
   title?: React.ReactNode;
 };
 
