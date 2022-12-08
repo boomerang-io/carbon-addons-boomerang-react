@@ -38,7 +38,7 @@ const getInputValue = (state: any) => {
 
 const getInstanceId = setupGetInstanceId();
 
-export type MultiSelectComboBoxProps = Pick<typeof MultiSelectComboBox.defaultProps, "itemToString"> & {
+export type MultiSelectComboBoxProps = {
   ariaLabel?: string;
   className?: string;
   disabled?: boolean;
@@ -70,12 +70,7 @@ export type MultiSelectComboBoxProps = Pick<typeof MultiSelectComboBox.defaultPr
 };
 export default class MultiSelectComboBox extends React.Component<MultiSelectComboBoxProps, any> {
   static defaultProps = {
-    disabled: false,
     itemToString: defaultItemToString,
-    shouldFilterItem: defaultShouldFilterItem,
-    type: "default",
-    ariaLabel: "Choose an item",
-    light: false,
   };
 
   comboBoxInstanceId: any;
@@ -113,7 +108,7 @@ export default class MultiSelectComboBox extends React.Component<MultiSelectComb
   }
 
   filterItems = (items: any, selectedItems: any, itemToString: any, inputValue: any) => {
-    const { shouldFilterItem } = this.props;
+    const { shouldFilterItem = defaultShouldFilterItem } = this.props;
 
     return shouldFilterItem
       ? items.filter((item: any) =>
@@ -240,31 +235,32 @@ export default class MultiSelectComboBox extends React.Component<MultiSelectComb
 
   render() {
     const {
+      ariaLabel = "Choose an item",
       className: containerClassName,
-      disabled,
+      disabled = false,
+      direction,
+      downshiftProps,
       id,
+      invalid,
+      invalidText,
       items,
-      itemToString,
+      itemToString = defaultItemToString,
       itemToElement,
+      initialSelectedItems,
       titleText,
       helperText,
       placeholder,
-      selectedItems: propsSelectedItems,
-      ariaLabel,
-      translateWithId,
-      invalid,
-      invalidText,
-      light,
-      initialSelectedItems, // eslint-disable-line no-unused-vars
-      type, // eslint-disable-line no-unused-vars
-      size,
-      shouldFilterItem, // eslint-disable-line no-unused-vars
-      onChange, // eslint-disable-line no-unused-vars
+      onChange,
       onInputBlur,
-      onInputChange, // eslint-disable-line no-unused-vars
-      downshiftProps,
+      onInputChange,
+      light = false,
+      selectedItems: propsSelectedItems,
+      size,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      shouldFilterItem = defaultShouldFilterItem,
       tagProps,
-      direction,
+      translateWithId,
+      type = "default",
       ...rest
     } = this.props;
     const { stateSelectedItems, isOpen } = this.state;
@@ -277,7 +273,8 @@ export default class MultiSelectComboBox extends React.Component<MultiSelectComb
       ListBoxMenuIcon: MenuIcon,
     } = ListBoxComponents;
 
-    const selectedItems = propsSelectedItems || stateSelectedItems; // externally controlled if selectedItems props exist
+    // externally controlled if selectedItems props exist
+    const selectedItems = propsSelectedItems || stateSelectedItems;
 
     const className = cx(`${prefix}--combo-box`, containerClassName, {
       [`${prefix}--list-box--up`]: direction === "top",
