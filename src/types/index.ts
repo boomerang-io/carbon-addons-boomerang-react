@@ -1,5 +1,5 @@
 import React from "react";
-export type DynamicInput = FormInput & Partial<Government>;
+export type DynamicInput = FormInput & Government;
 
 export interface FormInput {
   acceptsUserInput?: boolean;
