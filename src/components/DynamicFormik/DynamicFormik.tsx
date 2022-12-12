@@ -826,6 +826,7 @@ type OwnDynamicFormikProps<Values = any> = {
   inputs: DynamicInput[];
   onSubmit?: (...args: any[]) => any;
   useCSVforArrays?: boolean;
+  validateOnBlur?: boolean;
   validateOnMount?: boolean;
   validationSchema?: any;
   validationSchemaExtension?: any;

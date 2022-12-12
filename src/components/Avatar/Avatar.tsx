@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { prefix } from "../../internal/settings";
 
-interface Props {
+type Props = React.ImgHTMLAttributes<HTMLImageElement> & {
   className?: string;
   size?: "small" | "medium" | "large";
   src: string;
   style?: React.CSSProperties;
   userName?: string;
-}
+};
 
 const UserIcon = (props: React.SVGProps<SVGSVGElement> & { description?: string; userName?: string }) => {
   const { description, userName, ...rest } = props;
@@ -44,7 +44,16 @@ const UserIcon = (props: React.SVGProps<SVGSVGElement> & { description?: string;
   );
 };
 
-function Avatar({ className = `${prefix}--bmrg-avatar`, size = "medium", src, style, userName, ...rest }: Props) {
+function Avatar({
+  alt,
+  className = `${prefix}--bmrg-avatar`,
+  size = "medium",
+  src,
+  style,
+  title,
+  userName,
+  ...rest
+}: Props) {
   const [error, setError] = useState(false);
 
   const altText = `Avatar for ${userName}`;
@@ -53,11 +62,11 @@ function Avatar({ className = `${prefix}--bmrg-avatar`, size = "medium", src, st
     <UserIcon className={`${className} --${size || ""}`} description={altText} style={style} />
   ) : (
     <img
-      alt={altText}
+      alt={alt ?? altText}
       className={`${className} --${size || ""}`}
       src={src}
       style={style}
-      title={altText}
+      title={title ?? altText}
       onError={() => setError(true)}
       {...rest}
     />
