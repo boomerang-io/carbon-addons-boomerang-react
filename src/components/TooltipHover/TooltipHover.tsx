@@ -1,30 +1,16 @@
 import React from "react";
 import cx from "classnames";
-import Tippy from "@tippyjs/react";
+import Tippy, { TippyProps } from "@tippyjs/react";
 import { prefix } from "../../internal/settings";
 
-type Props = {
-  align?: "start" | "end";
-  children?: React.ReactElement;
-  className?: string;
-  content?: React.ReactNode;
-  direction?: "auto" | "top" | "bottom" | "left" | "right";
-  placement?:
-    | "top"
-    | "top-start"
-    | "top-end"
-    | "right"
-    | "right-start"
-    | "right-end"
-    | "bottom"
-    | "bottom-start"
-    | "bottom-end"
-    | "left"
-    | "left-start"
-    | "left-end"
-    | "auto"
-    | "auto-start"
-    | "auto-end";
+type Alignment = "start" | "end";
+type Direction = "auto" | "top" | "bottom" | "left" | "right";
+type Placement = Direction | `${Direction}-${Alignment}`;
+
+type Props = TippyProps & {
+  align?: Alignment;
+  direction?: Direction;
+  placement?: Placement;
   tooltipContent?: React.ReactNode;
   tooltipText?: React.ReactNode;
   [key: string]: any;
@@ -43,13 +29,13 @@ function TooltipHover({
   placement,
   tooltipContent,
   tooltipText,
-  ...restProps
+  ...rest
 }: Props) {
   // support all three for compat with both tippy props and carbon
   const contentToRender = content || tooltipContent || tooltipText;
 
   /**
-   * Determine where to place it based on possibble combinations
+   * Determine where to place it based on possible combinations
    *
    */
   let computedPlacement = "";
@@ -79,9 +65,8 @@ function TooltipHover({
       className={cx(`${prefix}--bmrg-tooltip`, className)}
       content={contentToRender}
       duration={100}
-      // @ts-expect-error TS(2322): Type 'string' is not assignable to type 'Placement... Remove this comment to see the full error message
-      placement={computedPlacement}
-      {...restProps}
+      placement={computedPlacement as TippyProps["placement"]}
+      {...rest}
     >
       {children}
     </Tippy>

@@ -23,7 +23,7 @@ type Props = Omit<MultiSelectComboBoxProps, "initialSelectedItems"> & {
   labelText?: string;
   label?: string;
   initialSelectedItems?: string | any[];
-  items: any;
+  items?: any;
   readOnly?: boolean;
   selectedItems?: string | any[];
   titleText?: string;
