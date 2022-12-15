@@ -1,5 +1,5 @@
 import React from "react";
-export type DynamicInput = FormInput & Government;
+export type DynamicInput = FormInput & InputGovernor;
 
 export interface FormInput {
   acceptsUserInput?: boolean;
@@ -31,7 +31,7 @@ export interface FormInput {
   dateFormat?: string;
   pattern?: string;
   patternInvalidText?: string;
-  government?: Government;
+  InputGovernor?: InputGovernor;
   description?: string;
   key: string;
   label?: string;
@@ -45,7 +45,7 @@ export interface FormInput {
   cannotEditLabel?: boolean;
 }
 
-export interface Government {
+export interface InputGovernor {
   governingJson: string;
   governingJsonKey: string;
   jsonKey: string;
@@ -68,7 +68,7 @@ export interface ModalFunctionChildrenProps {
   closeModal: () => void;
 }
 
-export interface SimpleIdNameObj {
+export interface SimpleIdNameMap {
   id: string;
   name: string;
 }
@@ -120,6 +120,7 @@ export interface Team {
   statements: TeamStatement[];
   allowMembersCreateProjectTeam: boolean;
   canLeaveTeam: boolean;
+  unassignedCatalogItems: UnassignedCatalogItems;
 }
 
 export interface TeamStatement {
@@ -137,12 +138,6 @@ export interface TeamOwner {
   ownerId: string;
   ownerEmail: string;
   ownerName: string;
-}
-
-export interface LowerLevelGroup {
-  id: string;
-  visible: boolean;
-  userProperties: any[];
 }
 
 export interface FavouriteCatalogItem {
@@ -181,7 +176,7 @@ export interface Label {
   dateFormat?: any;
   pattern?: any;
   patternInvalidText?: any;
-  government?: any;
+  InputGovernor?: any;
   description: string;
   key: string;
   label: string;
@@ -191,11 +186,6 @@ export interface Label {
   options: Option[];
   helperText: string;
   isDefaultLabel: boolean;
-}
-
-export interface Logo {
-  id: string;
-  name: string;
 }
 
 export interface Service {
@@ -212,16 +202,10 @@ export interface Group {
   linkedResource?: any;
 }
 
-export interface Service2 {
-  id: string;
-  name?: any;
-  order?: number;
-}
-
 export interface UnassignedCatalogItems {
   name: string;
   description: string;
-  services: Service2[];
+  services: Service[];
   order?: any;
   linkedResource?: any;
 }
@@ -259,7 +243,7 @@ export interface UserTeams {
     id: string;
     name: string;
     isAccountTeamMember: boolean;
-    projectTeams: SimpleIdNameObj[];
+    projectTeams: SimpleIdNameMap[];
   }[];
-  standardTeams: SimpleIdNameObj[];
+  standardTeams: SimpleIdNameMap[];
 }

@@ -10,7 +10,7 @@ import HeaderRightPanel from "./HeaderRightPanel";
 import { serviceUrl, resolver } from "../../config/servicesConfig";
 import { prefix } from "../../internal/settings";
 import { match, keys } from "../../internal/keyboard";
-import { SimpleIdNameObj, SimpleTeamService, UserTeams } from "../../types";
+import { SimpleIdNameMap, SimpleTeamService, UserTeams } from "../../types";
 
 const externalProps = {
   target: "_blank",
@@ -112,7 +112,7 @@ type TeamServiceListMenuProps = {
   baseLaunchEnvUrl?: string;
   isAccount?: boolean;
   isMember: boolean;
-  team: SimpleIdNameObj;
+  team: SimpleIdNameMap;
 };
 
 function TeamServiceListMenu({
