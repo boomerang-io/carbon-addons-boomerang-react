@@ -7,7 +7,7 @@ const SELECT_METHODS = ["up", "down", "click"];
 
 interface OwnProps {
   autoSuggestions: any[];
-  children: any;
+  children: React.ReactElement<any, string | React.JSXElementConstructor<any>>;
   initialValue?: string;
   inputProps?: any;
   onChange?: (...args: any[]) => any;

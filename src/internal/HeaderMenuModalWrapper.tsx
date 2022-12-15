@@ -16,14 +16,14 @@ type OwnProps = {
   buttonTriggerClassName?: string;
   disabled?: boolean;
   onKeyDown?: (...args: any[]) => any;
-  preventCloseOnClickOutside?: any;
+  preventCloseOnClickOutside?: boolean;
   selectorPrimaryFocus?: string;
   renderTriggerButtonIcon?: ((...args: any[]) => any) | any;
   secondaryButtonText?: string;
   triggerButtonIcon?: string;
   triggerButtonIconDescription?: string;
   triggerButtonKind?: "primary" | "secondary" | "danger" | "ghost" | "tertiary";
-  children: ({ closeModal}: { closeModal: () => void}) => React.ReactNode
+  children: ({ closeModal }: { closeModal: () => void }) => React.ReactNode;
 };
 
 type State = any;

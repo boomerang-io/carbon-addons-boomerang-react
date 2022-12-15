@@ -5,23 +5,24 @@ import Modal from "../Modal";
 import { ModalHeader } from "@carbon/react";
 import { prefix } from "../../internal/settings";
 import ConfirmModal from "../ConfirmModal";
+import type { ModalTrigger } from "types";
 
 type Props = {
   appElement?: string;
-  children?: (...args: any[]) => any;
-  composedModalProps?: any;
-  confirmModalProps?: any;
-  initialState?: any;
+  children?: React.ReactNode;
+  composedModalProps?: Record<string, any>;
+  confirmModalProps?: Record<string, any>;
+  initialState?: Record<string, any>;
   isOpen?: boolean;
   modalHeaderChildren?: React.ReactElement;
-  modalHeaderProps?: any;
-  modalTrigger?: (argTypes: { openModal: () => void }) => React.ReactNode;
-  onCloseModal?: (...args: any[]) => any;
+  modalHeaderProps?: Record<string, any>;
+  modalTrigger?: ModalTrigger;
+  onCloseModal?: () => void;
   size?: "xs" | "sm" | "md" | "lg";
 };
 
 export function ComposedModal(props: Props) {
-  const { appElement = "#app", composedModalProps = {}, isOpen, modalHeaderProps = {} } = props;
+  const { appElement = "#app", composedModalProps = {}, isOpen = false, modalHeaderProps = {} } = props;
   const [state, setState] = useSetState<{
     isConfirmModalOpen: boolean;
     isOpen: boolean;

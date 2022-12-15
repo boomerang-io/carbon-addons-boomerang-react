@@ -21,7 +21,7 @@ const iconMapping = {
 type Props = {
   altIconText?: string;
   className?: string;
-  children?: any;
+  children?: React.ReactNode;
   iconName?: "workspace" | "group" | "chat" | "debug" | "power" | "information" | "locked" | "launch";
   onClick?: (...args: any[]) => any;
   style?: React.CSSProperties;

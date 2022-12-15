@@ -2,7 +2,6 @@ import React from "react";
 import cx from "classnames";
 import { prefix } from "../../internal/settings";
 import { Chat, Debug, Group, Idea, Information, Launch, Locked, Power, Workspace } from "@carbon/react/icons";
-
 import HeaderMenuModalWrapper from "../../internal/HeaderMenuModalWrapper";
 
 const iconClassName = `${prefix}--bmrg-header-menu-item__img`;
@@ -23,7 +22,7 @@ const iconMapping = {
 type Props = {
   altIconText?: string;
   className?: string;
-  children?: any;
+  children: ({ closeModal }: { closeModal: () => void }) => React.ReactNode;
   forwardRef?: any;
   iconName?: "workspace" | "group" | "chat" | "debug" | "power" | "information" | "locked" | "launch" | "idea";
   style?: React.CSSProperties;

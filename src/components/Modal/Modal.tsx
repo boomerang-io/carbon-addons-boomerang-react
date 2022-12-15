@@ -3,9 +3,9 @@ import cx from "classnames";
 import ReactModal from "react-modal";
 import { prefix } from "../../internal/settings";
 
-type Props = {
+type Props = Omit<ReactModal.Props, "appElement"> & {
   appElement?: string;
-  children?: any;
+  children: React.ReactNode;
   className?: string;
   containerClassName?: string;
   isOpen?: boolean;

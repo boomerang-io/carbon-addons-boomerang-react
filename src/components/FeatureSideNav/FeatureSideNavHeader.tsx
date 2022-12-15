@@ -4,7 +4,7 @@ import { SkeletonPlaceholder } from "@carbon/react";
 import { prefix } from "../../internal/settings";
 
 type Props = {
-  children?: any;
+  children: React.ReactNode;
   className?: string;
   isLoading?: boolean;
 };

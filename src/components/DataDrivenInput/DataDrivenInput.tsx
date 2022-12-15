@@ -80,7 +80,7 @@ type OwnDataDrivenInputProps = {
   TextInput?: React.FC<any>;
   Toggle?: React.FC<any>;
   formikProps?: any;
-  onChange?: Function;
+  onChange?: (...args: any[]) => any;
 };
 
 type DataDrivenInputProps = OwnDataDrivenInputProps & FormInput;

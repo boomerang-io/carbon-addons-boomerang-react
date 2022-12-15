@@ -5,7 +5,7 @@ import { prefix } from "../../internal/settings";
 
 type Props = {
   border?: "left" | "right";
-  children?: any;
+  children: React.ReactNode;
   className?: string;
   isLoading?: boolean;
   small?: boolean;

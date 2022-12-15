@@ -63,4 +63,14 @@ export { default as TooltipHover } from "./components/TooltipHover";
 export { default as UIShell } from "./components/UIShell";
 export { default as UserRequests } from "./components/UserRequests";
 
-export type { DynamicInput, FormInput, InputGovernor, ModalFunctionChildrenProps, SimpleTeamService, Team, User, UserTeams } from "./types";
+export type {
+  DynamicInput,
+  FormInput,
+  InputGovernor,
+  ModalTrigger,
+  ModalFunctionChildrenProps,
+  SimpleTeamService,
+  Team,
+  User,
+  UserTeams,
+} from "./types";

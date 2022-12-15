@@ -3,6 +3,7 @@ import cx from "classnames";
 import { prefix } from "../../internal/settings";
 import { Button, ModalHeader, ModalBody, ModalFooter } from "@carbon/react";
 import Modal from "../Modal";
+import type { ModalTrigger } from "types";
 
 type Props = {
   affirmativeAction?: (...args: any[]) => any;
@@ -15,7 +16,7 @@ type Props = {
   isOpen?: boolean;
   label?: string;
   modalProps?: any;
-  modalTrigger?: (...args: any[]) => any;
+  modalTrigger?: ModalTrigger
   negativeAction?: (...args: any[]) => any;
   negativeButtonProps?: any;
   negativeText?: string;

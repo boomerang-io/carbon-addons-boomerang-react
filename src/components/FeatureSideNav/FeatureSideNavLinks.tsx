@@ -14,7 +14,7 @@ const LoadingSkeleton = () => {
 };
 
 type FeatureSideNavLinksProps = {
-  children?: any;
+  children: React.ReactNode;
   className?: string;
   isLoading?: boolean;
 };

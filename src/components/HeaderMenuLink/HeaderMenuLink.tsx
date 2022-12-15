@@ -37,7 +37,7 @@ const iconMapping = {
 type Props = {
   altIconText?: string;
   className?: string;
-  children?: any;
+  children?: React.ReactNode;
   href: string;
   iconName?:
     | "chat"

@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import cx from "classnames";
 import { ModalHeader, ProgressIndicator, ProgressStep } from "@carbon/react";
-import { prefix } from "../../internal/settings";
-
 import Modal from "../Modal";
 import useSetState from "../../tools/useSetState";
 import ConfirmModal from "../ConfirmModal";
+import { prefix } from "../../internal/settings";
+import type { ModalTrigger } from "types";
 
 FlowModalContainer.defaultProps = {
   composedModalProps: {},
@@ -23,7 +23,7 @@ type OwnProps = {
   isOpen?: boolean;
   modalHeaderChildren?: React.ReactElement;
   modalHeaderProps?: any;
-  modalTrigger?: (props: { openModal: () => void }) => React.ReactNode;
+  modalTrigger?: ModalTrigger
   onCloseModal?: (...args: any[]) => any;
   onFormDataChange?: (...args: any[]) => any;
   progressSteps?: {

@@ -15,8 +15,8 @@ export interface FormInput {
   minValueLength?: string;
   maxValueLength?: string;
   name?: string;
-  onBlur?: Function;
-  onChange?: Function;
+  onBlur?: (...args: any[]) => any;
+  onChange?: (...args: any[]) => any;
   requiredForKey?: string;
   requiredValueOf?: string[];
   required?: boolean;
@@ -31,7 +31,7 @@ export interface FormInput {
   dateFormat?: string;
   pattern?: string;
   patternInvalidText?: string;
-  InputGovernor?: InputGovernor;
+  government?: InputGovernor;
   description?: string;
   key: string;
   label?: string;
@@ -63,6 +63,8 @@ export interface LowerLevelGroup {
   userProperties: any[];
   visible: boolean;
 }
+
+export type ModalTrigger = (props: { openModal: () => void }) => React.ReactNode;
 
 export interface ModalFunctionChildrenProps {
   closeModal: () => void;
@@ -176,7 +178,7 @@ export interface Label {
   dateFormat?: any;
   pattern?: any;
   patternInvalidText?: any;
-  InputGovernor?: any;
+  government?: InputGovernor;
   description: string;
   key: string;
   label: string;

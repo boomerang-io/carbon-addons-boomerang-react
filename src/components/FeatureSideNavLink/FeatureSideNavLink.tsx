@@ -8,7 +8,7 @@ type Props = NavLinkProps & {
   className?: string;
   children?: string | number | ((...args: any[]) => any) | any | React.ReactNode;
   hasDivider?: boolean;
-  icon?: Function;
+  icon?: React.FC<any>;
   iconProps?: any;
   to: string;
   style?: React.CSSProperties;

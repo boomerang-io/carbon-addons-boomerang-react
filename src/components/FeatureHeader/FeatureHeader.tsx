@@ -68,7 +68,7 @@ export function FeatureHeader({
 }
 
 type FeatureHeaderTitleProps = {
-  children?: React.ReactElement | string;
+  children?: React.ReactNode;
   className?: string;
   element?: any;
   style?: React.CSSProperties;

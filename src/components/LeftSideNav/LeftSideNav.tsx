@@ -7,7 +7,7 @@ type Props = {
   children?: React.ReactNode;
   className?: string;
   isOpen?: boolean;
-  onMenuClose?: Function;
+  onMenuClose?: () => void;
 };
 
 export default function LeftSideNav(props: Props) {
