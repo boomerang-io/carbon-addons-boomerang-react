@@ -19,20 +19,16 @@ const defaultTranslations = {
   [translationIds["open.menu"]]: "Open menu",
 };
 
-type OwnProps = {
+type Props = {
   isOpen: boolean;
-  translateWithId: (...args: any[]) => any;
+  translateWithId?: (id: string) => string;
 };
-
-// @ts-expect-error TS(2456): Type alias 'Props' circularly references itself.
-type Props = OwnProps & typeof ListBoxMenuIcon.defaultProps;
 
 /**
  * `ListBoxMenuIcon` is used to orient the icon up or down depending on the
  * state of the menu for a given `ListBox`
  */
-// @ts-expect-error TS(7022): 'ListBoxMenuIcon' implicitly has type 'any' becaus... Remove this comment to see the full error message
-const ListBoxMenuIcon = ({ isOpen, translateWithId: t }: Props) => {
+const ListBoxMenuIcon = ({ isOpen, translateWithId: t = (id: any) => defaultTranslations[id] }: Props) => {
   const className = cx(`${prefix}--list-box__menu-icon`, {
     [`${prefix}--list-box__menu-icon--open`]: isOpen,
   });
@@ -44,10 +40,6 @@ const ListBoxMenuIcon = ({ isOpen, translateWithId: t }: Props) => {
       </ChevronDown>
     </div>
   );
-};
-
-ListBoxMenuIcon.defaultProps = {
-  translateWithId: (id: any) => defaultTranslations[id],
 };
 
 export default ListBoxMenuIcon;

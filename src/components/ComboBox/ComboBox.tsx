@@ -4,6 +4,8 @@ import TooltipHover from "../TooltipHover";
 import { Information } from "@carbon/react/icons";
 import { prefix } from "../../internal/settings";
 import { ComboBox } from "@carbon/react";
+import type { DownshiftProps } from "downshift";
+import type { ListBoxType, ListBoxSize } from "../../internal/ListBox/ListBoxTypes";
 
 type Props = {
   disableClear?: boolean;
@@ -17,7 +19,7 @@ type Props = {
   className?: string;
   direction?: "top" | "bottom";
   disabled?: boolean;
-  downshiftProps?: any; // TODO: PropTypes.shape(Downshift.propTypes)
+  downshiftProps?: DownshiftProps<any>;
   helperText?: string;
   id: string;
   initialSelectedItem?: any | string | number;
@@ -37,11 +39,11 @@ type Props = {
   placeholder?: string;
   readOnly?: boolean;
   selectedItem?: any | string | number;
-  size?: any; // TODO: ListBoxPropTypes.ListBoxSize
+  size?: ListBoxSize;
   style?: React.CSSProperties;
   titleText?: React.ReactNode;
-  translateWithId?: (...args: any[]) => any;
-  type?: any; // TODO: ListBoxPropTypes.ListBoxType
+  translateWithId?: (id: string) => string;
+  type?: ListBoxType;
   warn?: boolean;
   warnText?: React.ReactNode;
 };

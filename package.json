@@ -1,7 +1,7 @@
 {
   "name": "@boomerang-io/carbon-addons-boomerang-react",
   "description": "Carbon Addons for Boomerang apps",
-  "version": "3.2.0-beta.0",
+  "version": "3.2.0-beta.1",
   "author": {
     "name": "Tim Bula",
     "email": "timrbula@gmail.com"
@@ -17,7 +17,7 @@
   },
   "main": "dist/cjs",
   "module": "dist/esm",
-  "types": "dist/types",
+  "types": "dist/types/index.d.ts",
   "files": [
     "dist/**/*",
     "scss/**/*"
@@ -35,7 +35,7 @@
     "build:components": "rollup -c --bundleConfigAsCjs",
     "build:styles": "node scripts/build.js",
     "build:storybook": "build-storybook",
-    "build:types": "tsc -d --declarationDir dist/types --emitDeclarationOnly",
+    "build:types": "tsup src/index.ts --dts-only --clean --outDir dist/types",
     "lint": "eslint src",
     "prepare": "husky install",
     "precommit": "lint-staged",
@@ -92,9 +92,11 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^12.1.5",
     "@types/dompurify": "^2.4.0",
+    "@types/history": "^5.0.0",
     "@types/jest": "^29.2.3",
     "@types/react": "^16.9.49",
     "@types/react-dom": "^16.9.8",
+    "@types/react-modal": "^3.13.1",
     "@types/react-router-dom": "5.3.3",
     "@types/testing-library__jest-dom": "^5.14.5",
     "@vitejs/plugin-react": "^2.2.0",
@@ -111,6 +113,7 @@
     "jest-axe": "^6.0.0",
     "jsdom": "^20.0.0",
     "lint-staged": "^13.0.3",
+    "mock-socket": "^9.1.5",
     "react": "^16.14.0",
     "react-dom": "16.14.0",
     "react-router-dom": "^5.3.0",
@@ -120,6 +123,7 @@
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "sass": "^1.56.1",
     "storybook": "^6.5.12",
+    "tsup": "^6.5.0",
     "typescript": "^4.6.3",
     "vite": "^3.2.4",
     "vitest": "0.25.3",

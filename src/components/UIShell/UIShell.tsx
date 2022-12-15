@@ -13,11 +13,6 @@ import { queryClient } from "../../config/servicesConfig";
 import { User } from "../../types";
 
 UIShell.defaultProps = {
-  headerConfig: {},
-  isFlowApp: false,
-  renderGdprRedirect: true,
-  renderPrivacyStatement: true,
-  user: {},
   renderRightPanel: {},
 };
 
@@ -51,6 +46,7 @@ type OwnProps = {
       displayLogo?: boolean;
       feedbackUrl?: string;
       name?: string;
+      platformEmail?: string;
       platformName?: string;
       platformOrganization?: string;
       privateTeams?: boolean;
@@ -93,17 +89,17 @@ function UIShell({
   baseLaunchEnvUrl,
   baseServiceUrl,
   companyName,
-  headerConfig,
-  isFlowApp,
+  headerConfig = {},
+  isFlowApp = false,
   onMenuClick,
   onTutorialClick,
   platformName,
   productName,
   renderLogo,
-  renderGdprRedirect,
+  renderGdprRedirect = false,
   renderFlowDocs,
-  renderPrivacyStatement,
-  renderRightPanel,
+  renderPrivacyStatement = false,
+  renderRightPanel = {},
   renderSidenav,
   skipToContentProps,
   user,
@@ -153,7 +149,7 @@ function UIShell({
         renderRightPanel={renderRightPanel}
         renderSidenav={onMenuClick || renderSidenav}
         skipToContentProps={skipToContentProps}
-        requestSummary={user.requestSummary}
+        requestSummary={user?.requestSummary}
         notificationsConfig={{
           wsUrl: `${finalBaseServiceUrl}/notifications/ws`.replace("https://", "wss://"),
         }}
@@ -190,12 +186,12 @@ function UIShell({
           ),
         ].filter(Boolean)}
         profileChildren={[
-          Boolean((user as any)?.id) && (
+          Boolean(user?.id) && (
             <ProfileSettings
               baseServiceUrl={finalBaseServiceUrl}
               key="Avatar"
-              src={`${finalBaseServiceUrl}/users/image/${user.email}`}
-              userName={user.name}
+              src={`${finalBaseServiceUrl}/users/image/${user?.email}`}
+              userName={user?.name}
             />
           ),
           platform && (
@@ -218,13 +214,13 @@ function UIShell({
             <PrivacyStatement
               key="Privacy Statement"
               baseServiceUrl={finalBaseServiceUrl}
-              platformEmail={(platform as any)?.platformEmail}
+              platformEmail={platform?.platformEmail}
             />
           ),
           !!platform?.signOutUrl && <SignOut key="Sign Out" signOutLink={platform.signOutUrl} />,
         ].filter(Boolean)}
       />
-      {isGdprRedirectDisabled === false && user.hasConsented === false ? (
+      {isGdprRedirectDisabled === false && user?.hasConsented === false ? (
         <GdprRedirectModal isOpen baseLaunchEnvUrl={finalBaseUrl as string} user={user} platformName={platform?.name} />
       ) : null}
     </QueryClientProvider>

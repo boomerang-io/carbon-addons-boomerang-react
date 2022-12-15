@@ -33,7 +33,6 @@ type ListBoxProps = {
   type?: ListBoxType;
   warn?: boolean;
   warnText?: React.ReactNode;
-
 };
 
 /**
@@ -60,8 +59,7 @@ const ListBox = React.forwardRef<any, ListBoxProps>(function ListBox(
   const showWarning = !invalid && warn;
 
   const className = cx({
-    // @ts-expect-error TS(2464): A computed property name must be of type 'string',... Remove this comment to see the full error message
-    [containerClassName]: !!containerClassName,
+    [containerClassName as string]: !!containerClassName,
     [`${prefix}--list-box`]: true,
     [`${prefix}--list-box--${size}`]: size,
     [`${prefix}--list-box--inline`]: type === "inline",

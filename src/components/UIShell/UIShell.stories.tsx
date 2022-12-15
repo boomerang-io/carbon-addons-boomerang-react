@@ -9,6 +9,7 @@ import LeftSideNav from "../LeftSideNav";
 import { PRIVACY_DATA } from "../PrivacyStatement/constants";
 import { PROFILE_SETTINGS_DATA } from "../ProfileSettings/constants";
 import UIShell from "./UIShell";
+import { User } from "../../types";
 
 const mock = new MockAdapter(axios);
 
@@ -239,16 +240,17 @@ export const WithCarbonSidenavAndReactRouter = () => {
           </LeftSideNav>
         )}
         onTutorialClick={action("Tutorial")}
-        ///@ts-ignore
-        user={{
-          id: "1",
-          name: "test user",
-          email: "test.user@ibm.com",
-          requestSummary: {
-            requireUserAction: 11,
-            submittedByUser: 17,
-          },
-        }}
+        user={
+          {
+            id: "1",
+            name: "test user",
+            email: "test.user@ibm.com",
+            requestSummary: {
+              requireUserAction: 11,
+              submittedByUser: 17,
+            },
+          } as User
+        }
         renderRightPanel={{
           icon: <Help size={24} />,
           component: (
@@ -332,18 +334,19 @@ export const RightPanel = () => {
           </div>
         ),
       }}
-      ///@ts-ignore
-      user={{
-        id: "1",
-        name: "test user",
-        email: "test.user@ibm.com",
-        hasConsented: true,
-        status: "active",
-        requestSummary: {
-          requireUserAction: 11,
-          submittedByUser: 17,
-        },
-      }}
+      user={
+        {
+          id: "1",
+          name: "test user",
+          email: "test.user@ibm.com",
+          hasConsented: true,
+          status: "active",
+          requestSummary: {
+            requireUserAction: 11,
+            submittedByUser: 17,
+          },
+        } as User
+      }
     />
   );
 };
@@ -388,14 +391,15 @@ export const UserNotConsented = () => {
         },
       }}
       onTutorialClick={action("Tutorial")}
-      ///@ts-ignore
-      user={{
-        id: "1",
-        name: "test user",
-        email: "test.user@ibm.com",
-        hasConsented: false,
-        status: "active",
-      }}
+      user={
+        {
+          id: "1",
+          name: "test user",
+          email: "test.user@ibm.com",
+          hasConsented: false,
+          status: "active",
+        } as User
+      }
     />
   );
 };
@@ -440,14 +444,13 @@ export const UserPendingDeletion = () => {
         },
       }}
       onTutorialClick={action("Tutorial")}
-      ///@ts-ignore
       user={{
         id: "1",
         name: "test user",
         email: "test.user@ibm.com",
         hasConsented: false,
         status: "pending_deletion",
-      }}
+      } as User}
     />
   );
 };

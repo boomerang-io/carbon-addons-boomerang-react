@@ -1,4 +1,3 @@
-//@ts-nocheck
 import React from "react";
 import CheckboxListComponent from "../CheckboxList";
 import CreatableComponent from "../Creatable";
@@ -23,15 +22,15 @@ import {
 } from "../../internal/DataDrivenInputTypes";
 import { FormInput } from "../../types";
 
-function formatSelectOptions(options = []) {
+function formatSelectOptions(options: FormInput["options"] = []) {
   return options.map((option) => ({ label: (option as any).value, value: (option as any).key }));
 }
 
-function formatCheckBoxListOptions(options = []) {
+function formatCheckBoxListOptions(options: FormInput["options"] = []) {
   return options.map((option) => ({ labelText: (option as any).value, id: (option as any).key }));
 }
 
-function formatRadioGroupOptions(options = []) {
+function formatRadioGroupOptions(options: FormInput["options"] = []) {
   return options.map((option) => ({
     labelText: (option as any).value,
     value: (option as any).key,
@@ -47,7 +46,7 @@ function validateRegex(pattern: any, value: any) {
 }
 
 const determineInitialValues = (input: any) => {
-  let value = "";
+  let value: string | boolean = "";
   const valueToCheck = input.value || input.defaultValue || input.values || input.defaultValues;
   if (valueToCheck) {
     switch (valueToCheck) {
@@ -69,17 +68,17 @@ const determineInitialValues = (input: any) => {
 
 type OwnDataDrivenInputProps = {
   id?: string;
-  CheckboxList?: React.ReactElement;
-  Creatable?: React.ReactElement;
-  CustomComponent?: React.ReactElement | Function;
-  DateInput?: React.ReactElement;
-  MultiSelect?: React.ReactElement;
-  RadioGroup?: React.ReactElement;
-  Select?: React.ReactElement;
-  TextArea?: React.ReactElement;
-  TextEditor?: React.ReactElement;
-  TextInput?: React.ReactElement;
-  Toggle?: React.ReactElement;
+  CheckboxList?: React.FC<any>;
+  Creatable?: React.FC<any>;
+  CustomComponent?: React.FC<any>;
+  DateInput?: React.FC<any>;
+  MultiSelect?: React.FC<any>;
+  RadioGroup?: React.FC<any>;
+  Select?: React.FC<any>;
+  TextArea?: React.FC<any>;
+  TextEditor?: React.FC<any>;
+  TextInput?: React.FC<any>;
+  Toggle?: React.FC<any>;
   formikProps?: any;
   onChange?: Function;
 };

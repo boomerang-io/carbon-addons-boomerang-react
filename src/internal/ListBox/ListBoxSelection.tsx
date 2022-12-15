@@ -10,25 +10,28 @@ import { Close } from "@carbon/react/icons";
 import { match, keys } from "../keyboard";
 import { prefix } from "../settings";
 
-type OwnProps = {
+type Props = {
   clearSelection: (...args: any[]) => any;
   disabled?: boolean;
   onClearSelection?: (...args: any[]) => any;
   onClick?: (...args: any[]) => any;
   onKeyDown?: (...args: any[]) => any;
   selectionCount?: number;
-  translateWithId: (...args: any[]) => any;
+  translateWithId?: (id: string) => string;
 };
-
-// @ts-expect-error TS(2565): Property 'defaultProps' is used before being assig... Remove this comment to see the full error message
-type Props = OwnProps & typeof ListBoxSelection.defaultProps;
 
 /**
  * `ListBoxSelection` is used to provide controls for clearing a selection, in
  * addition to conditionally rendering a badge if the control has more than one
  * selection.
  */
-function ListBoxSelection({ clearSelection, selectionCount, translateWithId: t, disabled, onClearSelection }: Props) {
+function ListBoxSelection({
+  clearSelection,
+  selectionCount,
+  translateWithId: t = (id: any) => defaultTranslations[id],
+  disabled,
+  onClearSelection,
+}: Props) {
   const className = cx(`${prefix}--list-box__selection`, {
     [`${prefix}--tag--filter`]: selectionCount,
     [`${prefix}--list-box__selection--multi`]: selectionCount,
@@ -63,8 +66,8 @@ function ListBoxSelection({ clearSelection, selectionCount, translateWithId: t, 
   });
   return selectionCount ? (
     <div className={tagClasses}>
-      {/* @ts-expect-error TS(2322): Type 'number' is not assignable to type 'string'. */}
-      <span className={`${prefix}--tag__label`} title={selectionCount}>
+
+      <span className={`${prefix}--tag__label`} title={String(selectionCount)}>
         {selectionCount}
       </span>
       <div
@@ -73,7 +76,7 @@ function ListBoxSelection({ clearSelection, selectionCount, translateWithId: t, 
         className={`${prefix}--tag__close-icon`}
         onClick={handleOnClick}
         onKeyDown={handleOnKeyDown}
-        // @ts-expect-error TS(2322): Type '{ children: Element; role: "button"; tabInde... Remove this comment to see the full error message
+        // @ts-expect-error TS(2322)
         disabled={disabled}
         aria-label={t("clear.all")}
         title={description}
@@ -105,10 +108,6 @@ export const translationIds = {
 const defaultTranslations = {
   [translationIds["clear.all"]]: "Clear all selected items",
   [translationIds["clear.selection"]]: "Clear selected item",
-};
-
-ListBoxSelection.defaultProps = {
-  translateWithId: (id: any) => defaultTranslations[id],
 };
 
 export default ListBoxSelection;

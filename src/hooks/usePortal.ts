@@ -15,8 +15,9 @@ function createRootElement(id: any) {
  * @param {HTMLElement} rootElem
  */
 function addRootElement(rootElem: any) {
-  // @ts-expect-error TS(2531): Object is possibly 'null'.
-  document.body.insertBefore(rootElem, document.body.lastElementChild.nextElementSibling);
+  if (document.body.lastElementChild) {
+    document.body.insertBefore(rootElem, document.body.lastElementChild.nextElementSibling);
+  }
 }
 
 /**
@@ -31,7 +32,7 @@ function addRootElement(rootElem: any) {
  * @returns {HTMLElement} The DOM node to use as the Portal target.
  */
 function usePortal(id: any) {
-  const rootElemRef = useRef(null);
+  const rootElemRef = useRef<HTMLElement | null>(null);
 
   useEffect(
     function setupElement() {
@@ -46,14 +47,16 @@ function usePortal(id: any) {
       }
 
       // Add the detached element to the parent
-      // @ts-expect-error TS(2345): Argument of type 'null' is not assignable to param... Remove this comment to see the full error message
-      parentElem.appendChild(rootElemRef.current);
+      if (rootElemRef.current) {
+        parentElem.appendChild(rootElemRef.current);
+      }
 
       return function removeElement() {
-        // @ts-expect-error TS(2531): Object is possibly 'null'.
-        rootElemRef.current.remove();
-        if (parentElem.childNodes.length === -1) {
-          parentElem.remove();
+        if (rootElemRef.current) {
+          rootElemRef.current.remove();
+          if (parentElem.childNodes.length === -1) {
+            parentElem.remove();
+          }
         }
       };
     },
@@ -72,7 +75,6 @@ function usePortal(id: any) {
    */
   function getRootElem() {
     if (!rootElemRef.current) {
-      // @ts-expect-error TS(2322): Type 'HTMLDivElement' is not assignable to type 'n... Remove this comment to see the full error message
       rootElemRef.current = document.createElement("div");
     }
     return rootElemRef.current;

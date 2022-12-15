@@ -16,20 +16,17 @@
  */
 function createPropAdapter(spec: any) {
   // if props aren't passed in we should default the prop to empty object
-  return (input = {}) => {
-    const output = {};
+  return (input: { [key: string]: any } = {}) => {
+    const output: { [key: string]: any } = {};
     Object.keys(input).forEach((key) => {
-      // @ts-expect-error TS(7031): Binding element 'regex' implicitly has an 'any' ty... Remove this comment to see the full error message
-      const match = spec.find(([regex]) => {
+      const match: [string, string] = spec.find(([regex]: [string]) => {
         return key.match(regex);
       });
       if (match) {
         const [regex, replacer] = match;
-        // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
         output[key.replace(regex, replacer)] = input[key];
         return;
       }
-      // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       output[key] = input[key];
     });
     return output;

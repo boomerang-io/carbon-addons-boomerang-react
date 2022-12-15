@@ -171,7 +171,6 @@ class Header extends React.Component<OwnProps, State> {
   };
 
   handleCloseViaEsc = () => {
-    //@ts-ignore
     const activeMenuStateKey = Object.keys(this.state).find((key) => key.startsWith("is") && this.state[key]);
 
     if (activeMenuStateKey) {
@@ -217,8 +216,7 @@ class Header extends React.Component<OwnProps, State> {
 
             // Add callback if parent wants event emitted
             // Match prop name for handling on element click
-            // @ts-ignore
-            const propFunc = this.props[`on${type}Click`];
+            const propFunc = this.props[`on${type}Click` as keyof typeof this.props];
             if (typeof propFunc === "function") {
               propFunc(evt);
             }

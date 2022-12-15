@@ -9,7 +9,7 @@ import React from "react";
 import ListBoxMenuItem from "./ListBoxMenuItem";
 import { prefix } from "../settings";
 
-type Props = {
+type Props = React.HTMLAttributes<HTMLDivElement> & {
   children?:
     | React.ReactNode
     | typeof ListBoxMenuItem[]

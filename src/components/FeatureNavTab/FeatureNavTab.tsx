@@ -4,15 +4,16 @@ import cx from "classnames";
 import { SkeletonPlaceholder } from "@carbon/react";
 import { prefix } from "../../internal/settings";
 
-type Props = NavLinkProps & {
-  activeClassName?: string;
-  className?: string;
-  disabled?: boolean;
-  isLoading?: boolean;
-  label?: string;
-  style?: React.CSSProperties;
-  [key: string]: any;
-};
+type Props = NavLinkProps &
+  React.HTMLAttributes<HTMLAnchorElement> & {
+    activeClassName?: string;
+    className?: string;
+    disabled?: boolean;
+    isLoading?: boolean;
+    label?: string;
+    style?: React.CSSProperties;
+    [key: string]: any;
+  };
 
 function FeatureNavTab({
   activeClassName = "",
@@ -38,8 +39,7 @@ function FeatureNavTab({
       <SkeletonPlaceholder className={`${prefix}--bmrg-feature-nav-tab--loading__skeleton`} />
     </div>
   ) : (
-    //@ts-ignore
-    <NavLink className={classNames} activeClassName={activeClassNames} style={style} disabled={disabled} {...rest}>
+    <NavLink className={classNames} activeClassName={activeClassNames} style={style} {...rest}>
       {label}
     </NavLink>
   );

@@ -55,8 +55,7 @@ function RadioGroupComponent({
 
   return (
     //Defined a css var --height to be used on the wrapped container to determine the number of radios displayed in each column
-    // @ts-expect-error TS(2322): Type '{ "--height": string; }' is not assignable t... Remove this comment to see the full error message
-    <div key={id} className={`${prefix}--bmrg-radio-group`} style={{ "--height": columnHeight }}>
+    <div key={id} className={`${prefix}--bmrg-radio-group`} style={{ ["--height" as string]: columnHeight }}>
       {labelValue && (
         <div className={`${prefix}--bmrg-radio-group__title`}>
           <div id={labelTextId} className={`${prefix}--label`}>

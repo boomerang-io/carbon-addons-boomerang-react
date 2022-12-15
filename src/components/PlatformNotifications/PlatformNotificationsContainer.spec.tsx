@@ -1,5 +1,5 @@
 import React from "react";
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { action } from "@storybook/addon-actions";
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
@@ -41,20 +41,21 @@ mockServer.on("connection", (socket: any) => {
   });
 });
 
-describe("Default Notification Container", () => {
-  describe("Renders as expected", () => {
-    const wrapper = render(
+describe("Platform Notifications Container", () => {
+  test("default", async () => {
+    render(
       <PlatformNotificationsContainer
         config={{
           wsUrl: "ws://localhost:8081/ws",
           httpUrl: "http://localhost:8000/notifications",
         }}
-        isNotificationActive
+        isNotificationActive={false}
         setHasNewNotifications={action("setHasNewNotifications")}
+        initialNotifications={notificationsObj.notifications}
       />
     );
-    it("Should Render at top level", () => {
-      expect((wrapper as any).hasClass("cds--bmrg-notifications")).toEqual(true);
-    });
+    expect(screen.getByText("1 new notification")).toBeInTheDocument();
+    expect(screen.getByText("Mark All Read")).toBeInTheDocument();
+    expect(screen.getByText("Open Notification Center")).toBeInTheDocument();
   });
 });

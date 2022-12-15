@@ -22,7 +22,7 @@ export default {
 export const Default = (args: any) => {
   return (
     <Tabs contained ariaLabel="Team navigation" {...args}>
-      <Tab label="Services" to="/services" />
+      <Tab disabled label="Services" to="/services" />
       <Tab label="Members" to="/members" />
       <Tab label="Service Requests" to="/service-requests" />
       <Tab label="Members Requests" to="/members-requests" />

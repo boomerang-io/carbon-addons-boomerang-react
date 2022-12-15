@@ -10,11 +10,9 @@ import { prefix } from "../settings";
 // No longer used, left export for backward-compatibility
 export const translationIds = {};
 
-type Props = {
-  "aria-haspopup"?: string | boolean;
+type Props = React.HTMLAttributes<HTMLDivElement> & {
   children?: React.ReactNode;
   disabled?: boolean;
-  role?: string;
   tabIndex?: number | string;
 };
 
@@ -24,9 +22,9 @@ type Props = {
  * `role` to make sure a user can focus the given field.
  */
 function ListBoxField({ children, disabled, tabIndex, ...rest }: Props) {
+  const numTabIndex = typeof tabIndex === "string" ? parseInt(tabIndex) : tabIndex;
   return (
-    // @ts-expect-error TS(2322): Type 'string | number' is not assignable to type '... Remove this comment to see the full error message
-    <div className={`${prefix}--list-box__field`} tabIndex={(!disabled && tabIndex) || -1} {...rest}>
+    <div className={`${prefix}--list-box__field`} tabIndex={(!disabled && numTabIndex) || -1} {...rest}>
       {children}
     </div>
   );

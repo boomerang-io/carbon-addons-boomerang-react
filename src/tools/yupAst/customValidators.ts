@@ -1,9 +1,8 @@
-// @ts-nocheck
 import { object as yupObject } from "yup";
 
-const CUSTOM_VALIDATORS = {};
+const CUSTOM_VALIDATORS: Record<string, any> = {};
 
-export function addCustomValidator(name: any, validator: any, binding = false) {
+export function addCustomValidator(name: any, validator: any, binding: any = false) {
   if (binding !== false) {
     validator = validator.bind(binding);
   }

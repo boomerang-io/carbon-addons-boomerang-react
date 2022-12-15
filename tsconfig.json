@@ -18,7 +18,8 @@
     "strict": true /* Enable all strict type-checking options. */,
     "skipDefaultLibCheck": true /* Skip type checking .d.ts files that are included with TypeScript. */,
     "skipLibCheck": true /* Skip type checking all .d.ts files. */,
-    "rootDir": "src"
+    "rootDir": "src",
+    "noEmit": true
   },
   "exclude": ["**/*.spec.tsx","**/*.stories.tsx", "coverage", "dist", "node_modules", ".storybook", "scripts"],
   "include": ["src/**/*.ts", "src/**/*.tsx"],

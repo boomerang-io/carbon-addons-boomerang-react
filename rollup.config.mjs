@@ -2,7 +2,6 @@ import commonjs from "@rollup/plugin-commonjs";
 import resolve from "@rollup/plugin-node-resolve";
 import typescript from "@rollup/plugin-typescript";
 import peerDepsExternal from "rollup-plugin-peer-deps-external";
-import terser from "@rollup/plugin-terser";
 import image from "@rollup/plugin-image";
 import pkg from "./package.json" assert { type: "json" };
 
@@ -12,13 +11,14 @@ const config = {
     {
       dir: pkg.main,
       format: "cjs",
-      sourcemap: true
+      preserveModules: true,
+      interop: "auto",
+      exports: "named"
     },
     {
       dir: pkg.module,
       format: "esm",
       preserveModules: true,
-      sourcemap: true
     },
   ],
   external: Object.keys(pkg.dependencies).map((packageName) => new RegExp(`^${packageName}(\/.*)?`)),

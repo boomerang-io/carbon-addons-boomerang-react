@@ -4,7 +4,7 @@ export type DynamicInput = FormInput & Government;
 export interface FormInput {
   acceptsUserInput?: boolean;
   conditionallyRender?: boolean;
-  customComponent?: Function | React.ReactElement;
+  customComponent?: React.FC<any>;
   defaultValues?: any[];
   id?: string;
   invalid?: boolean;

@@ -1,6 +1,7 @@
 import React from "react";
 import cx from "classnames";
-import Tippy, { TippyProps } from "@tippyjs/react";
+import { default as Tippy } from "@tippyjs/react";
+import type { TippyProps } from "@tippyjs/react";
 import { prefix } from "../../internal/settings";
 
 type Alignment = "start" | "end";
