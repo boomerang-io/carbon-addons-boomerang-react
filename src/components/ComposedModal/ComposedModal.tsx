@@ -9,12 +9,18 @@ import type { ModalTrigger } from "types";
 
 type Props = {
   appElement?: string;
-  children?: React.ReactNode;
+  children?: (props: {
+    closeModal?: () => void;
+    forceCloseModal?: () => void;
+    resetInitialState?: (arg: Record<string, any>) => void;
+    setShouldConfirmModalClose?: (shouldConfirmModalClose: boolean) => void;
+    shouldConfirmModalClose: boolean;
+  }) => React.ReactNode;
   composedModalProps?: Record<string, any>;
   confirmModalProps?: Record<string, any>;
   initialState?: Record<string, any>;
   isOpen?: boolean;
-  modalHeaderChildren?: React.ReactElement;
+  modalHeaderChildren?: React.ReactNode;
   modalHeaderProps?: Record<string, any>;
   modalTrigger?: ModalTrigger;
   onCloseModal?: () => void;
@@ -48,7 +54,7 @@ export function ComposedModal(props: Props) {
    * Reset to initial state
    * and let parent know
    */
-  const resetInitialState = (stateUpdate: any) => {
+  const resetInitialState = (stateUpdate: Record<string, any>) => {
     setState({
       isConfirmModalOpen: false,
       shouldConfirmModalClose: false,
@@ -90,7 +96,7 @@ export function ComposedModal(props: Props) {
    * Method passed to children components and they determine if should confirm exit of modal
    * @param {bool} shouldConfirmModalClose - boolean of current component
    */
-  const handleSetShouldConfirmModalClose = (shouldConfirmModalClose: any) => {
+  const handleSetShouldConfirmModalClose = (shouldConfirmModalClose: boolean) => {
     setState({ shouldConfirmModalClose });
   };
 
