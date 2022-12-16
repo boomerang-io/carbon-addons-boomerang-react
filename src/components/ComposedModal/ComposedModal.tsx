@@ -9,11 +9,11 @@ import type { ModalTrigger } from "types";
 
 type Props = {
   appElement?: string;
-  children?: (props: {
-    closeModal?: () => void;
-    forceCloseModal?: () => void;
-    resetInitialState?: (arg: Record<string, any>) => void;
-    setShouldConfirmModalClose?: (shouldConfirmModalClose: boolean) => void;
+  children?: (args: {
+    closeModal: () => void;
+    forceCloseModal: () => void;
+    resetInitialState: (arg: Record<string, any>) => void;
+    setShouldConfirmModalClose: (shouldConfirmModalClose: boolean) => void;
     shouldConfirmModalClose: boolean;
   }) => React.ReactNode;
   composedModalProps?: Record<string, any>;
