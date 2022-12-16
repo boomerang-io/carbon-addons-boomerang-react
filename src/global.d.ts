@@ -1,9 +1,6 @@
 declare module "@carbon/react";
 declare module "@carbon/react/icons";
 declare module "jest-axe";
-declare module "lodash.get";
-declare module "lodash.isequal";
-declare module "lodash.sortby";
 declare module "mock-socket";
 declare module "react-autosuggest";
 
