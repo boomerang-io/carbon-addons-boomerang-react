@@ -10,7 +10,7 @@ interface OwnProps {
   children: React.ReactElement<any, string | React.JSXElementConstructor<any>>;
   initialValue?: string;
   inputProps?: any;
-  onChange?: (...args: any[]) => any;
+  onChange?: (newValue: any) => any;
 }
 
 type State = any;

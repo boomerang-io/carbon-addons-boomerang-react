@@ -37,7 +37,7 @@ specifiers:
   classnames: 2.3.2
   cpy: 8.1.2
   cross-env: ^7.0.3
-  date-fns: 2.29.3
+  dayjs: ^1.11.7
   dompurify: 2.4.1
   downshift: 6.1.7
   eslint: ^8.19.0
@@ -78,7 +78,7 @@ dependencies:
   '@stomp/stompjs': 6.1.2
   '@tippyjs/react': 4.2.6_wcqkhtmu7mswc6yz4uyexck3ty
   classnames: 2.3.2
-  date-fns: 2.29.3
+  dayjs: 1.11.7
   dompurify: 2.4.1
   downshift: 6.1.7_react@16.14.0
   focus-trap-react: 10.0.2_ccrd4luiijsxnlhe6bgkvyy2z4
@@ -6959,9 +6959,8 @@ packages:
       whatwg-url: 11.0.0
     dev: true
 
-  /date-fns/2.29.3:
-    resolution: {integrity: sha512-dDCnyH2WnnKusqvZZ6+jA1O51Ibt8ZMRNkDZdyAyK4YfbDwa/cEmuztzG5pk6hqlp9aSBPYcjOlktquahGwGeA==}
-    engines: {node: '>=0.11'}
+  /dayjs/1.11.7:
+    resolution: {integrity: sha512-+Yw9U6YO5TQohxLcIkrXBeY73WP3ejHWVvx8XCk3gxvQDCTEmS48ZrSZCKciI7Bhl/uCMyxYtE9UqRILmFphkQ==}
     dev: false
 
   /debug/2.6.9:

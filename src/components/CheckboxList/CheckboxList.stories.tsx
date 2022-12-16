@@ -41,7 +41,7 @@ export const KitchenSink = (args: any) => {
       helperText="Pick a good one"
       initialSelectedItems={["peacock"]}
       labelText="Select some animals"
-      onChange={() => {}}
+      onChange={(args) => console.log(args)}
       options={animals}
       tooltipContent="Tooltip for checkbox"
       tooltipProps={{ direction: "top" }}

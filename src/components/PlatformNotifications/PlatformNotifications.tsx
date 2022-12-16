@@ -1,8 +1,11 @@
 import React from "react";
 import cx from "classnames";
 import { Close } from "@carbon/react/icons";
-import { formatDistance, format, parseISO } from "date-fns";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
 import { prefix } from "../../internal/settings";
+
+dayjs.extend(relativeTime);
 
 type Props = {
   readNotification: (...args: any[]) => any;
@@ -40,10 +43,7 @@ function Notification({ readNotification, notificationInfo }: Props) {
         <h2 className={`${prefix}--bmrg-notification-content__title`}>{notificationInfo.title}</h2>
         <p className={`${prefix}--bmrg-notification-content__desc`}>{notificationInfo.detail}</p>
         <time className={`${prefix}--bmrg-notification-content__date`}>
-          {`${formatDistance(new Date(notificationInfo.date), new Date())} ago at ${format(
-            parseISO(notificationInfo.date),
-            "hh:mma"
-          )}`}
+          {`${dayjs(notificationInfo.date).fromNow()} at ${dayjs(notificationInfo.date).format("hh:mma")}`}
         </time>
         <button
           className={`${prefix}--bmrg-notification-content__close`}
