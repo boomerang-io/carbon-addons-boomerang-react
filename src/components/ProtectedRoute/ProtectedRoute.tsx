@@ -10,9 +10,9 @@ const checkAuth = (userRole: string | string[], allowedUserRoles: string[]) => {
   return allowedUserRoles.some((allowedRole) => allowedRole === userRole);
 };
 
-type Props = RouteProps & {
+type Props = Omit<RouteProps, "component"> & {
   allowedUserRoles: string[];
-  component?: React.ReactNode;
+  component: React.ReactNode;
   message?: string;
   title?: string;
   userRole: string | string[];
