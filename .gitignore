@@ -2,12 +2,8 @@
 node_modules
 
 # Compiled
-lib
-es
-umd
-build
+dist
 scss
-styles
 storybook-static
 *.tgz
 
