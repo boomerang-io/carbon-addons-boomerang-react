@@ -4,18 +4,15 @@ import TooltipHover from "../TooltipHover";
 import { Information } from "@carbon/react/icons";
 import { prefix } from "../../internal/settings";
 
-type Props = React.InputHTMLAttributes<HTMLInputElement> & {
+type Props = React.ComponentPropsWithRef<"input"> & {
   tooltipClassName?: string;
   tooltipContent?: React.ReactNode;
   tooltipProps?: any;
-  className?: string;
   cols?: number;
   defaultValue?: string | number;
-  disabled?: boolean;
   enableCounter?: boolean;
   helperText?: React.ReactNode;
   hideLabel?: boolean;
-  id?: string;
   invalid?: boolean;
   invalidText?: React.ReactNode;
   label?: string;
@@ -23,13 +20,7 @@ type Props = React.InputHTMLAttributes<HTMLInputElement> & {
   light?: boolean;
   max?: string | number;
   maxCount?: number;
-  name?: string;
-  onBlur?: (...args: any[]) => any;
-  onChange?: (...args: any[]) => any;
-  onClick?: (...args: any[]) => any;
-  placeholder?: string;
   rows?: number;
-  value?: string | number;
 };
 
 const TextAreaComponent = React.forwardRef<any, Props>(function TextAreaComponent(

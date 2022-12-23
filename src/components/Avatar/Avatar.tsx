@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { prefix } from "../../internal/settings";
 
-type Props = React.ImgHTMLAttributes<HTMLImageElement> & {
+type Props = React.ComponentPropsWithoutRef<"img"> & {
   className?: string;
   size?: "small" | "medium" | "large";
   src: string;

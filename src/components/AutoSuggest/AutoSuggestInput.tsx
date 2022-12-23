@@ -2,30 +2,30 @@ import React, { Component } from "react";
 import AutoSuggest from "react-autosuggest";
 import { prefix } from "../../internal/settings";
 
-const getSuggestions = (values: any, value: any) => {
+const getSuggestions = (values: any, value: string) => {
   const inputValue = value.trim().toLowerCase();
   const inputLength = inputValue.length;
 
   return inputLength === 0
     ? []
-    : values.filter((option: any) => option.toLowerCase().slice(0, inputLength) === inputValue);
+    : values.filter((option: string) => option.toLowerCase().slice(0, inputLength) === inputValue);
 };
 
 type OwnAutoSuggestInputProps = {
   autoSuggestions?: any[];
   children: any;
   focusInputOnSuggestionClick: boolean;
-  getSuggestions?: (...args: any[]) => any;
+  getSuggestions?: (values: string[], value: string) => string[];
   getSuggestionValue?: (...args: any[]) => any;
   inputProps?: any;
   renderInputComponent?: React.ReactNode;
   renderSuggestion?: (...args: any[]) => any;
-  suggestions?: any[];
+  suggestions?: string[];
 };
 
-type AutoSuggestInputState = any;
+type AutoSuggestInputState = { suggestions?: string[] };
 
-type AutoSuggestInputProps = OwnAutoSuggestInputProps & typeof AutoSuggestInput.defaultProps;
+export type AutoSuggestInputProps = OwnAutoSuggestInputProps & typeof AutoSuggestInput.defaultProps;
 
 class AutoSuggestInput extends Component<AutoSuggestInputProps, AutoSuggestInputState> {
   static defaultProps = {

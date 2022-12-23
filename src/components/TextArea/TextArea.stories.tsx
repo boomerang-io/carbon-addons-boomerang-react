@@ -16,7 +16,7 @@ export default {
 };
 
 const ExternallyControlledTextArea = (args: any) => {
-  const [value, setValue] = React.useState(null);
+  const [value, setValue] = React.useState("");
 
   return (
     <TextArea
@@ -36,7 +36,6 @@ export const Default = (args: any) => {
       onChange={action("text area change")}
       placeholder={"Placeholder"}
       style={{ resize: "none" }}
-      type="text"
       {...args}
     />
   );

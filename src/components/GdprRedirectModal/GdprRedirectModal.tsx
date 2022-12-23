@@ -2,11 +2,12 @@ import React, { Component } from "react";
 import { ComposedModal, Button, ModalHeader, ModalBody, ModalFooter } from "@carbon/react";
 import { prefix } from "../../internal/settings";
 import { USER_STATUS } from "./constants";
+import type { User } from "types";
 
 type OwnProps = {
   isOpen?: boolean;
   baseLaunchEnvUrl: string;
-  user: any;
+  user: User;
   platformName?: string;
 };
 

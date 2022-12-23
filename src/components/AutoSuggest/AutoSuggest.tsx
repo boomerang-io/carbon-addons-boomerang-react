@@ -1,34 +1,32 @@
 import React, { Component } from "react";
 import { matchSorter as ms } from "match-sorter";
-
-import AutoSuggestInput from "./AutoSuggestInput";
+import AutoSuggestInput, { AutoSuggestInputProps } from "./AutoSuggestInput";
 
 const SELECT_METHODS = ["up", "down", "click"];
 
-interface OwnProps {
-  autoSuggestions: any[];
+type Suggestion = { label: string; value: string };
+
+interface Props {
+  autoSuggestions: Suggestion[];
   children: React.ReactElement<any, string | React.JSXElementConstructor<any>>;
   initialValue?: string;
-  inputProps?: any;
+  inputProps?: AutoSuggestInputProps;
   onChange?: (newValue: any) => any;
 }
 
-type State = any;
-
-type Props = OwnProps & typeof AutoSuggest.defaultProps;
+type State = {
+  value: string;
+  caretIndex: number;
+  suggestions: any[];
+};
 
 class AutoSuggest extends Component<Props, State> {
-  static defaultProps = {
-    onChange: () => {},
-    initialValue: "",
-  };
-
   inputRef = React.createRef();
 
   state = {
     // Used if we want to have some of the functions external instead of
     // the default ones in the wrapper
-    value: this.props.initialValue,
+    value: this.props.initialValue ?? "",
     caretIndex: 0,
     suggestions: [],
   };
@@ -43,7 +41,7 @@ class AutoSuggest extends Component<Props, State> {
     }
   }
 
-  renderSuggestion = (suggestion: any) => <div>{suggestion.label}</div>;
+  renderSuggestion = (suggestion: Suggestion) => <div>{suggestion.label}</div>;
 
   /**
    * More logic here for handling a user cycling through suggestions
@@ -51,14 +49,16 @@ class AutoSuggest extends Component<Props, State> {
    * Shift based on the change in length of the value b/c of different length suggestions
    */
 
-  onInputChange = (event: any, { newValue, method }: any) => {
+  onInputChange = (_: any, { newValue, method }: any) => {
     this.setState((prevState: any) => ({
       value: newValue,
       caretIndex: SELECT_METHODS.includes(method)
         ? prevState.caretIndex + (newValue.length - prevState.value.length)
         : (this as any).inputRef.current.selectionStart,
     }));
-    this.props.onChange(newValue);
+    if (typeof this.props.onChange === "function") {
+      this.props.onChange(newValue);
+    }
   };
 
   /**
@@ -68,7 +68,7 @@ class AutoSuggest extends Component<Props, State> {
    * - find the last word (space-delimited) and replace it in input
    * -
    */
-  getSuggestionValue = (suggestion: any) => {
+  getSuggestionValue = (suggestion: Suggestion) => {
     const inputWords = this.findWordsBeforeCurrentLocation();
     // const propertySuggestion = `\${p:${suggestion}}`;
 
@@ -94,7 +94,7 @@ class AutoSuggest extends Component<Props, State> {
       ? []
       : ms(this.props.autoSuggestions, inputWord, {
           // Use match-sorter for matching inputs
-          keys: [{ key: "value", threshold: (ms.rankings as any).SIMPLE }],
+          keys: [{ key: "value" }],
         });
   };
 
@@ -120,7 +120,7 @@ class AutoSuggest extends Component<Props, State> {
         focusInputOnSuggestionClick={false}
         {...rest}
       >
-        {(inputProps: any) => React.cloneElement(children, { ...inputProps, ref: this.inputRef })}
+        {(inputProps: AutoSuggestInputProps) => React.cloneElement(children, { ...inputProps, ref: this.inputRef })}
       </AutoSuggestInput>
     );
   }

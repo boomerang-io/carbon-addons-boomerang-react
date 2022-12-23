@@ -1,7 +1,7 @@
 import React from "react";
 export type DynamicInput = FormInput & InputGovernor;
 
-export interface FormInput {
+export type FormInput = {
   acceptsUserInput?: boolean;
   conditionallyRender?: boolean;
   customComponent?: React.FC<any>;
@@ -43,9 +43,9 @@ export interface FormInput {
   helperTextOff?: string;
   isDefaultLabel?: boolean;
   cannotEditLabel?: boolean;
-}
+};
 
-export interface InputGovernor {
+export type InputGovernor = {
   governingJson: string;
   governingJsonKey: string;
   jsonKey: string;
@@ -55,32 +55,32 @@ export interface InputGovernor {
   governed: boolean;
   isGoverning: boolean;
   isGoverned: boolean;
-}
+};
 
-export interface LowerLevelGroup {
+export type LowerLevelGroup = {
   id: string;
   name?: string;
   userProperties: any[];
   visible: boolean;
-}
+};
 
 export type ModalTrigger = (props: { openModal: () => void }) => React.ReactNode;
 
-export interface ModalFunctionChildrenProps {
+export type ModalFunctionChildrenProps = {
   closeModal: () => void;
-}
+};
 
-export interface SimpleIdNameMap {
+export type SimpleIdNameMap = {
   id: string;
   name: string;
-}
+};
 
-export interface SimpleTeamService {
+export type SimpleTeamService = {
   name: string;
   url: string;
-}
+};
 
-export interface Team {
+export type Team = {
   id: string;
   name: string;
   shortName: string;
@@ -123,9 +123,9 @@ export interface Team {
   allowMembersCreateProjectTeam: boolean;
   canLeaveTeam: boolean;
   unassignedCatalogItems: UnassignedCatalogItems;
-}
+};
 
-export interface TeamStatement {
+export type TeamStatement = {
   id: number;
   name: string;
   jobTitle: string;
@@ -134,38 +134,38 @@ export interface TeamStatement {
     id: string;
     name: string;
   };
-}
+};
 
-export interface TeamOwner {
+export type TeamOwner = {
   ownerId: string;
   ownerEmail: string;
   ownerName: string;
-}
+};
 
-export interface FavouriteCatalogItem {
+export type FavouriteCatalogItem = {
   catalogItemId: string;
   order: number;
-}
+};
 
-export interface EmailPreferences {
+export type EmailPreferences = {
   receiveRequestLeaveTeam: boolean;
   receiveJoinTeamApproved: boolean;
   receiveNewMemberInvite: boolean;
   receiveCoOwnerAddMember: boolean;
-}
+};
 
-export interface Owner {
+export type Owner = {
   ownerId: string;
   ownerEmail: string;
   ownerName: string;
-}
+};
 
-export interface Option {
+export type Option = {
   key: string;
   value: string;
-}
+};
 
-export interface Label {
+export type Label = {
   required: boolean;
   placeholder: string;
   language?: any;
@@ -188,59 +188,87 @@ export interface Label {
   options: Option[];
   helperText: string;
   isDefaultLabel: boolean;
-}
+};
 
-export interface Service {
+export type Service = {
   id: string;
   name?: any;
   order?: number;
-}
+};
 
-export interface Group {
+export type Group = {
   name: string;
   description: string;
   services: Service[];
   order?: number;
   linkedResource?: any;
-}
+};
 
-export interface UnassignedCatalogItems {
+export type UnassignedCatalogItems = {
   name: string;
   description: string;
   services: Service[];
   order?: any;
   linkedResource?: any;
-}
+};
 
-export interface RequestSummary {
+export type RequestSummary = {
   requireUserAction: number;
   submittedByUser: number;
-}
+};
 
-export interface User {
-  id: string;
+export type User = {
   email: string;
-  name: string;
-  isFirstVisit?: any;
-  type: string;
-  isShowHelp: boolean;
-  firstLoginDate: Date;
-  lastLoginDate: Date;
-  lowerLevelGroups: LowerLevelGroup[];
-  personalizations?: any;
-  notificationSettings?: any;
-  favouriteCatalogItems: FavouriteCatalogItem[];
-  emailPreferences: EmailPreferences;
-  status: string;
-  globalServices: any[];
-  launchpadTutorialState: number;
-  projects?: any;
-  teams: Team[];
+  emailPreferences: {
+    receiveCoOwnerAddMember: boolean;
+    receiveJoinTeamApproved: boolean;
+    receiveNewMemberInvite: boolean;
+    receiveRequestLeaveTeam: boolean;
+  };
+  favouriteCatalogItems: [{
+    catalogItemId: string;
+    order: number;
+  }];
+  firstLoginDate: string;
+  globalServices?: [any]
   hasConsented: boolean;
-  requestSummary: RequestSummary;
-}
+  id: string;
+  isFirstVisit: boolean | null;
+  isShowHelp: boolean | null;
+  lastLoginDate: string;
+  approvedDate?: string;
+  launchpadTutorialState: null | -1 | 0 | 1 | 2 | 3;
+  isTeamOwner?: boolean;
+  isAllowToRemove?: boolean;
+  lowerLevelGroups: [{
+    id: string;
+    userProperties: [any];
+    visible: boolean;
+  }];
+  name: string;
+  notificationSettings: any;
+  personalizations: any;
+  projects: null | any;
+  requestSummary: {
+    requireUserAction: number;
+    submittedByUser: number;
+  };
+  pendingLeaveRequests?: any[];
+  pendingRemoveToolRequests?: any[];
+  status: string;
+  teams: any[];
+  type: string;
+  inviter?: {
+    id: string;
+    name: string;
+  };
+  approver?: {
+    id: string;
+    name: string;
+  };
+};
 
-export interface UserTeams {
+export type UserTeams = {
   accountTeams: {
     id: string;
     name: string;
@@ -248,4 +276,4 @@ export interface UserTeams {
     projectTeams: SimpleIdNameMap[];
   }[];
   standardTeams: SimpleIdNameMap[];
-}
+};
