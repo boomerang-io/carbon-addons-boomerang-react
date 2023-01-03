@@ -3,6 +3,7 @@ import { useQuery, useMutation, useQueryClient } from "react-query";
 import {
   Button,
   Checkbox,
+  ComposedModal,
   InlineNotification,
   ModalHeader,
   ModalBody,
@@ -33,6 +34,10 @@ function determineIfConfigIsDifferent(teams: LowerLevelGroup[], initialTeams: Lo
     }
   }
   return isConfigDifferent;
+}
+
+function closeModal() {
+  return void 0;
 }
 
 type Props = {
@@ -127,104 +132,92 @@ function ProfileSettings({ baseServiceUrl, src, userName }: Props) {
   }
 
   return (
-    <HeaderMenuUser
-      className={`${prefix}--bmrg-profile-settings-container`}
-      src={src}
-      userName={userName}
-      aria-label="Profile settings"
-    >
-      {({ closeModal }: any) => {
-        return (
-          <>
-            <ModalHeader closeModal={closeModal} title={`User profile - ${userName}`} />
-            <ModalBody style={{ maxHeight: "31.5rem" }}>
-              <p className={`${prefix}--bmrg-profile-settings__title`}>
-                More user profile settings will be here eventually, but for now you can choose which Teams are shown in
-                your sidebar in Launchpad.
-              </p>
-              <h2 className={`${prefix}--bmrg-profile-settings__subtitle`}>Teams visible in Launchpad sidebar</h2>
-              <p className={`${prefix}--bmrg-profile-settings__description`}>
-                Choose Teams to show or hide in your Launchpad sidebar and Catalog (useful for sensitive demos). You
-                will not be able to access or view unchecked Teams from the sidebar, and cannot add items to them from
-                Catalog.
-              </p>
-              {userIsLoading ? (
-                <StructuredListSkeleton />
-              ) : userError ? (
-                <ErrorMessage style={{ color: "#F2F4F8", padding: "1rem" }} />
-              ) : teams?.length > 0 ? (
-                <StructuredListWrapper className={`${prefix}--bmrg-profile-settings-list`}>
-                  <StructuredListHead>
-                    <StructuredListRow head>
-                      <StructuredListCell head>
-                        <Checkbox
-                          checked={allTeamsAreChecked}
-                          id={"team-name-batch-toggle"}
-                          indeterminate={someTeamsAreChecked}
-                          labelText={"Team Name"}
-                          onChange={batchChangeTeamVisibility}
-                        />
-                      </StructuredListCell>
-                    </StructuredListRow>
-                  </StructuredListHead>
-                  <StructuredListBody>
-                    {(sortBy(teams, "name") as LowerLevelGroup[]).map(({ name, id, visible }) => (
-                      <StructuredListRow
-                        key={id}
-                        className={!visible ? `${prefix}--bmrg-profile-settings-list__row--disabled` : ""}
-                      >
-                        <StructuredListCell>
-                          <Checkbox
-                            checked={visible}
-                            id={id}
-                            labelText={name}
-                            onChange={(_: any, { checked, id }: { checked: boolean; id: string }) => {
-                              return handleUpdateTeamVisibility(id, checked);
-                            }}
-                          />
-                        </StructuredListCell>
-                      </StructuredListRow>
-                    ))}
-                  </StructuredListBody>
-                </StructuredListWrapper>
-              ) : (
-                <p style={{ marginTop: "3rem", color: "#F2F4F8" }}>
-                  No teams to configure. Join or create teams in Launchpad!
-                </p>
-              )}
-            </ModalBody>
-            <ModalFooter>
-              {mutateUserProfileError && (
-                <div
-                  style={{
-                    position: "absolute",
-                    top: "-5rem",
-                    left: "2rem",
-                    width: "90%",
-                  }}
+    <ComposedModal open className={`${prefix}--bmrg-profile-settings-container`}>
+      <ModalHeader closeModal={closeModal} title={`User profile - ${userName}`} />
+      <ModalBody style={{ maxHeight: "31.5rem" }}>
+        <p className={`${prefix}--bmrg-profile-settings__title`}>
+          More user profile settings will be here eventually, but for now you can choose which Teams are shown in your
+          sidebar in Launchpad.
+        </p>
+        <h2 className={`${prefix}--bmrg-profile-settings__subtitle`}>Teams visible in Launchpad sidebar</h2>
+        <p className={`${prefix}--bmrg-profile-settings__description`}>
+          Choose Teams to show or hide in your Launchpad sidebar and Catalog (useful for sensitive demos). You will not
+          be able to access or view unchecked Teams from the sidebar, and cannot add items to them from Catalog.
+        </p>
+        {userIsLoading ? (
+          <StructuredListSkeleton />
+        ) : userError ? (
+          <ErrorMessage style={{ color: "#F2F4F8", padding: "1rem" }} />
+        ) : teams?.length > 0 ? (
+          <StructuredListWrapper className={`${prefix}--bmrg-profile-settings-list`}>
+            <StructuredListHead>
+              <StructuredListRow head>
+                <StructuredListCell head>
+                  <Checkbox
+                    checked={allTeamsAreChecked}
+                    id={"team-name-batch-toggle"}
+                    indeterminate={someTeamsAreChecked}
+                    labelText={"Team Name"}
+                    onChange={batchChangeTeamVisibility}
+                  />
+                </StructuredListCell>
+              </StructuredListRow>
+            </StructuredListHead>
+            <StructuredListBody>
+              {(sortBy(teams, "name") as LowerLevelGroup[]).map(({ name, id, visible }) => (
+                <StructuredListRow
+                  key={id}
+                  className={!visible ? `${prefix}--bmrg-profile-settings-list__row--disabled` : ""}
                 >
-                  <InlineNotification kind="error" title="Something's Wrong" subtitle="Failed to update user profile" />
-                </div>
-              )}
-              <Button kind="secondary" onClick={closeModal}>
-                Cancel
-              </Button>
-              <Button
-                disabled={!isConfigDifferent || mutateUserProfileIsLoading}
-                kind="primary"
-                type="submit"
-                onClick={(e: any) => {
-                  e.preventDefault();
-                  handleSubmit({ closeModal });
-                }}
-              >
-                {mutateUserProfileError ? "Try Again" : mutateUserProfileIsLoading ? "Saving..." : "Save changes"}
-              </Button>
-            </ModalFooter>
-          </>
-        );
-      }}
-    </HeaderMenuUser>
+                  <StructuredListCell>
+                    <Checkbox
+                      checked={visible}
+                      id={id}
+                      labelText={name}
+                      onChange={(_: any, { checked, id }: { checked: boolean; id: string }) => {
+                        return handleUpdateTeamVisibility(id, checked);
+                      }}
+                    />
+                  </StructuredListCell>
+                </StructuredListRow>
+              ))}
+            </StructuredListBody>
+          </StructuredListWrapper>
+        ) : (
+          <p style={{ marginTop: "3rem", color: "#F2F4F8" }}>
+            No teams to configure. Join or create teams in Launchpad!
+          </p>
+        )}
+      </ModalBody>
+      <ModalFooter>
+        {mutateUserProfileError && (
+          <div
+            style={{
+              position: "absolute",
+              top: "-5rem",
+              left: "2rem",
+              width: "90%",
+            }}
+          >
+            <InlineNotification kind="error" title="Something's Wrong" subtitle="Failed to update user profile" />
+          </div>
+        )}
+        <Button kind="secondary" onClick={closeModal}>
+          Cancel
+        </Button>
+        <Button
+          disabled={!isConfigDifferent || mutateUserProfileIsLoading}
+          kind="primary"
+          type="submit"
+          onClick={(e: any) => {
+            e.preventDefault();
+            handleSubmit({ closeModal });
+          }}
+        >
+          {mutateUserProfileError ? "Try Again" : mutateUserProfileIsLoading ? "Saving..." : "Save changes"}
+        </Button>
+      </ModalFooter>
+    </ComposedModal>
   );
 }
 

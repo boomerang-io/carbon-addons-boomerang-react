@@ -45,6 +45,7 @@ $use-theme-boomerang: false !default;
 @use '../components/FeatureSideNavLink/featureSideNavLink';
 @use '../components/GdprRedirectModal/gdprRedirectModal';
 @use '../components/Header/header';
+@use '../components/Headerv2/headerv2';
 @use '../components/Header/headerDropDown';
 @use '../components/HeaderMenuItem/headerMenuItem';
 @use '../components/HeaderMenuUser/headerMenuUser';

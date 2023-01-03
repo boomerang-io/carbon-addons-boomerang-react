@@ -1,6 +1,5 @@
 import React from "react";
 import cx from "classnames";
-import FocusTrap from "focus-trap-react";
 import { Client } from "@stomp/stompjs";
 import { prefix } from "../../internal/settings";
 import Notification from "./PlatformNotifications";
@@ -133,12 +132,12 @@ export default class PlatformNotificationsContainer extends React.Component<Prop
    * @returns {Function} - makes network request with all remaining notification IDs, then after waiting for it to return, setState is called to empty out currentNotifications and numNotifications
    */
   handleReadAllNotifications() {
-    const idList = this.state.currentNotifications.map((notification) => notification.id);
+    const idList = this.state.currentNotifications.map((notification: any) => notification.id);
     this.ws.publish({ destination: "/app/read", body: JSON.stringify(idList) });
   }
 
   renderNotifications() {
-    return this.state.currentNotifications.slice(0, 5).map((notification) => (
+    return this.state.currentNotifications.slice(0, 5).map((notification: any) => (
       <li key={notification.id}>
         <Notification readNotification={this.handleReadNotification.bind(this)} notificationInfo={notification} />
       </li>
@@ -151,48 +150,46 @@ export default class PlatformNotificationsContainer extends React.Component<Prop
 
     // Added stop propagation so the event doesn't close the menu
     return (
-      <FocusTrap active={this.props.isNotificationActive} focusTrapOptions={{ allowOutsideClick: true }}>
-        <div // eslint-disable-line jsx-a11y/no-noninteractive-element-interactions
-          role="article"
-          onClick={(e) => e.stopPropagation()}
-          onKeyDown={(e) => e.stopPropagation()}
-          className={cx(`${prefix}--bmrg-notifications`, {
-            "--is-active": this.props.isNotificationActive,
-          })}
-        >
-          <div className={`${prefix}--bmrg-notifications-header`}>
-            <h1 className={`${prefix}--bmrg-notifications-header__newNotifications`}>
-              {`${numNotifications} new notification${numNotifications !== 1 ? "s" : ""}`}
-            </h1>
-            <button
-              className={`${prefix}--bmrg-notifications-header__clear`}
-              disabled={!currentNotifications.length}
-              onClick={this.handleReadAllNotifications.bind(this)}
-              aria-label="Mark all read"
-            >
-              Mark All Read
-            </button>
-          </div>
-          <ul className={`${prefix}--bmrg-notifications__collection`}>
-            {currentNotifications.length ? (
-              this.renderNotifications()
-            ) : (
-              <div className={`${prefix}--bmrg-notifications-empty`}>
-                <h1 className={`${prefix}--bmrg-notifications-empty__no-news`}>No news is good news, right?</h1>
-              </div>
-            )}
-          </ul>
-          <div className={`${prefix}--bmrg-notifications__notifications-footer`}>
-            <a
-              aria-label="Link for notification center"
-              href={`${baseLaunchEnvUrl}/launchpad/notifications`}
-              className={`${prefix}--bmrg-notifications__notifications-redirect-link`}
-            >
-              Open Notification Center
-            </a>
-          </div>
+      <div // eslint-disable-line jsx-a11y/no-noninteractive-element-interactions
+        role="article"
+        onClick={(e) => e.stopPropagation()}
+        onKeyDown={(e) => e.stopPropagation()}
+        className={cx(`${prefix}--bmrg-notifications`, {
+          "--is-active": this.props.isNotificationActive,
+        })}
+      >
+        <div className={`${prefix}--bmrg-notifications-header`}>
+          <h1 className={`${prefix}--bmrg-notifications-header__newNotifications`}>
+            {`${numNotifications} new notification${numNotifications !== 1 ? "s" : ""}`}
+          </h1>
+          <button
+            className={`${prefix}--bmrg-notifications-header__clear`}
+            disabled={!currentNotifications.length}
+            onClick={this.handleReadAllNotifications.bind(this)}
+            aria-label="Mark all read"
+          >
+            Mark All Read
+          </button>
         </div>
-      </FocusTrap>
+        <ul className={`${prefix}--bmrg-notifications__collection`}>
+          {currentNotifications.length ? (
+            this.renderNotifications()
+          ) : (
+            <div className={`${prefix}--bmrg-notifications-empty`}>
+              <h1 className={`${prefix}--bmrg-notifications-empty__no-news`}>No news is good news, right?</h1>
+            </div>
+          )}
+        </ul>
+        <div className={`${prefix}--bmrg-notifications__notifications-footer`}>
+          <a
+            aria-label="Link for notification center"
+            href={`${baseLaunchEnvUrl}/launchpad/notifications`}
+            className={`${prefix}--bmrg-notifications__notifications-redirect-link`}
+          >
+            Open Notification Center
+          </a>
+        </div>
+      </div>
     );
   }
 }

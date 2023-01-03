@@ -1,7 +1,7 @@
 import React from "react";
 import { QueryClientProvider } from "react-query";
+import { Button, HeaderMenuItem } from "@carbon/react";
 import Header from "../Header"; // Using default export
-import HeaderMenuButton from "../HeaderMenuButton";
 import HeaderMenuLink from "../HeaderMenuLink";
 import ProfileSettings from "../ProfileSettings";
 import AboutPlatform from "../AboutPlatform";
@@ -12,8 +12,9 @@ import GdprRedirectModal from "../GdprRedirectModal";
 import { queryClient } from "../../config/servicesConfig";
 import { User } from "../../types";
 
-UIShell.defaultProps = {
-  renderRightPanel: {},
+type NavLink = {
+  name: string;
+  url: string;
 };
 
 type OwnProps = {
@@ -35,10 +36,7 @@ type OwnProps = {
       "support.enabled"?: boolean;
       "welcome.enabled"?: boolean;
     };
-    navigation?: {
-      name?: string;
-      url?: string;
-    }[];
+    navigation?: NavLink[];
     platform?: {
       baseEnvUrl?: string;
       baseServicesUrl?: string;
@@ -58,7 +56,7 @@ type OwnProps = {
     platformMessage?: any;
   };
   isFlowApp?: boolean;
-  onMenuClick?: (...args: any[]) => any;
+  onMenuClick?: (args: { isOpen: boolean; onMenuClose: Function; navLinks?: NavLink[] }) => React.ReactNode;
   onTutorialClick?: (...args: any[]) => any;
   ownedRequests?: any[];
   platformName?: string;
@@ -68,21 +66,18 @@ type OwnProps = {
   renderGdprRedirect?: boolean;
   renderPrivacyStatement?: boolean;
   renderRequests?: boolean;
-  user?: User;
-  userRequests?: any[];
-  renderRightPanel?: {
-    icon?: React.ReactElement;
-    component?: React.ReactElement;
-  };
-  renderSidenav?: (...args: any[]) => any;
+  renderRightPanel?: { icon: React.ReactNode; component: React.ReactNode };
+  renderSidenav?: (args: { isOpen: boolean; onMenuClose: Function; navLinks?: NavLink[] }) => React.ReactNode;
   skipToContentProps?: {
     href?: string;
     children?: string;
     className?: string;
   };
+  user?: User;
+  userRequests?: any[];
 };
 
-type Props = OwnProps & typeof UIShell.defaultProps;
+type Props = OwnProps;
 
 function UIShell({
   appName,
@@ -99,7 +94,7 @@ function UIShell({
   renderGdprRedirect = false,
   renderFlowDocs,
   renderPrivacyStatement = false,
-  renderRightPanel = {},
+  renderRightPanel,
   renderSidenav,
   skipToContentProps,
   user,
@@ -155,7 +150,20 @@ function UIShell({
         }}
         onHelpClick={[
           typeof onTutorialClick === "function" && (
-            <HeaderMenuButton iconName="workspace" key="Tutorial" onClick={onTutorialClick} text="Tutorial" />
+            <HeaderMenuItem
+              element={React.forwardRef((props, ref) => (
+                <Button
+                  {...props}
+                  ref={ref}
+                  onClick={(e: React.ChangeEvent<HTMLButtonElement>) => {
+                    e.stopPropagation();
+                    onTutorialClick();
+                  }}
+                >
+                  Tutorial
+                </Button>
+              ))}
+            />
           ),
           Boolean(finalBaseServiceUrl) && isSupportEnabled && (
             <HeaderMenuLink
@@ -203,12 +211,9 @@ function UIShell({
             />
           ),
           platform?.sendMail && (
-            <HeaderMenuLink
-              external={false}
-              href={`${finalBaseUrl}/launchpad/email-preferences`}
-              iconName="email"
-              text="Email Preferences"
-            />
+            <HeaderMenuItem external={false} href={`${finalBaseUrl}/launchpad/email-preferences`}>
+              Email Preferences
+            </HeaderMenuItem>
           ),
           baseServiceUrl && isPrivacyStatementDisabled === false && (
             <PrivacyStatement

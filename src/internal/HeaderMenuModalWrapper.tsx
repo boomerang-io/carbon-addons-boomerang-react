@@ -96,7 +96,7 @@ export default class HeaderMenuModalWrapper extends React.Component<Props, State
           renderIcon={renderTriggerButtonIcon}
           icon={triggerButtonIcon}
           iconDescription={triggerButtonIconDescription}
-          onClick={this.handleOpen}
+          onClick={e => e.stopPropagation() && this.handleOpen()}
           ref={this.triggerButton}
         >
           {buttonTriggerText}

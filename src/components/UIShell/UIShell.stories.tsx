@@ -3,7 +3,7 @@ import { action } from "@storybook/addon-actions";
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
 import { BrowserRouter as Router, Link } from "react-router-dom";
-import { SideNav, SideNavLink, SideNavItems, SideNavMenu, SideNavMenuItem } from "@carbon/react";
+import { SideNav, SideNavDivider, SideNavLink, SideNavItems, SideNavMenu, SideNavMenuItem } from "@carbon/react";
 import { Help, ServiceDesk } from "@carbon/react/icons";
 import LeftSideNav from "../LeftSideNav";
 import { PRIVACY_DATA } from "../PrivacyStatement/constants";
@@ -137,6 +137,8 @@ export const Default = (args: any) => {
         },
       }}
       {...args}
+      onMenuClick={null}
+      renderSidenav={null}
     />
   );
 };
@@ -190,54 +192,54 @@ export const WithCarbonSidenavAndReactRouter = () => {
             title: "Testing Platform Title",
           },
         }}
-        renderSidenav={({ isOpen }) => (
-          <LeftSideNav isOpen={isOpen}>
-            <SideNav expanded isChildOfHeader aria-label="sidenav">
-              <SideNavItems>
-                <SideNavLink element={Link} to="/">
-                  Link
-                </SideNavLink>
-                <SideNavLink isActive element={Link} renderIcon={ServiceDesk} to="/">
-                  Active link with icon
-                </SideNavLink>
-                <SideNavLink element={Link} large to="/">
-                  Large link
-                </SideNavLink>
-                <SideNavLink isActive element={Link} renderIcon={ServiceDesk} to="/" large>
-                  Large active link with icon
-                </SideNavLink>
-                <SideNavMenu title="Menu">
-                  <SideNavMenuItem element={Link} to="/">
-                    Active menu item 1
-                  </SideNavMenuItem>
-                  <SideNavMenuItem href="/">Menu item 2</SideNavMenuItem>
-                  <SideNavMenuItem href="/">Menu item 3</SideNavMenuItem>
-                </SideNavMenu>
-                <SideNavMenu renderIcon={ServiceDesk} title="Active menu with icon">
-                  <SideNavMenuItem isActive element={Link} to="/">
-                    Active menu item 1
-                  </SideNavMenuItem>
-                  <SideNavMenuItem href="/">Menu item 2</SideNavMenuItem>
-                  <SideNavMenuItem href="/">Menu item 3</SideNavMenuItem>
-                </SideNavMenu>
-                <SideNavMenu title="Large menu" large>
-                  <SideNavMenuItem element={Link} to="/">
-                    Large menu item 1
-                  </SideNavMenuItem>
-                  <SideNavMenuItem element={Link} to="/">
-                    Large menu item 2
-                  </SideNavMenuItem>
-                </SideNavMenu>
-                <SideNavMenu renderIcon={ServiceDesk} title="Large active menu with icon" large>
-                  <SideNavMenuItem isActive element={Link} to="/">
-                    Large active menu item 1
-                  </SideNavMenuItem>
-                  <SideNavMenuItem href="/">Large menu item 2</SideNavMenuItem>
-                  <SideNavMenuItem href="/">Large menu item 3</SideNavMenuItem>
-                </SideNavMenu>
-              </SideNavItems>
-            </SideNav>
-          </LeftSideNav>
+        renderSidenav={({ isOpen, navLinks }) => (
+          <SideNav expanded={isOpen} isChildOfHeader aria-label="sidenav">
+            <SideNavItems>
+              {navLinks}
+              <SideNavDivider />
+              <SideNavLink element={Link} to="/">
+                Link
+              </SideNavLink>
+              <SideNavLink isActive element={Link} renderIcon={ServiceDesk} to="/">
+                Active link with icon
+              </SideNavLink>
+              <SideNavLink element={Link} large to="/">
+                Large link
+              </SideNavLink>
+              <SideNavLink isActive element={Link} renderIcon={ServiceDesk} to="/" large>
+                Large active link with icon
+              </SideNavLink>
+              <SideNavMenu title="Menu">
+                <SideNavMenuItem element={Link} to="/">
+                  Active menu item 1
+                </SideNavMenuItem>
+                <SideNavMenuItem href="/">Menu item 2</SideNavMenuItem>
+                <SideNavMenuItem href="/">Menu item 3</SideNavMenuItem>
+              </SideNavMenu>
+              <SideNavMenu renderIcon={ServiceDesk} title="Active menu with icon">
+                <SideNavMenuItem isActive element={Link} to="/">
+                  Active menu item 1
+                </SideNavMenuItem>
+                <SideNavMenuItem href="/">Menu item 2</SideNavMenuItem>
+                <SideNavMenuItem href="/">Menu item 3</SideNavMenuItem>
+              </SideNavMenu>
+              <SideNavMenu title="Large menu" large>
+                <SideNavMenuItem element={Link} to="/">
+                  Large menu item 1
+                </SideNavMenuItem>
+                <SideNavMenuItem element={Link} to="/">
+                  Large menu item 2
+                </SideNavMenuItem>
+              </SideNavMenu>
+              <SideNavMenu renderIcon={ServiceDesk} title="Large active menu with icon" large>
+                <SideNavMenuItem isActive element={Link} to="/">
+                  Large active menu item 1
+                </SideNavMenuItem>
+                <SideNavMenuItem href="/">Large menu item 2</SideNavMenuItem>
+                <SideNavMenuItem href="/">Large menu item 3</SideNavMenuItem>
+              </SideNavMenu>
+            </SideNavItems>
+          </SideNav>
         )}
         onTutorialClick={action("Tutorial")}
         user={
@@ -319,7 +321,7 @@ export const RightPanel = () => {
       }}
       onTutorialClick={action("Tutorial")}
       renderRightPanel={{
-        icon: <Help size={24} />,
+        icon: <Help size={20} />,
         component: (
           <div
             style={{
@@ -444,13 +446,15 @@ export const UserPendingDeletion = () => {
         },
       }}
       onTutorialClick={action("Tutorial")}
-      user={{
-        id: "1",
-        name: "test user",
-        email: "test.user@ibm.com",
-        hasConsented: false,
-        status: "pending_deletion",
-      } as User}
+      user={
+        {
+          id: "1",
+          name: "test user",
+          email: "test.user@ibm.com",
+          hasConsented: false,
+          status: "pending_deletion",
+        } as User
+      }
     />
   );
 };

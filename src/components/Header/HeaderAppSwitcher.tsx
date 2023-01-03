@@ -1,12 +1,11 @@
 import React from "react";
 import { useQuery, UseQueryResult } from "react-query";
 import cx from "classnames";
-import { InlineLoading, SkeletonText, SideNavMenu, SideNavMenuItem, SwitcherDivider } from "@carbon/react";
+import { HeaderPanel, InlineLoading, SkeletonText, SideNavMenu, SideNavMenuItem, SwitcherDivider } from "@carbon/react";
 import { Launch } from "@carbon/react/icons";
 import FocusTrap from "focus-trap-react";
 import DelayedRender from "../DelayedRender";
 import ErrorMessage from "../ErrorMessage";
-import HeaderRightPanel from "./HeaderRightPanel";
 import { serviceUrl, resolver } from "../../config/servicesConfig";
 import { prefix } from "../../internal/settings";
 import { match, keys } from "../../internal/keyboard";
@@ -16,6 +15,7 @@ const externalProps = {
   target: "_blank",
   rel: "noreferrer noopener",
 };
+
 const classNames = "--app-switcher";
 
 type HeaderAppSwitcherProps = {
@@ -30,7 +30,7 @@ export default function HeaderAppSwitcher({ baseServiceUrl, baseLaunchEnvUrl, is
 
   if (teamsQuery.isLoading) {
     return (
-      <HeaderRightPanel className={classNames} isOpen={isActive}>
+      <HeaderPanel className={classNames} expanded={isActive}>
         <div className={cx(`${prefix}--bmrg-header-teams`, `--is-loading`)}>
           <SkeletonText className={`${prefix}--bmrg-header-teams__skeleton`} />
           <SkeletonText className={`${prefix}--bmrg-header-teams__skeleton`} />
@@ -38,15 +38,15 @@ export default function HeaderAppSwitcher({ baseServiceUrl, baseLaunchEnvUrl, is
           <SkeletonText className={`${prefix}--bmrg-header-teams__skeleton`} />
           <SkeletonText className={`${prefix}--bmrg-header-teams__skeleton`} />
         </div>
-      </HeaderRightPanel>
+      </HeaderPanel>
     );
   }
 
   if (teamsQuery.error) {
     return (
-      <HeaderRightPanel className={classNames} isOpen={isActive}>
+      <HeaderPanel className={classNames} expanded={isActive}>
         <ErrorMessage className={`${prefix}--bmrg-header-teams`} />
-      </HeaderRightPanel>
+      </HeaderPanel>
     );
   }
 
@@ -54,7 +54,7 @@ export default function HeaderAppSwitcher({ baseServiceUrl, baseLaunchEnvUrl, is
     const { accountTeams, standardTeams } = teamsQuery.data;
     if (accountTeams?.length || standardTeams?.length) {
       return (
-        <HeaderRightPanel className={classNames} isOpen={isActive}>
+        <HeaderPanel className={classNames} expanded={isActive}>
           <FocusTrap active={isActive} focusTrapOptions={{ allowOutsideClick: true }}>
             <ul className={`${prefix}--bmrg-header-teams`}>
               {standardTeams?.map((team) => (
@@ -90,17 +90,17 @@ export default function HeaderAppSwitcher({ baseServiceUrl, baseLaunchEnvUrl, is
               ))}
             </ul>
           </FocusTrap>
-        </HeaderRightPanel>
+        </HeaderPanel>
       );
     }
 
     return (
-      <HeaderRightPanel className={classNames} isOpen={isActive}>
+      <HeaderPanel className={classNames} expanded={isActive}>
         <div className={cx(`${prefix}--bmrg-header-teams`, "--is-empty")}>
           <h1 className={`${prefix}--bmrg-header-teams__empty-title`}>No teams</h1>
           <p className={`${prefix}--bmrg-header-teams__empty-subtitle`}>You must be new here</p>
         </div>
-      </HeaderRightPanel>
+      </HeaderPanel>
     );
   }
 

@@ -1,1 +1,1 @@
-export { default } from "./AboutPlatform";
+export { default, AboutPlatformMenuItem } from "./AboutPlatform";

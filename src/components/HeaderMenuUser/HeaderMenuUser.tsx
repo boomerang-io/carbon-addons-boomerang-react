@@ -13,13 +13,13 @@ type Props = {
   userName?: string;
 };
 
-const UserHeaderMenuItem = ({ children, className = "", forwardRef, src, style, userName, ...rest }: Props) => {
+const UserHeaderMenuItem = React.forwardRef(function UserHeaderMenuItem({ children, className = "", forwardRef, src, style, userName, ...rest }: Props, ref){
   const wrapperClassNames = cx(`${prefix}--bmrg-header-menu-item-wrapper`, {
     [className]: !!className,
   });
 
   return (
-    <div className={wrapperClassNames} style={style} role="presentation" ref={forwardRef}>
+    <div className={wrapperClassNames} style={style} role="presentation" ref={ref}>
       <HeaderMenuModalWrapper
         preventCloseOnClickOutside
         buttonTriggerClassName={`${prefix}--bmrg-header-menu-item`}
@@ -35,6 +35,6 @@ const UserHeaderMenuItem = ({ children, className = "", forwardRef, src, style, 
       </HeaderMenuModalWrapper>
     </div>
   );
-};
+})
 
 export default UserHeaderMenuItem;

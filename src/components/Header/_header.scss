@@ -124,6 +124,7 @@
 }
 
 .#{$prefix}--bmrg-header-list--mobile-nav {
+  height: 3rem;
   display: flex;
 
   @include utils.breakpoint("md") {
@@ -463,4 +464,13 @@
   letter-spacing: 0.02rem;
   line-height: 1rem;
   padding: 0.5rem 2rem 1rem;
+}
+
+.bmrg--submenu {
+  list-style: none !important;
+  ul {
+    list-style: none !important;
+    left: initial !important;
+    right: 0;
+  }
 }
