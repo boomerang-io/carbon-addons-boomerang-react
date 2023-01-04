@@ -1,6 +1,8 @@
 import React from "react";
 import { prefix } from "../../internal/settings";
-import { ModalHeader, ModalBody, ComposedModal } from "@carbon/react";
+import { ComposedModal, ModalHeader, ModalBody } from "@carbon/react";
+import { Information } from "@carbon/react/icons";
+import HeaderMenuItem from "../HeaderMenuItem";
 import IBMCloudIcon from "./assets/IBMCloudIcon";
 import KubernetesIcon from "./assets/KubernetesIcon";
 import MongoDbIcon from "./assets/MongoDbIcon";
@@ -9,7 +11,6 @@ import OpenShiftIcon from "./assets/OpenShiftIcon";
 import ReactIcon from "./assets/ReactIcon";
 import SpringIcon from "./assets/SpringIcon";
 import TektonIcon from "./assets/TektonIcon";
-import HeaderMenuItem from "../HeaderMenuItem";
 
 const iconClassName = `${prefix}--bmrg-aboutPlatform-images__img`;
 
@@ -23,7 +24,7 @@ type Props = {
 
 function AboutPlatform({ closeModal, isOpen = false, version = "", organization = "IBM", isFlowApp }: Props) {
   return (
-    <ComposedModal open={isOpen} className={`${prefix}--bmrg-aboutPlatform-container`}>
+    <ComposedModal open={isOpen} className={`${prefix}--bmrg-aboutPlatform-container`} onClose={closeModal}>
       <ModalHeader
         label={`${organization} ${" "} | ${" "} Version ${version}`}
         title="About the Platform"
@@ -93,17 +94,21 @@ function AboutPlatform({ closeModal, isOpen = false, version = "", organization 
 
 export default AboutPlatform;
 
-const AboutPlatformMenuItem = React.forwardRef(function AboutPlatformMenuItem(_, ref) {
+function AboutPlatformMenuItem(props: Omit<Props, "isOpen" | "closeModal">) {
+  const menuItemRef = React.useRef<HTMLButtonElement>(null);
   const [isOpen, setIsOpen] = React.useState(false);
+
+  const handleClose = () => {
+    setIsOpen(false);
+    menuItemRef.current?.focus();
+  };
 
   return (
     <>
-      <HeaderMenuItem onClick={() => setIsOpen(!isOpen)} ref={ref}>
-        Platform
-      </HeaderMenuItem>
-      <AboutPlatform isOpen={isOpen} closeModal={() => setIsOpen(false)} />
+      <HeaderMenuItem icon={<Information />} text="About Platform" onClick={() => setIsOpen(!isOpen)} />
+      <AboutPlatform isOpen={isOpen} closeModal={handleClose} {...props} />
     </>
   );
-});
+}
 
 export { AboutPlatformMenuItem };

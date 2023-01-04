@@ -1,1 +1,1 @@
-export { default } from "./ProfileSettings";
+export { default, ProfileSettingsMenuItem } from "./ProfileSettings";

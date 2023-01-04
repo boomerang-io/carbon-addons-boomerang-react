@@ -36,17 +36,15 @@ function determineIfConfigIsDifferent(teams: LowerLevelGroup[], initialTeams: Lo
   return isConfigDifferent;
 }
 
-function closeModal() {
-  return void 0;
-}
-
 type Props = {
+  closeModal: () => void;
+  isOpen: boolean;
   baseServiceUrl: string;
   src: string;
   userName?: string;
 };
 
-function ProfileSettings({ baseServiceUrl, src, userName }: Props) {
+function ProfileSettings({ baseServiceUrl, src, userName, isOpen, closeModal }: Props) {
   const queryClient = useQueryClient();
 
   const [initialTeams, setInitialTeams] = useState<LowerLevelGroup[]>([]);
@@ -132,7 +130,7 @@ function ProfileSettings({ baseServiceUrl, src, userName }: Props) {
   }
 
   return (
-    <ComposedModal open className={`${prefix}--bmrg-profile-settings-container`}>
+    <ComposedModal open={isOpen} className={`${prefix}--bmrg-profile-settings-container`} onClose={closeModal}>
       <ModalHeader closeModal={closeModal} title={`User profile - ${userName}`} />
       <ModalBody style={{ maxHeight: "31.5rem" }}>
         <p className={`${prefix}--bmrg-profile-settings__title`}>
@@ -222,3 +220,22 @@ function ProfileSettings({ baseServiceUrl, src, userName }: Props) {
 }
 
 export default ProfileSettings;
+
+function ProfileSettingsMenuItem(props: Omit<Props, "isOpen" | "closeModal">) {
+  const menuItemRef = React.useRef<HTMLButtonElement>(null);
+  const [isOpen, setIsOpen] = React.useState(false);
+
+  const handleClose = () => {
+    setIsOpen(false);
+    menuItemRef.current?.focus();
+  };
+
+  return (
+    <>
+      <HeaderMenuUser onClick={() => setIsOpen(!isOpen)} src={props.src} userName={props.userName} />
+      <ProfileSettings isOpen={isOpen} closeModal={handleClose} {...props} />
+    </>
+  );
+}
+
+export { ProfileSettingsMenuItem };

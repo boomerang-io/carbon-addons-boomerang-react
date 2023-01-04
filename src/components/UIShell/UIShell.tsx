@@ -3,8 +3,9 @@ import { QueryClientProvider } from "react-query";
 import { Button, HeaderMenuItem } from "@carbon/react";
 import Header from "../Header"; // Using default export
 import HeaderMenuLink from "../HeaderMenuLink";
-import ProfileSettings from "../ProfileSettings";
-import AboutPlatform from "../AboutPlatform";
+import HeaderMenuButton from "../HeaderMenuButton";
+import { ProfileSettingsMenuItem } from "../ProfileSettings";
+import { AboutPlatformMenuItem } from "../AboutPlatform";
 import Feedback from "../Feedback";
 import PrivacyStatement from "../PrivacyStatement";
 import SignOut from "../SignOut";
@@ -148,22 +149,9 @@ function UIShell({
         notificationsConfig={{
           wsUrl: `${finalBaseServiceUrl}/notifications/ws`.replace("https://", "wss://"),
         }}
-        onHelpClick={[
+        supportChildren={[
           typeof onTutorialClick === "function" && (
-            <HeaderMenuItem
-              element={React.forwardRef((props, ref) => (
-                <Button
-                  {...props}
-                  ref={ref}
-                  onClick={(e: React.ChangeEvent<HTMLButtonElement>) => {
-                    e.stopPropagation();
-                    onTutorialClick();
-                  }}
-                >
-                  Tutorial
-                </Button>
-              ))}
-            />
+            <HeaderMenuButton onClick={onTutorialClick} text="Tutorial" />
           ),
           Boolean(finalBaseServiceUrl) && isSupportEnabled && (
             <HeaderMenuLink
@@ -184,18 +172,18 @@ function UIShell({
               text="Flow Documentation"
             />
           ),
-          isFeedbackEnabled && (
-            <Feedback
-              key="Feedback"
-              platformName={platform?.platformName}
-              platformOrganization={platform?.platformOrganization}
-              sendIdeasUrl={finalSendIdeasUrl}
-            />
-          ),
+          // isFeedbackEnabled && (
+          //   <Feedback
+          //     key="Feedback"
+          //     platformName={platform?.platformName}
+          //     platformOrganization={platform?.platformOrganization}
+          //     sendIdeasUrl={finalSendIdeasUrl}
+          //   />
+          // ),
         ].filter(Boolean)}
         profileChildren={[
           Boolean(user?.id) && (
-            <ProfileSettings
+            <ProfileSettingsMenuItem
               baseServiceUrl={finalBaseServiceUrl}
               key="Avatar"
               src={`${finalBaseServiceUrl}/users/image/${user?.email}`}
@@ -203,26 +191,26 @@ function UIShell({
             />
           ),
           platform && (
-            <AboutPlatform
+            <AboutPlatformMenuItem
               key="About Platform"
               organization={platform.name}
               version={platform.version}
               isFlowApp={isFlowApp}
             />
           ),
-          platform?.sendMail && (
-            <HeaderMenuItem external={false} href={`${finalBaseUrl}/launchpad/email-preferences`}>
-              Email Preferences
-            </HeaderMenuItem>
-          ),
-          baseServiceUrl && isPrivacyStatementDisabled === false && (
-            <PrivacyStatement
-              key="Privacy Statement"
-              baseServiceUrl={finalBaseServiceUrl}
-              platformEmail={platform?.platformEmail}
-            />
-          ),
-          !!platform?.signOutUrl && <SignOut key="Sign Out" signOutLink={platform.signOutUrl} />,
+          // platform?.sendMail && (
+          //   <HeaderMenuItem external={false} href={`${finalBaseUrl}/launchpad/email-preferences`}>
+          //     Email Preferences
+          //   </HeaderMenuItem>
+          // ),
+          // baseServiceUrl && isPrivacyStatementDisabled === false && (
+          //   <PrivacyStatement
+          //     key="Privacy Statement"
+          //     baseServiceUrl={finalBaseServiceUrl}
+          //     platformEmail={platform?.platformEmail}
+          //   />
+          // ),
+          // !!platform?.signOutUrl && <SignOut key="Sign Out" signOutLink={platform.signOutUrl} />,
         ].filter(Boolean)}
       />
       {isGdprRedirectDisabled === false && user?.hasConsented === false ? (

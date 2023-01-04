@@ -3,7 +3,6 @@ import { Link, Router } from "react-router-dom";
 import { ServiceDesk } from "@carbon/react/icons";
 import { Modal, SideNav, SideNavLink, SideNavItems, SideNavMenu, SideNavMenuItem } from "@carbon/react";
 import HeaderMenuItem from "../HeaderMenuItem";
-import LeftSideNav from "../LeftSideNav";
 import { createMemoryHistory } from "history";
 import Header from "./index"; // Using default export
 
@@ -145,31 +144,35 @@ export const WithIntegratedSidenav = () => (
           <Modal passiveModal />
         </HeaderMenuItem>,
       ]}
-      renderSidenav={({ isOpen, onMenuClose }: any) => (
-        <LeftSideNav isOpen={isOpen} onMenuClose={onMenuClose}>
-          <SideNav aria-label="sidenav" expanded isChildOfHeader>
-            <SideNavItems>
-              <SideNavMenu title="Large menu" large>
-                <SideNavMenuItem element={Link} to="/">
-                  Menu 1
-                </SideNavMenuItem>
-                <SideNavMenuItem element={Link} to="/">
-                  Menu 3
-                </SideNavMenuItem>
-              </SideNavMenu>
-              <SideNavMenu renderIcon={ServiceDesk} title="Large menu w/icon" large>
-                <SideNavMenuItem isActive element={Link} to="">
-                  Menu 1
-                </SideNavMenuItem>
-                <SideNavMenuItem href="">Menu 2</SideNavMenuItem>
-                <SideNavMenuItem href="">Menu 3</SideNavMenuItem>
-              </SideNavMenu>
-              <SideNavLink isActive element={Link} renderIcon={ServiceDesk} to="" large>
-                Large link w/icon
-              </SideNavLink>
-            </SideNavItems>
-          </SideNav>
-        </LeftSideNav>
+      renderSidenav={({ isOpen, close }) => (
+        <SideNav
+          isChildOfHeader
+          aria-label="sidenav"
+          expanded={isOpen}
+          isPersistent={false}
+          onOverlayClick={() => console.log("close")}
+        >
+          <SideNavItems>
+            <SideNavMenu title="Large menu" large>
+              <SideNavMenuItem element={Link} to="/">
+                Menu 1
+              </SideNavMenuItem>
+              <SideNavMenuItem element={Link} to="/">
+                Menu 3
+              </SideNavMenuItem>
+            </SideNavMenu>
+            <SideNavMenu renderIcon={ServiceDesk} title="Large menu w/icon" large>
+              <SideNavMenuItem isActive element={Link} to="">
+                Menu 1
+              </SideNavMenuItem>
+              <SideNavMenuItem href="">Menu 2</SideNavMenuItem>
+              <SideNavMenuItem href="">Menu 3</SideNavMenuItem>
+            </SideNavMenu>
+            <SideNavLink isActive element={Link} renderIcon={ServiceDesk} to="" large>
+              Large link w/icon
+            </SideNavLink>
+          </SideNavItems>
+        </SideNav>
       )}
     />
   </Router>

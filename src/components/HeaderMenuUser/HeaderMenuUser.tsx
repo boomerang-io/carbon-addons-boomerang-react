@@ -1,40 +1,26 @@
 import React from "react";
-import cx from "classnames";
-import { prefix } from "../../internal/settings";
+import { Button } from "@carbon/react";
 import Avatar from "../Avatar";
-import HeaderMenuModalWrapper from "../../internal/HeaderMenuModalWrapper";
+import { prefix } from "../../internal/settings";
 
 type Props = {
-  children: ({ closeModal }: { closeModal: Function }) => React.ReactNode;
   className?: string;
-  forwardRef?: any;
-  src: string;
   style?: React.CSSProperties;
+  disabled?: boolean;
+  onClick: () => void;
+  src: string;
   userName?: string;
 };
 
-const UserHeaderMenuItem = React.forwardRef(function UserHeaderMenuItem({ children, className = "", forwardRef, src, style, userName, ...rest }: Props, ref){
-  const wrapperClassNames = cx(`${prefix}--bmrg-header-menu-item-wrapper`, {
-    [className]: !!className,
-  });
-
+function UserHeaderMenuItem({ onClick, src, userName, ...rest }: Props) {
   return (
-    <div className={wrapperClassNames} style={style} role="presentation" ref={ref}>
-      <HeaderMenuModalWrapper
-        preventCloseOnClickOutside
-        buttonTriggerClassName={`${prefix}--bmrg-header-menu-item`}
-        buttonTriggerText={
-          <div className={`${prefix}--bmrg-header-menu-user`}>
-            <Avatar size="medium" src={src} userName={userName} />
-            <p className={`${prefix}--bmrg-header-menu-user__name`}> {userName ? userName : ""} </p>
-          </div>
-        }
-        {...rest}
-      >
-        {children}
-      </HeaderMenuModalWrapper>
-    </div>
+    <Button className="cds--bmrg-header-menu-item" onClick={onClick} {...rest}>
+      <div className={`${prefix}--bmrg-header-menu-user`}>
+        <Avatar size="medium" src={src} userName={userName} />
+        <p className={`${prefix}--bmrg-header-menu-user__name`}> {userName ? userName : ""} </p>
+      </div>
+    </Button>
   );
-})
+}
 
 export default UserHeaderMenuItem;

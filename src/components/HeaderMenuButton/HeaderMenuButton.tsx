@@ -8,14 +8,14 @@ const iconClassName = `${prefix}--bmrg-header-menu-item__img`;
 const iconFill = "#FBFCFC";
 
 const iconMapping = {
-  workspace: <Workspace size={16} fill={iconFill} className={iconClassName} />,
-  group: <Group size={16} fill={iconFill} className={iconClassName} />,
-  chat: <Chat size={16} fill={iconFill} className={iconClassName} />,
-  debug: <Debug size={16} fill={iconFill} className={iconClassName} />,
-  power: <Power size={16} fill={iconFill} className={iconClassName} />,
-  information: <Information size={16} fill={iconFill} className={iconClassName} />,
-  locked: <Locked size={16} fill={iconFill} className={iconClassName} />,
-  launch: <Launch size={16} fill={iconFill} className={iconClassName} />,
+  workspace: <Workspace size={16} />,
+  group: <Group size={16} />,
+  chat: <Chat size={16} />,
+  debug: <Debug size={16} />,
+  power: <Power size={16} />,
+  information: <Information size={16} />,
+  locked: <Locked size={16} />,
+  launch: <Launch size={16} />,
 };
 
 type Props = {

@@ -3,9 +3,8 @@ import { action } from "@storybook/addon-actions";
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
 import { BrowserRouter as Router, Link } from "react-router-dom";
-import { SideNav, SideNavDivider, SideNavLink, SideNavItems, SideNavMenu, SideNavMenuItem } from "@carbon/react";
+import { SideNav, SideNavLink, SideNavItems, SideNavMenu, SideNavMenuItem } from "@carbon/react";
 import { Help, ServiceDesk } from "@carbon/react/icons";
-import LeftSideNav from "../LeftSideNav";
 import { PRIVACY_DATA } from "../PrivacyStatement/constants";
 import { PROFILE_SETTINGS_DATA } from "../ProfileSettings/constants";
 import UIShell from "./UIShell";
@@ -193,10 +192,9 @@ export const WithCarbonSidenavAndReactRouter = () => {
           },
         }}
         renderSidenav={({ isOpen, navLinks }) => (
-          <SideNav expanded={isOpen} isChildOfHeader aria-label="sidenav">
+          <SideNav expanded={isOpen} isChildOfHeader aria-label="sidenav" isPersistent={false}>
             <SideNavItems>
               {navLinks}
-              <SideNavDivider />
               <SideNavLink element={Link} to="/">
                 Link
               </SideNavLink>
@@ -254,7 +252,7 @@ export const WithCarbonSidenavAndReactRouter = () => {
           } as User
         }
         renderRightPanel={{
-          icon: <Help size={24} />,
+          icon: <Help size={20} />,
           component: (
             <div
               style={{
@@ -262,10 +260,9 @@ export const WithCarbonSidenavAndReactRouter = () => {
                 display: "flex",
                 justifyContent: "center",
                 marginTop: "4rem",
-                width: "25rem",
               }}
             >
-              Custom content behaviour
+              <button>Hello</button>
             </div>
           ),
         }}
@@ -329,7 +326,6 @@ export const RightPanel = () => {
               display: "flex",
               justifyContent: "center",
               marginTop: "4rem",
-              width: "25rem",
             }}
           >
             Custom content behaviour

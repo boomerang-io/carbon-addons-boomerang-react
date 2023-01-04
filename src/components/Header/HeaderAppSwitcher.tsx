@@ -30,7 +30,7 @@ export default function HeaderAppSwitcher({ baseServiceUrl, baseLaunchEnvUrl, is
 
   if (teamsQuery.isLoading) {
     return (
-      <HeaderPanel className={classNames} expanded={isActive}>
+      <HeaderPanel id="shell-app-switcher" role="menu" className={classNames} expanded={isActive}>
         <div className={cx(`${prefix}--bmrg-header-teams`, `--is-loading`)}>
           <SkeletonText className={`${prefix}--bmrg-header-teams__skeleton`} />
           <SkeletonText className={`${prefix}--bmrg-header-teams__skeleton`} />
@@ -44,7 +44,7 @@ export default function HeaderAppSwitcher({ baseServiceUrl, baseLaunchEnvUrl, is
 
   if (teamsQuery.error) {
     return (
-      <HeaderPanel className={classNames} expanded={isActive}>
+      <HeaderPanel id="shell-app-switcher" role="menu" className={classNames} expanded={isActive}>
         <ErrorMessage className={`${prefix}--bmrg-header-teams`} />
       </HeaderPanel>
     );
@@ -54,9 +54,9 @@ export default function HeaderAppSwitcher({ baseServiceUrl, baseLaunchEnvUrl, is
     const { accountTeams, standardTeams } = teamsQuery.data;
     if (accountTeams?.length || standardTeams?.length) {
       return (
-        <HeaderPanel className={classNames} expanded={isActive}>
+        <HeaderPanel className={classNames} expanded={isActive} id="shell-app-switcher" role="menu">
           <FocusTrap active={isActive} focusTrapOptions={{ allowOutsideClick: true }}>
-            <ul className={`${prefix}--bmrg-header-teams`}>
+            <ul className={`${prefix}--bmrg-header-teams`} style={{"display": isActive ? "block" : "none"}}>
               {standardTeams?.map((team) => (
                 <TeamServiceListMenu
                   key={team.id}
@@ -95,7 +95,7 @@ export default function HeaderAppSwitcher({ baseServiceUrl, baseLaunchEnvUrl, is
     }
 
     return (
-      <HeaderPanel className={classNames} expanded={isActive}>
+      <HeaderPanel className={classNames} expanded={isActive} id="shell-app-switcher" role="menu">
         <div className={cx(`${prefix}--bmrg-header-teams`, "--is-empty")}>
           <h1 className={`${prefix}--bmrg-header-teams__empty-title`}>No teams</h1>
           <p className={`${prefix}--bmrg-header-teams__empty-subtitle`}>You must be new here</p>

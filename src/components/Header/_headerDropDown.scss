@@ -3,6 +3,13 @@
 @use "../../global/config" as *;
 @use "../../global/themes/shell-tokens" as shell;
 
+.#{$prefix}--header__action[aria-expanded="true"] {
+  background: var(--cds-bmrg-header-menu-options-top-border);
+  svg {
+    fill: var(--cds-text-on-color, #ffffff) !important;
+  }
+}
+
 .#{$prefix}--bmrg-header-drop-down {
   animation: fade-in motion.$duration-moderate-01 motion.motion("standard");
   background: shell.$bmrg-tertiary;
