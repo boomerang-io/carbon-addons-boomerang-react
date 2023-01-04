@@ -218,7 +218,7 @@ function RequestsMenu(props: any) {
 }
 
 function SupportMenu(props: any) {
-  const { isActive, setIsActive, ref } = useShellMenu<HTMLDivElement>(FocusableElementIdMap.Profile);
+  const { isActive, setIsActive, ref } = useShellMenu<HTMLDivElement>(FocusableElementIdMap.Support);
 
   if (!props.enabled) {
     return null;
@@ -231,7 +231,7 @@ function SupportMenu(props: any) {
         aria-expanded={isActive}
         aria-haspopup="menu"
         aria-label="Support menu"
-        id={FocusableElementIdMap.Profile}
+        id={FocusableElementIdMap.Support}
         tooltipAlignment="end"
         onClick={() => setIsActive(!isActive)}
       >
