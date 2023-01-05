@@ -167,11 +167,11 @@ function NotificationsMenu(props: any) {
   return (
     <div style={{ position: "relative" }} ref={ref}>
       <button
-        className={headerButtonClassNames}
         aria-controls="shell-notifications-menu"
         aria-expanded={isActive}
         aria-haspopup="menu"
         aria-label="Notifications menu"
+        className={headerButtonClassNames}
         id={FocusableElementIdMap.Notifcations}
         onClick={() => setIsActive(!isActive)}
       >
@@ -197,11 +197,11 @@ function RequestsMenu(props: any) {
   return (
     <div style={{ position: "relative" }} ref={ref}>
       <button
-        className={headerButtonClassNames}
         aria-controls="shell-requests-menu"
         aria-expanded={isActive}
         aria-haspopup="menu"
         aria-label="Requests menu"
+        className={headerButtonClassNames}
         id={FocusableElementIdMap.Requests}
         onClick={() => setIsActive(!isActive)}
       >
@@ -226,11 +226,11 @@ function SupportMenu(props: any) {
   return (
     <div style={{ position: "relative" }} ref={ref}>
       <button
-        className={headerButtonClassNames}
         aria-controls="shell-support-menu"
         aria-expanded={isActive}
         aria-haspopup="menu"
         aria-label="Support menu"
+        className={headerButtonClassNames}
         id={FocusableElementIdMap.Support}
         onClick={() => setIsActive(!isActive)}
       >
@@ -251,11 +251,11 @@ function ProfileMenu(props: any) {
   return (
     <div style={{ position: "relative" }} ref={ref}>
       <button
-        className={headerButtonClassNames}
         aria-controls="shell-profile-menu"
         aria-expanded={isActive}
         aria-haspopup="menu"
         aria-label="User menu"
+        className={headerButtonClassNames}
         id={FocusableElementIdMap.Profile}
         onClick={() => setIsActive(!isActive)}
       >
@@ -272,11 +272,11 @@ function AppSwitcherMenu(props: any) {
   return (
     <div ref={ref}>
       <button
-        className={headerButtonClassNames}
         aria-controls="shell-app-switcher"
         aria-expanded={isActive}
         aria-haspopup="menu"
         aria-label="Team Switcher"
+        className={headerButtonClassNames}
         id={FocusableElementIdMap.Switcher}
         onClick={() => setIsActive(!isActive)}
       >
@@ -301,11 +301,11 @@ function RightPanelMenu(props: any) {
   return (
     <div ref={ref}>
       <button
-        className={headerButtonClassNames}
         aria-controls="shell-right-panel"
         aria-expanded={isActive}
         aria-haspopup="dialog"
         aria-label={`Right panel`}
+        className={headerButtonClassNames}
         id={FocusableElementIdMap.RightPanel}
         onClick={() => setIsActive(!isActive)}
       >
