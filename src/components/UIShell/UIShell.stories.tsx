@@ -1,5 +1,4 @@
 import React from "react";
-import { action } from "@storybook/addon-actions";
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
 import { BrowserRouter as Router, Link } from "react-router-dom";
@@ -12,7 +11,7 @@ import { User } from "../../types";
 
 const mock = new MockAdapter(axios);
 
-const BASE_URL = "https://www.ibm.com/services";
+const BASE_SERVICE_URL = "https://www.ibm.com/services";
 const BASE_ENV_URL = "https://ibm.com";
 
 const TEAMS_DATA = {
@@ -72,22 +71,15 @@ export default {
 };
 
 export const Default = (args: any) => {
-  mock.onGet(`${BASE_URL}/users/consents`).reply(200, PRIVACY_DATA);
-  mock.onGet(`${BASE_URL}/launchpad/user`).reply(200, PROFILE_SETTINGS_DATA);
-  mock.onGet(`${BASE_URL}/users/teams`).reply(withDelay(1000, [200, TEAMS_DATA]));
-  mock.onGet(`${BASE_URL}/launchpad/teams/1/services`).reply(withDelay(4000, [200, SERVICES_DATA]));
-  mock.onGet(`${BASE_URL}/launchpad/teams/2/services`).reply(withDelay(4000, [200, []]));
-  mock.onPost(`${BASE_URL}/support/contact`).reply(200);
+  mock.onGet(`${BASE_SERVICE_URL}/users/consents`).reply(200, PRIVACY_DATA);
+  mock.onGet(`${BASE_SERVICE_URL}/launchpad/user`).reply(200, PROFILE_SETTINGS_DATA);
+  mock.onGet(`${BASE_SERVICE_URL}/users/teams`).reply(withDelay(1000, [200, TEAMS_DATA]));
+  mock.onGet(`${BASE_SERVICE_URL}/launchpad/teams/1/services`).reply(withDelay(4000, [200, SERVICES_DATA]));
+  mock.onGet(`${BASE_SERVICE_URL}/launchpad/teams/2/services`).reply(withDelay(4000, [200, []]));
+  mock.onPost(`${BASE_SERVICE_URL}/support/contact`).reply(200);
   return (
     <UIShell
-      renderFlowDocs
-      renderLogo={true}
-      renderRequests={true}
-      appName={"Flow"}
-      platformName={"Boomerang"}
-      baseLaunchEnvUrl={BASE_ENV_URL}
-      baseServiceUrl={BASE_URL}
-      headerConfig={{
+      config={{
         features: {
           "appSwitcher.enabled": true,
           "community.enabled": true,
@@ -110,11 +102,11 @@ export const Default = (args: any) => {
           },
         ],
         platform: {
-          name: "IBM Boomerang Platform",
+          name: "Boomerang",
           version: "5.0.0",
           signOutUrl: "#",
           communityUrl: "#",
-          platformName: "IBM Boomerang",
+          platformName: "Boomerang",
           platformOrganization: "IBM",
         },
         platformMessage: {
@@ -143,25 +135,24 @@ export const Default = (args: any) => {
 };
 
 export const WithCarbonSidenavAndReactRouter = () => {
-  mock.onGet(`${BASE_URL}/users/consents`).reply(200, PRIVACY_DATA);
-  mock.onGet(`${BASE_URL}/launchpad/user`).reply(200, PROFILE_SETTINGS_DATA);
-  mock.onGet(`${BASE_URL}/users/teams`).reply(200, TEAMS_DATA);
-  mock.onGet(`${BASE_URL}/launchpad/teams/1/services`).reply(withDelay(3000, [200, SERVICES_DATA]));
-  mock.onGet(`${BASE_URL}/launchpad/teams/2/services`).reply(withDelay(3000, [200, []]));
-  mock.onPatch(`${BASE_URL}/users/profile`).reply(200);
-  mock.onPost(`${BASE_URL}/support/contact`).reply(200);
+  mock.onGet(`${BASE_SERVICE_URL}/users/consents`).reply(200, PRIVACY_DATA);
+  mock.onGet(`${BASE_SERVICE_URL}/launchpad/user`).reply(200, PROFILE_SETTINGS_DATA);
+  mock.onGet(`${BASE_SERVICE_URL}/users/teams`).reply(200, TEAMS_DATA);
+  mock.onGet(`${BASE_SERVICE_URL}/launchpad/teams/1/services`).reply(withDelay(3000, [200, SERVICES_DATA]));
+  mock.onGet(`${BASE_SERVICE_URL}/launchpad/teams/2/services`).reply(withDelay(3000, [200, []]));
+  mock.onPatch(`${BASE_SERVICE_URL}/users/profile`).reply(200);
+  mock.onPost(`${BASE_SERVICE_URL}/support/contact`).reply(200);
   return (
     <Router>
       <UIShell
-        platformName={"Boomerang"}
-        appName={""}
-        baseServiceUrl={BASE_URL}
-        baseLaunchEnvUrl={BASE_ENV_URL}
-        headerConfig={{
+        platformName="Boomerang Platform"
+        config={{
           features: {
             "appSwitcher.enabled": true,
+            "consent.enabled": true, 
             "notifications.enabled": true,
             "support.enabled": true,
+            "feedback.enabled": true,
           },
           navigation: [
             {
@@ -178,7 +169,10 @@ export const WithCarbonSidenavAndReactRouter = () => {
             },
           ],
           platform: {
-            name: "IBM Boomerang Platform",
+            baseEnvUrl: BASE_ENV_URL,
+            baseServicesUrl: BASE_SERVICE_URL,
+            name: "Boomerang",
+            platformName: "Boomerang",
             sendMail: true,
             version: "5.0.0",
             signOutUrl: "#",
@@ -190,7 +184,7 @@ export const WithCarbonSidenavAndReactRouter = () => {
             title: "Testing Platform Title",
           },
         }}
-        renderSidenav={({ close, isOpen, navLinks }) => (
+        leftPanel={({ close, isOpen, navLinks }) => (
           <SideNav expanded={isOpen} isChildOfHeader aria-label="sidenav" isPersistent={false} onOverlayClick={close}>
             <SideNavItems>
               {navLinks}
@@ -238,7 +232,6 @@ export const WithCarbonSidenavAndReactRouter = () => {
             </SideNavItems>
           </SideNav>
         )}
-        onTutorialClick={() => console.log("tutorial")}
         user={
           {
             id: "1",
@@ -250,7 +243,7 @@ export const WithCarbonSidenavAndReactRouter = () => {
             },
           } as User
         }
-        renderRightPanel={{
+        rightPanel={{
           icon: <Help size={20} />,
           component: (
             <div
@@ -261,7 +254,7 @@ export const WithCarbonSidenavAndReactRouter = () => {
                 marginTop: "4rem",
               }}
             >
-             <h1>Right panel</h1>
+              <h1>Right panel</h1>
             </div>
           ),
         }}
@@ -275,15 +268,11 @@ WithCarbonSidenavAndReactRouter.story = {
 };
 
 export const RightPanel = () => {
-  mock.onGet(`${BASE_URL}/users/consents`).reply(200, PRIVACY_DATA);
-  mock.onPost(`${BASE_URL}/support/contact`).reply(200);
+  mock.onGet(`${BASE_SERVICE_URL}/users/consents`).reply(200, PRIVACY_DATA);
+  mock.onPost(`${BASE_SERVICE_URL}/support/contact`).reply(200);
   return (
     <UIShell
-      isFlowApp
-      appName={""}
-      platformName={"Boomerang"}
-      baseServiceUrl={BASE_URL}
-      headerConfig={{
+      config={{
         features: {
           "notifications.enabled": true,
           "support.enabled": true,
@@ -303,6 +292,9 @@ export const RightPanel = () => {
           },
         ],
         platform: {
+          baseEnvUrl: "https://ibm.com",
+          baseServicesUrl: BASE_SERVICE_URL,
+          platformName: "IBM Boomerang Platform",
           name: "IBM Boomerang Platform",
           version: "5.0.0",
           signOutUrl: "#",
@@ -314,8 +306,7 @@ export const RightPanel = () => {
           title: "Testing Platform Title",
         },
       }}
-      onTutorialClick={() => console.log("tutorial")}
-      renderRightPanel={{
+      rightPanel={{
         icon: <Help size={20} />,
         component: (
           <div
@@ -348,13 +339,10 @@ export const RightPanel = () => {
 };
 
 export const UserNotConsented = () => {
-  mock.onGet(`${BASE_URL}/users/consents`).reply(200, PRIVACY_DATA);
+  mock.onGet(`${BASE_SERVICE_URL}/users/consents`).reply(200, PRIVACY_DATA);
   return (
     <UIShell
-      appName={""}
-      baseServiceUrl={BASE_URL}
-      platformName={"Boomerang"}
-      headerConfig={{
+      config={{
         features: {
           "notifications.enabled": true,
           "support.enabled": true,
@@ -374,6 +362,9 @@ export const UserNotConsented = () => {
           },
         ],
         platform: {
+          baseEnvUrl: "https://ibm.com",
+          baseServicesUrl: BASE_SERVICE_URL,
+          platformName: "IBM Boomerang Platform",
           name: "IBM Boomerang Platform",
           version: "5.0.0",
           signOutUrl: "#",
@@ -385,7 +376,6 @@ export const UserNotConsented = () => {
           title: "Testing Platform Title",
         },
       }}
-      onTutorialClick={() => console.log("tutorial")}
       user={
         {
           id: "1",
@@ -400,13 +390,10 @@ export const UserNotConsented = () => {
 };
 
 export const UserPendingDeletion = () => {
-  mock.onGet(`${BASE_URL}/users/consents`).reply(200, PRIVACY_DATA);
+  mock.onGet(`${BASE_SERVICE_URL}/users/consents`).reply(200, PRIVACY_DATA);
   return (
     <UIShell
-      platformName={"Boomerang"}
-      appName={""}
-      baseServiceUrl={BASE_URL}
-      headerConfig={{
+      config={{
         features: {
           "notifications.enabled": true,
           "support.enabled": true,
@@ -426,6 +413,9 @@ export const UserPendingDeletion = () => {
           },
         ],
         platform: {
+          baseEnvUrl: "https://ibm.com",
+          baseServicesUrl: BASE_SERVICE_URL,
+          platformName: "IBM Boomerang Platform",
           name: "IBM Boomerang Platform",
           version: "5.0.0",
           signOutUrl: "#",
@@ -437,7 +427,6 @@ export const UserPendingDeletion = () => {
           title: "Testing Platform Title",
         },
       }}
-      onTutorialClick={() => console.log("tutorial")}
       user={
         {
           id: "1",
@@ -452,6 +441,6 @@ export const UserPendingDeletion = () => {
 };
 
 export const EmptyState = () => {
-  mock.onGet(`${BASE_URL}/users/consents`).reply(200, PRIVACY_DATA);
+  mock.onGet(`${BASE_SERVICE_URL}/users/consents`).reply(200, PRIVACY_DATA);
   return <UIShell />;
 };

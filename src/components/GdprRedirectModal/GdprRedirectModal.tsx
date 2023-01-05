@@ -5,10 +5,10 @@ import { USER_STATUS } from "./constants";
 import type { User } from "types";
 
 type OwnProps = {
+  baseEnvUrl: string;
   isOpen?: boolean;
-  baseLaunchEnvUrl: string;
-  user: User;
   platformName?: string;
+  user: User;
 };
 
 type Props = OwnProps & typeof GdprRedirectModal.defaultProps;
@@ -22,12 +22,12 @@ class GdprRedirectModal extends Component<Props> {
   node: any;
 
   handleOnSubmit = () => {
-    const { baseLaunchEnvUrl, user } = this.props;
+    const { baseEnvUrl, user } = this.props;
     const pendingDeletion = user.status === USER_STATUS.PENDING_DELETION;
     if (pendingDeletion) {
-      window.location.assign(`${baseLaunchEnvUrl}/launchpad`); // There is no marketing site so TBD where this links to
+      window.location.assign(`${baseEnvUrl}/launchpad`); // There is no marketing site so TBD where this links to
     } else {
-      window.location.assign(`${baseLaunchEnvUrl}/launchpad?rd=${document.URL}`);
+      window.location.assign(`${baseEnvUrl}/launchpad?rd=${document.URL}`);
     }
   };
 

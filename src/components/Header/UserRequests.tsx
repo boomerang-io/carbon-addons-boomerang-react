@@ -4,7 +4,7 @@ import { HeaderMenuItem } from "@carbon/react";
 import { prefix } from "../../internal/settings";
 
 type Props = {
-  baseLaunchEnvUrl?: string;
+  baseEnvUrl?: string;
   requestSummary?: {
     requireUserAction: number;
     submittedByUser: number;
@@ -12,14 +12,14 @@ type Props = {
 };
 
 function UserRequests(props: Props) {
-  const { baseLaunchEnvUrl, requestSummary = { requireUserAction: 0, submittedByUser: 0 } } = props;
+  const { baseEnvUrl, requestSummary = { requireUserAction: 0, submittedByUser: 0 } } = props;
   const { requireUserAction, submittedByUser } = requestSummary;
   const existOwnedRequests = requireUserAction > 0;
   const existUserRequests = submittedByUser > 0;
 
   return (
     <>
-      <HeaderMenuItem href={`${baseLaunchEnvUrl}/launchpad/requests/action`}>
+      <HeaderMenuItem href={`${baseEnvUrl}/launchpad/requests/action`}>
         <div className="cds--bmrg-requests">
           <span
             className={cx(`${prefix}--bmrg-requests__title`, {
@@ -32,7 +32,7 @@ function UserRequests(props: Props) {
           <span className={`${prefix}--bmrg-requests__text`}>requiring your action</span>
         </div>
       </HeaderMenuItem>
-      <HeaderMenuItem href={`${baseLaunchEnvUrl}/launchpad/requests/mine`}>
+      <HeaderMenuItem href={`${baseEnvUrl}/launchpad/requests/mine`}>
         <div className="cds--bmrg-requests">
           <span
             className={cx(`${prefix}--bmrg-requests__title`, {

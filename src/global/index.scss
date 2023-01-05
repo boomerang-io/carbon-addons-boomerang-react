@@ -48,7 +48,6 @@ $use-theme-boomerang: false !default;
 @use '../components/Header/headerMenu';
 @use '../components/Header/headerMenuItem';
 @use '../components/Header/userRequests';
-@use '../components/HeaderMenuUser/headerMenuUser';
 @use '../components/LoadingAnimation/loadingAnimation';
 @use '../components/MemberBar/memberBar';
 @use '../components/Modal/modal' as addons-modal;

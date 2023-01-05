@@ -1,1 +1,1 @@
-export { default } from "./PrivacyStatement";
+export { default, PrivacyStatementMenuItem } from "./PrivacyStatement";

@@ -1,15 +1,15 @@
 import React from "react";
-import { prefix } from "../../internal/settings";
 import { HeaderMenuItem } from "@carbon/react";
+import Avatar from "../Avatar";
 import { ArrowRight, Launch } from "@carbon/react/icons";
+import { prefix } from "../../internal/settings";
 
 type Shared = {
   className?: string;
   children?: React.ReactNode;
   disabled?: boolean;
-  icon: React.ReactNode;
+  icon?: React.ReactNode;
   style?: React.CSSProperties;
-  text: string;
   variant?: "danger" | "default";
 };
 
@@ -19,18 +19,27 @@ type Props =
       href: string;
       kind: "link";
       onClick?: () => void;
+      text: string;
     })
   | (Shared & {
       onClick: () => void;
       kind: "button";
+      text: string;
+    })
+  | (Shared & {
+      onClick: () => void;
+      kind: "user";
+      src: string;
+      userName?: string;
     });
 
 function BmrgHeaderMenuItem(props: Props) {
-  const { kind, text, icon, onClick, variant = "default", ...rest } = props;
+  const { kind, icon, onClick, variant = "default", ...rest } = props;
+
   if (props.kind === "button")
     return (
       <HeaderMenuItem
-        aria-label={`Link for ${text}`}
+        aria-label={`Link for ${props.text}`}
         // eslint-disable-next-line no-script-url
         href={"javascript:void(0)"}
         onClick={onClick}
@@ -39,7 +48,7 @@ function BmrgHeaderMenuItem(props: Props) {
         <div className={`${prefix}--bmrg-header-menu-item__content ${variant === "danger" ? "--danger" : ""}`}>
           <span className={`${prefix}--bmrg-header-menu-item__text`}>
             {icon}
-            {text}
+            {props.text}
           </span>
         </div>
       </HeaderMenuItem>
@@ -48,13 +57,25 @@ function BmrgHeaderMenuItem(props: Props) {
   if (props.kind === "link") {
     const externalProps = props.external ? { target: "_blank", rel: "noopener noreferrer" } : {};
     return (
-      <HeaderMenuItem aria-label={`Button for ${text}`} href={props.href} {...externalProps} onClick={onClick}>
+      <HeaderMenuItem aria-label={`Button for ${props.text}`} href={props.href} {...externalProps} onClick={onClick}>
         <div className={`${prefix}--bmrg-header-menu-item__content ${variant === "danger" ? "--danger" : ""}`}>
           <span className={`${prefix}--bmrg-header-menu-item__text`}>
             {icon}
-            {text}
+            {props.text}
           </span>
           {props.external ? <Launch /> : <ArrowRight />}
+        </div>
+      </HeaderMenuItem>
+    );
+  }
+
+  if (props.kind === "user") {
+    return (
+      // eslint-disable-next-line no-script-url
+      <HeaderMenuItem aria-label={`Manage ${props.userName} settings`} href={"javascript:void(0)"} onClick={onClick}>
+        <div className={`${prefix}--bmrg-header-menu-user`}>
+          <Avatar size="medium" src={props.src} userName={props.userName} />
+          <p className={`${prefix}--bmrg-header-menu-user__name`}> {props.userName ? props.userName : ""} </p>
         </div>
       </HeaderMenuItem>
     );

@@ -13,7 +13,7 @@ type Props = {
   initialNotifications?: any[];
   isActive: boolean;
   setHasNewNotifications: (...args: any[]) => any;
-  baseLaunchEnvUrl?: string;
+  baseEnvUrl?: string;
 };
 
 type State = any;
@@ -142,7 +142,7 @@ export default class PlatformNotificationsContainer extends React.Component<Prop
 
   render() {
     const { numNotifications, currentNotifications } = this.state;
-    const { baseLaunchEnvUrl } = this.props;
+    const { baseEnvUrl } = this.props;
 
     return (
       <div
@@ -176,7 +176,7 @@ export default class PlatformNotificationsContainer extends React.Component<Prop
         <div className={`${prefix}--bmrg-notifications__notifications-footer`}>
           <a
             aria-label="Link for notification center"
-            href={`${baseLaunchEnvUrl}/launchpad/notifications`}
+            href={`${baseEnvUrl}/launchpad/notifications`}
             className={`${prefix}--bmrg-notifications__notifications-redirect-link`}
           >
             Open Notification Center

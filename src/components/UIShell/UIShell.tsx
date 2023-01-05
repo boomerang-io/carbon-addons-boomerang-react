@@ -1,12 +1,12 @@
 import React from "react";
 import { QueryClientProvider } from "react-query";
-import { Forum, HelpDesk, Information } from "@carbon/react/icons";
+import { Forum, HelpDesk, Email } from "@carbon/react/icons";
 import Header from "../Header"; // Using default export
 import HeaderMenuItem from "../HeaderMenuItem";
 import { ProfileSettingsMenuItem } from "../ProfileSettings";
 import { AboutPlatformMenuItem } from "../AboutPlatform";
-import Feedback from "../Feedback";
-import PrivacyStatement from "../PrivacyStatement";
+import { FeedbackMenuItem } from "../Feedback";
+import { PrivacyStatementMenuItem} from "../PrivacyStatement";
 import GdprRedirectModal from "../GdprRedirectModal";
 import { queryClient } from "../../config/servicesConfig";
 import { User } from "../../types";
@@ -18,11 +18,9 @@ type NavLink = {
 };
 
 type OwnProps = {
-  appName?: string;
-  baseServiceUrl?: string;
-  baseLaunchEnvUrl?: string;
-  companyName?: string;
-  headerConfig?: {
+  productName?: string;
+  platformName?: string;
+  config?: {
     features?: {
       "appSwitcher.enabled"?: boolean;
       "consent.enabled"?: boolean;
@@ -37,15 +35,14 @@ type OwnProps = {
       "welcome.enabled"?: boolean;
     };
     navigation?: NavLink[];
-    platform?: {
-      baseEnvUrl?: string;
-      baseServicesUrl?: string;
+    platform: {
+      baseEnvUrl: string;
+      baseServicesUrl: string;
       communityUrl?: string;
-      displayLogo?: boolean;
       feedbackUrl?: string;
-      name?: string;
+      name?: string; // Used in About Plaform modal
       platformEmail?: string;
-      platformName?: string;
+      platformName: string; // Used in UIShell
       platformOrganization?: string;
       privateTeams?: boolean;
       sendIdeasUrl?: string;
@@ -55,28 +52,10 @@ type OwnProps = {
     };
     platformMessage?: any;
   };
-  isFlowApp?: boolean;
-  onMenuClick?: (args: {
-    isOpen: boolean;
-    close: () => void;
-    onMenuClose: Function;
-    navLinks?: React.ReactNode[];
-  }) => React.ReactNode;
-  onTutorialClick?: (...args: any[]) => any;
-  ownedRequests?: any[];
-  platformName?: string;
-  productName?: string;
-  renderFlowDocs?: boolean;
   renderGdprRedirect?: boolean;
   renderPrivacyStatement?: boolean;
-  renderRequests?: boolean;
-  renderRightPanel?: { icon: React.ReactNode; component: React.ReactNode };
-  renderSidenav?: (args: {
-    isOpen: boolean;
-    close: () => void;
-    onMenuClose: Function;
-    navLinks?: React.ReactNode[];
-  }) => React.ReactNode;
+  rightPanel?: { icon?: React.ReactNode; component: React.ReactNode };
+  leftPanel?: (args: { close: () => void; isOpen: boolean; navLinks?: React.ReactNode[] }) => React.ReactNode;
   skipToContentProps?: {
     href?: string;
     children?: string;
@@ -89,39 +68,42 @@ type OwnProps = {
 type Props = OwnProps;
 
 function UIShell({
-  appName,
-  baseLaunchEnvUrl,
-  baseServiceUrl,
-  companyName,
-  headerConfig = {},
-  isFlowApp = false,
-  onMenuClick,
-  onTutorialClick,
+  config,
+  leftPanel,
   platformName,
   productName,
   renderGdprRedirect = false,
-  renderFlowDocs,
   renderPrivacyStatement = false,
-  renderRightPanel,
-  renderSidenav,
+  rightPanel,
   skipToContentProps,
   user,
 }: Props) {
-  const finalPlatformName = platformName || companyName;
-  const finalAppName = appName || productName;
+  if (!config) {
+    return (
+      <Header
+        baseEnvUrl=""
+        baseServiceUrl=""
+        enableAppSwitcher={false}
+        enableNotifications={false}
+        productName={productName || platformName || ""}
+      />
+    );
+  }
 
-  const { features, navigation, platform, platformMessage } = headerConfig;
-  /**
-   * Prevent breaking changes. Use the values from the platform object if present.
-   * Default to the legacy props to support backwards compatibility
-   */
-  const finalBaseUrl = platform?.baseEnvUrl || baseLaunchEnvUrl;
-  const finalBaseServiceUrl = platform?.baseServicesUrl || baseServiceUrl || "";
-  const finalSendIdeasUrl = platform?.feedbackUrl || "https://ideas.ibm.com";
+  const { features, navigation, platform, platformMessage } = config;
+
+  const names = getProductAndPlatformNames({ productName, platformName, platform });
+
+  const sendIdeasUrl = platform?.feedbackUrl || "https://ideas.ibm.com";
+  const isAboutPlatformEnabled = Boolean(platform.name && platform.version);
   const isAppSwitcherEnabled = Boolean(features?.["appSwitcher.enabled"]);
+  const isCommunityEnabled = Boolean(platform?.communityUrl);
   const isFeedbackEnabled = Boolean(features?.["feedback.enabled"]);
   const isNotificationsEnabled = Boolean(features?.["notifications.enabled"]);
+  const isSendMailEnabled = Boolean(platform.sendMail);
+  const isSignOutEnabled = Boolean(platform?.signOutUrl);
   const isSupportEnabled = Boolean(features?.["support.enabled"]);
+  const isUserEnabled = Boolean(user?.id);
 
   /**
    * Checking for conditions when we explicitly set "renderGdprRedirect" to false (it defaults to true) OR
@@ -130,6 +112,7 @@ function UIShell({
    * having it disabled in a "standalone" mode via the consent.enaable feature flag. aka its data driven via the service
    */
   const isGdprRedirectDisabled = renderGdprRedirect === false || features?.["consent.enabled"] === false;
+  const isGdprModalEnabled = isGdprRedirectDisabled === false && user?.hasConsented === false;
 
   /**
    * Also enable/disable privacy statement via the consent.enabled feature flag
@@ -139,98 +122,111 @@ function UIShell({
   return (
     <QueryClientProvider client={queryClient}>
       <Header
-        appName={finalAppName}
-        baseLaunchEnvUrl={finalBaseUrl}
-        baseServiceUrl={finalBaseServiceUrl}
+        productName={names.productName}
+        prefixName={names.platformName}
+        baseEnvUrl={platform.baseEnvUrl}
+        baseServiceUrl={platform.baseServicesUrl}
         enableAppSwitcher={isAppSwitcherEnabled}
         enableNotifications={isNotificationsEnabled}
+        leftPanel={leftPanel}
         navLinks={navigation}
         platformMessage={platformMessage}
-        platformName={finalPlatformName ? finalPlatformName : undefined}
-        renderRightPanel={renderRightPanel}
-        renderSidenav={onMenuClick || renderSidenav}
-        skipToContentProps={skipToContentProps}
+        rightPanel={rightPanel}
         requestSummary={user?.requestSummary}
+        skipToContentProps={skipToContentProps}
         notificationsConfig={{
-          wsUrl: `${finalBaseServiceUrl}/notifications/ws`.replace("https://", "wss://"),
+          wsUrl: `${platform.baseServicesUrl}/notifications/ws`.replace("https://", "wss://"),
         }}
-        supportChildren={[
-          typeof onTutorialClick === "function" && (
-            <HeaderMenuItem kind="button" onClick={onTutorialClick} text="Tutorial" icon={<Information />} />
-          ),
-          Boolean(finalBaseServiceUrl) && isSupportEnabled && (
+        supportMenuItems={[
+          isSupportEnabled && (
             <HeaderMenuItem
-              kind="link"
               external={false}
-              href={`${finalBaseUrl}/support/center`}
+              href={`${platform.baseEnvUrl}/support/center`}
               icon={<HelpDesk />}
+              kind="link"
               text="Support Center"
             />
           ),
-          Boolean(platform?.communityUrl) && (
+          isCommunityEnabled && (
             <HeaderMenuItem
               external={true}
-              kind="link"
               href={platform?.communityUrl as string}
               icon={<Forum />}
+              kind="link"
               text="Community"
             />
           ),
-          renderFlowDocs && (
-            <HeaderMenuItem
-              kind="link"
-              external={true}
-              href={`https://useboomerang.io/docs/boomerang-flow/introduction/overview/`}
-              icon={<Information />}
-              text="Flow Documentation"
+          isFeedbackEnabled && (
+            <FeedbackMenuItem
+              key="Feedback"
+              platformName={platform?.platformName}
+              platformOrganization={platform?.platformOrganization}
+              sendIdeasUrl={sendIdeasUrl}
             />
           ),
-          // isFeedbackEnabled && (
-          //   <Feedback
-          //     key="Feedback"
-          //     platformName={platform?.platformName}
-          //     platformOrganization={platform?.platformOrganization}
-          //     sendIdeasUrl={finalSendIdeasUrl}
-          //   />
-          // ),
         ].filter(Boolean)}
-        profileChildren={[
-          Boolean(user?.id) && (
+        profileMenuItems={[
+          isUserEnabled && (
             <ProfileSettingsMenuItem
-              baseServiceUrl={finalBaseServiceUrl}
+              baseServiceUrl={platform.baseServicesUrl}
               key="Avatar"
-              src={`${finalBaseServiceUrl}/users/image/${user?.email}`}
+              src={`${platform.baseServicesUrl}/users/image/${user?.email}`}
               userName={user?.name}
             />
           ),
-          platform && (
-            <AboutPlatformMenuItem
-              key="About Platform"
-              organization={platform.name}
-              version={platform.version}
-              isFlowApp={isFlowApp}
+          isAboutPlatformEnabled && (
+            <AboutPlatformMenuItem key="About Platform" name={platform.name} version={platform.version} />
+          ),
+          isSendMailEnabled && (
+            <HeaderMenuItem
+              external={false}
+              href={`${platform.baseEnvUrl}/launchpad/email-preferences`}
+              kind="link"
+              icon={<Email />}
+              text="Email Preferences"
             />
           ),
-          // platform?.sendMail && (
-          //   <HeaderMenuItem external={false} href={`${finalBaseUrl}/launchpad/email-preferences`}>
-          //     Email Preferences
-          //   </HeaderMenuItem>
-          // ),
-          // baseServiceUrl && isPrivacyStatementDisabled === false && (
-          //   <PrivacyStatement
-          //     key="Privacy Statement"
-          //     baseServiceUrl={finalBaseServiceUrl}
-          //     platformEmail={platform?.platformEmail}
-          //   />
-          // ),
-          !!platform?.signOutUrl && <SignOutMenuItem key="Sign Out" signOutLink={platform.signOutUrl} />,
+            <PrivacyStatementMenuItem
+              key="Privacy Statement"
+              baseServiceUrl={platform.baseServicesUrl}
+              platformEmail={platform?.platformEmail}
+            />,
+          isSignOutEnabled && <SignOutMenuItem key="Sign Out" signOutLink={platform.signOutUrl as string} />,
         ].filter(Boolean)}
       />
-      {isGdprRedirectDisabled === false && user?.hasConsented === false ? (
-        <GdprRedirectModal isOpen baseLaunchEnvUrl={finalBaseUrl as string} user={user} platformName={platform?.name} />
+      {isGdprModalEnabled ? (
+        <GdprRedirectModal
+          isOpen
+          baseEnvUrl={platform.baseEnvUrl as string}
+          user={user}
+          platformName={platform?.name}
+        />
       ) : null}
     </QueryClientProvider>
   );
+}
+
+function getProductAndPlatformNames(args: {
+  productName?: string;
+  platformName?: string;
+  platform: { platformName: string };
+}) {
+  const { productName, platformName, platform } = args;
+
+  const resolvedPlatformName = platform.platformName ?? platformName;
+  let finalProductName;
+  let finalPlatformName;
+
+  if (productName && resolvedPlatformName) {
+    finalProductName = productName;
+    finalPlatformName = resolvedPlatformName;
+  } else if (productName && !resolvedPlatformName) {
+    finalProductName = productName;
+  } else {
+    finalProductName = resolvedPlatformName;
+  }
+
+  return { productName: finalProductName, platformName: finalPlatformName };
 }
 
 export default UIShell;

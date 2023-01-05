@@ -10,41 +10,54 @@ export default function useShellMenu<T extends HTMLElement>(
 
   const toggleActive = () => setIsActive(!isActive);
 
-  const handleMousedownEvent = (event: MouseEvent) => {
-    if (!ref.current?.contains(event.target as Node)) {
-      setIsActive(false);
-    }
-    return;
-  };
-
-  const handleKeyDownEvent = (event: KeyboardEvent) => {
-    if (event.key === "Escape") {
-      if (ref.current?.contains(event.target as Node)) {
-        document.getElementById(elementId)?.focus();
+  const handleMousedownEvent = React.useCallback(
+    (event: MouseEvent) => {
+      if (!ref.current?.contains(event.target as Node)) {
         setIsActive(false);
       }
-    }
-    return;
-  };
+      return;
+    },
+    [setIsActive]
+  );
 
-  const handleFocusOutEvent = (event: FocusEvent) => {
-    if (event.relatedTarget && !ref.current?.contains(event.relatedTarget as Node)) {
-      setIsActive(false);
-    }
-    return;
-  };
+  const handleKeyDownEvent = React.useCallback(
+    (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        if (ref.current?.contains(event.target as Node)) {
+          document.getElementById(elementId)?.focus();
+          setIsActive(false);
+        }
+      }
+      return;
+    },
+    [setIsActive, elementId]
+  );
+
+  const handleFocusOutEvent = React.useCallback(
+    (event: FocusEvent) => {
+      if (event.relatedTarget && !ref.current?.contains(event.relatedTarget as Node)) {
+        setIsActive(false);
+      }
+      return;
+    },
+    [setIsActive]
+  );
 
   React.useEffect(() => {
-    document.addEventListener("mousedown", handleMousedownEvent);
-    document.addEventListener("keydown", handleKeyDownEvent);
-    document.addEventListener("focusout", handleFocusOutEvent);
-
+    const currentRef = ref.current;
+    if (currentRef) {
+      document.addEventListener("mousedown", handleMousedownEvent);
+      currentRef.addEventListener("keydown", handleKeyDownEvent);
+      currentRef.addEventListener("focusout", handleFocusOutEvent);
+    }
     return () => {
       document.removeEventListener("mousedown", handleMousedownEvent);
-      document.removeEventListener("keydown", handleKeyDownEvent);
-      document.removeEventListener("focusout", handleFocusOutEvent);
+      if (currentRef) {
+        currentRef.removeEventListener("keydown", handleKeyDownEvent);
+        currentRef.removeEventListener("focusout", handleFocusOutEvent);
+      }
     };
-  });
+  }, [handleFocusOutEvent, handleKeyDownEvent, handleMousedownEvent]);
 
   return { isActive, setIsActive, toggleActive, ref };
 }

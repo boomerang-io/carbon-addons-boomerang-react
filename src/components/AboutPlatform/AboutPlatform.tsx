@@ -1,8 +1,8 @@
 import React from "react";
 import { ComposedModal, ModalHeader, ModalBody } from "@carbon/react";
 import FocusTrap from "focus-trap-react";
-import { Information } from "@carbon/react/icons";
 import HeaderMenuItem from "../HeaderMenuItem";
+import { Information } from "@carbon/react/icons";
 import IBMCloudIcon from "./assets/IBMCloudIcon";
 import KubernetesIcon from "./assets/KubernetesIcon";
 import MongoDbIcon from "./assets/MongoDbIcon";
@@ -17,18 +17,18 @@ const iconClassName = `${prefix}--bmrg-aboutPlatform-images__img`;
 
 type Props = {
   closeModal: () => void;
+  name?: string;
   isOpen: boolean;
   isFlowApp?: boolean;
   version?: string;
-  organization?: string;
 };
 
-function AboutPlatform({ closeModal, isOpen = false, version = "", organization = "IBM", isFlowApp }: Props) {
-  return (  
+function AboutPlatform({ closeModal, isOpen = false, version = "", name, isFlowApp }: Props) {
+  return (
     <FocusTrap active={isOpen} focusTrapOptions={{ allowOutsideClick: true }}>
       <ComposedModal open={isOpen} className={`${prefix}--bmrg-aboutPlatform-container`} onClose={closeModal}>
         <ModalHeader
-          label={`${organization} ${" "} | ${" "} Version ${version}`}
+          label={`${name} ${" "} | ${" "} Version ${version}`}
           title="About the Platform"
           closeModal={closeModal}
         />

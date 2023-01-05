@@ -1,3 +1,4 @@
+/* eslint-disable no-script-url */
 import React from "react";
 import { Link, Router } from "react-router-dom";
 import { ServiceDesk } from "@carbon/react/icons";
@@ -25,9 +26,9 @@ export default {
 export const Default = () => (
   <div style={{ display: "block" }}>
     <Header
-      baseServiceUrl=""
-      appName={"App"}
-      platformName={"Boomerang"}
+      productName={"App"}
+      prefixName={"Boomerang"}
+      enableAppSwitcher={false}
       enableNotifications={true}
       navLinks={[
         {
@@ -54,30 +55,36 @@ export const Default = () => (
       notificationsConfig={{
         wsUrl: mockSocketUrl,
       }}
-      supportChildren={[
-        <HeaderMenuItem key="Tutorial" text="Tutorial" iconName="workspace">
-          {() => <Modal passiveModal />}
-        </HeaderMenuItem>,
-        <HeaderMenuItem key="FAQ + Contacts" text="FAQ + Contacts" iconName="group">
-          {() => <Modal passiveModal />}
-        </HeaderMenuItem>,
-        <HeaderMenuItem key="Send Feedback" text="Send Feedback" iconName="chat">
-          {() => <Modal passiveModal />}
-        </HeaderMenuItem>,
-        <HeaderMenuItem key="Report a bug" text="Report a bug" iconName="debug">
-          {() => <Modal passiveModal />}
-        </HeaderMenuItem>,
+      supportMenuItems={[
+        <HeaderMenuItem key="Tutorial" text="Tutorial" kind="link" href="javascript:void(0)"></HeaderMenuItem>,
+        <HeaderMenuItem
+          key="FAQ + Contacts"
+          text="FAQ + Contacts"
+          kind="link"
+          href="javascript:void(0)"
+        ></HeaderMenuItem>,
+        <HeaderMenuItem
+          key="Send Feedback"
+          text="Send Feedback"
+          kind="link"
+          href="javascript:void(0)"
+        ></HeaderMenuItem>,
+        <HeaderMenuItem key="Report a bug" text="Report a bug" kind="link" href="javascript:void(0)"></HeaderMenuItem>,
       ]}
-      profileChildren={[
-        <HeaderMenuItem key="About the Platform" text="About the Platform">
-          {() => <Modal passiveModal />}
-        </HeaderMenuItem>,
-        <HeaderMenuItem key="GDPR agreement" text="GDPR agreement">
-          {() => <Modal passiveModal />}
-        </HeaderMenuItem>,
-        <HeaderMenuItem key="Sign out" text="Sign out" iconName="power">
-          {() => <Modal passiveModal />}
-        </HeaderMenuItem>,
+      profileMenuItems={[
+        <HeaderMenuItem
+          key="About the Platform"
+          text="About the Platform"
+          kind="link"
+          href="javascript:void(0)"
+        ></HeaderMenuItem>,
+        <HeaderMenuItem
+          key="GDPR agreement"
+          text="GDPR agreement"
+          kind="link"
+          href="javascript:void(0)"
+        ></HeaderMenuItem>,
+        <HeaderMenuItem key="Sign out" text="Sign out" kind="link" href="javascript:void(0)"></HeaderMenuItem>,
       ]}
     />
   </div>
@@ -86,11 +93,10 @@ export const Default = () => (
 export const WithIntegratedSidenav = () => (
   <Router history={createMemoryHistory({ initialEntries: ["/"] })}>
     <Header
-      appName={"App"}
-      baseServiceUrl=""
-      platformName={"Boomerang"}
+      productName={"App"}
+      prefixName={"Boomerang"}
+      enableAppSwitcher={false}
       enableNotifications={true}
-      productName={"Flow"}
       navLinks={[
         {
           name: "Launchpad",
@@ -116,39 +122,19 @@ export const WithIntegratedSidenav = () => (
       notificationsConfig={{
         wsUrl: mockSocketUrl,
       }}
-      supportChildren={() => [
-        <HeaderMenuItem key="0" text="Tutorial" iconName="workspace">
-          {() => <Modal passiveModal />}
-        </HeaderMenuItem>,
-        <HeaderMenuItem key="1" text="FAQ + Contacts" iconName="group">
-          {() => <Modal passiveModal />}
-        </HeaderMenuItem>,
-        <HeaderMenuItem key="2" text="Send Feedback" iconName="chat">
-          {() => <Modal passiveModal />}
-        </HeaderMenuItem>,
-        <HeaderMenuItem key="3" text="Report a bug" iconName="debug">
-          {() => <Modal passiveModal />}
-        </HeaderMenuItem>,
+      supportMenuItems={[
+        <HeaderMenuItem key="0" text="Tutorial" kind="link" href="javascript:void(0)"></HeaderMenuItem>,
+        <HeaderMenuItem key="1" text="FAQ + Contacts" kind="link" href="javascript:void(0)"></HeaderMenuItem>,
+        <HeaderMenuItem key="2" text="Send Feedback" kind="link" href="javascript:void(0)"></HeaderMenuItem>,
+        <HeaderMenuItem key="3" text="Report a bug" kind="link" href="javascript:void(0)"></HeaderMenuItem>,
       ]}
-      profileChildren={() => [
-        <HeaderMenuItem key="0" text="About the Platform">
-          {() => <Modal passiveModal />}
-        </HeaderMenuItem>,
-        <HeaderMenuItem key="1" text="GDPR agreement">
-          {() => <Modal passiveModal />}
-        </HeaderMenuItem>,
-        <HeaderMenuItem key="2" text="Sign out" iconName="power">
-          <Modal passiveModal />
-        </HeaderMenuItem>,
+      profileMenuItems={[
+        <HeaderMenuItem key="0" text="About the Platform" kind="link" href="javascript:void(0)"></HeaderMenuItem>,
+        <HeaderMenuItem key="1" text="GDPR agreement" kind="link" href="javascript:void(0)"></HeaderMenuItem>,
+        <HeaderMenuItem key="2" text="Sign out" kind="link" href="javascript:void(0)"></HeaderMenuItem>,
       ]}
-      renderSidenav={({ isOpen, close }) => (
-        <SideNav
-          isChildOfHeader
-          aria-label="sidenav"
-          expanded={isOpen}
-          isPersistent={false}
-          onOverlayClick={() => console.log("close")}
-        >
+      leftPanel={({ isOpen, close }) => (
+        <SideNav isChildOfHeader aria-label="sidenav" expanded={isOpen} isPersistent={false} onOverlayClick={close}>
           <SideNavItems>
             <SideNavMenu title="Large menu" large>
               <SideNavMenuItem element={Link} to="/">

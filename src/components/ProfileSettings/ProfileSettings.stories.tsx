@@ -23,6 +23,8 @@ export const Default = () => {
     <QueryClientProvider client={queryClient}>
       <div style={{ width: "15rem", background: "var(--cds-bmrg-primary" }}>
         <ProfileSettings
+          isOpen={true}
+          closeModal={() => void 0}
           baseServiceUrl="https://ibm.com"
           src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50"
           userName="Boomerang Ada"

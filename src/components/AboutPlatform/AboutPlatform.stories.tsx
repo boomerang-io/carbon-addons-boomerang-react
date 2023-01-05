@@ -13,7 +13,7 @@ export default {
   },
   argTypes: {
     isFlowApp: { control: "boolean", defaultValue: false },
-    organization: { control: "text", defaultValue: "IBM" },
+    name: { control: "text", defaultValue: "IBM" },
     version: { control: "text", defaultValue: "5.0.0" },
   },
 };
