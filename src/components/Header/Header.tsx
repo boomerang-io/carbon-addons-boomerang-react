@@ -6,21 +6,17 @@ import NotificationsContainer from "../Notifications/NotificationsContainer";
 import CustomHeaderMenu from "../HeaderMenu";
 import UserRequests from "../UserRequests";
 import HeaderAppSwitcher from "./HeaderAppSwitcher";
-//import PrivacyStatement from "../PrivacyStatement";
-import { AboutPlatformMenuItem } from "../AboutPlatform";
 import FocusTrap from "focus-trap-react";
-import useWindowSize from "../../hooks/useWindowSize";
 import useShellMenu from "../../hooks/useShellMenu";
+import useWindowSize from "../../hooks/useWindowSize";
 
 import {
   Header,
   HeaderGlobalBar,
-  HeaderGlobalAction,
   HeaderMenuButton,
   HeaderName,
   HeaderNavigation,
   HeaderMenuItem,
-  HeaderMenu,
   HeaderPanel,
   SkipToContent,
   SideNav,
@@ -74,6 +70,9 @@ const FocusableElementIdMap = {
   RightPanel: "shell-right-panel-button",
   SideNav: "shell-sidenav-menu-button",
 };
+
+const headerButtonClassNames =
+  "cds--btn--icon-only cds--header__action cds--btn cds--btn--primary cds--btn--icon-only cds--btn cds--btn--primary";
 
 function MainHeader(props: Props) {
   const [isSideNavActive, setIsSideNavActive] = React.useState(false);
@@ -167,17 +166,17 @@ function NotificationsMenu(props: any) {
 
   return (
     <div style={{ position: "relative" }} ref={ref}>
-      <HeaderGlobalAction
+      <button
+        className={headerButtonClassNames}
         aria-controls="shell-notifications-menu"
         aria-expanded={isActive}
         aria-haspopup="menu"
         aria-label="Notifications menu"
         id={FocusableElementIdMap.Notifcations}
-        tooltipAlignment="end"
         onClick={() => setIsActive(!isActive)}
       >
         {icon}
-      </HeaderGlobalAction>
+      </button>
       <PlatformNotificationsContainer
         isActive={isActive}
         baseLaunchEnvUrl={props.baseLaunchEnvUrl}
@@ -197,17 +196,17 @@ function RequestsMenu(props: any) {
 
   return (
     <div style={{ position: "relative" }} ref={ref}>
-      <HeaderGlobalAction
+      <button
+        className={headerButtonClassNames}
         aria-controls="shell-requests-menu"
         aria-expanded={isActive}
         aria-haspopup="menu"
         aria-label="Requests menu"
         id={FocusableElementIdMap.Requests}
-        tooltipAlignment="end"
         onClick={() => setIsActive(!isActive)}
       >
         <Collaborate size={20} />
-      </HeaderGlobalAction>
+      </button>
       {isActive ? (
         <CustomHeaderMenu id="shell-requests-menu">
           <UserRequests baseLaunchEnvUrl={props.baseLaunchEnvUrl} requestSummary={props.requestSummary} />
@@ -226,17 +225,17 @@ function SupportMenu(props: any) {
 
   return (
     <div style={{ position: "relative" }} ref={ref}>
-      <HeaderGlobalAction
+      <button
+        className={headerButtonClassNames}
         aria-controls="shell-support-menu"
         aria-expanded={isActive}
         aria-haspopup="menu"
         aria-label="Support menu"
         id={FocusableElementIdMap.Support}
-        tooltipAlignment="end"
         onClick={() => setIsActive(!isActive)}
       >
         <Help size={20} />
-      </HeaderGlobalAction>
+      </button>
       {isActive ? <CustomHeaderMenu id="shell-support-menu">{props.supportChildren}</CustomHeaderMenu> : null}
     </div>
   );
@@ -251,17 +250,17 @@ function ProfileMenu(props: any) {
 
   return (
     <div style={{ position: "relative" }} ref={ref}>
-      <HeaderGlobalAction
+      <button
+        className={headerButtonClassNames}
         aria-controls="shell-profile-menu"
         aria-expanded={isActive}
         aria-haspopup="menu"
         aria-label="User menu"
         id={FocusableElementIdMap.Profile}
-        tooltipAlignment="end"
         onClick={() => setIsActive(!isActive)}
       >
         <UserAvatar alt="Profile icon" size={20} {...props} />
-      </HeaderGlobalAction>
+      </button>
       {isActive ? <CustomHeaderMenu id="shell-profile-menu">{props.profileChildren}</CustomHeaderMenu> : null}
     </div>
   );
@@ -272,17 +271,17 @@ function AppSwitcherMenu(props: any) {
 
   return (
     <div ref={ref}>
-      <HeaderGlobalAction
+      <button
+        className={headerButtonClassNames}
         aria-controls="shell-app-switcher"
         aria-expanded={isActive}
         aria-haspopup="menu"
         aria-label="Team Switcher"
         id={FocusableElementIdMap.Switcher}
-        tooltipAlignment="end"
         onClick={() => setIsActive(!isActive)}
       >
         {isActive ? <Close alt="Close App Switcher" size={20} /> : <Switcher alt="Open App Switcher" size={20} />}
-      </HeaderGlobalAction>
+      </button>
       <HeaderAppSwitcher
         baseLaunchEnvUrl={props.baseLaunchEnvUrl}
         baseServiceUrl={props.baseServiceUrl}
@@ -301,17 +300,17 @@ function RightPanelMenu(props: any) {
 
   return (
     <div ref={ref}>
-      <HeaderGlobalAction
+      <button
+        className={headerButtonClassNames}
         aria-controls="shell-right-panel"
         aria-expanded={isActive}
         aria-haspopup="dialog"
         aria-label={`Right panel`}
         id={FocusableElementIdMap.RightPanel}
-        tooltipAlignment="end"
         onClick={() => setIsActive(!isActive)}
       >
         {props.icon}
-      </HeaderGlobalAction>
+      </button>
       <FocusTrap active={isActive} focusTrapOptions={{ allowOutsideClick: true }}>
         <HeaderPanel id="shell-right-panel" role="dialog" aria-label="Right panel" expanded={isActive}>
           {props.component}
