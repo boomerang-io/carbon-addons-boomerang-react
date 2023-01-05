@@ -8,6 +8,8 @@ export default function useShellMenu<T extends HTMLElement>(
   const [localIsActive, localSetIsActive] = React.useState(false);
   const { isActive = localIsActive, setIsActive = localSetIsActive } = stateManagement;
 
+  const toggleActive = () => setIsActive(!isActive);
+
   const handleMousedownEvent = (event: MouseEvent) => {
     if (!ref.current?.contains(event.target as Node)) {
       setIsActive(false);
@@ -25,15 +27,24 @@ export default function useShellMenu<T extends HTMLElement>(
     return;
   };
 
+  const handleFocusOutEvent = (event: FocusEvent) => {
+    if (event.relatedTarget && !ref.current?.contains(event.relatedTarget as Node)) {
+      setIsActive(false);
+    }
+    return;
+  };
+
   React.useEffect(() => {
     document.addEventListener("mousedown", handleMousedownEvent);
     document.addEventListener("keydown", handleKeyDownEvent);
+    document.addEventListener("focusout", handleFocusOutEvent);
 
     return () => {
       document.removeEventListener("mousedown", handleMousedownEvent);
       document.removeEventListener("keydown", handleKeyDownEvent);
+      document.removeEventListener("focusout", handleFocusOutEvent);
     };
   });
 
-  return { isActive, setIsActive, ref };
+  return { isActive, setIsActive, toggleActive, ref };
 }

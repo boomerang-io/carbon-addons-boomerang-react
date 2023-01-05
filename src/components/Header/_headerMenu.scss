@@ -19,18 +19,5 @@
   position: absolute;
   right: 0;
   top: 100%;
-}
-
-.#{$prefix}--bmrg-header-drop-down__item {
-  color: shell.$bmrg-secondary;
-  width: 100%;
-
-  &:hover {
-    background: shell.$bmrg-header-hover-background;
-  }
-
-  > a {
-    color: shell.$bmrg-secondary;
-    text-decoration: none;
-  }
+  width: 15rem;
 }

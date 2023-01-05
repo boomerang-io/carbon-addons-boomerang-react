@@ -1,35 +1,63 @@
 import React from "react";
+import { Button, ComposedModal, ModalHeader, ModalBody, ModalFooter } from "@carbon/react";
+import FocusTrap from "focus-trap-react";
+import HeaderMenuItem from "../HeaderMenuItem";
+import { Power } from "@carbon/react/icons";
 import { prefix } from "../../internal/settings";
-import { Button, ComposedModal } from "@carbon/react";
-import { ModalHeader, ModalBody, ModalFooter } from "@carbon/react";
 
 type Props = {
+  closeModal: () => void;
+  isOpen: boolean;
   signOutLink: string;
 };
 
-function closeModal() {
-  return void 0;
-}
-
-function SignOutContainer({ signOutLink }: Props) {
+function SignOut({ closeModal, isOpen, signOutLink }: Props) {
   return (
-    <ComposedModal open className={`${prefix}--bmrg-signout-container`}>
-      <ModalHeader title="Sign out" closeModal={closeModal} />
-      <ModalBody>
-        <div className={`${prefix}--bmrg-signout`}>
-          <p className={`${prefix}--bmrg-signout__message`}>{"Are you sure you'd like to leave us?"}</p>
-        </div>
-      </ModalBody>
-      <ModalFooter>
-        <Button kind="secondary" onClick={closeModal}>
-          Cancel
-        </Button>
-        <Button kind="primary" role="link" href={signOutLink}>
-          Sign Out
-        </Button>
-      </ModalFooter>
-    </ComposedModal>
+    <FocusTrap active={isOpen} focusTrapOptions={{ allowOutsideClick: true }}>
+      <ComposedModal open={isOpen} className={`${prefix}--bmrg-signout-container`} onClose={closeModal}>
+        <ModalHeader title="Sign out" closeModal={closeModal} />
+        <ModalBody>
+          <div className={`${prefix}--bmrg-signout`}>
+            <p className={`${prefix}--bmrg-signout__message`}>{"Are you sure you'd like to leave us?"}</p>
+          </div>
+        </ModalBody>
+        <ModalFooter>
+          <Button kind="secondary" onClick={closeModal}>
+            Cancel
+          </Button>
+          <Button kind="primary" role="link" href={signOutLink}>
+            Sign Out
+          </Button>
+        </ModalFooter>
+      </ComposedModal>
+    </FocusTrap>
   );
 }
 
-export default SignOutContainer;
+export default SignOut;
+
+function SignOutMenuItem(props: Omit<Props, "isOpen" | "closeModal">) {
+  const menuItemRef = React.useRef<HTMLButtonElement>(null);
+  const [isOpen, setIsOpen] = React.useState(false);
+
+  const handleClose = () => {
+    setIsOpen(false);
+    menuItemRef.current?.focus();
+  };
+
+  return (
+    <>
+      <HeaderMenuItem
+        kind="button"
+        icon={<Power />}
+        text="Sign Out"
+        onClick={() => setIsOpen(!isOpen)}
+        style={{ color: "red" }}
+        variant="danger"
+      />
+      <SignOut isOpen={isOpen} closeModal={handleClose} {...props} />
+    </>
+  );
+}
+
+export { SignOutMenuItem };

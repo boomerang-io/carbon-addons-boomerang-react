@@ -1,6 +1,6 @@
 import React from "react";
 import cx from "classnames";
-import { Button } from "@carbon/react";
+import { HeaderMenuItem } from "@carbon/react";
 import { prefix } from "../../internal/settings";
 
 type Props = {
@@ -19,39 +19,31 @@ function UserRequests(props: Props) {
 
   return (
     <>
-      <Button
-        className={`${prefix}--bmrg-header-menu-item`}
-        href={`${baseLaunchEnvUrl}/launchpad/requests/action`}
-        role="link"
-      >
-        <div>
-          <p
+      <HeaderMenuItem href={`${baseLaunchEnvUrl}/launchpad/requests/action`}>
+        <div className="cds--bmrg-requests">
+          <span
             className={cx(`${prefix}--bmrg-requests__title`, {
               [`${prefix}--bmrg-requests-empty__title`]: !existOwnedRequests,
             })}
           >
             {existOwnedRequests ? requireUserAction : "No"} Request
             {requireUserAction > 1 || !existOwnedRequests ? "s" : ""}
-          </p>
-          <p className={`${prefix}--bmrg-requests__text`}>requiring your action</p>
+          </span>
+          <span className={`${prefix}--bmrg-requests__text`}>requiring your action</span>
         </div>
-      </Button>
-      <Button
-        className={`${prefix}--bmrg-header-menu-item`}
-        href={`${baseLaunchEnvUrl}/launchpad/requests/mine`}
-        role="link"
-      >
-        <div>
-          <p
+      </HeaderMenuItem>
+      <HeaderMenuItem href={`${baseLaunchEnvUrl}/launchpad/requests/mine`}>
+        <div className="cds--bmrg-requests">
+          <span
             className={cx(`${prefix}--bmrg-requests__title`, {
               [`${prefix}--bmrg-requests-empty__title`]: !existUserRequests,
             })}
           >
             {existUserRequests ? submittedByUser : "No"} Request{submittedByUser > 1 || !existUserRequests ? "s" : ""}
-          </p>
-          <p className={`${prefix}--bmrg-requests__text`}>made by you are processing</p>
+          </span>
+          <span className={`${prefix}--bmrg-requests__text`}>made by you are processing</span>
         </div>
-      </Button>
+      </HeaderMenuItem>
     </>
   );
 }

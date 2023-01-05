@@ -26,7 +26,6 @@ export const Default = () => (
   <div style={{ display: "block" }}>
     <Header
       baseServiceUrl=""
-      renderLogo={false}
       appName={"App"}
       platformName={"Boomerang"}
       enableNotifications={true}
@@ -55,7 +54,7 @@ export const Default = () => (
       notificationsConfig={{
         wsUrl: mockSocketUrl,
       }}
-      onHelpClick={[
+      supportChildren={[
         <HeaderMenuItem key="Tutorial" text="Tutorial" iconName="workspace">
           {() => <Modal passiveModal />}
         </HeaderMenuItem>,
@@ -90,9 +89,7 @@ export const WithIntegratedSidenav = () => (
       appName={"App"}
       baseServiceUrl=""
       platformName={"Boomerang"}
-      renderLogo={false}
       enableNotifications={true}
-      companyName={"Boomerang"}
       productName={"Flow"}
       navLinks={[
         {
@@ -119,7 +116,7 @@ export const WithIntegratedSidenav = () => (
       notificationsConfig={{
         wsUrl: mockSocketUrl,
       }}
-      onHelpClick={() => [
+      supportChildren={() => [
         <HeaderMenuItem key="0" text="Tutorial" iconName="workspace">
           {() => <Modal passiveModal />}
         </HeaderMenuItem>,

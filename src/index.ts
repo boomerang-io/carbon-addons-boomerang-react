@@ -1,9 +1,6 @@
 export { default as AutoSuggest } from "./components/AutoSuggest";
 export { default as Avatar } from "./components/Avatar";
 export { default as BmrgHeader } from "./components/Header";
-export { default as BmrgHeaderMenuButton } from "./components/HeaderMenuButton";
-export { default as BmrgHeaderMenuItem } from "./components/HeaderMenuItem";
-export { default as BrmgHeaderMenuLink } from "./components/HeaderMenuLink";
 export { default as BrmgHeaderMenuUser } from "./components/HeaderMenuUser";
 export { default as CheckboxList } from "./components/CheckboxList";
 export { default as ComboBox } from "./components/ComboBox";
@@ -39,7 +36,6 @@ export {
 export { default as FeatureSideNavLink } from "./components/FeatureSideNavLink";
 export { default as GraphicLoch } from "./components/GraphicLoch";
 export { default as GraphicWrangler } from "./components/GraphicWrangler";
-export { default as LeftSideNav } from "./components/LeftSideNav";
 export { default as Loading } from "./components/Loading";
 export { default as LoadingAnimation } from "./components/LoadingAnimation";
 export { default as MemberBar } from "./components/MemberBar";
@@ -61,7 +57,6 @@ export { default as TextInput } from "./components/TextInput";
 export { default as Toggle } from "./components/Toggle";
 export { default as TooltipHover } from "./components/TooltipHover";
 export { default as UIShell } from "./components/UIShell";
-export { default as UserRequests } from "./components/UserRequests";
 
 export type {
   DynamicInput,

@@ -22,21 +22,22 @@ type HeaderAppSwitcherProps = {
   baseServiceUrl: string;
   baseLaunchEnvUrl?: string;
   isActive?: boolean;
+  id: string;
 };
 
-export default function HeaderAppSwitcher({ baseServiceUrl, baseLaunchEnvUrl, isActive }: HeaderAppSwitcherProps) {
+export default function HeaderAppSwitcher({ baseServiceUrl, baseLaunchEnvUrl, id, isActive }: HeaderAppSwitcherProps) {
   const userTeamsUrl = serviceUrl.getUserTeams({ baseServiceUrl });
   const teamsQuery = useQuery<UserTeams>(userTeamsUrl, resolver.query(userTeamsUrl));
 
   if (teamsQuery.isLoading) {
     return (
-      <HeaderPanel id="shell-app-switcher" role="menu" className={classNames} expanded={isActive}>
-        <div className={cx(`${prefix}--bmrg-header-teams`, `--is-loading`)}>
-          <SkeletonText className={`${prefix}--bmrg-header-teams__skeleton`} />
-          <SkeletonText className={`${prefix}--bmrg-header-teams__skeleton`} />
-          <SkeletonText className={`${prefix}--bmrg-header-teams__skeleton`} />
-          <SkeletonText className={`${prefix}--bmrg-header-teams__skeleton`} />
-          <SkeletonText className={`${prefix}--bmrg-header-teams__skeleton`} />
+      <HeaderPanel id={id} role="menu" className={classNames} expanded={isActive}>
+        <div className={cx(`${prefix}--bmrg-header-switcher`, `--is-loading`)}>
+          <SkeletonText className={`${prefix}--bmrg-header-switcher__skeleton`} />
+          <SkeletonText className={`${prefix}--bmrg-header-switcher__skeleton`} />
+          <SkeletonText className={`${prefix}--bmrg-header-switcher__skeleton`} />
+          <SkeletonText className={`${prefix}--bmrg-header-switcher__skeleton`} />
+          <SkeletonText className={`${prefix}--bmrg-header-switcher__skeleton`} />
         </div>
       </HeaderPanel>
     );
@@ -44,8 +45,8 @@ export default function HeaderAppSwitcher({ baseServiceUrl, baseLaunchEnvUrl, is
 
   if (teamsQuery.error) {
     return (
-      <HeaderPanel id="shell-app-switcher" role="menu" className={classNames} expanded={isActive}>
-        <ErrorMessage className={`${prefix}--bmrg-header-teams`} />
+      <HeaderPanel id={id} role="menu" className={classNames} expanded={isActive}>
+        <ErrorMessage className={`${prefix}--bmrg-header-switcher`} />
       </HeaderPanel>
     );
   }
@@ -54,51 +55,49 @@ export default function HeaderAppSwitcher({ baseServiceUrl, baseLaunchEnvUrl, is
     const { accountTeams, standardTeams } = teamsQuery.data;
     if (accountTeams?.length || standardTeams?.length) {
       return (
-        <HeaderPanel className={classNames} expanded={isActive} id="shell-app-switcher" role="menu">
-          <FocusTrap active={isActive} focusTrapOptions={{ allowOutsideClick: true }}>
-            <ul className={`${prefix}--bmrg-header-teams`} style={{"display": isActive ? "block" : "none"}}>
-              {standardTeams?.map((team) => (
+        <HeaderPanel className={classNames} expanded={isActive} id={id} role="menu">
+          <ul className={`${prefix}--bmrg-header-switcher`} style={{ display: isActive ? "block" : "none" }}>
+            {standardTeams?.map((team) => (
+              <TeamServiceListMenu
+                key={team.id}
+                baseLaunchEnvUrl={baseLaunchEnvUrl}
+                baseServiceUrl={baseServiceUrl}
+                isMember={true}
+                team={team}
+              />
+            ))}
+            {accountTeams?.map((account) => (
+              <div key={account.id}>
+                <SwitcherDivider />
                 <TeamServiceListMenu
-                  key={team.id}
                   baseLaunchEnvUrl={baseLaunchEnvUrl}
                   baseServiceUrl={baseServiceUrl}
-                  isMember={true}
-                  team={team}
+                  isAccount={true}
+                  isMember={account.isAccountTeamMember}
+                  team={account}
                 />
-              ))}
-              {accountTeams?.map((account) => (
-                <div key={account.id}>
-                  <SwitcherDivider />
-                  <TeamServiceListMenu
-                    baseLaunchEnvUrl={baseLaunchEnvUrl}
-                    baseServiceUrl={baseServiceUrl}
-                    isAccount={true}
-                    isMember={account.isAccountTeamMember}
-                    team={account}
-                  />
-                  {Boolean(account.projectTeams) &&
-                    account.projectTeams.map((project) => (
-                      <TeamServiceListMenu
-                        key={project.id}
-                        baseLaunchEnvUrl={baseLaunchEnvUrl}
-                        baseServiceUrl={baseServiceUrl}
-                        isMember={true}
-                        team={project}
-                      />
-                    ))}
-                </div>
-              ))}
-            </ul>
-          </FocusTrap>
+                {Boolean(account.projectTeams) &&
+                  account.projectTeams.map((project) => (
+                    <TeamServiceListMenu
+                      key={project.id}
+                      baseLaunchEnvUrl={baseLaunchEnvUrl}
+                      baseServiceUrl={baseServiceUrl}
+                      isMember={true}
+                      team={project}
+                    />
+                  ))}
+              </div>
+            ))}
+          </ul>
         </HeaderPanel>
       );
     }
 
     return (
-      <HeaderPanel className={classNames} expanded={isActive} id="shell-app-switcher" role="menu">
-        <div className={cx(`${prefix}--bmrg-header-teams`, "--is-empty")}>
-          <h1 className={`${prefix}--bmrg-header-teams__empty-title`}>No teams</h1>
-          <p className={`${prefix}--bmrg-header-teams__empty-subtitle`}>You must be new here</p>
+      <HeaderPanel className={classNames} expanded={isActive} id={id} role="menu">
+        <div className={cx(`${prefix}--bmrg-header-switcher`, "--is-empty")}>
+          <h1 className={`${prefix}--bmrg-header-switcher__empty-title`}>No teams</h1>
+          <p className={`${prefix}--bmrg-header-switcher__empty-subtitle`}>You must be new here</p>
         </div>
       </HeaderPanel>
     );

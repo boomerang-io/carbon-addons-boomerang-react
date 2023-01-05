@@ -20,10 +20,11 @@ type State = any;
 
 export default class PlatformNotificationsContainer extends React.Component<Props, State> {
   ws: any;
+  articleRef = React.createRef();
 
   state = {
     currentNotifications: this.props.initialNotifications ?? [],
-    numNotifications: this.props.initialNotifications?.length ?? 0
+    numNotifications: this.props.initialNotifications?.length ?? 0,
   };
 
   componentDidMount() {
@@ -143,50 +144,45 @@ export default class PlatformNotificationsContainer extends React.Component<Prop
     const { numNotifications, currentNotifications } = this.state;
     const { baseLaunchEnvUrl } = this.props;
 
-    // Added stop propagation so the event doesn't close the menu
     return (
-      <FocusTrap active={this.props.isActive} focusTrapOptions={{ allowOutsideClick: true }}>
-        <div // eslint-disable-line jsx-a11y/no-noninteractive-element-interactions
-          role="article"
-          onClick={(e) => e.stopPropagation()}
-          onKeyDown={(e) => e.stopPropagation()}
-          className={cx(`${prefix}--bmrg-notifications`, {
-            "--is-active": this.props.isActive,
-          })}
-        >
-          <div className={`${prefix}--bmrg-notifications-header`}>
-            <h1 className={`${prefix}--bmrg-notifications-header__newNotifications`}>
-              {`${numNotifications} new notification${numNotifications !== 1 ? "s" : ""}`}
-            </h1>
-            <button
-              className={`${prefix}--bmrg-notifications-header__clear`}
-              disabled={!currentNotifications.length}
-              onClick={this.handleReadAllNotifications.bind(this)}
-              aria-label="Mark all read"
-            >
-              Mark All Read
-            </button>
-          </div>
-          <ul className={`${prefix}--bmrg-notifications__collection`}>
-            {currentNotifications.length ? (
-              this.renderNotifications()
-            ) : (
-              <div className={`${prefix}--bmrg-notifications-empty`}>
-                <h1 className={`${prefix}--bmrg-notifications-empty__no-news`}>No news is good news, right?</h1>
-              </div>
-            )}
-          </ul>
-          <div className={`${prefix}--bmrg-notifications__notifications-footer`}>
-            <a
-              aria-label="Link for notification center"
-              href={`${baseLaunchEnvUrl}/launchpad/notifications`}
-              className={`${prefix}--bmrg-notifications__notifications-redirect-link`}
-            >
-              Open Notification Center
-            </a>
-          </div>
+      <div
+        role="article"
+        className={cx(`${prefix}--bmrg-notifications`, {
+          "--is-active": this.props.isActive,
+        })}
+      >
+        <div className={`${prefix}--bmrg-notifications-header`}>
+          <h1 className={`${prefix}--bmrg-notifications-header__newNotifications`}>
+            {`${numNotifications} new notification${numNotifications !== 1 ? "s" : ""}`}
+          </h1>
+          <button
+            className={`${prefix}--bmrg-notifications-header__clear`}
+            disabled={!currentNotifications.length}
+            onClick={this.handleReadAllNotifications.bind(this)}
+            aria-label="Mark all read"
+          >
+            Mark All Read
+          </button>
         </div>
-      </FocusTrap>
+        <ul className={`${prefix}--bmrg-notifications__collection`}>
+          {currentNotifications.length ? (
+            this.renderNotifications()
+          ) : (
+            <div className={`${prefix}--bmrg-notifications-empty`}>
+              <h1 className={`${prefix}--bmrg-notifications-empty__no-news`}>No news is good news, right?</h1>
+            </div>
+          )}
+        </ul>
+        <div className={`${prefix}--bmrg-notifications__notifications-footer`}>
+          <a
+            aria-label="Link for notification center"
+            href={`${baseLaunchEnvUrl}/launchpad/notifications`}
+            className={`${prefix}--bmrg-notifications__notifications-redirect-link`}
+          >
+            Open Notification Center
+          </a>
+        </div>
+      </div>
     );
   }
 }

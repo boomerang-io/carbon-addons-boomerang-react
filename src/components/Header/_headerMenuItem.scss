@@ -1,0 +1,35 @@
+@use "../../global/config" as *;
+@use "../../global/utils";
+@use '@carbon/themes/scss/tokens' as theme;
+@use "../../global/themes/shell-tokens" as shell;
+
+.#{$prefix}--bmrg-header-menu-item__content {
+  display: flex;
+  align-items: center;
+  width: 12.5rem;
+  min-height: 3rem;
+  height: fit-content;
+  justify-content: space-between;
+
+  &.--danger {
+    .#{$prefix}--bmrg-header-menu-item__text {
+      color: theme.$support-error;
+      svg {
+        color: theme.$support-error;
+      }
+    }
+  }
+}
+
+.#{$prefix}--bmrg-header-menu-item__text {
+  align-items: center;
+  color: shell.$bmrg-header-active-text;
+  display: flex;
+  font-size: utils.rem(14px);
+  font-weight: 500;
+  line-height: utils.rem(18px);
+
+  svg {
+    margin-right: utils.rem(16px);
+  }
+}

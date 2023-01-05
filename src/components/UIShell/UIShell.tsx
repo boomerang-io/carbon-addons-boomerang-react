@@ -1,17 +1,16 @@
 import React from "react";
 import { QueryClientProvider } from "react-query";
-import { Button, HeaderMenuItem } from "@carbon/react";
+import { Forum, HelpDesk, Information } from "@carbon/react/icons";
 import Header from "../Header"; // Using default export
-import HeaderMenuLink from "../HeaderMenuLink";
-import HeaderMenuButton from "../HeaderMenuButton";
+import HeaderMenuItem from "../HeaderMenuItem";
 import { ProfileSettingsMenuItem } from "../ProfileSettings";
 import { AboutPlatformMenuItem } from "../AboutPlatform";
 import Feedback from "../Feedback";
 import PrivacyStatement from "../PrivacyStatement";
-import SignOut from "../SignOut";
 import GdprRedirectModal from "../GdprRedirectModal";
 import { queryClient } from "../../config/servicesConfig";
 import { User } from "../../types";
+import { SignOutMenuItem } from "../SignOut";
 
 type NavLink = {
   name: string;
@@ -57,18 +56,27 @@ type OwnProps = {
     platformMessage?: any;
   };
   isFlowApp?: boolean;
-  onMenuClick?: (args: { isOpen: boolean; onMenuClose: Function; navLinks?: NavLink[] }) => React.ReactNode;
+  onMenuClick?: (args: {
+    isOpen: boolean;
+    close: () => void;
+    onMenuClose: Function;
+    navLinks?: React.ReactNode[];
+  }) => React.ReactNode;
   onTutorialClick?: (...args: any[]) => any;
   ownedRequests?: any[];
   platformName?: string;
   productName?: string;
   renderFlowDocs?: boolean;
-  renderLogo?: boolean;
   renderGdprRedirect?: boolean;
   renderPrivacyStatement?: boolean;
   renderRequests?: boolean;
   renderRightPanel?: { icon: React.ReactNode; component: React.ReactNode };
-  renderSidenav?: (args: { isOpen: boolean; onMenuClose: Function; navLinks?: NavLink[] }) => React.ReactNode;
+  renderSidenav?: (args: {
+    isOpen: boolean;
+    close: () => void;
+    onMenuClose: Function;
+    navLinks?: React.ReactNode[];
+  }) => React.ReactNode;
   skipToContentProps?: {
     href?: string;
     children?: string;
@@ -91,7 +99,6 @@ function UIShell({
   onTutorialClick,
   platformName,
   productName,
-  renderLogo,
   renderGdprRedirect = false,
   renderFlowDocs,
   renderPrivacyStatement = false,
@@ -114,7 +121,6 @@ function UIShell({
   const isAppSwitcherEnabled = Boolean(features?.["appSwitcher.enabled"]);
   const isFeedbackEnabled = Boolean(features?.["feedback.enabled"]);
   const isNotificationsEnabled = Boolean(features?.["notifications.enabled"]);
-  const isLogoEnabled = platform?.displayLogo || renderLogo;
   const isSupportEnabled = Boolean(features?.["support.enabled"]);
 
   /**
@@ -140,8 +146,7 @@ function UIShell({
         enableNotifications={isNotificationsEnabled}
         navLinks={navigation}
         platformMessage={platformMessage}
-        platformName={!isLogoEnabled && finalPlatformName ? finalPlatformName : undefined}
-        renderLogo={isLogoEnabled}
+        platformName={finalPlatformName ? finalPlatformName : undefined}
         renderRightPanel={renderRightPanel}
         renderSidenav={onMenuClick || renderSidenav}
         skipToContentProps={skipToContentProps}
@@ -151,24 +156,32 @@ function UIShell({
         }}
         supportChildren={[
           typeof onTutorialClick === "function" && (
-            <HeaderMenuButton onClick={onTutorialClick} text="Tutorial" />
+            <HeaderMenuItem kind="button" onClick={onTutorialClick} text="Tutorial" icon={<Information />} />
           ),
           Boolean(finalBaseServiceUrl) && isSupportEnabled && (
-            <HeaderMenuLink
+            <HeaderMenuItem
+              kind="link"
               external={false}
               href={`${finalBaseUrl}/support/center`}
-              iconName="support"
+              icon={<HelpDesk />}
               text="Support Center"
             />
           ),
           Boolean(platform?.communityUrl) && (
-            <HeaderMenuLink href={platform?.communityUrl as string} iconName="forum" text="Community" />
+            <HeaderMenuItem
+              external={true}
+              kind="link"
+              href={platform?.communityUrl as string}
+              icon={<Forum />}
+              text="Community"
+            />
           ),
           renderFlowDocs && (
-            <HeaderMenuLink
+            <HeaderMenuItem
+              kind="link"
               external={true}
               href={`https://useboomerang.io/docs/boomerang-flow/introduction/overview/`}
-              iconName="information"
+              icon={<Information />}
               text="Flow Documentation"
             />
           ),
@@ -210,7 +223,7 @@ function UIShell({
           //     platformEmail={platform?.platformEmail}
           //   />
           // ),
-          // !!platform?.signOutUrl && <SignOut key="Sign Out" signOutLink={platform.signOutUrl} />,
+          !!platform?.signOutUrl && <SignOutMenuItem key="Sign Out" signOutLink={platform.signOutUrl} />,
         ].filter(Boolean)}
       />
       {isGdprRedirectDisabled === false && user?.hasConsented === false ? (

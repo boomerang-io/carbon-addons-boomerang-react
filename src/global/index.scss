@@ -45,11 +45,10 @@ $use-theme-boomerang: false !default;
 @use '../components/FeatureSideNavLink/featureSideNavLink';
 @use '../components/GdprRedirectModal/gdprRedirectModal';
 @use '../components/Header/header';
-@use '../components/Headerv2/headerv2';
-@use '../components/Header/headerDropDown';
-@use '../components/HeaderMenuItem/headerMenuItem';
+@use '../components/Header/headerMenu';
+@use '../components/Header/headerMenuItem';
+@use '../components/Header/userRequests';
 @use '../components/HeaderMenuUser/headerMenuUser';
-@use '../components/LeftSideNav/leftSideNav';
 @use '../components/LoadingAnimation/loadingAnimation';
 @use '../components/MemberBar/memberBar';
 @use '../components/Modal/modal' as addons-modal;
@@ -69,7 +68,6 @@ $use-theme-boomerang: false !default;
 @use '../components/TextInput/textInput';
 @use '../components/Toggle/toggle' as addons-toggle;
 @use '../components/TooltipHover/tooltip' as addons-tooltip;
-@use '../components/UserRequests/userRequests';
 
 // css for external libs
 @use "./tippy";

@@ -123,7 +123,7 @@ export const Default = (args: any) => {
           title: "Testing Platform Title",
         },
       }}
-      onTutorialClick={action("Tutorial")}
+      onTutorialClick={() => console.log("tutorial")}
       skipToContentProps={{ href: "#id" }}
       user={{
         name: "test user",
@@ -153,7 +153,6 @@ export const WithCarbonSidenavAndReactRouter = () => {
   return (
     <Router>
       <UIShell
-        renderLogo={true}
         platformName={"Boomerang"}
         appName={""}
         baseServiceUrl={BASE_URL}
@@ -191,8 +190,8 @@ export const WithCarbonSidenavAndReactRouter = () => {
             title: "Testing Platform Title",
           },
         }}
-        renderSidenav={({ isOpen, navLinks }) => (
-          <SideNav expanded={isOpen} isChildOfHeader aria-label="sidenav" isPersistent={false}>
+        renderSidenav={({ close, isOpen, navLinks }) => (
+          <SideNav expanded={isOpen} isChildOfHeader aria-label="sidenav" isPersistent={false} onOverlayClick={close}>
             <SideNavItems>
               {navLinks}
               <SideNavLink element={Link} to="/">
@@ -239,7 +238,7 @@ export const WithCarbonSidenavAndReactRouter = () => {
             </SideNavItems>
           </SideNav>
         )}
-        onTutorialClick={action("Tutorial")}
+        onTutorialClick={() => console.log("tutorial")}
         user={
           {
             id: "1",
@@ -262,7 +261,7 @@ export const WithCarbonSidenavAndReactRouter = () => {
                 marginTop: "4rem",
               }}
             >
-              <button>Hello</button>
+             <h1>Right panel</h1>
             </div>
           ),
         }}
@@ -281,7 +280,6 @@ export const RightPanel = () => {
   return (
     <UIShell
       isFlowApp
-      renderLogo={true}
       appName={""}
       platformName={"Boomerang"}
       baseServiceUrl={BASE_URL}
@@ -316,7 +314,7 @@ export const RightPanel = () => {
           title: "Testing Platform Title",
         },
       }}
-      onTutorialClick={action("Tutorial")}
+      onTutorialClick={() => console.log("tutorial")}
       renderRightPanel={{
         icon: <Help size={20} />,
         component: (
@@ -353,7 +351,6 @@ export const UserNotConsented = () => {
   mock.onGet(`${BASE_URL}/users/consents`).reply(200, PRIVACY_DATA);
   return (
     <UIShell
-      renderLogo={true}
       appName={""}
       baseServiceUrl={BASE_URL}
       platformName={"Boomerang"}
@@ -388,7 +385,7 @@ export const UserNotConsented = () => {
           title: "Testing Platform Title",
         },
       }}
-      onTutorialClick={action("Tutorial")}
+      onTutorialClick={() => console.log("tutorial")}
       user={
         {
           id: "1",
@@ -406,7 +403,6 @@ export const UserPendingDeletion = () => {
   mock.onGet(`${BASE_URL}/users/consents`).reply(200, PRIVACY_DATA);
   return (
     <UIShell
-      renderLogo={true}
       platformName={"Boomerang"}
       appName={""}
       baseServiceUrl={BASE_URL}
@@ -441,7 +437,7 @@ export const UserPendingDeletion = () => {
           title: "Testing Platform Title",
         },
       }}
-      onTutorialClick={action("Tutorial")}
+      onTutorialClick={() => console.log("tutorial")}
       user={
         {
           id: "1",

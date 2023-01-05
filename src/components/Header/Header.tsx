@@ -1,15 +1,4 @@
 import React from "react";
-import { Close, Collaborate, Help, UserAvatar, Notification, NotificationNew, Switcher } from "@carbon/react/icons";
-import FocusTrap from "focus-trap-react";
-import CustomHeaderMenu from "../HeaderMenu";
-import HeaderAppSwitcher from "./HeaderAppSwitcher";
-import NotificationsContainer from "../Notifications/NotificationsContainer";
-import PlatformNotificationsContainer from "../PlatformNotifications";
-import UserRequests from "../UserRequests";
-import useShellMenu from "../../hooks/useShellMenu";
-import useWindowSize from "../../hooks/useWindowSize";
-import { prefix } from "../../internal/settings";
-
 import {
   Header,
   HeaderGlobalBar,
@@ -24,6 +13,16 @@ import {
   SideNavLink,
   Theme,
 } from "@carbon/react";
+import FocusTrap from "focus-trap-react";
+import HeaderMenu from "./HeaderMenu";
+import HeaderAppSwitcher from "./HeaderAppSwitcher";
+import NotificationsContainer from "../Notifications/NotificationsContainer";
+import PlatformNotificationsContainer from "../PlatformNotifications";
+import UserRequests from "./UserRequests";
+import useShellMenu from "../../hooks/useShellMenu";
+import useWindowSize from "../../hooks/useWindowSize";
+import { Close, Collaborate, Help, UserAvatar, Notification, NotificationNew, Switcher } from "@carbon/react/icons";
+import { prefix } from "../../internal/settings";
 
 type NavLink = {
   name: string;
@@ -61,18 +60,40 @@ type Props = {
   skipToContentProps?: any;
 };
 
-const FocusableElementIdMap = {
-  Switcher: "shell-switcher-menu-button",
-  Support: "shell-support-menu-button",
-  Notifcations: "shell-notifications-menu-button",
-  Profile: "shell-profile-menu-button",
-  Requests: "shell-requests-menu-button",
-  RightPanel: "shell-right-panel-button",
-  SideNav: "shell-sidenav-menu-button",
+const MenuElementIdMap = {
+  Notifcations: "header-notifications-menu",
+  Profile: "header-profile-menu",
+  Requests: "header-requests-menu",
+  RightPanel: "header-right-panel",
+  SideNav: "header-sidenav-menu",
+  Support: "header-support-menu",
+  Switcher: "header-switcher-panel",
+} as const;
+
+type MenuElementIdMapType = typeof MenuElementIdMap;
+
+const FocusableElementIdMap: Record<
+  keyof MenuElementIdMapType,
+  `${MenuElementIdMapType[keyof MenuElementIdMapType]}-button`
+> = {
+  Notifcations: "header-notifications-menu-button",
+  Profile: "header-profile-menu-button",
+  Requests: "header-requests-menu-button",
+  RightPanel: "header-right-panel-button",
+  SideNav: "header-sidenav-menu-button",
+  Support: "header-support-menu-button",
+  Switcher: "header-switcher-panel-button",
 };
 
 const headerButtonClassNames =
   "cds--btn--icon-only cds--header__action cds--btn cds--btn--primary cds--btn--icon-only cds--btn cds--btn--primary";
+
+function isType(
+  elem: any,
+  type: "undefined" | "object" | "boolean" | "number" | "bigint" | "string" | "symbol" | "function"
+) {
+  return typeof elem === type;
+}
 
 function MainHeader(props: Props) {
   const [isSideNavActive, setIsSideNavActive] = React.useState(false);
@@ -94,17 +115,30 @@ function MainHeader(props: Props) {
         {skipToContentProps ? <SkipToContent {...skipToContentProps} /> : null}
         <HeaderMenuButton
           id={FocusableElementIdMap.SideNav}
-          isCollapsible={typeof props.renderSidenav === "function"}
+          isCollapsible={isType(props.renderSidenav, "function")}
           isActive={isSideNavActive}
           onClick={() => setIsSideNavActive(!isSideNavActive)}
+        />
+        <SidenavMenu
+          navLinks={props.navLinks}
+          renderSidenav={props.renderSidenav}
+          isActive={isSideNavActive}
+          setIsActive={setIsSideNavActive}
         />
         <HeaderName href={baseLaunchEnvUrl} prefix={platformName}>
           {appName}
         </HeaderName>
         <HeaderNavigation aria-label="Platform navigation">
           {Array.isArray(navLinks)
-            ? navLinks.map((link) => (
-                <HeaderMenuItem aria-label={`Link for ${link.name}`} href={link.url} key={link.url}>
+            ? navLinks.map((link, i) => (
+                <HeaderMenuItem
+                  isCurrentPage={
+                    i === 0 || (window?.location?.href && link.url ? window.location.href.startsWith(link.url) : false)
+                  }
+                  aria-label={`Link for ${link.name}`}
+                  href={link.url}
+                  key={link.url}
+                >
                   {link.name}
                 </HeaderMenuItem>
               ))
@@ -135,12 +169,6 @@ function MainHeader(props: Props) {
             baseServiceUrl={baseServiceUrl}
           />
           <RightPanelMenu enabled={renderRightPanel && Object.keys(renderRightPanel).length} {...renderRightPanel} />
-          <SidenavMenu
-            navLinks={props.navLinks}
-            renderSidenav={props.renderSidenav}
-            isActive={isSideNavActive}
-            setIsActive={setIsSideNavActive}
-          />
         </HeaderGlobalBar>
         <NotificationsContainer enableMultiContainer containerId={`${prefix}--bmrg-header-notifications`} />
       </Header>
@@ -151,7 +179,7 @@ function MainHeader(props: Props) {
 export default MainHeader;
 
 function NotificationsMenu(props: any) {
-  const { isActive, setIsActive, ref } = useShellMenu<HTMLDivElement>(FocusableElementIdMap.Notifcations);
+  const { isActive, toggleActive, ref } = useShellMenu<HTMLDivElement>(FocusableElementIdMap.Notifcations);
   const [hasNewNotifications, setHasNewNotifications] = React.useState(false);
 
   if (!props.enabled) {
@@ -167,13 +195,13 @@ function NotificationsMenu(props: any) {
   return (
     <div style={{ position: "relative" }} ref={ref}>
       <button
-        aria-controls="shell-notifications-menu"
+        aria-controls="header-notifications-menu"
         aria-expanded={isActive}
         aria-haspopup="menu"
         aria-label="Notifications menu"
         className={headerButtonClassNames}
         id={FocusableElementIdMap.Notifcations}
-        onClick={() => setIsActive(!isActive)}
+        onClick={toggleActive}
       >
         {icon}
       </button>
@@ -188,7 +216,7 @@ function NotificationsMenu(props: any) {
 }
 
 function RequestsMenu(props: any) {
-  const { isActive, setIsActive, ref } = useShellMenu<HTMLDivElement>(FocusableElementIdMap.Requests);
+  const { isActive, toggleActive, ref } = useShellMenu<HTMLDivElement>(FocusableElementIdMap.Requests);
 
   if (!props.enabled) {
     return null;
@@ -197,27 +225,27 @@ function RequestsMenu(props: any) {
   return (
     <div style={{ position: "relative" }} ref={ref}>
       <button
-        aria-controls="shell-requests-menu"
+        aria-controls="header-requests-menu"
         aria-expanded={isActive}
         aria-haspopup="menu"
         aria-label="Requests menu"
         className={headerButtonClassNames}
         id={FocusableElementIdMap.Requests}
-        onClick={() => setIsActive(!isActive)}
+        onClick={toggleActive}
       >
         <Collaborate size={20} />
       </button>
       {isActive ? (
-        <CustomHeaderMenu id="shell-requests-menu">
+        <HeaderMenu id="header-requests-menu">
           <UserRequests baseLaunchEnvUrl={props.baseLaunchEnvUrl} requestSummary={props.requestSummary} />
-        </CustomHeaderMenu>
+        </HeaderMenu>
       ) : null}
     </div>
   );
 }
 
 function SupportMenu(props: any) {
-  const { isActive, setIsActive, ref } = useShellMenu<HTMLDivElement>(FocusableElementIdMap.Support);
+  const { isActive, toggleActive, ref } = useShellMenu<HTMLDivElement>(FocusableElementIdMap.Support);
 
   if (!props.enabled) {
     return null;
@@ -226,23 +254,23 @@ function SupportMenu(props: any) {
   return (
     <div style={{ position: "relative" }} ref={ref}>
       <button
-        aria-controls="shell-support-menu"
+        aria-controls="header-support-menu"
         aria-expanded={isActive}
         aria-haspopup="menu"
         aria-label="Support menu"
         className={headerButtonClassNames}
         id={FocusableElementIdMap.Support}
-        onClick={() => setIsActive(!isActive)}
+        onClick={toggleActive}
       >
         <Help size={20} />
       </button>
-      {isActive ? <CustomHeaderMenu id="shell-support-menu">{props.supportChildren}</CustomHeaderMenu> : null}
+      {isActive ? <HeaderMenu id="header-support-menu">{props.supportChildren}</HeaderMenu> : null}
     </div>
   );
 }
 
 function ProfileMenu(props: any) {
-  const { isActive, setIsActive, ref } = useShellMenu<HTMLDivElement>(FocusableElementIdMap.Profile);
+  const { isActive, toggleActive, ref } = useShellMenu<HTMLDivElement>(FocusableElementIdMap.Profile);
 
   if (!props.enabled) {
     return null;
@@ -251,40 +279,41 @@ function ProfileMenu(props: any) {
   return (
     <div style={{ position: "relative" }} ref={ref}>
       <button
-        aria-controls="shell-profile-menu"
+        aria-controls="header-profile-menu"
         aria-expanded={isActive}
         aria-haspopup="menu"
         aria-label="User menu"
         className={headerButtonClassNames}
         id={FocusableElementIdMap.Profile}
-        onClick={() => setIsActive(!isActive)}
+        onClick={toggleActive}
       >
         <UserAvatar alt="Profile icon" size={20} {...props} />
       </button>
-      {isActive ? <CustomHeaderMenu id="shell-profile-menu">{props.profileChildren}</CustomHeaderMenu> : null}
+      {isActive ? <HeaderMenu id="header-profile-menu">{props.profileChildren}</HeaderMenu> : null}
     </div>
   );
 }
 
 function AppSwitcherMenu(props: any) {
-  const { isActive, setIsActive, ref } = useShellMenu<HTMLDivElement>(FocusableElementIdMap.Switcher);
+  const { isActive, toggleActive, ref } = useShellMenu<HTMLDivElement>(FocusableElementIdMap.Switcher);
 
   return (
     <div ref={ref}>
       <button
-        aria-controls="shell-app-switcher"
+        aria-controls={MenuElementIdMap.Switcher}
         aria-expanded={isActive}
         aria-haspopup="menu"
         aria-label="Team Switcher"
         className={headerButtonClassNames}
         id={FocusableElementIdMap.Switcher}
-        onClick={() => setIsActive(!isActive)}
+        onClick={toggleActive}
       >
         {isActive ? <Close alt="Close App Switcher" size={20} /> : <Switcher alt="Open App Switcher" size={20} />}
       </button>
       <HeaderAppSwitcher
         baseLaunchEnvUrl={props.baseLaunchEnvUrl}
         baseServiceUrl={props.baseServiceUrl}
+        id={MenuElementIdMap.Switcher}
         isActive={isActive}
       />
     </div>
@@ -292,7 +321,7 @@ function AppSwitcherMenu(props: any) {
 }
 
 function RightPanelMenu(props: any) {
-  const { isActive, setIsActive, ref } = useShellMenu<HTMLDivElement>(FocusableElementIdMap.RightPanel);
+  const { isActive, toggleActive, ref } = useShellMenu<HTMLDivElement>(FocusableElementIdMap.RightPanel);
 
   if (!props.enabled) {
     return null;
@@ -301,27 +330,19 @@ function RightPanelMenu(props: any) {
   return (
     <div ref={ref}>
       <button
-        aria-controls="shell-right-panel"
+        aria-controls={MenuElementIdMap.RightPanel}
         aria-expanded={isActive}
         aria-haspopup="dialog"
         aria-label={`Right panel`}
         className={headerButtonClassNames}
         id={FocusableElementIdMap.RightPanel}
-        onClick={() => setIsActive(!isActive)}
+        onClick={toggleActive}
       >
         {props.icon}
       </button>
-      <FocusTrap active={isActive} focusTrapOptions={{ allowOutsideClick: true }}>
-        <HeaderPanel
-          id="shell-right-panel"
-          role="dialog"
-          aria-label="Right panel"
-          expanded={isActive}
-          style={{ background: "var(--cds-background)" }}
-        >
-          {props.component}
-        </HeaderPanel>
-      </FocusTrap>
+      <HeaderPanel id={MenuElementIdMap.RightPanel} role="dialog" aria-label="Right panel" expanded={isActive}>
+        {props.component}
+      </HeaderPanel>
     </div>
   );
 }
@@ -332,13 +353,15 @@ function SidenavMenu(props: any) {
   const windowSize = useWindowSize();
   const isMobileSidenavActive = (windowSize.width as number) < 1024;
 
-  return typeof props.renderSidenav === "function" ? (
-    <FocusTrap active={isActive} focusTrapOptions={{ allowOutsideClick: true }}>
-      <div ref={ref}>
+  const closeMenu = () => setIsActive(false);
+
+  if (isType(props.renderSidenav, "function")) {
+    return (
+      <div ref={ref} style={{ display: isActive ? "block" : "none" }}>
         {props.renderSidenav({
           isOpen: isActive,
-          onMenuClose: () => setIsActive(false),
-          close: () => setIsActive(false),
+          onMenuClose: closeMenu,
+          close: closeMenu,
           navLinks: isMobileSidenavActive
             ? props.navLinks?.map((link: any) => (
                 <SideNavLink aria-label={`Link for ${link.name}`} href={link.url} key={link.url}>
@@ -348,26 +371,32 @@ function SidenavMenu(props: any) {
             : undefined,
         })}
       </div>
-    </FocusTrap>
-  ) : isMobileSidenavActive ? (
-    <FocusTrap active={isActive} focusTrapOptions={{ allowOutsideClick: true }}>
-      <div ref={ref}>
-        <SideNav
-          isChildOfHeader
-          aria-label="Side navigation"
-          expanded={isActive}
-          isPersistent={false}
-          onOverlayClick={() => setIsActive(false)}
-        >
-          <SideNavItems>
-            {props.navLinks?.map((link: any) => (
-              <SideNavLink aria-label={`Link for ${link.name}`} href={link.url} key={link.url}>
-                {link.name}
-              </SideNavLink>
-            ))}
-          </SideNavItems>
-        </SideNav>
-      </div>
-    </FocusTrap>
-  ) : null;
+    );
+  }
+
+  if (isMobileSidenavActive) {
+    return (
+      <FocusTrap active={isActive} focusTrapOptions={{ allowOutsideClick: true }}>
+        <div ref={ref} style={{ display: isActive ? "block" : "none" }}>
+          <SideNav
+            isChildOfHeader
+            aria-label="Side navigation"
+            expanded={isActive}
+            isPersistent={false}
+            onOverlayClick={closeMenu}
+          >
+            <SideNavItems>
+              {props.navLinks?.map((link: any) => (
+                <SideNavLink aria-label={`Link for ${link.name}`} href={link.url} key={link.url}>
+                  {link.name}
+                </SideNavLink>
+              ))}
+            </SideNavItems>
+          </SideNav>
+        </div>
+      </FocusTrap>
+    );
+  }
+
+  return null;
 }

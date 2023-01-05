@@ -49,7 +49,7 @@ describe("Platform Notifications Container", () => {
           wsUrl: "ws://localhost:8081/ws",
           httpUrl: "http://localhost:8000/notifications",
         }}
-        isNotificationActive={false}
+        isActive={false}
         setHasNewNotifications={action("setHasNewNotifications")}
         initialNotifications={notificationsObj.notifications}
       />
