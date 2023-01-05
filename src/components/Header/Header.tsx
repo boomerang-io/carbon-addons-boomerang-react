@@ -202,7 +202,7 @@ function RequestsMenu(props: any) {
         aria-expanded={isActive}
         aria-haspopup="menu"
         aria-label="Requests menu"
-        id={FocusableElementIdMap.Profile}
+        id={FocusableElementIdMap.Requests}
         tooltipAlignment="end"
         onClick={() => setIsActive(!isActive)}
       >
