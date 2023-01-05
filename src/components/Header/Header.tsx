@@ -312,7 +312,13 @@ function RightPanelMenu(props: any) {
         {props.icon}
       </button>
       <FocusTrap active={isActive} focusTrapOptions={{ allowOutsideClick: true }}>
-        <HeaderPanel id="shell-right-panel" role="dialog" aria-label="Right panel" expanded={isActive}>
+        <HeaderPanel
+          id="shell-right-panel"
+          role="dialog"
+          aria-label="Right panel"
+          expanded={isActive}
+          style={{ background: "var(--cds-background)" }}
+        >
           {props.component}
         </HeaderPanel>
       </FocusTrap>
