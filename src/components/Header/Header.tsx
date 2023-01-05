@@ -1,14 +1,14 @@
 import React from "react";
 import { Close, Collaborate, Help, UserAvatar, Notification, NotificationNew, Switcher } from "@carbon/react/icons";
-import { prefix } from "../../internal/settings";
-import PlatformNotificationsContainer from "../PlatformNotifications";
-import NotificationsContainer from "../Notifications/NotificationsContainer";
-import CustomHeaderMenu from "../HeaderMenu";
-import UserRequests from "../UserRequests";
-import HeaderAppSwitcher from "./HeaderAppSwitcher";
 import FocusTrap from "focus-trap-react";
+import CustomHeaderMenu from "../HeaderMenu";
+import HeaderAppSwitcher from "./HeaderAppSwitcher";
+import NotificationsContainer from "../Notifications/NotificationsContainer";
+import PlatformNotificationsContainer from "../PlatformNotifications";
+import UserRequests from "../UserRequests";
 import useShellMenu from "../../hooks/useShellMenu";
 import useWindowSize from "../../hooks/useWindowSize";
+import { prefix } from "../../internal/settings";
 
 import {
   Header,
