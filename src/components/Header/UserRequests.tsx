@@ -5,15 +5,15 @@ import { prefix } from "../../internal/settings";
 
 type Props = {
   baseEnvUrl?: string;
-  requestSummary?: {
+  summary?: {
     requireUserAction: number;
     submittedByUser: number;
   };
 };
 
 function UserRequests(props: Props) {
-  const { baseEnvUrl, requestSummary = { requireUserAction: 0, submittedByUser: 0 } } = props;
-  const { requireUserAction, submittedByUser } = requestSummary;
+  const { baseEnvUrl, summary = { requireUserAction: 0, submittedByUser: 0 } } = props;
+  const { requireUserAction, submittedByUser } = summary;
   const existOwnedRequests = requireUserAction > 0;
   const existUserRequests = submittedByUser > 0;
 

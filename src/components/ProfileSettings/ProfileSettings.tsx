@@ -132,7 +132,7 @@ function ProfileSettings({ baseServiceUrl, src, userName, isOpen, closeModal }: 
 
   return (
     <FocusTrap active={isOpen} focusTrapOptions={{ allowOutsideClick: true }}>
-      <ComposedModal open={isOpen} className={`${prefix}--bmrg-profile-settings-container`} onClose={closeModal}>
+      <ComposedModal open={isOpen} className={`${prefix}--bmrg-profile-settings-container ${prefix}--bmrg-header-modal`} onClose={closeModal}>
         <ModalHeader closeModal={closeModal} title={`User profile - ${userName}`} />
         <ModalBody style={{ maxHeight: "31.5rem" }}>
           <p className={`${prefix}--bmrg-profile-settings__title`}>

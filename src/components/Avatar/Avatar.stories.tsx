@@ -36,7 +36,7 @@ export default {
   },
 };
 
-export const Default = (args: any) => <Avatar {...args} />;
+export const Default = (args) => <Avatar {...args} />;
 
 Default.args = {
   size: "large",

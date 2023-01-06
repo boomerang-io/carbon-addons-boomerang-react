@@ -1,13 +1,14 @@
 import React from "react";
 import { TextArea } from "@carbon/react";
 import TooltipHover from "../TooltipHover";
+import type { TooltipHoverProps } from  "../TooltipHover";
 import { Information } from "@carbon/react/icons";
 import { prefix } from "../../internal/settings";
 
 type Props = React.ComponentPropsWithRef<"input"> & {
   tooltipClassName?: string;
   tooltipContent?: React.ReactNode;
-  tooltipProps?: any;
+  tooltipProps?: TooltipHoverProps;
   cols?: number;
   defaultValue?: string | number;
   enableCounter?: boolean;

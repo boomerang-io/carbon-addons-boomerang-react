@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Checkbox } from "@carbon/react";
 import TooltipHover from "../TooltipHover";
+import type { TooltipHoverProps } from  "../TooltipHover";
 import { Information } from "@carbon/react/icons";
 import { prefix } from "../../internal/settings";
 
@@ -17,7 +18,7 @@ type Props = {
   selectedItems?: any[];
   tooltipClassName?: string;
   tooltipContent?: React.ReactNode;
-  tooltipProps?: any;
+  tooltipProps?: TooltipHoverProps;
 };
 
 function CheckboxListComponent({

@@ -6,7 +6,7 @@ export default {
   component: PlatformBanner,
 };
 
-export const Default = (args: any) => {
+export const Default = (args) => {
   return <PlatformBanner {...args} />;
 };
 

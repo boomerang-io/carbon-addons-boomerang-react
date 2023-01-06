@@ -1,4 +1,3 @@
-
 import React from "react";
 import { action } from "@storybook/addon-actions";
 import MultiSelect from "./ComboBoxMultiSelect";
@@ -13,7 +12,7 @@ export default {
       },
     },
   },
-  decorators: [(story: any) => <div style={{ maxWidth: "25rem", padding: "1rem" }}>{story()}</div>],
+  decorators: [(story) => <div style={{ maxWidth: "25rem", padding: "1rem" }}>{story()}</div>],
 };
 
 const animals = [
@@ -33,13 +32,13 @@ const animals = [
 
 const initialDefaultAnimals = "panda,dog";
 
-export const Default = (args: any) => {
+export const Default = (args) => {
   return (
     <MultiSelect
       id="multi-select"
       initialSelectedItems={initialDefaultAnimals}
       items={animals}
-      itemToString={(item: any) => item.label}
+      itemToString={(item) => item.label}
       onChange={action("Multiselect changed")}
       titleText={"Select some animals"}
       placeholder={"Select an animal"}
@@ -48,12 +47,12 @@ export const Default = (args: any) => {
   );
 };
 
-export const NoSelectedItems = (args: any) => {
+export const NoSelectedItems = (args) => {
   return (
     <MultiSelect
       id="multi-select"
       items={animals}
-      itemToString={(item: any) => item.label}
+      itemToString={(item: { label: string}) => item.label}
       onChange={action("Multiselect changed")}
       titleText={"Select some animals"}
       placeholder={"Select an animal"}
@@ -66,7 +65,7 @@ NoSelectedItems.story = {
   name: "No selected items",
 };
 
-export const KitchenSink = (args: any) => {
+export const KitchenSink = (args) => {
   return (
     <MultiSelect
       disableClear

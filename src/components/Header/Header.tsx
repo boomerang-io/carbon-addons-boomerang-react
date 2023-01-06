@@ -1,6 +1,6 @@
 import React from "react";
 import {
-  Header,
+  Header as CarbonHeader,
   HeaderGlobalBar,
   HeaderMenuButton,
   HeaderName,
@@ -87,7 +87,7 @@ function isType(
   return typeof elem === type;
 }
 
-function MainHeader(props: Props) {
+export default function Header(props: Props) {
   const [isSideNavActive, setIsSideNavActive] = React.useState(false);
 
   const {
@@ -103,9 +103,10 @@ function MainHeader(props: Props) {
 
   return (
     <Theme theme="g100">
-      <Header className={className}>
+      <CarbonHeader aria-label="App navigation header" className={className}>
         {skipToContentProps ? <SkipToContent {...skipToContentProps} /> : null}
         <HeaderMenuButton
+          aria-label="Sidenav menu"
           id={FocusableElementIdMap.SideNav}
           isCollapsible={isType(props.leftPanel, "function")}
           isActive={isSideNavActive}
@@ -157,12 +158,10 @@ function MainHeader(props: Props) {
           <RightPanelMenu enabled={Boolean(rightPanel && Object.keys(rightPanel).length)} {...rightPanel} />
         </HeaderGlobalBar>
         <NotificationsContainer enableMultiContainer containerId={`${prefix}--bmrg-header-notifications`} />
-      </Header>
+      </CarbonHeader>
     </Theme>
   );
 }
-
-export default MainHeader;
 
 function NotificationsMenu(props: { enabled: boolean; baseEnvUrl?: string; config: Props["notificationsConfig"] }) {
   const { isActive, toggleActive, ref } = useHeaderMenu<HTMLDivElement>(FocusableElementIdMap.Notifcations);
@@ -201,7 +200,7 @@ function NotificationsMenu(props: { enabled: boolean; baseEnvUrl?: string; confi
   );
 }
 
-function RequestsMenu(props: any) {
+function RequestsMenu(props: { baseEnvUrl?: string; enabled: boolean; summary: Props["requestSummary"] }) {
   const { isActive, toggleActive, ref } = useHeaderMenu<HTMLDivElement>(FocusableElementIdMap.Requests);
 
   if (!props.enabled) {
@@ -223,7 +222,7 @@ function RequestsMenu(props: any) {
       </button>
       {isActive ? (
         <HeaderMenu id="header-requests-menu">
-          <UserRequests baseEnvUrl={props.baseEnvUrl} requestSummary={props.requestSummary} />
+          <UserRequests baseEnvUrl={props.baseEnvUrl} summary={props.summary} />
         </HeaderMenu>
       ) : null}
     </div>
@@ -268,7 +267,7 @@ function ProfileMenu(props: { enabled: boolean; menuItems?: Props["profileMenuIt
         aria-controls="header-profile-menu"
         aria-expanded={isActive}
         aria-haspopup="menu"
-        aria-label="User menu"
+        aria-label="Profile menu"
         className={headerButtonClassNames}
         id={FocusableElementIdMap.Profile}
         onClick={toggleActive}
@@ -293,7 +292,7 @@ function AppSwitcherMenu(props: { enabled?: boolean; baseEnvUrl?: string; baseSe
         aria-controls={MenuElementIdMap.Switcher}
         aria-expanded={isActive}
         aria-haspopup="menu"
-        aria-label="Team Switcher"
+        aria-label="App switcher"
         className={headerButtonClassNames}
         id={FocusableElementIdMap.Switcher}
         onClick={toggleActive}

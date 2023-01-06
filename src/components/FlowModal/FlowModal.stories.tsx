@@ -15,12 +15,12 @@ export default {
   },
 };
 
-const Component1 = (props: any) => (
+const Component1 = (props) => (
   <FlowModalForm title="Testing some text here">
     <ModalBody>
       <TextInput
         id="testing"
-        onChange={(e: any) => props.saveValues({ text: e.target.value })}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => props.saveValues({ text: e.target.value })}
         placeholder="The second component will know what you write here"
       />
       <Tooltip triggerId="test-tooltip" direction="top" tabIndex={0} triggerText="">
@@ -36,7 +36,7 @@ const Component1 = (props: any) => (
   </FlowModalForm>
 );
 
-const Component2 = (props: any) => (
+const Component2 = (props) => (
   <FlowModalForm element="div" title="Another title here">
     <ModalBody>
       <p>Value wrote in previous component: {props.formData.text}</p>

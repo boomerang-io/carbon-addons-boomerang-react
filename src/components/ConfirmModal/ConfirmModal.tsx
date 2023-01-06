@@ -83,7 +83,7 @@ function ConfirmModal(props: Props) {
         closeTimeoutMS={240}
         shouldCloseOnOverlayClick
         selectorPrimaryFocus={selectorPrimaryFocus}
-        {...modalProps}
+        {...headerModalProps}
       >
         <ModalHeader closeModal={closeModal} iconDescription="Close" label={label} title={title} />
         <div id="confirm-modal-container">

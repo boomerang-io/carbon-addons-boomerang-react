@@ -8,7 +8,7 @@ import FeatureNavTabs from "./FeatureNavTabs";
 
 const history = createMemoryHistory();
 
-test("render feature nav tabs", () => {
+test("FeatureNavTabs - render correctly ", () => {
   const { queryByText } = render(
     <Router history={history}>
       <FeatureNavTabs ariaLabel="Cute animals">
@@ -17,6 +17,6 @@ test("render feature nav tabs", () => {
       </FeatureNavTabs>
     </Router>
   );
-  (expect(queryByText(/Polar Bear/i)) as any).toBeInTheDocument();
-  (expect(queryByText(/Bee/i)) as any).toBeInTheDocument();
+  expect(queryByText(/Polar Bear/i)).toBeInTheDocument();
+  expect(queryByText(/Bee/i)).toBeInTheDocument();
 });

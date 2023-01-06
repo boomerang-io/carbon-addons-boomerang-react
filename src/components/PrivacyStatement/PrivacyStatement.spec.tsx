@@ -7,12 +7,13 @@ import PrivacyStatement from "./PrivacyStatement";
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
 import { PRIVACY_DATA } from "./constants";
+import { headerModalProps } from "../../internal/helpers";
 
 const queryClient = new QueryClient({
   defaultOptions: { queries: { refetchOnWindowFocus: false } },
 });
 
-const baseServiceUrl = "http://boomerang.com";
+const baseServiceUrl = "https://ibm.com";
 const { reload } = window.location;
 
 beforeAll(() => {
@@ -26,7 +27,7 @@ afterAll(() => {
   window.location.reload = reload;
 });
 
-test("Privacy Statement error", async () => {
+test("Privacy Statement - error", async () => {
   /**
    * Simulate deleting account
    * -pulls in mocked out data
@@ -42,7 +43,7 @@ test("Privacy Statement error", async () => {
   mock.onPut(serviceUrl.resourceUserConsent({ baseServiceUrl })).networkError();
   const { getByText, getByRole, findByRole } = render(
     <QueryClientProvider client={queryClient}>
-      <PrivacyStatement baseServiceUrl={baseServiceUrl} />
+      <PrivacyStatement baseServiceUrl={baseServiceUrl} {...headerModalProps} />
     </QueryClientProvider>
   );
   const btn = getByRole("button", { name: /^Privacy Statement$/i });
@@ -52,11 +53,11 @@ test("Privacy Statement error", async () => {
   const confirmButton = getByText(/Delete my account/i);
   fireEvent.click(confirmButton);
   await waitFor(() =>
-    (expect(getByText(/Failed to receive deletion request. Please try again./i)) as any).toBeInTheDocument()
+    expect(getByText(/Failed to receive deletion request. Please try again./i)).toBeInTheDocument()
   );
 });
 
-test("Privacy Statement success", async () => {
+test("Privacy Statement - success", async () => {
   /**
    *
    */
@@ -66,7 +67,7 @@ test("Privacy Statement success", async () => {
 
   const { getByRole, findByRole } = render(
     <QueryClientProvider client={queryClient}>
-      <PrivacyStatement baseServiceUrl={baseServiceUrl} />
+      <PrivacyStatement baseServiceUrl={baseServiceUrl} {...headerModalProps} />
     </QueryClientProvider>
   );
 

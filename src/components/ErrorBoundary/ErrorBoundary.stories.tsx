@@ -17,10 +17,10 @@ export default {
       },
     },
   },
-  decorators: [(Story: any) => <Story />],
+  decorators: [(story) => <Story />],
 };
 
-export const Default = (args: any) => {
+export const Default = (args) => {
   return (
     <ErrorBoundary {...args}>
       <ThrowComponent />
@@ -28,7 +28,7 @@ export const Default = (args: any) => {
   );
 };
 
-export const _ErrorPageFull = (args: any) => {
+export const _ErrorPageFull = (args) => {
   return (
     <ErrorBoundary errorComponent={ErrorPageCore} {...args}>
       <ThrowComponent />
@@ -36,7 +36,7 @@ export const _ErrorPageFull = (args: any) => {
   );
 };
 
-export const _ErrorDragon = (args: any) => {
+export const _ErrorDragon = (args) => {
   return (
     <ErrorBoundary errorComponent={ErrorDragon} {...args}>
       <ThrowComponent />

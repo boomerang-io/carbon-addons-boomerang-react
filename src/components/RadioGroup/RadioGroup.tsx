@@ -1,6 +1,7 @@
 import React from "react";
 import { RadioButton, RadioButtonGroup } from "@carbon/react";
 import TooltipHover from "../TooltipHover";
+import type { TooltipHoverProps } from  "../TooltipHover";
 import { Information } from "@carbon/react/icons";
 import { prefix } from "../../internal/settings";
 
@@ -21,7 +22,7 @@ type Props = {
   radioButtonProps?: any;
   tooltipClassName?: string;
   tooltipContent?: React.ReactNode;
-  tooltipProps?: any;
+  tooltipProps?: TooltipHoverProps;
   value?: string;
   verticalWrapped?: boolean;
 };

@@ -1,6 +1,7 @@
 import React from "react";
 import cx from "classnames";
 import TooltipHover from "../TooltipHover";
+import type { TooltipHoverProps } from  "../TooltipHover";
 import { Information } from "@carbon/react/icons";
 import { prefix } from "../../internal/settings";
 import { ComboBox } from "@carbon/react";
@@ -14,7 +15,7 @@ type Props = {
   shouldFilterItem?: ((...args: any[]) => any) | boolean;
   tooltipClassName?: string;
   tooltipContent?: React.ReactNode;
-  tooltipProps?: any;
+  tooltipProps?: TooltipHoverProps;
   ariaLabel?: string;
   className?: string;
   direction?: "top" | "bottom";
@@ -25,8 +26,8 @@ type Props = {
   initialSelectedItem?: any | string | number;
   invalid?: boolean;
   invalidText?: React.ReactNode;
-  itemToElement?: (...args: any[]) => any;
-  itemToString?: (...args: any[]) => any;
+  itemToElement?: (...args: any[]) => React.ReactNode;
+  itemToString?: (...args: any[]) => string;
   items: any[];
   light?: boolean;
   name?: string;

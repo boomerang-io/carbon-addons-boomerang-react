@@ -15,11 +15,11 @@ export default {
   },
 };
 
-export const Default = (args: any) => {
+export const Default = (args) => {
   return <ErrorPage header={"Header"} title={"Title"} message={"Message"} graphic={<GraphicWrangler />} {...args} />;
 };
 
-export const MessageLink = (args: any) => {
+export const MessageLink = (args) => {
   return (
     <ErrorPage
       title={"Title"}

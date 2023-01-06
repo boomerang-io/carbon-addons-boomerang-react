@@ -24,7 +24,7 @@ const options2 = [
   { labelText: "Radio 4", value: "radio 4 value" },
 ];
 
-export const Default = (args: any) => {
+export const Default = (args) => {
   return (
     <RadioGroup
       id="test"
@@ -39,7 +39,7 @@ export const Default = (args: any) => {
   );
 };
 
-export const KitchenSink = (args: any) => {
+export const KitchenSink = (args) => {
   return (
     <RadioGroup
       id="test"

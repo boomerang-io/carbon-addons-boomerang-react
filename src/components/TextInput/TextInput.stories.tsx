@@ -12,7 +12,7 @@ export default {
       },
     },
   },
-  decorators: [(story: any) => <div style={{ maxWidth: "25rem", padding: "1rem" }}>{story()}</div>],
+  decorators: [(story) => <div style={{ maxWidth: "25rem", padding: "1rem" }}>{story()}</div>],
   argTypes: {
     tooltipContent: {
       control: "text",
@@ -20,7 +20,7 @@ export default {
   },
 };
 
-export const Default = (args: any) => {
+export const Default = (args) => {
   return (
     <TextInput
       id="default-text-input"
@@ -33,7 +33,7 @@ export const Default = (args: any) => {
   );
 };
 
-export const KitchenSink = (args: any) => {
+export const KitchenSink = (args) => {
   return (
     <div style={{ height: "5rem" }}>
       <TextInput

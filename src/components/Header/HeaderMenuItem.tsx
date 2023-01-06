@@ -41,7 +41,7 @@ function BmrgHeaderMenuItem(props: Props) {
     return (
       <HeaderMenuItem
         // eslint-disable-next-line no-script-url
-        href={"javascript:void(0)"}
+        href={undefined}
         onClick={onClick}
         role="button"
         {...rest}

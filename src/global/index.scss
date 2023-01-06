@@ -43,7 +43,7 @@ $use-theme-boomerang: false !default;
 @use '../components/FeatureNavTab/featureNavTab';
 @use '../components/FeatureSideNav/featureSideNav';
 @use '../components/FeatureSideNavLink/featureSideNavLink';
-@use '../components/GdprRedirectModal/gdprRedirectModal';
+@use '../components/PrivacyRedirect/privacyRedirect';
 @use '../components/Header/header';
 @use '../components/Header/headerMenu';
 @use '../components/Header/headerMenuItem';
@@ -77,14 +77,7 @@ $use-theme-boomerang: false !default;
 }
 
 // Styles for the UIShell from addons
-.#{$prefix}--bmrg-aboutPlatform-container,
-.#{$prefix}--bmrg-contact-us-container,
-.#{$prefix}--bmrg-feedback-container,
-.#{$prefix}--bmrg-privacy-statement-container,
-.#{$prefix}--bmrg-profile-settings-container,
-.#{$prefix}--bmrg-report-bug-container,
-.#{$prefix}--bmrg-signout-container,
-.#{$prefix}--bmrg-redirect-container {
+.#{$prefix}--bmrg-header-modal {
   .#{$prefix}--modal-container {
     background-color: shell.$bmrg-header-modal-background;
     border-radius: var(--cds-border-radius, 0);

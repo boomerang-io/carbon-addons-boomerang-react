@@ -22,13 +22,13 @@ const props = {
   tooltipContent: "tooltip content",
 };
 
-test("render label, helperText and tooltip", () => {
+test("ComboBox - render label, helperText and tooltip", () => {
   const { queryByText } = render(<ComboBox {...props} />);
-  (expect(queryByText(/helper text/i)) as any).toBeInTheDocument();
-  (expect(queryByText(/label text/i)) as any).toBeInTheDocument();
+  expect(queryByText(/helper text/i)).toBeInTheDocument();
+  expect(queryByText(/label text/i)).toBeInTheDocument();
 });
 
-test("select and remove items", () => {
+test("ComboBox - select and remove items", () => {
   const { getByPlaceholderText, getByText, getByLabelText } = render(<ComboBox {...props} />);
   const input = getByPlaceholderText(/select an animal/i);
   expect((input as any).value).toBe("");

@@ -7,7 +7,7 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: "Header menu item that displays modal with key metadata about the platform.",
+        component: "Header modal with key metadata about the platform.",
       },
     },
   },
@@ -18,11 +18,11 @@ export default {
   },
 };
 
-export const Default = (args: any) => {
+export const Default = (args) => {
   return <AboutPlatform {...args} />;
 };
 
-export const Flow = (args: any) => {
+export const Flow = (args) => {
   return <AboutPlatform {...args} />;
 };
 

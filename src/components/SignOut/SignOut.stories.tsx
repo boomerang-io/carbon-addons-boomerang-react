@@ -1,11 +1,12 @@
 import React from "react";
-import Component from "./SignOut";
+import SignOut from "./SignOut";
+import { headerModalProps } from "../../internal/helpers";
 
 export default {
   title: "Platform/SignOut",
-  component: Component,
+  component: SignOut,
 };
 
-export const SignOut = (args: any) => {
-  return <Component {...args} />;
+export const Default = () => {
+  return <SignOut signOutLink="https://ibm.com" {...headerModalProps} />;
 };

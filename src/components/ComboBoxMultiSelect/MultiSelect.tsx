@@ -47,7 +47,7 @@ export type MultiSelectComboBoxProps = {
   initialSelectedItems?: any[];
   selectedItems?: any[];
   items?: any[];
-  itemToString?: (...args: any[]) => any;
+  itemToString?: (...args: any[]) => string;
   itemToElement?: React.FC;
   titleText?: any;
   helperText?: string;

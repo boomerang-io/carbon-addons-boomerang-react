@@ -16,7 +16,7 @@ export default {
       },
     },
   },
-  decorators: [(story: any) => <div style={{ maxWidth: "30rem", padding: "2rem" }}>{story()}</div>],
+  decorators: [(story) => <div style={{ maxWidth: "30rem", padding: "2rem" }}>{story()}</div>],
 };
 
 const additionalSchema = Yup.object().shape({
@@ -518,7 +518,7 @@ const governingSelectsInputs = [
   },
 ];
 
-export const Default = (args: any) => {
+export const Default = (args) => {
   return (
     <DynamicFormik
       id="dynamic-formik-form-id"
@@ -549,7 +549,7 @@ export const Default = (args: any) => {
   );
 };
 
-export const AllowPropertySyntax = (args: any) => {
+export const AllowPropertySyntax = (args) => {
   return (
     <DynamicFormik
       allowCustomPropertySyntax
@@ -584,7 +584,7 @@ AllowPropertySyntax.story = {
   name: "allow property syntax",
 };
 
-export const AllowPropertySyntaxCustomPatternB = (args: any) => {
+export const AllowPropertySyntaxCustomPatternB = (args) => {
   return (
     <DynamicFormik
       allowCustomPropertySyntax
@@ -620,7 +620,7 @@ AllowPropertySyntaxCustomPatternB.story = {
   name: "allow property syntax, custom pattern ${b:}",
 };
 
-export const GoverningSelects = (args: any) => {
+export const GoverningSelects = (args) => {
   return (
     <DynamicFormik
       id="dynamic-formik-form-id"

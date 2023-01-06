@@ -16,10 +16,10 @@ export default {
       },
     },
   },
-  decorators: [(story: any) => <Router history={createMemoryHistory({ initialEntries: ["/"] })}>{story()}</Router>],
+  decorators: [(story) => <Router history={createMemoryHistory({ initialEntries: ["/"] })}>{story()}</Router>],
 };
 
-export const Default = (args: any) => {
+export const Default = (args) => {
   return (
     <Tabs contained ariaLabel="Team navigation" {...args}>
       <Tab disabled label="Services" to="/services" />
@@ -31,7 +31,7 @@ export const Default = (args: any) => {
   );
 };
 
-export const Loading = (args: any) => {
+export const Loading = (args) => {
   return (
     <Tabs contained ariaLabel="Team navigation" {...args}>
       <Tab label="Services" to="/services" isLoading />

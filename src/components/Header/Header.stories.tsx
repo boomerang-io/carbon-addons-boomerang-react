@@ -55,15 +55,15 @@ export const Default = () => (
         wsUrl: mockSocketUrl,
       }}
       supportMenuItems={[
-        <HeaderMenuItem key="Tutorial" text="Tutorial" type="link" href="javascript:void(0)" />,
-        <HeaderMenuItem key="FAQ + Contacts" text="FAQ + Contacts" type="link" href="javascript:void(0)" />,
-        <HeaderMenuItem key="Send Feedback" text="Send Feedback" type="link" href="javascript:void(0)" />,
-        <HeaderMenuItem key="Report a bug" text="Report a bug" type="link" href="javascript:void(0)" />,
+        <HeaderMenuItem key="Tutorial" text="Tutorial" type="link" kind="app" href="javascript:void(0)" />,
+        <HeaderMenuItem key="FAQ + Contacts" text="FAQ + Contacts" type="link" kind="app" href="javascript:void(0)" />,
+        <HeaderMenuItem key="Send Feedback" text="Send Feedback" type="link" kind="app" href="javascript:void(0)" />,
+        <HeaderMenuItem key="Report a bug" text="Report a bug" type="link" kind="app" href="javascript:void(0)" />,
       ]}
       profileMenuItems={[
-        <HeaderMenuItem key="About the Platform" text="About the Platform" type="link" href="javascript:void(0)" />,
-        <HeaderMenuItem key="GDPR agreement" text="GDPR agreement" type="link" href="javascript:void(0)" />,
-        <HeaderMenuItem key="Sign out" text="Sign out" type="link" href="javascript:void(0)" />,
+        <HeaderMenuItem key="About the Platform" text="About the Platform" type="link" kind="app" href="javascript:void(0)" />,
+        <HeaderMenuItem key="GDPR agreement" text="GDPR agreement" type="link" kind="app" href="javascript:void(0)" />,
+        <HeaderMenuItem key="Sign out" text="Sign out" type="link" kind="app" href="javascript:void(0)" />,
       ]}
     />
   </div>
@@ -102,15 +102,15 @@ export const WithIntegratedSidenav = () => (
         wsUrl: mockSocketUrl,
       }}
       supportMenuItems={[
-        <HeaderMenuItem key="0" text="Tutorial" type="link" href="javascript:void(0)" />,
-        <HeaderMenuItem key="1" text="FAQ + Contacts" type="link" href="javascript:void(0)" />,
-        <HeaderMenuItem key="2" text="Send Feedback" type="link" href="javascript:void(0)" />,
-        <HeaderMenuItem key="3" text="Report a bug" type="link" href="javascript:void(0)" />,
+        <HeaderMenuItem key="0" text="Tutorial" type="link" kind="app" href="javascript:void(0)" />,
+        <HeaderMenuItem key="1" text="FAQ + Contacts" type="link" kind="app" href="javascript:void(0)" />,
+        <HeaderMenuItem key="2" text="Send Feedback" type="link" kind="app" href="javascript:void(0)" />,
+        <HeaderMenuItem key="3" text="Report a bug" type="link" kind="app" href="javascript:void(0)" />,
       ]}
       profileMenuItems={[
-        <HeaderMenuItem key="0" text="About the Platform" type="link" href="javascript:void(0)" />,
-        <HeaderMenuItem key="1" text="GDPR agreement" type="link" href="javascript:void(0)" />,
-        <HeaderMenuItem key="2" text="Sign out" type="link" href="javascript:void(0)" />,
+        <HeaderMenuItem key="0" text="About the Platform" type="link" kind="app" href="javascript:void(0)" />,
+        <HeaderMenuItem key="1" text="GDPR agreement" type="link" kind="app"href="javascript:void(0)" />,
+        <HeaderMenuItem key="2" text="Sign out" type="link" kind="app" href="javascript:void(0)" />,
       ]}
       leftPanel={({ isOpen, close }) => (
         <SideNav isChildOfHeader aria-label="sidenav" expanded={isOpen} isPersistent={false} onOverlayClick={close}>

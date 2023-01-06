@@ -4,10 +4,10 @@ import PlatformNotificationsContainer from "./index";
 export default {
   title: "Platform/PlatformNotifications",
   component: PlatformNotificationsContainer,
-  decorators: [(story: any) => <div style={{ position: "absolute", left: "20rem" }}>{story()}</div>],
+  decorators: [(story) => <div style={{ position: "absolute", left: "20rem" }}>{story()}</div>],
 };
 
-export const Default = (args: any) => {
+export const Default = (args) => {
   return <PlatformNotificationsContainer {...args} />;
 };
 
@@ -29,7 +29,7 @@ Default.args = {
     },
   ],
   config: {
-    wsUrl: "http://localhost:8080/ws",
+    wsUrl: "ws://localhost:8081/ws",
   },
-  isNotificationActive: true,
+  isActive: true,
 };

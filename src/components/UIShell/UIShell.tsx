@@ -7,7 +7,7 @@ import { ProfileSettingsMenuItem } from "../ProfileSettings";
 import { AboutPlatformMenuItem } from "../AboutPlatform";
 import { FeedbackMenuItem } from "../Feedback";
 import { PrivacyStatementMenuItem } from "../PrivacyStatement";
-import GdprRedirectModal from "../GdprRedirectModal";
+import PrivacyRedirectModal from "../PrivacyRedirect";
 import { queryClient } from "../../config/servicesConfig";
 import { User } from "../../types";
 import { SignOutMenuItem } from "../SignOut";
@@ -50,7 +50,7 @@ type Props = {
     };
     platformMessage?: any;
   };
-  renderGdprRedirect?: boolean;
+  renderPrivacyRedirect?: boolean;
   renderPrivacyStatement?: boolean;
   rightPanel?: { icon?: React.ReactNode; component: React.ReactNode };
   leftPanel?: (args: { close: () => void; isOpen: boolean; navLinks?: React.ReactNode[] }) => React.ReactNode;
@@ -71,7 +71,7 @@ function UIShell({
   productName,
   profileMenuItems = [],
   supportMenuItems = [],
-  renderGdprRedirect = true,
+  renderPrivacyRedirect = true,
   renderPrivacyStatement = true,
   rightPanel,
   skipToContentProps,
@@ -112,13 +112,13 @@ function UIShell({
   const isUserEnabled = Boolean(user?.id);
 
   /**
-   * Checking for conditions when we explicitly set "renderGdprRedirect" to false (it defaults to true) OR
+   * Checking for conditions when we explicitly set "renderPrivacyRedirect" to false (it defaults to true) OR
    * it's disabled overall for the platform. This lets us toggle the UIShell consent redirect per app as needed
    * e.g. disabled in Launchpad, but have it enabled for rest of the platform AND also support
    * having it disabled in a "standalone" mode via the consent.enable feature flag, i.e. data driven via the service
    */
-  const isGdprRedirectDisabled = renderGdprRedirect === false || features?.["consent.enabled"] === false;
-  const isGdprModalEnabled = isGdprRedirectDisabled === false && user?.hasConsented === false;
+  const isPrivacyRedirectDisabled = renderPrivacyRedirect === false || features?.["consent.enabled"] === false;
+  const isPrivacyModalRendered = isPrivacyRedirectDisabled === false && user?.hasConsented === false;
 
   /**
    * Also enable/disable privacy statement via the consent.enabled feature flag
@@ -128,8 +128,6 @@ function UIShell({
   return (
     <QueryClientProvider client={queryClient}>
       <Header
-        productName={names.productName}
-        prefixName={names.platformName}
         baseEnvUrl={platform.baseEnvUrl}
         baseServiceUrl={platform.baseServicesUrl}
         enableAppSwitcher={isAppSwitcherEnabled}
@@ -137,55 +135,29 @@ function UIShell({
         leftPanel={leftPanel}
         navLinks={navigation}
         platformMessage={platformMessage}
+        prefixName={names.platformName}
+        productName={names.productName}
         rightPanel={rightPanel}
         requestSummary={user?.requestSummary}
         skipToContentProps={skipToContentProps}
         notificationsConfig={{
           wsUrl: `${platform.baseServicesUrl}/notifications/ws`.replace("https://", "wss://"),
         }}
-        supportMenuItems={[
-          isSupportEnabled && (
-            <HeaderMenuItem
-              href={`${platform.baseEnvUrl}/support/center`}
-              icon={<HelpDesk />}
-              type="link"
-              text="Support Center"
-              kind="internal"
-            />
-          ),
-          isCommunityEnabled && (
-            <HeaderMenuItem
-              href={platform?.communityUrl as string}
-              icon={<Forum />}
-              type="link"
-              text="Community"
-              kind="external"
-            />
-          ),
-          isFeedbackEnabled && (
-            <FeedbackMenuItem
-              key="Feedback"
-              platformName={platform?.platformName}
-              platformOrganization={platform?.platformOrganization}
-              sendIdeasUrl={sendIdeasUrl}
-            />
-          ),
-          ...supportMenuItems,
-        ].filter(Boolean)}
         profileMenuItems={[
           isUserEnabled && (
             <ProfileSettingsMenuItem
+              key="profile-settings"
               baseServiceUrl={platform.baseServicesUrl}
-              key="Avatar"
               src={`${platform.baseServicesUrl}/users/image/${user?.email}`}
               userName={user?.name}
             />
           ),
           isAboutPlatformEnabled && (
-            <AboutPlatformMenuItem key="About Platform" name={platform.name} version={platform.version} />
+            <AboutPlatformMenuItem key="about-platform" name={platform.name} version={platform.version} />
           ),
           isSendMailEnabled && (
             <HeaderMenuItem
+              key="email-preferences"
               href={`${platform.baseEnvUrl}/launchpad/email-preferences`}
               type="link"
               icon={<Email />}
@@ -195,7 +167,7 @@ function UIShell({
           ),
           !isPrivacyStatementDisabled && (
             <PrivacyStatementMenuItem
-              key="Privacy Statement"
+              key="privacy-statement"
               baseServiceUrl={platform.baseServicesUrl}
               platformEmail={platform?.platformEmail}
             />
@@ -203,13 +175,44 @@ function UIShell({
           ...profileMenuItems,
           isSignOutEnabled && <SignOutMenuItem key="Sign Out" signOutLink={platform.signOutUrl as string} />,
         ].filter(Boolean)}
+        supportMenuItems={[
+          isSupportEnabled && (
+            <HeaderMenuItem
+              key="support-center"
+              href={`${platform.baseEnvUrl}/support/center`}
+              icon={<HelpDesk />}
+              type="link"
+              text="Support Center"
+              kind="internal"
+            />
+          ),
+          isCommunityEnabled && (
+            <HeaderMenuItem
+              key="community"
+              href={platform?.communityUrl as string}
+              icon={<Forum />}
+              type="link"
+              text="Community"
+              kind="external"
+            />
+          ),
+          isFeedbackEnabled && (
+            <FeedbackMenuItem
+              key="feedback"
+              platformName={platform?.platformName}
+              platformOrganization={platform?.platformOrganization}
+              sendIdeasUrl={sendIdeasUrl}
+            />
+          ),
+          ...supportMenuItems,
+        ].filter(Boolean)}
       />
-      {isGdprModalEnabled ? (
-        <GdprRedirectModal
+      {isPrivacyModalRendered ? (
+        <PrivacyRedirectModal
           isOpen
           baseEnvUrl={platform.baseEnvUrl as string}
-          user={user}
           platformName={platform?.name}
+          user={user}
         />
       ) : null}
     </QueryClientProvider>

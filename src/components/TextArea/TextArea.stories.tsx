@@ -12,10 +12,10 @@ export default {
       },
     },
   },
-  decorators: [(story: any) => <div style={{ maxWidth: "25rem", padding: "1rem" }}>{story()}</div>],
+  decorators: [(story) => <div style={{ maxWidth: "25rem", padding: "1rem" }}>{story()}</div>],
 };
 
-const ExternallyControlledTextArea = (args: any) => {
+const ExternallyControlledTextArea = (args) => {
   const [value, setValue] = React.useState("");
 
   return (
@@ -29,7 +29,7 @@ const ExternallyControlledTextArea = (args: any) => {
   );
 };
 
-export const Default = (args: any) => {
+export const Default = (args) => {
   return (
     <TextArea
       id="default-text-area"
@@ -41,7 +41,7 @@ export const Default = (args: any) => {
   );
 };
 
-export const MaxInputLength = (args: any) => {
+export const MaxInputLength = (args) => {
   return (
     <ExternallyControlledTextArea
       id="max-length-label-text-area"
@@ -54,7 +54,7 @@ export const MaxInputLength = (args: any) => {
   );
 };
 
-export const KitchenSink = (args: any) => {
+export const KitchenSink = (args) => {
   return (
     <TextArea
       id="tooltip-label-text-area"

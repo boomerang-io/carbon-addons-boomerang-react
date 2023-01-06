@@ -26,7 +26,7 @@ type Props = {
 function AboutPlatform({ closeModal, isOpen = false, version = "", name, isFlowApp }: Props) {
   return (
     <FocusTrap active={isOpen} focusTrapOptions={{ allowOutsideClick: true }}>
-      <ComposedModal open={isOpen} className={`${prefix}--bmrg-aboutPlatform-container`} onClose={closeModal}>
+      <ComposedModal open={isOpen} className={`${prefix}--bmrg-aboutPlatform-container ${prefix}--bmrg-header-modal`} onClose={closeModal}>
         <ModalHeader
           label={`${name} ${" "} | ${" "} Version ${version}`}
           title="About the Platform"

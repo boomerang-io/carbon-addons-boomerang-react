@@ -2,6 +2,7 @@ import React from "react";
 import cx from "classnames";
 import { Toggle } from "@carbon/react";
 import TooltipHover from "../TooltipHover";
+import type { TooltipHoverProps } from  "../TooltipHover";
 import { Information } from "@carbon/react/icons";
 import { prefix } from "../../internal/settings";
 
@@ -12,7 +13,7 @@ type Props = {
   reversed?: boolean;
   tooltipClassName?: string;
   tooltipContent?: React.ReactNode;
-  tooltipProps?: any;
+  tooltipProps?: TooltipHoverProps;
   className?: string;
   defaultToggled?: boolean;
   disabled?: boolean;

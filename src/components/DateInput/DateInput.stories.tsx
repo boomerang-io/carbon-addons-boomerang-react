@@ -15,7 +15,7 @@ export default {
   },
 };
 
-export const Default = (args: any) => {
+export const Default = (args) => {
   return (
     <DateInput
       id="default-date-input"
@@ -31,7 +31,7 @@ export const Default = (args: any) => {
   );
 };
 
-export const ReadOnly = (args: any) => {
+export const ReadOnly = (args) => {
   return (
     <DateInput
       id="read-only-date-input"
@@ -49,7 +49,7 @@ export const ReadOnly = (args: any) => {
   );
 };
 
-export const Range = (args: any) => {
+export const Range = (args) => {
   return (
     <div style={{ height: "5rem" }}>
       <DateInput
@@ -71,7 +71,7 @@ export const Range = (args: any) => {
   );
 };
 
-export const KitchenSink = (args: any) => {
+export const KitchenSink = (args) => {
   return (
     <div style={{ height: "5rem", width: "20rem" }}>
       <DateInput

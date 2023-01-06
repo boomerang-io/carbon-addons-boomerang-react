@@ -12,11 +12,11 @@ const props = {
   to: "/test",
 };
 
-test("render feature nav tab", () => {
+test("FeatureNavTab - render correctly", () => {
   const { queryByText } = render(
     <Router history={history}>
       <FeatureNavTab {...props} />
     </Router>
   );
-  (expect(queryByText(/Red Panda/i)) as any).toBeInTheDocument();
+  expect(queryByText(/Red Panda/i)).toBeInTheDocument();
 });

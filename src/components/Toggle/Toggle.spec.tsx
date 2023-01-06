@@ -16,6 +16,6 @@ const props = {
 
 test("render label, helperText and tooltip", () => {
   const { queryByText } = render(<Toggle {...props} />);
-  (expect(queryByText(/helper text/i)) as any).toBeInTheDocument();
-  (expect(queryByText(/label text/i)) as any).toBeInTheDocument();
+  expect(queryByText(/helper text/i)).toBeInTheDocument();
+  expect(queryByText(/label text/i)).toBeInTheDocument();
 });

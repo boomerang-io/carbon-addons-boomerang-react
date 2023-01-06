@@ -15,10 +15,10 @@ export default {
   },
 };
 
-export const Default = (args: any) => {
+export const Default = (args) => {
   return <ErrorFullPage statusUrl={statusUrl} {...args} />;
 };
 
-export const Boomerang = (args: any) => {
+export const Boomerang = (args) => {
   return <ErrorFullPage theme="boomerang" statusUrl={statusUrl} {...args} />;
 };

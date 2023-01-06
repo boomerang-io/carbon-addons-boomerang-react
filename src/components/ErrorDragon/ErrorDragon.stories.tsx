@@ -15,6 +15,6 @@ export default {
   },
 };
 
-export const Default = (args: any) => {
+export const Default = (args) => {
   return <ErrorDragon statusUrl={statusUrl} {...args} />;
 };

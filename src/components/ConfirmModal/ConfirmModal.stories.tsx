@@ -49,7 +49,7 @@ function ExternallyControlled() {
   );
 }
 
-export const Default = (args: any) => {
+export const Default = (args) => {
   return (
     <ConfirmModal
       affirmativeAction={action("confirm modal affirmative action")}

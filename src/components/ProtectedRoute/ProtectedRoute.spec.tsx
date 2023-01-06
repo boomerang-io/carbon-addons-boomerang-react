@@ -24,8 +24,8 @@ test("render component for authorized user", () => {
       <ProtectedRoute userRole="admin" {...props} />
     </Router>
   );
-  (expect(queryByText(/Test/i)) as any).toBeInTheDocument();
-  (expect(queryByText(/Sorry mate, you are not allowed here/i)).not as any).toBeInTheDocument();
+  expect(queryByText(/Test/i)).toBeInTheDocument();
+  expect(queryByText(/Sorry mate, you are not allowed here/i)).not.toBeInTheDocument();
 });
 
 test("block access to unauthorized user", () => {
@@ -34,6 +34,6 @@ test("block access to unauthorized user", () => {
       <ProtectedRoute userRole={["user, member"]} {...props} />
     </Router>
   );
-  (expect(queryByText(/Test/i)).not as any).toBeInTheDocument();
-  (expect(queryByText(/Sorry mate, you are not allowed here/i)) as any).toBeInTheDocument();
+  expect(queryByText(/Test/i)).not.toBeInTheDocument();
+  expect(queryByText(/Sorry mate, you are not allowed here/i)).toBeInTheDocument();
 });

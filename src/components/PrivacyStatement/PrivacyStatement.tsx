@@ -74,7 +74,7 @@ function PrivacyStatement({
 
   return (
     <FocusTrap active={isOpen} focusTrapOptions={{ allowOutsideClick: true }}>
-      <ComposedModal open={isOpen} className={`${prefix}--bmrg-privacy-statement-container`} onClose={closeModal}>
+      <ComposedModal open={isOpen} className={`${prefix}--bmrg-privacy-statement-container ${prefix}--bmrg-header-modal`} onClose={closeModal}>
         <ModalHeader
           closeModal={closeModal}
           label={`Effective as of ${statementQuery.data ? formatDateTimestamp(statementQuery.data.effectiveDate) : ""}`}

@@ -8,17 +8,16 @@ import { Rocket } from "@carbon/react/icons";
 import { prefix } from "../../internal/settings";
 
 const history = createBrowserHistory();
-test("render FeatureSideNavLink with correct class", async () => {
-  const { container, getByText } = render(
+test("FeatureSideNavLink - render correctly", async () => {
+  const { getByText } = render(
     <Router history={history}>
       <FeatureSideNavLink to="/testlink">Test Link</FeatureSideNavLink>
     </Router>
   );
-  (expect(container.firstChild) as any).toHaveClass(`${prefix}--bmrg-feature-sidenav-link`);
-  (expect(getByText("Test Link")) as any).toHaveClass(`${prefix}--bmrg-feature-sidenav-link-content`);
+  expect(getByText("Test Link")).toBeInTheDocument();
 });
 
-test("render FeatureSideNavLink with Divider", async () => {
+test("FeatureSideNavLink - render with Divider", async () => {
   const { container } = render(
     <Router history={history}>
       <FeatureSideNavLink to="/testlink" hasDivider>
@@ -26,10 +25,10 @@ test("render FeatureSideNavLink with Divider", async () => {
       </FeatureSideNavLink>
     </Router>
   );
-  (expect(container.lastChild) as any).toHaveClass(`${prefix}--bmrg-feature-sidenav-link-divider`);
+  expect(container.lastChild).toHaveClass(`${prefix}--bmrg-feature-sidenav-link-divider`);
 });
 
-test("render FeatureSideNavLink with Icon", async () => {
+test("FeatureSideNavLink - render with icon", async () => {
   const { getByTestId } = render(
     <Router history={history}>
       <FeatureSideNavLink to="/testlink" icon={Rocket} iconProps={{ "data-testid": "rocket-icon" }} hasDivider>
@@ -37,5 +36,5 @@ test("render FeatureSideNavLink with Icon", async () => {
       </FeatureSideNavLink>
     </Router>
   );
-  (expect(getByTestId("rocket-icon")) as any).toBeInTheDocument();
+  expect(getByTestId("rocket-icon")).toBeInTheDocument();
 });

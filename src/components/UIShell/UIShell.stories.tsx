@@ -4,7 +4,7 @@ import MockAdapter from "axios-mock-adapter";
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import HeaderMenuItem from "../Header/HeaderMenuItem";
 import { SideNav, SideNavLink, SideNavItems, SideNavMenu, SideNavMenuItem } from "@carbon/react";
-import { Help, ServiceDesk } from "@carbon/react/icons";
+import { ArrowRight, Help, ServiceDesk } from "@carbon/react/icons";
 import { PRIVACY_DATA } from "../PrivacyStatement/constants";
 import { PROFILE_SETTINGS_DATA } from "../ProfileSettings/constants";
 import UIShell from "./UIShell";
@@ -49,7 +49,7 @@ const SERVICES_DATA = [
   { name: "Service 4 with a loooong long long long name", url: "https://google.com" },
 ];
 
-const withDelay = (delay: any, response: any) => (): any => {
+const withDelay = (delay: number, response: any) => (): Promise<any> => {
   return new Promise(function (resolve) {
     setTimeout(function () {
       resolve(response);
@@ -57,85 +57,7 @@ const withDelay = (delay: any, response: any) => (): any => {
   });
 };
 
-export default {
-  title: "Platform/UIShell",
-  component: UIShell,
-  parameters: {
-    docs: {
-      inlineStories: false,
-      description: {
-        component:
-          "Integrates the Header, Sidenav and Right Panel components among others into a data-driven and flexible application shell for the IBM Services Essentials platform.",
-      },
-    },
-  },
-};
-
-export const Default = (args: any) => {
-  mock.onGet(`${BASE_SERVICE_URL}/users/consents`).reply(200, PRIVACY_DATA);
-  mock.onGet(`${BASE_SERVICE_URL}/launchpad/user`).reply(200, PROFILE_SETTINGS_DATA);
-  mock.onGet(`${BASE_SERVICE_URL}/users/teams`).reply(withDelay(1000, [200, TEAMS_DATA]));
-  mock.onGet(`${BASE_SERVICE_URL}/launchpad/teams/1/services`).reply(withDelay(4000, [200, SERVICES_DATA]));
-  mock.onGet(`${BASE_SERVICE_URL}/launchpad/teams/2/services`).reply(withDelay(4000, [200, []]));
-  mock.onPost(`${BASE_SERVICE_URL}/support/contact`).reply(200);
-  return (
-    <UIShell
-      config={{
-        features: {
-          "appSwitcher.enabled": true,
-          "community.enabled": true,
-          "notifications.enabled": true,
-          "support.enabled": true,
-          "feedback.enabled": true,
-        },
-        navigation: [
-          {
-            name: "Launchpad",
-            url: "#",
-          },
-          {
-            name: "Admin",
-            url: "#",
-          },
-          {
-            name: "Docs",
-            url: "#",
-          },
-        ],
-        platform: {
-          name: "Boomerang",
-          version: "5.0.0",
-          signOutUrl: "#",
-          communityUrl: "#",
-          platformName: "Boomerang",
-          platformOrganization: "IBM",
-        },
-        platformMessage: {
-          kind: "info",
-          message: "Message Goes Here",
-          title: "Testing Platform Title",
-        },
-      }}
-      onTutorialClick={() => console.log("tutorial")}
-      skipToContentProps={{ href: "#id" }}
-      user={{
-        name: "test user",
-        email: "test.user@ibm.com",
-        hasConsented: true,
-        status: "active",
-        requestSummary: {
-          requireUserAction: 0,
-          submittedByUser: 17,
-        },
-      }}
-      {...args}
-      onMenuClick={null}
-      renderSidenav={null}
-    />
-  );
-};
-
-export const WithCarbonSidenavAndReactRouter = () => {
+export function UIShellKitchenSink() {
   mock.onGet(`${BASE_SERVICE_URL}/users/consents`).reply(200, PRIVACY_DATA);
   mock.onGet(`${BASE_SERVICE_URL}/launchpad/user`).reply(200, PROFILE_SETTINGS_DATA);
   mock.onGet(`${BASE_SERVICE_URL}/users/teams`).reply(200, TEAMS_DATA);
@@ -146,7 +68,7 @@ export const WithCarbonSidenavAndReactRouter = () => {
   return (
     <Router>
       <UIShell
-        platformName="Boomerang Platform"
+        productName="Flow"
         config={{
           features: {
             "appSwitcher.enabled": true,
@@ -236,8 +158,8 @@ export const WithCarbonSidenavAndReactRouter = () => {
         user={
           {
             id: "1",
-            name: "test user",
-            email: "test.user@ibm.com",
+            name: "Rick Deckard",
+            email: "rdeckard@ibm.com",
             requestSummary: {
               requireUserAction: 11,
               submittedByUser: 17,
@@ -245,7 +167,7 @@ export const WithCarbonSidenavAndReactRouter = () => {
           } as User
         }
         rightPanel={{
-          icon: <Help size={20} />,
+          icon: <ArrowRight size={20} />,
           component: (
             <div
               style={{
@@ -259,28 +181,46 @@ export const WithCarbonSidenavAndReactRouter = () => {
             </div>
           ),
         }}
-        supportMenuItems={[<HeaderMenuItem onClick={() => console.log("hello")} type="button" text="Tutorial" />]}
+        supportMenuItems={[<HeaderMenuItem onClick={() => console.log("hello")} type="button" text="Tutorial" key="tutorial"/>]}
         profileMenuItems={[
-          <HeaderMenuItem kind="external" href={`https://ibm.com`} type="link" text="App Policy" icon={<Help />} />,
+          <HeaderMenuItem kind="external" href={`https://ibm.com`} type="link" text="App Policy" icon={<Help />} key="app policy" />,
         ]}
       />
     </Router>
   );
+}
+
+export default {
+  title: "Platform/UIShell",
+  component: UIShell,
+  parameters: {
+    docs: {
+      inlineStories: false,
+      description: {
+        component:
+          "Integrates the Header, Sidenav and Right Panel components among others into a data-driven and flexible application shell for the IBM Services Essentials platform.",
+      },
+    },
+  },
+  excludeStories: /UIShell.*/
 };
 
-WithCarbonSidenavAndReactRouter.story = {
-  name: "Carbon Sidenav + React Router ",
-};
-
-export const RightPanel = () => {
+export const UIShellDefault = (args) => {
   mock.onGet(`${BASE_SERVICE_URL}/users/consents`).reply(200, PRIVACY_DATA);
+  mock.onGet(`${BASE_SERVICE_URL}/launchpad/user`).reply(200, PROFILE_SETTINGS_DATA);
+  mock.onGet(`${BASE_SERVICE_URL}/users/teams`).reply(withDelay(1000, [200, TEAMS_DATA]));
+  mock.onGet(`${BASE_SERVICE_URL}/launchpad/teams/1/services`).reply(withDelay(4000, [200, SERVICES_DATA]));
+  mock.onGet(`${BASE_SERVICE_URL}/launchpad/teams/2/services`).reply(withDelay(4000, [200, []]));
   mock.onPost(`${BASE_SERVICE_URL}/support/contact`).reply(200);
   return (
     <UIShell
       config={{
         features: {
+          "appSwitcher.enabled": true,
+          "community.enabled": true,
           "notifications.enabled": true,
           "support.enabled": true,
+          "feedback.enabled": true,
         },
         navigation: [
           {
@@ -297,13 +237,12 @@ export const RightPanel = () => {
           },
         ],
         platform: {
-          baseEnvUrl: "https://ibm.com",
-          baseServicesUrl: BASE_SERVICE_URL,
-          platformName: "IBM Boomerang Platform",
-          name: "IBM Boomerang Platform",
+          name: "Boomerang",
           version: "5.0.0",
           signOutUrl: "#",
           communityUrl: "#",
+          platformName: "Boomerang",
+          platformOrganization: "IBM",
         },
         platformMessage: {
           kind: "info",
@@ -311,39 +250,28 @@ export const RightPanel = () => {
           title: "Testing Platform Title",
         },
       }}
-      rightPanel={{
-        icon: <Help size={20} />,
-        component: (
-          <div
-            style={{
-              color: "white",
-              display: "flex",
-              justifyContent: "center",
-              marginTop: "4rem",
-            }}
-          >
-            Custom content behaviour
-          </div>
-        ),
+      onTutorialClick={() => console.log("tutorial")}
+      skipToContentProps={{ href: "#id" }}
+      user={{
+        name: "Rick Deckard",
+        email: "rdeckard@ibm.com",
+        hasConsented: true,
+        status: "active",
+        requestSummary: {
+          requireUserAction: 0,
+          submittedByUser: 17,
+        },
       }}
-      user={
-        {
-          id: "1",
-          name: "test user",
-          email: "test.user@ibm.com",
-          hasConsented: true,
-          status: "active",
-          requestSummary: {
-            requireUserAction: 11,
-            submittedByUser: 17,
-          },
-        } as User
-      }
+      {...args}
+      onMenuClick={null}
+      renderSidenav={null}
     />
   );
 };
 
-export const UserNotConsented = () => {
+
+
+export const UIShellUserNotConsented = () => {
   mock.onGet(`${BASE_SERVICE_URL}/users/consents`).reply(200, PRIVACY_DATA);
   return (
     <UIShell
@@ -384,8 +312,8 @@ export const UserNotConsented = () => {
       user={
         {
           id: "1",
-          name: "test user",
-          email: "test.user@ibm.com",
+          name: "Rick Deckard",
+          email: "rdeckard@ibm.com",
           hasConsented: false,
           status: "active",
         } as User
@@ -394,7 +322,7 @@ export const UserNotConsented = () => {
   );
 };
 
-export const UserPendingDeletion = () => {
+export const UIShellUserPendingDeletion = () => {
   mock.onGet(`${BASE_SERVICE_URL}/users/consents`).reply(200, PRIVACY_DATA);
   return (
     <UIShell
@@ -435,8 +363,8 @@ export const UserPendingDeletion = () => {
       user={
         {
           id: "1",
-          name: "test user",
-          email: "test.user@ibm.com",
+          name: "Rick Deckard",
+          email: "rdeckard@ibm.com",
           hasConsented: false,
           status: "pending_deletion",
         } as User
@@ -445,7 +373,23 @@ export const UserPendingDeletion = () => {
   );
 };
 
+export const Default = () => {
+  return <Default />;
+}
+
+export const KitchenSink = () => {
+  return <UIShellKitchenSink />;
+};
+
+export const UserNotConsented = () => {
+  return <UIShellUserNotConsented />
+}
+
+export const UserPendingDeletion = () => {
+  return <UIShellUserPendingDeletion />
+}
+
 export const EmptyState = () => {
   mock.onGet(`${BASE_SERVICE_URL}/users/consents`).reply(200, PRIVACY_DATA);
-  return <UIShell />;
+  return <UIShell productName="Boomerang" />;
 };

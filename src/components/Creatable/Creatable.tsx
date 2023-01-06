@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import cx from "classnames";
 import { Button, Tag, TextInput } from "@carbon/react";
 import TooltipHover from "../TooltipHover";
+import type { TooltipHoverProps } from  "../TooltipHover";
 import { Add, Information } from "@carbon/react/icons";
 import { prefix } from "../../internal/settings";
 
@@ -38,7 +39,7 @@ type Props = {
   textInputProps?: any;
   tooltipClassName?: string;
   tooltipContent?: React.ReactNode;
-  tooltipProps?: any;
+  tooltipProps?: TooltipHoverProps;
   type?: string;
   valueHelperText?: string;
   valueLabel?: string;

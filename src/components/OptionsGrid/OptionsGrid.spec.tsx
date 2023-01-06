@@ -12,12 +12,12 @@ const data = [
 const columns = 2;
 const selectedItems: any = [];
 
-test("render OptionsGrid", async () => {
+test("OptionsGrid - render correctly", async () => {
   const { findByText } = render(
     <OptionsGrid onSelect={mockfn} data={data} columns={columns} selectedItems={selectedItems} />
   );
   const firstOption = await findByText(/data1/i);
-  (expect(firstOption) as any).toBeInTheDocument();
-  const SecondOption = await findByText(/data2/i);
-  (expect(SecondOption) as any).toBeInTheDocument();
+  const secondOption = await findByText(/data2/i);
+  expect(firstOption).toBeInTheDocument();
+  expect(secondOption).toBeInTheDocument();
 });

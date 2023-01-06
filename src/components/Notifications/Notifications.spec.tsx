@@ -7,7 +7,7 @@ import NotificationsContainer from "./NotificationsContainer";
 import ToastNotification from "./ToastNotification";
 import notify from "./notify";
 
-test("toast notification displays correctly when triggered", async () => {
+test("Notifcations - toast notification displays correctly when triggered", async () => {
   const { getByText, findByText } = render(
     <div>
       <Button
@@ -20,5 +20,5 @@ test("toast notification displays correctly when triggered", async () => {
   );
   const notificationButton = getByText(/Try Me/);
   fireEvent.click(notificationButton);
-  (expect(await findByText(/something happened/i)) as any).toBeInTheDocument();
+  expect(await findByText(/something happened/i)).toBeInTheDocument();
 });

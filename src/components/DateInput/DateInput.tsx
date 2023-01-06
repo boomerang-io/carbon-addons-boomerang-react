@@ -1,6 +1,7 @@
 import React from "react";
 import cx from "classnames";
 import TooltipHover from "../TooltipHover";
+import type { TooltipHoverProps } from  "../TooltipHover";
 import { DatePicker, DatePickerInput } from "@carbon/react";
 import { Information } from "@carbon/react/icons";
 import { DATE_TYPES } from "../../constants/DataDrivenInputTypes";
@@ -25,7 +26,7 @@ type Props = {
   readOnly?: boolean;
   tooltipClassName?: string;
   tooltipContent?: React.ReactNode;
-  tooltipProps?: any;
+  tooltipProps?: TooltipHoverProps;
   type?: DATE_TYPE;
   value: string | string[];
 };

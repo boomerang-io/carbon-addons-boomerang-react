@@ -27,7 +27,7 @@ const items2 = [
   { icon: Help, label: "Maybe", value: "maybe" },
 ];
 
-function ExternallyControlledDecisionButtons(args: any) {
+function ExternallyControlledDecisionButtons(args) {
   const [selectedItem, setSelectedItem] = React.useState("");
   const handleClear = () => {
     setSelectedItem("");
@@ -49,7 +49,7 @@ function ExternallyControlledDecisionButtons(args: any) {
   );
 }
 
-export const Default = (args: any) => {
+export const Default = (args) => {
   return (
     <DecisionButtons
       defaultSelected="radio 2"
@@ -66,7 +66,7 @@ export const Default = (args: any) => {
   );
 };
 
-export const PositiveAndNegativeButtonsAndHorizontal = (args: any) => {
+export const PositiveAndNegativeButtonsAndHorizontal = (args) => {
   return (
     <DecisionButtons
       defaultSelected="no"
@@ -80,11 +80,11 @@ export const PositiveAndNegativeButtonsAndHorizontal = (args: any) => {
   );
 };
 
-export const ExternallyControlled = (args: any) => {
+export const ExternallyControlled = (args) => {
   return <ExternallyControlledDecisionButtons {...args} />;
 };
 
-export const CanUncheckButtons = (args: any) => {
+export const CanUncheckButtons = (args) => {
   return (
     <DecisionButtons
       canUncheck

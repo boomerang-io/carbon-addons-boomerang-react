@@ -18,7 +18,7 @@ export default {
     },
   },
   decorators: [
-    (story: any) => (
+    (story) => (
       <Router history={createMemoryHistory({ initialEntries: ["/"] })}>
         <div style={{ backgroundColor: "#f2f4f8", height: "20rem", width: "100%" }}>{story()}</div>
       </Router>
@@ -81,7 +81,7 @@ const Actions = () => (
   </div>
 );
 
-export const Default = (args: any) => {
+export const Default = (args) => {
   return (
     <FeatureHeader
       header={
@@ -95,7 +95,7 @@ export const Default = (args: any) => {
   );
 };
 
-export const SubtitleFirst = (args: any) => {
+export const SubtitleFirst = (args) => {
   return (
     <FeatureHeader
       header={
@@ -115,7 +115,7 @@ SubtitleFirst.story = {
   name: "Subtitle above title",
 };
 
-export const WithoutBorder = (args: any) => {
+export const WithoutBorder = (args) => {
   return (
     <FeatureHeader
       includeBorder={false}
@@ -134,7 +134,7 @@ WithoutBorder.story = {
   name: "No border",
 };
 
-export const Loading = (args: any) => {
+export const Loading = (args) => {
   return (
     <FeatureHeader
       isLoading
@@ -153,7 +153,7 @@ Loading.story = {
   name: "Loading state",
 };
 
-export const WithFooter = (args: any) => {
+export const WithFooter = (args) => {
   return <FeatureHeader footer={<Footer />} {...args} />;
 };
 
@@ -161,7 +161,7 @@ WithFooter.story = {
   name: "Footer",
 };
 
-export const WithNav = (args: any) => {
+export const WithNav = (args) => {
   return (
     <FeatureHeader
       nav={<Nav />}
@@ -205,7 +205,7 @@ OnlyChildren.story = {
   name: "Children",
 };
 
-export const WithNavHeaderFooterActionsAndChildren = (args: any) => {
+export const WithNavHeaderFooterActionsAndChildren = (args) => {
   return (
     <FeatureHeader
       nav={<Nav />}

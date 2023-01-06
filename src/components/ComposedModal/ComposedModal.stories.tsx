@@ -18,7 +18,7 @@ export default {
   },
 };
 
-function Component1(props: any) {
+function Component1(props) {
   return (
     <ModalForm title="Testing some text here">
       <ModalBody>

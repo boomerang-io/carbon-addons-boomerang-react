@@ -13,18 +13,18 @@ export default {
   },
 };
 
-export const Default = (args: any) => {
+export const Default = (args) => {
   return <Error404Component {...args} />;
 };
 
-export const CustomText = (args: any) => {
+export const CustomText = (args) => {
   return <Error404Component header={"Header"} title={"Title"} message={"Message"} {...args} />;
 };
 
-export const NoText = (args: any) => {
+export const NoText = (args) => {
   return <Error404Component header={null} title={null} message={null} {...args} />;
 };
 
-export const Boomerang = (args: any) => {
+export const Boomerang = (args) => {
   return <Error404Component theme="boomerang" {...args} />;
 };

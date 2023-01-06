@@ -14,7 +14,7 @@ type Props = {
 function SignOut({ closeModal, isOpen, signOutLink }: Props) {
   return (
     <FocusTrap active={isOpen} focusTrapOptions={{ allowOutsideClick: true }}>
-      <ComposedModal open={isOpen} className={`${prefix}--bmrg-signout-container`} onClose={closeModal}>
+      <ComposedModal open={isOpen} className={`${prefix}--bmrg-signout-container ${prefix}--bmrg-header-modal`} onClose={closeModal}>
         <ModalHeader title="Sign out" closeModal={closeModal} />
         <ModalBody>
           <div className={`${prefix}--bmrg-signout`}>
@@ -48,11 +48,11 @@ function SignOutMenuItem(props: Omit<Props, "isOpen" | "closeModal">) {
   return (
     <>
       <HeaderMenuItem
-        type="button"
         icon={<Power />}
-        text="Sign Out"
         onClick={() => setIsOpen(!isOpen)}
+        text="Sign Out"
         style={{ color: "red" }}
+        type="button"
         variant="danger"
       />
       <SignOut isOpen={isOpen} closeModal={handleClose} {...props} />

@@ -12,14 +12,14 @@ export default {
       },
     },
   },
-  decorators: [(story: any) => <div style={{ maxWidth: "16rem", padding: "1rem" }}>{story()}</div>],
+  decorators: [(story) => <div style={{ maxWidth: "16rem", padding: "1rem" }}>{story()}</div>],
 };
 
-export const Default = (args: any) => {
+export const Default = (args) => {
   return <Toggle id="default-toggle" defaultToggled onToggle={action("Toggle clicked")} {...args} />;
 };
 
-export const InvalidWarning = (args: any) => {
+export const InvalidWarning = (args) => {
   return (
     <Toggle
       id="tooltip-label-toggle"
@@ -38,7 +38,7 @@ export const InvalidWarning = (args: any) => {
   );
 };
 
-export const HorizontalToggle = (args: any) => {
+export const HorizontalToggle = (args) => {
   return (
     <Toggle
       id="default-toggle"
@@ -51,7 +51,7 @@ export const HorizontalToggle = (args: any) => {
   );
 };
 
-export const KitchenSink = (args: any) => {
+export const KitchenSink = (args) => {
   return (
     <Toggle
       id="tooltip-label-toggle"
