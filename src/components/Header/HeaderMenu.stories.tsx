@@ -1,6 +1,6 @@
 /* eslint-disable no-script-url */
 import React from "react";
-import HeaderMenu from "../Header/HeaderMenu";
+import HeaderMenu from "./HeaderMenu";
 import HeaderMenuItem from "./HeaderMenuItem";
 
 export default {
@@ -22,13 +22,13 @@ export const Link = () => {
         <HeaderMenu id="link">
           <HeaderMenuItem
             external={true}
-            kind="link"
+            type="link"
             href="javascript:void(0)"
             text="Link 1"
           />
           <HeaderMenuItem
             external={false}
-            kind="link"
+            type="link"
             href="javascript:void(0)"
             text="Link 2"
           />
@@ -44,12 +44,12 @@ export const Button = () => {
       <div style={{ position: "relative", width: "15rem" }}>
         <HeaderMenu id="link">
           <HeaderMenuItem
-            kind="button"
+            type="button"
             onClick={() => console.log("button 1")}
             text="Button 1"
           />
                     <HeaderMenuItem
-            kind="button"
+            type="button"
             onClick={() => console.log("button 2")}
             text="Button 2"
           />
@@ -64,7 +64,7 @@ export const User = () => {
       <div style={{ position: "relative", width: "15rem" }}>
         <HeaderMenu id="link">
           <HeaderMenuItem
-            kind="user"
+            type="user"
             onClick={() => console.log("button")}
             userName="John"
             src=""

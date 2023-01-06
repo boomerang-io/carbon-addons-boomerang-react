@@ -1,7 +1,7 @@
 import React from "react";
 import { action } from "@storybook/addon-actions";
 import DateInput from "./DateInput";
-import { DATE_TYPES } from "../../internal/DataDrivenInputTypes";
+import { DATE_TYPES } from "../../constants/DataDrivenInputTypes";
 
 export default {
   title: "Inputs/DateInput",

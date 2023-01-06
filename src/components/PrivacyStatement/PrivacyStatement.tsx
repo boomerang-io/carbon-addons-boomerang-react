@@ -2,13 +2,12 @@ import React from "react";
 import { useQuery, useMutation } from "react-query";
 import dompurify from "dompurify";
 import FocusTrap from "focus-trap-react";
-import { Information } from "@carbon/react/icons";
-import HeaderMenuItem from "../HeaderMenuItem";
+import { Locked } from "@carbon/react/icons";
+import HeaderMenuItem from "../Header/HeaderMenuItem";
 import { Accordion, AccordionItem, Button, ComposedModal, ModalHeader, ModalBody, ModalFooter } from "@carbon/react";
 import ErrorMessage from "../ErrorMessage";
 import Loading from "../Loading";
 import { prefix } from "../../internal/settings";
-import HeaderMenuModalWrapper from "../../internal/HeaderMenuModalWrapper";
 import { serviceUrl, resolver } from "../../config/servicesConfig";
 import notify from "../Notifications/notify";
 import ToastNotification from "../Notifications/ToastNotification";
@@ -172,8 +171,8 @@ function PrivacyStatementMenuItem(props: Omit<Props, "isOpen" | "closeModal">) {
   return (
     <>
       <HeaderMenuItem
-        kind="button"
-        icon={<Information />}
+        type="button"
+        icon={<Locked />}
         text="Privacy Statement"
         onClick={() => setIsOpen(!isOpen)}
       />

@@ -1,12 +1,14 @@
 // https://usehooks.com/useWindowSize/
 
 import { useState, useEffect } from "react";
-// Define general type for useWindowSize hook, which includes width and height
 interface Size {
   width: number | undefined;
   height: number | undefined;
 }
-// Hook
+
+/**
+ * Gets the dimensions of the window
+ */
 export default function useWindowSize(): Size {
   // Initialize state with undefined width/height so server and client renders match
   // Learn more here: https://joshwcomeau.com/react/the-perils-of-rehydration/

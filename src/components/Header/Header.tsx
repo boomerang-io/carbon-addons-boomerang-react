@@ -19,39 +19,37 @@ import HeaderAppSwitcher from "./HeaderAppSwitcher";
 import NotificationsContainer from "../Notifications/NotificationsContainer";
 import PlatformNotificationsContainer from "../PlatformNotifications";
 import UserRequests from "./UserRequests";
-import useShellMenu from "../../hooks/useShellMenu";
+import useHeaderMenu from "../../hooks/useHeaderMenu";
 import useWindowSize from "../../hooks/useWindowSize";
 import { Close, Collaborate, Help, UserAvatar, Notification, NotificationNew, Switcher } from "@carbon/react/icons";
 import { prefix } from "../../internal/settings";
-
-type NavLink = {
-  name: string;
-  url: string;
-};
 
 type Props = {
   baseServiceUrl?: string;
   baseEnvUrl?: string;
   className?: string;
-  enableAppSwitcher: boolean;
-  enableNotifications: boolean;
+  enableAppSwitcher?: boolean;
+  enableNotifications?: boolean;
   leftPanel?: (args: { close: () => void; isOpen: boolean; navLinks?: React.ReactNode[] }) => React.ReactNode;
-  navLinks?: NavLink[];
+  navLinks?: {
+    name: string;
+    url: string;
+  }[];
   notificationsConfig?: {
     wsUrl: string;
     httpUrl?: string;
   };
-  platformMessage?: any;
+  platformMessage?: string;
   prefixName?: string;
   productName: string;
-  profileMenuItems?: any[];
+  profileMenuItems?: React.ReactNode[];
   rightPanel?: { icon?: React.ReactNode; component: React.ReactNode };
   requestSummary?: {
     requireUserAction: number;
     submittedByUser: number;
   };
-  skipToContentProps?: any;
-  supportMenuItems?: any[];
+  skipToContentProps?: { href?: string; children?: string; className?: string };
+  supportMenuItems?: React.ReactNode[];
 };
 
 const MenuElementIdMap = {
@@ -138,18 +136,18 @@ function MainHeader(props: Props) {
         </HeaderNavigation>
         <HeaderGlobalBar>
           <RequestsMenu
-            enabled={Boolean(props.requestSummary)}
             baseEnvUrl={baseEnvUrl}
-            requestSummary={props.requestSummary}
+            enabled={Boolean(props.requestSummary)}
+            summary={props.requestSummary}
           />
           <NotificationsMenu
-            enabled={Boolean(props.enableNotifications && props.notificationsConfig)}
             baseEnvUrl={baseEnvUrl}
             config={props.notificationsConfig}
+            enabled={Boolean(props.enableNotifications && props.notificationsConfig)}
           />
           <SupportMenu
             enabled={Array.isArray(props.supportMenuItems) && props.supportMenuItems.length > 0}
-            supportMenuItems={props.supportMenuItems}
+            menuItems={props.supportMenuItems}
           />
           <ProfileMenu
             enabled={Array.isArray(props.profileMenuItems) && props.profileMenuItems.length > 0}
@@ -166,11 +164,11 @@ function MainHeader(props: Props) {
 
 export default MainHeader;
 
-function NotificationsMenu(props: any) {
-  const { isActive, toggleActive, ref } = useShellMenu<HTMLDivElement>(FocusableElementIdMap.Notifcations);
+function NotificationsMenu(props: { enabled: boolean; baseEnvUrl?: string; config: Props["notificationsConfig"] }) {
+  const { isActive, toggleActive, ref } = useHeaderMenu<HTMLDivElement>(FocusableElementIdMap.Notifcations);
   const [hasNewNotifications, setHasNewNotifications] = React.useState(false);
 
-  if (!props.enabled) {
+  if (!props.enabled || !props.baseEnvUrl || !props.config) {
     return null;
   }
 
@@ -194,9 +192,9 @@ function NotificationsMenu(props: any) {
         {icon}
       </button>
       <PlatformNotificationsContainer
-        isActive={isActive}
         baseEnvUrl={props.baseEnvUrl}
-        config={props.notificationsConfig}
+        config={props.config}
+        isActive={isActive}
         setHasNewNotifications={setHasNewNotifications}
       />
     </div>
@@ -204,7 +202,7 @@ function NotificationsMenu(props: any) {
 }
 
 function RequestsMenu(props: any) {
-  const { isActive, toggleActive, ref } = useShellMenu<HTMLDivElement>(FocusableElementIdMap.Requests);
+  const { isActive, toggleActive, ref } = useHeaderMenu<HTMLDivElement>(FocusableElementIdMap.Requests);
 
   if (!props.enabled) {
     return null;
@@ -232,8 +230,8 @@ function RequestsMenu(props: any) {
   );
 }
 
-function SupportMenu(props: { enabled: Boolean; supportMenuItems: Props["supportMenuItems"] }) {
-  const { isActive, toggleActive, ref } = useShellMenu<HTMLDivElement>(FocusableElementIdMap.Support);
+function SupportMenu(props: { enabled: Boolean; menuItems: Props["supportMenuItems"] }) {
+  const { isActive, toggleActive, ref } = useHeaderMenu<HTMLDivElement>(FocusableElementIdMap.Support);
 
   if (!props.enabled) {
     return null;
@@ -252,13 +250,13 @@ function SupportMenu(props: { enabled: Boolean; supportMenuItems: Props["support
       >
         <Help size={20} />
       </button>
-      {isActive ? <HeaderMenu id="header-support-menu">{props.supportMenuItems}</HeaderMenu> : null}
+      {isActive ? <HeaderMenu id="header-support-menu">{props.menuItems}</HeaderMenu> : null}
     </div>
   );
 }
 
-function ProfileMenu(props: { enabled: boolean; menuItems?: Props["supportMenuItems"] }) {
-  const { isActive, toggleActive, ref } = useShellMenu<HTMLDivElement>(FocusableElementIdMap.Profile);
+function ProfileMenu(props: { enabled: boolean; menuItems?: Props["profileMenuItems"] }) {
+  const { isActive, toggleActive, ref } = useHeaderMenu<HTMLDivElement>(FocusableElementIdMap.Profile);
 
   if (!props.enabled) {
     return null;
@@ -282,10 +280,10 @@ function ProfileMenu(props: { enabled: boolean; menuItems?: Props["supportMenuIt
   );
 }
 
-function AppSwitcherMenu(props: { enabled: boolean; baseEnvUrl?: string; baseServiceUrl?: string }) {
-  const { isActive, toggleActive, ref } = useShellMenu<HTMLDivElement>(FocusableElementIdMap.Switcher);
+function AppSwitcherMenu(props: { enabled?: boolean; baseEnvUrl?: string; baseServiceUrl?: string }) {
+  const { isActive, toggleActive, ref } = useHeaderMenu<HTMLDivElement>(FocusableElementIdMap.Switcher);
 
-  if (!props.baseServiceUrl) {
+  if (!props.enabled || !props.baseServiceUrl) {
     return null;
   }
 
@@ -313,7 +311,7 @@ function AppSwitcherMenu(props: { enabled: boolean; baseEnvUrl?: string; baseSer
 }
 
 function RightPanelMenu(props: { enabled: boolean; icon?: React.ReactNode; component?: React.ReactNode }) {
-  const { isActive, toggleActive, ref } = useShellMenu<HTMLDivElement>(FocusableElementIdMap.RightPanel);
+  const { isActive, toggleActive, ref } = useHeaderMenu<HTMLDivElement>(FocusableElementIdMap.RightPanel);
 
   if (!props.enabled) {
     return null;
@@ -346,7 +344,7 @@ function SidenavMenu(props: {
   navLinks: Props["navLinks"];
 }) {
   const { isActive, setIsActive } = props;
-  const { ref } = useShellMenu<HTMLDivElement>(FocusableElementIdMap.SideNav, { isActive, setIsActive });
+  const { ref } = useHeaderMenu<HTMLDivElement>(FocusableElementIdMap.SideNav, { isActive, setIsActive });
   const windowSize = useWindowSize();
   const isMobileSidenavActive = (windowSize.width as number) < 1024;
 
@@ -359,7 +357,7 @@ function SidenavMenu(props: {
           isOpen: isActive,
           close: closeMenu,
           navLinks: isMobileSidenavActive
-            ? props.navLinks?.map((link: any) => (
+            ? props.navLinks?.map((link) => (
                 <SideNavLink aria-label={`Link for ${link.name}`} href={link.url} key={link.url}>
                   {link.name}
                 </SideNavLink>
@@ -382,7 +380,7 @@ function SidenavMenu(props: {
             onOverlayClick={closeMenu}
           >
             <SideNavItems>
-              {props.navLinks?.map((link: any) => (
+              {props.navLinks?.map((link) => (
                 <SideNavLink aria-label={`Link for ${link.name}`} href={link.url} key={link.url}>
                   {link.name}
                 </SideNavLink>

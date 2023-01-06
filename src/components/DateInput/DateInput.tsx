@@ -3,7 +3,7 @@ import cx from "classnames";
 import TooltipHover from "../TooltipHover";
 import { DatePicker, DatePickerInput } from "@carbon/react";
 import { Information } from "@carbon/react/icons";
-import { DATE_TYPES } from "../../internal/DataDrivenInputTypes";
+import { DATE_TYPES } from "../../constants/DataDrivenInputTypes";
 import { prefix } from "../../internal/settings";
 
 type DATE_TYPE = typeof DATE_TYPES[keyof typeof DATE_TYPES];

@@ -17,7 +17,7 @@ import {
 } from "@carbon/react";
 import Avatar from "../Avatar";
 import ErrorMessage from "../ErrorMessage";
-import HeaderMenuItem from "../HeaderMenuItem";
+import HeaderMenuItem from "../Header/HeaderMenuItem";
 import notify from "../Notifications/notify";
 import ToastNotification from "../Notifications/ToastNotification";
 import { serviceUrl, resolver } from "../../config/servicesConfig";
@@ -235,7 +235,7 @@ function ProfileSettingsMenuItem(props: Omit<Props, "isOpen" | "closeModal">) {
 
   return (
     <>
-      <HeaderMenuItem kind="user" onClick={() => setIsOpen(!isOpen)} src={props.src} userName={props.userName} />
+      <HeaderMenuItem type="user" onClick={() => setIsOpen(!isOpen)} src={props.src} userName={props.userName} />
       <ProfileSettings isOpen={isOpen} closeModal={handleClose} {...props} />
     </>
   );

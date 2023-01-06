@@ -2,7 +2,7 @@ import React from "react";
 import { QueryClientProvider } from "react-query";
 import { Forum, HelpDesk, Email } from "@carbon/react/icons";
 import Header from "../Header"; // Using default export
-import HeaderMenuItem from "../HeaderMenuItem";
+import HeaderMenuItem from "../Header/HeaderMenuItem";
 import { ProfileSettingsMenuItem } from "../ProfileSettings";
 import { AboutPlatformMenuItem } from "../AboutPlatform";
 import { FeedbackMenuItem } from "../Feedback";
@@ -12,12 +12,7 @@ import { queryClient } from "../../config/servicesConfig";
 import { User } from "../../types";
 import { SignOutMenuItem } from "../SignOut";
 
-type NavLink = {
-  name: string;
-  url: string;
-};
-
-type OwnProps = {
+type Props = {
   productName?: string;
   platformName?: string;
   config?: {
@@ -34,7 +29,10 @@ type OwnProps = {
       "support.enabled"?: boolean;
       "welcome.enabled"?: boolean;
     };
-    navigation?: NavLink[];
+    navigation?: {
+      name: string;
+      url: string;
+    }[];
     platform: {
       baseEnvUrl: string;
       baseServicesUrl: string;
@@ -62,22 +60,24 @@ type OwnProps = {
     className?: string;
   };
   user?: User;
-  userRequests?: any[];
+  supportMenuItems?: React.ReactNode[];
+  profileMenuItems?: React.ReactNode[];
 };
-
-type Props = OwnProps;
 
 function UIShell({
   config,
   leftPanel,
   platformName,
   productName,
+  profileMenuItems = [],
+  supportMenuItems = [],
   renderGdprRedirect = true,
   renderPrivacyStatement = true,
   rightPanel,
   skipToContentProps,
   user,
 }: Props) {
+  // Support base header
   if (!config) {
     return (
       <Header
@@ -91,25 +91,31 @@ function UIShell({
   }
 
   const { features, navigation, platform, platformMessage } = config;
-
   const names = getProductAndPlatformNames({ productName, platformName, platform });
-
   const sendIdeasUrl = platform?.feedbackUrl || "https://ideas.ibm.com";
-  const isAboutPlatformEnabled = Boolean(platform.name && platform.version);
+
+  /**
+   * Check feature enablement via explicit feature flags
+   */
   const isAppSwitcherEnabled = Boolean(features?.["appSwitcher.enabled"]);
-  const isCommunityEnabled = Boolean(platform?.communityUrl);
   const isFeedbackEnabled = Boolean(features?.["feedback.enabled"]);
   const isNotificationsEnabled = Boolean(features?.["notifications.enabled"]);
+  const isSupportEnabled = Boolean(features?.["support.enabled"]);
+
+  /**
+   * Check feature enablement via values being present
+   */
+  const isAboutPlatformEnabled = Boolean(platform.name && platform.version);
+  const isCommunityEnabled = Boolean(platform?.communityUrl);
   const isSendMailEnabled = Boolean(platform.sendMail);
   const isSignOutEnabled = Boolean(platform?.signOutUrl);
-  const isSupportEnabled = Boolean(features?.["support.enabled"]);
   const isUserEnabled = Boolean(user?.id);
 
   /**
    * Checking for conditions when we explicitly set "renderGdprRedirect" to false (it defaults to true) OR
    * it's disabled overall for the platform. This lets us toggle the UIShell consent redirect per app as needed
    * e.g. disabled in Launchpad, but have it enabled for rest of the platform AND also support
-   * having it disabled in a "standalone" mode via the consent.enaable feature flag. aka its data driven via the service
+   * having it disabled in a "standalone" mode via the consent.enable feature flag, i.e. data driven via the service
    */
   const isGdprRedirectDisabled = renderGdprRedirect === false || features?.["consent.enabled"] === false;
   const isGdprModalEnabled = isGdprRedirectDisabled === false && user?.hasConsented === false;
@@ -140,20 +146,20 @@ function UIShell({
         supportMenuItems={[
           isSupportEnabled && (
             <HeaderMenuItem
-              external={false}
               href={`${platform.baseEnvUrl}/support/center`}
               icon={<HelpDesk />}
-              kind="link"
+              type="link"
               text="Support Center"
+              kind="internal"
             />
           ),
           isCommunityEnabled && (
             <HeaderMenuItem
-              external={true}
               href={platform?.communityUrl as string}
               icon={<Forum />}
-              kind="link"
+              type="link"
               text="Community"
+              kind="external"
             />
           ),
           isFeedbackEnabled && (
@@ -164,6 +170,7 @@ function UIShell({
               sendIdeasUrl={sendIdeasUrl}
             />
           ),
+          ...supportMenuItems,
         ].filter(Boolean)}
         profileMenuItems={[
           isUserEnabled && (
@@ -179,11 +186,11 @@ function UIShell({
           ),
           isSendMailEnabled && (
             <HeaderMenuItem
-              external={false}
               href={`${platform.baseEnvUrl}/launchpad/email-preferences`}
-              kind="link"
+              type="link"
               icon={<Email />}
               text="Email Preferences"
+              kind={"internal"}
             />
           ),
           !isPrivacyStatementDisabled && (
@@ -193,6 +200,7 @@ function UIShell({
               platformEmail={platform?.platformEmail}
             />
           ),
+          ...profileMenuItems,
           isSignOutEnabled && <SignOutMenuItem key="Sign Out" signOutLink={platform.signOutUrl as string} />,
         ].filter(Boolean)}
       />
@@ -208,6 +216,11 @@ function UIShell({
   );
 }
 
+/**
+ * Determine how to render the name and prefix in the Header based
+ *  on what is passed in. If we only have the plaform or product name, then
+ * we want it to be bolded. If we have both, then make the platform the prefix
+ */
 function getProductAndPlatformNames(args: {
   productName?: string;
   platformName?: string;
@@ -216,16 +229,18 @@ function getProductAndPlatformNames(args: {
   const { productName, platformName, platform } = args;
 
   const resolvedPlatformName = platform.platformName ?? platformName;
-  let finalProductName;
-  let finalPlatformName;
+  let finalProductName = "";
+  let finalPlatformName = "";
 
   if (productName && resolvedPlatformName) {
     finalProductName = productName;
     finalPlatformName = resolvedPlatformName;
   } else if (productName && !resolvedPlatformName) {
     finalProductName = productName;
-  } else {
+  } else if (!productName && resolvedPlatformName) {
     finalProductName = resolvedPlatformName;
+  } else {
+    // no-op in else branch if they don't pass anything in
   }
 
   return { productName: finalProductName, platformName: finalPlatformName };

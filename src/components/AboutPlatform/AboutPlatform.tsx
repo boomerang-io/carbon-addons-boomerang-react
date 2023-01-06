@@ -1,7 +1,7 @@
 import React from "react";
 import { ComposedModal, ModalHeader, ModalBody } from "@carbon/react";
 import FocusTrap from "focus-trap-react";
-import HeaderMenuItem from "../HeaderMenuItem";
+import HeaderMenuItem from "../Header/HeaderMenuItem";
 import { Information } from "@carbon/react/icons";
 import IBMCloudIcon from "./assets/IBMCloudIcon";
 import KubernetesIcon from "./assets/KubernetesIcon";
@@ -108,7 +108,7 @@ function AboutPlatformMenuItem(props: Omit<Props, "isOpen" | "closeModal">) {
 
   return (
     <>
-      <HeaderMenuItem kind="button" icon={<Information />} text="About Platform" onClick={() => setIsOpen(!isOpen)} />
+      <HeaderMenuItem type="button" icon={<Information />} text="About Platform" onClick={() => setIsOpen(!isOpen)} />
       <AboutPlatform isOpen={isOpen} closeModal={handleClose} {...props} />
     </>
   );

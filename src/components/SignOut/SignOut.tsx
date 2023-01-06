@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, ComposedModal, ModalHeader, ModalBody, ModalFooter } from "@carbon/react";
 import FocusTrap from "focus-trap-react";
-import HeaderMenuItem from "../HeaderMenuItem";
+import HeaderMenuItem from "../Header/HeaderMenuItem";
 import { Power } from "@carbon/react/icons";
 import { prefix } from "../../internal/settings";
 
@@ -48,7 +48,7 @@ function SignOutMenuItem(props: Omit<Props, "isOpen" | "closeModal">) {
   return (
     <>
       <HeaderMenuItem
-        kind="button"
+        type="button"
         icon={<Power />}
         text="Sign Out"
         onClick={() => setIsOpen(!isOpen)}

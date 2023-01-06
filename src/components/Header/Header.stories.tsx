@@ -3,7 +3,7 @@ import React from "react";
 import { Link, Router } from "react-router-dom";
 import { ServiceDesk } from "@carbon/react/icons";
 import { SideNav, SideNavLink, SideNavItems, SideNavMenu, SideNavMenuItem } from "@carbon/react";
-import HeaderMenuItem from "../HeaderMenuItem";
+import HeaderMenuItem from "../Header/HeaderMenuItem";
 import { createMemoryHistory } from "history";
 import Header from "./index"; // Using default export
 
@@ -55,15 +55,15 @@ export const Default = () => (
         wsUrl: mockSocketUrl,
       }}
       supportMenuItems={[
-        <HeaderMenuItem key="Tutorial" text="Tutorial" kind="link" href="javascript:void(0)" />,
-        <HeaderMenuItem key="FAQ + Contacts" text="FAQ + Contacts" kind="link" href="javascript:void(0)" />,
-        <HeaderMenuItem key="Send Feedback" text="Send Feedback" kind="link" href="javascript:void(0)" />,
-        <HeaderMenuItem key="Report a bug" text="Report a bug" kind="link" href="javascript:void(0)" />,
+        <HeaderMenuItem key="Tutorial" text="Tutorial" type="link" href="javascript:void(0)" />,
+        <HeaderMenuItem key="FAQ + Contacts" text="FAQ + Contacts" type="link" href="javascript:void(0)" />,
+        <HeaderMenuItem key="Send Feedback" text="Send Feedback" type="link" href="javascript:void(0)" />,
+        <HeaderMenuItem key="Report a bug" text="Report a bug" type="link" href="javascript:void(0)" />,
       ]}
       profileMenuItems={[
-        <HeaderMenuItem key="About the Platform" text="About the Platform" kind="link" href="javascript:void(0)" />,
-        <HeaderMenuItem key="GDPR agreement" text="GDPR agreement" kind="link" href="javascript:void(0)" />,
-        <HeaderMenuItem key="Sign out" text="Sign out" kind="link" href="javascript:void(0)" />,
+        <HeaderMenuItem key="About the Platform" text="About the Platform" type="link" href="javascript:void(0)" />,
+        <HeaderMenuItem key="GDPR agreement" text="GDPR agreement" type="link" href="javascript:void(0)" />,
+        <HeaderMenuItem key="Sign out" text="Sign out" type="link" href="javascript:void(0)" />,
       ]}
     />
   </div>
@@ -102,15 +102,15 @@ export const WithIntegratedSidenav = () => (
         wsUrl: mockSocketUrl,
       }}
       supportMenuItems={[
-        <HeaderMenuItem key="0" text="Tutorial" kind="link" href="javascript:void(0)" />,
-        <HeaderMenuItem key="1" text="FAQ + Contacts" kind="link" href="javascript:void(0)" />,
-        <HeaderMenuItem key="2" text="Send Feedback" kind="link" href="javascript:void(0)" />,
-        <HeaderMenuItem key="3" text="Report a bug" kind="link" href="javascript:void(0)" />,
+        <HeaderMenuItem key="0" text="Tutorial" type="link" href="javascript:void(0)" />,
+        <HeaderMenuItem key="1" text="FAQ + Contacts" type="link" href="javascript:void(0)" />,
+        <HeaderMenuItem key="2" text="Send Feedback" type="link" href="javascript:void(0)" />,
+        <HeaderMenuItem key="3" text="Report a bug" type="link" href="javascript:void(0)" />,
       ]}
       profileMenuItems={[
-        <HeaderMenuItem key="0" text="About the Platform" kind="link" href="javascript:void(0)" />,
-        <HeaderMenuItem key="1" text="GDPR agreement" kind="link" href="javascript:void(0)" />,
-        <HeaderMenuItem key="2" text="Sign out" kind="link" href="javascript:void(0)" />,
+        <HeaderMenuItem key="0" text="About the Platform" type="link" href="javascript:void(0)" />,
+        <HeaderMenuItem key="1" text="GDPR agreement" type="link" href="javascript:void(0)" />,
+        <HeaderMenuItem key="2" text="Sign out" type="link" href="javascript:void(0)" />,
       ]}
       leftPanel={({ isOpen, close }) => (
         <SideNav isChildOfHeader aria-label="sidenav" expanded={isOpen} isPersistent={false} onOverlayClick={close}>

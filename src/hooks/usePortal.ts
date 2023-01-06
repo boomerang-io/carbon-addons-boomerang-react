@@ -2,7 +2,6 @@ import { useRef, useEffect } from "react";
 
 /**
  * Creates DOM element to be used as React root.
- * @returns {HTMLElement}
  */
 function createRootElement(id: any) {
   const rootContainer = document.createElement("div");

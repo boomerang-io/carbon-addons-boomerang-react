@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
 import { BrowserRouter as Router, Link } from "react-router-dom";
+import HeaderMenuItem from "../Header/HeaderMenuItem";
 import { SideNav, SideNavLink, SideNavItems, SideNavMenu, SideNavMenuItem } from "@carbon/react";
 import { Help, ServiceDesk } from "@carbon/react/icons";
 import { PRIVACY_DATA } from "../PrivacyStatement/constants";
@@ -258,6 +259,10 @@ export const WithCarbonSidenavAndReactRouter = () => {
             </div>
           ),
         }}
+        supportMenuItems={[<HeaderMenuItem onClick={() => console.log("hello")} type="button" text="Tutorial" />]}
+        profileMenuItems={[
+          <HeaderMenuItem kind="external" href={`https://ibm.com`} type="link" text="App Policy" icon={<Help />} />,
+        ]}
       />
     </Router>
   );

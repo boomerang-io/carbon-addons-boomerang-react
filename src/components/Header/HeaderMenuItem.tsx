@@ -8,6 +8,7 @@ type Shared = {
   className?: string;
   children?: React.ReactNode;
   disabled?: boolean;
+  element?: React.FC<any>;
   icon?: React.ReactNode;
   style?: React.CSSProperties;
   variant?: "danger" | "default";
@@ -15,34 +16,34 @@ type Shared = {
 
 type Props =
   | (Shared & {
-      external?: boolean;
       href: string;
-      kind: "link";
+      kind: "app" | "internal" | "external";
       onClick?: () => void;
       text: string;
+      type: "link";
     })
   | (Shared & {
       onClick: () => void;
-      kind: "button";
       text: string;
+      type: "button";
     })
   | (Shared & {
       onClick: () => void;
-      kind: "user";
       src: string;
+      type: "user";
       userName?: string;
     });
 
 function BmrgHeaderMenuItem(props: Props) {
-  const { kind, icon, onClick, variant = "default", ...rest } = props;
+  const { type, icon, onClick, variant = "default", ...rest } = props;
 
-  if (props.kind === "button")
+  if (props.type === "button")
     return (
       <HeaderMenuItem
-        aria-label={`Link for ${props.text}`}
         // eslint-disable-next-line no-script-url
         href={"javascript:void(0)"}
         onClick={onClick}
+        role="button"
         {...rest}
       >
         <div className={`${prefix}--bmrg-header-menu-item__content ${variant === "danger" ? "--danger" : ""}`}>
@@ -54,25 +55,37 @@ function BmrgHeaderMenuItem(props: Props) {
       </HeaderMenuItem>
     );
 
-  if (props.kind === "link") {
-    const externalProps = props.external ? { target: "_blank", rel: "noopener noreferrer" } : {};
+  if (props.type === "link") {
+    const externalProps = props.kind === "external" ? { target: "_blank", rel: "noopener noreferrer" } : {};
+    let linkTypeIcon;
+    switch (props.kind) {
+      case "external":
+        linkTypeIcon = <Launch aria-label="Opens in new tab" />;
+        break;
+      case "internal":
+        linkTypeIcon = <ArrowRight aria-label="Opens in same platform" />;
+        break;
+      case "app":
+      default:
+      // no-op
+    }
     return (
-      <HeaderMenuItem aria-label={`Button for ${props.text}`} href={props.href} {...externalProps} onClick={onClick}>
+      <HeaderMenuItem href={props.href} {...externalProps} onClick={onClick}>
         <div className={`${prefix}--bmrg-header-menu-item__content ${variant === "danger" ? "--danger" : ""}`}>
           <span className={`${prefix}--bmrg-header-menu-item__text`}>
             {icon}
             {props.text}
           </span>
-          {props.external ? <Launch /> : <ArrowRight />}
+          {linkTypeIcon}
         </div>
       </HeaderMenuItem>
     );
   }
 
-  if (props.kind === "user") {
+  if (props.type === "user") {
     return (
       // eslint-disable-next-line no-script-url
-      <HeaderMenuItem aria-label={`Manage ${props.userName} settings`} href={"javascript:void(0)"} onClick={onClick}>
+      <HeaderMenuItem href={"javascript:void(0)"} onClick={onClick}>
         <div className={`${prefix}--bmrg-header-menu-user`}>
           <Avatar size="medium" src={props.src} userName={props.userName} />
           <p className={`${prefix}--bmrg-header-menu-user__name`}> {props.userName ? props.userName : ""} </p>

@@ -2,7 +2,7 @@ import React from "react";
 import { prefix } from "../../internal/settings";
 import { Button, ComposedModal, ModalHeader, ModalBody, ModalFooter } from "@carbon/react";
 import FocusTrap from "focus-trap-react";
-import HeaderMenuItem from "../HeaderMenuItem";
+import HeaderMenuItem from "../Header/HeaderMenuItem";
 import { Idea } from "@carbon/react/icons";
 
 type Props = {
@@ -94,7 +94,7 @@ function FeedbackMenuItem(props: Omit<Props, "isOpen" | "closeModal">) {
 
   return (
     <>
-      <HeaderMenuItem kind="button" icon={<Idea />} text="Submit an idea" onClick={() => setIsOpen(!isOpen)} />
+      <HeaderMenuItem type="button" icon={<Idea />} text="Submit an idea" onClick={() => setIsOpen(!isOpen)} />
       <Feedback isOpen={isOpen} closeModal={handleClose} {...props} />
     </>
   );

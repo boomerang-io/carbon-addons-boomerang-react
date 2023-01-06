@@ -20,7 +20,7 @@ import {
   BOOLEAN_TYPES,
   INPUT_TYPES_ARRAY,
   INPUT_GROUPS,
-} from "../../internal/DataDrivenInputTypes";
+} from "../../constants/DataDrivenInputTypes";
 import { DynamicInput } from "../../types";
 
 /**
