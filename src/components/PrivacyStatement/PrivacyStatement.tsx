@@ -36,6 +36,7 @@ function PrivacyStatement({
   organization = "the platform",
   platformEmail = "isesupp@us.ibm.com",
 }: Props) {
+  const [isConfirmModalOpen, setIsConfirmModalOpen] = React.useState(false);
   const statementUrl = serviceUrl.getStatement({ baseServiceUrl });
   const statementQuery = useQuery({
     queryKey: statementUrl,
@@ -80,7 +81,6 @@ function PrivacyStatement({
           label={`Effective as of ${statementQuery.data ? formatDateTimestamp(statementQuery.data.effectiveDate) : ""}`}
           title="Privacy Statement"
         />
-
         <ModalBody>
           <div className={`${prefix}--bmrg-privacy-statement`}>
             {statementQuery.isLoading ? (
@@ -122,36 +122,37 @@ function PrivacyStatement({
         </ModalBody>
         <ModalFooter>
           <div className={`${prefix}--bmrg-privacy-statement-delete`}>
-            <HeaderMenuModalWrapper buttonTriggerText="Request account deletion" triggerButtonKind="danger">
-              {({ closeModal: closeAlertModal }: any) => {
-                return (
-                  <>
-                    <ModalHeader closeModal={closeAlertModal} label="Delete Account" title="Request account deletion" />
-                    <ModalBody>
-                      <p className={`${prefix}--bmrg-privacy-statement-delete__desc`}>
-                        By selecting to delete your account, your account will be deleted along with all of your user
-                        data from our system and we will notify your team(s) that you are no longer a memeber of the
-                        platform. Are you sure you want to delete your account?
-                      </p>
-                    </ModalBody>
-                    <ModalFooter style={{ marginTop: "1.125rem" }}>
-                      <Button kind="secondary" onClick={closeAlertModal}>
-                        No, go back to Privacy Statement
-                      </Button>
-                      <Button
-                        kind="danger"
-                        type="submit"
-                        onClick={() => {
-                          handleSubmit({ closeAlertModal, closeModal });
-                        }}
-                      >
-                        Yes, Delete my account
-                      </Button>
-                    </ModalFooter>
-                  </>
-                );
-              }}
-            </HeaderMenuModalWrapper>
+            <Button kind="danger" onClick={() => setIsConfirmModalOpen(true)}>
+              Request account deletion
+            </Button>
+            <ComposedModal open={isConfirmModalOpen}>
+              <ModalHeader
+                closeModal={() => setIsConfirmModalOpen(false)}
+                label="Delete Account"
+                title="Request account deletion"
+              />
+              <ModalBody>
+                <p className={`${prefix}--bmrg-privacy-statement-delete__desc`}>
+                  By selecting to delete your account, your account will be deleted along with all of your user data
+                  from our system and we will notify your team(s) that you are no longer a memeber of the platform. Are
+                  you sure you want to delete your account?
+                </p>
+              </ModalBody>
+              <ModalFooter style={{ marginTop: "1.125rem" }}>
+                <Button kind="secondary" onClick={() => setIsConfirmModalOpen(false)}>
+                  No, go back to Privacy Statement
+                </Button>
+                <Button
+                  kind="danger"
+                  type="submit"
+                  onClick={() => {
+                    handleSubmit({ closeAlertModal: () => setIsConfirmModalOpen(false), closeModal });
+                  }}
+                >
+                  Yes, Delete my account
+                </Button>
+              </ModalFooter>
+            </ComposedModal>
           </div>
         </ModalFooter>
       </ComposedModal>
@@ -170,7 +171,12 @@ function PrivacyStatementMenuItem(props: Omit<Props, "isOpen" | "closeModal">) {
 
   return (
     <>
-      <HeaderMenuItem kind="button" icon={<Information />} text="Privacy Statement" onClick={() => setIsOpen(!isOpen)} />
+      <HeaderMenuItem
+        kind="button"
+        icon={<Information />}
+        text="Privacy Statement"
+        onClick={() => setIsOpen(!isOpen)}
+      />
       <PrivacyStatement isOpen={isOpen} closeModal={handleClose} {...props} />
     </>
   );
