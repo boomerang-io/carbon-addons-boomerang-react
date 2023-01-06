@@ -124,11 +124,9 @@ function MainHeader(props: Props) {
         </HeaderName>
         <HeaderNavigation aria-label="Platform navigation">
           {Array.isArray(navLinks)
-            ? navLinks.map((link, i) => (
+            ? navLinks.map((link) => (
                 <HeaderMenuItem
-                  isCurrentPage={
-                    i === 0 || (window?.location?.href && link.url ? window.location.href.startsWith(link.url) : false)
-                  }
+                  isCurrentPage={window?.location?.href && link.url ? window.location.href.startsWith(link.url) : false}
                   aria-label={`Link for ${link.name}`}
                   href={link.url}
                   key={link.url}
