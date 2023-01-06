@@ -6,7 +6,7 @@ import HeaderMenuItem from "../HeaderMenuItem";
 import { ProfileSettingsMenuItem } from "../ProfileSettings";
 import { AboutPlatformMenuItem } from "../AboutPlatform";
 import { FeedbackMenuItem } from "../Feedback";
-import { PrivacyStatementMenuItem} from "../PrivacyStatement";
+import { PrivacyStatementMenuItem } from "../PrivacyStatement";
 import GdprRedirectModal from "../GdprRedirectModal";
 import { queryClient } from "../../config/servicesConfig";
 import { User } from "../../types";
@@ -72,8 +72,8 @@ function UIShell({
   leftPanel,
   platformName,
   productName,
-  renderGdprRedirect = false,
-  renderPrivacyStatement = false,
+  renderGdprRedirect = true,
+  renderPrivacyStatement = true,
   rightPanel,
   skipToContentProps,
   user,
@@ -186,11 +186,13 @@ function UIShell({
               text="Email Preferences"
             />
           ),
+          !isPrivacyStatementDisabled && (
             <PrivacyStatementMenuItem
               key="Privacy Statement"
               baseServiceUrl={platform.baseServicesUrl}
               platformEmail={platform?.platformEmail}
-            />,
+            />
+          ),
           isSignOutEnabled && <SignOutMenuItem key="Sign Out" signOutLink={platform.signOutUrl as string} />,
         ].filter(Boolean)}
       />

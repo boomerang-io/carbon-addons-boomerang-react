@@ -1,7 +1,6 @@
 import React from "react";
 import cx from "classnames";
 import { Client } from "@stomp/stompjs";
-import FocusTrap from "focus-trap-react";
 import { prefix } from "../../internal/settings";
 import Notification from "./PlatformNotifications";
 

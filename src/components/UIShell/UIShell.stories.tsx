@@ -149,7 +149,7 @@ export const WithCarbonSidenavAndReactRouter = () => {
         config={{
           features: {
             "appSwitcher.enabled": true,
-            "consent.enabled": true, 
+            "consent.enabled": true,
             "notifications.enabled": true,
             "support.enabled": true,
             "feedback.enabled": true,
