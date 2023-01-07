@@ -15,11 +15,11 @@ const queryClient = new QueryClient({
   defaultOptions: { queries: { refetchOnWindowFocus: false } },
 });
 
-test("Profile Settings success", async () => {
+test("Profile Settings - success", async () => {
   const mock = new MockAdapter(axios);
   mock.onGet(`${baseServiceUrl}/launchpad/user`).reply(200, PROFILE_SETTINGS_DATA);
   mock.onPatch(`${baseServiceUrl}/users/profile`).reply(200);
-  const { findByText, getByLabelText, getByText, queryByText } = render(
+  const { findByText, getByLabelText, queryByText } = render(
     <QueryClientProvider client={queryClient}>
       <ProfileSettings
         baseServiceUrl={baseServiceUrl}
@@ -29,8 +29,7 @@ test("Profile Settings success", async () => {
       />
     </QueryClientProvider>
   );
-  const userBtn = getByText("Boomerang Joe");
-  fireEvent.click(userBtn);
+
   const btn = await findByText(/Save changes/i);
   expect(btn).toBeDisabled();
   const allToggle = getByLabelText("Team Name");
@@ -46,7 +45,7 @@ test("Profile Settings success", async () => {
   );
 });
 
-test("Profile Settings error", async () => {
+test("Profile Settings - error", async () => {
   const mock = new MockAdapter(axios);
   mock.onGet(`${baseServiceUrl}/launchpad/user`).reply(200, PROFILE_SETTINGS_DATA);
   mock.onPatch(`${baseServiceUrl}/users/profile`).networkError();
@@ -60,8 +59,6 @@ test("Profile Settings error", async () => {
       />
     </QueryClientProvider>
   );
-  const userBtn = getByText("Boomerang Joe");
-  fireEvent.click(userBtn);
   const allToggle = await findByLabelText(/Team Name/i);
   fireEvent.click(allToggle);
   const btn = await findByText(/Save changes/i);
@@ -69,7 +66,7 @@ test("Profile Settings error", async () => {
   await waitFor(() => expect(getByText(/try again/i)).toBeInTheDocument());
 });
 
-test("Profile Settings accessibility", async () => {
+test("Profile Settings - accessibility", async () => {
   const { container } = render(
     <QueryClientProvider client={queryClient}>
       <ProfileSettings

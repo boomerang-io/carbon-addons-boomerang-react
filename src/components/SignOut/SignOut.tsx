@@ -1,6 +1,5 @@
 import React from "react";
 import { Button, ComposedModal, ModalHeader, ModalBody, ModalFooter } from "@carbon/react";
-import FocusTrap from "focus-trap-react";
 import HeaderMenuItem from "../Header/HeaderMenuItem";
 import { Power } from "@carbon/react/icons";
 import { prefix } from "../../internal/settings";
@@ -13,24 +12,26 @@ type Props = {
 
 function SignOut({ closeModal, isOpen, signOutLink }: Props) {
   return (
-    <FocusTrap active={isOpen} focusTrapOptions={{ allowOutsideClick: true }}>
-      <ComposedModal open={isOpen} className={`${prefix}--bmrg-signout-container ${prefix}--bmrg-header-modal`} onClose={closeModal}>
-        <ModalHeader title="Sign out" closeModal={closeModal} />
-        <ModalBody>
-          <div className={`${prefix}--bmrg-signout`}>
-            <p className={`${prefix}--bmrg-signout__message`}>{"Are you sure you'd like to leave us?"}</p>
-          </div>
-        </ModalBody>
-        <ModalFooter>
-          <Button kind="secondary" onClick={closeModal}>
-            Cancel
-          </Button>
-          <Button kind="primary" role="link" href={signOutLink}>
-            Sign Out
-          </Button>
-        </ModalFooter>
-      </ComposedModal>
-    </FocusTrap>
+    <ComposedModal
+      open={isOpen}
+      className={`${prefix}--bmrg-signout-container ${prefix}--bmrg-header-modal`}
+      onClose={closeModal}
+    >
+      <ModalHeader title="Sign out" closeModal={closeModal} />
+      <ModalBody>
+        <div className={`${prefix}--bmrg-signout`}>
+          <p className={`${prefix}--bmrg-signout__message`}>{"Are you sure you'd like to leave us?"}</p>
+        </div>
+      </ModalBody>
+      <ModalFooter>
+        <Button data-modal-primary-focus kind="secondary" onClick={closeModal}>
+          Cancel
+        </Button>
+        <Button kind="primary" role="link" href={signOutLink}>
+          Sign Out
+        </Button>
+      </ModalFooter>
+    </ComposedModal>
   );
 }
 

@@ -30,7 +30,7 @@ export default function HeaderAppSwitcher({ baseServiceUrl, baseEnvUrl, id, isAc
 
   if (teamsQuery.isLoading) {
     return (
-      <HeaderPanel id={id} role="menu" className={classNames} expanded={isActive}>
+      <HeaderPanel aria-label="App Switcher" id={id} role="menu" className={classNames} expanded={isActive}>
         <div className={cx(`${prefix}--bmrg-header-switcher`, `--is-loading`)}>
           <SkeletonText className={`${prefix}--bmrg-header-switcher__skeleton`} />
           <SkeletonText className={`${prefix}--bmrg-header-switcher__skeleton`} />
@@ -44,7 +44,7 @@ export default function HeaderAppSwitcher({ baseServiceUrl, baseEnvUrl, id, isAc
 
   if (teamsQuery.error) {
     return (
-      <HeaderPanel id={id} role="menu" className={classNames} expanded={isActive}>
+      <HeaderPanel aria-label="App Switcher" id={id} role="menu" className={classNames} expanded={isActive}>
         <ErrorMessage className={`${prefix}--bmrg-header-switcher`} />
       </HeaderPanel>
     );
@@ -54,7 +54,7 @@ export default function HeaderAppSwitcher({ baseServiceUrl, baseEnvUrl, id, isAc
     const { accountTeams, standardTeams } = teamsQuery.data;
     if (accountTeams?.length || standardTeams?.length) {
       return (
-        <HeaderPanel className={classNames} expanded={isActive} id={id} role="menu">
+        <HeaderPanel aria-label="App Switcher" className={classNames} expanded={isActive} id={id} role="menu">
           <ul className={`${prefix}--bmrg-header-switcher`} style={{ display: isActive ? "block" : "none" }}>
             {standardTeams?.map((team) => (
               <TeamServiceListMenu
@@ -93,7 +93,7 @@ export default function HeaderAppSwitcher({ baseServiceUrl, baseEnvUrl, id, isAc
     }
 
     return (
-      <HeaderPanel className={classNames} expanded={isActive} id={id} role="menu">
+      <HeaderPanel aria-label="App Switcher" className={classNames} expanded={isActive} id={id} role="menu">
         <div className={cx(`${prefix}--bmrg-header-switcher`, "--is-empty")}>
           <h1 className={`${prefix}--bmrg-header-switcher__empty-title`}>No teams</h1>
           <p className={`${prefix}--bmrg-header-switcher__empty-subtitle`}>You must be new here</p>

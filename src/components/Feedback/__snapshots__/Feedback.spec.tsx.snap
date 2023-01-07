@@ -1,0 +1,119 @@
+// Vitest Snapshot v1
+
+exports[`Feedback - snapshot 1`] = `
+<body
+  class="cds--body--with-modal-open"
+>
+  <div>
+    <div
+      aria-hidden="false"
+      class="cds--modal is-visible cds--bmrg-feedback-container"
+      role="presentation"
+      tabindex="-1"
+    >
+      <div
+        aria-label="Feedback"
+        aria-modal="true"
+        class="cds--modal-container"
+        role="dialog"
+      >
+        <button
+          class="cds--visually-hidden"
+          type="button"
+        >
+          Focus sentinel
+        </button>
+        <div
+          class="cds--modal-container-body"
+        >
+          <div
+            class="cds--modal-header"
+          >
+            <h3
+              class="cds--modal-header__heading cds--type-beta"
+            >
+              Submit an Idea
+            </h3>
+            <button
+              aria-label="Close"
+              class="cds--modal-close"
+              title="Close"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="cds--modal-close__icon"
+                fill="currentColor"
+                focusable="false"
+                height="20"
+                preserveAspectRatio="xMidYMid meet"
+                viewBox="0 0 32 32"
+                width="20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z"
+                />
+              </svg>
+            </button>
+          </div>
+          <div
+            class="cds--modal-content"
+          >
+            <div
+              class="cds--bmrg-feedback"
+            >
+              <p>
+                Share your thoughts and ideas on what we can do to improve the 
+                IBM Platform
+                 platform and our onboarding process.
+              </p>
+              <p>
+                To submit your idea, visit our portal at
+                 
+                <a
+                  aria-describedby="new-window-aria-desc-0"
+                  href="https://ideas.ibm.com"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  https://ideas.ibm.com
+                </a>
+                .
+              </p>
+              <p>
+                For now, you must have an 
+                 email address and you will need to register with a password during your first visit.
+              </p>
+              <p>
+                You will have the opportunity to see other public ideas, vote on them and track the status of your idea.
+              </p>
+              <p>
+                We look forward to your feedback!
+              </p>
+            </div>
+          </div>
+          <div
+            class="cds--modal-footer cds--btn-set"
+          >
+            <button
+              class="cds--btn cds--btn--primary"
+              data-modal-primary-focus="true"
+              tabindex="0"
+              type="button"
+            >
+              OK
+            </button>
+          </div>
+        </div>
+        <button
+          class="cds--visually-hidden"
+          type="button"
+        >
+          Focus sentinel
+        </button>
+      </div>
+    </div>
+  </div>
+</body>
+`;

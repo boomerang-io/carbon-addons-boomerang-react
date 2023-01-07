@@ -1,3 +1,4 @@
+/* eslint-disable no-script-url */
 import React from "react";
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
@@ -225,15 +226,15 @@ export const UIShellDefault = (args) => {
         navigation: [
           {
             name: "Launchpad",
-            url: "#",
+            url: "javascript:voido(0)",
           },
           {
             name: "Admin",
-            url: "#",
+            url: "javascript:voido(0)",
           },
           {
             name: "Docs",
-            url: "#",
+            url: "javascript:voido(0)",
           },
         ],
         platform: {
@@ -300,8 +301,8 @@ export const UIShellUserNotConsented = () => {
           platformName: "IBM Boomerang Platform",
           name: "IBM Boomerang Platform",
           version: "5.0.0",
-          signOutUrl: "#",
-          communityUrl: "#",
+          signOutUrl: "javascript:void(0)",
+          communityUrl: "javascript:void(0)",
         },
         platformMessage: {
           kind: "info",
@@ -351,8 +352,8 @@ export const UIShellUserPendingDeletion = () => {
           platformName: "IBM Boomerang Platform",
           name: "IBM Boomerang Platform",
           version: "5.0.0",
-          signOutUrl: "#",
-          communityUrl: "#",
+          signOutUrl: "javascript:void(0)",
+          communityUrl: "javascript:void(0)",
         },
         platformMessage: {
           kind: "info",
@@ -374,7 +375,7 @@ export const UIShellUserPendingDeletion = () => {
 };
 
 export const Default = () => {
-  return <Default />;
+  return <UIShellDefault />;
 }
 
 export const KitchenSink = () => {

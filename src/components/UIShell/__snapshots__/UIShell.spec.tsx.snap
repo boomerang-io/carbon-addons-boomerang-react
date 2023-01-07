@@ -1,0 +1,121 @@
+// Vitest Snapshot v1
+
+exports[`UIShell - render correctly 1`] = `
+<body>
+  <div>
+    <div
+      class="cds--g100 cds--layer-one"
+    >
+      <header
+        aria-label="App navigation header"
+        class="cds--header"
+      >
+        <button
+          aria-label="Sidenav menu"
+          class="cds--header__action cds--header__menu-trigger cds--header__menu-toggle cds--header__menu-toggle__hidden"
+          id="header-sidenav-menu-button"
+          title="Sidenav menu"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            fill="currentColor"
+            focusable="false"
+            height="20"
+            preserveAspectRatio="xMidYMid meet"
+            viewBox="0 0 20 20"
+            width="20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M2 14.8H18V16H2zM2 11.2H18V12.399999999999999H2zM2 7.6H18V8.799999999999999H2zM2 4H18V5.2H2z"
+            />
+          </svg>
+        </button>
+        <a
+          class="cds--header__name"
+          href=""
+        >
+          
+          Boomerang
+        </a>
+        <nav
+          aria-label="Platform navigation"
+          class="cds--header__nav"
+        >
+          <ul
+            class="cds--header__menu-bar"
+          />
+        </nav>
+        <div
+          class="cds--header__global"
+        />
+        <div
+          class="Toastify"
+          id="cds--bmrg-header-notifications"
+        />
+      </header>
+    </div>
+  </div>
+</body>
+`;
+
+exports[`UIShell - snapshot 1`] = `
+<body>
+  <div>
+    <div
+      class="cds--g100 cds--layer-one"
+    >
+      <header
+        aria-label="App navigation header"
+        class="cds--header"
+      >
+        <button
+          aria-label="Sidenav menu"
+          class="cds--header__action cds--header__menu-trigger cds--header__menu-toggle cds--header__menu-toggle__hidden"
+          id="header-sidenav-menu-button"
+          title="Sidenav menu"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            fill="currentColor"
+            focusable="false"
+            height="20"
+            preserveAspectRatio="xMidYMid meet"
+            viewBox="0 0 20 20"
+            width="20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M2 14.8H18V16H2zM2 11.2H18V12.399999999999999H2zM2 7.6H18V8.799999999999999H2zM2 4H18V5.2H2z"
+            />
+          </svg>
+        </button>
+        <a
+          class="cds--header__name"
+          href=""
+        >
+          
+          Boomerang
+        </a>
+        <nav
+          aria-label="Platform navigation"
+          class="cds--header__nav"
+        >
+          <ul
+            class="cds--header__menu-bar"
+          />
+        </nav>
+        <div
+          class="cds--header__global"
+        />
+        <div
+          class="Toastify"
+          id="cds--bmrg-header-notifications"
+        />
+      </header>
+    </div>
+  </div>
+</body>
+`;

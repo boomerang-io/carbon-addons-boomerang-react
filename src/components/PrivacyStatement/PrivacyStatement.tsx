@@ -1,7 +1,6 @@
 import React from "react";
 import { useQuery, useMutation } from "react-query";
 import dompurify from "dompurify";
-import FocusTrap from "focus-trap-react";
 import { Locked } from "@carbon/react/icons";
 import HeaderMenuItem from "../Header/HeaderMenuItem";
 import { Accordion, AccordionItem, Button, ComposedModal, ModalHeader, ModalBody, ModalFooter } from "@carbon/react";
@@ -73,8 +72,7 @@ function PrivacyStatement({
   }
 
   return (
-    <FocusTrap active={isOpen} focusTrapOptions={{ allowOutsideClick: true }}>
-      <ComposedModal open={isOpen} className={`${prefix}--bmrg-privacy-statement-container ${prefix}--bmrg-header-modal`} onClose={closeModal}>
+      <ComposedModal aria-label="Privacy Statement" open={isOpen} className={`${prefix}--bmrg-privacy-statement-container ${prefix}--bmrg-header-modal`} onClose={closeModal}>
         <ModalHeader
           closeModal={closeModal}
           label={`Effective as of ${statementQuery.data ? formatDateTimestamp(statementQuery.data.effectiveDate) : ""}`}
@@ -116,12 +114,12 @@ function PrivacyStatement({
               <p className={`${prefix}--bmrg-privacy-statement__error`}>
                 Failed to receive deletion request. Please try again.
               </p>
-            )}
+            )}  
           </div>
         </ModalBody>
         <ModalFooter>
           <div className={`${prefix}--bmrg-privacy-statement-delete`}>
-            <Button kind="danger" onClick={() => setIsConfirmModalOpen(true)}>
+            <Button data-modal-primary-focus kind="danger" onClick={() => setIsConfirmModalOpen(true)}>
               Request account deletion
             </Button>
             <ComposedModal open={isConfirmModalOpen}>
@@ -138,7 +136,7 @@ function PrivacyStatement({
                 </p>
               </ModalBody>
               <ModalFooter style={{ marginTop: "1.125rem" }}>
-                <Button kind="secondary" onClick={() => setIsConfirmModalOpen(false)}>
+                <Button data-modal-primary-focus kind="secondary" onClick={() => setIsConfirmModalOpen(false)}>
                   No, go back to Privacy Statement
                 </Button>
                 <Button
@@ -148,14 +146,13 @@ function PrivacyStatement({
                     handleSubmit({ closeAlertModal: () => setIsConfirmModalOpen(false), closeModal });
                   }}
                 >
-                  Yes, Delete my account
+                  Yes, delete my account
                 </Button>
               </ModalFooter>
             </ComposedModal>
           </div>
         </ModalFooter>
       </ComposedModal>
-    </FocusTrap>
   );
 }
 

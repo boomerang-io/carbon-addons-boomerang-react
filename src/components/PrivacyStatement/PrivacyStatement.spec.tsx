@@ -6,6 +6,7 @@ import { serviceUrl } from "../../config/servicesConfig";
 import PrivacyStatement from "./PrivacyStatement";
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
+import { axe } from "jest-axe";
 import { PRIVACY_DATA } from "./constants";
 import { headerModalProps } from "../../internal/helpers";
 
@@ -41,20 +42,16 @@ test("Privacy Statement - error", async () => {
   const mock = new MockAdapter(axios);
   mock.onGet(serviceUrl.getStatement({ baseServiceUrl })).reply(200, PRIVACY_DATA);
   mock.onPut(serviceUrl.resourceUserConsent({ baseServiceUrl })).networkError();
-  const { getByText, getByRole, findByRole } = render(
+  const { getByText, findByRole } = render(
     <QueryClientProvider client={queryClient}>
       <PrivacyStatement baseServiceUrl={baseServiceUrl} {...headerModalProps} />
     </QueryClientProvider>
   );
-  const btn = getByRole("button", { name: /^Privacy Statement$/i });
-  fireEvent.click(btn);
   const deleteButton = await findByRole("button", { name: /Request account deletion/i });
   fireEvent.click(deleteButton);
   const confirmButton = getByText(/Delete my account/i);
   fireEvent.click(confirmButton);
-  await waitFor(() =>
-    expect(getByText(/Failed to receive deletion request. Please try again./i)).toBeInTheDocument()
-  );
+  await waitFor(() => expect(getByText(/Failed to receive deletion request. Please try again./i)).toBeInTheDocument());
 });
 
 test("Privacy Statement - success", async () => {
@@ -71,12 +68,19 @@ test("Privacy Statement - success", async () => {
     </QueryClientProvider>
   );
 
-  const btn = getByRole("button", { name: /^Privacy Statement$/i });
-  fireEvent.click(btn);
-
   const deleteButton = await findByRole("button", { name: /Request account deletion/i });
   fireEvent.click(deleteButton);
 
   const confirmButton = getByRole("button", { name: /Delete my account/i });
   fireEvent.click(confirmButton);
+});
+
+test("Privacy Statement - accessibility", async () => {
+  const { container } = render(
+    <QueryClientProvider client={queryClient}>
+      <PrivacyStatement baseServiceUrl={baseServiceUrl} {...headerModalProps} />
+    </QueryClientProvider>
+  );
+  const results = await axe(container);
+  expect(results).toHaveNoViolations();
 });

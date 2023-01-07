@@ -10,7 +10,7 @@
   }
 
   .#{$prefix}--bmrg-privacy-statement-delete {
-    width: 100%;
+    width: 50%;
 
     .#{$prefix}--modal {
       width: 100%;
@@ -30,10 +30,6 @@
 
     .#{$prefix}--modal-footer {
       margin-top: 1.125rem;
-    }
-
-    .#{$prefix}--btn--danger {
-      width: 100%;
     }
 
     .#{$prefix}--bmrg-privacy-statement-delete__desc {

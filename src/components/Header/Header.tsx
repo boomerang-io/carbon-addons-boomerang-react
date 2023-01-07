@@ -13,7 +13,6 @@ import {
   SideNavLink,
   Theme,
 } from "@carbon/react";
-import FocusTrap from "focus-trap-react";
 import HeaderMenu from "./HeaderMenu";
 import HeaderAppSwitcher from "./HeaderAppSwitcher";
 import NotificationsContainer from "../Notifications/NotificationsContainer";
@@ -125,10 +124,10 @@ export default function Header(props: Props) {
           {Array.isArray(navLinks)
             ? navLinks.map((link) => (
                 <HeaderMenuItem
+                  key={link.name}
                   isCurrentPage={window?.location?.href && link.url ? window.location.href.startsWith(link.url) : false}
                   aria-label={`Link for ${link.name}`}
                   href={link.url}
-                  key={link.url}
                 >
                   {link.name}
                 </HeaderMenuItem>
@@ -171,11 +170,7 @@ function NotificationsMenu(props: { enabled: boolean; baseEnvUrl?: string; confi
     return null;
   }
 
-  const icon = hasNewNotifications ? (
-    <NotificationNew alt="New notifications icon" size={20} />
-  ) : (
-    <Notification alt="No new notifications icon" size={20} />
-  );
+  const icon = hasNewNotifications ? <NotificationNew size={20} /> : <Notification size={20} />;
 
   return (
     <div style={{ position: "relative" }} ref={ref}>
@@ -272,7 +267,7 @@ function ProfileMenu(props: { enabled: boolean; menuItems?: Props["profileMenuIt
         id={FocusableElementIdMap.Profile}
         onClick={toggleActive}
       >
-        <UserAvatar alt="Profile icon" size={20} {...props} />
+        <UserAvatar size={20} />
       </button>
       {isActive ? <HeaderMenu id="header-profile-menu">{props.menuItems}</HeaderMenu> : null}
     </div>
@@ -297,7 +292,7 @@ function AppSwitcherMenu(props: { enabled?: boolean; baseEnvUrl?: string; baseSe
         id={FocusableElementIdMap.Switcher}
         onClick={toggleActive}
       >
-        {isActive ? <Close alt="Close App Switcher" size={20} /> : <Switcher alt="Open App Switcher" size={20} />}
+        {isActive ? <Close size={20} /> : <Switcher size={20} />}
       </button>
       <HeaderAppSwitcher
         baseEnvUrl={props.baseEnvUrl}
@@ -322,7 +317,7 @@ function RightPanelMenu(props: { enabled: boolean; icon?: React.ReactNode; compo
         aria-controls={MenuElementIdMap.RightPanel}
         aria-expanded={isActive}
         aria-haspopup="dialog"
-        aria-label={`Right panel`}
+        aria-label="Right panel"
         className={headerButtonClassNames}
         id={FocusableElementIdMap.RightPanel}
         onClick={toggleActive}
@@ -369,25 +364,23 @@ function SidenavMenu(props: {
 
   if (isMobileSidenavActive) {
     return (
-      <FocusTrap active={isActive} focusTrapOptions={{ allowOutsideClick: true }}>
-        <div ref={ref} style={{ display: isActive ? "block" : "none" }}>
-          <SideNav
-            isChildOfHeader
-            aria-label="Side navigation"
-            expanded={isActive}
-            isPersistent={false}
-            onOverlayClick={closeMenu}
-          >
-            <SideNavItems>
-              {props.navLinks?.map((link) => (
-                <SideNavLink aria-label={`Link for ${link.name}`} href={link.url} key={link.url}>
-                  {link.name}
-                </SideNavLink>
-              ))}
-            </SideNavItems>
-          </SideNav>
-        </div>
-      </FocusTrap>
+      <div ref={ref} style={{ display: isActive ? "block" : "none" }}>
+        <SideNav
+          isChildOfHeader
+          aria-label="Side navigation"
+          expanded={isActive}
+          isPersistent={false}
+          onOverlayClick={closeMenu}
+        >
+          <SideNavItems>
+            {props.navLinks?.map((link) => (
+              <SideNavLink aria-label={`Link for ${link.name}`} href={link.url} key={link.url}>
+                {link.name}
+              </SideNavLink>
+            ))}
+          </SideNavItems>
+        </SideNav>
+      </div>
     );
   }
 
