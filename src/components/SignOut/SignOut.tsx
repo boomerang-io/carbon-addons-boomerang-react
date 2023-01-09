@@ -13,6 +13,7 @@ type Props = {
 function SignOut({ closeModal, isOpen, signOutLink }: Props) {
   return (
     <ComposedModal
+      aria-label="Sign out"
       open={isOpen}
       className={`${prefix}--bmrg-signout-container ${prefix}--bmrg-header-modal`}
       onClose={closeModal}
@@ -43,7 +44,9 @@ function SignOutMenuItem(props: Omit<Props, "isOpen" | "closeModal">) {
 
   const handleClose = () => {
     setIsOpen(false);
-    menuItemRef.current?.focus();
+    setTimeout(() => {
+      menuItemRef.current?.focus();
+    }, 0);
   };
 
   return (
@@ -55,6 +58,7 @@ function SignOutMenuItem(props: Omit<Props, "isOpen" | "closeModal">) {
         style={{ color: "red" }}
         type="button"
         variant="danger"
+        ref={menuItemRef}
       />
       <SignOut isOpen={isOpen} closeModal={handleClose} {...props} />
     </>

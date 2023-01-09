@@ -1,16 +1,14 @@
 import React from "react";
 import { expect, test } from "vitest";
-import { Router } from "react-router-dom";
+import { MemoryRouter as Router } from "react-router-dom";
 import { render } from "@testing-library/react";
 import FeatureSideNavLink from ".";
-import { createBrowserHistory } from "history";
-import { Rocket } from "@carbon/react/icons";
+import { Launch } from "@carbon/react/icons";
 import { prefix } from "../../internal/settings";
 
-const history = createBrowserHistory();
 test("FeatureSideNavLink - render correctly", async () => {
   const { getByText } = render(
-    <Router history={history}>
+    <Router>
       <FeatureSideNavLink to="/testlink">Test Link</FeatureSideNavLink>
     </Router>
   );
@@ -19,7 +17,7 @@ test("FeatureSideNavLink - render correctly", async () => {
 
 test("FeatureSideNavLink - render with Divider", async () => {
   const { container } = render(
-    <Router history={history}>
+    <Router>
       <FeatureSideNavLink to="/testlink" hasDivider>
         Test Link
       </FeatureSideNavLink>
@@ -30,8 +28,8 @@ test("FeatureSideNavLink - render with Divider", async () => {
 
 test("FeatureSideNavLink - render with icon", async () => {
   const { getByTestId } = render(
-    <Router history={history}>
-      <FeatureSideNavLink to="/testlink" icon={Rocket} iconProps={{ "data-testid": "rocket-icon" }} hasDivider>
+    <Router>
+      <FeatureSideNavLink to="/testlink" icon={Launch} iconProps={{ "data-testid": "rocket-icon" }} hasDivider>
         Test Link
       </FeatureSideNavLink>
     </Router>

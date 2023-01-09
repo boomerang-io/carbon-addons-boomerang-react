@@ -1,14 +1,11 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import { action } from "@storybook/addon-actions";
-import axios from "axios";
-import MockAdapter from "axios-mock-adapter";
 import { Server } from "mock-socket";
-
 import PlatformNotificationsContainer from "./PlatformNotificationsContainer";
 
-const mockSocketUrl = "ws://localhost:8081/ws";
-const mockServer = new Server(mockSocketUrl);
+const baseEnvUrl = "https://localhost:8080";
+const baseServicesUrl = "https://localhost:8080/services";
+const mockServer = new Server(`${baseServicesUrl}/notifications/ws`);
 const notificationsObj: any = {
   notifications: [
     {
@@ -28,10 +25,6 @@ const notificationsObj: any = {
   ],
 };
 
-const mockEndptURL = "http://localhost:8000/notifications";
-const mock = new MockAdapter(axios);
-mock.onPut(mockEndptURL).reply(200, {});
-
 mockServer.on("connection", (socket: any) => {
   socket.on("message", () => {
     setInterval(() => {
@@ -45,12 +38,10 @@ describe("Platform Notifications Container", () => {
   test("default", async () => {
     render(
       <PlatformNotificationsContainer
-        config={{
-          wsUrl: "ws://localhost:8081/ws",
-          httpUrl: "http://localhost:8000/notifications",
-        }}
+        baseEnvUrl={baseEnvUrl}
+        baseServicesUrl={baseServicesUrl}
         isActive={true}
-        setHasNewNotifications={action("setHasNewNotifications")}
+        setHasNewNotifications={() => true}
         initialNotifications={notificationsObj.notifications}
       />
     );

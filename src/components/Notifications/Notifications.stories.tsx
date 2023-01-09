@@ -12,13 +12,21 @@ const about = {
 
 export default about;
 
-export const Default = () => {
+export const Default = (args) => {
   return (
     <div>
-      <Button onClick={() => notify(<ToastNotification subtitle="So notification" title="Wow" kind="success" />)}>
+      <Button
+        onClick={() => notify(<ToastNotification  {...args} />)}
+      >
         Create Notification
       </Button>
       <NotificationsContainer containerId="test-story" />
     </div>
   );
 };
+
+Default.args = {
+  subtitle: "So notification",
+  title: "Wow",
+  kind: "success"
+}

@@ -13,11 +13,6 @@ export default {
     },
   },
   decorators: [(story) => <div style={{ maxWidth: "25rem", padding: "1rem" }}>{story()}</div>],
-  argTypes: {
-    tooltipContent: {
-      control: "text",
-    },
-  },
 };
 
 export const Default = (args) => {

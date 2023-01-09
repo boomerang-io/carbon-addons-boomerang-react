@@ -1,5 +1,6 @@
 import React from "react";
 import AboutPlatform from "./AboutPlatform";
+import { headerModalProps } from "../../internal/helpers";
 
 export default {
   title: "Platform/AboutPlatform",
@@ -11,15 +12,17 @@ export default {
       },
     },
   },
-  argTypes: {
-    isFlowApp: { control: "boolean", defaultValue: false },
-    name: { control: "text", defaultValue: "IBM" },
-    version: { control: "text", defaultValue: "5.0.0" },
-  },
 };
 
 export const Default = (args) => {
   return <AboutPlatform {...args} />;
+};
+
+Default.args = {
+  isFlowApp: false,
+  name: "Boomerang",
+  version: "1.0.0",
+  ...headerModalProps,
 };
 
 export const Flow = (args) => {
@@ -28,4 +31,7 @@ export const Flow = (args) => {
 
 Flow.args = {
   isFlowApp: true,
+  name: "Boomerang",
+  version: "1.0.0",
+  ...headerModalProps,
 };

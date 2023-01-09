@@ -1,13 +1,13 @@
 // Vitest Snapshot v1
 
-exports[`Feedback - snapshot 1`] = `
+exports[`Feedback > snapshot 1`] = `
 <body
   class="cds--body--with-modal-open"
 >
   <div>
     <div
       aria-hidden="false"
-      class="cds--modal is-visible cds--bmrg-feedback-container"
+      class="cds--modal is-visible cds--bmrg-feedback-container cds--bmrg-header-modal"
       role="presentation"
       tabindex="-1"
     >

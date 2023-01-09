@@ -1,6 +1,6 @@
 import React from "react";
 import { expect, test } from "vitest";
-import PlatformNotifications from "./PlatformNotifications";
+import PlatformNotifications from "./PlatformNotification";
 import { screen, render } from "@testing-library/react";
 
 const notificationsObj = {
@@ -21,11 +21,9 @@ const notificationsObj = {
 
 describe("Platform notification", () => {
   test("Renders correctly", async () => {
-    render(<PlatformNotifications notificationInfo={notificationsObj} readNotification={() => {}} />);
-    (
-      expect(
-        screen.getByText("Outage description test for the following service(s): Boomerang Flow,Boomerang CICD")
-      ) as any
+    render(<PlatformNotifications data={notificationsObj} readNotification={() => void 0} />);
+    expect(
+      screen.getByText(notificationsObj.detail)
     ).toBeInTheDocument();
   });
 });

@@ -23,7 +23,7 @@ const Component1 = (props) => (
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => props.saveValues({ text: e.target.value })}
         placeholder="The second component will know what you write here"
       />
-      <Tooltip triggerId="test-tooltip" direction="top" tabIndex={0} triggerText="">
+      <Tooltip description="Hello">
         <p>Test Tooltip</p>
       </Tooltip>
     </ModalBody>
@@ -71,7 +71,7 @@ class Component3 extends React.Component {
   }
 }
 
-export const Default = () => {
+export const Default = (args) => {
   return (
     <FlowModal
       appElement="#root"
@@ -85,6 +85,7 @@ export const Default = () => {
         label: "Change between components and persisted data",
       }}
       modalTrigger={({ openModal }) => <Button onClick={openModal}>Open modal flow</Button>}
+      {...args}
     >
       <Component1 />
       <Component2 />

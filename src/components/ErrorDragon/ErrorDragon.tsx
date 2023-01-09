@@ -1,10 +1,9 @@
 import React from "react";
 import cx from "classnames";
 import { prefix } from "../../internal/settings";
-
 import ErrorGraphic from "./assets/ErrorGraphic";
 
-type Props = {
+export type Props = {
   className?: string;
   header?: React.ReactNode;
   message?: React.ReactNode;

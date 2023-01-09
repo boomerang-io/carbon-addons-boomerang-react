@@ -14,13 +14,13 @@ export default {
   },
 };
 
-export const Default = () => {
-  return (
-    <Feedback
-      platformName="Boomerang"
-      sendIdeasUrl="https://ideas.ibm.com"
-      platformOrganization="IBM"
-      {...headerModalProps}
-    />
-  );
+export const Default = (args) => {
+  return <Feedback {...args} />;
+};
+
+Default.args = {
+  platformName: "Boomerang",
+  sendIdeasUrl: "https://ideas.ibm.com",
+  platformOrganization: "IBM",
+  ...headerModalProps,
 };

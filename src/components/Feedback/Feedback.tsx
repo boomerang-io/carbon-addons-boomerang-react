@@ -17,7 +17,7 @@ function Feedback(props: Props) {
     <ComposedModal
       aria-label="Feedback"
       open={props.isOpen}
-      className={`${prefix}--bmrg-feedback-container`}
+      className={`${prefix}--bmrg-feedback-container ${prefix}--bmrg-header-modal`}
       onClose={props.closeModal}
       onKeyDown={(e: any) => e.stopPropagation()}
     >
@@ -66,12 +66,14 @@ function FeedbackMenuItem(props: Omit<Props, "isOpen" | "closeModal">) {
 
   const handleClose = () => {
     setIsOpen(false);
-    menuItemRef.current?.focus();
+    setTimeout(() => {
+      menuItemRef.current?.focus();
+    }, 0);
   };
 
   return (
     <>
-      <HeaderMenuItem type="button" icon={<Idea />} text="Submit an idea" onClick={() => setIsOpen(!isOpen)} />
+      <HeaderMenuItem type="button" icon={<Idea />} text="Submit an idea" onClick={() => setIsOpen(!isOpen)} ref={menuItemRef}/>
       <Feedback isOpen={isOpen} closeModal={handleClose} {...props} />
     </>
   );

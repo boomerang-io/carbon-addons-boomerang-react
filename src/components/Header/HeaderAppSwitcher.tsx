@@ -19,13 +19,13 @@ const classNames = "--app-switcher";
 
 type HeaderAppSwitcherProps = {
   baseEnvUrl?: string;
-  baseServiceUrl: string;
+  baseServicesUrl: string;
   isActive?: boolean;
   id: string;
 };
 
-export default function HeaderAppSwitcher({ baseServiceUrl, baseEnvUrl, id, isActive }: HeaderAppSwitcherProps) {
-  const userTeamsUrl = serviceUrl.getUserTeams({ baseServiceUrl });
+export default function HeaderAppSwitcher({ baseServicesUrl, baseEnvUrl, id, isActive }: HeaderAppSwitcherProps) {
+  const userTeamsUrl = serviceUrl.getUserTeams({ baseServicesUrl });
   const teamsQuery = useQuery<UserTeams>(userTeamsUrl, resolver.query(userTeamsUrl));
 
   if (teamsQuery.isLoading) {
@@ -60,7 +60,7 @@ export default function HeaderAppSwitcher({ baseServiceUrl, baseEnvUrl, id, isAc
               <TeamServiceListMenu
                 key={team.id}
                 baseEnvUrl={baseEnvUrl}
-                baseServiceUrl={baseServiceUrl}
+                baseServicesUrl={baseServicesUrl}
                 isMember={true}
                 team={team}
               />
@@ -70,7 +70,7 @@ export default function HeaderAppSwitcher({ baseServiceUrl, baseEnvUrl, id, isAc
                 <SwitcherDivider />
                 <TeamServiceListMenu
                   baseEnvUrl={baseEnvUrl}
-                  baseServiceUrl={baseServiceUrl}
+                  baseServicesUrl={baseServicesUrl}
                   isAccount={true}
                   isMember={account.isAccountTeamMember}
                   team={account}
@@ -80,7 +80,7 @@ export default function HeaderAppSwitcher({ baseServiceUrl, baseEnvUrl, id, isAc
                     <TeamServiceListMenu
                       key={project.id}
                       baseEnvUrl={baseEnvUrl}
-                      baseServiceUrl={baseServiceUrl}
+                      baseServicesUrl={baseServicesUrl}
                       isMember={true}
                       team={project}
                     />
@@ -106,17 +106,17 @@ export default function HeaderAppSwitcher({ baseServiceUrl, baseEnvUrl, id, isAc
 }
 
 type TeamServiceListMenuProps = {
-  baseServiceUrl: string;
+  baseServicesUrl: string;
   baseEnvUrl?: string;
   isAccount?: boolean;
   isMember: boolean;
   team: SimpleIdNameMap;
 };
 
-function TeamServiceListMenu({ baseServiceUrl, baseEnvUrl, isAccount, isMember, team }: TeamServiceListMenuProps) {
+function TeamServiceListMenu({ baseServicesUrl, baseEnvUrl, isAccount, isMember, team }: TeamServiceListMenuProps) {
   const { id, name } = team;
   const [isSelected, setIsSelected] = React.useState(false);
-  const teamsServicesUrl = serviceUrl.getTeamServices({ baseServiceUrl, teamId: id });
+  const teamsServicesUrl = serviceUrl.getTeamServices({ baseServicesUrl, teamId: id });
 
   const servicesQuery = useQuery<SimpleTeamService[]>({
     queryKey: teamsServicesUrl,

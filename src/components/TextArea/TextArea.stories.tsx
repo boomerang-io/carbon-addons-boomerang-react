@@ -1,5 +1,4 @@
 import React from "react";
-import { action } from "@storybook/addon-actions";
 import TextArea from "./TextArea";
 
 export default {
@@ -33,7 +32,6 @@ export const Default = (args) => {
   return (
     <TextArea
       id="default-text-area"
-      onChange={action("text area change")}
       placeholder={"Placeholder"}
       style={{ resize: "none" }}
       {...args}
@@ -58,7 +56,6 @@ export const KitchenSink = (args) => {
   return (
     <TextArea
       id="tooltip-label-text-area"
-      onChange={action("text area change")}
       placeholder={"Placeholder"}
       style={{ resize: "none" }}
       helperText={"Some helper text"}

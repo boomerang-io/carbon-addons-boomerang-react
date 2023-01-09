@@ -1,0 +1,14 @@
+// Vitest Snapshot v1
+
+exports[`Avatar > snapshot 1`] = `
+<body>
+  <div>
+    <img
+      alt="Avatar for Rick Deckard"
+      class="cds--bmrg-avatar --medium"
+      src="ibm.com/fake/path/to/img.png"
+      title="Avatar for Rick Deckard"
+    />
+  </div>
+</body>
+`;

@@ -1,13 +1,10 @@
 /* eslint-disable no-script-url */
 import React from "react";
-import { Link, Router } from "react-router-dom";
+import { Link, MemoryRouter as Router } from "react-router-dom";
 import { ServiceDesk } from "@carbon/react/icons";
 import { SideNav, SideNavLink, SideNavItems, SideNavMenu, SideNavMenuItem } from "@carbon/react";
 import HeaderMenuItem from "../Header/HeaderMenuItem";
-import { createMemoryHistory } from "history";
 import Header from "./index"; // Using default export
-
-const mockSocketUrl = "https://www.ibm.com/ws";
 
 export default {
   title: "Platform/Header",
@@ -32,45 +29,44 @@ export const Default = () => (
       navLinks={[
         {
           name: "Launchpad",
-          url: "https://servicesessentials.ibm.com/launchpad/",
+          url: "javascript:void(0)",
         },
         {
-          name: "Next",
-          url: "https://servicesessentials.ibm.com/next/",
-        },
-        {
-          name: "Status",
-          url: "https://servicesessentials.ibm.com/status/",
+          name: "Catalog",
+          url: "javascript:void(0)",
         },
         {
           name: "Docs",
-          url: "https://servicesessentials.ibm.com/docs/",
+          url: "javascript:void(0)",
         },
         {
           name: "Admin",
-          url: "https://servicesessentials.ibm.com/admin/",
+          url: "javascript:void(0)",
         },
       ]}
-      notificationsConfig={{
-        wsUrl: mockSocketUrl,
-      }}
+      profileMenuItems={[
+        <HeaderMenuItem
+          key="About the Platform"
+          text="About the Platform"
+          type="link"
+          kind="app"
+          href="javascript:void(0)"
+        />,
+        <HeaderMenuItem key="GDPR agreement" text="GDPR agreement" type="link" kind="app" href="javascript:void(0)" />,
+        <HeaderMenuItem key="Sign out" text="Sign out" type="link" kind="app" href="javascript:void(0)" />,
+      ]}
       supportMenuItems={[
         <HeaderMenuItem key="Tutorial" text="Tutorial" type="link" kind="app" href="javascript:void(0)" />,
         <HeaderMenuItem key="FAQ + Contacts" text="FAQ + Contacts" type="link" kind="app" href="javascript:void(0)" />,
         <HeaderMenuItem key="Send Feedback" text="Send Feedback" type="link" kind="app" href="javascript:void(0)" />,
         <HeaderMenuItem key="Report a bug" text="Report a bug" type="link" kind="app" href="javascript:void(0)" />,
       ]}
-      profileMenuItems={[
-        <HeaderMenuItem key="About the Platform" text="About the Platform" type="link" kind="app" href="javascript:void(0)" />,
-        <HeaderMenuItem key="GDPR agreement" text="GDPR agreement" type="link" kind="app" href="javascript:void(0)" />,
-        <HeaderMenuItem key="Sign out" text="Sign out" type="link" kind="app" href="javascript:void(0)" />,
-      ]}
     />
   </div>
 );
 
-export const WithIntegratedSidenav = () => (
-  <Router history={createMemoryHistory({ initialEntries: ["/"] })}>
+export const IntegratedSidenav = () => (
+  <Router>
     <Header
       productName={"App"}
       prefixName={"Boomerang"}
@@ -79,41 +75,34 @@ export const WithIntegratedSidenav = () => (
       navLinks={[
         {
           name: "Launchpad",
-          url: "https://servicesessentials.ibm.com/launchpad/",
+          url: "javascript:void(0)",
         },
         {
-          name: "Next",
-          url: "https://servicesessentials.ibm.com/next/",
-        },
-        {
-          name: "Status",
-          url: "https://servicesessentials.ibm.com/status/",
+          name: "Catalog",
+          url: "javascript:void(0)",
         },
         {
           name: "Docs",
-          url: "https://servicesessentials.ibm.com/docs/",
+          url: "javascript:void(0)",
         },
         {
           name: "Admin",
-          url: "https://servicesessentials.ibm.com/admin/",
+          url: "javascript:void(0)",
         },
       ]}
-      notificationsConfig={{
-        wsUrl: mockSocketUrl,
-      }}
+      profileMenuItems={[
+        <HeaderMenuItem key="0" text="About the Platform" type="link" kind="app" href="javascript:void(0)" />,
+        <HeaderMenuItem key="1" text="GDPR agreement" type="link" kind="app" href="javascript:void(0)" />,
+        <HeaderMenuItem key="2" text="Sign out" type="link" kind="app" href="javascript:void(0)" />,
+      ]}
       supportMenuItems={[
         <HeaderMenuItem key="0" text="Tutorial" type="link" kind="app" href="javascript:void(0)" />,
         <HeaderMenuItem key="1" text="FAQ + Contacts" type="link" kind="app" href="javascript:void(0)" />,
         <HeaderMenuItem key="2" text="Send Feedback" type="link" kind="app" href="javascript:void(0)" />,
         <HeaderMenuItem key="3" text="Report a bug" type="link" kind="app" href="javascript:void(0)" />,
       ]}
-      profileMenuItems={[
-        <HeaderMenuItem key="0" text="About the Platform" type="link" kind="app" href="javascript:void(0)" />,
-        <HeaderMenuItem key="1" text="GDPR agreement" type="link" kind="app"href="javascript:void(0)" />,
-        <HeaderMenuItem key="2" text="Sign out" type="link" kind="app" href="javascript:void(0)" />,
-      ]}
       leftPanel={({ isOpen, close }) => (
-        <SideNav isChildOfHeader aria-label="sidenav" expanded={isOpen} isPersistent={false} onOverlayClick={close}>
+        <SideNav aria-label="sidenav" expanded={isOpen} isPersistent={false} onOverlayClick={close}>
           <SideNavItems>
             <SideNavMenu title="Large menu" large>
               <SideNavMenuItem element={Link} to="/">
@@ -139,7 +128,3 @@ export const WithIntegratedSidenav = () => (
     />
   </Router>
 );
-
-WithIntegratedSidenav.story = {
-  name: "with integrated Sidenav",
-};

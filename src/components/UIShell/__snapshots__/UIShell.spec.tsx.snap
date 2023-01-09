@@ -1,6 +1,6 @@
 // Vitest Snapshot v1
 
-exports[`UIShell - snapshot 1`] = `
+exports[`UIShell > snapshot 1`] = `
 <body>
   <div>
     <div

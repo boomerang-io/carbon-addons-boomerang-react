@@ -1,6 +1,6 @@
 // Vitest Snapshot v1
 
-exports[`AboutPlatform - snapshot 1`] = `
+exports[`AboutPlatform > snapshot 1`] = `
 <body
   class="cds--body--with-modal-open"
 >
@@ -12,7 +12,7 @@ exports[`AboutPlatform - snapshot 1`] = `
       tabindex="-1"
     >
       <div
-        aria-label="Boomerang   |   Version 1.2.1"
+        aria-label="Boomerang  |  Version 1.2.1"
         aria-modal="true"
         class="cds--modal-container"
         role="dialog"
@@ -32,7 +32,7 @@ exports[`AboutPlatform - snapshot 1`] = `
             <h2
               class="cds--modal-header__label cds--type-delta"
             >
-              Boomerang   |   Version 1.2.1
+              Boomerang  |  Version 1.2.1
             </h2>
             <h3
               class="cds--modal-header__heading cds--type-beta"

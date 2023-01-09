@@ -1,11 +1,9 @@
 import React from "react";
 import { expect, test } from "vitest";
 import { render } from "@testing-library/react";
-import { Router } from "react-router-dom";
-import { createMemoryHistory } from "history";
+import { MemoryRouter as Router } from "react-router-dom";
 import FeatureNavTab from "./FeatureNavTab";
 
-const history = createMemoryHistory();
 
 const props = {
   label: "Red Panda",
@@ -14,7 +12,7 @@ const props = {
 
 test("FeatureNavTab - render correctly", () => {
   const { queryByText } = render(
-    <Router history={history}>
+    <Router>
       <FeatureNavTab {...props} />
     </Router>
   );

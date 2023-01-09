@@ -1,6 +1,5 @@
 import React from "react";
-import { createMemoryHistory } from "history";
-import { Router } from "react-router-dom";
+import { MemoryRouter as Router  } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute";
 
 export default {
@@ -13,10 +12,9 @@ export default {
       },
     },
   },
-  decorators: [(story) => <Router history={history}>{story()}</Router>],
+  decorators: [(story) => <Router >{story()}</Router>],
 };
 
-const history = createMemoryHistory();
 const Component = () => <div>Yay, you are authorized to view this page.</div>;
 
 export const Authorized = (args) => {

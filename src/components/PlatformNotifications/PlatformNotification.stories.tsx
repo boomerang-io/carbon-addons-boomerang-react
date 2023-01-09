@@ -1,6 +1,9 @@
 import React from "react";
 import PlatformNotificationsContainer from "./index";
 
+const BASE_ENV_URL = "http://localhost:6006";
+const BASE_SERVICES_URL = "http://localhost:8080/services";
+
 export default {
   title: "Platform/PlatformNotifications",
   component: PlatformNotificationsContainer,
@@ -12,6 +15,8 @@ export const Default = (args) => {
 };
 
 Default.args = {
+  baseEnvUrl: BASE_ENV_URL,
+  baseServicesUrl: BASE_SERVICES_URL,
   initialNotifications: [
     {
       creator: "Boomerang CICD",
@@ -28,8 +33,5 @@ Default.args = {
       userId: "61730018ae92414d2bd15b4c",
     },
   ],
-  config: {
-    wsUrl: "ws://localhost:8081/ws",
-  },
   isActive: true,
 };

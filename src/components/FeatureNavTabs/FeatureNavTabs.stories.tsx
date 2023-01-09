@@ -1,6 +1,5 @@
 import React from "react";
-import { createMemoryHistory } from "history";
-import { Router } from "react-router-dom";
+import { MemoryRouter as Router } from "react-router-dom";
 import { default as Tabs } from "./index";
 import { default as Tab } from "../FeatureNavTab";
 
@@ -16,7 +15,7 @@ export default {
       },
     },
   },
-  decorators: [(story) => <Router history={createMemoryHistory({ initialEntries: ["/"] })}>{story()}</Router>],
+  decorators: [(story) => <Router>{story()}</Router>],
 };
 
 export const Default = (args) => {

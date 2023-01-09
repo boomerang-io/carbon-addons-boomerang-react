@@ -1,10 +1,8 @@
 import React from "react";
-import { Router } from "react-router-dom";
+import { MemoryRouter as Router } from "react-router-dom";
 import FeatureSideNavLink from "./FeatureSideNavLink";
-import { Rocket } from "@carbon/react/icons";
-import { createBrowserHistory } from "history";
+import { Launch } from "@carbon/react/icons";
 
-const history = createBrowserHistory();
 
 export default {
   title: "Features/FeatureSideNavLink",
@@ -20,7 +18,7 @@ export default {
 
 export const Default = () => {
   return (
-    <Router history={history}>
+    <Router>
       <FeatureSideNavLink to="#" children="TESTING" />
     </Router>
   );
@@ -28,15 +26,15 @@ export const Default = () => {
 
 export const Icon = () => {
   return (
-    <Router history={history}>
-      <FeatureSideNavLink to="#" children="Boomerang" iconProps={{ "data-testid": "rocket-icon" }} icon={Rocket} />
+    <Router>
+      <FeatureSideNavLink to="#" children="Boomerang" iconProps={{ "data-testid": "rocket-icon" }} icon={Launch} />
     </Router>
   );
 };
 
 export const CustomContent = () => {
   return (
-    <Router history={history}>
+    <Router>
       <FeatureSideNavLink to="#">
         <div>
           <p>text1</p>
@@ -49,7 +47,7 @@ export const CustomContent = () => {
 
 export const Divider = () => {
   return (
-    <Router history={history}>
+    <Router>
       <FeatureSideNavLink to="#" children="Boomerang" hasDivider />
     </Router>
   );

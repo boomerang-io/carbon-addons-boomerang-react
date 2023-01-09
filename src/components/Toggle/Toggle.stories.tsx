@@ -22,8 +22,8 @@ export const Default = (args) => {
 export const InvalidWarning = (args) => {
   return (
     <Toggle
-      id="tooltip-label-toggle"
       defaultToggled
+      id="tooltip-label-toggle"
       onToggle={action("Toggle clicked")}
       labelText="Label for toggle"
       tooltipContent="Tooltip for toggle"
@@ -41,8 +41,8 @@ export const InvalidWarning = (args) => {
 export const HorizontalToggle = (args) => {
   return (
     <Toggle
-      id="default-toggle"
       defaultToggled
+      id="default-toggle"
       onToggle={action("Toggle clicked")}
       labelText="Label for toggle"
       helperText={"helperText"}
@@ -54,8 +54,8 @@ export const HorizontalToggle = (args) => {
 export const KitchenSink = (args) => {
   return (
     <Toggle
-      id="tooltip-label-toggle"
       defaultToggled
+      id="tooltip-label-toggle"
       onToggle={action("Toggle clicked")}
       labelText="Label for toggle"
       tooltipContent="Tooltip for toggle"

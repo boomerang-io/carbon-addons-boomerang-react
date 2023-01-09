@@ -2,33 +2,35 @@ import React from "react";
 import cx from "classnames";
 import { Client } from "@stomp/stompjs";
 import { prefix } from "../../internal/settings";
-import Notification from "./PlatformNotifications";
+import Notification from "./PlatformNotification";
+import type { PlatformNotification } from "../../types";
 
 type Props = {
-  config?: {
-    wsUrl: string;
-    httpUrl?: string;
-  };
-  initialNotifications?: any[];
-  isActive: boolean;
-  setHasNewNotifications: (...args: any[]) => any;
   baseEnvUrl?: string;
+  baseServicesUrl?: string;
+  initialNotifications?: PlatformNotification[];
+  isActive: boolean;
+  setHasNewNotifications: (hasNewNotifications: boolean) => void;
 };
 
-type State = any;
+type State = { currentNotifications: PlatformNotification[]; numNotifications: number; error: boolean };
 
 export default class PlatformNotificationsContainer extends React.Component<Props, State> {
   ws: any;
   articleRef = React.createRef();
 
   state = {
+    error: false,
     currentNotifications: this.props.initialNotifications ?? [],
     numNotifications: this.props.initialNotifications?.length ?? 0,
   };
 
   componentDidMount() {
+    const brokerURL = `${this.props.baseServicesUrl}/notifications/ws`
+      .replace("https://", "wss://")
+      .replace("http://", "ws://");
     this.ws = new Client({
-      brokerURL: this.props.config?.wsUrl,
+      brokerURL,
       reconnectDelay: 10000,
     });
     this.ws.onConnect = this.connect;
@@ -50,13 +52,13 @@ export default class PlatformNotificationsContainer extends React.Component<Prop
    * recieve x amount of new notifications and pass them into state of current notifications
    *
    */
-  receiveNewNotifications = (incomingNotifications: any) => {
+  receiveNewNotifications = (incomingNotifications: { body: string }) => {
     if (incomingNotifications.body) {
-      const data = [JSON.parse(incomingNotifications.body)];
+      const data = [JSON.parse(incomingNotifications.body)] as PlatformNotification[];
       if (data.length > 0) {
         this.props.setHasNewNotifications(true);
       }
-      this.setState((prevState: any) => ({
+      this.setState((prevState) => ({
         currentNotifications: [...data, ...prevState.currentNotifications],
         numNotifications: prevState.numNotifications + data.length,
       }));
@@ -116,7 +118,7 @@ export default class PlatformNotificationsContainer extends React.Component<Prop
    * notificationId - a single notification that the user has marked as read
    * @returns {Function} - makes network request, then after waiting for it to return, setState is called to update currentNotifications and numNotifications
    */
-  handleReadNotification(notificationId: any) {
+  handleReadNotification(notificationId: string) {
     this.ws.publish({
       destination: "/app/read",
       body: JSON.stringify([notificationId]),
@@ -132,9 +134,9 @@ export default class PlatformNotificationsContainer extends React.Component<Prop
   }
 
   renderNotifications() {
-    return this.state.currentNotifications.slice(0, 5).map((notification: any) => (
+    return this.state.currentNotifications.slice(0, 5).map((notification) => (
       <li key={notification.id}>
-        <Notification readNotification={this.handleReadNotification.bind(this)} notificationInfo={notification} />
+        <Notification readNotification={this.handleReadNotification.bind(this)} data={notification} />
       </li>
     ));
   }

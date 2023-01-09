@@ -1,12 +1,10 @@
 import React from "react";
 import { expect, test } from "vitest";
-import { Router } from "react-router-dom";
-import { createMemoryHistory } from "history";
+import { MemoryRouter as Router } from "react-router-dom";
 import { render } from "@testing-library/react";
 
 import ProtectedRoute from "./ProtectedRoute";
 
-const history = createMemoryHistory();
 
 function DivTest() {
   return <div>test</div>;
@@ -20,7 +18,7 @@ const props = {
 
 test("render component for authorized user", () => {
   const { queryByText } = render(
-    <Router history={history}>
+    <Router>
       <ProtectedRoute userRole="admin" {...props} />
     </Router>
   );
@@ -30,7 +28,7 @@ test("render component for authorized user", () => {
 
 test("block access to unauthorized user", () => {
   const { queryByText } = render(
-    <Router history={history}>
+    <Router>
       <ProtectedRoute userRole={["user, member"]} {...props} />
     </Router>
   );

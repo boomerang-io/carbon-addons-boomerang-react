@@ -8,9 +8,7 @@ type Props = {
 
 function HeaderMenu({ children, id }: Props) {
   return (
-    <ul className={`${prefix}--bmrg-header-drop-down`} role="menu" id={id}>
-      {children}
-    </ul>
+      <ul className={`${prefix}--bmrg-header-drop-down`} role="menu">{children}</ul>
   );
 }
 

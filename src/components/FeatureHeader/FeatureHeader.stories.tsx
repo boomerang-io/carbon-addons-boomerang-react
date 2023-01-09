@@ -1,6 +1,5 @@
 import React from "react";
-import { Router, Link } from "react-router-dom";
-import { createMemoryHistory } from "history";
+import { MemoryRouter as Router, Link } from "react-router-dom";
 import { FeatureHeader, FeatureHeaderTitle, FeatureHeaderSubtitle } from "./index";
 import { default as Tabs } from "../FeatureNavTabs";
 import { default as Tab } from "../FeatureNavTab";
@@ -19,7 +18,7 @@ export default {
   },
   decorators: [
     (story) => (
-      <Router history={createMemoryHistory({ initialEntries: ["/"] })}>
+      <Router>
         <div style={{ backgroundColor: "#f2f4f8", height: "20rem", width: "100%" }}>{story()}</div>
       </Router>
     ),

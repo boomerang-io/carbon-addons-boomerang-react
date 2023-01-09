@@ -1,12 +1,11 @@
 import React from "react";
-import { Router } from "react-router-dom";
+import { MemoryRouter as Router } from "react-router-dom";
 import FeatureSideNav from "./FeatureSideNav";
 import FeatureSideNavLinks from "./FeatureSideNavLinks";
 import FeatureSideNavFooter from "./FeatureSideNavFooter";
 import FeatureSideNavHeader from "./FeatureSideNavHeader";
 import FeatureSideNavLink from "../FeatureSideNavLink";
 import { Search, Accordion, AccordionItem, Button } from "@carbon/react";
-import { createMemoryHistory } from "history";
 
 export default {
   title: "Features/FeatureSideNav",
@@ -18,7 +17,7 @@ export default {
       },
     },
   },
-  decorators: [(story) => <Router history={createMemoryHistory({ initialEntries: ["/"] })}>{story()}</Router>],
+  decorators: [(story) => <Router>{story()}</Router>],
 };
 
 export const SidenavLinks = (args) => {

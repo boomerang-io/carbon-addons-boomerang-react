@@ -1,0 +1,208 @@
+// Vitest Snapshot v1
+
+exports[`Privacy Statement - snapshot 1`] = `
+<body
+  class="cds--body--with-modal-open"
+>
+  <div>
+    <div
+      aria-hidden="false"
+      class="cds--modal is-visible cds--bmrg-privacy-statement-container cds--bmrg-header-modal"
+      role="presentation"
+      tabindex="-1"
+    >
+      <div
+        aria-label="Privacy Statement"
+        aria-modal="true"
+        class="cds--modal-container"
+        role="dialog"
+      >
+        <button
+          class="cds--visually-hidden"
+          type="button"
+        >
+          Focus sentinel
+        </button>
+        <div
+          class="cds--modal-container-body"
+        >
+          <div
+            class="cds--modal-header"
+          >
+            <h2
+              class="cds--modal-header__label cds--type-delta"
+            >
+              Effective as of 
+            </h2>
+            <h3
+              class="cds--modal-header__heading cds--type-beta"
+            >
+              Privacy Statement
+            </h3>
+            <button
+              aria-label="Close"
+              class="cds--modal-close"
+              title="Close"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="cds--modal-close__icon"
+                fill="currentColor"
+                focusable="false"
+                height="20"
+                preserveAspectRatio="xMidYMid meet"
+                viewBox="0 0 32 32"
+                width="20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z"
+                />
+              </svg>
+            </button>
+          </div>
+          <div
+            class="cds--modal-content"
+          >
+            <div
+              class="cds--bmrg-privacy-statement"
+            />
+          </div>
+          <div
+            class="cds--modal-footer cds--btn-set"
+          >
+            <div
+              class="cds--bmrg-privacy-statement-delete"
+            >
+              <button
+                aria-describedby="danger-description-1"
+                class="cds--btn cds--btn--danger"
+                data-modal-primary-focus="true"
+                tabindex="0"
+                type="button"
+              >
+                <span
+                  class="cds--visually-hidden"
+                  id="danger-description-1"
+                >
+                  danger
+                </span>
+                Request account deletion
+              </button>
+              <div
+                aria-hidden="true"
+                class="cds--modal"
+                role="presentation"
+                tabindex="-1"
+              >
+                <div
+                  aria-label="Delete Account"
+                  aria-modal="true"
+                  class="cds--modal-container"
+                  role="dialog"
+                >
+                  <button
+                    class="cds--visually-hidden"
+                    type="button"
+                  >
+                    Focus sentinel
+                  </button>
+                  <div
+                    class="cds--modal-container-body"
+                  >
+                    <div
+                      class="cds--modal-header"
+                    >
+                      <h2
+                        class="cds--modal-header__label cds--type-delta"
+                      >
+                        Delete Account
+                      </h2>
+                      <h3
+                        class="cds--modal-header__heading cds--type-beta"
+                      >
+                        Request account deletion
+                      </h3>
+                      <button
+                        aria-label="Close"
+                        class="cds--modal-close"
+                        title="Close"
+                        type="button"
+                      >
+                        <svg
+                          aria-hidden="true"
+                          class="cds--modal-close__icon"
+                          fill="currentColor"
+                          focusable="false"
+                          height="20"
+                          preserveAspectRatio="xMidYMid meet"
+                          viewBox="0 0 32 32"
+                          width="20"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z"
+                          />
+                        </svg>
+                      </button>
+                    </div>
+                    <div
+                      class="cds--modal-content"
+                    >
+                      <p
+                        class="cds--bmrg-privacy-statement-delete__desc"
+                      >
+                        By selecting to delete your account, your account will be deleted along with all of your user data from our system and we will notify your team(s) that you are no longer a memeber of the platform. Are you sure you want to delete your account?
+                      </p>
+                    </div>
+                    <div
+                      class="cds--modal-footer cds--btn-set"
+                      style="margin-top: 1.125rem;"
+                    >
+                      <button
+                        class="cds--btn cds--btn--secondary"
+                        data-modal-primary-focus="true"
+                        tabindex="0"
+                        type="button"
+                      >
+                        No, go back to Privacy Statement
+                      </button>
+                      <button
+                        aria-describedby="danger-description-3"
+                        class="cds--btn cds--btn--danger"
+                        tabindex="0"
+                        type="submit"
+                      >
+                        <span
+                          class="cds--visually-hidden"
+                          id="danger-description-3"
+                        >
+                          danger
+                        </span>
+                        Yes, delete my account
+                      </button>
+                    </div>
+                  </div>
+                  <button
+                    class="cds--visually-hidden"
+                    type="button"
+                  >
+                    Focus sentinel
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button
+          class="cds--visually-hidden"
+          type="button"
+        >
+          Focus sentinel
+        </button>
+      </div>
+    </div>
+  </div>
+</body>
+`;

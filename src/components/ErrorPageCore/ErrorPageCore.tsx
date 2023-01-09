@@ -3,12 +3,12 @@ import cx from "classnames";
 import { prefix } from "../../internal/settings";
 import GenericErrorBackground from "./GenericErrorBackground";
 
-type Props = {
+export type Props = {
   className?: string;
   graphic?: React.ReactNode;
   header?: React.ReactNode;
   message?: React.ReactNode;
-  statusUrl?: string;
+  statusUrl: string;
   style?: React.CSSProperties;
   title?: React.ReactNode;
   [key: string]: any;

@@ -281,3 +281,18 @@ export type UserTeams = {
   }[];
   standardTeams: SimpleIdNameMap[];
 };
+
+export type PlatformNotification = {
+  creator: string;
+  date: string;
+  detail: string;
+  eventId: string;
+  id: string;
+  priority: string;
+  read: boolean;
+  severity: string;
+  target: string;
+  title: string;
+  type: string;
+  userId: string;
+};

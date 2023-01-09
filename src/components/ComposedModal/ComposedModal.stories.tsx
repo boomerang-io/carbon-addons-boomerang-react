@@ -47,7 +47,7 @@ function Component1(props) {
   );
 }
 
-export const Default = () => {
+export const Default = (args) => {
   return (
     <ComposedModal
       appElement="#root"
@@ -62,53 +62,9 @@ export const Default = () => {
         subtitle: "Even more info here",
       }}
       modalTrigger={({ openModal }) => <Button onClick={openModal}>Open modal composed</Button>}
+      {...args}
     >
       {({ closeModal }) => <Component1 closeModal={closeModal} />}
     </ComposedModal>
   );
-};
-
-export const Size = () => {
-  const [size, setSize] = React.useState<"xs" | "sm" | "md" | "lg">("md");
-  return (
-    <div>
-      <div style={{ marginBottom: "1rem" }}>
-        <RadioGroup
-          id="testSize"
-          name="testSize"
-          //defaultSelected={"md"}
-          labelText={"Size"}
-          onChange={(value) => setSize(value)}
-          options={[
-            { labelText: "xs", value: "xs" },
-            { labelText: "sm", value: "sm" },
-            { labelText: "md", value: "md" },
-            { labelText: "lg", value: "lg" },
-          ]}
-          orientation="horizontal"
-        />
-      </div>
-      <ComposedModal
-        size={size}
-        appElement="#root"
-        composedModalProps={{ selectorPrimaryFocus: 'input[id="testing"]' }}
-        confirmModalProps={{
-          title: "Close Composed Modal?",
-          children: <div>You will need to start from the first component</div>,
-        }}
-        modalHeaderProps={{
-          title: "Composed Modal",
-          label: "Single child as a function",
-          subtitle: "Even more info here",
-        }}
-        modalTrigger={({ openModal }) => <Button onClick={openModal}>Open modal composed</Button>}
-      >
-        {({ closeModal }) => <Component1 closeModal={closeModal} />}
-      </ComposedModal>
-    </div>
-  );
-};
-
-Size.story = {
-  name: "Size",
 };

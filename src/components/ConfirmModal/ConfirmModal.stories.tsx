@@ -13,15 +13,26 @@ export default {
           "A pre-built confirm modal that has built in state management, modal header, exposed trigger and renders children.",
       },
     },
-  },
-  argTypes: {
-    children: {
-      control: "text",
-    },
-  },
+  }
 };
 
-function ExternallyControlled() {
+
+export const Default = (args) => {
+  return (
+    <ConfirmModal
+      affirmativeAction={action("confirm modal affirmative action")}
+      appElement="#root"
+      label="do things"
+      title="Yeah?"
+      modalTrigger={({ openModal }) => <Button onClick={openModal}>Open confirm modal</Button>}
+      {...args}
+    >
+      <div>Welcome to the World Wide Web</div>
+    </ConfirmModal>
+  );
+};
+
+export const ExternallyControlled = (args) => {
   const [isOpen, setIsOpen] = React.useState(false);
 
   return (
@@ -43,31 +54,9 @@ function ExternallyControlled() {
       title="Yeah?"
       modalTrigger={() => <Button onClick={() => setIsOpen(true)}>Open confirm modal</Button>}
       isOpen={isOpen}
+      {...args}
     >
       <div>Affirmative action should close modal after 2 seconds and negative after 1 second</div>
     </ConfirmModal>
   );
 }
-
-export const Default = (args) => {
-  return (
-    <ConfirmModal
-      affirmativeAction={action("confirm modal affirmative action")}
-      appElement="#root"
-      label="do things"
-      title="Yeah?"
-      modalTrigger={({ openModal }) => <Button onClick={openModal}>Open confirm modal</Button>}
-      {...args}
-    >
-      <div>Welcome to the World Wide Web</div>
-    </ConfirmModal>
-  );
-};
-
-export const _ExternallyControlled = () => {
-  return <ExternallyControlled />;
-};
-
-_ExternallyControlled.story = {
-  name: "externally controlled",
-};

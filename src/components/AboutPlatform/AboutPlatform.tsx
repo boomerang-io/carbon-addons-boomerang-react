@@ -16,24 +16,20 @@ const iconClassName = `${prefix}--bmrg-aboutPlatform-images__img`;
 
 type Props = {
   closeModal: () => void;
-  name?: string;
+  name: string;
   isOpen: boolean;
   isFlowApp?: boolean;
-  version?: string;
+  version: string;
 };
 
-function AboutPlatform({ closeModal, isOpen = false, version = "", name, isFlowApp }: Props) {
+function AboutPlatform({ closeModal, isOpen = false, version, name, isFlowApp }: Props) {
   return (
     <ComposedModal
       open={isOpen}
       className={`${prefix}--bmrg-aboutPlatform-container ${prefix}--bmrg-header-modal`}
       onClose={closeModal}
     >
-      <ModalHeader
-        label={`${name} ${" "} | ${" "} Version ${version}`}
-        title="About the Platform"
-        closeModal={closeModal}
-      />
+      <ModalHeader label={`${name}  |  Version ${version}`} title="About the Platform" closeModal={closeModal} />
       <ModalBody>
         <footer className={`${prefix}--bmrg-aboutPlatform-footer`}>
           <h1 className={`${prefix}--bmrg-aboutPlatform-footer__header`}>Powered by</h1>
@@ -65,7 +61,7 @@ function AboutPlatform({ closeModal, isOpen = false, version = "", name, isFlowA
                     rel="noopener noreferrer"
                     title="OpenShift"
                   >
-                    <OpenShiftIcon className={iconClassName}  />
+                    <OpenShiftIcon className={iconClassName} />
                   </a>
                 </li>
               </>
@@ -100,17 +96,25 @@ function AboutPlatform({ closeModal, isOpen = false, version = "", name, isFlowA
 export default AboutPlatform;
 
 function AboutPlatformMenuItem(props: Omit<Props, "isOpen" | "closeModal">) {
-  const menuItemRef = React.useRef<HTMLButtonElement>(null);
+  const menuItemRef = React.useRef<HTMLLinkElement>(null);
   const [isOpen, setIsOpen] = React.useState(false);
 
   const handleClose = () => {
     setIsOpen(false);
-    menuItemRef.current?.focus();
+    setTimeout(() => {
+      menuItemRef.current?.focus();
+    }, 0);
   };
 
   return (
     <>
-      <HeaderMenuItem type="button" icon={<Information />} text="About Platform" onClick={() => setIsOpen(!isOpen)} />
+      <HeaderMenuItem
+        type="button"
+        icon={<Information />}
+        text="About Platform"
+        onClick={() => setIsOpen(!isOpen)}
+        ref={menuItemRef}
+      />
       <AboutPlatform isOpen={isOpen} closeModal={handleClose} {...props} />
     </>
   );

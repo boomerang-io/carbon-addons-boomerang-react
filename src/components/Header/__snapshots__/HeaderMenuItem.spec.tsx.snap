@@ -1,0 +1,421 @@
+// Vitest Snapshot v1
+
+exports[`Feedback > App link 1`] = `
+<body>
+  <div>
+    <li>
+      <a
+        class="cds--header__menu-item"
+        href="https://useboomerang.io"
+        tabindex="0"
+      >
+        <span
+          class="cds--text-truncate--end"
+        >
+          <div
+            class="cds--bmrg-header-menu-item__content "
+          >
+            <span
+              class="cds--bmrg-header-menu-item__text"
+            >
+              Use Boomerang
+            </span>
+          </div>
+        </span>
+      </a>
+    </li>
+  </div>
+</body>
+`;
+
+exports[`Feedback > App link snapshot 1`] = `
+<body>
+  <div>
+    <li>
+      <a
+        class="cds--header__menu-item"
+        href="https://useboomerang.io"
+        tabindex="0"
+      >
+        <span
+          class="cds--text-truncate--end"
+        >
+          <div
+            class="cds--bmrg-header-menu-item__content "
+          >
+            <span
+              class="cds--bmrg-header-menu-item__text"
+            >
+              Use Boomerang
+            </span>
+          </div>
+        </span>
+      </a>
+    </li>
+  </div>
+</body>
+`;
+
+exports[`Feedback > Button 1`] = `
+<body>
+  <div>
+    <li
+      role="button"
+    >
+      <a
+        class="cds--header__menu-item"
+        href="javascript:void(0)"
+        tabindex="0"
+        text="Show Boomerang"
+      >
+        <span
+          class="cds--text-truncate--end"
+        >
+          <div
+            class="cds--bmrg-header-menu-item__content "
+          >
+            <span
+              class="cds--bmrg-header-menu-item__text"
+            >
+              Show Boomerang
+            </span>
+          </div>
+        </span>
+      </a>
+    </li>
+  </div>
+</body>
+`;
+
+exports[`Feedback > Button snapshot 1`] = `
+<body>
+  <div>
+    <li
+      role="button"
+    >
+      <a
+        class="cds--header__menu-item"
+        href="javascript:void(0)"
+        tabindex="0"
+        text="Show Boomerang"
+      >
+        <span
+          class="cds--text-truncate--end"
+        >
+          <div
+            class="cds--bmrg-header-menu-item__content "
+          >
+            <span
+              class="cds--bmrg-header-menu-item__text"
+            >
+              Show Boomerang
+            </span>
+          </div>
+        </span>
+      </a>
+    </li>
+  </div>
+</body>
+`;
+
+exports[`Feedback > Button snapshot 2`] = `
+<body>
+  <div>
+    <li>
+      <a
+        class="cds--header__menu-item"
+        href="javascript:void(0)"
+        tabindex="0"
+      >
+        <span
+          class="cds--text-truncate--end"
+        >
+          <div
+            class="cds--bmrg-header-menu-user"
+          >
+            <img
+              alt="Avatar for Boomerang user"
+              class="cds--bmrg-avatar --medium"
+              src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50"
+              title="Avatar for Boomerang user"
+            />
+            <p
+              class="cds--bmrg-header-menu-user__name"
+            >
+               
+              Boomerang user
+               
+            </p>
+          </div>
+        </span>
+      </a>
+    </li>
+  </div>
+</body>
+`;
+
+exports[`Feedback > External link 1`] = `
+<body>
+  <div>
+    <li>
+      <a
+        class="cds--header__menu-item"
+        href="https://useboomerang.io"
+        rel="noopener noreferrer"
+        tabindex="0"
+        target="_blank"
+      >
+        <span
+          class="cds--text-truncate--end"
+        >
+          <div
+            class="cds--bmrg-header-menu-item__content "
+          >
+            <span
+              class="cds--bmrg-header-menu-item__text"
+            >
+              Use Boomerang
+            </span>
+            <svg
+              aria-label="Opens in new tab"
+              fill="currentColor"
+              focusable="false"
+              height="16"
+              preserveAspectRatio="xMidYMid meet"
+              role="img"
+              viewBox="0 0 16 16"
+              width="16"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M13,14H3c-0.6,0-1-0.4-1-1V3c0-0.6,0.4-1,1-1h5v1H3v10h10V8h1v5C14,13.6,13.6,14,13,14z"
+              />
+              <path
+                d="M10 1L10 2 13.3 2 9 6.3 9.7 7 14 2.7 14 6 15 6 15 1z"
+              />
+            </svg>
+          </div>
+        </span>
+      </a>
+    </li>
+  </div>
+</body>
+`;
+
+exports[`Feedback > External link snapshot 1`] = `
+<body>
+  <div>
+    <li>
+      <a
+        class="cds--header__menu-item"
+        href="https://useboomerang.io"
+        rel="noopener noreferrer"
+        tabindex="0"
+        target="_blank"
+      >
+        <span
+          class="cds--text-truncate--end"
+        >
+          <div
+            class="cds--bmrg-header-menu-item__content "
+          >
+            <span
+              class="cds--bmrg-header-menu-item__text"
+            >
+              Use Boomerang
+            </span>
+            <svg
+              aria-label="Opens in new tab"
+              fill="currentColor"
+              focusable="false"
+              height="16"
+              preserveAspectRatio="xMidYMid meet"
+              role="img"
+              viewBox="0 0 16 16"
+              width="16"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M13,14H3c-0.6,0-1-0.4-1-1V3c0-0.6,0.4-1,1-1h5v1H3v10h10V8h1v5C14,13.6,13.6,14,13,14z"
+              />
+              <path
+                d="M10 1L10 2 13.3 2 9 6.3 9.7 7 14 2.7 14 6 15 6 15 1z"
+              />
+            </svg>
+          </div>
+        </span>
+      </a>
+    </li>
+  </div>
+</body>
+`;
+
+exports[`Feedback > Internal link 1`] = `
+<body>
+  <div>
+    <li>
+      <a
+        class="cds--header__menu-item"
+        href="https://useboomerang.io"
+        tabindex="0"
+      >
+        <span
+          class="cds--text-truncate--end"
+        >
+          <div
+            class="cds--bmrg-header-menu-item__content "
+          >
+            <span
+              class="cds--bmrg-header-menu-item__text"
+            >
+              Use Boomerang
+            </span>
+            <svg
+              aria-label="Opens in same platform"
+              fill="currentColor"
+              focusable="false"
+              height="16"
+              preserveAspectRatio="xMidYMid meet"
+              role="img"
+              viewBox="0 0 16 16"
+              width="16"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M9.3 3.7L13.1 7.5 1 7.5 1 8.5 13.1 8.5 9.3 12.3 10 13 15 8 10 3z"
+              />
+            </svg>
+          </div>
+        </span>
+      </a>
+    </li>
+  </div>
+</body>
+`;
+
+exports[`Feedback > Internal link snapshot 1`] = `
+<body>
+  <div>
+    <li>
+      <a
+        class="cds--header__menu-item"
+        href="https://useboomerang.io"
+        tabindex="0"
+      >
+        <span
+          class="cds--text-truncate--end"
+        >
+          <div
+            class="cds--bmrg-header-menu-item__content "
+          >
+            <span
+              class="cds--bmrg-header-menu-item__text"
+            >
+              Use Boomerang
+            </span>
+            <svg
+              aria-label="Opens in same platform"
+              fill="currentColor"
+              focusable="false"
+              height="16"
+              preserveAspectRatio="xMidYMid meet"
+              role="img"
+              viewBox="0 0 16 16"
+              width="16"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M9.3 3.7L13.1 7.5 1 7.5 1 8.5 13.1 8.5 9.3 12.3 10 13 15 8 10 3z"
+              />
+            </svg>
+          </div>
+        </span>
+      </a>
+    </li>
+  </div>
+</body>
+`;
+
+exports[`Feedback > Link snapshot 1`] = `
+<body>
+  <div>
+    <li>
+      <a
+        class="cds--header__menu-item"
+        href="https://useboomerang.io"
+        rel="noopener noreferrer"
+        tabindex="0"
+        target="_blank"
+      >
+        <span
+          class="cds--text-truncate--end"
+        >
+          <div
+            class="cds--bmrg-header-menu-item__content "
+          >
+            <span
+              class="cds--bmrg-header-menu-item__text"
+            >
+              Use Boomerang
+            </span>
+            <svg
+              aria-label="Opens in new tab"
+              fill="currentColor"
+              focusable="false"
+              height="16"
+              preserveAspectRatio="xMidYMid meet"
+              role="img"
+              viewBox="0 0 16 16"
+              width="16"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M13,14H3c-0.6,0-1-0.4-1-1V3c0-0.6,0.4-1,1-1h5v1H3v10h10V8h1v5C14,13.6,13.6,14,13,14z"
+              />
+              <path
+                d="M10 1L10 2 13.3 2 9 6.3 9.7 7 14 2.7 14 6 15 6 15 1z"
+              />
+            </svg>
+          </div>
+        </span>
+      </a>
+    </li>
+  </div>
+</body>
+`;
+
+exports[`Feedback > User 1`] = `
+<body>
+  <div>
+    <li>
+      <a
+        class="cds--header__menu-item"
+        href="javascript:void(0)"
+        tabindex="0"
+      >
+        <span
+          class="cds--text-truncate--end"
+        >
+          <div
+            class="cds--bmrg-header-menu-user"
+          >
+            <img
+              alt="Avatar for Boomerang user"
+              class="cds--bmrg-avatar --medium"
+              src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50"
+              title="Avatar for Boomerang user"
+            />
+            <p
+              class="cds--bmrg-header-menu-user__name"
+            >
+               
+              Boomerang user
+               
+            </p>
+          </div>
+        </span>
+      </a>
+    </li>
+  </div>
+</body>
+`;

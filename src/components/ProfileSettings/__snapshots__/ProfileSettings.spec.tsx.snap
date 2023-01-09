@@ -1,0 +1,25 @@
+// Vitest Snapshot v1
+
+exports[`Profile Settings > snapshot 1`] = `
+<body>
+  <div>
+    <div
+      class="cds--bmrg-profile-menu-user"
+    >
+      <img
+        alt="Avatar for Boomerang Joe"
+        class="cds--bmrg-avatar --medium"
+        src="joe@ibm.com"
+        title="Avatar for Boomerang Joe"
+      />
+      <p
+        class="cds--bmrg-profile-menu-user__name"
+      >
+         
+        Boomerang Joe
+         
+      </p>
+    </div>
+  </div>
+</body>
+`;

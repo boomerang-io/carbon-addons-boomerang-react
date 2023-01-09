@@ -39,19 +39,19 @@ function determineIfConfigIsDifferent(teams: LowerLevelGroup[], initialTeams: Lo
 type Props = {
   closeModal: () => void;
   isOpen: boolean;
-  baseServiceUrl: string;
+  baseServicesUrl: string;
   src: string;
   userName?: string;
 };
 
-function ProfileSettings({ baseServiceUrl, src, userName, isOpen, closeModal }: Props) {
+function ProfileSettings({ baseServicesUrl, src, userName, isOpen, closeModal }: Props) {
   const queryClient = useQueryClient();
 
   const [initialTeams, setInitialTeams] = useState<LowerLevelGroup[]>([]);
   const [teams, setTeams] = useState<LowerLevelGroup[]>([]);
 
-  const userUrl = serviceUrl.getLaunchpadUser({ baseServiceUrl });
-  const profileUrl = serviceUrl.resourceUserProfile({ baseServiceUrl });
+  const userUrl = serviceUrl.getLaunchpadUser({ baseServicesUrl });
+  const profileUrl = serviceUrl.resourceUserProfile({ baseServicesUrl });
 
   const {
     data: user,
@@ -87,7 +87,7 @@ function ProfileSettings({ baseServiceUrl, src, userName, isOpen, closeModal }: 
     };
 
     try {
-      await mutateUserProfile({ baseServiceUrl, body });
+      await mutateUserProfile({ baseServicesUrl, body });
       notify(
         <ToastNotification subtitle="Successfully updated user settings" title="Update Settings" kind="success" />,
         { containerId: `${prefix}--bmrg-header-notifications` }
@@ -232,12 +232,14 @@ function ProfileSettingsMenuItem(props: Omit<Props, "isOpen" | "closeModal">) {
 
   const handleClose = () => {
     setIsOpen(false);
-    menuItemRef.current?.focus();
+    setTimeout(() => {
+      menuItemRef.current?.focus();
+    }, 0);
   };
 
   return (
     <>
-      <HeaderMenuItem type="user" onClick={() => setIsOpen(!isOpen)} src={props.src} userName={props.userName} />
+      <HeaderMenuItem type="user" onClick={() => setIsOpen(!isOpen)} src={props.src} userName={props.userName} ref={menuItemRef}/>
       <ProfileSettings isOpen={isOpen} closeModal={handleClose} {...props} />
     </>
   );

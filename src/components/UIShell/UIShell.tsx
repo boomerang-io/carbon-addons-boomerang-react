@@ -13,8 +13,6 @@ import { User } from "../../types";
 import { SignOutMenuItem } from "../SignOut";
 
 type Props = {
-  productName?: string;
-  platformName?: string;
   config?: {
     features?: {
       "appSwitcher.enabled"?: boolean;
@@ -50,18 +48,20 @@ type Props = {
     };
     platformMessage?: any;
   };
+  leftPanel?: (args: { close: () => void; isOpen: boolean; navLinks?: React.ReactNode[] }) => React.ReactNode;
+  platformName?: string;
+  productName?: string;
+  profileMenuItems?: React.ReactNode[];
   renderPrivacyRedirect?: boolean;
   renderPrivacyStatement?: boolean;
   rightPanel?: { icon?: React.ReactNode; component: React.ReactNode };
-  leftPanel?: (args: { close: () => void; isOpen: boolean; navLinks?: React.ReactNode[] }) => React.ReactNode;
   skipToContentProps?: {
     href?: string;
     children?: string;
     className?: string;
   };
-  user?: User;
   supportMenuItems?: React.ReactNode[];
-  profileMenuItems?: React.ReactNode[];
+  user?: User;
 };
 
 function UIShell({
@@ -77,12 +77,12 @@ function UIShell({
   skipToContentProps,
   user,
 }: Props) {
-  // Support base header
+  // Support base header .e.g for an error state
   if (!config) {
     return (
       <Header
         baseEnvUrl=""
-        baseServiceUrl=""
+        baseServicesUrl=""
         enableAppSwitcher={false}
         enableNotifications={false}
         productName={productName || platformName || ""}
@@ -129,7 +129,7 @@ function UIShell({
     <QueryClientProvider client={queryClient}>
       <Header
         baseEnvUrl={platform.baseEnvUrl}
-        baseServiceUrl={platform.baseServicesUrl}
+        baseServicesUrl={platform.baseServicesUrl}
         enableAppSwitcher={isAppSwitcherEnabled}
         enableNotifications={isNotificationsEnabled}
         leftPanel={leftPanel}
@@ -140,20 +140,21 @@ function UIShell({
         rightPanel={rightPanel}
         requestSummary={user?.requestSummary}
         skipToContentProps={skipToContentProps}
-        notificationsConfig={{
-          wsUrl: `${platform.baseServicesUrl}/notifications/ws`.replace("https://", "wss://"),
-        }}
         profileMenuItems={[
           isUserEnabled && (
             <ProfileSettingsMenuItem
               key="profile-settings"
-              baseServiceUrl={platform.baseServicesUrl}
+              baseServicesUrl={platform.baseServicesUrl}
               src={`${platform.baseServicesUrl}/users/image/${user?.email}`}
               userName={user?.name}
             />
           ),
           isAboutPlatformEnabled && (
-            <AboutPlatformMenuItem key="about-platform" name={platform.name} version={platform.version} />
+            <AboutPlatformMenuItem
+              key="about-platform"
+              name={platform.name as string}
+              version={platform.version as string}
+            />
           ),
           isSendMailEnabled && (
             <HeaderMenuItem
@@ -168,7 +169,7 @@ function UIShell({
           !isPrivacyStatementDisabled && (
             <PrivacyStatementMenuItem
               key="privacy-statement"
-              baseServiceUrl={platform.baseServicesUrl}
+              baseServicesUrl={platform.baseServicesUrl}
               platformEmail={platform?.platformEmail}
             />
           ),

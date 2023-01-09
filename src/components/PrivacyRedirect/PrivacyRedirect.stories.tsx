@@ -1,6 +1,5 @@
 import React from "react";
 import PrivacyRedirect from "./PrivacyRedirect";
-import { User } from "../../types";
 
 export default {
   title: "Platform/PrivacyRedirect",
@@ -14,10 +13,24 @@ export default {
   },
 };
 
-export const Default = () => {
-  return <PrivacyRedirect isOpen baseEnvUrl="" platformName="Boomerang" user={{ status: "active" } as User} />;
+export const Default = (args) => {
+  return <PrivacyRedirect {...args} />;
 };
 
-export const PendingDeletion = () => {
-  return <PrivacyRedirect isOpen baseEnvUrl="" platformName="Boomerang" user={{ status: "pending_deletion" } as User} />;
+Default.args = {
+  isOpen: true,
+  baseEnvUrl: "",
+  platformName: "Boomerang",
+  user: { status: "active" },
+};
+
+export const PendingDeletion = (args) => {
+  return <PrivacyRedirect {...args} />;
+};
+
+PendingDeletion.args = {
+  isOpen: true,
+  baseEnvUrl: "",
+  platformName: "Boomerang",
+  user: { status: "pending_deletion" },
 };

@@ -20,7 +20,7 @@ function formatDateTimestamp(timestamp: string) {
 }
 
 type Props = {
-  baseServiceUrl: string;
+  baseServicesUrl: string;
   closeModal: () => void;
   isOpen: boolean;
   organization?: string;
@@ -28,14 +28,14 @@ type Props = {
 };
 
 function PrivacyStatement({
-  baseServiceUrl,
+  baseServicesUrl,
   closeModal,
   isOpen,
   organization = "the platform",
   platformEmail = "isesupp@us.ibm.com",
 }: Props) {
   const [isConfirmModalOpen, setIsConfirmModalOpen] = React.useState(false);
-  const statementUrl = serviceUrl.getStatement({ baseServiceUrl });
+  const statementUrl = serviceUrl.getStatement({ baseServicesUrl });
   const statementQuery = useQuery({
     queryKey: statementUrl,
     queryFn: resolver.query(statementUrl),
@@ -56,7 +56,7 @@ function PrivacyStatement({
     };
 
     try {
-      await mutateAsync({ baseServiceUrl, body });
+      await mutateAsync({ baseServicesUrl, body });
       notify(
         <ToastNotification subtitle="Successfully requested account deletion" title="Delete Account" kind="success" />,
         { containerId: `${prefix}--bmrg-header-notifications` }
@@ -162,7 +162,9 @@ function PrivacyStatementMenuItem(props: Omit<Props, "isOpen" | "closeModal">) {
 
   const handleClose = () => {
     setIsOpen(false);
-    menuItemRef.current?.focus();
+    setTimeout(() => {
+      menuItemRef.current?.focus();
+    }, 0);
   };
 
   return (
@@ -172,6 +174,7 @@ function PrivacyStatementMenuItem(props: Omit<Props, "isOpen" | "closeModal">) {
         icon={<Locked />}
         text="Privacy Statement"
         onClick={() => setIsOpen(!isOpen)}
+        ref={menuItemRef}
       />
       <PrivacyStatement isOpen={isOpen} closeModal={handleClose} {...props} />
     </>
