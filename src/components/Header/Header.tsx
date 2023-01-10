@@ -365,7 +365,7 @@ function SidenavMenu(props: {
   const { isActive, setIsActive } = props;
   const { ref } = useHeaderMenu<HTMLDivElement>(FocusableElementIdMap.SideNav, { isActive, setIsActive });
   const windowSize = useWindowSize();
-  const isMobileSidenavActive = (windowSize.width as number) < 1024;
+  const isMobileSidenavActive = (windowSize.width as number) < 1056;
 
   const closeMenu = () => setIsActive(false);
 
