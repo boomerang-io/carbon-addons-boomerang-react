@@ -5,8 +5,8 @@ import MockAdapter from "axios-mock-adapter";
 import { Server } from "mock-socket";
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import HeaderMenuItem from "../Header/HeaderMenuItem";
-import { Button, Modal, SideNav, SideNavLink, SideNavItems, SideNavMenu, SideNavMenuItem } from "@carbon/react";
-import { ArrowRight, Help, ServiceDesk } from "@carbon/react/icons";
+import { Modal, SideNav, SideNavLink, SideNavItems, SideNavMenu, SideNavMenuItem } from "@carbon/react";
+import { Help, OpenPanelRight, ServiceDesk } from "@carbon/react/icons";
 import { PRIVACY_DATA } from "../PrivacyStatement/constants";
 import { PROFILE_SETTINGS_DATA } from "../ProfileSettings/constants";
 import UIShell from "./UIShell";
@@ -293,7 +293,7 @@ export function UIShellKitchenSink(args) {
           } as User
         }
         rightPanel={{
-          icon: <ArrowRight size={20} />,
+          icon: <OpenPanelRight size={20} />,
           component: (
             <div
               style={{

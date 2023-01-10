@@ -10,31 +10,29 @@ exports[`UIShell > snapshot 1`] = `
         aria-label="App navigation header"
         class="cds--header"
       >
-        <button
-          aria-label="Sidenav menu"
-          class="cds--header__action cds--header__menu-trigger cds--header__menu-toggle cds--header__menu-toggle__hidden"
-          id="header-sidenav-menu-button"
-          title="Sidenav menu"
-          type="button"
-        >
-          <svg
-            aria-hidden="true"
-            fill="currentColor"
-            focusable="false"
-            height="20"
-            preserveAspectRatio="xMidYMid meet"
-            viewBox="0 0 20 20"
-            width="20"
-            xmlns="http://www.w3.org/2000/svg"
+        <div>
+          <button
+            aria-label="Sidenav menu"
+            class="cds--header__action cds--header__menu-trigger cds--header__menu-toggle cds--header__menu-toggle__hidden"
+            id="header-sidenav-menu-button"
+            title="Sidenav menu"
+            type="button"
           >
-            <path
-              d="M2 14.8H18V16H2zM2 11.2H18V12.399999999999999H2zM2 7.6H18V8.799999999999999H2zM2 4H18V5.2H2z"
-            />
-          </svg>
-        </button>
-        <div
-          style="display: none;"
-        >
+            <svg
+              aria-hidden="true"
+              fill="currentColor"
+              focusable="false"
+              height="20"
+              preserveAspectRatio="xMidYMid meet"
+              viewBox="0 0 20 20"
+              width="20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M2 14.8H18V16H2zM2 11.2H18V12.399999999999999H2zM2 7.6H18V8.799999999999999H2zM2 4H18V5.2H2z"
+              />
+            </svg>
+          </button>
           <div
             class="cds--side-nav__overlay"
           />

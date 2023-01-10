@@ -55,20 +55,18 @@ export default function useHeaderMenu<T extends HTMLElement>(
 
   React.useEffect(() => {
     const currentRef = ref.current;
-    if (currentRef) {
-      // We need to listen for event that are OUTSIDE the node
-      document.addEventListener("mousedown", handleMousedownEvent);
+    
+    // We need to listen for event that are OUTSIDE the node
+    document.addEventListener("mousedown", handleMousedownEvent);
 
-      // We need to listen for event that are INSIDE the node
-      currentRef.addEventListener("keydown", handleKeyDownEvent);
-      currentRef.addEventListener("focusout", handleFocusOutEvent);
-    }
+    // We need to listen for event that are INSIDE the node
+    currentRef?.addEventListener("keydown", handleKeyDownEvent);
+    currentRef?.addEventListener("focusout", handleFocusOutEvent);
+
     return () => {
       document.removeEventListener("mousedown", handleMousedownEvent);
-      if (currentRef) {
-        currentRef.removeEventListener("keydown", handleKeyDownEvent);
-        currentRef.removeEventListener("focusout", handleFocusOutEvent);
-      }
+      currentRef?.removeEventListener("keydown", handleKeyDownEvent);
+      currentRef?.removeEventListener("focusout", handleFocusOutEvent);
     };
   }, [handleFocusOutEvent, handleKeyDownEvent, handleMousedownEvent]);
 

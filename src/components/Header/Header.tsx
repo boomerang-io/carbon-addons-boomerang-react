@@ -13,7 +13,16 @@ import {
   SideNavLink,
   Theme,
 } from "@carbon/react";
-import { Close, Collaborate, Help, Notification, NotificationNew, Switcher, UserAvatar } from "@carbon/react/icons";
+import {
+  Close,
+  Collaborate,
+  Help,
+  Notification,
+  NotificationNew,
+  Switcher,
+  OpenPanelFilledRight,
+  UserAvatar,
+} from "@carbon/react/icons";
 import HeaderAppSwitcher from "./HeaderAppSwitcher";
 import HeaderMenu from "./HeaderMenu";
 import NotificationsContainer from "../Notifications/NotificationsContainer";
@@ -87,8 +96,6 @@ const headerButtonClassNames =
   "cds--btn--icon-only cds--header__action cds--btn cds--btn--primary cds--btn--icon-only cds--btn cds--btn--primary";
 
 export default function Header(props: Props) {
-  const [isSideNavActive, setIsSideNavActive] = React.useState(false);
-
   const {
     productName,
     baseEnvUrl,
@@ -104,19 +111,7 @@ export default function Header(props: Props) {
     <Theme theme="g100">
       <CarbonHeader aria-label="App navigation header" className={className}>
         {skipToContentProps ? <SkipToContent {...skipToContentProps} /> : null}
-        <HeaderMenuButton
-          aria-label="Sidenav menu"
-          id={FocusableElementIdMap.SideNav}
-          isActive={isSideNavActive}
-          isCollapsible={isType(props.leftPanel, "function")}
-          onClick={() => setIsSideNavActive(!isSideNavActive)}
-        />
-        <SidenavMenu
-          isActive={isSideNavActive}
-          leftPanel={props.leftPanel}
-          navLinks={props.navLinks}
-          setIsActive={setIsSideNavActive}
-        />
+        <SidenavMenu leftPanel={props.leftPanel} navLinks={props.navLinks} />
         <HeaderName href={baseEnvUrl} prefix={prefixName}>
           {productName}
         </HeaderName>
@@ -336,7 +331,7 @@ function RightPanelMenu(props: { enabled: boolean; icon?: React.ReactNode; compo
         id={FocusableElementIdMap.RightPanel}
         onClick={toggleActive}
       >
-        {props.icon ?? <Switcher size={20} />}
+        {props.icon ?? <OpenPanelFilledRight size={20} />}
       </button>
       <HeaderPanel
         id={MenuElementIdRecord.RightPanel}
@@ -351,13 +346,11 @@ function RightPanelMenu(props: { enabled: boolean; icon?: React.ReactNode; compo
 }
 
 function SidenavMenu(props: {
-  leftPanel: Props["leftPanel"];
-  isActive: boolean;
-  setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
+  leftPanel?: Props["leftPanel"];
+
   navLinks: Props["navLinks"];
 }) {
-  const { isActive, setIsActive } = props;
-  const { ref } = useHeaderMenu<HTMLDivElement>(FocusableElementIdMap.SideNav, { isActive, setIsActive });
+  const { ref, isActive, setIsActive, toggleActive } = useHeaderMenu<HTMLDivElement>(FocusableElementIdMap.SideNav);
   const windowSize = useWindowSize();
   const isMobileSidenavActive = (windowSize.width as number) < 1056;
 
@@ -366,6 +359,13 @@ function SidenavMenu(props: {
   if (typeof props.leftPanel === "function") {
     return (
       <div ref={ref}>
+        <HeaderMenuButton
+          aria-label="Sidenav menu"
+          id={FocusableElementIdMap.SideNav}
+          isActive={isActive}
+          isCollapsible={isType(props.leftPanel, "function")}
+          onClick={toggleActive}
+        />
         {props.leftPanel({
           isOpen: isActive,
           close: closeMenu,
@@ -383,7 +383,14 @@ function SidenavMenu(props: {
 
   if (isMobileSidenavActive) {
     return (
-      <div ref={ref} style={{ display: isActive ? "block" : "none" }}>
+      <div ref={ref}>
+        <HeaderMenuButton
+          aria-label="Sidenav menu"
+          id={FocusableElementIdMap.SideNav}
+          isActive={isActive}
+          isCollapsible={isType(props.leftPanel, "function")}
+          onClick={toggleActive}
+        />
         <SideNav
           isChildOfHeader
           aria-label="Side navigation"
