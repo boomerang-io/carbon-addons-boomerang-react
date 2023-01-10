@@ -131,6 +131,16 @@ function CreatableComponent({
   const tagsToShow = finalExternalInitialValues ? [...initialTagItems, ...tagItems] : [...tagItems];
   const disableInputs = disabled || (max && tagsToShow.length >= max && max > 0);
 
+  // Check if key value pair has colon
+  const keyInputHasColon = keyValue?.includes(":");
+  const valueInputHasColon = value?.includes(":");
+  const isKeyInputValid = invalid || keyInputHasColon;
+  const isValueInputValid = invalid || valueInputHasColon;
+  const keyInputInvalidText = keyInputHasColon ? "Colon is not allowed" : invalidText;
+  const valueInputInvalidText = valueInputHasColon ? "Colon is not allowed" : invalidText;
+
+  const isAddButtonDisabled = disabled || !existValue || invalid || isKeyInputValid || isValueInputValid;
+
   const onInputChange = (e: any) => {
     setInput(e.target.value);
   };
@@ -173,8 +183,8 @@ function CreatableComponent({
             <TextInput
               disabled={disableInputs}
               id={`${id}-key`}
-              invalid={invalid}
-              invalidText={invalidText}
+              invalid={isKeyInputValid}
+              invalidText={keyInputInvalidText}
               helperText={keyHelperText}
               labelText={inputKeyLabel}
               onBlur={onKeyBlur}
@@ -191,7 +201,7 @@ function CreatableComponent({
             <span
               className={`${prefix}--bmrg-creatable__colon`}
               style={{
-                marginTop: inputKeyLabel || inputValueLabel ? "1.75rem" : "0.75rem",
+                marginTop: inputKeyLabel || inputValueLabel ? "2.25rem" : "1.25rem",
               }}
             >
               :
@@ -199,8 +209,8 @@ function CreatableComponent({
             <TextInput
               disabled={disableInputs}
               id={`${id}-value`}
-              invalid={invalid}
-              invalidText={invalidText}
+              invalid={isValueInputValid}
+              invalidText={valueInputInvalidText}
               helperText={valueHelperText}
               labelText={inputValueLabel}
               onBlur={onValueBlur}
@@ -244,7 +254,7 @@ function CreatableComponent({
         )}
         <Button
           className={createButtonClassName}
-          disabled={disabled || !existValue}
+          disabled={isAddButtonDisabled}
           onClick={addValue}
           iconDescription="Add"
           renderIcon={Add}
