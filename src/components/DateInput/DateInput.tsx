@@ -1,11 +1,11 @@
 import React from "react";
-import cx from "classnames";
-import TooltipHover from "../TooltipHover";
-import type { TooltipHoverProps } from  "../TooltipHover";
 import { DatePicker, DatePickerInput } from "@carbon/react";
 import { Information } from "@carbon/react/icons";
+import cx from "classnames";
+import TooltipHover from "../TooltipHover";
 import { DATE_TYPES } from "../../constants/DataDrivenInputTypes";
 import { prefix } from "../../internal/settings";
+import type { TooltipHoverProps } from  "../TooltipHover";
 
 type DATE_TYPE = typeof DATE_TYPES[keyof typeof DATE_TYPES];
 

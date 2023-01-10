@@ -1,9 +1,9 @@
 import React, { useState } from "react";
+import { Information } from "@carbon/react/icons";
 import cx from "classnames";
 import TooltipHover from "../TooltipHover";
-import type { TooltipHoverProps } from  "../TooltipHover";
-import { Information } from "@carbon/react/icons";
 import { prefix } from "../../internal/settings";
+import type { TooltipHoverProps } from  "../TooltipHover";
 
 const ButtonTypes = {
   Negative: "negative",

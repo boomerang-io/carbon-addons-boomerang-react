@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, ComposedModal, ModalHeader, ModalBody, ModalFooter } from "@carbon/react";
-import HeaderMenuItem from "../Header/HeaderMenuItem";
 import { Power } from "@carbon/react/icons";
+import HeaderMenuItem from "../Header/HeaderMenuItem";
 import { prefix } from "../../internal/settings";
 
 type Props = {

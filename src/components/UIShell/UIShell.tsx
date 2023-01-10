@@ -3,14 +3,14 @@ import { QueryClientProvider } from "react-query";
 import { Forum, HelpDesk, Email } from "@carbon/react/icons";
 import Header from "../Header"; // Using default export
 import HeaderMenuItem from "../Header/HeaderMenuItem";
-import { ProfileSettingsMenuItem } from "../ProfileSettings";
+import PrivacyRedirectModal from "../PrivacyRedirect";
 import { AboutPlatformMenuItem } from "../AboutPlatform";
 import { FeedbackMenuItem } from "../Feedback";
 import { PrivacyStatementMenuItem } from "../PrivacyStatement";
-import PrivacyRedirectModal from "../PrivacyRedirect";
+import { ProfileSettingsMenuItem } from "../ProfileSettings";
 import { queryClient } from "../../config/servicesConfig";
-import { User } from "../../types";
 import { SignOutMenuItem } from "../SignOut";
+import type { User } from "../../types";
 
 type Props = {
   config?: {

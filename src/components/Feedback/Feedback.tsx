@@ -1,8 +1,8 @@
 import React from "react";
-import { prefix } from "../../internal/settings";
 import { Button, ComposedModal, ModalHeader, ModalBody, ModalFooter } from "@carbon/react";
-import HeaderMenuItem from "../Header/HeaderMenuItem";
 import { Idea } from "@carbon/react/icons";
+import HeaderMenuItem from "../Header/HeaderMenuItem";
+import { prefix } from "../../internal/settings";
 
 type Props = {
   closeModal: () => void;

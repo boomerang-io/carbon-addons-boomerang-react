@@ -13,14 +13,15 @@ import {
   SideNavLink,
   Theme,
 } from "@carbon/react";
-import HeaderMenu from "./HeaderMenu";
+import { Close, Collaborate, Help, Notification, NotificationNew, Switcher, UserAvatar } from "@carbon/react/icons";
 import HeaderAppSwitcher from "./HeaderAppSwitcher";
+import HeaderMenu from "./HeaderMenu";
 import NotificationsContainer from "../Notifications/NotificationsContainer";
 import PlatformNotificationsContainer from "../PlatformNotifications";
 import UserRequests from "./UserRequests";
 import useHeaderMenu from "../../hooks/useHeaderMenu";
 import useWindowSize from "../../hooks/useWindowSize";
-import { Close, Collaborate, Help, UserAvatar, Notification, NotificationNew, Switcher } from "@carbon/react/icons";
+import { isType } from "../../internal/helpers";
 import { prefix } from "../../internal/settings";
 
 type Props = {
@@ -47,7 +48,7 @@ type Props = {
   supportMenuItems?: React.ReactNode[];
 };
 
-const MenuElementIdMap = {
+const MenuElementIdRecord = {
   Notifcations: "header-notifications-dialog",
   Profile: "header-profile-menu",
   Requests: "header-requests-menu",
@@ -57,11 +58,11 @@ const MenuElementIdMap = {
   Switcher: "header-switcher-dialog",
 } as const;
 
-type MenuElementIdMapType = typeof MenuElementIdMap;
+type MenuElementIdRecordType = typeof MenuElementIdRecord;
 
 const FocusableElementIdMap: Record<
-  keyof MenuElementIdMapType,
-  `${MenuElementIdMapType[keyof MenuElementIdMapType]}-button`
+  keyof MenuElementIdRecordType,
+  `${MenuElementIdRecordType[keyof MenuElementIdRecordType]}-button`
 > = {
   Notifcations: "header-notifications-dialog-button",
   Profile: "header-profile-menu-button",
@@ -72,7 +73,7 @@ const FocusableElementIdMap: Record<
   Switcher: "header-switcher-dialog-button",
 };
 
-const MenuAriaLabelMap: Record<keyof MenuElementIdMapType, string> = {
+const MenuAriaLabelRecord: Record<keyof MenuElementIdRecordType, string> = {
   Notifcations: "Notifications dialog",
   Profile: "Profile menu",
   Requests: "Requests menu",
@@ -84,13 +85,6 @@ const MenuAriaLabelMap: Record<keyof MenuElementIdMapType, string> = {
 
 const headerButtonClassNames =
   "cds--btn--icon-only cds--header__action cds--btn cds--btn--primary cds--btn--icon-only cds--btn cds--btn--primary";
-
-function isType(
-  elem: any,
-  type: "undefined" | "object" | "boolean" | "number" | "bigint" | "string" | "symbol" | "function"
-) {
-  return typeof elem === type;
-}
 
 export default function Header(props: Props) {
   const [isSideNavActive, setIsSideNavActive] = React.useState(false);
@@ -182,10 +176,10 @@ function RequestsMenu(props: { baseEnvUrl?: string; enabled: boolean; summary: P
   return (
     <div style={{ position: "relative" }} ref={ref}>
       <button
-        aria-controls={MenuElementIdMap.Requests}
+        aria-controls={MenuElementIdRecord.Requests}
         aria-expanded={isActive}
         aria-haspopup="menu"
-        aria-label={MenuAriaLabelMap.Requests}
+        aria-label={MenuAriaLabelRecord.Requests}
         className={headerButtonClassNames}
         id={FocusableElementIdMap.Requests}
         onClick={toggleActive}
@@ -193,7 +187,7 @@ function RequestsMenu(props: { baseEnvUrl?: string; enabled: boolean; summary: P
         <Collaborate size={20} />
       </button>
       {isActive ? (
-        <HeaderMenu aria-labelledby={MenuAriaLabelMap.Requests} id={MenuElementIdMap.Requests}>
+        <HeaderMenu aria-labelledby={MenuAriaLabelRecord.Requests} id={MenuElementIdRecord.Requests}>
           <UserRequests baseEnvUrl={props.baseEnvUrl} summary={props.summary} />
         </HeaderMenu>
       ) : null}
@@ -214,10 +208,10 @@ function NotificationsMenu(props: { enabled: boolean; baseEnvUrl?: string; baseS
   return (
     <div style={{ position: "relative" }} ref={ref}>
       <button
-        aria-controls={MenuElementIdMap.Notifcations}
+        aria-controls={MenuElementIdRecord.Notifcations}
         aria-expanded={isActive}
         aria-haspopup="dialog"
-        aria-label={MenuAriaLabelMap.Notifcations}
+        aria-label={MenuAriaLabelRecord.Notifcations}
         className={headerButtonClassNames}
         id={FocusableElementIdMap.Notifcations}
         onClick={toggleActive}
@@ -225,10 +219,10 @@ function NotificationsMenu(props: { enabled: boolean; baseEnvUrl?: string; baseS
         {icon}
       </button>
       <PlatformNotificationsContainer
-        aria-labelledby={MenuAriaLabelMap.Notifcations}
+        aria-labelledby={MenuAriaLabelRecord.Notifcations}
         baseEnvUrl={props.baseEnvUrl}
         baseServicesUrl={props.baseServicesUrl}
-        id={MenuElementIdMap.Notifcations}
+        id={MenuElementIdRecord.Notifcations}
         isActive={isActive}
         setHasNewNotifications={setHasNewNotifications}
       />
@@ -246,10 +240,10 @@ function SupportMenu(props: { enabled: Boolean; menuItems: Props["supportMenuIte
   return (
     <div style={{ position: "relative" }} ref={ref}>
       <button
-        aria-controls={MenuElementIdMap.Support}
+        aria-controls={MenuElementIdRecord.Support}
         aria-expanded={isActive}
         aria-haspopup="menu"
-        aria-label={MenuAriaLabelMap.Support}
+        aria-label={MenuAriaLabelRecord.Support}
         className={headerButtonClassNames}
         id={FocusableElementIdMap.Support}
         onClick={toggleActive}
@@ -257,7 +251,7 @@ function SupportMenu(props: { enabled: Boolean; menuItems: Props["supportMenuIte
         <Help size={20} />
       </button>
       {isActive ? (
-        <HeaderMenu aria-labelledby={MenuAriaLabelMap.Support} id={MenuElementIdMap.Support}>
+        <HeaderMenu aria-labelledby={MenuAriaLabelRecord.Support} id={MenuElementIdRecord.Support}>
           {props.menuItems}
         </HeaderMenu>
       ) : null}
@@ -275,10 +269,10 @@ function ProfileMenu(props: { enabled: boolean; menuItems?: Props["profileMenuIt
   return (
     <div style={{ position: "relative" }} ref={ref}>
       <button
-        aria-controls={MenuElementIdMap.Profile}
+        aria-controls={MenuElementIdRecord.Profile}
         aria-expanded={isActive}
         aria-haspopup="menu"
-        aria-label={MenuAriaLabelMap.Profile}
+        aria-label={MenuAriaLabelRecord.Profile}
         className={headerButtonClassNames}
         id={FocusableElementIdMap.Profile}
         onClick={toggleActive}
@@ -286,7 +280,7 @@ function ProfileMenu(props: { enabled: boolean; menuItems?: Props["profileMenuIt
         <UserAvatar size={20} />
       </button>
       {isActive ? (
-        <HeaderMenu aria-labelledby={MenuAriaLabelMap.Profile} id={MenuElementIdMap.Profile}>
+        <HeaderMenu aria-labelledby={MenuAriaLabelRecord.Profile} id={MenuElementIdRecord.Profile}>
           {props.menuItems}
         </HeaderMenu>
       ) : null}
@@ -304,10 +298,10 @@ function AppSwitcherMenu(props: { enabled?: boolean; baseEnvUrl?: string; baseSe
   return (
     <div ref={ref}>
       <button
-        aria-controls={MenuElementIdMap.Switcher}
+        aria-controls={MenuElementIdRecord.Switcher}
         aria-expanded={isActive}
         aria-haspopup="menu"
-        aria-label={MenuAriaLabelMap.Switcher}
+        aria-label={MenuAriaLabelRecord.Switcher}
         className={headerButtonClassNames}
         id={FocusableElementIdMap.Switcher}
         onClick={toggleActive}
@@ -317,7 +311,7 @@ function AppSwitcherMenu(props: { enabled?: boolean; baseEnvUrl?: string; baseSe
       <HeaderAppSwitcher
         baseEnvUrl={props.baseEnvUrl}
         baseServicesUrl={props.baseServicesUrl}
-        id={MenuElementIdMap.Switcher}
+        id={MenuElementIdRecord.Switcher}
         isActive={isActive}
       />
     </div>
@@ -334,10 +328,10 @@ function RightPanelMenu(props: { enabled: boolean; icon?: React.ReactNode; compo
   return (
     <div ref={ref}>
       <button
-        aria-controls={MenuElementIdMap.RightPanel}
+        aria-controls={MenuElementIdRecord.RightPanel}
         aria-expanded={isActive}
         aria-haspopup="dialog"
-        aria-label={MenuAriaLabelMap.RightPanel}
+        aria-label={MenuAriaLabelRecord.RightPanel}
         className={headerButtonClassNames}
         id={FocusableElementIdMap.RightPanel}
         onClick={toggleActive}
@@ -345,9 +339,9 @@ function RightPanelMenu(props: { enabled: boolean; icon?: React.ReactNode; compo
         {props.icon ?? <Switcher size={20} />}
       </button>
       <HeaderPanel
-        id={MenuElementIdMap.RightPanel}
+        id={MenuElementIdRecord.RightPanel}
         role="dialog"
-        aria-label={MenuAriaLabelMap.RightPanel}
+        aria-label={MenuAriaLabelRecord.RightPanel}
         expanded={isActive}
       >
         {props.component}

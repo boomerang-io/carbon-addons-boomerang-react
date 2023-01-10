@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useQuery, useMutation, useQueryClient } from "react-query";
 import {
   Button,
   Checkbox,
@@ -18,12 +17,13 @@ import {
 import Avatar from "../Avatar";
 import ErrorMessage from "../ErrorMessage";
 import HeaderMenuItem from "../Header/HeaderMenuItem";
-import notify from "../Notifications/notify";
 import ToastNotification from "../Notifications/ToastNotification";
+import notify from "../Notifications/notify";
 import { serviceUrl, resolver } from "../../config/servicesConfig";
 import sortBy from "lodash.sortby";
+import { useQuery, useMutation, useQueryClient } from "react-query";
 import { prefix } from "../../internal/settings";
-import { LowerLevelGroup, User } from "../../types";
+import type { LowerLevelGroup, User } from "../../types";
 
 function determineIfConfigIsDifferent(teams: LowerLevelGroup[], initialTeams: LowerLevelGroup[]) {
   let isConfigDifferent = false;

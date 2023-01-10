@@ -1,9 +1,8 @@
 import React from "react";
-import { prefix } from "../../internal/settings";
 import { Edit } from "@carbon/react/icons";
-
 import ModalConfirmDetails from "./ModalConfirmDetails";
 import ModalConfirmArray from "./ModalConfirmArray";
+import { prefix } from "../../internal/settings";
 
 const TYPES = {
   DETAILS: "details",

@@ -2,9 +2,9 @@ import React from "react";
 import * as Yup from "yup";
 import { Formik, FormikProps } from "formik";
 import get from "lodash.get";
-import { transformAll, addCustomValidator } from "../../tools/yupAst";
-import isUrl from "../../tools/isUrl";
 import DataDrivenInput from "../DataDrivenInput";
+import isUrl from "../../tools/isUrl";
+import { transformAll, addCustomValidator } from "../../tools/yupAst";
 import { prefix } from "../../internal/settings";
 import {
   ARRAY_INPUT_TYPES,

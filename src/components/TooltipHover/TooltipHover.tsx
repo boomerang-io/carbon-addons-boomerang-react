@@ -1,8 +1,8 @@
 import React from "react";
-import cx from "classnames";
 import { default as Tippy } from "@tippyjs/react";
-import type { TippyProps } from "@tippyjs/react";
+import cx from "classnames";
 import { prefix } from "../../internal/settings";
+import type { TippyProps } from "@tippyjs/react";
 
 type Alignment = "start" | "end";
 type Direction = "auto" | "top" | "bottom" | "left" | "right";

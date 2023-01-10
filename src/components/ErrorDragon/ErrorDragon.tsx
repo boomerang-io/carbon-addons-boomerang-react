@@ -1,7 +1,7 @@
 import React from "react";
+import ErrorGraphic from "./assets/ErrorGraphic";
 import cx from "classnames";
 import { prefix } from "../../internal/settings";
-import ErrorGraphic from "./assets/ErrorGraphic";
 
 export type Props = {
   className?: string;

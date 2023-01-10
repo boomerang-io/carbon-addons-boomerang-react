@@ -1,15 +1,15 @@
 import React from "react";
-import cx from "classnames";
-import Downshift, { DownshiftProps } from "downshift";
-import isEqual from "lodash.isequal";
-import { prefix } from "../../internal/settings";
-import { WarningFilled } from "@carbon/react/icons";
 import { Tag } from "@carbon/react";
+import { WarningFilled } from "@carbon/react/icons";
+import Downshift, { DownshiftProps } from "downshift";
+import cx from "classnames";
+import isEqual from "lodash.isequal";
 import * as ListBoxComponents from "../../internal/ListBox";
-import type { ListBoxType, ListBoxSize } from "../../internal/ListBox/ListBoxTypes";
 import { isAccessibleKeyDownEvent } from "../../tools/accessibility";
 import { mapDownshiftProps } from "../../tools/createPropAdapter";
 import setupGetInstanceId from "../../tools/setupGetInstanceId";
+import { prefix } from "../../internal/settings";
+import type { ListBoxType, ListBoxSize } from "../../internal/ListBox/ListBoxTypes";
 
 const defaultItemToString = (item: any) => {
   if (typeof item === "string") {

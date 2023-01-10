@@ -1,6 +1,6 @@
 import React from "react";
-import cx from "classnames";
 import { SkeletonPlaceholder } from "@carbon/react";
+import cx from "classnames";
 import { prefix } from "../../internal/settings";
 
 type Props = {

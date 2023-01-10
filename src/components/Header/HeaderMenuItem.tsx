@@ -1,7 +1,7 @@
 import React from "react";
 import { HeaderMenuItem as CarbonHeaderMenuItem } from "@carbon/react";
-import Avatar from "../Avatar";
 import { ArrowRight, Launch } from "@carbon/react/icons";
+import Avatar from "../Avatar";
 import { prefix } from "../../internal/settings";
 
 type Shared = {

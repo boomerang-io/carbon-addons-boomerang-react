@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Checkbox } from "@carbon/react";
-import TooltipHover from "../TooltipHover";
-import type { TooltipHoverProps } from  "../TooltipHover";
 import { Information } from "@carbon/react/icons";
+import TooltipHover from "../TooltipHover";
 import { prefix } from "../../internal/settings";
+import type { TooltipHoverProps } from  "../TooltipHover";
 
 type Props = {
   checkboxProps?: any;

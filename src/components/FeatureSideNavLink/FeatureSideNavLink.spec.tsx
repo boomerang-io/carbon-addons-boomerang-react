@@ -2,7 +2,7 @@ import React from "react";
 import { expect, test } from "vitest";
 import { MemoryRouter as Router } from "react-router-dom";
 import { render } from "@testing-library/react";
-import FeatureSideNavLink from ".";
+import FeatureSideNavLink from "./FeatureSideNavLink";
 import { Launch } from "@carbon/react/icons";
 import { prefix } from "../../internal/settings";
 

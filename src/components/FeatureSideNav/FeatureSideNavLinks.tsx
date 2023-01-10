@@ -1,6 +1,6 @@
 import React from "react";
-import cx from "classnames";
 import { ButtonSkeleton } from "@carbon/react";
+import cx from "classnames";
 import { prefix } from "../../internal/settings";
 
 const LoadingSkeleton = () => {

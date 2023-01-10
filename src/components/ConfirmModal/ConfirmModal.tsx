@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import cx from "classnames";
-import { prefix } from "../../internal/settings";
 import { Button, ModalHeader, ModalBody, ModalFooter } from "@carbon/react";
+import cx from "classnames";
 import Modal from "../Modal";
+import { prefix } from "../../internal/settings";
 import type { ModalTrigger } from "types";
 
 type Props = {

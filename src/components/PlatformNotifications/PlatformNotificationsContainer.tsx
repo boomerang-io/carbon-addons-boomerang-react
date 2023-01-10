@@ -1,8 +1,8 @@
 import React from "react";
-import cx from "classnames";
 import { Client } from "@stomp/stompjs";
-import { prefix } from "../../internal/settings";
 import Notification from "./PlatformNotification";
+import cx from "classnames";
+import { prefix } from "../../internal/settings";
 import type { PlatformNotification } from "../../types";
 
 type Props = {

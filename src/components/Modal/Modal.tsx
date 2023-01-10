@@ -1,6 +1,6 @@
 import React from "react";
-import cx from "classnames";
 import ReactModal from "react-modal";
+import cx from "classnames";
 import { prefix } from "../../internal/settings";
 
 type Props = Omit<ReactModal.Props, "appElement"> & {

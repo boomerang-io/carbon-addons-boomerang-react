@@ -3,9 +3,9 @@ import ForbiddenErrorBackground from "./ForbiddenErrorBackground";
 import GraphicWrangler from "./GraphicWrangler";
 import ErrorPage from "../ErrorPage";
 import ErrorPageCore from "../ErrorPageCore";
+import { prefix } from "../../internal/settings";
 import type { Props as DragonProps } from "../ErrorDragon";
 import type { Props as CoreProps } from "../ErrorPageCore";
-import { prefix } from "../../internal/settings";
 
 type Props =
   | ({

@@ -1,10 +1,10 @@
 import React from "react";
-import cx from "classnames";
-import TooltipHover from "../TooltipHover";
-import type { TooltipHoverProps } from  "../TooltipHover";
 import { Information } from "@carbon/react/icons";
-import { prefix } from "../../internal/settings";
+import cx from "classnames";
 import MultiSelect from "./MultiSelect";
+import TooltipHover from "../TooltipHover";
+import { prefix } from "../../internal/settings";
+import type { TooltipHoverProps } from  "../TooltipHover";
 import type { MultiSelectComboBoxProps } from "./MultiSelect";
 
 /**

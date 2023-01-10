@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink, NavLinkProps } from "react-router-dom";
-import { prefix } from "../../internal/settings";
 import cx from "classnames";
+import { prefix } from "../../internal/settings";
 
 type Props = NavLinkProps & {
   activeClassName?: string;

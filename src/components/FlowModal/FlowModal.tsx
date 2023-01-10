@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
-import cx from "classnames";
 import { ModalHeader, ProgressIndicator, ProgressStep } from "@carbon/react";
-import Modal from "../Modal";
-import useSetState from "../../tools/useSetState";
 import ConfirmModal from "../ConfirmModal";
+import Modal from "../Modal";
+import cx from "classnames";
+import useSetState from "../../tools/useSetState";
 import { prefix } from "../../internal/settings";
 import type { ModalTrigger } from "types";
 

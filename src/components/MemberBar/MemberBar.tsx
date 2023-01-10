@@ -1,7 +1,7 @@
 import React from "react";
+import { CloseOutline } from "@carbon/react/icons";
 import cx from "classnames";
 import Avatar from "../Avatar";
-import { CloseOutline } from "@carbon/react/icons";
 import { prefix } from "../../internal/settings";
 
 type Props = {

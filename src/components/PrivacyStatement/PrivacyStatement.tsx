@@ -1,15 +1,15 @@
 import React from "react";
-import { useQuery, useMutation } from "react-query";
-import dompurify from "dompurify";
-import { Locked } from "@carbon/react/icons";
-import HeaderMenuItem from "../Header/HeaderMenuItem";
 import { Accordion, AccordionItem, Button, ComposedModal, ModalHeader, ModalBody, ModalFooter } from "@carbon/react";
+import { Locked } from "@carbon/react/icons";
+import dompurify from "dompurify";
 import ErrorMessage from "../ErrorMessage";
-import Loading from "../Loading";
-import { prefix } from "../../internal/settings";
-import { serviceUrl, resolver } from "../../config/servicesConfig";
-import notify from "../Notifications/notify";
+import HeaderMenuItem from "../Header/HeaderMenuItem";
 import ToastNotification from "../Notifications/ToastNotification";
+import Loading from "../Loading";
+import notify from "../Notifications/notify";
+import { useQuery, useMutation } from "react-query";
+import { serviceUrl, resolver } from "../../config/servicesConfig";
+import { prefix } from "../../internal/settings";
 
 function formatDateTimestamp(timestamp: string) {
   return new Date(timestamp).toLocaleDateString("en-us", {

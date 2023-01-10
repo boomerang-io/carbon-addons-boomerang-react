@@ -1,7 +1,7 @@
 import React from "react";
 import { ComposedModal, ModalHeader, ModalBody } from "@carbon/react";
-import HeaderMenuItem from "../Header/HeaderMenuItem";
 import { Information } from "@carbon/react/icons";
+import HeaderMenuItem from "../Header/HeaderMenuItem";
 import IBMCloudIcon from "./assets/IBMCloudIcon";
 import KubernetesIcon from "./assets/KubernetesIcon";
 import MongoDbIcon from "./assets/MongoDbIcon";

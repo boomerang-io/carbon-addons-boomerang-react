@@ -1,14 +1,14 @@
 import React from "react";
 import { useQuery, UseQueryResult } from "react-query";
-import cx from "classnames";
 import { HeaderPanel, InlineLoading, SkeletonText, SideNavMenu, SideNavMenuItem, SwitcherDivider } from "@carbon/react";
 import { Launch } from "@carbon/react/icons";
 import DelayedRender from "../DelayedRender";
 import ErrorMessage from "../ErrorMessage";
+import cx from "classnames";
 import { serviceUrl, resolver } from "../../config/servicesConfig";
-import { prefix } from "../../internal/settings";
 import { match, keys } from "../../internal/keyboard";
 import { SimpleIdNameMap, SimpleTeamService, UserTeams } from "../../types";
+import { prefix } from "../../internal/settings";
 
 const externalProps = {
   target: "_blank",

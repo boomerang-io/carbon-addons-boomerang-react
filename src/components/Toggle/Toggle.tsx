@@ -1,10 +1,10 @@
 import React from "react";
-import cx from "classnames";
 import { Toggle } from "@carbon/react";
-import TooltipHover from "../TooltipHover";
-import type { TooltipHoverProps } from  "../TooltipHover";
 import { Information } from "@carbon/react/icons";
+import TooltipHover from "../TooltipHover";
+import cx from "classnames";
 import { prefix } from "../../internal/settings";
+import type { TooltipHoverProps } from  "../TooltipHover";
 
 type Props = {
   helperText?: React.ReactNode;

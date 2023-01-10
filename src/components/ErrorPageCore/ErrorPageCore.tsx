@@ -1,7 +1,7 @@
 import React from "react";
 import cx from "classnames";
-import { prefix } from "../../internal/settings";
 import GenericErrorBackground from "./GenericErrorBackground";
+import { prefix } from "../../internal/settings";
 
 type SharedProps = {
   className?: string;

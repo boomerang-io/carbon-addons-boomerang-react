@@ -1,9 +1,9 @@
 import React from "react";
-import TooltipHover from "../TooltipHover";
-import type { TooltipHoverProps } from  "../TooltipHover";
 import { TextInput } from "@carbon/react";
 import { Information } from "@carbon/react/icons";
+import TooltipHover from "../TooltipHover";
 import { prefix } from "../../internal/settings";
+import type { TooltipHoverProps } from  "../TooltipHover";
 
 type Props = React.ComponentPropsWithRef<"input"> & {
   tooltipClassName?: string;
