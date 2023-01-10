@@ -109,11 +109,11 @@ function AboutPlatformMenuItem(props: Omit<Props, "isOpen" | "closeModal">) {
   return (
     <>
       <HeaderMenuItem
-        type="button"
         icon={<Information />}
-        text="About Platform"
         onClick={() => setIsOpen(!isOpen)}
         ref={menuItemRef}
+        text="About Platform"
+        type="button"
       />
       <AboutPlatform isOpen={isOpen} closeModal={handleClose} {...props} />
     </>

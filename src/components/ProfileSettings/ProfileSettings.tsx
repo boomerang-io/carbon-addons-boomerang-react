@@ -131,7 +131,7 @@ function ProfileSettings({ baseServicesUrl, src, userName, isOpen, closeModal }:
 
   return (
     <ComposedModal
-    aria-label="Profile Settings"
+      aria-label="Profile Settings"
       open={isOpen}
       className={`${prefix}--bmrg-profile-settings-container ${prefix}--bmrg-header-modal`}
       onClose={closeModal}
@@ -227,7 +227,7 @@ function ProfileSettings({ baseServicesUrl, src, userName, isOpen, closeModal }:
 export default ProfileSettings;
 
 function ProfileSettingsMenuItem(props: Omit<Props, "isOpen" | "closeModal">) {
-  const menuItemRef = React.useRef<HTMLButtonElement>(null);
+  const menuItemRef = React.useRef<HTMLLinkElement>(null);
   const [isOpen, setIsOpen] = React.useState(false);
 
   const handleClose = () => {
@@ -239,7 +239,13 @@ function ProfileSettingsMenuItem(props: Omit<Props, "isOpen" | "closeModal">) {
 
   return (
     <>
-      <HeaderMenuItem type="user" onClick={() => setIsOpen(!isOpen)} src={props.src} userName={props.userName} ref={menuItemRef}/>
+      <HeaderMenuItem
+        onClick={() => setIsOpen(!isOpen)}
+        ref={menuItemRef}
+        src={props.src}
+        type="user"
+        userName={props.userName}
+      />
       <ProfileSettings isOpen={isOpen} closeModal={handleClose} {...props} />
     </>
   );

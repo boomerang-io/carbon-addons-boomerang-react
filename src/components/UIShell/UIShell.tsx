@@ -160,10 +160,10 @@ function UIShell({
             <HeaderMenuItem
               key="email-preferences"
               href={`${platform.baseEnvUrl}/launchpad/email-preferences`}
-              type="link"
               icon={<Email />}
+              kind="internal"
               text="Email Preferences"
-              kind={"internal"}
+              type="link"
             />
           ),
           !isPrivacyStatementDisabled && (
@@ -182,9 +182,9 @@ function UIShell({
               key="support-center"
               href={`${platform.baseEnvUrl}/support/center`}
               icon={<HelpDesk />}
-              type="link"
-              text="Support Center"
               kind="internal"
+              text="Support Center"
+              type="link"
             />
           ),
           isCommunityEnabled && (
@@ -192,9 +192,9 @@ function UIShell({
               key="community"
               href={platform?.communityUrl as string}
               icon={<Forum />}
-              type="link"
-              text="Community"
               kind="external"
+              text="Community"
+              type="link"
             />
           ),
           isFeedbackEnabled && (

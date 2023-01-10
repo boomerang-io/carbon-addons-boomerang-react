@@ -1,5 +1,5 @@
 import React from "react";
-import { HeaderMenuItem } from "@carbon/react";
+import { HeaderMenuItem as CarbonHeaderMenuItem } from "@carbon/react";
 import Avatar from "../Avatar";
 import { ArrowRight, Launch } from "@carbon/react/icons";
 import { prefix } from "../../internal/settings";
@@ -34,12 +34,12 @@ type Props =
       userName?: string;
     });
 
-function BmrgHeaderMenuItem(props: Props, ref: React.RefObject<HTMLButtonElement>) {
+function HeaderMenuItem(props: Props, ref: React.ForwardedRef<HTMLLinkElement>) {
   const { type, icon, onClick, variant = "default", ...rest } = props;
 
   if (props.type === "button")
     return (
-        <HeaderMenuItem
+        <CarbonHeaderMenuItem
           // eslint-disable-next-line no-script-url
           href={"javascript:void(0)"}
           onClick={onClick}
@@ -53,7 +53,7 @@ function BmrgHeaderMenuItem(props: Props, ref: React.RefObject<HTMLButtonElement
               {props.text}
             </span>
           </div>
-        </HeaderMenuItem>
+        </CarbonHeaderMenuItem>
     );
 
   if (props.type === "link") {
@@ -71,7 +71,7 @@ function BmrgHeaderMenuItem(props: Props, ref: React.RefObject<HTMLButtonElement
       // no-op
     }
     return (
-      <HeaderMenuItem href={props.href} {...externalProps} onClick={onClick} role="menuitem" ref={ref}>
+      <CarbonHeaderMenuItem href={props.href} {...externalProps} onClick={onClick} role="menuitem" ref={ref}>
         <div className={`${prefix}--bmrg-header-menu-item__content ${variant === "danger" ? "--danger" : ""}`}>
           <span className={`${prefix}--bmrg-header-menu-item__text`}>
             {icon}
@@ -79,23 +79,23 @@ function BmrgHeaderMenuItem(props: Props, ref: React.RefObject<HTMLButtonElement
           </span>
           {linkTypeIcon}
         </div>
-      </HeaderMenuItem>
+      </CarbonHeaderMenuItem>
     );
   }
 
   if (props.type === "user") {
     return (
       // eslint-disable-next-line no-script-url
-      <HeaderMenuItem href={"javascript:void(0)"} onClick={onClick} role="menuitem" ref={ref}>
+      <CarbonHeaderMenuItem href={"javascript:void(0)"} onClick={onClick} role="menuitem" ref={ref}>
         <div className={`${prefix}--bmrg-header-menu-user`}>
           <Avatar size="medium" src={props.src} userName={props.userName} />
           <p className={`${prefix}--bmrg-header-menu-user__name`}> {props.userName ? props.userName : ""} </p>
         </div>
-      </HeaderMenuItem>
+      </CarbonHeaderMenuItem>
     );
   }
 
   return null;
 }
 
-export default React.forwardRef(BmrgHeaderMenuItem);
+export default React.forwardRef(HeaderMenuItem);

@@ -15,7 +15,7 @@ export default {
 };
 
 export const Default = (args) => {
-  return <ErrorPageCore header={"Header"} title={"Title"} message={"Message"} {...args} />;
+  return <ErrorPageCore header={"Header"} title={"Title"} statusUrl="https://useboomerang.io" {...args} />;
 };
 
 export const MessageLink = (args) => {

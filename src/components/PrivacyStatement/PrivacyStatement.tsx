@@ -157,7 +157,7 @@ function PrivacyStatement({
 }
 
 function PrivacyStatementMenuItem(props: Omit<Props, "isOpen" | "closeModal">) {
-  const menuItemRef = React.useRef<HTMLButtonElement>(null);
+  const menuItemRef = React.useRef<HTMLLinkElement>(null);
   const [isOpen, setIsOpen] = React.useState(false);
 
   const handleClose = () => {
@@ -170,11 +170,11 @@ function PrivacyStatementMenuItem(props: Omit<Props, "isOpen" | "closeModal">) {
   return (
     <>
       <HeaderMenuItem
-        type="button"
         icon={<Locked />}
-        text="Privacy Statement"
         onClick={() => setIsOpen(!isOpen)}
         ref={menuItemRef}
+        text="Privacy Statement"
+        type="button"
       />
       <PrivacyStatement isOpen={isOpen} closeModal={handleClose} {...props} />
     </>

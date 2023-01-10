@@ -1254,15 +1254,7 @@ exports[`ErrorFullPage > snapshot - core 1`] = `
         <section
           class="cds--bmrg-error-page-core__message"
         >
-          <p>
-            Hit the back button to return to your previous page, or if you keep finding yourself here,
-            <a
-              href="https://useboomerang.io"
-            >
-               navigate to Support Center 
-            </a>
-            for help.
-          </p>
+          Try again!
         </section>
       </div>
     </div>

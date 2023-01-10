@@ -18,6 +18,12 @@ describe("ErrorPageCore", () => {
     expect(getByText("Something looks off, but we're getting a handle of it.")).toBeInTheDocument();
   });
 
+  test("functional - custom message", async () => {
+    const { getByText } = render(<ErrorPageCore message="Ok, then." />);
+    expect(getByText("Oops!")).toBeInTheDocument();
+    expect(getByText("Something looks off, but we're getting a handle of it.")).toBeInTheDocument();
+  });
+
   test("a11y", async () => {
     const { container } = render(<ErrorPageCore statusUrl={statusUrl} />);
     const results = await axe(container);

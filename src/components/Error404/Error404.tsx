@@ -3,16 +3,17 @@ import NotFoundErrorBackground from "./NotFoundErrorBackground";
 import GraphicLoch from "../GraphicLoch";
 import ErrorPage from "../ErrorPage";
 import ErrorPageCore from "../ErrorPageCore";
+import type { Props as DragonProps } from "../ErrorDragon";
+import type { Props as CoreProps } from "../ErrorPageCore";
 import { prefix } from "../../internal/settings";
 
-type Props = {
-  header?: React.ReactNode;
-  title?: React.ReactNode;
-  message?: React.ReactNode;
-  graphic?: React.ReactNode;
-  theme?: "core" | "boomerang";
-  [key: string]: any;
-};
+type Props =
+  | ({
+      theme?: "core";
+    } & CoreProps)
+  | ({
+      theme?: "boomerang";
+    } & DragonProps);
 
 export default function Error404({ theme = "core", ...rest }: Props) {
   return theme === "boomerang" ? (

@@ -39,7 +39,7 @@ function SignOut({ closeModal, isOpen, signOutLink }: Props) {
 export default SignOut;
 
 function SignOutMenuItem(props: Omit<Props, "isOpen" | "closeModal">) {
-  const menuItemRef = React.useRef<HTMLButtonElement>(null);
+  const menuItemRef = React.useRef<HTMLLinkElement>(null);
   const [isOpen, setIsOpen] = React.useState(false);
 
   const handleClose = () => {
@@ -54,11 +54,11 @@ function SignOutMenuItem(props: Omit<Props, "isOpen" | "closeModal">) {
       <HeaderMenuItem
         icon={<Power />}
         onClick={() => setIsOpen(!isOpen)}
-        text="Sign Out"
+        ref={menuItemRef}
         style={{ color: "red" }}
+        text="Sign Out"
         type="button"
         variant="danger"
-        ref={menuItemRef}
       />
       <SignOut isOpen={isOpen} closeModal={handleClose} {...props} />
     </>

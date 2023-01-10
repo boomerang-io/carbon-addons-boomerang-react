@@ -61,7 +61,7 @@ function Feedback(props: Props) {
 }
 
 function FeedbackMenuItem(props: Omit<Props, "isOpen" | "closeModal">) {
-  const menuItemRef = React.useRef<HTMLButtonElement>(null);
+  const menuItemRef = React.useRef<HTMLLinkElement>(null);
   const [isOpen, setIsOpen] = React.useState(false);
 
   const handleClose = () => {
@@ -73,7 +73,13 @@ function FeedbackMenuItem(props: Omit<Props, "isOpen" | "closeModal">) {
 
   return (
     <>
-      <HeaderMenuItem type="button" icon={<Idea />} text="Submit an idea" onClick={() => setIsOpen(!isOpen)} ref={menuItemRef}/>
+      <HeaderMenuItem
+        icon={<Idea />}
+        onClick={() => setIsOpen(!isOpen)}
+        ref={menuItemRef}
+        text="Submit an idea"
+        type="button"
+      />
       <Feedback isOpen={isOpen} closeModal={handleClose} {...props} />
     </>
   );

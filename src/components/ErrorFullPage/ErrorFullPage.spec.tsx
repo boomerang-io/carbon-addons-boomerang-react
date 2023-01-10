@@ -8,7 +8,7 @@ const statusUrl = "https://useboomerang.io";
 
 describe("ErrorFullPage", () => {
   test("snapshot - core", async () => {
-    const { baseElement } = render(<ErrorFullPage statusUrl={statusUrl} />);
+    const { baseElement } = render(<ErrorFullPage message="Try again!"/>);
     expect(baseElement).toMatchSnapshot();
   });
 
@@ -18,7 +18,7 @@ describe("ErrorFullPage", () => {
   });
 
   test("functional - core", async () => {
-    render(<ErrorFullPage statusUrl={statusUrl} />);
+    render(<ErrorFullPage statusUrl={statusUrl}/>);
     expect(screen.getByText("Oops!")).toBeInTheDocument();
     expect(screen.getByText("Something looks off, but we're getting a handle of it.")).toBeInTheDocument();
   });
