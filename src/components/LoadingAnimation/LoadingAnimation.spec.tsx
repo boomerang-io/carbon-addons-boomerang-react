@@ -1,7 +1,6 @@
 import React from "react";
 import { expect, test } from "vitest";
 import { render } from "@testing-library/react";
-
 import LoadingAnimation from "./LoadingAnimation";
 
 test("LoadingAnimation - render custom message", async () => {

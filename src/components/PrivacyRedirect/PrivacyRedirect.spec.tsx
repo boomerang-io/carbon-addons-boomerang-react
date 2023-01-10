@@ -6,22 +6,22 @@ import PrivacyRedirect from "./PrivacyRedirect";
 
 describe("PrivacyRedirect", () => {
   test("snapshot", async () => {
-    const { baseElement } = render(<PrivacyRedirect isOpen baseEnvUrl="https://ibm.com" />);
+    const { baseElement } = render(<PrivacyRedirect isOpen baseEnvUrl="https://useboomerang.io" />);
     expect(baseElement).toMatchSnapshot();
   });
 
   test("default message", async () => {
-    render(<PrivacyRedirect isOpen baseEnvUrl="https://ibm.com" />);
+    render(<PrivacyRedirect isOpen baseEnvUrl="https://useboomerang.io" />);
     expect(screen.getByText("Before continuing, we need you to consent to the Privacy Statement.")).toBeInTheDocument();
   });
 
   test("pending deletion message", async () => {
-    render(<PrivacyRedirect isOpen baseEnvUrl="https://ibm.com" user={{ status: "pending_deletion" }} />);
+    render(<PrivacyRedirect isOpen baseEnvUrl="https://useboomerang.io" user={{ status: "pending_deletion" }} />);
     expect(screen.getByText(/We’re working on removing your account and personal information./)).toBeInTheDocument();
   });
 
   test("a11y", async () => {
-    const { container } = render(<PrivacyRedirect isOpen baseEnvUrl="https://ibm.com" />);
+    const { container } = render(<PrivacyRedirect isOpen baseEnvUrl="https://useboomerang.io" />);
     const results = await axe(container);
     expect(results).toHaveNoViolations();
   });

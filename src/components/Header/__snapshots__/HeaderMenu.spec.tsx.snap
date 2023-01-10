@@ -4,7 +4,9 @@ exports[`Feedback > snapshot 1`] = `
 <body>
   <div>
     <ul
+      aria-labelledby="menu"
       class="cds--bmrg-header-drop-down"
+      id="header-menu"
       role="menu"
     >
       <li

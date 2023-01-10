@@ -1,5 +1,5 @@
 import React from "react";
-import GraphicWrangler from "../GraphicWrangler";
+import GraphicWrangler from "../Error403/GraphicWrangler";
 import ErrorPage from "./ErrorPage";
 
 export default {

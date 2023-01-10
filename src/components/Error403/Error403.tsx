@@ -1,6 +1,6 @@
 import React from "react";
 import ForbiddenErrorBackground from "./ForbiddenErrorBackground";
-import GraphicWrangler from "../GraphicWrangler";
+import GraphicWrangler from "./GraphicWrangler";
 import ErrorPage from "../ErrorPage";
 import ErrorPageCore from "../ErrorPageCore";
 import type { Props as DragonProps } from "../ErrorDragon";

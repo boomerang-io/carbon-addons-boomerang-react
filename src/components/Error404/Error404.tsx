@@ -1,6 +1,6 @@
 import React from "react";
 import NotFoundErrorBackground from "./NotFoundErrorBackground";
-import GraphicLoch from "../GraphicLoch";
+import GraphicLoch from "./GraphicLoch";
 import ErrorPage from "../ErrorPage";
 import ErrorPageCore from "../ErrorPageCore";
 import type { Props as DragonProps } from "../ErrorDragon";

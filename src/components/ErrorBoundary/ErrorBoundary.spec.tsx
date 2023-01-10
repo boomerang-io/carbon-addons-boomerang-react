@@ -8,14 +8,18 @@ const ErrorComponent = () => {
   throw new Error("test");
 };
 
-test("ErrorBoundary - render with message", async () => {
-  const consoleSpy = vi.spyOn(console, "error").mockImplementation(() => {});
-  const { findByText } = render(
-    <ErrorBoundary>
-      <ErrorComponent />
-    </ErrorBoundary>
-  );
-  const testStatus = await findByText(/Oops, something went wrong/i);
-  expect(testStatus).toBeInTheDocument();
-  expect(consoleSpy).toHaveBeenCalled();
-});
+describe("ErrorBoundary", () => {
+  test("render with message", async () => {
+    const consoleSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+    const { findByText } = render(
+      <ErrorBoundary>
+        <ErrorComponent />
+      </ErrorBoundary>
+    );
+    const testStatus = await findByText(/Oops, something went wrong/i);
+    expect(testStatus).toBeInTheDocument();
+    expect(consoleSpy).toHaveBeenCalled();
+  });
+  
+})
+

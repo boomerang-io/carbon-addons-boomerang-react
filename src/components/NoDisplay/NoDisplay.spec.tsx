@@ -1,7 +1,6 @@
 import React from "react";
 import { expect, test } from "vitest";
 import { render } from "@testing-library/react";
-
 import NoDisplay from "./NoDisplay";
 
 test("render NoDisplay with Message", async () => {

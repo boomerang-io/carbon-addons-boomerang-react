@@ -1,0 +1,7 @@
+// Vitest Snapshot v1
+
+exports[`Feedback > snapshot 1`] = `
+<body>
+  <div />
+</body>
+`;

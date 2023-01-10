@@ -5,7 +5,7 @@ import MockAdapter from "axios-mock-adapter";
 import { Server } from "mock-socket";
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import HeaderMenuItem from "../Header/HeaderMenuItem";
-import { Button, SideNav, SideNavLink, SideNavItems, SideNavMenu, SideNavMenuItem } from "@carbon/react";
+import { Button, Modal, SideNav, SideNavLink, SideNavItems, SideNavMenu, SideNavMenuItem } from "@carbon/react";
 import { ArrowRight, Help, ServiceDesk } from "@carbon/react/icons";
 import { PRIVACY_DATA } from "../PrivacyStatement/constants";
 import { PROFILE_SETTINGS_DATA } from "../ProfileSettings/constants";
@@ -103,11 +103,12 @@ const withDelay = (delay: number, response: any) => (): Promise<any> => {
   });
 };
 
-function MainContent() {
+function MainContent(props: { children?: React.ReactNode }) {
   return (
     <div id="main" style={{ display: "flex", flexDirection: "column", gap: "1rem", paddingTop: "2rem" }}>
       <h1>App name</h1>
-      <Button>Perform Action</Button>
+      <p>All about your great app</p>
+      {props.children}
     </div>
   );
 }
@@ -119,6 +120,7 @@ export const UIShellDefault = (args) => {
   mock.onGet(`${BASE_SERVICES_URL}/launchpad/teams/1/services`).reply(withDelay(4000, [200, SERVICES_DATA]));
   mock.onGet(`${BASE_SERVICES_URL}/launchpad/teams/2/services`).reply(withDelay(4000, [200, []]));
   mock.onPost(`${BASE_SERVICES_URL}/support/contact`).reply(200);
+
   return (
     <>
       <UIShell
@@ -188,6 +190,7 @@ export function UIShellKitchenSink(args) {
   mock.onPatch(`${BASE_SERVICES_URL}/users/profile`).reply(200);
   mock.onPost(`${BASE_SERVICES_URL}/support/contact`).reply(200);
   mock.onPut(`${BASE_SERVICES_URL}/notifications`).reply(200, {});
+  const [isTutorialOpen, setIsTutorialOpen] = React.useState(false);
   return (
     <Router>
       <UIShell
@@ -306,7 +309,7 @@ export function UIShellKitchenSink(args) {
         }}
         skipToContentProps={{ href: "#main" }}
         supportMenuItems={[
-          <HeaderMenuItem onClick={() => console.log("hello")} type="button" text="Tutorial" key="tutorial" />,
+          <HeaderMenuItem onClick={() => setIsTutorialOpen(true)} type="button" text="Tutorial" key="tutorial" />,
         ]}
         profileMenuItems={[
           <HeaderMenuItem
@@ -320,7 +323,16 @@ export function UIShellKitchenSink(args) {
         ]}
         {...args}
       />
-      <MainContent />
+      <MainContent>
+        <Modal
+          open={isTutorialOpen}
+          onRequestClose={() => setIsTutorialOpen(false)}
+          modalHeading="Tutorial"
+          modalLabel="Learn about App"
+          primaryButtonText="Next"
+          secondaryButtonText="Cancel"
+        />
+      </MainContent>
     </Router>
   );
 }

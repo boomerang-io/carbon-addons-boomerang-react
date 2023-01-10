@@ -73,7 +73,8 @@ function ProfileSettings({ baseServicesUrl, src, userName, isOpen, closeModal }:
     },
   });
 
-  const disableModal = user?.lowerLevelGroups === undefined;
+  // Only disable when we have a user and we know that there aren' any lower level groups to manage
+  const disableModal = user && user?.lowerLevelGroups === undefined;
 
   useEffect(() => {
     const teams = user?.lowerLevelGroups ?? [];

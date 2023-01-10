@@ -1,24 +1,206 @@
 // Vitest Snapshot v1
 
 exports[`Profile Settings > snapshot 1`] = `
-<body>
+<body
+  class="cds--body--with-modal-open"
+>
   <div>
     <div
-      class="cds--bmrg-profile-menu-user"
+      aria-hidden="false"
+      class="cds--modal is-visible cds--bmrg-profile-settings-container cds--bmrg-header-modal"
+      role="presentation"
+      tabindex="-1"
     >
-      <img
-        alt="Avatar for Boomerang Joe"
-        class="cds--bmrg-avatar --medium"
-        src="joe@ibm.com"
-        title="Avatar for Boomerang Joe"
-      />
-      <p
-        class="cds--bmrg-profile-menu-user__name"
+      <div
+        aria-label="Profile Settings"
+        aria-modal="true"
+        class="cds--modal-container"
+        role="dialog"
       >
-         
-        Boomerang Joe
-         
-      </p>
+        <button
+          class="cds--visually-hidden"
+          type="button"
+        >
+          Focus sentinel
+        </button>
+        <div
+          class="cds--modal-container-body"
+        >
+          <div
+            class="cds--modal-header"
+          >
+            <h3
+              class="cds--modal-header__heading cds--type-beta"
+            >
+              User profile - Boomerang Joe
+            </h3>
+            <button
+              aria-label="Close"
+              class="cds--modal-close"
+              title="Close"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="cds--modal-close__icon"
+                fill="currentColor"
+                focusable="false"
+                height="20"
+                preserveAspectRatio="xMidYMid meet"
+                viewBox="0 0 32 32"
+                width="20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z"
+                />
+              </svg>
+            </button>
+          </div>
+          <div
+            class="cds--modal-content"
+            style="max-height: 31.5rem;"
+          >
+            <p
+              class="cds--bmrg-profile-settings__title"
+            >
+              More user profile settings will be here eventually, but for now you can choose which Teams are shown in your sidebar in Launchpad.
+            </p>
+            <h2
+              class="cds--bmrg-profile-settings__subtitle"
+            >
+              Teams visible in Launchpad sidebar
+            </h2>
+            <p
+              class="cds--bmrg-profile-settings__description"
+            >
+              Choose Teams to show or hide in your Launchpad sidebar and Catalog (useful for sensitive demos). You will not be able to access or view unchecked Teams from the sidebar, and cannot add items to them from Catalog.
+            </p>
+            <div
+              class="cds--skeleton cds--structured-list"
+            >
+              <div
+                class="cds--structured-list-thead"
+              >
+                <div
+                  class="cds--structured-list-row cds--structured-list-row--header-row"
+                >
+                  <div
+                    class="cds--structured-list-th"
+                  >
+                    <span />
+                  </div>
+                  <div
+                    class="cds--structured-list-th"
+                  >
+                    <span />
+                  </div>
+                  <div
+                    class="cds--structured-list-th"
+                  >
+                    <span />
+                  </div>
+                </div>
+              </div>
+              <div
+                class="cds--structured-list-tbody"
+              >
+                <div
+                  class="cds--structured-list-row"
+                >
+                  <div
+                    class="cds--structured-list-td"
+                  />
+                  <div
+                    class="cds--structured-list-td"
+                  />
+                  <div
+                    class="cds--structured-list-td"
+                  />
+                </div>
+                <div
+                  class="cds--structured-list-row"
+                >
+                  <div
+                    class="cds--structured-list-td"
+                  />
+                  <div
+                    class="cds--structured-list-td"
+                  />
+                  <div
+                    class="cds--structured-list-td"
+                  />
+                </div>
+                <div
+                  class="cds--structured-list-row"
+                >
+                  <div
+                    class="cds--structured-list-td"
+                  />
+                  <div
+                    class="cds--structured-list-td"
+                  />
+                  <div
+                    class="cds--structured-list-td"
+                  />
+                </div>
+                <div
+                  class="cds--structured-list-row"
+                >
+                  <div
+                    class="cds--structured-list-td"
+                  />
+                  <div
+                    class="cds--structured-list-td"
+                  />
+                  <div
+                    class="cds--structured-list-td"
+                  />
+                </div>
+                <div
+                  class="cds--structured-list-row"
+                >
+                  <div
+                    class="cds--structured-list-td"
+                  />
+                  <div
+                    class="cds--structured-list-td"
+                  />
+                  <div
+                    class="cds--structured-list-td"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="cds--modal-footer cds--btn-set"
+          >
+            <button
+              class="cds--btn cds--btn--secondary"
+              data-modal-primary-focus="true"
+              tabindex="0"
+              type="button"
+            >
+              Cancel
+            </button>
+            <button
+              class="cds--btn cds--btn--primary cds--btn--disabled"
+              disabled=""
+              tabindex="0"
+              type="submit"
+            >
+              Save changes
+            </button>
+          </div>
+        </div>
+        <button
+          class="cds--visually-hidden"
+          type="button"
+        >
+          Focus sentinel
+        </button>
+      </div>
     </div>
   </div>
 </body>

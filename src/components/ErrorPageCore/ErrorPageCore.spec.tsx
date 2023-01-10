@@ -12,7 +12,7 @@ describe("ErrorPageCore", () => {
     expect(baseElement).toMatchSnapshot();
   });
 
-  test("functional", async () => {
+  test("functional - default", async () => {
     const { getByText } = render(<ErrorPageCore statusUrl={statusUrl} />);
     expect(getByText("Oops!")).toBeInTheDocument();
     expect(getByText("Something looks off, but we're getting a handle of it.")).toBeInTheDocument();

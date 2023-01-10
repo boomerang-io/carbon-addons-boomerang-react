@@ -10,8 +10,10 @@ const props = {
   avatarSrc: "",
 };
 
-test("render member bar", () => {
-  const { queryByText } = render(<MemberBar {...props} />);
-  expect(queryByText(/Mister Owl/i)).toBeInTheDocument();
-  expect(queryByText(/owl@email.com/i)).toBeInTheDocument();
+describe("MemberBar", () => {
+  test("functional", () => {
+    const { queryByText } = render(<MemberBar {...props} />);
+    expect(queryByText(/Mister Owl/i)).toBeInTheDocument();
+    expect(queryByText(/owl@email.com/i)).toBeInTheDocument();
+  });
 });

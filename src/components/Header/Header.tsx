@@ -73,13 +73,13 @@ const FocusableElementIdMap: Record<
 };
 
 const MenuAriaLabelMap: Record<keyof MenuElementIdMapType, string> = {
-  Notifcations: "Notifications Dialog",
-  Profile: "Profile Menu",
-  Requests: "Requests Menu",
-  RightPanel: "RightPanel Dialog",
-  SideNav: "SideNav Menu",
-  Support: "Support Menu",
-  Switcher: "Switcher Menu",
+  Notifcations: "Notifications dialog",
+  Profile: "Profile menu",
+  Requests: "Requests menu",
+  RightPanel: "RightPanel dialog",
+  SideNav: "SideNav menu",
+  Support: "Support menu",
+  Switcher: "Switcher menu",
 };
 
 const headerButtonClassNames =

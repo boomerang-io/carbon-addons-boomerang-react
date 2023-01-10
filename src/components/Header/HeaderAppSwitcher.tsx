@@ -211,7 +211,7 @@ function ServiceList(props: ServiceListProps) {
               >
                 <>
                   <span>{service.name}</span>
-                  {isExternalLink ? <Launch size={16} alt="Opens page in new tab" /> : undefined}
+                  {isExternalLink ? <Launch size={16} title="Opens page in new tab" /> : undefined}
                 </>
               </SideNavMenuItem>
             );

@@ -6,7 +6,7 @@ exports[`Avatar > snapshot 1`] = `
     <img
       alt="Avatar for Rick Deckard"
       class="cds--bmrg-avatar --medium"
-      src="ibm.com/fake/path/to/img.png"
+      src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50"
       title="Avatar for Rick Deckard"
     />
   </div>

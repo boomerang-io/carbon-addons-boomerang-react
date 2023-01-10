@@ -7,18 +7,18 @@ import { headerModalProps } from "../../internal/helpers";
 
 describe("Signout", () => {
   test("snapshot", () => {
-    const { baseElement } = render(<SignOut signOutLink="https://ibm.com" {...headerModalProps} />);
+    const { baseElement } = render(<SignOut signOutLink="https://useboomerang.io" {...headerModalProps} />);
     expect(baseElement).toMatchSnapshot();
   });
 
   test("functional", () => {
-    render(<SignOut signOutLink="https://ibm.com" {...headerModalProps} />);
+    render(<SignOut signOutLink="https://useboomerang.io" {...headerModalProps} />);
     expect(screen.getByText(/Are you sure you'd like to leave us\?/i)).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /Sign out/i })).toBeInTheDocument();
   });
 
   test("a11y", async () => {
-    const { container } = render(<SignOut signOutLink="https://ibm.com" {...headerModalProps} />);
+    const { container } = render(<SignOut signOutLink="https://useboomerang.io" {...headerModalProps} />);
     const results = await axe(container);
     expect(results).toHaveNoViolations();
   });

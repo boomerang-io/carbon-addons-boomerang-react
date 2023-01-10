@@ -12,7 +12,7 @@ const data = [
 const columns = 2;
 const selectedItems: any = [];
 
-test("OptionsGrid - render correctly", async () => {
+test("OptionsGrid - functional", async () => {
   const { findByText } = render(
     <OptionsGrid onSelect={mockfn} data={data} columns={columns} selectedItems={selectedItems} />
   );

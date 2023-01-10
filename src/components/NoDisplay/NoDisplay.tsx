@@ -31,7 +31,7 @@ function NoDisplay({
       {textLocation === TEXT_LOCATIONS.ABOVE && (
         <p className={cx(`${prefix}--bmrg-no-display__text`, "--above")}>{text}</p>
       )}
-      <ShipSharks className={`${prefix}--bmrg-no-display__img`} alt="no-display" />
+      <ShipSharks className={`${prefix}--bmrg-no-display__img`} title="No display" />
       {textLocation === TEXT_LOCATIONS.BELOW && (
         <p className={cx(`${prefix}--bmrg-no-display__text`, "--below")}>{text}</p>
       )}

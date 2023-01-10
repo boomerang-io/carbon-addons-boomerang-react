@@ -14,7 +14,7 @@ const queryClient = new QueryClient({
   defaultOptions: { queries: { refetchOnWindowFocus: false } },
 });
 
-const baseServicesUrl = "https://ibm.com";
+const baseServicesUrl = "https://useboomerang.io";
 const { reload } = window.location;
 
 beforeAll(() => {

@@ -29,7 +29,7 @@ function Notification({ readNotification, data }: Props) {
           {`${dayjs(data.date).fromNow()} at ${dayjs(data.date).format("hh:mma")}`}
         </time>
         <button className={`${prefix}--bmrg-notification-content__close`} onClick={() => readNotification(data.id)}>
-          <Close size={16} alt="Mark as read icon" />
+          <Close size={16} title="Mark as read icon" />
         </button>
       </div>
     </div>

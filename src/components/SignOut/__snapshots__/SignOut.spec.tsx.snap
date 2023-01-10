@@ -83,7 +83,7 @@ exports[`Signout > snapshot 1`] = `
             </button>
             <a
               class="cds--btn cds--btn--primary"
-              href="https://ibm.com"
+              href="https://useboomerang.io"
               role="link"
               tabindex="0"
             >

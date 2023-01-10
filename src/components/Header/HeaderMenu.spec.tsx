@@ -8,7 +8,7 @@ import HeaderMenuItem from "./HeaderMenuItem";
 describe("Feedback", () => {
   test("snapshot", async () => {
     const { baseElement, container } = render(
-      <HeaderMenu id="header-menu">
+      <HeaderMenu aria-labelledby="menu" id="header-menu">
         <HeaderMenuItem type="link" kind="external" href="https://useboomerang.io" text="Use Boomerang" />
         <HeaderMenuItem type="link" kind="internal" href="https://useboomerang.io" text="Use Boomerang" />
         <HeaderMenuItem type="link" kind="app" href="https://useboomerang.io" text="Use Boomerang" />
@@ -25,10 +25,10 @@ describe("Feedback", () => {
     const results = await axe(container);
     expect(results).toHaveNoViolations();
   });
-  
+
   test("a11y", async () => {
     const { container } = render(
-      <HeaderMenu id="header-menu">
+      <HeaderMenu aria-labelledby="menu" id="header-menu">
         <HeaderMenuItem type="link" kind="external" href="https://useboomerang.io" text="Use Boomerang" />
         <HeaderMenuItem type="link" kind="internal" href="https://useboomerang.io" text="Use Boomerang" />
         <HeaderMenuItem type="link" kind="app" href="https://useboomerang.io" text="Use Boomerang" />

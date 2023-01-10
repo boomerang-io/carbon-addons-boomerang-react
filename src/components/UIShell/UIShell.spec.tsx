@@ -16,19 +16,21 @@ describe("UIShell", () => {
     const user = userEvent.setup();
     render(<UIShellKitchenSink />);
 
-    // Get name and navs links
+    // Get name
     expect(screen.getByText("Boomerang")).toBeInTheDocument();
     expect(screen.getByText("Flow")).toBeInTheDocument();
-    expect(screen.getByText("Launchpad")).toBeInTheDocument();
-    expect(screen.getByText("Admin")).toBeInTheDocument();
-    expect(screen.getByText("Docs")).toBeInTheDocument();
+
+    // Get nav links
+    expect(screen.getAllByText("Launchpad").length).toBe(2);
+    expect(screen.getAllByText("Admin").length).toBe(2);
+    expect(screen.getAllByText("Docs").length).toBe(2);
 
     // Get header menus and interact with them
-    const requestsMenuButton = screen.getByLabelText("Requests menu");
-    const notificationsMenuButton = screen.getByLabelText("Notifications menu");
-    const supporttMenuButton = screen.getByLabelText("Support menu");
-    const profileMenuButton = screen.getByLabelText("Profile menu");
-    const appSwitcherButton = screen.getByLabelText("App switcher");
+    const requestsMenuButton = screen.getByLabelText(/Requests menu/i);
+    const notificationsMenuButton = screen.getByLabelText(/Notifications dialog/i);
+    const supporttMenuButton = screen.getByLabelText(/Support menu/i);
+    const profileMenuButton = screen.getByLabelText(/Profile menu/i);
+    const appSwitcherButton = screen.getByLabelText(/Switcher menu/i);
 
     expect(requestsMenuButton).toBeInTheDocument();
     expect(notificationsMenuButton).toBeInTheDocument();
@@ -69,5 +71,3 @@ describe("UIShell", () => {
     expect(results).toHaveNoViolations();
   });
 });
-
-

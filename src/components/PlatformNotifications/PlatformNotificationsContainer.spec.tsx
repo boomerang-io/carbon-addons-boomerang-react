@@ -1,6 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import { Server } from "mock-socket";
+import { axe } from "jest-axe";
 import PlatformNotificationsContainer from "./PlatformNotificationsContainer";
 
 const baseEnvUrl = "https://localhost:8080";
@@ -34,19 +35,40 @@ mockServer.on("connection", (socket: any) => {
   });
 });
 
-describe("Platform Notifications Container", () => {
+describe("Platform Notifications", () => {
   test("default", async () => {
     render(
       <PlatformNotificationsContainer
+        aria-labelledby="menu"
         baseEnvUrl={baseEnvUrl}
         baseServicesUrl={baseServicesUrl}
+        id="notifications-container"
+        initialNotifications={notificationsObj.notifications}
         isActive={true}
         setHasNewNotifications={() => true}
-        initialNotifications={notificationsObj.notifications}
       />
     );
     expect(screen.getByText("1 new notification")).toBeInTheDocument();
     expect(screen.getByText("Mark All Read")).toBeInTheDocument();
     expect(screen.getByText("Open Notification Center")).toBeInTheDocument();
+  });
+
+  test("a11y", async () => {
+    const { container } = render(
+      <>
+        <button id="notifications-menu">Platform Notifications</button>
+        <PlatformNotificationsContainer
+          aria-labelledby="notifications-menu"
+          baseEnvUrl={baseEnvUrl}
+          baseServicesUrl={baseServicesUrl}
+          id="notifications-container"
+          initialNotifications={notificationsObj.notifications}
+          isActive={true}
+          setHasNewNotifications={() => true}
+        />
+      </>
+    );
+    const results = await axe(container);
+    expect(results).toHaveNoViolations();
   });
 });

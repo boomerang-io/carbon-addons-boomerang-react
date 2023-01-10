@@ -26,7 +26,7 @@ function ErrorDragon({
   const classNames = cx(`${prefix}--bmrg-error-dragon`, className);
   return (
     <div className={classNames} style={style} {...rest}>
-      <ErrorGraphic className={`${prefix}--bmrg-error-dragon__image`} alt="dragon" />
+      <ErrorGraphic className={`${prefix}--bmrg-error-dragon__image`} title="dragon" />
       <h1 className={`${prefix}--bmrg-error-dragon__title`}>{header}</h1>
       <p className={`${prefix}--bmrg-error-dragon__text`}>{title}</p>
       <p className={`${prefix}--bmrg-error-dragon__text`}>{message}</p>

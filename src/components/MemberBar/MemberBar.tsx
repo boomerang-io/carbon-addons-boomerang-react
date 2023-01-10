@@ -65,7 +65,7 @@ function MemberBar({
               <CloseOutline
                 size={32}
                 className={`${prefix}--bmrg-member-bar__close-icon`}
-                alt="remove user"
+                title="Remove user"
                 data-testid="remove-user-button"
               />
             )}

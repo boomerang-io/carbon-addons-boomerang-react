@@ -28,28 +28,30 @@ const props = {
   tooltipContent: "tooltip content",
 };
 
-test("ComboBoxMultiSelect - render label, helperText and tooltip", () => {
-  const { queryByText } = render(<ComboBoxMultiSelect {...props} />);
-  expect(queryByText(/helper text/i)).toBeInTheDocument();
-  expect(queryByText(/label text/i)).toBeInTheDocument();
-});
-
-test("ComboBoxMultiSelect - select and remove items", async () => {
-  const { getByRole, getByPlaceholderText, getByText, queryByLabelText } = render(<ComboBoxMultiSelect {...props} />);
-  const input = getByPlaceholderText(/select some animals/i);
-  fireEvent.click(getByText(/panda/i));
-  fireEvent.click(input);
-  fireEvent.click(getByText(/cat/i));
-  fireEvent.click(input);
-  await waitFor(() => {
-    expect(queryByLabelText(/Clear filter dog/i)).toBeInTheDocument();
-    expect(queryByLabelText(/Clear filter cat/i)).toBeInTheDocument();
+describe("ComboBoxMultiSelect", () => {
+  test("render label, helperText and tooltip", () => {
+    const { queryByText } = render(<ComboBoxMultiSelect {...props} />);
+    expect(queryByText(/helper text/i)).toBeInTheDocument();
+    expect(queryByText(/label text/i)).toBeInTheDocument();
   });
-  const clearButton = getByRole("button", { name: "Clear selected item" });
-  fireEvent.click(clearButton);
-  await waitFor(() => {
-    expect(queryByLabelText(/Clear filter panda/i)).not.toBeInTheDocument();
-    expect(queryByLabelText(/Clear filter dog/i)).not.toBeInTheDocument();
-    expect(queryByLabelText(/Clear filter cat/i)).not.toBeInTheDocument();
+
+  test("select and remove items", async () => {
+    const { getByRole, getByPlaceholderText, getByText, queryByLabelText } = render(<ComboBoxMultiSelect {...props} />);
+    const input = getByPlaceholderText(/select some animals/i);
+    fireEvent.click(getByText(/panda/i));
+    fireEvent.click(input);
+    fireEvent.click(getByText(/cat/i));
+    fireEvent.click(input);
+    await waitFor(() => {
+      expect(queryByLabelText(/Clear filter dog/i)).toBeInTheDocument();
+      expect(queryByLabelText(/Clear filter cat/i)).toBeInTheDocument();
+    });
+    const clearButton = getByRole("button", { name: "Clear selected item" });
+    fireEvent.click(clearButton);
+    await waitFor(() => {
+      expect(queryByLabelText(/Clear filter panda/i)).not.toBeInTheDocument();
+      expect(queryByLabelText(/Clear filter dog/i)).not.toBeInTheDocument();
+      expect(queryByLabelText(/Clear filter cat/i)).not.toBeInTheDocument();
+    });
   });
 });
