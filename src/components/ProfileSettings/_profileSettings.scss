@@ -6,6 +6,7 @@
     min-height: utils.rem(448px);
     max-height: utils.rem(570px);
     max-width: utils.rem(600px);
+    height: 100%;
   }
 
   .#{$prefix}--modal-header {

@@ -6,8 +6,10 @@ import Notification from "./PlatformNotification";
 import type { PlatformNotification } from "../../types";
 
 type Props = {
+  ["aria-labelledby"]: string;
   baseEnvUrl?: string;
   baseServicesUrl?: string;
+  id: string;
   initialNotifications?: PlatformNotification[];
   isActive: boolean;
   setHasNewNotifications: (hasNewNotifications: boolean) => void;
@@ -147,10 +149,12 @@ export default class PlatformNotificationsContainer extends React.Component<Prop
 
     return (
       <div
-        role="article"
+        aria-labelledby={this.props["aria-labelledby"]}
         className={cx(`${prefix}--bmrg-notifications`, {
           "--is-active": this.props.isActive,
         })}
+        id={this.props.id}
+        role="dialog"
       >
         <div className={`${prefix}--bmrg-notifications-header`}>
           <h1 className={`${prefix}--bmrg-notifications-header__newNotifications`}>
