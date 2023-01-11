@@ -5,8 +5,7 @@ import cx from "classnames";
 import TooltipHover from "../TooltipHover";
 import { isAccessibleKeyDownEvent } from "../../tools/accessibility";
 import { prefix } from "../../internal/settings";
-import type { TooltipHoverProps } from  "../TooltipHover";
-
+import type { TooltipHoverProps } from "../TooltipHover";
 
 type Props = {
   buttonClassName?: string;
@@ -266,7 +265,7 @@ function CreatableComponent({
             onKeyDown={
               nonDeletable && (initialTagItems as any).includes(item)
                 ? undefined
-                : (e: any) => isAccessibleKeyDownEvent(e) && removeValue(item)
+                : (e: React.KeyboardEvent<HTMLDivElement>) => isAccessibleKeyDownEvent(e) && removeValue(item)
             }
             filter={!nonDeletable || (nonDeletable && !(initialTagItems as any).includes(item))}
             {...tagProps}

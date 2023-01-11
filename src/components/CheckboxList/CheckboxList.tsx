@@ -3,19 +3,29 @@ import { Checkbox } from "@carbon/react";
 import { Information } from "@carbon/react/icons";
 import TooltipHover from "../TooltipHover";
 import { prefix } from "../../internal/settings";
-import type { TooltipHoverProps } from  "../TooltipHover";
+import type { TooltipHoverProps } from "../TooltipHover";
+
+type CheckboxListItem = {
+  id: string;
+  labelText: string;
+};
 
 type Props = {
-  checkboxProps?: any;
+  checkboxProps?: Record<string, any>;
   disabled?: boolean;
   helperText?: string;
   id?: string;
-  initialSelectedItems?: any[];
+  initialSelectedItems?: CheckboxListItem[];
   label?: string;
   labelText?: string;
-  onChange?: (...args: any[]) => any;
-  options: any[];
-  selectedItems?: any[];
+  onChange?: (
+    value: boolean,
+    id: string,
+    event: React.ChangeEvent<HTMLInputElement>,
+    newSelectedItems: string[]
+  ) => void;
+  options: CheckboxListItem[];
+  selectedItems?: CheckboxListItem[];
   tooltipClassName?: string;
   tooltipContent?: React.ReactNode;
   tooltipProps?: TooltipHoverProps;

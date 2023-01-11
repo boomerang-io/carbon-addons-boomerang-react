@@ -1,5 +1,4 @@
 import React from "react";
-import { action } from "@storybook/addon-actions";
 import RadioGroup from "./RadioGroup";
 
 export default {
@@ -31,7 +30,7 @@ export const Default = (args) => {
       defaultSelected={"default value"}
       helperText={"Test helper text"}
       name={"Radio group 1"}
-      onChange={action("radio changed")}
+      onChange={(...args) => console.log(...args)}
       options={options1}
       orientation="horizontal"
       {...args}
@@ -47,7 +46,7 @@ export const KitchenSink = (args) => {
       labelText={"Select a value"}
       helperText={"Test helper text"}
       name={"Radio group 2"}
-      onChange={() => {}}
+      onChange={(...args) => console.log(...args)}
       options={options2}
       orientation="vertical"
       tooltipContent={"Tooltip for radioGroup"}
