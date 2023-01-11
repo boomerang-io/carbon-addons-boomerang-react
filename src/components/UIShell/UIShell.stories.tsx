@@ -2,10 +2,9 @@
 import React from "react";
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
-import { Server } from "mock-socket";
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import HeaderMenuItem from "../Header/HeaderMenuItem";
-import { Modal, SideNav, SideNavLink, SideNavItems, SideNavMenu, SideNavMenuItem } from "@carbon/react";
+import { Modal, SideNav, SideNavDivider, SideNavLink, SideNavItems, SideNavMenu, SideNavMenuItem } from "@carbon/react";
 import { Help, OpenPanelRight, ServiceDesk } from "@carbon/react/icons";
 import { PRIVACY_DATA } from "../PrivacyStatement/constants";
 import { PROFILE_SETTINGS_DATA } from "../ProfileSettings/constants";
@@ -27,39 +26,8 @@ export default {
   excludeStories: /UIShell.*/,
 };
 
-const mock = new MockAdapter(axios);
 const BASE_ENV_URL = "http://localhost:6006";
 const BASE_SERVICES_URL = "http://localhost:8080/services";
-
-const mockSocketUrl = "ws://localhost:8080/services/notifications/ws";
-const mockServer = new Server(mockSocketUrl);
-const notificationsObj: any = {
-  notifications: [
-    {
-      creator: "Boomerang CICD",
-      date: "2022-02-15T12:47:47.655+00:00",
-      detail: "Outage description test for the following service(s): Boomerang Flow,Boomerang CICD",
-      eventId: "620b9f7e99fcb715cbc222b3",
-      id: "620ba0f354f1b83f5077dec6",
-      priority: "highest",
-      read: false,
-      severity: "INFO",
-      target: "user",
-      title: "Resolved",
-      type: "notification",
-      userId: "61730018ae92414d2bd15b4c",
-    },
-  ],
-};
-
-mockServer.on("connection", (socket: any) => {
-  socket.on("message", () => {
-    setInterval(() => {
-      notificationsObj.notifications[0].id = Math.round(Math.random() * 100000000); // Change for each one
-      socket.send(JSON.stringify(notificationsObj));
-    }, 10000);
-  });
-});
 
 const TEAMS_DATA = {
   standardTeams: [
@@ -114,6 +82,7 @@ function MainContent(props: { children?: React.ReactNode }) {
 }
 
 export const UIShellDefault = (args) => {
+  const mock = new MockAdapter(axios);
   mock.onGet(`${BASE_SERVICES_URL}/users/consents`).reply(200, PRIVACY_DATA);
   mock.onGet(`${BASE_SERVICES_URL}/launchpad/user`).reply(200, PROFILE_SETTINGS_DATA);
   mock.onGet(`${BASE_SERVICES_URL}/users/teams`).reply(withDelay(1000, [200, TEAMS_DATA]));
@@ -182,6 +151,7 @@ export const UIShellDefault = (args) => {
 };
 
 export function UIShellKitchenSink(args) {
+  const mock = new MockAdapter(axios);
   mock.onGet(`${BASE_SERVICES_URL}/launchpad/user`).reply(200, PROFILE_SETTINGS_DATA);
   mock.onGet(`${BASE_SERVICES_URL}/launchpad/teams/1/services`).reply(withDelay(3000, [200, SERVICES_DATA]));
   mock.onGet(`${BASE_SERVICES_URL}/launchpad/teams/2/services`).reply(withDelay(3000, [200, []]));
@@ -236,7 +206,12 @@ export function UIShellKitchenSink(args) {
         leftPanel={({ close, isOpen, navLinks }) => (
           <SideNav isChildOfHeader aria-label="Sidenav" expanded={isOpen} isPersistent={false} onOverlayClick={close}>
             <SideNavItems>
-              {navLinks}
+              {navLinks?.map((navLink) => (
+                <SideNavLink large element={Link} to="." onClick={close}>
+                  {navLink.name}
+                </SideNavLink>
+              ))}
+              {navLinks ? <SideNavDivider /> : null}
               <SideNavLink element={Link} to="." onClick={close}>
                 React Router Link
               </SideNavLink>
@@ -350,6 +325,7 @@ export function UIShellKitchenSink(args) {
 }
 
 export const UIShellUserNotConsented = (args) => {
+  const mock = new MockAdapter(axios);
   mock.onGet(`${BASE_SERVICES_URL}/users/consents`).reply(200, PRIVACY_DATA);
   return (
     <UIShell
@@ -402,6 +378,7 @@ export const UIShellUserNotConsented = (args) => {
 };
 
 export const UIShellUserPendingDeletion = (args) => {
+  const mock = new MockAdapter(axios);
   mock.onGet(`${BASE_SERVICES_URL}/users/consents`).reply(200, PRIVACY_DATA);
   return (
     <UIShell
@@ -453,6 +430,12 @@ export const UIShellUserPendingDeletion = (args) => {
   );
 };
 
+const UIShellEmptyState = (args) => {
+  const mock = new MockAdapter(axios);
+  mock.onGet(`${BASE_SERVICES_URL}/users/consents`).reply(200, PRIVACY_DATA);
+  return <UIShell productName="Boomerang" {...args} />;
+};
+
 export const Default = (args) => {
   return <UIShellDefault {...args} />;
 };
@@ -470,6 +453,5 @@ export const UserPendingDeletion = (args) => {
 };
 
 export const EmptyState = (args) => {
-  mock.onGet(`${BASE_SERVICES_URL}/users/consents`).reply(200, PRIVACY_DATA);
-  return <UIShell productName="Boomerang" {...args} />;
+  return <UIShellEmptyState {...args} />;
 };

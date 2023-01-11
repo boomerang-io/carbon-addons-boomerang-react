@@ -16,6 +16,12 @@
     max-height: 28rem;
   }
 
+  .#{$prefix}--modal-header {
+    button {
+      display: none;
+    }
+  }
+
   .#{$prefix}--modal-header__heading {
     color: #121619 !important;
   }

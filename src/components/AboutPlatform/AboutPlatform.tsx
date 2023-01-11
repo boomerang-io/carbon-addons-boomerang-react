@@ -5,24 +5,21 @@ import HeaderMenuItem from "../Header/HeaderMenuItem";
 import IBMCloudIcon from "./assets/IBMCloudIcon";
 import KubernetesIcon from "./assets/KubernetesIcon";
 import MongoDbIcon from "./assets/MongoDbIcon";
-import NATSIcon from "./assets/NATSIcon";
 import OpenShiftIcon from "./assets/OpenShiftIcon";
 import ReactIcon from "./assets/ReactIcon";
 import SpringIcon from "./assets/SpringIcon";
-import TektonIcon from "./assets/TektonIcon";
 import { prefix } from "../../internal/settings";
 
 const iconClassName = `${prefix}--bmrg-aboutPlatform-images__img`;
 
 type Props = {
   closeModal: () => void;
-  name: string;
   isOpen: boolean;
-  isFlowApp?: boolean;
+  name: string;
   version: string;
 };
 
-function AboutPlatform({ closeModal, isOpen = false, version, name, isFlowApp }: Props) {
+function AboutPlatform({ closeModal, isOpen = false, version, name }: Props) {
   return (
     <ComposedModal
       open={isOpen}
@@ -34,38 +31,21 @@ function AboutPlatform({ closeModal, isOpen = false, version, name, isFlowApp }:
         <footer className={`${prefix}--bmrg-aboutPlatform-footer`}>
           <h1 className={`${prefix}--bmrg-aboutPlatform-footer__header`}>Powered by</h1>
           <ul className={`${prefix}--bmrg-aboutPlatform-images`}>
-            {isFlowApp ? (
-              <>
-                <li key="tekton-icon">
-                  <a href="https://tekton.dev/" target="_blank" rel="noopener noreferrer" title="Tekton">
-                    <TektonIcon className={iconClassName} />
-                  </a>
-                </li>
-                <li key="nats-icon">
-                  <a href="https://nats.io/" target="_blank" rel="noopener noreferrer" title="NATS">
-                    <NATSIcon className={iconClassName} />
-                  </a>
-                </li>
-              </>
-            ) : (
-              <>
-                <li key="ibm-cloud-icon">
-                  <a href="https://www.ibm.com/cloud" target="_blank" rel="noopener noreferrer" title="IBM Cloud">
-                    <IBMCloudIcon className={iconClassName} />
-                  </a>
-                </li>
-                <li key="openshift-icon">
-                  <a
-                    href="https://www.redhat.com/en/technologies/cloud-computing/openshift"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    title="OpenShift"
-                  >
-                    <OpenShiftIcon className={iconClassName} />
-                  </a>
-                </li>
-              </>
-            )}
+            <li key="ibm-cloud-icon">
+              <a href="https://www.ibm.com/cloud" target="_blank" rel="noopener noreferrer" title="IBM Cloud">
+                <IBMCloudIcon className={iconClassName} />
+              </a>
+            </li>
+            <li key="openshift-icon">
+              <a
+                href="https://www.redhat.com/en/technologies/cloud-computing/openshift"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="OpenShift"
+              >
+                <OpenShiftIcon className={iconClassName} />
+              </a>
+            </li>
             <li key="kubernetes-icon">
               <a href="https://kubernetes.io/" target="_blank" rel="noopener noreferrer" title="Kubernetes">
                 <KubernetesIcon className={iconClassName} />

@@ -74,6 +74,7 @@ exports[`PrivacyRedirect > snapshot 1`] = `
             >
               <button
                 class="cds--btn cds--btn--primary"
+                data-modal-primary-focus="true"
                 tabindex="0"
                 type="button"
               >

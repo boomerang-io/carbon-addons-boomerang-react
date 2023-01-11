@@ -43,7 +43,7 @@ function PrivacyRedirect(props: Props) {
           <span className={`${prefix}--bmrg-redirect__body`}>{contentText}</span>
         </ModalBody>
         <ModalFooter>
-          <Button kind="primary" onClick={handleOnSubmit}>
+          <Button data-modal-primary-focus kind="primary" onClick={handleOnSubmit}>
             {buttonText}
           </Button>
         </ModalFooter>

@@ -296,3 +296,8 @@ export type PlatformNotification = {
   type: string;
   userId: string;
 };
+
+export type NavLink = {
+  name: string;
+  url: string;
+};

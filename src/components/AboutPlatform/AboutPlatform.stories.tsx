@@ -19,18 +19,6 @@ export const Default = (args) => {
 };
 
 Default.args = {
-  isFlowApp: false,
-  name: "Boomerang",
-  version: "1.0.0",
-  ...headerModalProps,
-};
-
-export const Flow = (args) => {
-  return <AboutPlatform {...args} />;
-};
-
-Flow.args = {
-  isFlowApp: true,
   name: "Boomerang",
   version: "1.0.0",
   ...headerModalProps,

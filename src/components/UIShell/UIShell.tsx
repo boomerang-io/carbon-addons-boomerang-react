@@ -10,7 +10,7 @@ import { PrivacyStatementMenuItem } from "../PrivacyStatement";
 import { ProfileSettingsMenuItem } from "../ProfileSettings";
 import { queryClient } from "../../config/servicesConfig";
 import { SignOutMenuItem } from "../SignOut";
-import type { User } from "../../types";
+import type { NavLink, User } from "../../types";
 
 type Props = {
   config?: {
@@ -27,10 +27,7 @@ type Props = {
       "support.enabled"?: boolean;
       "welcome.enabled"?: boolean;
     };
-    navigation?: {
-      name: string;
-      url: string;
-    }[];
+    navigation?: NavLink[];
     platform: {
       baseEnvUrl: string;
       baseServicesUrl: string;
@@ -48,7 +45,7 @@ type Props = {
     };
     platformMessage?: any;
   };
-  leftPanel?: (args: { close: () => void; isOpen: boolean; navLinks?: React.ReactNode[] }) => React.ReactNode;
+  leftPanel?: (args: { close: () => void; isOpen: boolean; navLinks?: NavLink[] }) => React.ReactNode;
   platformName?: string;
   productName?: string;
   profileMenuItems?: React.ReactNode[];
@@ -103,7 +100,7 @@ function UIShell({
   const isSupportEnabled = Boolean(features?.["support.enabled"]);
 
   /**
-   * Check feature enablement via values being present
+   * Check feature enablement via value truthiness
    */
   const isAboutPlatformEnabled = Boolean(platform.name && platform.version);
   const isCommunityEnabled = Boolean(platform?.communityUrl);
