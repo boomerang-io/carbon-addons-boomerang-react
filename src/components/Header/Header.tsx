@@ -30,7 +30,6 @@ import PlatformNotificationsContainer from "../PlatformNotifications";
 import UserRequests from "./UserRequests";
 import useHeaderMenu from "../../hooks/useHeaderMenu";
 import useWindowSize from "../../hooks/useWindowSize";
-import { isType } from "../../internal/helpers";
 import inert from "../../internal/inertPolyfill";
 import { prefix } from "../../internal/settings";
 import type { NavLink } from "../../types";
@@ -183,7 +182,7 @@ function RequestsMenu(props: { baseEnvUrl?: string; enabled: boolean; summary: P
         <Collaborate size={20} />
       </button>
       {isOpen ? (
-        <HeaderMenu aria-labelledby={MenuAriaLabelRecord.Requests} id={MenuListId.Requests}>
+        <HeaderMenu aria-labelledby={MenuButtonId.Requests} id={MenuListId.Requests}>
           <UserRequests baseEnvUrl={props.baseEnvUrl} summary={props.summary} />
         </HeaderMenu>
       ) : null}
@@ -215,7 +214,7 @@ function NotificationsMenu(props: { enabled: boolean; baseEnvUrl?: string; baseS
         {icon}
       </button>
       <PlatformNotificationsContainer
-        aria-labelledby={MenuAriaLabelRecord.Notifcations}
+        aria-labelledby={MenuButtonId.Notifcations}
         baseEnvUrl={props.baseEnvUrl}
         baseServicesUrl={props.baseServicesUrl}
         id={MenuListId.Notifcations}
@@ -247,7 +246,7 @@ function SupportMenu(props: { enabled: Boolean; menuItems: Props["supportMenuIte
         <Help size={20} />
       </button>
       {isOpen ? (
-        <HeaderMenu aria-labelledby={MenuAriaLabelRecord.Support} id={MenuListId.Support}>
+        <HeaderMenu aria-labelledby={MenuButtonId.Support} id={MenuListId.Support}>
           {props.menuItems}
         </HeaderMenu>
       ) : null}
@@ -276,7 +275,7 @@ function ProfileMenu(props: { enabled: boolean; menuItems?: Props["profileMenuIt
         <UserAvatar size={20} />
       </button>
       {isOpen ? (
-        <HeaderMenu aria-labelledby={MenuAriaLabelRecord.Profile} id={MenuListId.Profile}>
+        <HeaderMenu aria-labelledby={MenuButtonId.Profile} id={MenuListId.Profile}>
           {props.menuItems}
         </HeaderMenu>
       ) : null}
@@ -362,7 +361,7 @@ function SidenavMenu(props: { leftPanel?: Props["leftPanel"]; navLinks: Props["n
           aria-label="Sidenav menu"
           id={MenuButtonId.SideNav}
           isActive={isOpen}
-          isCollapsible={isType(props.leftPanel, "function")}
+          isCollapsible={true}
           onClick={toggleActive}
         />
         {
@@ -379,45 +378,45 @@ function SidenavMenu(props: { leftPanel?: Props["leftPanel"]; navLinks: Props["n
     );
   }
 
-  if (isMobileSidenavActive) {
-    return (
-      <div ref={ref}>
-        <HeaderMenuButton
-          aria-label="Sidenav menu"
-          id={MenuButtonId.SideNav}
-          isActive={isOpen}
-          isCollapsible={isType(props.leftPanel, "function")}
-          onClick={toggleActive}
-        />
-        {
-          // @ts-ignore
-          <div inert={isOpen ? undefined : "true"}>
-            <SideNav
-              isChildOfHeader
-              aria-label="Side navigation"
-              expanded={isOpen}
-              isPersistent={false}
-              onOverlayClick={closeMenu}
-            >
-              <SideNavItems>
-                {props.navLinks?.map((link) => (
-                  <SideNavLink
-                    large
-                    aria-label={`Link for ${link.name}`}
-                    href={link.url}
-                    isActive={window?.location?.href && link.url ? window.location.href.startsWith(link.url) : false}
-                    key={link.url + link.name}
-                  >
-                    {link.name}
-                  </SideNavLink>
-                ))}
-              </SideNavItems>
-            </SideNav>
-          </div>
-        }
-      </div>
-    );
-  }
-
-  return null;
+  return (
+    <div ref={ref}>
+      {isMobileSidenavActive ? (
+        <>
+          <HeaderMenuButton
+            aria-label="Sidenav menu"
+            id={MenuButtonId.SideNav}
+            isActive={isOpen}
+            isCollapsible={false}
+            onClick={toggleActive}
+          />
+          {
+            // @ts-ignore
+            <div inert={isOpen ? undefined : "true"}>
+              <SideNav
+                isChildOfHeader
+                aria-label="Side navigation"
+                expanded={isOpen}
+                isPersistent={false}
+                onOverlayClick={closeMenu}
+              >
+                <SideNavItems>
+                  {props.navLinks?.map((link) => (
+                    <SideNavLink
+                      large
+                      aria-label={`Link for ${link.name}`}
+                      href={link.url}
+                      isActive={window?.location?.href && link.url ? window.location.href.startsWith(link.url) : false}
+                      key={link.url + link.name}
+                    >
+                      {link.name}
+                    </SideNavLink>
+                  ))}
+                </SideNavItems>
+              </SideNav>
+            </div>
+          }
+        </>
+      ) : null}
+    </div>
+  );
 }
