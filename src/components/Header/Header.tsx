@@ -32,6 +32,7 @@ import useHeaderMenu from "../../hooks/useHeaderMenu";
 import useWindowSize from "../../hooks/useWindowSize";
 import { isType } from "../../internal/helpers";
 import { prefix } from "../../internal/settings";
+import "wicg-inert";
 
 type Props = {
   baseServicesUrl?: string;
@@ -162,7 +163,7 @@ export default function Header(props: Props) {
 }
 
 function RequestsMenu(props: { baseEnvUrl?: string; enabled: boolean; summary: Props["requestSummary"] }) {
-  const { isActive, toggleActive, ref } = useHeaderMenu<HTMLDivElement>(FocusableElementIdMap.Requests);
+  const { isOpen, toggleActive, ref } = useHeaderMenu<HTMLDivElement>(FocusableElementIdMap.Requests);
 
   if (!props.enabled) {
     return null;
@@ -172,7 +173,7 @@ function RequestsMenu(props: { baseEnvUrl?: string; enabled: boolean; summary: P
     <div style={{ position: "relative" }} ref={ref}>
       <button
         aria-controls={MenuElementIdRecord.Requests}
-        aria-expanded={isActive}
+        aria-expanded={isOpen}
         aria-haspopup="menu"
         aria-label={MenuAriaLabelRecord.Requests}
         className={headerButtonClassNames}
@@ -181,7 +182,7 @@ function RequestsMenu(props: { baseEnvUrl?: string; enabled: boolean; summary: P
       >
         <Collaborate size={20} />
       </button>
-      {isActive ? (
+      {isOpen ? (
         <HeaderMenu aria-labelledby={MenuAriaLabelRecord.Requests} id={MenuElementIdRecord.Requests}>
           <UserRequests baseEnvUrl={props.baseEnvUrl} summary={props.summary} />
         </HeaderMenu>
@@ -191,7 +192,7 @@ function RequestsMenu(props: { baseEnvUrl?: string; enabled: boolean; summary: P
 }
 
 function NotificationsMenu(props: { enabled: boolean; baseEnvUrl?: string; baseServicesUrl?: string }) {
-  const { isActive, toggleActive, ref } = useHeaderMenu<HTMLDivElement>(FocusableElementIdMap.Notifcations);
+  const { isOpen, toggleActive, ref } = useHeaderMenu<HTMLDivElement>(FocusableElementIdMap.Notifcations);
   const [hasNewNotifications, setHasNewNotifications] = React.useState(false);
 
   if (!props.enabled || !props.baseEnvUrl || !props.baseServicesUrl) {
@@ -204,7 +205,7 @@ function NotificationsMenu(props: { enabled: boolean; baseEnvUrl?: string; baseS
     <div style={{ position: "relative" }} ref={ref}>
       <button
         aria-controls={MenuElementIdRecord.Notifcations}
-        aria-expanded={isActive}
+        aria-expanded={isOpen}
         aria-haspopup="dialog"
         aria-label={MenuAriaLabelRecord.Notifcations}
         className={headerButtonClassNames}
@@ -218,7 +219,7 @@ function NotificationsMenu(props: { enabled: boolean; baseEnvUrl?: string; baseS
         baseEnvUrl={props.baseEnvUrl}
         baseServicesUrl={props.baseServicesUrl}
         id={MenuElementIdRecord.Notifcations}
-        isActive={isActive}
+        isOpen={isOpen}
         setHasNewNotifications={setHasNewNotifications}
       />
     </div>
@@ -226,7 +227,7 @@ function NotificationsMenu(props: { enabled: boolean; baseEnvUrl?: string; baseS
 }
 
 function SupportMenu(props: { enabled: Boolean; menuItems: Props["supportMenuItems"] }) {
-  const { isActive, toggleActive, ref } = useHeaderMenu<HTMLDivElement>(FocusableElementIdMap.Support);
+  const { isOpen, toggleActive, ref } = useHeaderMenu<HTMLDivElement>(FocusableElementIdMap.Support);
 
   if (!props.enabled) {
     return null;
@@ -236,7 +237,7 @@ function SupportMenu(props: { enabled: Boolean; menuItems: Props["supportMenuIte
     <div style={{ position: "relative" }} ref={ref}>
       <button
         aria-controls={MenuElementIdRecord.Support}
-        aria-expanded={isActive}
+        aria-expanded={isOpen}
         aria-haspopup="menu"
         aria-label={MenuAriaLabelRecord.Support}
         className={headerButtonClassNames}
@@ -245,7 +246,7 @@ function SupportMenu(props: { enabled: Boolean; menuItems: Props["supportMenuIte
       >
         <Help size={20} />
       </button>
-      {isActive ? (
+      {isOpen ? (
         <HeaderMenu aria-labelledby={MenuAriaLabelRecord.Support} id={MenuElementIdRecord.Support}>
           {props.menuItems}
         </HeaderMenu>
@@ -255,7 +256,7 @@ function SupportMenu(props: { enabled: Boolean; menuItems: Props["supportMenuIte
 }
 
 function ProfileMenu(props: { enabled: boolean; menuItems?: Props["profileMenuItems"] }) {
-  const { isActive, toggleActive, ref } = useHeaderMenu<HTMLDivElement>(FocusableElementIdMap.Profile);
+  const { isOpen, toggleActive, ref } = useHeaderMenu<HTMLDivElement>(FocusableElementIdMap.Profile);
 
   if (!props.enabled) {
     return null;
@@ -265,7 +266,7 @@ function ProfileMenu(props: { enabled: boolean; menuItems?: Props["profileMenuIt
     <div style={{ position: "relative" }} ref={ref}>
       <button
         aria-controls={MenuElementIdRecord.Profile}
-        aria-expanded={isActive}
+        aria-expanded={isOpen}
         aria-haspopup="menu"
         aria-label={MenuAriaLabelRecord.Profile}
         className={headerButtonClassNames}
@@ -274,7 +275,7 @@ function ProfileMenu(props: { enabled: boolean; menuItems?: Props["profileMenuIt
       >
         <UserAvatar size={20} />
       </button>
-      {isActive ? (
+      {isOpen ? (
         <HeaderMenu aria-labelledby={MenuAriaLabelRecord.Profile} id={MenuElementIdRecord.Profile}>
           {props.menuItems}
         </HeaderMenu>
@@ -284,7 +285,7 @@ function ProfileMenu(props: { enabled: boolean; menuItems?: Props["profileMenuIt
 }
 
 function AppSwitcherMenu(props: { enabled?: boolean; baseEnvUrl?: string; baseServicesUrl?: string }) {
-  const { isActive, toggleActive, ref } = useHeaderMenu<HTMLDivElement>(FocusableElementIdMap.Switcher);
+  const { isOpen, toggleActive, ref } = useHeaderMenu<HTMLDivElement>(FocusableElementIdMap.Switcher);
 
   if (!props.enabled || !props.baseServicesUrl) {
     return null;
@@ -294,27 +295,27 @@ function AppSwitcherMenu(props: { enabled?: boolean; baseEnvUrl?: string; baseSe
     <div ref={ref}>
       <button
         aria-controls={MenuElementIdRecord.Switcher}
-        aria-expanded={isActive}
+        aria-expanded={isOpen}
         aria-haspopup="menu"
         aria-label={MenuAriaLabelRecord.Switcher}
         className={headerButtonClassNames}
         id={FocusableElementIdMap.Switcher}
         onClick={toggleActive}
       >
-        {isActive ? <Close size={20} /> : <Switcher size={20} />}
+        {isOpen ? <Close size={20} /> : <Switcher size={20} />}
       </button>
       <HeaderAppSwitcher
         baseEnvUrl={props.baseEnvUrl}
         baseServicesUrl={props.baseServicesUrl}
         id={MenuElementIdRecord.Switcher}
-        isActive={isActive}
+        isOpen={isOpen}
       />
     </div>
   );
 }
 
 function RightPanelMenu(props: { enabled: boolean; icon?: React.ReactNode; component?: React.ReactNode }) {
-  const { isActive, toggleActive, ref } = useHeaderMenu<HTMLDivElement>(FocusableElementIdMap.RightPanel);
+  const { isOpen, toggleActive, ref } = useHeaderMenu<HTMLDivElement>(FocusableElementIdMap.RightPanel);
 
   if (!props.enabled) {
     return null;
@@ -324,7 +325,7 @@ function RightPanelMenu(props: { enabled: boolean; icon?: React.ReactNode; compo
     <div ref={ref}>
       <button
         aria-controls={MenuElementIdRecord.RightPanel}
-        aria-expanded={isActive}
+        aria-expanded={isOpen}
         aria-haspopup="dialog"
         aria-label={MenuAriaLabelRecord.RightPanel}
         className={headerButtonClassNames}
@@ -337,7 +338,7 @@ function RightPanelMenu(props: { enabled: boolean; icon?: React.ReactNode; compo
         id={MenuElementIdRecord.RightPanel}
         role="dialog"
         aria-label={MenuAriaLabelRecord.RightPanel}
-        expanded={isActive}
+        expanded={isOpen}
       >
         {props.component}
       </HeaderPanel>
@@ -346,12 +347,12 @@ function RightPanelMenu(props: { enabled: boolean; icon?: React.ReactNode; compo
 }
 
 function SidenavMenu(props: { leftPanel?: Props["leftPanel"]; navLinks: Props["navLinks"] }) {
-  const { ref, isActive, setIsActive, toggleActive } = useHeaderMenu<HTMLDivElement>(FocusableElementIdMap.SideNav);
+  const { ref, isOpen, setIsOpen, toggleActive } = useHeaderMenu<HTMLDivElement>(FocusableElementIdMap.SideNav);
   const windowSize = useWindowSize();
   const isMobileSidenavActive = (windowSize.width as number) < 1056;
 
   const closeMenu = () => {
-    setIsActive(false);
+    setIsOpen(false);
   };
 
   if (typeof props.leftPanel === "function") {
@@ -360,21 +361,26 @@ function SidenavMenu(props: { leftPanel?: Props["leftPanel"]; navLinks: Props["n
         <HeaderMenuButton
           aria-label="Sidenav menu"
           id={FocusableElementIdMap.SideNav}
-          isActive={isActive}
+          isActive={isOpen}
           isCollapsible={isType(props.leftPanel, "function")}
           onClick={toggleActive}
         />
-        {props.leftPanel({
-          isOpen: isActive,
-          close: closeMenu,
-          navLinks: isMobileSidenavActive
-            ? props.navLinks?.map((link) => (
-                <SideNavLink aria-label={`Link for ${link.name}`} href={link.url} key={link.url}>
-                  {link.name}
-                </SideNavLink>
-              ))
-            : undefined,
-        })}
+        {
+          // @ts-ignore
+          <div inert={isOpen ? undefined : "true"}>
+            {props.leftPanel({
+              isOpen: isOpen,
+              close: closeMenu,
+              navLinks: isMobileSidenavActive
+                ? props.navLinks?.map((link) => (
+                    <SideNavLink aria-label={`Link for ${link.name}`} href={link.url} key={link.url + link.name}>
+                      {link.name}
+                    </SideNavLink>
+                  ))
+                : undefined,
+            })}
+          </div>
+        }
       </div>
     );
   }
@@ -385,25 +391,31 @@ function SidenavMenu(props: { leftPanel?: Props["leftPanel"]; navLinks: Props["n
         <HeaderMenuButton
           aria-label="Sidenav menu"
           id={FocusableElementIdMap.SideNav}
-          isActive={isActive}
+          isOpen={isOpen}
           isCollapsible={isType(props.leftPanel, "function")}
           onClick={toggleActive}
         />
-        <SideNav
-          isChildOfHeader
-          aria-label="Side navigation"
-          expanded={isActive}
-          isPersistent={false}
-          onOverlayClick={closeMenu}
-        >
-          <SideNavItems>
-            {props.navLinks?.map((link) => (
-              <SideNavLink aria-label={`Link for ${link.name}`} href={link.url} key={link.url}>
-                {link.name}
-              </SideNavLink>
-            ))}
-          </SideNavItems>
-        </SideNav>
+        {
+          // @ts-ignore
+          <div inert={isOpen ? undefined : "true"}>
+            <SideNav
+              isChildOfHeader
+              addFocusListeners={false}
+              aria-label="Side navigation"
+              expanded={isOpen}
+              isPersistent={false}
+              onOverlayClick={closeMenu}
+            >
+              <SideNavItems>
+                {props.navLinks?.map((link) => (
+                  <SideNavLink aria-label={`Link for ${link.name}`} href={link.url} key={link.url + link.name}>
+                    {link.name}
+                  </SideNavLink>
+                ))}
+              </SideNavItems>
+            </SideNav>
+          </div>
+        }
       </div>
     );
   }

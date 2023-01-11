@@ -11,7 +11,7 @@ type Props = {
   baseServicesUrl?: string;
   id: string;
   initialNotifications?: PlatformNotification[];
-  isActive: boolean;
+  isOpen: boolean;
   setHasNewNotifications: (hasNewNotifications: boolean) => void;
 };
 
@@ -151,7 +151,7 @@ export default class PlatformNotificationsContainer extends React.Component<Prop
       <div
         aria-labelledby={this.props["aria-labelledby"]}
         className={cx(`${prefix}--bmrg-notifications`, {
-          "--is-active": this.props.isActive,
+          "--is-active": this.props.isOpen,
         })}
         id={this.props.id}
         role="dialog"

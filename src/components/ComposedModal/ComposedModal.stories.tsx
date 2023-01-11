@@ -3,7 +3,6 @@ import TextInput from "../TextInput";
 import { Button, ModalBody, ModalFooter } from "@carbon/react";
 import ComposedModal from "./index";
 import ModalForm from "../ModalForm/ModalForm";
-import RadioGroup from "../RadioGroup";
 
 export default {
   title: "Components/ComposedModal",

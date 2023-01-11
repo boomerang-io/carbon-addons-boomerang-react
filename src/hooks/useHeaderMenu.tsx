@@ -6,14 +6,14 @@ import React from "react";
  */
 export default function useHeaderMenu<T extends HTMLElement>(focusableElementId: string) {
   const ref = React.useRef<T>(null);
-  const [isActive, setIsActive] = React.useState(false);
-  const toggleActive = () => setIsActive(!isActive);
+  const [isOpen, setIsOpen] = React.useState(false);
+  const toggleActive = () => setIsOpen(!isOpen);
 
   React.useEffect(() => {
     // Close menu if click event originates outside the menu
     const handleMousedownEvent = (event: MouseEvent) => {
       if (!ref.current?.contains(event.target as Node)) {
-        setIsActive(false);
+        setIsOpen(false);
       }
       return;
     };
@@ -23,7 +23,7 @@ export default function useHeaderMenu<T extends HTMLElement>(focusableElementId:
       if (event.key === "Escape") {
         if (ref.current?.contains(event.target as Node)) {
           document.getElementById(focusableElementId)?.focus();
-          setIsActive(false);
+          setIsOpen(false);
         }
       }
       return;
@@ -33,7 +33,7 @@ export default function useHeaderMenu<T extends HTMLElement>(focusableElementId:
     // transfers focus to a element OUTSIDE the menu
     const handleFocusOutEvent = (event: FocusEvent) => {
       if (event.relatedTarget && !ref.current?.contains(event.relatedTarget as Node)) {
-        setIsActive(false);
+        setIsOpen(false);
       }
       return;
     };
@@ -54,5 +54,5 @@ export default function useHeaderMenu<T extends HTMLElement>(focusableElementId:
     };
   }, [focusableElementId]);
 
-  return { isActive, setIsActive, toggleActive, ref };
+  return { isOpen, setIsOpen, toggleActive, ref };
 }

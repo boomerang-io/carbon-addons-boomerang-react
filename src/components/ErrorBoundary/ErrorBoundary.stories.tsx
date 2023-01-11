@@ -17,7 +17,7 @@ export default {
       },
     },
   },
-  decorators: [(story) => <Story />],
+  decorators: [(story) => story()],
 };
 
 export const Default = (args) => {

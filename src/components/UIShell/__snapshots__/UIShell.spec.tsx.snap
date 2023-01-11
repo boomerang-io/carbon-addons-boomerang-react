@@ -34,16 +34,20 @@ exports[`UIShell > snapshot 1`] = `
             </svg>
           </button>
           <div
-            class="cds--side-nav__overlay"
-          />
-          <nav
-            aria-label="Side navigation"
-            class="cds--side-nav__navigation cds--side-nav cds--side-nav--ux cds--side-nav--hidden"
+            inert="true"
           >
-            <ul
-              class="cds--side-nav__items"
+            <div
+              class="cds--side-nav__overlay"
             />
-          </nav>
+            <nav
+              aria-label="Side navigation"
+              class="cds--side-nav__navigation cds--side-nav cds--side-nav--ux cds--side-nav--hidden"
+            >
+              <ul
+                class="cds--side-nav__items"
+              />
+            </nav>
+          </div>
         </div>
         <a
           class="cds--header__name"

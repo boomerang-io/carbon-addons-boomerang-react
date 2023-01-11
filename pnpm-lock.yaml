@@ -14,7 +14,7 @@ specifiers:
   '@storybook/addon-essentials': ^6.5.12
   '@storybook/addon-links': ^6.5.12
   '@storybook/addon-storysource': ^6.5.12
-  '@storybook/builder-vite': ^0.2.5
+  '@storybook/builder-vite': ^0.2.6
   '@storybook/react': ^6.5.12
   '@storybook/testing-library': ^0.0.13
   '@testing-library/jest-dom': ^5.16.5
@@ -44,7 +44,6 @@ specifiers:
   eslint: ^8.19.0
   eslint-config-react-app: ^7.0.1
   eslint-plugin-jsx-a11y: ^6.6.0
-  focus-trap-react: 10.0.2
   formik: ^2.2.9
   husky: ^8.0.1
   in-publish: ^2.0.1
@@ -73,6 +72,7 @@ specifiers:
   typescript: ^4.6.3
   vite: ^3.2.4
   vitest: 0.25.3
+  wicg-inert: ^3.1.2
   yup: ^0.32.11
 
 dependencies:
@@ -82,7 +82,6 @@ dependencies:
   dayjs: 1.11.7
   dompurify: 2.4.1
   downshift: 6.1.7_react@16.14.0
-  focus-trap-react: 10.0.2_ccrd4luiijsxnlhe6bgkvyy2z4
   lodash.get: 4.4.2
   lodash.isequal: 4.5.0
   lodash.sortby: 4.7.0
@@ -91,6 +90,7 @@ dependencies:
   react-modal: 3.16.1_wcqkhtmu7mswc6yz4uyexck3ty
   react-query: 3.39.2_wcqkhtmu7mswc6yz4uyexck3ty
   react-toastify: 9.1.1_wcqkhtmu7mswc6yz4uyexck3ty
+  wicg-inert: 3.1.2
 
 devDependencies:
   '@carbon/react': 1.19.0_65pstldvghehba4bsfayyandx4
@@ -105,7 +105,7 @@ devDependencies:
   '@storybook/addon-essentials': 6.5.13_u7nflhc4uphollmntzrej2ygmu
   '@storybook/addon-links': 6.5.13_wcqkhtmu7mswc6yz4uyexck3ty
   '@storybook/addon-storysource': 6.5.13_wcqkhtmu7mswc6yz4uyexck3ty
-  '@storybook/builder-vite': 0.2.5_7chuunri7onrcv6po26bose5di
+  '@storybook/builder-vite': 0.2.7_7chuunri7onrcv6po26bose5di
   '@storybook/react': 6.5.13_eh5dzhgclb7pxikhvx3mw4oolu
   '@storybook/testing-library': 0.0.13_wcqkhtmu7mswc6yz4uyexck3ty
   '@testing-library/jest-dom': 5.16.5
@@ -3051,8 +3051,8 @@ packages:
       util-deprecate: 1.0.2
     dev: true
 
-  /@storybook/builder-vite/0.2.5_7chuunri7onrcv6po26bose5di:
-    resolution: {integrity: sha512-0PktEaYsbR6gGE/YDkW/tI1VxVnaPNZpHGpiWfDU7c5hjCajWYzdFTgHOwcXT8tiTs+WN/rvoCPT2iAhSCcHIw==}
+  /@storybook/builder-vite/0.2.7_7chuunri7onrcv6po26bose5di:
+    resolution: {integrity: sha512-IvgInn1dsL4amHn8IDHWv2KaoWyRWxGQvHvctfHl7ayN8fke6Tzg8lBUxVoGBfqeoO3glo/zsVUUO+aNeUUlxQ==}
     peerDependencies:
       '@storybook/mdx2-csf': ^0.0.3
       '@sveltejs/vite-plugin-svelte': ^1.0.0
@@ -8718,26 +8718,6 @@ packages:
       inherits: 2.0.4
       readable-stream: 2.3.7
     dev: true
-
-  /focus-trap-react/10.0.2_ccrd4luiijsxnlhe6bgkvyy2z4:
-    resolution: {integrity: sha512-MnN2cmdgpY7NY74ePOio4kbO5A3ILhrg1g5OGbgIQjcWEv1hhcbh6e98K0a+df88hNbE+4i9r8ji9aQnHou6GA==}
-    peerDependencies:
-      prop-types: ^15.8.1
-      react: '>=16.3.0'
-      react-dom: '>=16.3.0'
-    dependencies:
-      focus-trap: 7.2.0
-      prop-types: 15.8.1
-      react: 16.14.0
-      react-dom: 16.14.0_react@16.14.0
-      tabbable: 6.0.1
-    dev: false
-
-  /focus-trap/7.2.0:
-    resolution: {integrity: sha512-v4wY6HDDYvzkBy4735kW5BUEuw6Yz9ABqMYLuTNbzAFPcBOGiGHwwcNVMvUz4G0kgSYh13wa/7TG3XwTeT4O/A==}
-    dependencies:
-      tabbable: 6.0.1
-    dev: false
 
   /follow-redirects/1.15.2:
     resolution: {integrity: sha512-VQLG33o04KaQ8uYi2tVNbdrWp1QWxNNea+nmIB4EVM28v0hmP17z7aG1+wAkNzVq4KeXTq3221ye5qTJP91JwA==}
@@ -14673,10 +14653,6 @@ packages:
     resolution: {integrity: sha512-qImOD23aDfnIDNqlG1NOehdB9IYsn1V9oByPjKY1nakv2MQYCEMyX033/q+aEtYCpmYK1cv2+NTmlH+ra6GA5A==}
     dev: true
 
-  /tabbable/6.0.1:
-    resolution: {integrity: sha512-SYJSIgeyXW7EuX1ytdneO5e8jip42oHWg9xl/o3oTYhmXusZVgiA+VlPvjIN+kHii9v90AmzTZEBcsEvuAY+TA==}
-    dev: false
-
   /tapable/1.1.3:
     resolution: {integrity: sha512-4WK/bYZmj8xLr+HUCODHGF1ZFzsYffasLUgEiMBY4fgtltdO6B4WJtlSbPaDTLpYTcGVwM2qLnFTICEcNxs3kA==}
     engines: {node: '>=6'}
@@ -16059,7 +16035,6 @@ packages:
 
   /wicg-inert/3.1.2:
     resolution: {integrity: sha512-Ba9tGNYxXwaqKEi9sJJvPMKuo063umUPsHN0JJsjrs2j8KDSzkWLMZGZ+MH1Jf1Fq4OWZ5HsESJID6nRza2ang==}
-    dev: true
 
   /wide-align/1.1.5:
     resolution: {integrity: sha512-eDMORYaPNZ4sQIuuYPDHdQvf4gyCF9rEEV/yPxGfwPkRodwEgiMUUXTx/dex+Me0wxx53S+NgUHaP7y3MGlDmg==}
