@@ -15,7 +15,7 @@ type Props = {
   disabled?: boolean;
   helperText?: string;
   id?: string;
-  initialSelectedItems?: CheckboxListItem[];
+  initialSelectedItems?: string[];
   label?: string;
   labelText?: string;
   onChange?: (
@@ -25,7 +25,7 @@ type Props = {
     newSelectedItems: string[]
   ) => void;
   options: CheckboxListItem[];
-  selectedItems?: CheckboxListItem[];
+  selectedItems?: string[];
   tooltipClassName?: string;
   tooltipContent?: React.ReactNode;
   tooltipProps?: TooltipHoverProps;
