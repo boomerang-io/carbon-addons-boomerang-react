@@ -345,16 +345,14 @@ function RightPanelMenu(props: { enabled: boolean; icon?: React.ReactNode; compo
   );
 }
 
-function SidenavMenu(props: {
-  leftPanel?: Props["leftPanel"];
-
-  navLinks: Props["navLinks"];
-}) {
+function SidenavMenu(props: { leftPanel?: Props["leftPanel"]; navLinks: Props["navLinks"] }) {
   const { ref, isActive, setIsActive, toggleActive } = useHeaderMenu<HTMLDivElement>(FocusableElementIdMap.SideNav);
   const windowSize = useWindowSize();
   const isMobileSidenavActive = (windowSize.width as number) < 1056;
 
-  const closeMenu = () => setIsActive(false);
+  const closeMenu = () => {
+    setIsActive(false);
+  };
 
   if (typeof props.leftPanel === "function") {
     return (

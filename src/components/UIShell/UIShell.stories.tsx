@@ -234,49 +234,57 @@ export function UIShellKitchenSink(args) {
           },
         }}
         leftPanel={({ close, isOpen, navLinks }) => (
-          <SideNav expanded={isOpen} isChildOfHeader aria-label="sidenav" isPersistent={false} onOverlayClick={close}>
+          <SideNav
+            addFocusListeners={false}
+            expanded={isOpen}
+            isChildOfHeader
+            aria-label="sidenav"
+            isPersistent={false}
+            onOverlayClick={close}
+          >
             <SideNavItems>
               {navLinks}
-              <SideNavLink element={Link} to="/">
+              <button onClick={close}></button>
+              <SideNavLink element={Link} to="#">
                 Link
               </SideNavLink>
-              <SideNavLink isActive element={Link} renderIcon={ServiceDesk} to="/">
+              <SideNavLink isActive element={Link} renderIcon={ServiceDesk} to="#">
                 Active link with icon
               </SideNavLink>
-              <SideNavLink element={Link} large to="/">
+              <SideNavLink element={Link} large to="#">
                 Large link
               </SideNavLink>
-              <SideNavLink isActive element={Link} renderIcon={ServiceDesk} to="/" large>
+              <SideNavLink isActive element={Link} renderIcon={ServiceDesk} to="#" large>
                 Large active link with icon
               </SideNavLink>
               <SideNavMenu title="Menu">
-                <SideNavMenuItem element={Link} to="/">
-                  Active menu item 1
+                <SideNavMenuItem element={Link} to="#">
+                  Active React Router menu link 1
                 </SideNavMenuItem>
-                <SideNavMenuItem href="/">Menu item 2</SideNavMenuItem>
-                <SideNavMenuItem href="/">Menu item 3</SideNavMenuItem>
+                <SideNavMenuItem href="#">re link 2</SideNavMenuItem>
+                <SideNavMenuItem href="#">Menu link 3</SideNavMenuItem>
               </SideNavMenu>
               <SideNavMenu renderIcon={ServiceDesk} title="Active menu with icon">
-                <SideNavMenuItem isActive element={Link} to="/">
+                <SideNavMenuItem isActive element={Link} to="#">
                   Active menu item 1
                 </SideNavMenuItem>
-                <SideNavMenuItem href="/">Menu item 2</SideNavMenuItem>
-                <SideNavMenuItem href="/">Menu item 3</SideNavMenuItem>
+                <SideNavMenuItem href="#">Menu item 2</SideNavMenuItem>
+                <SideNavMenuItem href="#">Menu item 3</SideNavMenuItem>
               </SideNavMenu>
               <SideNavMenu title="Large menu" large>
-                <SideNavMenuItem element={Link} to="/">
-                  Large menu item 1
+                <SideNavMenuItem element={Link} to="#">
+                  Large React Router menu link 1
                 </SideNavMenuItem>
-                <SideNavMenuItem element={Link} to="/">
+                <SideNavMenuItem element={Link} to="#">
                   Large menu item 2
                 </SideNavMenuItem>
               </SideNavMenu>
               <SideNavMenu renderIcon={ServiceDesk} title="Large active menu with icon" large>
-                <SideNavMenuItem isActive element={Link} to="/">
+                <SideNavMenuItem isActive element={Link} to="#">
                   Large active menu item 1
                 </SideNavMenuItem>
-                <SideNavMenuItem href="/">Large menu item 2</SideNavMenuItem>
-                <SideNavMenuItem href="/">Large menu item 3</SideNavMenuItem>
+                <SideNavMenuItem href="#">Large menu item 2</SideNavMenuItem>
+                <SideNavMenuItem href="#">Large menu item 3</SideNavMenuItem>
               </SideNavMenu>
             </SideNavItems>
           </SideNav>
