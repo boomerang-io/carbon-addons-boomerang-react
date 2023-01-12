@@ -4,7 +4,7 @@ import HeaderMenu from "./HeaderMenu";
 import HeaderMenuItem from "./HeaderMenuItem";
 
 export default {
-  title: "Platform/HeaderMenu",
+  title: "Platform/HeaderMenuItem",
   component: HeaderMenuItem,
   parameters: {
     docs: {
@@ -18,8 +18,8 @@ export default {
 export const Link = () => {
   return (
     <div style={{ position: "relative", height: "16rem" }}>
-      <div style={{ position: "relative", width: "15rem" }}>
-        <HeaderMenu id="link">
+      <div style={{ position: "relative", width: "15rem" }} aria-label="Header Menu">
+        <HeaderMenu id="link" aria-labelledby="header-menu">
           <HeaderMenuItem kind={"external"} type="link" href="javascript:void(0)" text="External Link" />
           <HeaderMenuItem kind="internal" type="link" href="javascript:void(0)" text="Internal Link" />
           <HeaderMenuItem kind="app" type="link" href="javascript:void(0)" text="App Link" />
@@ -32,8 +32,8 @@ export const Link = () => {
 export const Button = () => {
   return (
     <div style={{ position: "relative", height: "16rem" }}>
-      <div style={{ position: "relative", width: "15rem" }}>
-        <HeaderMenu id="link">
+      <div style={{ position: "relative", width: "15rem" }} id="header-menu" aria-label="Header Menu">
+        <HeaderMenu id="link" aria-labelledby="header-menu">
           <HeaderMenuItem type="button" onClick={() => console.log("button 1")} text="Button 1" />
           <HeaderMenuItem type="button" onClick={() => console.log("button 2")} text="Button 2" />
         </HeaderMenu>
@@ -44,9 +44,9 @@ export const Button = () => {
 export const User = () => {
   return (
     <div style={{ position: "relative", height: "16rem" }}>
-      <div style={{ position: "relative", width: "15rem" }}>
-        <HeaderMenu id="link">
-          <HeaderMenuItem type="user" onClick={() => console.log("button")} userName="John" src=""></HeaderMenuItem>
+      <div style={{ position: "relative", width: "15rem" }} aria-label="Header Menu">
+        <HeaderMenu id="link" aria-labelledby="header-menu">
+          <HeaderMenuItem type="user" onClick={() => console.log("button")} userName="John" src="" />
         </HeaderMenu>
       </div>
     </div>

@@ -1,5 +1,6 @@
 /* eslint-disable no-template-curly-in-string */
 import React from "react";
+import { Button } from "@carbon/react";
 import { action } from "@storybook/addon-actions";
 import TextInput from "../TextInput";
 import * as Yup from "yup";
@@ -534,7 +535,7 @@ export const Default = (args) => {
         return (
           <form style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
             {inputs}
-            <button
+            <Button
               disabled={!formikProps.isValid}
               //@ts-ignore
               onClick={formikProps.handleSubmit}
@@ -542,7 +543,7 @@ export const Default = (args) => {
               type="button"
             >
               Submit
-            </button>
+            </Button>
           </form>
         );
       }}
@@ -566,7 +567,7 @@ export const AllowPropertySyntax = (args) => {
         return (
           <form style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
             {inputs}
-            <button
+            <Button
               disabled={!formikProps.isValid}
               //@ts-ignore
               onClick={formikProps.handleSubmit}
@@ -574,7 +575,7 @@ export const AllowPropertySyntax = (args) => {
               type="button"
             >
               Submit
-            </button>
+            </Button>
           </form>
         );
       }}
@@ -603,7 +604,7 @@ export const AllowPropertySyntaxCustomPatternB = (args) => {
         return (
           <form style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
             {inputs}
-            <button
+            <Button
               disabled={!formikProps.isValid}
               //@ts-ignore
               onClick={formikProps.handleSubmit}
@@ -611,7 +612,7 @@ export const AllowPropertySyntaxCustomPatternB = (args) => {
               type="button"
             >
               Submit
-            </button>
+            </Button>
           </form>
         );
       }}
@@ -639,7 +640,7 @@ export const GoverningSelects = (args) => {
         return (
           <form style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
             {inputs}
-            <button
+            <Button
               disabled={!formikProps.isValid}
               //@ts-ignore
               onClick={formikProps.handleSubmit}
@@ -647,7 +648,7 @@ export const GoverningSelects = (args) => {
               type="button"
             >
               Submit
-            </button>
+            </Button>
           </form>
         );
       }}

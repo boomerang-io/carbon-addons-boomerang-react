@@ -37,13 +37,14 @@ function MemberBar({
   notAllowedMessage = "This Partner User is not on the allow-list",
   removeUser,
 }: Props) {
-  const avatarOpacity = isUserNotAllowed ? "0.5" : "1";
+  const avatarOpacity = isUserNotAllowed ? "0.8" : "1";
   return (
     <li {...liProps}>
       <button
         className={cx(`${prefix}--bmrg-member-bar`, buttonClassName, {
           [`${prefix}--bmrg-member-bar--detail`]: isDetail,
         })}
+        disabled={isUserNotAllowed}
         onClick={addUser && !isUserNotAllowed ? () => addUser(id) : removeUser ? () => removeUser(id) : undefined}
         type="button"
         {...buttonProps}

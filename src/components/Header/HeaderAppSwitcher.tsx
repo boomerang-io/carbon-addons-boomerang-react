@@ -15,7 +15,9 @@ const externalProps = {
   rel: "noreferrer noopener",
 };
 
-const classNames = "--app-switcher";
+const panelClassName = `${prefix}--bmrg-header-switcher-panel`;
+const contentClassName = `${prefix}--bmrg-header-switcher`;
+const skeletonClassName = `${prefix}--bmrg-header-switcher__skeleton`;
 
 type HeaderAppSwitcherProps = {
   baseEnvUrl?: string;
@@ -30,13 +32,13 @@ export default function HeaderAppSwitcher({ baseServicesUrl, baseEnvUrl, id, isO
 
   if (teamsQuery.isLoading) {
     return (
-      <HeaderPanel aria-label="App Switcher" id={id} role="menu" className={classNames} expanded={isOpen}>
-        <div className={cx(`${prefix}--bmrg-header-switcher`, `--is-loading`)}>
-          <SkeletonText className={`${prefix}--bmrg-header-switcher__skeleton`} />
-          <SkeletonText className={`${prefix}--bmrg-header-switcher__skeleton`} />
-          <SkeletonText className={`${prefix}--bmrg-header-switcher__skeleton`} />
-          <SkeletonText className={`${prefix}--bmrg-header-switcher__skeleton`} />
-          <SkeletonText className={`${prefix}--bmrg-header-switcher__skeleton`} />
+      <HeaderPanel aria-label="App Switcher" className={panelClassName} expanded={isOpen} id={id} role="menu">
+        <div className={cx(contentClassName, "--is-loading", { "--is-hidden": !isOpen })}>
+          <SkeletonText className={skeletonClassName} />
+          <SkeletonText className={skeletonClassName} />
+          <SkeletonText className={skeletonClassName} />
+          <SkeletonText className={skeletonClassName} />
+          <SkeletonText className={skeletonClassName} />
         </div>
       </HeaderPanel>
     );
@@ -44,8 +46,8 @@ export default function HeaderAppSwitcher({ baseServicesUrl, baseEnvUrl, id, isO
 
   if (teamsQuery.error) {
     return (
-      <HeaderPanel aria-label="App Switcher" id={id} role="menu" className={classNames} expanded={isOpen}>
-        <ErrorMessage className={`${prefix}--bmrg-header-switcher`} />
+      <HeaderPanel aria-label="App Switcher" id={id} role="menu" className={panelClassName} expanded={isOpen}>
+        <ErrorMessage className={cx(contentClassName, { "--is-hidden": !isOpen })} />
       </HeaderPanel>
     );
   }
@@ -54,8 +56,8 @@ export default function HeaderAppSwitcher({ baseServicesUrl, baseEnvUrl, id, isO
     const { accountTeams, standardTeams } = teamsQuery.data;
     if (accountTeams?.length || standardTeams?.length) {
       return (
-        <HeaderPanel aria-label="App Switcher" className={classNames} expanded={isOpen} id={id} role="menu">
-          <ul className={`${prefix}--bmrg-header-switcher`} style={{ display: isOpen ? "block" : "none" }}>
+        <HeaderPanel aria-label="App Switcher" className={panelClassName} expanded={isOpen} id={id} role="menu">
+          <div className={cx(contentClassName, { "--is-hidden": !isOpen })}>
             {standardTeams?.map((team) => (
               <TeamServiceListMenu
                 key={team.id}
@@ -87,14 +89,14 @@ export default function HeaderAppSwitcher({ baseServicesUrl, baseEnvUrl, id, isO
                   ))}
               </div>
             ))}
-          </ul>
+          </div>
         </HeaderPanel>
       );
     }
 
     return (
-      <HeaderPanel aria-label="App Switcher" className={classNames} expanded={isOpen} id={id} role="menu">
-        <div className={cx(`${prefix}--bmrg-header-switcher`, "--is-empty")}>
+      <HeaderPanel aria-label="App Switcher" className={panelClassName} expanded={isOpen} id={id} role="menu">
+        <div className={cx(contentClassName, "--is-empty", { "--is-hidden": !isOpen })}>
           <h1 className={`${prefix}--bmrg-header-switcher__empty-title`}>No teams</h1>
           <p className={`${prefix}--bmrg-header-switcher__empty-subtitle`}>You must be new here</p>
         </div>
@@ -138,7 +140,7 @@ function TeamServiceListMenu({ baseServicesUrl, baseEnvUrl, isAccount, isMember,
     setIsSelected(true);
   }
 
-  function handleOnKeyDown(e: any) {
+  function handleOnKeyDown(e: React.KeyboardEvent) {
     if (match(e, keys.Enter) || match(e, keys.Space)) {
       setIsSelected(true);
     }
@@ -149,17 +151,17 @@ function TeamServiceListMenu({ baseServicesUrl, baseEnvUrl, isAccount, isMember,
 
   if (!isMember) {
     return (
-      <li className={`${prefix}--side-nav__item`} title={isNameTruncated ? name : undefined}>
+      <div className={`${prefix}--side-nav__item`} title={isNameTruncated ? name : undefined}>
         <button disabled className={`${prefix}--side-nav__submenu`}>
           <span className={`${prefix}--side-nav__submenu-title`}>{name}</span>
         </button>
-      </li>
+      </div>
     );
   }
 
   return (
     // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
-    <li
+    <ul
       className={cx(`${prefix}--bmrg-header-team`, { "--is-loading": isInlineLoadingVisible })}
       onClick={handleOnClick}
       onFocus={getServices}
@@ -175,7 +177,7 @@ function TeamServiceListMenu({ baseServicesUrl, baseEnvUrl, isAccount, isMember,
           <InlineLoading />
         </DelayedRender>
       )}
-    </li>
+    </ul>
   );
 }
 
@@ -205,6 +207,7 @@ function ServiceList(props: ServiceListProps) {
             const isNameTruncated = isExternalLink ? service.name.length > 28 : service.name.length > 32;
             return (
               <SideNavMenuItem
+                key={service.name}
                 href={service.url}
                 title={isNameTruncated ? service.name : undefined}
                 {...(isExternalLink ? externalProps : undefined)}

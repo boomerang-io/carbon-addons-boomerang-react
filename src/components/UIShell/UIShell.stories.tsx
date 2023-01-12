@@ -4,7 +4,7 @@ import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import HeaderMenuItem from "../Header/HeaderMenuItem";
-import { Modal, SideNav, SideNavDivider, SideNavLink, SideNavItems, SideNavMenu, SideNavMenuItem } from "@carbon/react";
+import { Button, Modal, SideNav, SideNavDivider, SideNavLink, SideNavItems, SideNavMenu, SideNavMenuItem } from "@carbon/react";
 import { Help, OpenPanelRight, ServiceDesk } from "@carbon/react/icons";
 import { PRIVACY_DATA } from "../PrivacyStatement/constants";
 import { PROFILE_SETTINGS_DATA } from "../ProfileSettings/constants";
@@ -73,9 +73,10 @@ const withDelay = (delay: number, response: any) => (): Promise<any> => {
 
 function MainContent(props: { children?: React.ReactNode }) {
   return (
-    <div id="main" style={{ display: "flex", flexDirection: "column", gap: "1rem", paddingTop: "2rem" }}>
+    <div id="id" style={{ display: "flex", flexDirection: "column", gap: "1rem", paddingTop: "2rem" }}>
       <h1>App name</h1>
       <p>All about your great app</p>
+      <Button>Learn more</Button>
       {props.children}
     </div>
   );
@@ -294,7 +295,7 @@ export function UIShellKitchenSink(args) {
             </div>
           ),
         }}
-        skipToContentProps={{ href: "#main" }}
+        skipToContentProps={{ href: "#id" }}
         supportMenuItems={[
           <HeaderMenuItem onClick={() => setIsTutorialOpen(true)} type="button" text="Tutorial" key="tutorial" />,
         ]}

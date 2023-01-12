@@ -45,6 +45,7 @@ $use-theme-boomerang: false !default;
 @use '../components/FeatureSideNavLink/featureSideNavLink';
 @use '../components/PrivacyRedirect/privacyRedirect';
 @use '../components/Header/header';
+@use '../components/Header/headerAppSwitcher';
 @use '../components/Header/headerMenu';
 @use '../components/Header/headerMenuItem';
 @use '../components/Header/userRequests';

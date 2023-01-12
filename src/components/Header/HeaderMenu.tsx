@@ -7,7 +7,7 @@ type Props = {
   id: string;
 };
 
-function HeaderMenu({  children, id, ...rest }: Props) {
+function HeaderMenu({ children, id, ...rest }: Props) {
   return (
     <ul className={`${prefix}--bmrg-header-drop-down`} id={id} role="menu" {...rest}>
       {children}

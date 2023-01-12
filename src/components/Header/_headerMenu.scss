@@ -4,7 +4,7 @@
 @use "../../global/themes/shell-tokens" as shell;
 
 .#{$prefix}--header__action[aria-expanded="true"] {
-  background: var(--cds-bmrg-header-menu-options-top-border);
+  background: shell.$bmrg-header-menu-options-top-border;
   svg {
     fill: var(--cds-text-on-color, #ffffff) !important;
   }

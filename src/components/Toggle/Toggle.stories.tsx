@@ -16,7 +16,7 @@ export default {
 };
 
 export const Default = (args) => {
-  return <Toggle id="default-toggle" defaultToggled onToggle={action("Toggle clicked")} {...args} />;
+  return <Toggle id="default-toggle" labelText="Toggle me" defaultToggled onToggle={action("Toggle clicked")} {...args} />;
 };
 
 export const InvalidWarning = (args) => {
@@ -25,7 +25,7 @@ export const InvalidWarning = (args) => {
       defaultToggled
       id="tooltip-label-toggle"
       onToggle={action("Toggle clicked")}
-      labelText="Label for toggle"
+      labelText="Toggle me"
       tooltipContent="Tooltip for toggle"
       tooltipProps={{ direction: "top" }}
       helperText={"helperText"}

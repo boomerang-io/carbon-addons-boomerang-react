@@ -55,11 +55,11 @@ export const Default = (args) => {
       defaultSelected="radio 2"
       name="radio buttons 1"
       onChange={action("Change radio button")}
-      labelText={"Example label text"}
-      helperText={"Example helper text"}
+      labelText={"Make a decision"}
+      helperText={"It's an important one. Choose wisely."}
       items={items1}
       orientation="vertical"
-      tooltipContent={"Tooltip for DecisionButtons"}
+      tooltipContent={"Looking for help with the decision?"}
       tooltipProps={{ direction: "right" }}
       {...args}
     />
@@ -71,7 +71,7 @@ export const PositiveAndNegativeButtonsAndHorizontal = (args) => {
     <DecisionButtons
       defaultSelected="no"
       name="radio buttons 2"
-      helperText={"Example helper text"}
+      helperText={"Yes, no, maybe so"}
       onChange={action("Change radio button")}
       orientation="horizontal"
       items={items2}

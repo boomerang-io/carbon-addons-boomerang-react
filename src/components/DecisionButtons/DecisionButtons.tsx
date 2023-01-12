@@ -128,7 +128,7 @@ function DecisionButtons({
           )}
         </div>
       )}
-      {hasVerticalHelperText && <div className={`${prefix}--form__helper-text`}>{helperText}</div>}
+      {hasVerticalHelperText && <div className={`${prefix}--form__helper-text`} style={{marginBottom: "0.5rem"}}>{helperText}</div>}
       <div className={`${prefix}--form-item`}>
         <div className={wrapperClasses}>{getDecisionButtons()}</div>
       </div>

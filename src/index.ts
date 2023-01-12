@@ -1,6 +1,7 @@
 export { default as AutoSuggest } from "./components/AutoSuggest";
 export { default as Avatar } from "./components/Avatar";
-export { default as BmrgHeader } from "./components/Header";
+export { default as Header } from "./components/Header";
+export { default as HeaderMenuItem } from "./components/Header/HeaderMenuItem";
 export { default as CheckboxList } from "./components/CheckboxList";
 export { default as ComboBox } from "./components/ComboBox";
 export { default as ComboBoxMultiSelect } from "./components/ComboBoxMultiSelect";

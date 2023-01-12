@@ -32,7 +32,7 @@ function ModalConfirmEdit({ items, onEdit, style, title = "Confirm Your Details"
           ) : null}
           {typeof onEdit === "function" && (
             <button className={`${prefix}--bmrg-modal-confirm-edit__button`} onClick={onEdit}>
-              <Edit size={16} className={`${prefix}--bmrg-modal-confirm-edit__icon`} />
+              <Edit size={16} className={`${prefix}--bmrg-modal-confirm-edit__icon`} title="Edit"/>
             </button>
           )}
         </div>
