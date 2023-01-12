@@ -30,12 +30,9 @@ import PlatformNotificationsContainer from "../PlatformNotifications";
 import UserRequests from "./UserRequests";
 import useHeaderMenu from "../../hooks/useHeaderMenu";
 import useWindowSize from "../../hooks/useWindowSize";
-import inert from "../../internal/inertPolyfill";
 import { prefix } from "../../internal/settings";
 import type { NavLink } from "../../types";
-
-// Set up polyfill for FF
-inert();
+import "wicg-inert";
 
 type Props = {
   baseServicesUrl?: string;

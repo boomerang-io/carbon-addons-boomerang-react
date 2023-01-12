@@ -72,6 +72,7 @@ specifiers:
   typescript: ^4.6.3
   vite: ^3.2.4
   vitest: 0.25.3
+  wicg-inert: ^3.1.2
   yup: ^0.32.11
 
 dependencies:
@@ -89,6 +90,7 @@ dependencies:
   react-modal: 3.16.1_wcqkhtmu7mswc6yz4uyexck3ty
   react-query: 3.39.2_wcqkhtmu7mswc6yz4uyexck3ty
   react-toastify: 9.1.1_wcqkhtmu7mswc6yz4uyexck3ty
+  wicg-inert: 3.1.2
 
 devDependencies:
   '@carbon/react': 1.14.0_65pstldvghehba4bsfayyandx4
@@ -16238,7 +16240,6 @@ packages:
 
   /wicg-inert/3.1.2:
     resolution: {integrity: sha512-Ba9tGNYxXwaqKEi9sJJvPMKuo063umUPsHN0JJsjrs2j8KDSzkWLMZGZ+MH1Jf1Fq4OWZ5HsESJID6nRza2ang==}
-    dev: true
 
   /wide-align/1.1.5:
     resolution: {integrity: sha512-eDMORYaPNZ4sQIuuYPDHdQvf4gyCF9rEEV/yPxGfwPkRodwEgiMUUXTx/dex+Me0wxx53S+NgUHaP7y3MGlDmg==}
