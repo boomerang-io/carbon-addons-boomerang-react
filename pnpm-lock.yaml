@@ -1,7 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@carbon/react': ^1.19.0
+  '@carbon/react': 1.14.0
   '@commitlint/cli': ^17.0.3
   '@commitlint/config-conventional': ^17.0.3
   '@rollup/plugin-commonjs': ^23.0.3
@@ -91,7 +91,7 @@ dependencies:
   react-toastify: 9.1.1_wcqkhtmu7mswc6yz4uyexck3ty
 
 devDependencies:
-  '@carbon/react': 1.19.0_65pstldvghehba4bsfayyandx4
+  '@carbon/react': 1.14.0_65pstldvghehba4bsfayyandx4
   '@commitlint/cli': 17.2.0
   '@commitlint/config-conventional': 17.2.0
   '@rollup/plugin-commonjs': 23.0.3_rollup@3.6.0
@@ -1662,6 +1662,10 @@ packages:
     resolution: {integrity: sha512-5sQ/qrR5N7/uNI2Pj0PjN/tc93Dcy8cKV4p/jxXAmhGGaWgOYetjwKYUrHBX4RoFRqzM3gn0iAyrwC77hBX7rA==}
     dev: true
 
+  /@carbon/feature-flags/0.9.0:
+    resolution: {integrity: sha512-uNCRkxsNwLdJVNwQ5S5vrLAm4yawWzhFBwyP9EgXVmRzJH85Aim+miC+QNjRXntJDYhZYDuLABTeb3VD692ypA==}
+    dev: true
+
   /@carbon/grid/11.9.0:
     resolution: {integrity: sha512-dOxOH+X1YtWi8KGE1inw83LmK1ehHNtLpQG8E+iNH5eJJSay7IBNWHRQiTSyHX/UG5XlRqDNoTXmnxKBdXC7Wg==}
     dependencies:
@@ -1692,8 +1696,8 @@ packages:
     resolution: {integrity: sha512-RQWMQEyk7orhRovUdZjjLe8UL4cOH0qyUc4Ra/dEvl1+/gXKOC3r0rASZX28xp1QuqrNRfMnHeD12MyhM3JdcA==}
     dev: true
 
-  /@carbon/react/1.19.0_65pstldvghehba4bsfayyandx4:
-    resolution: {integrity: sha512-FwoAUE2Re4Z8kQLBmQdGNRgp6nZPDV6NifEASHqWKqO5QZA6X5aTDFa8Ge1vfjMa3ickquYA5Nki9rMUAnUNDQ==}
+  /@carbon/react/1.14.0_65pstldvghehba4bsfayyandx4:
+    resolution: {integrity: sha512-pLJqayUDVFOGt8cYXaFcRKB9kouy6WKMb2cqx5divBsCiGXH0hM/pntjIc3DeI3PYIwWvYiSdcxrLLA9cwrZCg==}
     requiresBuild: true
     peerDependencies:
       react: ^16.8.6 || ^17.0.1
@@ -1701,7 +1705,7 @@ packages:
       sass: ^1.33.0
     dependencies:
       '@babel/runtime': 7.18.9
-      '@carbon/feature-flags': 0.11.0
+      '@carbon/feature-flags': 0.9.0
       '@carbon/icons-react': 11.13.0_react@16.14.0
       '@carbon/layout': 11.9.0
       '@carbon/styles': 1.19.0_sass@1.56.1

@@ -3,28 +3,23 @@ import cx from "classnames";
 import GenericErrorBackground from "./GenericErrorBackground";
 import { prefix } from "../../internal/settings";
 
-type SharedProps = {
+export type Props = {
   className?: string;
   graphic?: React.ReactNode;
   header?: React.ReactNode;
+  message?: React.ReactNode;
+  statusUrl?: string;
   style?: React.CSSProperties;
   title?: React.ReactNode;
-  [key: string]: any;
 };
-
-export type Props =
-  | ({
-      message: string;
-    } & SharedProps)
-  | ({ statusUrl: string } & SharedProps);
 
 export default function ErrorPageCore({
   className,
   graphic,
   header = "Oops!",
+  style,
   message,
   statusUrl,
-  style,
   title = "Something looks off, but we're getting a handle of it.",
 }: Props) {
   return (

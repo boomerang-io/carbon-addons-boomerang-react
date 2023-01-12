@@ -63,7 +63,7 @@
     "react-toastify": "9.1.1"
   },
   "peerDependencies": {
-    "@carbon/react": "^1.19.0",
+    "@carbon/react": "^1.14.0",
     "axios": ">= 0.26.0 < 1",
     "formik": "^2.1.5",
     "react": "^17.0.0 || ^16.14.0",
@@ -73,7 +73,7 @@
     "yup": ">=0.32.11"
   },
   "devDependencies": {
-    "@carbon/react": "^1.19.0",
+    "@carbon/react": "1.14.0",
     "@commitlint/cli": "^17.0.3",
     "@commitlint/config-conventional": "^17.0.3",
     "@rollup/plugin-commonjs": "^23.0.3",
