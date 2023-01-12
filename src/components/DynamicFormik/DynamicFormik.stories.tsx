@@ -536,6 +536,7 @@ export const Default = (args) => {
             {inputs}
             <button
               disabled={!formikProps.isValid}
+              //@ts-ignore
               onClick={formikProps.handleSubmit}
               style={{ marginTop: "1rem" }}
               type="button"
@@ -567,6 +568,7 @@ export const AllowPropertySyntax = (args) => {
             {inputs}
             <button
               disabled={!formikProps.isValid}
+              //@ts-ignore
               onClick={formikProps.handleSubmit}
               style={{ marginTop: "1rem" }}
               type="button"
@@ -603,6 +605,7 @@ export const AllowPropertySyntaxCustomPatternB = (args) => {
             {inputs}
             <button
               disabled={!formikProps.isValid}
+              //@ts-ignore
               onClick={formikProps.handleSubmit}
               style={{ marginTop: "1rem" }}
               type="button"
@@ -638,6 +641,7 @@ export const GoverningSelects = (args) => {
             {inputs}
             <button
               disabled={!formikProps.isValid}
+              //@ts-ignore
               onClick={formikProps.handleSubmit}
               style={{ marginTop: "1rem" }}
               type="button"
