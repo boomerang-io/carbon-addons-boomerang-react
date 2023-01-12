@@ -57,7 +57,6 @@ exports[`CheckboxList > snapshot 1`] = `
           <label
             class="cds--checkbox-label"
             for="cat"
-            title=""
           >
             <span
               class="cds--checkbox-label-text"
@@ -78,7 +77,6 @@ exports[`CheckboxList > snapshot 1`] = `
           <label
             class="cds--checkbox-label"
             for="dog"
-            title=""
           >
             <span
               class="cds--checkbox-label-text"
@@ -99,7 +97,6 @@ exports[`CheckboxList > snapshot 1`] = `
           <label
             class="cds--checkbox-label"
             for="panda"
-            title=""
           >
             <span
               class="cds--checkbox-label-text"

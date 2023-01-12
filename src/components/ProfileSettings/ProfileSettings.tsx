@@ -46,7 +46,6 @@ type Props = {
 
 function ProfileSettings({ baseServicesUrl, src, userName, isOpen, closeModal }: Props) {
   const queryClient = useQueryClient();
-
   const [initialTeams, setInitialTeams] = useState<LowerLevelGroup[]>([]);
   const [teams, setTeams] = useState<LowerLevelGroup[]>([]);
 
@@ -82,7 +81,12 @@ function ProfileSettings({ baseServicesUrl, src, userName, isOpen, closeModal }:
     setTeams(teams);
   }, [user]);
 
-  async function handleSubmit({ closeModal }: any) {
+  function handleClose() {
+    closeModal();
+    setTeams(initialTeams);
+  }
+
+  async function handleSubmit({ closeModal }: { closeModal: Function }) {
     const body = {
       lowerLevelGroups: teams,
     };
@@ -133,11 +137,12 @@ function ProfileSettings({ baseServicesUrl, src, userName, isOpen, closeModal }:
   return (
     <ComposedModal
       aria-label="Profile Settings"
-      open={isOpen}
       className={`${prefix}--bmrg-profile-settings-container ${prefix}--bmrg-header-modal`}
-      onClose={closeModal}
+      open={isOpen}
+      onClose={handleClose}
+      preventCloseOnClickOutside={true}
     >
-      <ModalHeader closeModal={closeModal} title={`User profile - ${userName}`} />
+      <ModalHeader closeModal={handleClose} title={`User profile - ${userName}`} />
       <ModalBody style={{ maxHeight: "31.5rem" }}>
         <p className={`${prefix}--bmrg-profile-settings__title`}>
           More user profile settings will be here eventually, but for now you can choose which Teams are shown in your
@@ -178,7 +183,10 @@ function ProfileSettings({ baseServicesUrl, src, userName, isOpen, closeModal }:
                       checked={visible}
                       id={id}
                       labelText={name}
-                      onChange={(_: any, { checked, id }: { checked: boolean; id: string }) => {
+                      onChange={(
+                        _: React.ChangeEvent<HTMLInputElement>,
+                        { checked, id }: { checked: boolean; id: string }
+                      ) => {
                         return handleUpdateTeamVisibility(id, checked);
                       }}
                     />
@@ -206,16 +214,16 @@ function ProfileSettings({ baseServicesUrl, src, userName, isOpen, closeModal }:
             <InlineNotification kind="error" title="Something's Wrong" subtitle="Failed to update user profile" />
           </div>
         )}
-        <Button data-modal-primary-focus kind="secondary" onClick={closeModal}>
+        <Button data-modal-primary-focus kind="secondary" onClick={handleClose}>
           Cancel
         </Button>
         <Button
           disabled={!isConfigDifferent || mutateUserProfileIsLoading}
           kind="primary"
           type="submit"
-          onClick={(e: any) => {
+          onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
             e.preventDefault();
-            handleSubmit({ closeModal });
+            handleSubmit({ closeModal: handleClose });
           }}
         >
           {mutateUserProfileError ? "Try Again" : mutateUserProfileIsLoading ? "Saving..." : "Save changes"}

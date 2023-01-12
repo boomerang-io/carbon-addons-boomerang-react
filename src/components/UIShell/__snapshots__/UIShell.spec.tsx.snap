@@ -67,12 +67,12 @@ exports[`UIShell > snapshot 1`] = `
         <div
           class="cds--header__global"
         />
-        <div
-          class="Toastify"
-          id="cds--bmrg-header-notifications"
-        />
       </header>
     </div>
+    <div
+      class="Toastify"
+      id="cds--bmrg-header-notifications"
+    />
   </div>
 </body>
 `;

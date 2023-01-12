@@ -15,15 +15,17 @@ exports[`Feedback > snapshot 1`] = `
         <a
           class="cds--header__menu-item"
           href="https://useboomerang.io"
+          kind="external"
           rel="noopener noreferrer"
           tabindex="0"
           target="_blank"
+          text="Use Boomerang"
         >
           <span
             class="cds--text-truncate--end"
           >
             <div
-              class="cds--bmrg-header-menu-item__content "
+              class="cds--bmrg-header-menu-item__content"
             >
               <span
                 class="cds--bmrg-header-menu-item__text"
@@ -31,12 +33,12 @@ exports[`Feedback > snapshot 1`] = `
                 Use Boomerang
               </span>
               <svg
-                aria-label="Opens in new tab"
                 fill="currentColor"
                 focusable="false"
                 height="16"
                 preserveAspectRatio="xMidYMid meet"
                 role="img"
+                title="Opens link in new tab"
                 viewBox="0 0 16 16"
                 width="16"
                 xmlns="http://www.w3.org/2000/svg"
@@ -58,13 +60,15 @@ exports[`Feedback > snapshot 1`] = `
         <a
           class="cds--header__menu-item"
           href="https://useboomerang.io"
+          kind="internal"
           tabindex="0"
+          text="Use Boomerang"
         >
           <span
             class="cds--text-truncate--end"
           >
             <div
-              class="cds--bmrg-header-menu-item__content "
+              class="cds--bmrg-header-menu-item__content"
             >
               <span
                 class="cds--bmrg-header-menu-item__text"
@@ -72,12 +76,12 @@ exports[`Feedback > snapshot 1`] = `
                 Use Boomerang
               </span>
               <svg
-                aria-label="Opens in same platform"
                 fill="currentColor"
                 focusable="false"
                 height="16"
                 preserveAspectRatio="xMidYMid meet"
                 role="img"
+                title="Opens link within same platform"
                 viewBox="0 0 16 16"
                 width="16"
                 xmlns="http://www.w3.org/2000/svg"
@@ -96,13 +100,15 @@ exports[`Feedback > snapshot 1`] = `
         <a
           class="cds--header__menu-item"
           href="https://useboomerang.io"
+          kind="app"
           tabindex="0"
+          text="Use Boomerang"
         >
           <span
             class="cds--text-truncate--end"
           >
             <div
-              class="cds--bmrg-header-menu-item__content "
+              class="cds--bmrg-header-menu-item__content"
             >
               <span
                 class="cds--bmrg-header-menu-item__text"
@@ -118,7 +124,7 @@ exports[`Feedback > snapshot 1`] = `
       >
         <a
           class="cds--header__menu-item"
-          href="javascript:void(0)"
+          href="#"
           tabindex="0"
           text="Show Boomerang"
         >
@@ -142,8 +148,10 @@ exports[`Feedback > snapshot 1`] = `
       >
         <a
           class="cds--header__menu-item"
-          href="javascript:void(0)"
+          href="#"
+          src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50"
           tabindex="0"
+          username="Boomerang user"
         >
           <span
             class="cds--text-truncate--end"

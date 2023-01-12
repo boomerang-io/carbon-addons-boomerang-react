@@ -72,24 +72,31 @@ exports[`Privacy Statement - snapshot 1`] = `
           <div
             class="cds--modal-footer cds--btn-set"
           >
+            <button
+              class="cds--btn cds--btn--secondary"
+              data-modal-primary-focus="true"
+              tabindex="0"
+              type="button"
+            >
+              Close
+            </button>
+            <button
+              aria-describedby="danger-description-2"
+              class="cds--btn cds--btn--danger"
+              tabindex="0"
+              type="button"
+            >
+              <span
+                class="cds--visually-hidden"
+                id="danger-description-2"
+              >
+                danger
+              </span>
+              Request account deletion
+            </button>
             <div
               class="cds--bmrg-privacy-statement-delete"
             >
-              <button
-                aria-describedby="danger-description-1"
-                class="cds--btn cds--btn--danger"
-                data-modal-primary-focus="true"
-                tabindex="0"
-                type="button"
-              >
-                <span
-                  class="cds--visually-hidden"
-                  id="danger-description-1"
-                >
-                  danger
-                </span>
-                Request account deletion
-              </button>
               <div
                 aria-hidden="true"
                 class="cds--modal"
@@ -169,14 +176,14 @@ exports[`Privacy Statement - snapshot 1`] = `
                         No, go back to Privacy Statement
                       </button>
                       <button
-                        aria-describedby="danger-description-3"
+                        aria-describedby="danger-description-4"
                         class="cds--btn cds--btn--danger"
                         tabindex="0"
                         type="submit"
                       >
                         <span
                           class="cds--visually-hidden"
-                          id="danger-description-3"
+                          id="danger-description-4"
                         >
                           danger
                         </span>

@@ -105,56 +105,60 @@ export default function Header(props: Props) {
   } = props;
 
   return (
-    <Theme theme="g100">
-      <CarbonHeader aria-label="App navigation header" className={className}>
-        {skipToContentProps ? <SkipToContent {...skipToContentProps} /> : null}
-        <SidenavMenu leftPanel={props.leftPanel} navLinks={props.navLinks} />
-        <HeaderName href={baseEnvUrl} prefix={prefixName}>
-          {productName}
-        </HeaderName>
-        <HeaderNavigation aria-label="Platform navigation">
-          {Array.isArray(navLinks)
-            ? navLinks.map((link) => (
-                <HeaderMenuItem
-                  aria-label={`Link for ${link.name}`}
-                  href={link.url}
-                  isCurrentPage={window?.location?.href && link.url ? window.location.href.startsWith(link.url) : false}
-                  key={link.name}
-                >
-                  {link.name}
-                </HeaderMenuItem>
-              ))
-            : null}
-        </HeaderNavigation>
-        <HeaderGlobalBar>
-          <RequestsMenu
-            baseEnvUrl={baseEnvUrl}
-            enabled={Boolean(props.requestSummary)}
-            summary={props.requestSummary}
-          />
-          <NotificationsMenu
-            baseEnvUrl={baseEnvUrl}
-            baseServicesUrl={baseServicesUrl}
-            enabled={Boolean(props.enableNotifications)}
-          />
-          <SupportMenu
-            enabled={Array.isArray(props.supportMenuItems) && props.supportMenuItems.length > 0}
-            menuItems={props.supportMenuItems}
-          />
-          <ProfileMenu
-            enabled={Array.isArray(props.profileMenuItems) && props.profileMenuItems.length > 0}
-            menuItems={props.profileMenuItems}
-          />
-          <AppSwitcherMenu
-            baseEnvUrl={baseEnvUrl}
-            baseServicesUrl={baseServicesUrl}
-            enabled={props.enableAppSwitcher}
-          />
-          <RightPanelMenu enabled={Boolean(rightPanel && Object.keys(rightPanel).length)} {...rightPanel} />
-        </HeaderGlobalBar>
-        <NotificationsContainer enableMultiContainer containerId={`${prefix}--bmrg-header-notifications`} />
-      </CarbonHeader>
-    </Theme>
+    <>
+      <Theme theme="g100">
+        <CarbonHeader aria-label="App navigation header" className={className}>
+          {skipToContentProps ? <SkipToContent {...skipToContentProps} /> : null}
+          <SidenavMenu leftPanel={props.leftPanel} navLinks={props.navLinks} />
+          <HeaderName href={baseEnvUrl} prefix={prefixName}>
+            {productName}
+          </HeaderName>
+          <HeaderNavigation aria-label="Platform navigation">
+            {Array.isArray(navLinks)
+              ? navLinks.map((link) => (
+                  <HeaderMenuItem
+                    aria-label={`Link for ${link.name}`}
+                    href={link.url}
+                    isCurrentPage={
+                      window?.location?.href && link.url ? window.location.href.startsWith(link.url) : false
+                    }
+                    key={link.name}
+                  >
+                    {link.name}
+                  </HeaderMenuItem>
+                ))
+              : null}
+          </HeaderNavigation>
+          <HeaderGlobalBar>
+            <RequestsMenu
+              baseEnvUrl={baseEnvUrl}
+              enabled={Boolean(props.requestSummary)}
+              summary={props.requestSummary}
+            />
+            <NotificationsMenu
+              baseEnvUrl={baseEnvUrl}
+              baseServicesUrl={baseServicesUrl}
+              enabled={Boolean(props.enableNotifications)}
+            />
+            <SupportMenu
+              enabled={Array.isArray(props.supportMenuItems) && props.supportMenuItems.length > 0}
+              menuItems={props.supportMenuItems}
+            />
+            <ProfileMenu
+              enabled={Array.isArray(props.profileMenuItems) && props.profileMenuItems.length > 0}
+              menuItems={props.profileMenuItems}
+            />
+            <AppSwitcherMenu
+              baseEnvUrl={baseEnvUrl}
+              baseServicesUrl={baseServicesUrl}
+              enabled={props.enableAppSwitcher}
+            />
+            <RightPanelMenu enabled={Boolean(rightPanel && Object.keys(rightPanel).length)} {...rightPanel} />
+          </HeaderGlobalBar>
+        </CarbonHeader>
+      </Theme>
+      <NotificationsContainer enableMultiContainer containerId={`${prefix}--bmrg-header-notifications`} />
+    </>
   );
 }
 

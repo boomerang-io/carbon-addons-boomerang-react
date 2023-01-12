@@ -81,7 +81,7 @@ export default class PlatformNotificationsContainer extends React.Component<Prop
       if (data.length > 0) {
         this.props.setHasNewNotifications(true);
       } else {
-        // This has to be decalred because this function can be triggered from the notification page in Launchpad
+        // This has to be declared because this function can be triggered from the notification page in Launchpad
         this.props.setHasNewNotifications(false);
       }
       this.setState({
