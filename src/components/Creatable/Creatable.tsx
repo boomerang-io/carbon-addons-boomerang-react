@@ -139,7 +139,7 @@ function CreatableComponent({
   const keyInputInvalidText = keyInputHasColon ? "Colon is not allowed" : invalidText;
   const valueInputInvalidText = valueInputHasColon ? "Colon is not allowed" : invalidText;
 
-  const isAddButtonDisabled = disabled || !existValue || isKeyInputValid || isValueInputValid;
+  const isAddButtonDisabled = disabled || !existValue || keyInputHasColon || valueInputHasColon;
 
   const onInputChange = (e: any) => {
     setInput(e.target.value);
