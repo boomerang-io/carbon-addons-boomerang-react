@@ -1,6 +1,6 @@
-# v3 Migration Guide
+# v4 Migration Guide
 
-Follow the sections below for migrating from v2 to v3.
+Follow the sections below for migrating from v3 to v4.
 
 ## Prerequisites
 
