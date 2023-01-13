@@ -36,9 +36,8 @@ type Props =
     });
 
 function HeaderMenuItem(props: Props, ref: React.ForwardedRef<HTMLLinkElement>) {
-  const { type, icon, onClick, variant = "default", ...rest } = props;
-
-  if (props.type === "button")
+  if (props.type === "button") {
+    const { icon, onClick, type, text, variant = "default", ...rest } = props;
     return (
       <CarbonHeaderMenuItem
         // eslint-disable-next-line no-script-url
@@ -51,16 +50,17 @@ function HeaderMenuItem(props: Props, ref: React.ForwardedRef<HTMLLinkElement>) 
         <div className={`${prefix}--bmrg-header-menu-item__content ${variant === "danger" ? "--danger" : ""}`}>
           <span className={`${prefix}--bmrg-header-menu-item__text`}>
             {icon}
-            {props.text}
+            {text}
           </span>
         </div>
       </CarbonHeaderMenuItem>
     );
-
+  }
   if (props.type === "link") {
-    const externalProps = props.kind === "external" ? { target: "_blank", rel: "noopener noreferrer" } : {};
+    const { href, icon, kind, onClick, text, type, variant = "default", ...rest } = props;
+    const externalProps = kind === "external" ? { target: "_blank", rel: "noopener noreferrer" } : {};
     let linkTypeIcon;
-    switch (props.kind) {
+    switch (kind) {
       case "external":
         linkTypeIcon = <Launch title="Opens link in new tab" />;
         break;
@@ -72,11 +72,11 @@ function HeaderMenuItem(props: Props, ref: React.ForwardedRef<HTMLLinkElement>) 
       // no-op
     }
     return (
-      <CarbonHeaderMenuItem href={props.href} {...externalProps} onClick={onClick} role="menuitem" ref={ref} {...rest}>
+      <CarbonHeaderMenuItem href={href} {...externalProps} onClick={onClick} role="menuitem" ref={ref} {...rest}>
         <div className={cx(`${prefix}--bmrg-header-menu-item__content`, { "--danger": variant === "danger" })}>
           <span className={`${prefix}--bmrg-header-menu-item__text`}>
             {icon}
-            {props.text}
+            {text}
           </span>
           {linkTypeIcon}
         </div>
@@ -85,12 +85,13 @@ function HeaderMenuItem(props: Props, ref: React.ForwardedRef<HTMLLinkElement>) 
   }
 
   if (props.type === "user") {
+    const { icon, onClick = "default", src, type, userName, ...rest } = props;
     return (
       // eslint-disable-next-line no-script-url
       <CarbonHeaderMenuItem href={"javascript:void(0)"} onClick={onClick} role="menuitem" ref={ref} {...rest}>
         <div className={`${prefix}--bmrg-header-menu-user`}>
-          <Avatar size="medium" src={props.src} userName={props.userName} />
-          <p className={`${prefix}--bmrg-header-menu-user__name`}> {props.userName ? props.userName : ""} </p>
+          <Avatar size="medium" src={src} userName={userName} />
+          <p className={`${prefix}--bmrg-header-menu-user__name`}> {userName ? userName : ""} </p>
         </div>
       </CarbonHeaderMenuItem>
     );

@@ -15,11 +15,9 @@ exports[`Feedback > snapshot 1`] = `
         <a
           class="cds--header__menu-item"
           href="https://useboomerang.io"
-          kind="external"
           rel="noopener noreferrer"
           tabindex="0"
           target="_blank"
-          text="Use Boomerang"
         >
           <span
             class="cds--text-truncate--end"
@@ -60,9 +58,7 @@ exports[`Feedback > snapshot 1`] = `
         <a
           class="cds--header__menu-item"
           href="https://useboomerang.io"
-          kind="internal"
           tabindex="0"
-          text="Use Boomerang"
         >
           <span
             class="cds--text-truncate--end"
@@ -100,9 +96,7 @@ exports[`Feedback > snapshot 1`] = `
         <a
           class="cds--header__menu-item"
           href="https://useboomerang.io"
-          kind="app"
           tabindex="0"
-          text="Use Boomerang"
         >
           <span
             class="cds--text-truncate--end"
@@ -124,9 +118,8 @@ exports[`Feedback > snapshot 1`] = `
       >
         <a
           class="cds--header__menu-item"
-          href="#"
+          href="javascript:void(0)"
           tabindex="0"
-          text="Show Boomerang"
         >
           <span
             class="cds--text-truncate--end"
@@ -148,10 +141,8 @@ exports[`Feedback > snapshot 1`] = `
       >
         <a
           class="cds--header__menu-item"
-          href="#"
-          src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50"
+          href="javascript:void(0)"
           tabindex="0"
-          username="Boomerang user"
         >
           <span
             class="cds--text-truncate--end"
