@@ -10,7 +10,7 @@ import { isAccessibleKeyDownEvent } from "../../tools/accessibility";
 type Props = {
   buttonClassName?: string;
   buttonContent?: React.ReactNode;
-  buttonProps?: React.ComponentPropsWithRef<"button">;
+  buttonProps?: any;
   createKeyValuePair?: boolean;
   disabled?: boolean;
   id?: string;
@@ -35,7 +35,7 @@ type Props = {
   readOnly?: boolean;
   tagProps?: any;
   tagType?: string;
-  textInputProps?: React.ComponentPropsWithRef<"input">;
+  textInputProps?: any;
   tooltipClassName?: string;
   tooltipContent?: React.ReactNode;
   tooltipProps?: any;
@@ -90,7 +90,7 @@ function CreatableComponent({
   const [keyValue, setKeyValue] = useState("");
   const [value, setValue] = useState("");
   const [input, setInput] = useState("");
-  const inputRef = React.useRef<HTMLInputElement>(null)
+  const inputRef = React.useRef<HTMLInputElement>(null);
 
   const inputLabel = labelText || label;
   const inputKeyLabel = keyLabelText || keyLabel;
@@ -174,7 +174,7 @@ function CreatableComponent({
 
     setCreatedItems(items);
     if (onChange) onChange(items);
-    inputRef.current?.focus()
+    inputRef.current?.focus();
   };
 
   const removeValue = (value: string) => {
