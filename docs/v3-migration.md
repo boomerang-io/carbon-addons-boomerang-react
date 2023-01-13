@@ -1,10 +1,10 @@
-# v3 Migration Guide
+# v3 Upgrade Guide
 
-Follow the sections below for migrating from v2 to v3.
+Follow the sections below for upgrading from v2 to v3.
 
 ## Prerequisites
 
-Moving to v3 of this library requires you to be using [v11 of Carbon](https://medium.com/carbondesign/carbon-v11-72ace7fac01fc). Migrating a codebase to Carbon v11 will likely be significantly more involved than migrating to v3 of this component library. View their [migration guide](https://carbondesignsystem.com/migrating/guide/overview/) for getting started with that work.
+Moving to v3 of this library requires you to be using [v11 of Carbon](https://medium.com/carbondesign/carbon-v11-72ace7fac01fc). Migrating a codebase to Carbon v11 will likely be significantly more involved than upgrading to v3 of this component library. View their [migration guide](https://carbondesignsystem.com/migrating/guide/overview/) for getting started with that work.
 
 ## Dependencies
 
