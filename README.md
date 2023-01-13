@@ -12,7 +12,7 @@ Run the following command using [pnpm](https://pnpm.io). Other package managers 
 pnpm install @carbon/react @boomerang-io/carbon-addons-boomerang-react axios@0.27.2 formik react-router-dom@5 yup
 ```
 
-Upgrading from a previous version? View our [migration guide](/docs/v3-migration.md).
+Upgrading from a previous version? View our [migration guide](/docs/v4-migration.md).
 
 ## Styles
 
