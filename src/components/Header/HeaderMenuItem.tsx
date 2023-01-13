@@ -41,7 +41,8 @@ function HeaderMenuItem(props: Props, ref: React.ForwardedRef<HTMLLinkElement>) 
   if (props.type === "button")
     return (
       <CarbonHeaderMenuItem
-        href={"#"}
+        // eslint-disable-next-line no-script-url
+        href={"javascript:void(0)"}
         onClick={onClick}
         role="menuitem"
         ref={ref}
@@ -86,7 +87,7 @@ function HeaderMenuItem(props: Props, ref: React.ForwardedRef<HTMLLinkElement>) 
   if (props.type === "user") {
     return (
       // eslint-disable-next-line no-script-url
-      <CarbonHeaderMenuItem href={`#`} onClick={onClick} role="menuitem" ref={ref} {...rest}>
+      <CarbonHeaderMenuItem href={"javascript:void(0)"} onClick={onClick} role="menuitem" ref={ref} {...rest}>
         <div className={`${prefix}--bmrg-header-menu-user`}>
           <Avatar size="medium" src={props.src} userName={props.userName} />
           <p className={`${prefix}--bmrg-header-menu-user__name`}> {props.userName ? props.userName : ""} </p>
