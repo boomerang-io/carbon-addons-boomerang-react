@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
-import useSetState from "../../tools/useSetState";
+import { ModalHeader } from "@carbon/react";
 import cx from "classnames";
 import Modal from "../Modal";
-import { ModalHeader } from "@carbon/react";
-import { prefix } from "../../internal/settings";
 import ConfirmModal from "../ConfirmModal";
+import { prefix } from "../../internal/settings";
+import useSetState from "../../tools/useSetState";
 import type { ModalTrigger } from "types";
 
 type Props = {

@@ -1,8 +1,15 @@
 import React from "react";
 import { RadioButton, RadioButtonGroup } from "@carbon/react";
-import TooltipHover from "../TooltipHover";
 import { Information } from "@carbon/react/icons";
+import TooltipHover from "../TooltipHover";
 import { prefix } from "../../internal/settings";
+import type { TooltipHoverProps } from "../TooltipHover";
+
+type RadioButtonOption = {
+  disabled?: boolean;
+  labelText: string;
+  value: string;
+};
 
 type Props = {
   columnHeight?: string;
@@ -14,14 +21,14 @@ type Props = {
   label?: string;
   labelText?: string;
   name: string;
-  onChange: (...args: any[]) => any;
-  options: any[];
-  orientation?: string;
-  radioGroupProps?: any;
-  radioButtonProps?: any;
+  onChange: (selectedValue: string, radioGroup: string, e: React.ChangeEvent<HTMLInputElement>) => void;
+  options: RadioButtonOption[];
+  orientation?: "horizontal" | "vertical";
+  radioGroupProps?: Record<string, any>;
+  radioButtonProps?: Record<string, any>;
   tooltipClassName?: string;
   tooltipContent?: React.ReactNode;
-  tooltipProps?: any;
+  tooltipProps?: TooltipHoverProps;
   value?: string;
   verticalWrapped?: boolean;
 };
@@ -70,7 +77,11 @@ function RadioGroupComponent({
           )}
         </div>
       )}
-      {hasVerticalHelperText && <div className={`${prefix}--form__helper-text`}>{helperText}</div>}
+      {hasVerticalHelperText && (
+        <div className={`${prefix}--form__helper-text`} style={{ marginBottom: "0.375rem" }}>
+          {helperText}
+        </div>
+      )}
       <RadioButtonGroup
         className={isVertical && verticalWrapped ? `${prefix}--bmrg-radio-group__container` : undefined}
         defaultSelected={defaultSelected}

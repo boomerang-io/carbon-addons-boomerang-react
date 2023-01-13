@@ -1,27 +1,19 @@
 import React from "react";
 import { QueryClientProvider } from "react-query";
+import { Forum, HelpDesk, Email } from "@carbon/react/icons";
 import Header from "../Header"; // Using default export
-import HeaderMenuButton from "../HeaderMenuButton";
-import HeaderMenuLink from "../HeaderMenuLink";
-import ProfileSettings from "../ProfileSettings";
-import AboutPlatform from "../AboutPlatform";
-import Feedback from "../Feedback";
-import PrivacyStatement from "../PrivacyStatement";
-import SignOut from "../SignOut";
-import GdprRedirectModal from "../GdprRedirectModal";
+import HeaderMenuItem from "../Header/HeaderMenuItem";
+import PrivacyRedirectModal from "../PrivacyRedirect";
+import { AboutPlatformMenuItem } from "../AboutPlatform";
+import { FeedbackMenuItem } from "../Feedback";
+import { PrivacyStatementMenuItem } from "../PrivacyStatement";
+import { ProfileSettingsMenuItem } from "../ProfileSettings";
 import { queryClient } from "../../config/servicesConfig";
-import { User } from "../../types";
+import { SignOutMenuItem } from "../SignOut";
+import type { NavLink, User } from "../../types";
 
-UIShell.defaultProps = {
-  renderRightPanel: {},
-};
-
-type OwnProps = {
-  appName?: string;
-  baseServiceUrl?: string;
-  baseLaunchEnvUrl?: string;
-  companyName?: string;
-  headerConfig?: {
+type Props = {
+  config?: {
     features?: {
       "appSwitcher.enabled"?: boolean;
       "consent.enabled"?: boolean;
@@ -35,19 +27,15 @@ type OwnProps = {
       "support.enabled"?: boolean;
       "welcome.enabled"?: boolean;
     };
-    navigation?: {
-      name?: string;
-      url?: string;
-    }[];
-    platform?: {
-      baseEnvUrl?: string;
-      baseServicesUrl?: string;
+    navigation?: NavLink[];
+    platform: {
+      baseEnvUrl: string;
+      baseServicesUrl: string;
       communityUrl?: string;
-      displayLogo?: boolean;
       feedbackUrl?: string;
-      name?: string;
+      name?: string; // Used in About Plaform modal
       platformEmail?: string;
-      platformName?: string;
+      platformName: string; // Used in UIShell
       platformOrganization?: string;
       privateTeams?: boolean;
       sendIdeasUrl?: string;
@@ -57,77 +45,77 @@ type OwnProps = {
     };
     platformMessage?: any;
   };
-  isFlowApp?: boolean;
-  onMenuClick?: (...args: any[]) => any;
-  onTutorialClick?: (...args: any[]) => any;
-  ownedRequests?: any[];
+  leftPanel?: (args: { close: () => void; isOpen: boolean; navLinks?: NavLink[] }) => React.ReactNode;
   platformName?: string;
   productName?: string;
-  renderFlowDocs?: boolean;
-  renderLogo?: boolean;
-  renderGdprRedirect?: boolean;
+  profileMenuItems?: React.ReactNode[];
+  renderPrivacyRedirect?: boolean;
   renderPrivacyStatement?: boolean;
-  renderRequests?: boolean;
-  user?: User;
-  userRequests?: any[];
-  renderRightPanel?: {
-    icon?: React.ReactElement;
-    component?: React.ReactElement;
-  };
-  renderSidenav?: (...args: any[]) => any;
+  rightPanel?: { icon?: React.ReactNode; component: React.ReactNode };
   skipToContentProps?: {
     href?: string;
     children?: string;
     className?: string;
   };
+  supportMenuItems?: React.ReactNode[];
+  user?: User;
 };
 
-type Props = OwnProps & typeof UIShell.defaultProps;
-
 function UIShell({
-  appName,
-  baseLaunchEnvUrl,
-  baseServiceUrl,
-  companyName,
-  headerConfig = {},
-  isFlowApp = false,
-  onMenuClick,
-  onTutorialClick,
+  config,
+  leftPanel,
   platformName,
   productName,
-  renderLogo,
-  renderGdprRedirect = true,
-  renderFlowDocs,
+  profileMenuItems = [],
+  supportMenuItems = [],
+  renderPrivacyRedirect = true,
   renderPrivacyStatement = true,
-  renderRightPanel = {},
-  renderSidenav,
+  rightPanel,
   skipToContentProps,
   user,
 }: Props) {
-  const finalPlatformName = platformName || companyName;
-  const finalAppName = appName || productName;
+  // Support base header .e.g for an error state
+  if (!config) {
+    return (
+      <Header
+        baseEnvUrl=""
+        baseServicesUrl=""
+        enableAppSwitcher={false}
+        enableNotifications={false}
+        productName={productName || platformName || ""}
+      />
+    );
+  }
 
-  const { features, navigation, platform, platformMessage } = headerConfig;
+  const { features, navigation, platform, platformMessage } = config;
+  const names = getProductAndPlatformNames({ productName, platformName, platform });
+  const sendIdeasUrl = platform?.feedbackUrl || "https://ideas.ibm.com";
+
   /**
-   * Prevent breaking changes. Use the values from the platform object if present.
-   * Default to the legacy props to support backwards compatibility
+   * Check feature enablement via explicit feature flags
    */
-  const finalBaseUrl = platform?.baseEnvUrl || baseLaunchEnvUrl;
-  const finalBaseServiceUrl = platform?.baseServicesUrl || baseServiceUrl || "";
-  const finalSendIdeasUrl = platform?.feedbackUrl || "https://ideas.ibm.com";
   const isAppSwitcherEnabled = Boolean(features?.["appSwitcher.enabled"]);
   const isFeedbackEnabled = Boolean(features?.["feedback.enabled"]);
   const isNotificationsEnabled = Boolean(features?.["notifications.enabled"]);
-  const isLogoEnabled = platform?.displayLogo || renderLogo;
   const isSupportEnabled = Boolean(features?.["support.enabled"]);
 
   /**
-   * Checking for conditions when we explicitly set "renderGdprRedirect" to false (it defaults to true) OR
+   * Check feature enablement via value truthiness
+   */
+  const isAboutPlatformEnabled = Boolean(platform.name && platform.version);
+  const isCommunityEnabled = Boolean(platform?.communityUrl);
+  const isSendMailEnabled = Boolean(platform.sendMail);
+  const isSignOutEnabled = Boolean(platform?.signOutUrl);
+  const isUserEnabled = Boolean(user?.id);
+
+  /**
+   * Checking for conditions when we explicitly set "renderPrivacyRedirect" to false (it defaults to true) OR
    * it's disabled overall for the platform. This lets us toggle the UIShell consent redirect per app as needed
    * e.g. disabled in Launchpad, but have it enabled for rest of the platform AND also support
-   * having it disabled in a "standalone" mode via the consent.enaable feature flag. aka its data driven via the service
+   * having it disabled in a "standalone" mode via the consent.enable feature flag, i.e. data driven via the service
    */
-  const isGdprRedirectDisabled = renderGdprRedirect === false || features?.["consent.enabled"] === false;
+  const isPrivacyRedirectDisabled = renderPrivacyRedirect === false || features?.["consent.enabled"] === false;
+  const isPrivacyModalRendered = isPrivacyRedirectDisabled === false && user?.hasConsented === false;
 
   /**
    * Also enable/disable privacy statement via the consent.enabled feature flag
@@ -137,94 +125,126 @@ function UIShell({
   return (
     <QueryClientProvider client={queryClient}>
       <Header
-        appName={finalAppName}
-        baseLaunchEnvUrl={finalBaseUrl}
-        baseServiceUrl={finalBaseServiceUrl}
+        baseEnvUrl={platform.baseEnvUrl}
+        baseServicesUrl={platform.baseServicesUrl}
         enableAppSwitcher={isAppSwitcherEnabled}
         enableNotifications={isNotificationsEnabled}
+        leftPanel={leftPanel}
         navLinks={navigation}
         platformMessage={platformMessage}
-        platformName={!isLogoEnabled && finalPlatformName ? finalPlatformName : undefined}
-        renderLogo={isLogoEnabled}
-        renderRightPanel={renderRightPanel}
-        renderSidenav={onMenuClick || renderSidenav}
-        skipToContentProps={skipToContentProps}
+        prefixName={names.platformName}
+        productName={names.productName}
+        rightPanel={rightPanel}
         requestSummary={user?.requestSummary}
-        notificationsConfig={{
-          wsUrl: `${finalBaseServiceUrl}/notifications/ws`.replace("https://", "wss://"),
-        }}
-        onHelpClick={[
-          typeof onTutorialClick === "function" && (
-            <HeaderMenuButton iconName="workspace" key="Tutorial" onClick={onTutorialClick} text="Tutorial" />
-          ),
-          Boolean(finalBaseServiceUrl) && isSupportEnabled && (
-            <HeaderMenuLink
-              external={false}
-              href={`${finalBaseUrl}/support/center`}
-              iconName="support"
-              text="Support Center"
-            />
-          ),
-          Boolean(platform?.communityUrl) && (
-            <HeaderMenuLink href={platform?.communityUrl as string} iconName="forum" text="Community" />
-          ),
-          renderFlowDocs && (
-            <HeaderMenuLink
-              external={true}
-              href={`https://useboomerang.io/docs/boomerang-flow/introduction/overview/`}
-              iconName="information"
-              text="Flow Documentation"
-            />
-          ),
-          isFeedbackEnabled && (
-            <Feedback
-              key="Feedback"
-              platformName={platform?.platformName}
-              platformOrganization={platform?.platformOrganization}
-              sendIdeasUrl={finalSendIdeasUrl}
-            />
-          ),
-        ].filter(Boolean)}
-        profileChildren={[
-          Boolean(user?.id) && (
-            <ProfileSettings
-              baseServiceUrl={finalBaseServiceUrl}
-              key="Avatar"
-              src={`${finalBaseServiceUrl}/users/image/${user?.email}`}
+        skipToContentProps={skipToContentProps}
+        profileMenuItems={[
+          isUserEnabled && (
+            <ProfileSettingsMenuItem
+              key="profile-settings"
+              baseServicesUrl={platform.baseServicesUrl}
+              src={`${platform.baseServicesUrl}/users/image/${user?.email}`}
               userName={user?.name}
             />
           ),
-          platform && (
-            <AboutPlatform
-              key="About Platform"
-              organization={platform.name}
-              version={platform.version}
-              isFlowApp={isFlowApp}
+          isAboutPlatformEnabled && (
+            <AboutPlatformMenuItem
+              key="about-platform"
+              name={platform.name as string}
+              version={platform.version as string}
             />
           ),
-          platform?.sendMail && (
-            <HeaderMenuLink
-              external={false}
-              href={`${finalBaseUrl}/launchpad/email-preferences`}
-              iconName="email"
+          isSendMailEnabled && (
+            <HeaderMenuItem
+              key="email-preferences"
+              href={`${platform.baseEnvUrl}/launchpad/email-preferences`}
+              icon={<Email />}
+              kind="internal"
               text="Email Preferences"
+              type="link"
             />
           ),
-          baseServiceUrl && isPrivacyStatementDisabled === false && (
-            <PrivacyStatement
-              key="Privacy Statement"
-              baseServiceUrl={finalBaseServiceUrl}
+          !isPrivacyStatementDisabled && (
+            <PrivacyStatementMenuItem
+              key="privacy-statement"
+              baseServicesUrl={platform.baseServicesUrl}
               platformEmail={platform?.platformEmail}
             />
           ),
-          !!platform?.signOutUrl && <SignOut key="Sign Out" signOutLink={platform.signOutUrl} />,
+          ...profileMenuItems,
+          isSignOutEnabled && <SignOutMenuItem key="Sign Out" signOutLink={platform.signOutUrl as string} />,
+        ].filter(Boolean)}
+        supportMenuItems={[
+          isSupportEnabled && (
+            <HeaderMenuItem
+              key="support-center"
+              href={`${platform.baseEnvUrl}/support/center`}
+              icon={<HelpDesk />}
+              kind="internal"
+              text="Support Center"
+              type="link"
+            />
+          ),
+          isCommunityEnabled && (
+            <HeaderMenuItem
+              key="community"
+              href={platform?.communityUrl as string}
+              icon={<Forum />}
+              kind="external"
+              text="Community"
+              type="link"
+            />
+          ),
+          isFeedbackEnabled && (
+            <FeedbackMenuItem
+              key="feedback"
+              platformName={platform?.platformName}
+              platformOrganization={platform?.platformOrganization}
+              sendIdeasUrl={sendIdeasUrl}
+            />
+          ),
+          ...supportMenuItems,
         ].filter(Boolean)}
       />
-      {isGdprRedirectDisabled === false && user?.hasConsented === false ? (
-        <GdprRedirectModal isOpen baseLaunchEnvUrl={finalBaseUrl as string} user={user} platformName={platform?.name} />
+      {isPrivacyModalRendered ? (
+        <PrivacyRedirectModal
+          isOpen
+          baseEnvUrl={platform.baseEnvUrl as string}
+          platformName={platform?.name}
+          user={user}
+        />
       ) : null}
     </QueryClientProvider>
   );
+}
+
+/**
+ * Determine how to render the name and prefix in the Header based
+ *  on what is passed in. If we only have the plaform or product name, then
+ * we want it to be bolded. If we have both, then make the platform the prefix
+ */
+function getProductAndPlatformNames(args: {
+  productName?: string;
+  platformName?: string;
+  platform: { platformName: string };
+}) {
+  const { productName, platformName, platform } = args;
+
+  const resolvedPlatformName = platform.platformName ?? platformName;
+  let finalProductName = "";
+  let finalPlatformName = "";
+
+  if (productName && resolvedPlatformName) {
+    finalProductName = productName;
+    finalPlatformName = resolvedPlatformName;
+  } else if (productName && !resolvedPlatformName) {
+    finalProductName = productName;
+  } else if (!productName && resolvedPlatformName) {
+    finalProductName = resolvedPlatformName;
+  } else {
+    // no-op in else branch if they don't pass anything in
+  }
+
+  return { productName: finalProductName, platformName: finalPlatformName };
 }
 
 export default UIShell;

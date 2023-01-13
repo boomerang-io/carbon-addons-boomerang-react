@@ -1,10 +1,7 @@
 export { default as AutoSuggest } from "./components/AutoSuggest";
 export { default as Avatar } from "./components/Avatar";
-export { default as BmrgHeader } from "./components/Header";
-export { default as BmrgHeaderMenuButton } from "./components/HeaderMenuButton";
-export { default as BmrgHeaderMenuItem } from "./components/HeaderMenuItem";
-export { default as BrmgHeaderMenuLink } from "./components/HeaderMenuLink";
-export { default as BrmgHeaderMenuUser } from "./components/HeaderMenuUser";
+export { default as Header } from "./components/Header";
+export { default as HeaderMenuItem } from "./components/Header/HeaderMenuItem";
 export { default as CheckboxList } from "./components/CheckboxList";
 export { default as ComboBox } from "./components/ComboBox";
 export { default as ComboBoxMultiSelect } from "./components/ComboBoxMultiSelect";
@@ -37,31 +34,23 @@ export {
   FeatureSideNavLinks,
 } from "./components/FeatureSideNav";
 export { default as FeatureSideNavLink } from "./components/FeatureSideNavLink";
-export { default as GraphicLoch } from "./components/GraphicLoch";
-export { default as GraphicWrangler } from "./components/GraphicWrangler";
-export { default as LeftSideNav } from "./components/LeftSideNav";
 export { default as Loading } from "./components/Loading";
-export { default as LoadingAnimation } from "./components/LoadingAnimation";
 export { default as MemberBar } from "./components/MemberBar";
 export { default as Modal } from "./components/Modal";
 export { default as ModalConfirmEdit } from "./components/ModalConfirmEdit";
 export { ModalForm } from "./components/ModalForm";
-export { default as NoDisplay } from "./components/NoDisplay";
 export { NotificationsContainer, notify, ToastNotification } from "./components/Notifications";
-export { default as OptionsGrid } from "./components/OptionsGrid";
 export { default as PlatformBanner } from "./components/PlatformBanner";
 export { default as PlatformNotificationsContainer } from "./components/PlatformNotifications";
 export { default as Portal } from "./components/Portal";
 export { default as PrivacyStatement } from "./components/PrivacyStatement";
 export { default as ProtectedRoute } from "./components/ProtectedRoute";
 export { default as RadioGroup } from "./components/RadioGroup";
-export { default as Sidenav } from "./components/Sidenav";
 export { default as TextArea } from "./components/TextArea";
 export { default as TextInput } from "./components/TextInput";
 export { default as Toggle } from "./components/Toggle";
 export { default as TooltipHover } from "./components/TooltipHover";
 export { default as UIShell } from "./components/UIShell";
-export { default as UserRequests } from "./components/UserRequests";
 
 export type {
   DynamicInput,

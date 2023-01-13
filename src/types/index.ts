@@ -225,12 +225,14 @@ export type User = {
     receiveNewMemberInvite: boolean;
     receiveRequestLeaveTeam: boolean;
   };
-  favouriteCatalogItems: [{
-    catalogItemId: string;
-    order: number;
-  }];
+  favouriteCatalogItems: [
+    {
+      catalogItemId: string;
+      order: number;
+    }
+  ];
   firstLoginDate: string;
-  globalServices?: [any]
+  globalServices?: [any];
   hasConsented: boolean;
   id: string;
   isFirstVisit: boolean | null;
@@ -240,11 +242,13 @@ export type User = {
   launchpadTutorialState: null | -1 | 0 | 1 | 2 | 3;
   isTeamOwner?: boolean;
   isAllowToRemove?: boolean;
-  lowerLevelGroups: [{
-    id: string;
-    userProperties: [any];
-    visible: boolean;
-  }];
+  lowerLevelGroups: [
+    {
+      id: string;
+      userProperties: [any];
+      visible: boolean;
+    }
+  ];
   name: string;
   notificationSettings: any;
   personalizations: any;
@@ -255,7 +259,7 @@ export type User = {
   };
   pendingLeaveRequests?: any[];
   pendingRemoveToolRequests?: any[];
-  status: string;
+  status: "active" | "inactive" | "pending_deletion" | "deleted" | "archived" | "pending_invite";
   teams: any[];
   type: string;
   inviter?: {
@@ -276,4 +280,24 @@ export type UserTeams = {
     projectTeams: SimpleIdNameMap[];
   }[];
   standardTeams: SimpleIdNameMap[];
+};
+
+export type PlatformNotification = {
+  creator: string;
+  date: string;
+  detail: string;
+  eventId: string;
+  id: string;
+  priority: string;
+  read: boolean;
+  severity: string;
+  target: string;
+  title: string;
+  type: string;
+  userId: string;
+};
+
+export type NavLink = {
+  name: string;
+  url: string;
 };

@@ -58,18 +58,13 @@ export const parameters = {
     // https://storybook.js.org/docs/react/essentials/controls#show-full-documentation-for-each-property
     expanded: true,
 
-    // https://storybook.js.org/docs/react/essentials/controls#specify-initial-preset-color-swatches
-    // presetColors: [],
-
     // https://storybook.js.org/docs/react/essentials/controls#sorting-controls
     sort: "alpha",
 
     hideNoControlsWarning: true,
-    controls: {
-      matchers: {
-        color: /(background|color)$/i,
-        date: /Date$/,
-      },
+    matchers: {
+      color: /(background|color)$/i,
+      date: /Date$/,
     },
   },
   darkMode: {
@@ -83,7 +78,7 @@ export const parameters = {
   parameters: {
     docs: {
       source: {
-        type: 'dynamic',
+        type: "dynamic",
         excludeDecorators: true,
       },
     },

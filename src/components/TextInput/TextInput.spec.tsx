@@ -17,5 +17,5 @@ const props = {
 
 test("render tooltip", () => {
   const { queryByText } = render(<TextInput {...props} />);
-  (expect(queryByText(/helper text/i)) as any).toBeInTheDocument();
+  expect(queryByText(/helper text/i)).toBeInTheDocument();
 });

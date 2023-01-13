@@ -1,14 +1,10 @@
+/* eslint-disable no-script-url */
 import React from "react";
-import { Link, Router } from "react-router-dom";
+import { Link, MemoryRouter as Router } from "react-router-dom";
 import { ServiceDesk } from "@carbon/react/icons";
-import { Modal, SideNav, SideNavLink, SideNavItems, SideNavMenu, SideNavMenuItem } from "@carbon/react";
-import HeaderMenuItem from "../HeaderMenuItem";
-import LeftSideNav from "../LeftSideNav";
-import { createMemoryHistory } from "history";
+import { SideNav, SideNavLink, SideNavItems, SideNavMenu, SideNavMenuItem } from "@carbon/react";
+import HeaderMenuItem from "../Header/HeaderMenuItem";
 import Header from "./index"; // Using default export
-
-// const mockSocketUrl = 'http://localhost:7750/notifications/ws';
-const mockSocketUrl = "https://www.google.com/ws";
 
 export default {
   title: "Platform/Header",
@@ -26,155 +22,109 @@ export default {
 export const Default = () => (
   <div style={{ display: "block" }}>
     <Header
-      baseServiceUrl=""
-      renderLogo={false}
-      appName={"App"}
-      platformName={"Boomerang"}
+      productName={"App"}
+      prefixName={"Boomerang"}
+      enableAppSwitcher={false}
       enableNotifications={true}
       navLinks={[
         {
           name: "Launchpad",
-          url: "https://servicesessentials.ibm.com/launchpad/",
+          url: "javascript:void(0)",
         },
         {
-          name: "Next",
-          url: "https://servicesessentials.ibm.com/next/",
-        },
-        {
-          name: "Status",
-          url: "https://servicesessentials.ibm.com/status/",
+          name: "Catalog",
+          url: "javascript:void(0)",
         },
         {
           name: "Docs",
-          url: "https://servicesessentials.ibm.com/docs/",
+          url: "javascript:void(0)",
         },
         {
           name: "Admin",
-          url: "https://servicesessentials.ibm.com/admin/",
+          url: "javascript:void(0)",
         },
       ]}
-      notificationsConfig={{
-        wsUrl: mockSocketUrl,
-      }}
-      onHelpClick={[
-        <HeaderMenuItem key="Tutorial" text="Tutorial" iconName="workspace">
-          {() => <Modal passiveModal />}
-        </HeaderMenuItem>,
-        <HeaderMenuItem key="FAQ + Contacts" text="FAQ + Contacts" iconName="group">
-          {() => <Modal passiveModal />}
-        </HeaderMenuItem>,
-        <HeaderMenuItem key="Send Feedback" text="Send Feedback" iconName="chat">
-          {() => <Modal passiveModal />}
-        </HeaderMenuItem>,
-        <HeaderMenuItem key="Report a bug" text="Report a bug" iconName="debug">
-          {() => <Modal passiveModal />}
-        </HeaderMenuItem>,
+      profileMenuItems={[
+        <HeaderMenuItem
+          key="About the Platform"
+          text="About the Platform"
+          type="link"
+          kind="app"
+          href="javascript:void(0)"
+        />,
+        <HeaderMenuItem key="GDPR agreement" text="GDPR agreement" type="link" kind="app" href="javascript:void(0)" />,
+        <HeaderMenuItem key="Sign out" text="Sign out" type="link" kind="app" href="javascript:void(0)" />,
       ]}
-      profileChildren={[
-        <HeaderMenuItem key="About the Platform" text="About the Platform">
-          {() => <Modal passiveModal />}
-        </HeaderMenuItem>,
-        <HeaderMenuItem key="GDPR agreement" text="GDPR agreement">
-          {() => <Modal passiveModal />}
-        </HeaderMenuItem>,
-        <HeaderMenuItem key="Sign out" text="Sign out" iconName="power">
-          {() => <Modal passiveModal />}
-        </HeaderMenuItem>,
+      supportMenuItems={[
+        <HeaderMenuItem key="Tutorial" text="Tutorial" type="link" kind="app" href="javascript:void(0)" />,
+        <HeaderMenuItem key="FAQ + Contacts" text="FAQ + Contacts" type="link" kind="app" href="javascript:void(0)" />,
+        <HeaderMenuItem key="Send Feedback" text="Send Feedback" type="link" kind="app" href="javascript:void(0)" />,
+        <HeaderMenuItem key="Report a bug" text="Report a bug" type="link" kind="app" href="javascript:void(0)" />,
       ]}
     />
   </div>
 );
 
-export const WithIntegratedSidenav = () => (
-  <Router history={createMemoryHistory({ initialEntries: ["/"] })}>
+export const IntegratedSidenav = () => (
+  <Router>
     <Header
-      appName={"App"}
-      baseServiceUrl=""
-      platformName={"Boomerang"}
-      renderLogo={false}
+      productName={"App"}
+      prefixName={"Boomerang"}
+      enableAppSwitcher={false}
       enableNotifications={true}
-      companyName={"Boomerang"}
-      productName={"Flow"}
       navLinks={[
         {
           name: "Launchpad",
-          url: "https://servicesessentials.ibm.com/launchpad/",
+          url: "javascript:void(0)",
         },
         {
-          name: "Next",
-          url: "https://servicesessentials.ibm.com/next/",
-        },
-        {
-          name: "Status",
-          url: "https://servicesessentials.ibm.com/status/",
+          name: "Catalog",
+          url: "javascript:void(0)",
         },
         {
           name: "Docs",
-          url: "https://servicesessentials.ibm.com/docs/",
+          url: "javascript:void(0)",
         },
         {
           name: "Admin",
-          url: "https://servicesessentials.ibm.com/admin/",
+          url: "javascript:void(0)",
         },
       ]}
-      notificationsConfig={{
-        wsUrl: mockSocketUrl,
-      }}
-      onHelpClick={() => [
-        <HeaderMenuItem key="0" text="Tutorial" iconName="workspace">
-          {() => <Modal passiveModal />}
-        </HeaderMenuItem>,
-        <HeaderMenuItem key="1" text="FAQ + Contacts" iconName="group">
-          {() => <Modal passiveModal />}
-        </HeaderMenuItem>,
-        <HeaderMenuItem key="2" text="Send Feedback" iconName="chat">
-          {() => <Modal passiveModal />}
-        </HeaderMenuItem>,
-        <HeaderMenuItem key="3" text="Report a bug" iconName="debug">
-          {() => <Modal passiveModal />}
-        </HeaderMenuItem>,
+      profileMenuItems={[
+        <HeaderMenuItem key="0" text="About the Platform" type="link" kind="app" href="javascript:void(0)" />,
+        <HeaderMenuItem key="1" text="GDPR agreement" type="link" kind="app" href="javascript:void(0)" />,
+        <HeaderMenuItem key="2" text="Sign out" type="link" kind="app" href="javascript:void(0)" />,
       ]}
-      profileChildren={() => [
-        <HeaderMenuItem key="0" text="About the Platform">
-          {() => <Modal passiveModal />}
-        </HeaderMenuItem>,
-        <HeaderMenuItem key="1" text="GDPR agreement">
-          {() => <Modal passiveModal />}
-        </HeaderMenuItem>,
-        <HeaderMenuItem key="2" text="Sign out" iconName="power">
-          <Modal passiveModal />
-        </HeaderMenuItem>,
+      supportMenuItems={[
+        <HeaderMenuItem key="0" text="Tutorial" type="link" kind="app" href="javascript:void(0)" />,
+        <HeaderMenuItem key="1" text="FAQ + Contacts" type="link" kind="app" href="javascript:void(0)" />,
+        <HeaderMenuItem key="2" text="Send Feedback" type="link" kind="app" href="javascript:void(0)" />,
+        <HeaderMenuItem key="3" text="Report a bug" type="link" kind="app" href="javascript:void(0)" />,
       ]}
-      renderSidenav={({ isOpen, onMenuClose }: any) => (
-        <LeftSideNav isOpen={isOpen} onMenuClose={onMenuClose}>
-          <SideNav aria-label="sidenav" expanded isChildOfHeader>
-            <SideNavItems>
-              <SideNavMenu title="Large menu" large>
-                <SideNavMenuItem element={Link} to="/">
-                  Menu 1
-                </SideNavMenuItem>
-                <SideNavMenuItem element={Link} to="/">
-                  Menu 3
-                </SideNavMenuItem>
-              </SideNavMenu>
-              <SideNavMenu renderIcon={ServiceDesk} title="Large menu w/icon" large>
-                <SideNavMenuItem isActive element={Link} to="">
-                  Menu 1
-                </SideNavMenuItem>
-                <SideNavMenuItem href="">Menu 2</SideNavMenuItem>
-                <SideNavMenuItem href="">Menu 3</SideNavMenuItem>
-              </SideNavMenu>
-              <SideNavLink isActive element={Link} renderIcon={ServiceDesk} to="" large>
-                Large link w/icon
-              </SideNavLink>
-            </SideNavItems>
-          </SideNav>
-        </LeftSideNav>
+      leftPanel={({ isOpen, close }) => (
+        <SideNav aria-label="sidenav" expanded={isOpen} isPersistent={false} onOverlayClick={close}>
+          <SideNavItems>
+            <SideNavMenu title="Large menu" large>
+              <SideNavMenuItem element={Link} to="/">
+                Menu 1
+              </SideNavMenuItem>
+              <SideNavMenuItem element={Link} to="/">
+                Menu 3
+              </SideNavMenuItem>
+            </SideNavMenu>
+            <SideNavMenu renderIcon={ServiceDesk} title="Large menu w/icon" large>
+              <SideNavMenuItem isActive element={Link} to="">
+                Menu 1
+              </SideNavMenuItem>
+              <SideNavMenuItem href="">Menu 2</SideNavMenuItem>
+              <SideNavMenuItem href="">Menu 3</SideNavMenuItem>
+            </SideNavMenu>
+            <SideNavLink isActive element={Link} renderIcon={ServiceDesk} to="" large>
+              Large link w/icon
+            </SideNavLink>
+          </SideNavItems>
+        </SideNav>
       )}
     />
   </Router>
 );
-
-WithIntegratedSidenav.story = {
-  name: "with integrated Sidenav",
-};

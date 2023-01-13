@@ -12,10 +12,10 @@ export default {
       },
     },
   },
-  decorators: [(story: any) => <div style={{ maxWidth: "25rem", padding: "1rem" }}>{story()}</div>],
+  decorators: [(story) => <div style={{ maxWidth: "25rem", padding: "1rem" }}>{story()}</div>],
 };
 
-export const Default = (args: any) => {
+export const Default = (args) => {
   return (
     <Creatable
       id="text-input-creatable"
@@ -29,7 +29,7 @@ export const Default = (args: any) => {
   );
 };
 
-export const NonDeletable = (args: any) => {
+export const NonDeletable = (args) => {
   return (
     <Creatable
       id="text-input-creatable"
@@ -45,7 +45,7 @@ export const NonDeletable = (args: any) => {
   );
 };
 
-export const KeyValuePair = (args: any) => {
+export const KeyValuePair = (args) => {
   return (
     <Creatable
       createKeyValuePair
@@ -63,7 +63,7 @@ export const KeyValuePair = (args: any) => {
   );
 };
 
-export const LimitTheNumberOfAddedValues = (args: any) => {
+export const LimitTheNumberOfAddedValues = (args) => {
   return (
     <Creatable
       id="limit-values-creatable"
@@ -78,7 +78,7 @@ export const LimitTheNumberOfAddedValues = (args: any) => {
   );
 };
 
-export const KitchenSink = (args: any) => {
+export const KitchenSink = (args) => {
   return (
     <Creatable
       id="tooltip-creatable"

@@ -1,5 +1,6 @@
 import React from "react";
 import AboutPlatform from "./AboutPlatform";
+import { headerModalProps } from "../../internal/helpers";
 
 export default {
   title: "Platform/AboutPlatform",
@@ -7,25 +8,18 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: "Header menu item that displays modal with key metadata about the platform.",
+        component: "Header modal with key metadata about the platform.",
       },
     },
   },
-  argTypes: {
-    isFlowApp: { control: "boolean", defaultValue: false },
-    organization: { control: "text", defaultValue: "IBM" },
-    version: { control: "text", defaultValue: "5.0.0" },
-  },
 };
 
-export const Default = (args: any) => {
+export const Default = (args) => {
   return <AboutPlatform {...args} />;
 };
 
-export const Flow = (args: any) => {
-  return <AboutPlatform {...args} />;
-};
-
-Flow.args = {
-  isFlowApp: true,
+Default.args = {
+  name: "Boomerang",
+  version: "1.0.0",
+  ...headerModalProps,
 };

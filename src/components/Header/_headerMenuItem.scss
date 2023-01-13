@@ -1,0 +1,58 @@
+@use "../../global/config" as *;
+@use "../../global/utils";
+@use '@carbon/themes/scss/tokens' as theme;
+@use "../../global/themes/shell-tokens" as shell;
+
+.#{$prefix}--bmrg-header-menu-item__content {
+  display: flex;
+  align-items: center;
+  width: 12.5rem;
+  min-height: 3rem;
+  height: fit-content;
+  justify-content: space-between;
+
+  svg {
+    color: white
+  }
+
+  &.--danger {
+    .#{$prefix}--bmrg-header-menu-item__text {
+      color: theme.$support-error;
+      svg {
+        color: theme.$support-error;
+      }
+    }
+  }
+}
+
+.#{$prefix}--bmrg-header-menu-item__text {
+  align-items: center;
+  color: shell.$bmrg-header-active-text;
+  display: flex;
+  font-size: utils.rem(14px);
+  font-weight: 500;
+  line-height: utils.rem(18px);
+
+  svg {
+    margin-right: utils.rem(16px);
+  }
+}
+
+.#{$prefix}--bmrg-header-menu-user {
+  align-items: center;
+  border-bottom: utils.rem(1px) solid #4d5358;
+  color: #ffffff;
+  display: flex;
+  padding: utils.rem(16px);
+  margin-left: -1.125rem;
+  width: 15rem;
+}
+
+.#{$prefix}--bmrg-header-menu-user__name {
+  color: #ffffff;
+  font-family: "IBM Plex Sans", "Helvetica Neue", Arial, Helvetica, sans-serif;
+  font-size: utils.rem(14px);
+  font-weight: 300;
+  line-height: utils.rem(18px);
+  margin-left: utils.rem(16px);
+}

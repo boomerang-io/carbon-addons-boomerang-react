@@ -1,1 +1,1 @@
-export { default } from "./Feedback";
+export { default, FeedbackMenuItem } from "./Feedback";

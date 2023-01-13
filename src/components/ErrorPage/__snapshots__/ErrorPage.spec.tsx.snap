@@ -1,0 +1,27 @@
+// Vitest Snapshot v1
+
+exports[`ErrorPage > snapshot 1`] = `
+<body>
+  <div>
+    <div
+      class="cds--bmrg-error-page"
+    >
+      <header
+        class="cds--bmrg-error-page__header"
+      >
+        Error
+      </header>
+      <h1
+        class="cds--bmrg-error-page__title"
+      >
+        Something is wrong
+      </h1>
+      <section
+        class="cds--bmrg-error-page__message"
+      >
+        Sorry!
+      </section>
+    </div>
+  </div>
+</body>
+`;

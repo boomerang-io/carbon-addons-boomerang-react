@@ -1,39 +1,68 @@
 import React from "react";
+import { Button, ComposedModal, ModalHeader, ModalBody, ModalFooter } from "@carbon/react";
+import { Power } from "@carbon/react/icons";
+import HeaderMenuItem from "../Header/HeaderMenuItem";
 import { prefix } from "../../internal/settings";
-import { Button } from "@carbon/react";
-import { ModalHeader, ModalBody, ModalFooter } from "@carbon/react";
-
-import HeaderMenuItem from "../HeaderMenuItem";
 
 type Props = {
+  closeModal: () => void;
+  isOpen: boolean;
   signOutLink: string;
 };
 
-function SignOutContainer({ signOutLink }: Props) {
+function SignOut({ closeModal, isOpen, signOutLink }: Props) {
   return (
-    <HeaderMenuItem text="Sign out" iconName="power" className={`${prefix}--bmrg-signout-container`}>
-      {({ closeModal }: any) => {
-        return (
-          <>
-            <ModalHeader title="Sign out" closeModal={closeModal} />
-            <ModalBody>
-              <div className={`${prefix}--bmrg-signout`}>
-                <p className={`${prefix}--bmrg-signout__message`}>{"Are you sure you'd like to leave us?"}</p>
-              </div>
-            </ModalBody>
-            <ModalFooter>
-              <Button kind="secondary" onClick={closeModal}>
-                Cancel
-              </Button>
-              <Button kind="primary" role="link" href={signOutLink}>
-                Sign Out
-              </Button>
-            </ModalFooter>
-          </>
-        );
-      }}
-    </HeaderMenuItem>
+    <ComposedModal
+      aria-label="Sign out"
+      open={isOpen}
+      className={`${prefix}--bmrg-signout-container ${prefix}--bmrg-header-modal`}
+      onClose={closeModal}
+    >
+      <ModalHeader title="Sign out" closeModal={closeModal} />
+      <ModalBody>
+        <div className={`${prefix}--bmrg-signout`}>
+          <p className={`${prefix}--bmrg-signout__message`}>{"Are you sure you'd like to leave us?"}</p>
+        </div>
+      </ModalBody>
+      <ModalFooter>
+        <Button data-modal-primary-focus kind="secondary" onClick={closeModal}>
+          Cancel
+        </Button>
+        <Button kind="primary" role="link" href={signOutLink}>
+          Sign Out
+        </Button>
+      </ModalFooter>
+    </ComposedModal>
   );
 }
 
-export default SignOutContainer;
+export default SignOut;
+
+function SignOutMenuItem(props: Omit<Props, "isOpen" | "closeModal">) {
+  const menuItemRef = React.useRef<HTMLLinkElement>(null);
+  const [isOpen, setIsOpen] = React.useState(false);
+
+  const handleClose = () => {
+    setIsOpen(false);
+    setTimeout(() => {
+      menuItemRef.current?.focus();
+    }, 0);
+  };
+
+  return (
+    <>
+      <HeaderMenuItem
+        icon={<Power />}
+        onClick={() => setIsOpen(!isOpen)}
+        ref={menuItemRef}
+        style={{ color: "red" }}
+        text="Sign Out"
+        type="button"
+        variant="danger"
+      />
+      <SignOut isOpen={isOpen} closeModal={handleClose} {...props} />
+    </>
+  );
+}
+
+export { SignOutMenuItem };

@@ -10,8 +10,6 @@
   }
 
   .#{$prefix}--bmrg-privacy-statement-delete {
-    width: 100%;
-
     .#{$prefix}--modal {
       width: 100%;
       height: 100%;
@@ -30,10 +28,6 @@
 
     .#{$prefix}--modal-footer {
       margin-top: 1.125rem;
-    }
-
-    .#{$prefix}--btn--danger {
-      width: 100%;
     }
 
     .#{$prefix}--bmrg-privacy-statement-delete__desc {
@@ -69,7 +63,6 @@
 
       &__message {
         height: utils.rem(36px);
-        width: utils.rem(620px);
         font-size: utils.rem(14px);
         line-height: utils.rem(18px);
         margin-top: utils.rem(24px);

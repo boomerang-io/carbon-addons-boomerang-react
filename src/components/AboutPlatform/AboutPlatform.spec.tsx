@@ -1,23 +1,28 @@
 import React from "react";
 import { expect, test } from "vitest";
-import { render, fireEvent } from "@testing-library/react";
-
+import { render } from "@testing-library/react";
+import { axe } from "jest-axe";
 import AboutPlatform from "./AboutPlatform";
+import { headerModalProps } from "../../internal/helpers";
 
-test("correct version rendered", () => {
-  // Render new instance in every test to prevent leaking state
-  const { getByText, getByRole } = render(<AboutPlatform version="1.2.1" />);
-  const btn = getByRole("button", { name: /About the Platform/i });
-  fireEvent.click(btn);
-  const version = getByText(/1.2.1/i);
-  (expect(version) as any).toBeInTheDocument();
-});
+describe("AboutPlatform", () => {
+  test("snapshot", () => {
+    const { baseElement } = render(<AboutPlatform name="Boomerang" version="1.2.1" {...headerModalProps} />);
+    expect(baseElement).toMatchSnapshot();
+  });
 
-test("correct organization rendered", () => {
-  // Render new instance in every test to prevent leaking state
-  const { getByText, getByRole } = render(<AboutPlatform organization="Boomerang" />);
-  const btn = getByRole("button", { name: /About the Platform/i });
-  fireEvent.click(btn);
-  const organization = getByText(/Boomerang/i);
-  (expect(organization) as any).toBeInTheDocument();
+  test("functional", () => {
+    // Render new instance in every test to prevent leaking state
+    const { getByText } = render(<AboutPlatform name="Boomerang" version="1.2.1" {...headerModalProps} />);
+    const version = getByText(/1.2.1/i);
+    const organization = getByText(/Boomerang/i);
+    expect(version).toBeInTheDocument();
+    expect(organization).toBeInTheDocument();
+  });
+
+  test("a11y", async () => {
+    const { container } = render(<AboutPlatform name="Boomerang" version="1.2.1" {...headerModalProps} />);
+    const results = await axe(container);
+    expect(results).toHaveNoViolations();
+  });
 });

@@ -1,5 +1,6 @@
 /* eslint-disable no-template-curly-in-string */
 import React from "react";
+import { Button } from "@carbon/react";
 import { action } from "@storybook/addon-actions";
 import TextInput from "../TextInput";
 import * as Yup from "yup";
@@ -16,7 +17,7 @@ export default {
       },
     },
   },
-  decorators: [(story: any) => <div style={{ maxWidth: "30rem", padding: "2rem" }}>{story()}</div>],
+  decorators: [(story) => <div style={{ maxWidth: "30rem", padding: "2rem" }}>{story()}</div>],
 };
 
 const additionalSchema = Yup.object().shape({
@@ -518,7 +519,7 @@ const governingSelectsInputs = [
   },
 ];
 
-export const Default = (args: any) => {
+export const Default = (args) => {
   return (
     <DynamicFormik
       id="dynamic-formik-form-id"
@@ -534,14 +535,15 @@ export const Default = (args: any) => {
         return (
           <form style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
             {inputs}
-            <button
+            <Button
               disabled={!formikProps.isValid}
+              //@ts-ignore
               onClick={formikProps.handleSubmit}
               style={{ marginTop: "1rem" }}
               type="button"
             >
               Submit
-            </button>
+            </Button>
           </form>
         );
       }}
@@ -549,7 +551,7 @@ export const Default = (args: any) => {
   );
 };
 
-export const AllowPropertySyntax = (args: any) => {
+export const AllowPropertySyntax = (args) => {
   return (
     <DynamicFormik
       allowCustomPropertySyntax
@@ -565,14 +567,15 @@ export const AllowPropertySyntax = (args: any) => {
         return (
           <form style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
             {inputs}
-            <button
+            <Button
               disabled={!formikProps.isValid}
+              //@ts-ignore
               onClick={formikProps.handleSubmit}
               style={{ marginTop: "1rem" }}
               type="button"
             >
               Submit
-            </button>
+            </Button>
           </form>
         );
       }}
@@ -584,7 +587,7 @@ AllowPropertySyntax.story = {
   name: "allow property syntax",
 };
 
-export const AllowPropertySyntaxCustomPatternB = (args: any) => {
+export const AllowPropertySyntaxCustomPatternB = (args) => {
   return (
     <DynamicFormik
       allowCustomPropertySyntax
@@ -601,14 +604,15 @@ export const AllowPropertySyntaxCustomPatternB = (args: any) => {
         return (
           <form style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
             {inputs}
-            <button
+            <Button
               disabled={!formikProps.isValid}
+              //@ts-ignore
               onClick={formikProps.handleSubmit}
               style={{ marginTop: "1rem" }}
               type="button"
             >
               Submit
-            </button>
+            </Button>
           </form>
         );
       }}
@@ -620,7 +624,7 @@ AllowPropertySyntaxCustomPatternB.story = {
   name: "allow property syntax, custom pattern ${b:}",
 };
 
-export const GoverningSelects = (args: any) => {
+export const GoverningSelects = (args) => {
   return (
     <DynamicFormik
       id="dynamic-formik-form-id"
@@ -636,14 +640,15 @@ export const GoverningSelects = (args: any) => {
         return (
           <form style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
             {inputs}
-            <button
+            <Button
               disabled={!formikProps.isValid}
+              //@ts-ignore
               onClick={formikProps.handleSubmit}
               style={{ marginTop: "1rem" }}
               type="button"
             >
               Submit
-            </button>
+            </Button>
           </form>
         );
       }}

@@ -14,7 +14,7 @@ export default {
     },
   },
   decorators: [
-    (story: any) => (
+    (story) => (
       <div style={{ height: "10rem", width: "10rem", display: "flex", alignItems: "center", justifyContent: "center" }}>
         {story()}
       </div>
@@ -37,7 +37,7 @@ export default {
   },
 };
 
-export const Default = (args: any) => {
+export const Default = (args) => {
   return (
     <TooltipHover {...args}>
       <Button>Hover me!</Button>

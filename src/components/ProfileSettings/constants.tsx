@@ -1,7 +1,7 @@
 export const PROFILE_SETTINGS_DATA = {
   id: "5e7377c6a97b78000125ed7c",
-  email: "trbula@us.ibm.com",
-  name: "Tim Bula",
+  email: "rdeckard@ibm.com",
+  name: "Rick Deckard",
   isFirstVisit: false,
   type: "admin",
   isShowHelp: true,

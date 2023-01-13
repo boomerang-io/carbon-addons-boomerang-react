@@ -14,11 +14,11 @@ export default {
   },
 };
 
-export const Default = (args: any) => {
-  return <ErrorPageCore header={"Header"} title={"Title"} message={"Message"} {...args} />;
+export const Default = (args) => {
+  return <ErrorPageCore header={"Header"} title={"Title"} statusUrl="https://useboomerang.io" {...args} />;
 };
 
-export const MessageLink = (args: any) => {
+export const MessageLink = (args) => {
   return (
     <ErrorPageCore
       title={"Title"}

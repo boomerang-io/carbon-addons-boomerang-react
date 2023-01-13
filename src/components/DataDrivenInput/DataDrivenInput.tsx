@@ -19,7 +19,7 @@ import {
   TEXT_EDITOR_TYPES,
   TEXT_INPUT_TYPES,
   BOOLEAN_TYPES,
-} from "../../internal/DataDrivenInputTypes";
+} from "../../constants/DataDrivenInputTypes";
 import { FormInput } from "../../types";
 
 function formatSelectOptions(options: FormInput["options"] = []) {

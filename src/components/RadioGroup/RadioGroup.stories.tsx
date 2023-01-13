@@ -1,5 +1,4 @@
 import React from "react";
-import { action } from "@storybook/addon-actions";
 import RadioGroup from "./RadioGroup";
 
 export default {
@@ -24,14 +23,14 @@ const options2 = [
   { labelText: "Radio 4", value: "radio 4 value" },
 ];
 
-export const Default = (args: any) => {
+export const Default = (args) => {
   return (
     <RadioGroup
       id="test"
       defaultSelected={"default value"}
       helperText={"Test helper text"}
       name={"Radio group 1"}
-      onChange={action("radio changed")}
+      onChange={(...args) => console.log(...args)}
       options={options1}
       orientation="horizontal"
       {...args}
@@ -39,7 +38,7 @@ export const Default = (args: any) => {
   );
 };
 
-export const KitchenSink = (args: any) => {
+export const KitchenSink = (args) => {
   return (
     <RadioGroup
       id="test"
@@ -47,7 +46,7 @@ export const KitchenSink = (args: any) => {
       labelText={"Select a value"}
       helperText={"Test helper text"}
       name={"Radio group 2"}
-      onChange={() => {}}
+      onChange={(...args) => console.log(...args)}
       options={options2}
       orientation="vertical"
       tooltipContent={"Tooltip for radioGroup"}

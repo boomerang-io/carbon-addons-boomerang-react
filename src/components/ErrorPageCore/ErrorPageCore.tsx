@@ -1,9 +1,9 @@
 import React from "react";
 import cx from "classnames";
-import { prefix } from "../../internal/settings";
 import GenericErrorBackground from "./GenericErrorBackground";
+import { prefix } from "../../internal/settings";
 
-type Props = {
+export type Props = {
   className?: string;
   graphic?: React.ReactNode;
   header?: React.ReactNode;
@@ -11,16 +11,15 @@ type Props = {
   statusUrl?: string;
   style?: React.CSSProperties;
   title?: React.ReactNode;
-  [key: string]: any;
 };
 
 export default function ErrorPageCore({
   className,
   graphic,
   header = "Oops!",
+  style,
   message,
   statusUrl,
-  style,
   title = "Something looks off, but we're getting a handle of it.",
 }: Props) {
   return (

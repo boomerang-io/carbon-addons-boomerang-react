@@ -16,8 +16,12 @@ const props = {
   header: <Header />,
 };
 
-test("render feature header", () => {
-  const { queryByText } = render(<FeatureHeader {...props} />);
-  (expect(queryByText(/Header Title/i)) as any).toBeInTheDocument();
-  (expect(queryByText(/Header Subtitle/i)) as any).toBeInTheDocument();
-});
+describe("FeatureHeader", () =>{
+  test("functional", () => {
+    const { queryByText } = render(<FeatureHeader {...props} />);
+    expect(queryByText(/Header Title/i)).toBeInTheDocument();
+    expect(queryByText(/Header Subtitle/i)).toBeInTheDocument();
+  });
+})
+
+

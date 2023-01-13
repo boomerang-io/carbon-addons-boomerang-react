@@ -1,6 +1,5 @@
 import React from "react";
-import { createMemoryHistory } from "history";
-import { Router } from "react-router-dom";
+import { MemoryRouter as Router  } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute";
 
 export default {
@@ -13,13 +12,12 @@ export default {
       },
     },
   },
-  decorators: [(story: any) => <Router history={history}>{story()}</Router>],
+  decorators: [(story) => <Router >{story()}</Router>],
 };
 
-const history = createMemoryHistory();
 const Component = () => <div>Yay, you are authorized to view this page.</div>;
 
-export const Authorized = (args: any) => {
+export const Authorized = (args) => {
   return <ProtectedRoute {...args} />;
 };
 
@@ -30,7 +28,7 @@ Authorized.args = {
   userRole: ["user", "operator"],
 };
 
-export const NotAuthorized = (args: any) => {
+export const NotAuthorized = (args) => {
   return <ProtectedRoute {...args} />;
 };
 
@@ -41,7 +39,7 @@ NotAuthorized.args = {
   userRole: "user",
 };
 
-export const WithCustomMessage = (args: any) => {
+export const WithCustomMessage = (args) => {
   return <ProtectedRoute {...args} />;
 };
 

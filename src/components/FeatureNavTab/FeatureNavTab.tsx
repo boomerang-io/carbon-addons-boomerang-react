@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink, NavLinkProps } from "react-router-dom";
-import cx from "classnames";
 import { SkeletonPlaceholder } from "@carbon/react";
+import cx from "classnames";
 import { prefix } from "../../internal/settings";
 
 type Props = NavLinkProps &

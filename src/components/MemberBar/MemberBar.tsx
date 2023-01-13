@@ -1,7 +1,7 @@
 import React from "react";
+import { CloseOutline } from "@carbon/react/icons";
 import cx from "classnames";
 import Avatar from "../Avatar";
-import { CloseOutline } from "@carbon/react/icons";
 import { prefix } from "../../internal/settings";
 
 type Props = {
@@ -37,13 +37,14 @@ function MemberBar({
   notAllowedMessage = "This Partner User is not on the allow-list",
   removeUser,
 }: Props) {
-  const avatarOpacity = isUserNotAllowed ? "0.5" : "1";
+  const avatarOpacity = isUserNotAllowed ? "0.8" : "1";
   return (
     <li {...liProps}>
       <button
         className={cx(`${prefix}--bmrg-member-bar`, buttonClassName, {
           [`${prefix}--bmrg-member-bar--detail`]: isDetail,
         })}
+        disabled={isUserNotAllowed}
         onClick={addUser && !isUserNotAllowed ? () => addUser(id) : removeUser ? () => removeUser(id) : undefined}
         type="button"
         {...buttonProps}
@@ -65,7 +66,7 @@ function MemberBar({
               <CloseOutline
                 size={32}
                 className={`${prefix}--bmrg-member-bar__close-icon`}
-                alt="remove user"
+                title="Remove user"
                 data-testid="remove-user-button"
               />
             )}

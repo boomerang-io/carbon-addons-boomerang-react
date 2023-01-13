@@ -43,32 +43,27 @@ $use-theme-boomerang: false !default;
 @use '../components/FeatureNavTab/featureNavTab';
 @use '../components/FeatureSideNav/featureSideNav';
 @use '../components/FeatureSideNavLink/featureSideNavLink';
-@use '../components/GdprRedirectModal/gdprRedirectModal';
+@use '../components/PrivacyRedirect/privacyRedirect';
 @use '../components/Header/header';
-@use '../components/Header/headerDropDown';
-@use '../components/HeaderMenuItem/headerMenuItem';
-@use '../components/HeaderMenuUser/headerMenuUser';
-@use '../components/LeftSideNav/leftSideNav';
-@use '../components/LoadingAnimation/loadingAnimation';
+@use '../components/Header/headerAppSwitcher';
+@use '../components/Header/headerMenu';
+@use '../components/Header/headerMenuItem';
+@use '../components/Header/userRequests';
 @use '../components/MemberBar/memberBar';
 @use '../components/Modal/modal' as addons-modal;
 @use '../components/ModalConfirmEdit/modalConfirmEdit';
 @use '../components/Notifications/notifications';
-@use '../components/NoDisplay/noDisplay';
-@use '../components/OptionsGrid/optionsGrid';
 @use '../components/PlatformBanner/platformBanner';
 @use '../components/PlatformNotifications/platformNotifications';
 @use '../components/PrivacyStatement/privacyStatement';
 @use '../components/ProfileSettings/profileSettings';
 @use '../components/ProtectedRoute/protectedRoute';
 @use '../components/RadioGroup/radioGroup';
-@use '../components/Sidenav/sidenav';
 @use '../components/SignOut/signOut';
 @use '../components/TextArea/textArea';
 @use '../components/TextInput/textInput';
 @use '../components/Toggle/toggle' as addons-toggle;
 @use '../components/TooltipHover/tooltip' as addons-tooltip;
-@use '../components/UserRequests/userRequests';
 
 // css for external libs
 @use "./tippy";
@@ -79,14 +74,7 @@ $use-theme-boomerang: false !default;
 }
 
 // Styles for the UIShell from addons
-.#{$prefix}--bmrg-aboutPlatform-container,
-.#{$prefix}--bmrg-contact-us-container,
-.#{$prefix}--bmrg-feedback-container,
-.#{$prefix}--bmrg-privacy-statement-container,
-.#{$prefix}--bmrg-profile-settings-container,
-.#{$prefix}--bmrg-report-bug-container,
-.#{$prefix}--bmrg-signout-container,
-.#{$prefix}--bmrg-redirect-container {
+.#{$prefix}--bmrg-header-modal {
   .#{$prefix}--modal-container {
     background-color: shell.$bmrg-header-modal-background;
     border-radius: var(--cds-border-radius, 0);

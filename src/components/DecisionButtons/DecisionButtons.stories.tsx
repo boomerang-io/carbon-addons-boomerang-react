@@ -27,7 +27,7 @@ const items2 = [
   { icon: Help, label: "Maybe", value: "maybe" },
 ];
 
-function ExternallyControlledDecisionButtons(args: any) {
+function ExternallyControlledDecisionButtons(args) {
   const [selectedItem, setSelectedItem] = React.useState("");
   const handleClear = () => {
     setSelectedItem("");
@@ -49,29 +49,29 @@ function ExternallyControlledDecisionButtons(args: any) {
   );
 }
 
-export const Default = (args: any) => {
+export const Default = (args) => {
   return (
     <DecisionButtons
       defaultSelected="radio 2"
       name="radio buttons 1"
       onChange={action("Change radio button")}
-      labelText={"Example label text"}
-      helperText={"Example helper text"}
+      labelText={"Make a decision"}
+      helperText={"It's an important one. Choose wisely."}
       items={items1}
       orientation="vertical"
-      tooltipContent={"Tooltip for DecisionButtons"}
+      tooltipContent={"Looking for help with the decision?"}
       tooltipProps={{ direction: "right" }}
       {...args}
     />
   );
 };
 
-export const PositiveAndNegativeButtonsAndHorizontal = (args: any) => {
+export const PositiveAndNegativeButtonsAndHorizontal = (args) => {
   return (
     <DecisionButtons
       defaultSelected="no"
       name="radio buttons 2"
-      helperText={"Example helper text"}
+      helperText={"Yes, no, maybe so"}
       onChange={action("Change radio button")}
       orientation="horizontal"
       items={items2}
@@ -80,11 +80,11 @@ export const PositiveAndNegativeButtonsAndHorizontal = (args: any) => {
   );
 };
 
-export const ExternallyControlled = (args: any) => {
+export const ExternallyControlled = (args) => {
   return <ExternallyControlledDecisionButtons {...args} />;
 };
 
-export const CanUncheckButtons = (args: any) => {
+export const CanUncheckButtons = (args) => {
   return (
     <DecisionButtons
       canUncheck

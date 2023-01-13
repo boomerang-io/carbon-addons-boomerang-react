@@ -12,20 +12,20 @@ export default {
       },
     },
   },
-  decorators: [(story: any) => <div style={{ maxWidth: "16rem", padding: "1rem" }}>{story()}</div>],
+  decorators: [(story) => <div style={{ maxWidth: "16rem", padding: "1rem" }}>{story()}</div>],
 };
 
-export const Default = (args: any) => {
-  return <Toggle id="default-toggle" defaultToggled onToggle={action("Toggle clicked")} {...args} />;
+export const Default = (args) => {
+  return <Toggle id="default-toggle" labelText="Toggle me" defaultToggled onToggle={action("Toggle clicked")} {...args} />;
 };
 
-export const InvalidWarning = (args: any) => {
+export const InvalidWarning = (args) => {
   return (
     <Toggle
-      id="tooltip-label-toggle"
       defaultToggled
+      id="tooltip-label-toggle"
       onToggle={action("Toggle clicked")}
-      labelText="Label for toggle"
+      labelText="Toggle me"
       tooltipContent="Tooltip for toggle"
       tooltipProps={{ direction: "top" }}
       helperText={"helperText"}
@@ -38,11 +38,11 @@ export const InvalidWarning = (args: any) => {
   );
 };
 
-export const HorizontalToggle = (args: any) => {
+export const HorizontalToggle = (args) => {
   return (
     <Toggle
-      id="default-toggle"
       defaultToggled
+      id="default-toggle"
       onToggle={action("Toggle clicked")}
       labelText="Label for toggle"
       helperText={"helperText"}
@@ -51,11 +51,11 @@ export const HorizontalToggle = (args: any) => {
   );
 };
 
-export const KitchenSink = (args: any) => {
+export const KitchenSink = (args) => {
   return (
     <Toggle
-      id="tooltip-label-toggle"
       defaultToggled
+      id="tooltip-label-toggle"
       onToggle={action("Toggle clicked")}
       labelText="Label for toggle"
       tooltipContent="Tooltip for toggle"

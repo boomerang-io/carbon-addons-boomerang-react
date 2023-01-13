@@ -1,21 +1,33 @@
 import React from "react";
 import { expect, test } from "vitest";
-import { render, fireEvent } from "@testing-library/react";
-
+import { render, fireEvent, screen } from "@testing-library/react";
+import { axe } from "jest-axe";
 import Feedback from "./Feedback";
+import { headerModalProps } from "../../internal/helpers";
 
 const platformName = "IBM Platform";
 const sendIdeasUrl = "https://ideas.ibm.com";
 
-test("feedback modal render", async () => {
-  /**
-   * In this test we do not mock out the response from the contact server,
-   * so we want to show that the state of the submission button should still
-   * be in "Sending" since we have not recieved a response
-   */
-  const { findByText, getByRole } = render(<Feedback platformName={platformName} sendIdeasUrl={sendIdeasUrl} />);
-  const btn = getByRole("button", { name: /^Submit an Idea$/i });
-  fireEvent.click(btn);
-  (expect(await findByText("We look forward to your feedback!")) as any).toBeInTheDocument();
-  fireEvent.click(getByRole("button", { name: /OK/i }));
+describe("Feedback", () => {
+  test("snapshot", async () => {
+    const { baseElement } = render(
+      <Feedback platformName={platformName} sendIdeasUrl={sendIdeasUrl} {...headerModalProps} />
+    );
+    expect(baseElement).toMatchSnapshot();
+  });
+
+  test("functional", async () => {
+    render(<Feedback platformName={platformName} sendIdeasUrl={sendIdeasUrl} {...headerModalProps} />);
+
+    expect(await screen.findByText("We look forward to your feedback!")).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: /OK/i }));
+  });
+
+  test("a11y", async () => {
+    const { container } = render(
+      <Feedback platformName={platformName} sendIdeasUrl={sendIdeasUrl} {...headerModalProps} />
+    );
+    const results = await axe(container);
+    expect(results).toHaveNoViolations();
+  });
 });

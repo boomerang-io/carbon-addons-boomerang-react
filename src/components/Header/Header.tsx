@@ -1,482 +1,423 @@
 import React from "react";
-import cx from "classnames";
 import {
-  ChevronDown,
-  ChevronUp,
+  Header as CarbonHeader,
+  HeaderGlobalBar,
+  HeaderMenuButton,
+  HeaderName,
+  HeaderNavigation,
+  HeaderMenuItem,
+  HeaderPanel,
+  SkipToContent,
+  SideNav,
+  SideNavItems,
+  SideNavLink,
+  Theme,
+} from "@carbon/react";
+import {
   Close,
   Collaborate,
   Help,
-  UserAvatar,
   Notification,
   NotificationNew,
   Switcher,
+  OpenPanelFilledRight,
+  UserAvatar,
 } from "@carbon/react/icons";
-import { prefix } from "../../internal/settings";
-import { SkipToContent, Theme } from "@carbon/react";
-import PlatformNotificationsContainer from "../PlatformNotifications";
-import HeaderMenu from "../HeaderMenu";
-import NotificationsContainer from "../Notifications/NotificationsContainer";
-import UserRequests from "../UserRequests";
 import HeaderAppSwitcher from "./HeaderAppSwitcher";
-import HeaderList from "./HeaderList";
-import HeaderListItem from "./HeaderListItem";
-import HeaderMenuLink from "../HeaderMenuLink";
-import HeaderLogo from "./HeaderLogo";
-import HeaderMenuBmrg from "./HeaderMenuBmrg";
-import HeaderWrapper from "./HeaderWrapper";
-import HeaderRightPanel from "./HeaderRightPanel";
-import BoomerangLogo from "./assets/BoomerangLogo";
+import HeaderMenu from "./HeaderMenu";
+import NotificationsContainer from "../Notifications/NotificationsContainer";
+import PlatformNotificationsContainer from "../PlatformNotifications";
+import UserRequests from "./UserRequests";
+import useHeaderMenu from "../../hooks/useHeaderMenu";
+import useWindowSize from "../../hooks/useWindowSize";
+import { prefix } from "../../internal/settings";
+import type { NavLink } from "../../types";
+import "wicg-inert";
 
-const stateToButtonElemIdMap: Record<string, string> = {
-  isAppSwitcherActive: "navigation-switcher-menu-button",
-  isHelpActive: "navigation-help-menu-button",
-  isMobileNavActive: "navigation-mobile-menu-button",
-  isNotificationActive: "navigation-notification-menu-button",
-  isProfileActive: "navigation-profile-menu-button",
-  isRequestsActive: "navigation-requests-menu-button",
-  isRightPanelActive: "navigation-right-panel-button",
-  isSidenavActive: "navigation-sidenav-menu-button",
-};
-
-function transformToIsStateKey(key: keyof typeof stateToButtonElemIdMap) {
-  return `is${key}Active`;
-}
-
-type OwnProps = {
-  appName?: string;
-  baseServiceUrl: string;
-  baseLaunchEnvUrl?: string;
+type Props = {
+  baseServicesUrl?: string;
+  baseEnvUrl?: string;
   className?: string;
-  companyName?: string;
   enableAppSwitcher?: boolean;
   enableNotifications?: boolean;
-  navLinks?: any[];
-  notificationsConfig?: {
-    wsUrl: string;
-    httpUrl?: string;
-  };
-  onHelpClick?: Function | any[];
-  platformName?: string;
-  platformMessage?: any;
-  profileChildren?: Function | any[];
-  productName?: string;
-  renderLogo?: boolean;
-  renderRightPanel?: any;
-  renderSidenav?: Function;
+  leftPanel?: (args: { close: () => void; isOpen: boolean; navLinks?: NavLink[] }) => React.ReactNode;
+  navLinks?: NavLink[];
+  platformMessage?: string;
+  prefixName?: string;
+  productName: string;
+  profileMenuItems?: React.ReactNode[];
+  rightPanel?: { icon?: React.ReactNode; component: React.ReactNode };
   requestSummary?: {
     requireUserAction: number;
     submittedByUser: number;
   };
-  skipToContentProps?: any;
+  skipToContentProps?: { href?: string; children?: string; className?: string };
+  supportMenuItems?: React.ReactNode[];
 };
 
-type State = any;
+type MenuType = "Notifcations" | "Profile" | "Requests" | "RightPanel" | "SideNav" | "Support" | "Switcher";
 
-//type Props = OwnProps & typeof Header.defaultProps;
+const MenuListId = {
+  Notifcations: "header-notifications-dialog",
+  Profile: "header-profile-menu",
+  Requests: "header-user-requests-menu",
+  RightPanel: "header-right-panel-dialog",
+  SideNav: "header-sidenav-menu",
+  Support: "header-support-menu",
+  Switcher: "header-switcher-menu",
+} as const;
 
-class Header extends React.Component<OwnProps, State> {
-  static defaultProps = {};
+type MenuListType = typeof MenuListId;
 
-  state: any = {
-    hasNewNotifications: false,
-    isAppSwitcherActive: false,
-    isHelpActive: false,
-    isMobileNavActive: false,
-    isNotificationActive: false,
-    isProfileActive: false,
-    isRequestsActive: false,
-    isRightPanelActive: false,
-    isSidenavActive: false,
-  };
+const MenuButtonId: Record<MenuType, `${MenuListType[keyof MenuListType]}-button`> = {
+  Notifcations: "header-notifications-dialog-button",
+  Profile: "header-profile-menu-button",
+  Requests: "header-user-requests-menu-button",
+  RightPanel: "header-right-panel-dialog-button",
+  SideNav: "header-sidenav-menu-button",
+  Support: "header-support-menu-button",
+  Switcher: "header-switcher-menu-button",
+};
 
-  navRef = React.createRef<HTMLDivElement>();
-  mobileNavRef = React.createRef<HTMLDivElement>();
-  sideNavRef = React.createRef<HTMLDivElement>();
-  sideNavButtonRef = React.createRef<HTMLDivElement>();
+const MenuAriaLabelRecord: Record<keyof MenuListType, string> = {
+  Notifcations: "Notifications dialog",
+  Profile: "Profile menu",
+  Requests: "Requests menu",
+  RightPanel: "RightPanel dialog",
+  SideNav: "SideNav menu",
+  Support: "Support menu",
+  Switcher: "Switcher menu",
+};
 
-  componentDidMount() {
-    document.addEventListener("mousedown", this.handleClickoutsideEvent);
-    document.addEventListener("keydown", this.handleKeyEvent);
-  }
+const headerButtonClassNames =
+  "cds--btn--icon-only cds--header__action cds--btn cds--btn--primary cds--btn--icon-only cds--btn cds--btn--primary";
 
-  componentWillUnmount() {
-    document.removeEventListener("mousedown", this.handleClickoutsideEvent);
-    document.removeEventListener("keydown", this.handleKeyEvent);
-  }
+export default function Header(props: Props) {
+  const {
+    productName,
+    baseEnvUrl,
+    baseServicesUrl,
+    className,
+    navLinks,
+    prefixName = "",
+    rightPanel,
+    skipToContentProps,
+  } = props;
 
-  /**
-   * Handle clicking outside a open menu and closing the appropriate one
-   * @param {object} event - mousedown event
-   */
-  handleClickoutsideEvent = (event: any) => {
-    if (this.navRef && !(this as any).navRef.current?.contains(event.target)) {
-      this.handleCloseHeaderMenus();
-    }
-
-    if (this.mobileNavRef && !(this as any).mobileNavRef.current?.contains(event.target)) {
-      this.handleCloseMobileNav();
-    }
-
-    if (
-      this.sideNavRef &&
-      !(this as any).sideNavRef.current?.contains(event.target) &&
-      !(this as any).sideNavButtonRef.current?.contains(event.target)
-    ) {
-      this.handleCloseSidenav();
-    }
-  };
-
-  /**
-   * Close the active menu and focus on the button that triggered it
-   * Close menu
-   * via the ESC key
-   * @param {object} event - keydown event
-   */
-  handleKeyEvent = (event: any) => {
-    if (event.key === "Escape") {
-      this.handleCloseViaEsc();
-      return;
-    }
-
-    if (event.key === "Tab") {
-      // Only have to test for the right panel here bc other menus have a focus trap
-      if (this.state.isRightPanelActive && !(this as any).navRef.current?.contains(event.target)) {
-        this.handleCloseHeaderMenus();
-        return;
-      }
-    }
-  };
-
-  handleCloseHeaderMenus = () => {
-    this.setState({
-      isAppSwitcherActive: false,
-      isHelpActive: false,
-      isNotificationActive: false,
-      isProfileActive: false,
-      isRequestsActive: false,
-      isRightPanelActive: false,
-    });
-  };
-
-  handleCloseMobileNav = () => {
-    this.setState({
-      isMobileNavActive: false,
-    });
-  };
-
-  handleCloseSidenav = () => {
-    this.setState({
-      isSidenavActive: false,
-    });
-  };
-
-  handleCloseViaEsc = () => {
-    const activeMenuStateKey = Object.keys(this.state).find((key) => key.startsWith("is") && this.state[key]);
-
-    if (activeMenuStateKey) {
-      this.setState({
-        [activeMenuStateKey]: false,
-      });
-
-      const elemToReceiveFocus = document.getElementById(stateToButtonElemIdMap[activeMenuStateKey]);
-      if (elemToReceiveFocus) {
-        elemToReceiveFocus.focus();
-      }
-    }
-  };
-
-  /**
-   * 13 - corresponds to return/enter key
-   * 32 - corresponds to space key
-   * @param {string} type - Passes in the type of click (i.e. profile, notification)
-   * @returns {(...args: any[]) => any} - if the appropriate type of click, calls handleIconClick with specified params
-   */
-  handleIconKeypress = (type: any) => (evt: any) => {
-    if (evt.which === 13 || evt.which === 32) {
-      this.handleIconClick(type)(evt);
-    }
-  };
-
-  /**
-   * @param {string} type - Passes in the type of click (i.e. profile, notification)
-   * @returns {(...args: any[]) => any} - finds the appropriate click type to trigger function, sets all other state items that have
-   * 'is' prefix to false (in order to only have one active item at a time)
-   */
-  handleIconClick =
-    (type: any): ((...args: any[]) => any) =>
-    (evt: any) => {
-      Object.keys(this.state)
-        .filter((key) => key.startsWith("is"))
-        .forEach((key) => {
-          const clickType = transformToIsStateKey(type);
-          if (key === clickType) {
-            this.setState({
-              [clickType]: !this.state[clickType],
-            });
-
-            // Add callback if parent wants event emitted
-            // Match prop name for handling on element click
-            const propFunc = this.props[`on${type}Click` as keyof typeof this.props];
-            if (typeof propFunc === "function") {
-              propFunc(evt);
-            }
-          } else {
-            this.setState({
-              [key]: false,
-            });
-          }
-        });
-    };
-
-  /**
-   * @param {string} key - key in state to update
-   * @returns {(...args: any[]) => any} - pass in value for key
-   */
-  handleUpdateStateKey = (key: any) => (value: any) => {
-    this.setState({
-      [key]: value,
-    });
-  };
-
-  onMenuClose = () => {
-    this.setState({
-      isSidenavActive: false,
-    });
-  };
-
-  render() {
-    const {
-      appName,
-      baseLaunchEnvUrl,
-      baseServiceUrl,
-      className,
-      navLinks,
-      platformName,
-      renderLogo,
-      renderRightPanel,
-      skipToContentProps,
-    } = this.props;
-    return (
+  return (
+    <>
       <Theme theme="g100">
-        <header className={`${prefix}--bmrg-header-container`}>
-          <div className={cx(`${prefix}--bmrg-header`, className)}>
-            <HeaderWrapper>
-              <div className={`${prefix}--bmrg-header-brand-container`}>
-                {skipToContentProps ? <SkipToContent {...skipToContentProps} /> : null}
-                {this.props.renderSidenav && (
-                  <HeaderMenuBmrg
-                    id={stateToButtonElemIdMap["isSidenavActive"]}
-                    isOpen={this.state.isSidenavActive}
-                    onClick={this.handleIconClick("Sidenav")}
-                    onKeyDown={this.handleIconKeypress("Sidenav")}
-                    ref={this.sideNavButtonRef}
-                  />
-                )}
-                <HeaderLogo appName={appName} href={baseLaunchEnvUrl} navLinks={navLinks} platformName={platformName}>
-                  {renderLogo && (
-                    <BoomerangLogo alt="Boomerang Logo" className={`${prefix}--bmrg-header-brand__icon`} />
-                  )}
-                </HeaderLogo>
-              </div>
-              <nav aria-label="Main navigation menu">
-                <HeaderList className={`${prefix}--bmrg-header-list--link`}>
-                  {Array.isArray(navLinks) &&
-                    navLinks.map((link, i) => (
-                      <li key={`${link.url}-${i}`}>
-                        <HeaderListItem aria-label={`link for ${link.name}`} href={link.url}>
-                          {link.name}
-                        </HeaderListItem>
-                      </li>
-                    ))}
-                </HeaderList>
-              </nav>
-              <div ref={this.mobileNavRef}>
-                <HeaderList className={`${prefix}--bmrg-header-list--mobile-nav`}>
-                  <li>
-                    <HeaderListItem
-                      isIcon
-                      aria-label="Mobile navigation menu"
-                      aria-expanded={this.state.isMobileNavActive}
-                      id={stateToButtonElemIdMap[transformToIsStateKey("MobileNavActive")]}
-                      onClick={this.handleIconClick("MobileNav")}
-                      onKeyDown={this.handleIconKeypress("MobileNav")}
-                    >
-                      <span
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          color: this.state.isMobileNavActive ? "#343a3f" : "inherit",
-                          fontSize: "0.875rem",
-                        }}
-                      >
-                        Navigation{" "}
-                        {this.state.isMobileNavActive ? (
-                          <ChevronUp alt="Close mobile navigation" />
-                        ) : (
-                          <ChevronDown alt="Open mobile navigation" />
-                        )}
-                      </span>
-                    </HeaderListItem>
-                    {this.state.isMobileNavActive && (
-                      <HeaderMenu>
-                        {Array.isArray(navLinks) &&
-                          navLinks.map((link, i) => (
-                            <HeaderMenuLink
-                              external={false}
-                              href={link.url}
-                              text={link.name}
-                              key={`${link.url}-${i}`}
-                            />
-                          ))}
-                      </HeaderMenu>
-                    )}
-                  </li>
-                </HeaderList>
-              </div>
-            </HeaderWrapper>
-            <HeaderWrapper>
-              <div ref={this.navRef}>
-                <HeaderList className={`${prefix}--bmrg-header-list--icon`}>
-                  {Boolean(this.props.requestSummary) && (
-                    <li>
-                      <HeaderListItem
-                        isIcon
-                        aria-expanded={this.state.isRequestsActive}
-                        aria-label="Requests menu button"
-                        id={stateToButtonElemIdMap[transformToIsStateKey("Requests")]}
-                        onClick={this.handleIconClick("Requests")}
-                        onKeyDown={this.handleIconKeypress("Requests")}
-                      >
-                        <Collaborate alt="Requests icon" />
-                      </HeaderListItem>
-                      {this.state.isRequestsActive && (
-                        <HeaderMenu>
-                          <UserRequests
-                            baseLaunchEnvUrl={baseLaunchEnvUrl}
-                            requestSummary={this.props.requestSummary}
-                          />
-                        </HeaderMenu>
-                      )}
-                    </li>
-                  )}
-                  {this.props.enableNotifications && this.props.notificationsConfig && (
-                    <li>
-                      <HeaderListItem
-                        isIcon
-                        aria-expanded={this.state.isNotificationActive}
-                        aria-label="Notification menu button"
-                        id={stateToButtonElemIdMap[transformToIsStateKey("Notification")]}
-                        onClick={this.handleIconClick("Notification")}
-                        onKeyDown={this.handleIconKeypress("Notification")}
-                      >
-                        {this.state.hasNewNotifications ? (
-                          <NotificationNew alt="New notifications icon" />
-                        ) : (
-                          <Notification alt="No new notifications icon" />
-                        )}
-                        <PlatformNotificationsContainer
-                          baseLaunchEnvUrl={baseLaunchEnvUrl}
-                          config={this.props.notificationsConfig}
-                          isNotificationActive={this.state.isNotificationActive}
-                          setHasNewNotifications={this.handleUpdateStateKey("hasNewNotifications")}
-                        />
-                      </HeaderListItem>
-                    </li>
-                  )}
-                  {Array.isArray(this.props.onHelpClick) && this.props.onHelpClick.length > 0 && (
-                    <li>
-                      <HeaderListItem
-                        isIcon
-                        aria-expanded={this.state.isHelpActive}
-                        aria-label="Help menu button"
-                        id={stateToButtonElemIdMap[transformToIsStateKey("Help")]}
-                        onClick={this.handleIconClick("Help")}
-                        onKeyDown={this.handleIconKeypress("Help")}
-                      >
-                        <Help size={24} alt="Help icon" />
-                      </HeaderListItem>
-                      {this.state.isHelpActive && <HeaderMenu>{this.props.onHelpClick}</HeaderMenu>}
-                    </li>
-                  )}
-                  <li>
-                    {Array.isArray(this.props.profileChildren) && this.props.profileChildren.length > 0 && (
-                      <HeaderListItem
-                        isIcon
-                        aria-expanded={this.state.isProfileActive}
-                        aria-label="Profile menu button"
-                        id={stateToButtonElemIdMap[transformToIsStateKey("Profile")]}
-                        onClick={this.handleIconClick("Profile")}
-                        onKeyDown={this.handleIconKeypress("Profile")}
-                      >
-                        <UserAvatar alt="Profile icon" />
-                      </HeaderListItem>
-                    )}
-                    {this.state.isProfileActive && <HeaderMenu>{this.props.profileChildren}</HeaderMenu>}
-                  </li>
-                  {this.props.enableAppSwitcher && (
-                    <li>
-                      <HeaderListItem
-                        isIcon
-                        aria-expanded={this.state.isAppSwitcherActive}
-                        aria-label="App Switcher menu button"
-                        id={stateToButtonElemIdMap[transformToIsStateKey("AppSwitcher")]}
-                        onClick={this.handleIconClick("AppSwitcher")}
-                        onKeyDown={this.handleIconKeypress("AppSwitcher")}
-                      >
-                        {this.state?.isAppSwitcherActive ? (
-                          <Close alt="Close App Switcher" />
-                        ) : (
-                          <Switcher alt="Open App Switcher" />
-                        )}
-                      </HeaderListItem>
-                      <HeaderAppSwitcher
-                        baseLaunchEnvUrl={baseLaunchEnvUrl}
-                        baseServiceUrl={baseServiceUrl}
-                        isActive={this.state.isAppSwitcherActive}
-                      />
-                    </li>
-                  )}
-                  {renderRightPanel && Object.keys(renderRightPanel).length ? (
-                    <li>
-                      <HeaderListItem
-                        isIcon
-                        aria-expanded={this.state.isRightPanelActive}
-                        aria-label={`Right panel button`}
-                        id={stateToButtonElemIdMap[transformToIsStateKey("RightPanel")]}
-                        onClick={this.handleIconClick("RightPanel")}
-                        onKeyDown={this.handleIconKeypress("RightPanel")}
-                      >
-                        {renderRightPanel.icon}
-                      </HeaderListItem>
-                      <HeaderRightPanel isOpen={this.state.isRightPanelActive}>
-                        {renderRightPanel.component}
-                      </HeaderRightPanel>
-                    </li>
-                  ) : (
-                    ""
-                  )}
-                </HeaderList>
-              </div>
-            </HeaderWrapper>
-            {this.props.renderSidenav && (
-              <div
-                className={cx(`${prefix}--bmrg-header__app-menu-wrapper`, {
-                  "--is-hidden": !this.state.isSidenavActive,
-                })}
-                ref={this.sideNavRef}
-              >
-                {this.props.renderSidenav({
-                  isOpen: this.state.isSidenavActive,
-                  onMenuClose: this.onMenuClose,
-                })}
-              </div>
-            )}
-          </div>
-          <NotificationsContainer enableMultiContainer containerId={`${prefix}--bmrg-header-notifications`} />
-        </header>
+        <CarbonHeader aria-label="App navigation header" className={className}>
+          {skipToContentProps ? <SkipToContent {...skipToContentProps} /> : null}
+          <SidenavMenu leftPanel={props.leftPanel} navLinks={props.navLinks} />
+          <HeaderName href={baseEnvUrl} prefix={prefixName}>
+            {productName}
+          </HeaderName>
+          <HeaderNavigation aria-label="Platform navigation">
+            {Array.isArray(navLinks)
+              ? navLinks.map((link) => (
+                  <HeaderMenuItem
+                    aria-label={`Link for ${link.name}`}
+                    href={link.url}
+                    isCurrentPage={
+                      window?.location?.href && link.url ? window.location.href.startsWith(link.url) : false
+                    }
+                    key={link.name}
+                  >
+                    {link.name}
+                  </HeaderMenuItem>
+                ))
+              : null}
+          </HeaderNavigation>
+          <HeaderGlobalBar>
+            <RequestsMenu
+              baseEnvUrl={baseEnvUrl}
+              enabled={Boolean(props.requestSummary)}
+              summary={props.requestSummary}
+            />
+            <NotificationsMenu
+              baseEnvUrl={baseEnvUrl}
+              baseServicesUrl={baseServicesUrl}
+              enabled={Boolean(props.enableNotifications)}
+            />
+            <SupportMenu
+              enabled={Array.isArray(props.supportMenuItems) && props.supportMenuItems.length > 0}
+              menuItems={props.supportMenuItems}
+            />
+            <ProfileMenu
+              enabled={Array.isArray(props.profileMenuItems) && props.profileMenuItems.length > 0}
+              menuItems={props.profileMenuItems}
+            />
+            <AppSwitcherMenu
+              baseEnvUrl={baseEnvUrl}
+              baseServicesUrl={baseServicesUrl}
+              enabled={props.enableAppSwitcher}
+            />
+            <RightPanelMenu enabled={Boolean(rightPanel && Object.keys(rightPanel).length)} {...rightPanel} />
+          </HeaderGlobalBar>
+        </CarbonHeader>
       </Theme>
-    );
-  }
+      <NotificationsContainer enableMultiContainer containerId={`${prefix}--bmrg-header-notifications`} />
+    </>
+  );
 }
 
-export default Header;
+function RequestsMenu(props: { baseEnvUrl?: string; enabled: boolean; summary: Props["requestSummary"] }) {
+  const { isOpen, toggleActive, ref } = useHeaderMenu<HTMLDivElement>(MenuButtonId.Requests);
+
+  if (!props.enabled) {
+    return null;
+  }
+
+  return (
+    <div style={{ position: "relative" }} ref={ref}>
+      <button
+        aria-controls={MenuListId.Requests}
+        aria-expanded={isOpen}
+        aria-haspopup="menu"
+        aria-label={MenuAriaLabelRecord.Requests}
+        className={headerButtonClassNames}
+        id={MenuButtonId.Requests}
+        onClick={toggleActive}
+      >
+        <Collaborate size={20} />
+      </button>
+      {isOpen ? (
+        <HeaderMenu aria-labelledby={MenuButtonId.Requests} id={MenuListId.Requests}>
+          <UserRequests baseEnvUrl={props.baseEnvUrl} summary={props.summary} />
+        </HeaderMenu>
+      ) : null}
+    </div>
+  );
+}
+
+function NotificationsMenu(props: { enabled: boolean; baseEnvUrl?: string; baseServicesUrl?: string }) {
+  const { isOpen, toggleActive, ref } = useHeaderMenu<HTMLDivElement>(MenuButtonId.Notifcations);
+  const [hasNewNotifications, setHasNewNotifications] = React.useState(false);
+
+  if (!props.enabled || !props.baseEnvUrl || !props.baseServicesUrl) {
+    return null;
+  }
+
+  const icon = hasNewNotifications ? <NotificationNew size={20} /> : <Notification size={20} />;
+
+  return (
+    <div style={{ position: "relative" }} ref={ref}>
+      <button
+        aria-controls={MenuListId.Notifcations}
+        aria-expanded={isOpen}
+        aria-haspopup="dialog"
+        aria-label={MenuAriaLabelRecord.Notifcations}
+        className={headerButtonClassNames}
+        id={MenuButtonId.Notifcations}
+        onClick={toggleActive}
+      >
+        {icon}
+      </button>
+      <PlatformNotificationsContainer
+        aria-labelledby={MenuButtonId.Notifcations}
+        baseEnvUrl={props.baseEnvUrl}
+        baseServicesUrl={props.baseServicesUrl}
+        id={MenuListId.Notifcations}
+        isOpen={isOpen}
+        setHasNewNotifications={setHasNewNotifications}
+      />
+    </div>
+  );
+}
+
+function SupportMenu(props: { enabled: Boolean; menuItems: Props["supportMenuItems"] }) {
+  const { isOpen, toggleActive, ref } = useHeaderMenu<HTMLDivElement>(MenuButtonId.Support);
+
+  if (!props.enabled) {
+    return null;
+  }
+
+  return (
+    <div style={{ position: "relative" }} ref={ref}>
+      <button
+        aria-controls={MenuListId.Support}
+        aria-expanded={isOpen}
+        aria-haspopup="menu"
+        aria-label={MenuAriaLabelRecord.Support}
+        className={headerButtonClassNames}
+        id={MenuButtonId.Support}
+        onClick={toggleActive}
+      >
+        <Help size={20} />
+      </button>
+      {isOpen ? (
+        <HeaderMenu aria-labelledby={MenuButtonId.Support} id={MenuListId.Support}>
+          {props.menuItems}
+        </HeaderMenu>
+      ) : null}
+    </div>
+  );
+}
+
+function ProfileMenu(props: { enabled: boolean; menuItems?: Props["profileMenuItems"] }) {
+  const { isOpen, toggleActive, ref } = useHeaderMenu<HTMLDivElement>(MenuButtonId.Profile);
+
+  if (!props.enabled) {
+    return null;
+  }
+
+  return (
+    <div style={{ position: "relative" }} ref={ref}>
+      <button
+        aria-controls={MenuListId.Profile}
+        aria-expanded={isOpen}
+        aria-haspopup="menu"
+        aria-label={MenuAriaLabelRecord.Profile}
+        className={headerButtonClassNames}
+        id={MenuButtonId.Profile}
+        onClick={toggleActive}
+      >
+        <UserAvatar size={20} />
+      </button>
+      {isOpen ? (
+        <HeaderMenu aria-labelledby={MenuButtonId.Profile} id={MenuListId.Profile}>
+          {props.menuItems}
+        </HeaderMenu>
+      ) : null}
+    </div>
+  );
+}
+
+function AppSwitcherMenu(props: { enabled?: boolean; baseEnvUrl?: string; baseServicesUrl?: string }) {
+  const { isOpen, toggleActive, ref } = useHeaderMenu<HTMLDivElement>(MenuButtonId.Switcher);
+
+  if (!props.enabled || !props.baseServicesUrl) {
+    return null;
+  }
+
+  return (
+    <div ref={ref}>
+      <button
+        aria-controls={MenuListId.Switcher}
+        aria-expanded={isOpen}
+        aria-haspopup="menu"
+        aria-label={MenuAriaLabelRecord.Switcher}
+        className={headerButtonClassNames}
+        id={MenuButtonId.Switcher}
+        onClick={toggleActive}
+      >
+        {isOpen ? <Close size={20} /> : <Switcher size={20} />}
+      </button>
+      <HeaderAppSwitcher
+        baseEnvUrl={props.baseEnvUrl}
+        baseServicesUrl={props.baseServicesUrl}
+        id={MenuListId.Switcher}
+        isOpen={isOpen}
+      />
+    </div>
+  );
+}
+
+function RightPanelMenu(props: { enabled: boolean; icon?: React.ReactNode; component?: React.ReactNode }) {
+  const { isOpen, toggleActive, ref } = useHeaderMenu<HTMLDivElement>(MenuButtonId.RightPanel);
+
+  if (!props.enabled) {
+    return null;
+  }
+
+  return (
+    <div ref={ref}>
+      <button
+        aria-controls={MenuListId.RightPanel}
+        aria-expanded={isOpen}
+        aria-haspopup="dialog"
+        aria-label={MenuAriaLabelRecord.RightPanel}
+        className={headerButtonClassNames}
+        id={MenuButtonId.RightPanel}
+        onClick={toggleActive}
+      >
+        {props.icon ?? <OpenPanelFilledRight size={20} />}
+      </button>
+      <HeaderPanel
+        id={MenuListId.RightPanel}
+        role="dialog"
+        aria-label={MenuAriaLabelRecord.RightPanel}
+        expanded={isOpen}
+      >
+        {props.component}
+      </HeaderPanel>
+    </div>
+  );
+}
+
+function SidenavMenu(props: { leftPanel?: Props["leftPanel"]; navLinks: Props["navLinks"] }) {
+  const { ref, isOpen, setIsOpen, toggleActive } = useHeaderMenu<HTMLDivElement>(MenuButtonId.SideNav);
+  const windowSize = useWindowSize();
+  const isMobileSidenavActive = (windowSize.width as number) < 1056;
+
+  const closeMenu = () => {
+    setIsOpen(false);
+  };
+
+  if (typeof props.leftPanel === "function") {
+    return (
+      <div ref={ref}>
+        <HeaderMenuButton
+          aria-label="Sidenav menu"
+          id={MenuButtonId.SideNav}
+          isActive={isOpen}
+          isCollapsible={true}
+          onClick={toggleActive}
+        />
+        {
+          // @ts-ignore
+          <div inert={isOpen ? undefined : "true"}>
+            {props.leftPanel({
+              isOpen: isOpen,
+              close: closeMenu,
+              navLinks: isMobileSidenavActive ? props.navLinks : undefined,
+            })}
+          </div>
+        }
+      </div>
+    );
+  }
+
+  return (
+    <div ref={ref}>
+      {isMobileSidenavActive ? (
+        <>
+          <HeaderMenuButton
+            aria-label="Sidenav menu"
+            id={MenuButtonId.SideNav}
+            isActive={isOpen}
+            isCollapsible={false}
+            onClick={toggleActive}
+          />
+          {
+            // @ts-ignore
+            <div inert={isOpen ? undefined : "true"}>
+              <SideNav
+                isChildOfHeader
+                aria-label="Side navigation"
+                expanded={isOpen}
+                isPersistent={false}
+                onOverlayClick={closeMenu}
+              >
+                <SideNavItems>
+                  {props.navLinks?.map((link) => (
+                    <SideNavLink
+                      large
+                      aria-label={`Link for ${link.name}`}
+                      href={link.url}
+                      isActive={window?.location?.href && link.url ? window.location.href.startsWith(link.url) : false}
+                      key={link.url + link.name}
+                    >
+                      {link.name}
+                    </SideNavLink>
+                  ))}
+                </SideNavItems>
+              </SideNav>
+            </div>
+          }
+        </>
+      ) : null}
+    </div>
+  );
+}

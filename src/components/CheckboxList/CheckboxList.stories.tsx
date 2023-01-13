@@ -31,11 +31,11 @@ export default {
   },
 };
 
-export const Default = (args: any) => {
+export const Default = (args) => {
   return <CheckboxList {...args} />;
 };
 
-export const KitchenSink = (args: any) => {
+export const KitchenSink = (args) => {
   return (
     <CheckboxList
       helperText="Pick a good one"

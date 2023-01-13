@@ -1,0 +1,182 @@
+// Vitest Snapshot v1
+
+exports[`Feedback > snapshot 1`] = `
+<body>
+  <div>
+    <ul
+      aria-labelledby="menu"
+      class="cds--bmrg-header-drop-down"
+      id="header-menu"
+      role="menu"
+    >
+      <li
+        role="menuitem"
+      >
+        <a
+          class="cds--header__menu-item"
+          href="https://useboomerang.io"
+          kind="external"
+          rel="noopener noreferrer"
+          tabindex="0"
+          target="_blank"
+          text="Use Boomerang"
+        >
+          <span
+            class="cds--text-truncate--end"
+          >
+            <div
+              class="cds--bmrg-header-menu-item__content"
+            >
+              <span
+                class="cds--bmrg-header-menu-item__text"
+              >
+                Use Boomerang
+              </span>
+              <svg
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                preserveAspectRatio="xMidYMid meet"
+                role="img"
+                title="Opens link in new tab"
+                viewBox="0 0 16 16"
+                width="16"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M13,14H3c-0.6,0-1-0.4-1-1V3c0-0.6,0.4-1,1-1h5v1H3v10h10V8h1v5C14,13.6,13.6,14,13,14z"
+                />
+                <path
+                  d="M10 1L10 2 13.3 2 9 6.3 9.7 7 14 2.7 14 6 15 6 15 1z"
+                />
+              </svg>
+            </div>
+          </span>
+        </a>
+      </li>
+      <li
+        role="menuitem"
+      >
+        <a
+          class="cds--header__menu-item"
+          href="https://useboomerang.io"
+          kind="internal"
+          tabindex="0"
+          text="Use Boomerang"
+        >
+          <span
+            class="cds--text-truncate--end"
+          >
+            <div
+              class="cds--bmrg-header-menu-item__content"
+            >
+              <span
+                class="cds--bmrg-header-menu-item__text"
+              >
+                Use Boomerang
+              </span>
+              <svg
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                preserveAspectRatio="xMidYMid meet"
+                role="img"
+                title="Opens link within same platform"
+                viewBox="0 0 16 16"
+                width="16"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M9.3 3.7L13.1 7.5 1 7.5 1 8.5 13.1 8.5 9.3 12.3 10 13 15 8 10 3z"
+                />
+              </svg>
+            </div>
+          </span>
+        </a>
+      </li>
+      <li
+        role="menuitem"
+      >
+        <a
+          class="cds--header__menu-item"
+          href="https://useboomerang.io"
+          kind="app"
+          tabindex="0"
+          text="Use Boomerang"
+        >
+          <span
+            class="cds--text-truncate--end"
+          >
+            <div
+              class="cds--bmrg-header-menu-item__content"
+            >
+              <span
+                class="cds--bmrg-header-menu-item__text"
+              >
+                Use Boomerang
+              </span>
+            </div>
+          </span>
+        </a>
+      </li>
+      <li
+        role="menuitem"
+      >
+        <a
+          class="cds--header__menu-item"
+          href="#"
+          tabindex="0"
+          text="Show Boomerang"
+        >
+          <span
+            class="cds--text-truncate--end"
+          >
+            <div
+              class="cds--bmrg-header-menu-item__content "
+            >
+              <span
+                class="cds--bmrg-header-menu-item__text"
+              >
+                Show Boomerang
+              </span>
+            </div>
+          </span>
+        </a>
+      </li>
+      <li
+        role="menuitem"
+      >
+        <a
+          class="cds--header__menu-item"
+          href="#"
+          src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50"
+          tabindex="0"
+          username="Boomerang user"
+        >
+          <span
+            class="cds--text-truncate--end"
+          >
+            <div
+              class="cds--bmrg-header-menu-user"
+            >
+              <img
+                alt="Avatar for Boomerang user"
+                class="cds--bmrg-avatar --medium"
+                src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50"
+                title="Avatar for Boomerang user"
+              />
+              <p
+                class="cds--bmrg-header-menu-user__name"
+              >
+                 
+                Boomerang user
+                 
+              </p>
+            </div>
+          </span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</body>
+`;

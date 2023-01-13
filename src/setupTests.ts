@@ -2,6 +2,7 @@
 import "jest-axe/extend-expect";
 import "@testing-library/jest-dom";
 import { setLogger } from "react-query";
+
 setLogger({
   log: () => {},
   warn: () => {},

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { prefix } from "../../internal/settings";
-
 import ErrorMessage from "../ErrorMessage";
 
 interface Props {

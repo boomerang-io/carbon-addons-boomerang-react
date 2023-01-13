@@ -12,14 +12,6 @@
     margin-bottom: 0.5rem;
   }
 
-  .#{$prefix}--bmrg-header-menu-item__img {
-    color: theme.$support-error;
-  }
-
-  .#{$prefix}--bmrg-header-menu-item__text {
-    color: theme.$support-error !important;
-  }
-
   .#{$prefix}--bmrg-signout {
     margin-top: 1rem;
     margin-bottom: 2rem;
@@ -37,6 +29,15 @@
 
     &.#{$prefix}--btn--secondary {
       max-width: 50%;
+    }
+  }
+}
+
+.#{$prefix}--bmrg-sign-out-button {
+  .#{$prefix}--bmrg-header-menu-item__text {
+    color: theme.$support-error !important;
+    svg {
+      color: theme.$support-error;
     }
   }
 }

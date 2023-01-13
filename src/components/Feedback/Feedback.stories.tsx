@@ -1,23 +1,26 @@
 import React from "react";
-import Component from "./Feedback";
+import Feedback from "./Feedback";
+import { headerModalProps } from "../../internal/helpers";
 
 export default {
   title: "Platform/Feedback",
-  component: Component,
+  component: Feedback,
   parameters: {
     docs: {
       description: {
-        component: "Header menu item that displays modal with details on providing feedback to the platform",
+        component: "Header modal with details on providing feedback to the platform",
       },
     },
   },
 };
 
-const Template = (args: any) => <Component {...args} />;
+export const Default = (args) => {
+  return <Feedback {...args} />;
+};
 
-export const Feedback = Template.bind({});
-(Feedback as any).args = {
+Default.args = {
   platformName: "Boomerang",
   sendIdeasUrl: "https://ideas.ibm.com",
   platformOrganization: "IBM",
+  ...headerModalProps,
 };

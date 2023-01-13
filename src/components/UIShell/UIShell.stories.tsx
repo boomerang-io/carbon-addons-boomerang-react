@@ -1,20 +1,33 @@
+/* eslint-disable no-script-url */
 import React from "react";
-import { action } from "@storybook/addon-actions";
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
 import { BrowserRouter as Router, Link } from "react-router-dom";
-import { SideNav, SideNavLink, SideNavItems, SideNavMenu, SideNavMenuItem } from "@carbon/react";
-import { Help, ServiceDesk } from "@carbon/react/icons";
-import LeftSideNav from "../LeftSideNav";
+import HeaderMenuItem from "../Header/HeaderMenuItem";
+import { Button, Modal, SideNav, SideNavDivider, SideNavLink, SideNavItems, SideNavMenu, SideNavMenuItem } from "@carbon/react";
+import { Help, OpenPanelRight, ServiceDesk } from "@carbon/react/icons";
 import { PRIVACY_DATA } from "../PrivacyStatement/constants";
 import { PROFILE_SETTINGS_DATA } from "../ProfileSettings/constants";
 import UIShell from "./UIShell";
 import { User } from "../../types";
 
-const mock = new MockAdapter(axios);
+export default {
+  title: "Platform/UIShell",
+  component: UIShell,
+  parameters: {
+    docs: {
+      inlineStories: false,
+      description: {
+        component:
+          "Integrates the Header, Sidenav and Right Panel components among others into a data-driven and flexible application shell for the IBM Services Essentials platform.",
+      },
+    },
+  },
+  excludeStories: /UIShell.*/,
+};
 
-const BASE_URL = "https://www.ibm.com/services";
-const BASE_ENV_URL = "https://ibm.com";
+const BASE_ENV_URL = "http://localhost:6006";
+const BASE_SERVICES_URL = "http://localhost:8080/services";
 
 const TEAMS_DATA = {
   standardTeams: [
@@ -50,7 +63,7 @@ const SERVICES_DATA = [
   { name: "Service 4 with a loooong long long long name", url: "https://google.com" },
 ];
 
-const withDelay = (delay: any, response: any) => (): any => {
+const withDelay = (delay: number, response: any) => (): Promise<any> => {
   return new Promise(function (resolve) {
     setTimeout(function () {
       resolve(response);
@@ -58,110 +71,108 @@ const withDelay = (delay: any, response: any) => (): any => {
   });
 };
 
-export default {
-  title: "Platform/UIShell",
-  component: UIShell,
-  parameters: {
-    docs: {
-      inlineStories: false,
-      description: {
-        component:
-          "Integrates the Header, Sidenav and Right Panel components among others into a data-driven and flexible application shell for the IBM Services Essentials platform.",
-      },
-    },
-  },
-};
-
-export const Default = (args: any) => {
-  mock.onGet(`${BASE_URL}/users/consents`).reply(200, PRIVACY_DATA);
-  mock.onGet(`${BASE_URL}/launchpad/user`).reply(200, PROFILE_SETTINGS_DATA);
-  mock.onGet(`${BASE_URL}/users/teams`).reply(withDelay(1000, [200, TEAMS_DATA]));
-  mock.onGet(`${BASE_URL}/launchpad/teams/1/services`).reply(withDelay(4000, [200, SERVICES_DATA]));
-  mock.onGet(`${BASE_URL}/launchpad/teams/2/services`).reply(withDelay(4000, [200, []]));
-  mock.onPost(`${BASE_URL}/support/contact`).reply(200);
+function MainContent(props: { children?: React.ReactNode }) {
   return (
-    <UIShell
-      renderFlowDocs
-      renderLogo={true}
-      renderRequests={true}
-      appName={"Flow"}
-      platformName={"Boomerang"}
-      baseLaunchEnvUrl={BASE_ENV_URL}
-      baseServiceUrl={BASE_URL}
-      headerConfig={{
-        features: {
-          "appSwitcher.enabled": true,
-          "community.enabled": true,
-          "notifications.enabled": true,
-          "support.enabled": true,
-          "feedback.enabled": true,
-        },
-        navigation: [
-          {
-            name: "Launchpad",
-            url: "#",
-          },
-          {
-            name: "Admin",
-            url: "#",
-          },
-          {
-            name: "Docs",
-            url: "#",
-          },
-        ],
-        platform: {
-          name: "IBM Boomerang Platform",
-          version: "5.0.0",
-          signOutUrl: "#",
-          communityUrl: "#",
-          platformName: "IBM Boomerang",
-          platformOrganization: "IBM",
-        },
-        platformMessage: {
-          kind: "info",
-          message: "Message Goes Here",
-          title: "Testing Platform Title",
-        },
-      }}
-      onTutorialClick={action("Tutorial")}
-      skipToContentProps={{ href: "#id" }}
-      user={{
-        name: "test user",
-        email: "test.user@ibm.com",
-        hasConsented: true,
-        status: "active",
-        requestSummary: {
-          requireUserAction: 0,
-          submittedByUser: 17,
-        },
-      }}
-      {...args}
-    />
+    <div id="id" style={{ display: "flex", flexDirection: "column", gap: "1rem", paddingTop: "2rem" }}>
+      <h1>App name</h1>
+      <p>All about your great app</p>
+      <Button>Learn more</Button>
+      {props.children}
+    </div>
   );
-};
+}
 
-export const WithCarbonSidenavAndReactRouter = () => {
-  mock.onGet(`${BASE_URL}/users/consents`).reply(200, PRIVACY_DATA);
-  mock.onGet(`${BASE_URL}/launchpad/user`).reply(200, PROFILE_SETTINGS_DATA);
-  mock.onGet(`${BASE_URL}/users/teams`).reply(200, TEAMS_DATA);
-  mock.onGet(`${BASE_URL}/launchpad/teams/1/services`).reply(withDelay(3000, [200, SERVICES_DATA]));
-  mock.onGet(`${BASE_URL}/launchpad/teams/2/services`).reply(withDelay(3000, [200, []]));
-  mock.onPatch(`${BASE_URL}/users/profile`).reply(200);
-  mock.onPost(`${BASE_URL}/support/contact`).reply(200);
+export const UIShellDefault = (args) => {
+  const mock = new MockAdapter(axios);
+  mock.onGet(`${BASE_SERVICES_URL}/users/consents`).reply(200, PRIVACY_DATA);
+  mock.onGet(`${BASE_SERVICES_URL}/launchpad/user`).reply(200, PROFILE_SETTINGS_DATA);
+  mock.onGet(`${BASE_SERVICES_URL}/users/teams`).reply(withDelay(1000, [200, TEAMS_DATA]));
+  mock.onGet(`${BASE_SERVICES_URL}/launchpad/teams/1/services`).reply(withDelay(4000, [200, SERVICES_DATA]));
+  mock.onGet(`${BASE_SERVICES_URL}/launchpad/teams/2/services`).reply(withDelay(4000, [200, []]));
+  mock.onPost(`${BASE_SERVICES_URL}/support/contact`).reply(200);
+
   return (
-    <Router>
+    <>
       <UIShell
-        renderLogo={true}
-        platformName={"Boomerang"}
-        appName={""}
-        baseServiceUrl={BASE_URL}
-        baseLaunchEnvUrl={BASE_ENV_URL}
-        headerConfig={{
+        config={{
           features: {
             "appSwitcher.enabled": true,
             "notifications.enabled": true,
             "support.enabled": true,
+            "feedback.enabled": true,
+          },
+          navigation: [
+            {
+              name: "Launchpad",
+              url: "javascript:voido(0)",
+            },
+            {
+              name: "Admin",
+              url: "javascript:voido(0)",
+            },
+            {
+              name: "Docs",
+              url: "javascript:voido(0)",
+            },
+          ],
+          platform: {
+            baseEnvUrl: BASE_ENV_URL,
+            baseServicesUrl: BASE_SERVICES_URL,
+            name: "Boomerang",
+            version: "4.0.0",
+            signOutUrl: "#",
+            communityUrl: "#",
+            platformName: "Boomerang",
+            platformOrganization: "IBM",
+          },
+          platformMessage: {
+            kind: "info",
+            message: "Message Goes Here",
+            title: "Testing Platform Title",
+          },
+        }}
+        skipToContentProps={{ href: "#id" }}
+        user={
+          {
+            name: "Rick Deckard",
+            email: "rdeckard@ibm.com",
+            hasConsented: true,
+            status: "active",
+            requestSummary: {
+              requireUserAction: 0,
+              submittedByUser: 17,
+            },
+          } as User
+        }
+        {...args}
+      />
+      <MainContent />
+    </>
+  );
+};
+
+export function UIShellKitchenSink(args) {
+  const mock = new MockAdapter(axios);
+  mock.onGet(`${BASE_SERVICES_URL}/launchpad/user`).reply(200, PROFILE_SETTINGS_DATA);
+  mock.onGet(`${BASE_SERVICES_URL}/launchpad/teams/1/services`).reply(withDelay(3000, [200, SERVICES_DATA]));
+  mock.onGet(`${BASE_SERVICES_URL}/launchpad/teams/2/services`).reply(withDelay(3000, [200, []]));
+  mock.onGet(`${BASE_SERVICES_URL}/users/consents`).reply(200, PRIVACY_DATA);
+  mock.onGet(`${BASE_SERVICES_URL}/users/teams`).reply(200, TEAMS_DATA);
+  mock.onPatch(`${BASE_SERVICES_URL}/users/profile`).reply(200);
+  mock.onPost(`${BASE_SERVICES_URL}/support/contact`).reply(200);
+  mock.onPut(`${BASE_SERVICES_URL}/notifications`).reply(200, {});
+  const [isTutorialOpen, setIsTutorialOpen] = React.useState(false);
+  return (
+    <Router>
+      <UIShell
+        productName="Flow"
+        config={{
+          features: {
+            "appSwitcher.enabled": true,
+            "consent.enabled": true,
+            "notifications.enabled": true,
+            "support.enabled": true,
+            "feedback.enabled": true,
           },
           navigation: [
             {
@@ -178,9 +189,12 @@ export const WithCarbonSidenavAndReactRouter = () => {
             },
           ],
           platform: {
-            name: "IBM Boomerang Platform",
+            baseEnvUrl: BASE_ENV_URL,
+            baseServicesUrl: BASE_SERVICES_URL,
+            name: "Boomerang",
+            platformName: "Boomerang",
             sendMail: true,
-            version: "5.0.0",
+            version: "4.0.0",
             signOutUrl: "#",
             communityUrl: "#",
           },
@@ -190,69 +204,84 @@ export const WithCarbonSidenavAndReactRouter = () => {
             title: "Testing Platform Title",
           },
         }}
-        renderSidenav={({ isOpen }) => (
-          <LeftSideNav isOpen={isOpen}>
-            <SideNav expanded isChildOfHeader aria-label="sidenav">
-              <SideNavItems>
-                <SideNavLink element={Link} to="/">
-                  Link
+        leftPanel={({ close, isOpen, navLinks }) => (
+          <SideNav isChildOfHeader aria-label="Sidenav" expanded={isOpen} isPersistent={false} onOverlayClick={close}>
+            <SideNavItems>
+              {navLinks?.map((navLink) => (
+                <SideNavLink large element={Link} to="." onClick={close}>
+                  {navLink.name}
                 </SideNavLink>
-                <SideNavLink isActive element={Link} renderIcon={ServiceDesk} to="/">
-                  Active link with icon
-                </SideNavLink>
-                <SideNavLink element={Link} large to="/">
+              ))}
+              {navLinks ? <SideNavDivider /> : null}
+              <SideNavLink element={Link} to="." onClick={close}>
+                React Router Link
+              </SideNavLink>
+              <SideNavLink isActive element={Link} renderIcon={ServiceDesk} to="." onClick={close}>
+                Active React Router link with icon
+              </SideNavLink>
+              <SideNavLink element={Link} large to="." onClick={close}>
+                Large React Router link
+              </SideNavLink>
+              <SideNavLink isActive element={Link} renderIcon={ServiceDesk} to="." large onClick={close}>
+                Large React Router active link with icon
+              </SideNavLink>
+              <SideNavMenu title="Menu">
+                <SideNavMenuItem element={Link} to="." onClick={close}>
+                  Active React Router menu link 1
+                </SideNavMenuItem>
+                <SideNavMenuItem href="#" onClick={close}>
+                  Menu link
+                </SideNavMenuItem>
+                <SideNavMenuItem href="#" onClick={close}>
+                  Menu link
+                </SideNavMenuItem>
+              </SideNavMenu>
+              <SideNavMenu renderIcon={ServiceDesk} title="Active menu with icon">
+                <SideNavMenuItem isActive element={Link} to="." onClick={close}>
+                  Active React Router menu item
+                </SideNavMenuItem>
+                <SideNavMenuItem href="#" onClick={close}>
+                  Menu link
+                </SideNavMenuItem>
+                <SideNavMenuItem href="#" onClick={close}>
+                  Menu link
+                </SideNavMenuItem>
+              </SideNavMenu>
+              <SideNavMenu large title="Large menu">
+                <SideNavMenuItem element={Link} to="." onClick={close}>
+                  Large React Router menu link 1
+                </SideNavMenuItem>
+                <SideNavMenuItem element={Link} to="." onClick={close}>
+                  Large menu item 2
+                </SideNavMenuItem>
+              </SideNavMenu>
+              <SideNavMenu large renderIcon={ServiceDesk} title="Large active menu with icon">
+                <SideNavMenuItem isActive element={Link} to="." onClick={close}>
+                  Large React Router Link active link
+                </SideNavMenuItem>
+                <SideNavMenuItem href="#" onClick={close}>
                   Large link
-                </SideNavLink>
-                <SideNavLink isActive element={Link} renderIcon={ServiceDesk} to="/" large>
-                  Large active link with icon
-                </SideNavLink>
-                <SideNavMenu title="Menu">
-                  <SideNavMenuItem element={Link} to="/">
-                    Active menu item 1
-                  </SideNavMenuItem>
-                  <SideNavMenuItem href="/">Menu item 2</SideNavMenuItem>
-                  <SideNavMenuItem href="/">Menu item 3</SideNavMenuItem>
-                </SideNavMenu>
-                <SideNavMenu renderIcon={ServiceDesk} title="Active menu with icon">
-                  <SideNavMenuItem isActive element={Link} to="/">
-                    Active menu item 1
-                  </SideNavMenuItem>
-                  <SideNavMenuItem href="/">Menu item 2</SideNavMenuItem>
-                  <SideNavMenuItem href="/">Menu item 3</SideNavMenuItem>
-                </SideNavMenu>
-                <SideNavMenu title="Large menu" large>
-                  <SideNavMenuItem element={Link} to="/">
-                    Large menu item 1
-                  </SideNavMenuItem>
-                  <SideNavMenuItem element={Link} to="/">
-                    Large menu item 2
-                  </SideNavMenuItem>
-                </SideNavMenu>
-                <SideNavMenu renderIcon={ServiceDesk} title="Large active menu with icon" large>
-                  <SideNavMenuItem isActive element={Link} to="/">
-                    Large active menu item 1
-                  </SideNavMenuItem>
-                  <SideNavMenuItem href="/">Large menu item 2</SideNavMenuItem>
-                  <SideNavMenuItem href="/">Large menu item 3</SideNavMenuItem>
-                </SideNavMenu>
-              </SideNavItems>
-            </SideNav>
-          </LeftSideNav>
+                </SideNavMenuItem>
+                <SideNavMenuItem href="#" onClick={close}>
+                  Large link
+                </SideNavMenuItem>
+              </SideNavMenu>
+            </SideNavItems>
+          </SideNav>
         )}
-        onTutorialClick={action("Tutorial")}
         user={
           {
             id: "1",
-            name: "test user",
-            email: "test.user@ibm.com",
+            name: "Rick Deckard",
+            email: "rdeckard@ibm.com",
             requestSummary: {
               requireUserAction: 11,
               submittedByUser: 17,
             },
           } as User
         }
-        renderRightPanel={{
-          icon: <Help size={24} />,
+        rightPanel={{
+          icon: <OpenPanelRight size={20} />,
           component: (
             <div
               style={{
@@ -260,33 +289,48 @@ export const WithCarbonSidenavAndReactRouter = () => {
                 display: "flex",
                 justifyContent: "center",
                 marginTop: "4rem",
-                width: "25rem",
               }}
             >
-              Custom content behaviour
+              <h1>Right panel</h1>
             </div>
           ),
         }}
+        skipToContentProps={{ href: "#id" }}
+        supportMenuItems={[
+          <HeaderMenuItem onClick={() => setIsTutorialOpen(true)} type="button" text="Tutorial" key="tutorial" />,
+        ]}
+        profileMenuItems={[
+          <HeaderMenuItem
+            kind="external"
+            href={`https://ibm.com`}
+            type="link"
+            text="App Policy"
+            icon={<Help />}
+            key="app policy"
+          />,
+        ]}
+        {...args}
       />
+      <MainContent>
+        <Modal
+          open={isTutorialOpen}
+          onRequestClose={() => setIsTutorialOpen(false)}
+          modalHeading="Tutorial"
+          modalLabel="Learn about App"
+          primaryButtonText="Next"
+          secondaryButtonText="Cancel"
+        />
+      </MainContent>
     </Router>
   );
-};
+}
 
-WithCarbonSidenavAndReactRouter.story = {
-  name: "Carbon Sidenav + React Router ",
-};
-
-export const RightPanel = () => {
-  mock.onGet(`${BASE_URL}/users/consents`).reply(200, PRIVACY_DATA);
-  mock.onPost(`${BASE_URL}/support/contact`).reply(200);
+export const UIShellUserNotConsented = (args) => {
+  const mock = new MockAdapter(axios);
+  mock.onGet(`${BASE_SERVICES_URL}/users/consents`).reply(200, PRIVACY_DATA);
   return (
     <UIShell
-      isFlowApp
-      renderLogo={true}
-      appName={""}
-      platformName={"Boomerang"}
-      baseServiceUrl={BASE_URL}
-      headerConfig={{
+      config={{
         features: {
           "notifications.enabled": true,
           "support.enabled": true,
@@ -306,10 +350,13 @@ export const RightPanel = () => {
           },
         ],
         platform: {
-          name: "IBM Boomerang Platform",
-          version: "5.0.0",
-          signOutUrl: "#",
-          communityUrl: "#",
+          baseEnvUrl: BASE_ENV_URL,
+          baseServicesUrl: BASE_SERVICES_URL,
+          platformName: "Boomerang Platform",
+          name: "Boomerang Platform",
+          version: "4.0.0",
+          signOutUrl: "javascript:void(0)",
+          communityUrl: "javascript:void(0)",
         },
         platformMessage: {
           kind: "info",
@@ -317,102 +364,26 @@ export const RightPanel = () => {
           title: "Testing Platform Title",
         },
       }}
-      onTutorialClick={action("Tutorial")}
-      renderRightPanel={{
-        icon: <Help size={24} />,
-        component: (
-          <div
-            style={{
-              color: "white",
-              display: "flex",
-              justifyContent: "center",
-              marginTop: "4rem",
-              width: "25rem",
-            }}
-          >
-            Custom content behaviour
-          </div>
-        ),
-      }}
       user={
         {
           id: "1",
-          name: "test user",
-          email: "test.user@ibm.com",
-          hasConsented: true,
-          status: "active",
-          requestSummary: {
-            requireUserAction: 11,
-            submittedByUser: 17,
-          },
-        } as User
-      }
-    />
-  );
-};
-
-export const UserNotConsented = () => {
-  mock.onGet(`${BASE_URL}/users/consents`).reply(200, PRIVACY_DATA);
-  return (
-    <UIShell
-      renderLogo={true}
-      appName={""}
-      baseServiceUrl={BASE_URL}
-      platformName={"Boomerang"}
-      headerConfig={{
-        features: {
-          "notifications.enabled": true,
-          "support.enabled": true,
-        },
-        navigation: [
-          {
-            name: "Launchpad",
-            url: "#",
-          },
-          {
-            name: "Admin",
-            url: "#",
-          },
-          {
-            name: "Docs",
-            url: "#",
-          },
-        ],
-        platform: {
-          name: "IBM Boomerang Platform",
-          version: "5.0.0",
-          signOutUrl: "#",
-          communityUrl: "#",
-        },
-        platformMessage: {
-          kind: "info",
-          message: "Message Goes Here",
-          title: "Testing Platform Title",
-        },
-      }}
-      onTutorialClick={action("Tutorial")}
-      user={
-        {
-          id: "1",
-          name: "test user",
-          email: "test.user@ibm.com",
+          name: "Rick Deckard",
+          email: "rdeckard@ibm.com",
           hasConsented: false,
           status: "active",
         } as User
       }
+      {...args}
     />
   );
 };
 
-export const UserPendingDeletion = () => {
-  mock.onGet(`${BASE_URL}/users/consents`).reply(200, PRIVACY_DATA);
+export const UIShellUserPendingDeletion = (args) => {
+  const mock = new MockAdapter(axios);
+  mock.onGet(`${BASE_SERVICES_URL}/users/consents`).reply(200, PRIVACY_DATA);
   return (
     <UIShell
-      renderLogo={true}
-      platformName={"Boomerang"}
-      appName={""}
-      baseServiceUrl={BASE_URL}
-      headerConfig={{
+      config={{
         features: {
           "notifications.enabled": true,
           "support.enabled": true,
@@ -432,10 +403,13 @@ export const UserPendingDeletion = () => {
           },
         ],
         platform: {
-          name: "IBM Boomerang Platform",
-          version: "5.0.0",
-          signOutUrl: "#",
-          communityUrl: "#",
+          baseEnvUrl: "https://ibm.com",
+          baseServicesUrl: BASE_SERVICES_URL,
+          platformName: "Boomerang Platform",
+          name: "Boomerang Platform",
+          version: "4.0.0",
+          signOutUrl: "javascript:void(0)",
+          communityUrl: "javascript:void(0)",
         },
         platformMessage: {
           kind: "info",
@@ -443,19 +417,42 @@ export const UserPendingDeletion = () => {
           title: "Testing Platform Title",
         },
       }}
-      onTutorialClick={action("Tutorial")}
-      user={{
-        id: "1",
-        name: "test user",
-        email: "test.user@ibm.com",
-        hasConsented: false,
-        status: "pending_deletion",
-      } as User}
+      user={
+        {
+          id: "1",
+          name: "Rick Deckard",
+          email: "rdeckard@ibm.com",
+          hasConsented: false,
+          status: "pending_deletion",
+        } as User
+      }
+      {...args}
     />
   );
 };
 
-export const EmptyState = () => {
-  mock.onGet(`${BASE_URL}/users/consents`).reply(200, PRIVACY_DATA);
-  return <UIShell />;
+const UIShellEmptyState = (args) => {
+  const mock = new MockAdapter(axios);
+  mock.onGet(`${BASE_SERVICES_URL}/users/consents`).reply(200, PRIVACY_DATA);
+  return <UIShell productName="Boomerang" {...args} />;
+};
+
+export const Default = (args) => {
+  return <UIShellDefault {...args} />;
+};
+
+export const KitchenSink = (args) => {
+  return <UIShellKitchenSink {...args} />;
+};
+
+export const UserNotConsented = (args) => {
+  return <UIShellUserNotConsented {...args} />;
+};
+
+export const UserPendingDeletion = (args) => {
+  return <UIShellUserPendingDeletion {...args} />;
+};
+
+export const EmptyState = (args) => {
+  return <UIShellEmptyState {...args} />;
 };

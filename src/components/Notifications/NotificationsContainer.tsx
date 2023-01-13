@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { ToastContainer, Slide } from "react-toastify";
 import { Close } from "@carbon/react/icons";
-import { prefix } from "../../internal/settings";
 import { injectStyle } from "react-toastify/dist/inject-style";
+import { prefix } from "../../internal/settings";
 
 if (typeof window !== "undefined") {
   injectStyle();

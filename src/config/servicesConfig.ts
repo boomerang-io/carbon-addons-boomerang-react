@@ -6,18 +6,18 @@ export const queryClient = new QueryClient({
 });
 
 export const serviceUrl = {
-  getLaunchpadUser: ({ baseServiceUrl }: any) => `${baseServiceUrl}/launchpad/user`,
-  getStatement: ({ baseServiceUrl }: any) => `${baseServiceUrl}/users/consents`,
-  getTeamServices: ({ baseServiceUrl, teamId }: any) => `${baseServiceUrl}/launchpad/teams/${teamId}/services`,
-  getUserTeams: ({ baseServiceUrl }: any) => `${baseServiceUrl}/users/teams`,
-  resourceUserConsent: ({ baseServiceUrl }: any) => `${baseServiceUrl}/users/consent`,
-  resourceUserProfile: ({ baseServiceUrl }: any) => `${baseServiceUrl}/users/profile`,
+  getLaunchpadUser: ({ baseServicesUrl }: any) => `${baseServicesUrl}/launchpad/user`,
+  getStatement: ({ baseServicesUrl }: any) => `${baseServicesUrl}/users/consents`,
+  getTeamServices: ({ baseServicesUrl, teamId }: any) => `${baseServicesUrl}/launchpad/teams/${teamId}/services`,
+  getUserTeams: ({ baseServicesUrl }: any) => `${baseServicesUrl}/users/teams`,
+  resourceUserConsent: ({ baseServicesUrl }: any) => `${baseServicesUrl}/users/consent`,
+  resourceUserProfile: ({ baseServicesUrl }: any) => `${baseServicesUrl}/users/profile`,
 };
 
 export const resolver = {
   query: (url: any, config?: any) => () => axios.get(url, config).then((response) => response.data),
-  patchUserProfile: ({ baseServiceUrl, body }: any) =>
-    axios.patch(serviceUrl.resourceUserProfile({ baseServiceUrl }), body),
-  putUserConsent: ({ baseServiceUrl, body }: any) =>
-    axios.put(serviceUrl.resourceUserConsent({ baseServiceUrl }), body),
+  patchUserProfile: ({ baseServicesUrl, body }: any) =>
+    axios.patch(serviceUrl.resourceUserProfile({ baseServicesUrl }), body),
+  putUserConsent: ({ baseServicesUrl, body }: any) =>
+    axios.put(serviceUrl.resourceUserConsent({ baseServicesUrl }), body),
 };

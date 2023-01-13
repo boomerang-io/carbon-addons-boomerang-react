@@ -1,14 +1,14 @@
 import React from "react";
-import cx from "classnames";
 import { default as Tippy } from "@tippyjs/react";
-import type { TippyProps } from "@tippyjs/react";
+import cx from "classnames";
 import { prefix } from "../../internal/settings";
+import type { TippyProps } from "@tippyjs/react";
 
 type Alignment = "start" | "end";
 type Direction = "auto" | "top" | "bottom" | "left" | "right";
 type Placement = Direction | `${Direction}-${Alignment}`;
 
-type Props = TippyProps & {
+export type TooltipHoverProps = TippyProps & {
   align?: Alignment;
   direction?: Direction;
   placement?: Placement;
@@ -31,7 +31,7 @@ function TooltipHover({
   tooltipContent,
   tooltipText,
   ...rest
-}: Props) {
+}: TooltipHoverProps) {
   // support all three for compat with both tippy props and carbon
   const contentToRender = content || tooltipContent || tooltipText;
 

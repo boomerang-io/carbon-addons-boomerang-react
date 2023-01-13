@@ -1,22 +1,21 @@
 import React from "react";
 import { expect, test } from "vitest";
 import { render } from "@testing-library/react";
-import { Router } from "react-router-dom";
-import { createMemoryHistory } from "history";
+import { MemoryRouter as Router } from "react-router-dom";
 import FeatureNavTab from "./FeatureNavTab";
-
-const history = createMemoryHistory();
 
 const props = {
   label: "Red Panda",
   to: "/test",
 };
 
-test("render feature nav tab", () => {
-  const { queryByText } = render(
-    <Router history={history}>
-      <FeatureNavTab {...props} />
-    </Router>
-  );
-  (expect(queryByText(/Red Panda/i)) as any).toBeInTheDocument();
+describe("FeatureNavTab", () => {
+  test("functional", () => {
+    const { queryByText } = render(
+      <Router>
+        <FeatureNavTab {...props} />
+      </Router>
+    );
+    expect(queryByText(/Red Panda/i)).toBeInTheDocument();
+  });
 });

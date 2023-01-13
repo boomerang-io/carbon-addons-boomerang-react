@@ -25,7 +25,7 @@ export default {
   },
 };
 
-function Component1({ setIsOpen }: any) {
+function Component1({ setIsOpen }) {
   return (
     <ModalForm>
       <ModalBody style={{ display: "flex", flexDirection: "column", gap: "1rem", padding: "1rem", width: "30rem" }}>
@@ -35,9 +35,9 @@ function Component1({ setIsOpen }: any) {
           <SelectItem value="carbon" text="Carbon" />
           <SelectItem value="boomerang" text="Boomerang" />
         </Select>
-        <MultiSelect items={["Carbon", "Boomerang"]} itemToString={(item: any) => item} label="Muliselect" />
-        <Dropdown items={["Carbon", "Boomerang"]} itemToString={(item: any) => item} label="Dropdown" />
-        <ComboBox items={["Carbon", "Boomerang"]} itemToString={(item: any) => item} placeholder="e.g. Combobox" />
+        <MultiSelect items={["Carbon", "Boomerang"]} itemToString={(item: string) => item} label="Muliselect" />
+        <Dropdown items={["Carbon", "Boomerang"]} itemToString={(item: string) => item} label="Dropdown" />
+        <ComboBox items={["Carbon", "Boomerang"]} itemToString={(item: string) => item} placeholder="e.g. Combobox" />
         <Button onClick={() => setIsOpen(false)}>Close </Button>
       </ModalBody>
     </ModalForm>

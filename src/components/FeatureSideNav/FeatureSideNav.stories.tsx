@@ -1,12 +1,11 @@
 import React from "react";
-import { Router } from "react-router-dom";
+import { MemoryRouter as Router } from "react-router-dom";
 import FeatureSideNav from "./FeatureSideNav";
 import FeatureSideNavLinks from "./FeatureSideNavLinks";
 import FeatureSideNavFooter from "./FeatureSideNavFooter";
 import FeatureSideNavHeader from "./FeatureSideNavHeader";
 import FeatureSideNavLink from "../FeatureSideNavLink";
 import { Search, Accordion, AccordionItem, Button } from "@carbon/react";
-import { createMemoryHistory } from "history";
 
 export default {
   title: "Features/FeatureSideNav",
@@ -18,10 +17,10 @@ export default {
       },
     },
   },
-  decorators: [(story: any) => <Router history={createMemoryHistory({ initialEntries: ["/"] })}>{story()}</Router>],
+  decorators: [(story) => <Router>{story()}</Router>],
 };
 
-export const SidenavLinks = (args: any) => {
+export const SidenavLinks = (args) => {
   return (
     <FeatureSideNav border="right" small {...args}>
       <FeatureSideNavLinks>
@@ -34,7 +33,7 @@ export const SidenavLinks = (args: any) => {
   );
 };
 
-export const SidenavLinksWithHeaderAndCustomLinks = (args: any) => {
+export const SidenavLinksWithHeaderAndCustomLinks = (args) => {
   return (
     <FeatureSideNav border="left" {...args}>
       <FeatureSideNavHeader>
@@ -69,7 +68,7 @@ SidenavLinksWithHeaderAndCustomLinks.story = {
   name: "Sidenav Links, Header and Custom Links",
 };
 
-export const Loading = (args: any) => {
+export const Loading = (args) => {
   return (
     <FeatureSideNav border="right" isLoading={true} {...args}>
       <FeatureSideNavLink to="/link1" children="Link1" />
@@ -78,7 +77,7 @@ export const Loading = (args: any) => {
   );
 };
 
-export const ComponentsLoading = (args: any) => {
+export const ComponentsLoading = (args) => {
   return (
     <FeatureSideNav border="left" {...args}>
       <FeatureSideNavHeader isLoading={true}>

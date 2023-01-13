@@ -1,26 +1,27 @@
 import React, { useState, useEffect } from "react";
-import cx from "classnames";
-import { prefix } from "../../internal/settings";
 import { Button, ModalHeader, ModalBody, ModalFooter } from "@carbon/react";
+import cx from "classnames";
 import Modal from "../Modal";
+import { prefix } from "../../internal/settings";
 import type { ModalTrigger } from "types";
+import type { Props as ModalProps } from "../Modal";
 
-type Props = {
-  affirmativeAction?: (...args: any[]) => any;
+export type Props = {
+  affirmativeAction?: () => any;
   affirmativeButtonProps?: any;
-  affirmativeText?: string;
+  affirmativeText?: React.ReactNode;
   appElement?: string;
   children?: React.ReactNode;
   containerClassName?: string;
   isExternallyControlled?: boolean;
   isOpen?: boolean;
   label?: string;
-  modalProps?: any;
-  modalTrigger?: ModalTrigger
-  negativeAction?: (...args: any[]) => any;
+  modalProps?: Omit<ModalProps, "isOpen">;
+  modalTrigger?: ModalTrigger;
+  negativeAction?: () => any;
   negativeButtonProps?: any;
-  negativeText?: string;
-  onCloseModal?: (...args: any[]) => any;
+  negativeText?: React.ReactNode;
+  onCloseModal?: () => any;
   selectorPrimaryFocus?: string;
   title?: string;
 };
@@ -78,9 +79,10 @@ function ConfirmModal(props: Props) {
       <Modal
         appElement={appElement}
         containerClassName={cx(`${prefix}--bmrg-confirm-modal-container`, containerClassName)}
+        closeTimeoutMS={240}
+        //@ts-ignore
         isOpen={isOpen}
         onRequestClose={closeModal}
-        closeTimeoutMS={240}
         shouldCloseOnOverlayClick
         selectorPrimaryFocus={selectorPrimaryFocus}
         {...modalProps}

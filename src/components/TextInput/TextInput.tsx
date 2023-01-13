@@ -1,13 +1,14 @@
 import React from "react";
-import TooltipHover from "../TooltipHover";
 import { TextInput } from "@carbon/react";
 import { Information } from "@carbon/react/icons";
+import TooltipHover from "../TooltipHover";
 import { prefix } from "../../internal/settings";
+import type { TooltipHoverProps } from  "../TooltipHover";
 
 type Props = React.ComponentPropsWithRef<"input"> & {
   tooltipClassName?: string;
   tooltipContent?: React.ReactNode;
-  tooltipProps?: any;
+  tooltipProps?: TooltipHoverProps;
   defaultValue?: string | number;
   helperText?: React.ReactNode;
   hideLabel?: boolean;

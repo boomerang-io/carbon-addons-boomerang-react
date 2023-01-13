@@ -13,6 +13,6 @@ export default {
   },
 };
 
-export const Default = (args: any) => {
+export const Default = (args) => {
   return <ErrorMessage {...args} />;
 };

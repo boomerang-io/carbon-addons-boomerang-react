@@ -1,8 +1,9 @@
 import React, { useState } from "react";
+import { Information } from "@carbon/react/icons";
 import cx from "classnames";
 import TooltipHover from "../TooltipHover";
-import { Information } from "@carbon/react/icons";
 import { prefix } from "../../internal/settings";
+import type { TooltipHoverProps } from  "../TooltipHover";
 
 const ButtonTypes = {
   Negative: "negative",
@@ -26,7 +27,7 @@ type Props = {
   orientation?: "horizontal" | "vertical";
   tooltipClassName?: string;
   tooltipContent?: React.ReactNode;
-  tooltipProps?: any;
+  tooltipProps?: TooltipHoverProps;
   selectedItem?: string | number;
 };
 
@@ -127,7 +128,7 @@ function DecisionButtons({
           )}
         </div>
       )}
-      {hasVerticalHelperText && <div className={`${prefix}--form__helper-text`}>{helperText}</div>}
+      {hasVerticalHelperText && <div className={`${prefix}--form__helper-text`} style={{marginBottom: "0.5rem"}}>{helperText}</div>}
       <div className={`${prefix}--form-item`}>
         <div className={wrapperClasses}>{getDecisionButtons()}</div>
       </div>

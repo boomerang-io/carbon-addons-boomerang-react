@@ -1,14 +1,12 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import { action } from "@storybook/addon-actions";
-import axios from "axios";
-import MockAdapter from "axios-mock-adapter";
 import { Server } from "mock-socket";
-
+import { axe } from "jest-axe";
 import PlatformNotificationsContainer from "./PlatformNotificationsContainer";
 
-const mockSocketUrl = "ws://localhost:8081/ws";
-const mockServer = new Server(mockSocketUrl);
+const baseEnvUrl = "https://localhost:8080";
+const baseServicesUrl = "https://localhost:8080/services";
+const mockServer = new Server(`${baseServicesUrl}/notifications/ws`);
 const notificationsObj: any = {
   notifications: [
     {
@@ -28,10 +26,6 @@ const notificationsObj: any = {
   ],
 };
 
-const mockEndptURL = "http://localhost:8000/notifications";
-const mock = new MockAdapter(axios);
-mock.onPut(mockEndptURL).reply(200, {});
-
 mockServer.on("connection", (socket: any) => {
   socket.on("message", () => {
     setInterval(() => {
@@ -41,21 +35,40 @@ mockServer.on("connection", (socket: any) => {
   });
 });
 
-describe("Platform Notifications Container", () => {
+describe("Platform Notifications", () => {
   test("default", async () => {
     render(
       <PlatformNotificationsContainer
-        config={{
-          wsUrl: "ws://localhost:8081/ws",
-          httpUrl: "http://localhost:8000/notifications",
-        }}
-        isNotificationActive={false}
-        setHasNewNotifications={action("setHasNewNotifications")}
+        aria-labelledby="menu"
+        baseEnvUrl={baseEnvUrl}
+        baseServicesUrl={baseServicesUrl}
+        id="notifications-container"
         initialNotifications={notificationsObj.notifications}
+        isActive={true}
+        setHasNewNotifications={() => true}
       />
     );
     expect(screen.getByText("1 new notification")).toBeInTheDocument();
     expect(screen.getByText("Mark All Read")).toBeInTheDocument();
     expect(screen.getByText("Open Notification Center")).toBeInTheDocument();
+  });
+
+  test("a11y", async () => {
+    const { container } = render(
+      <>
+        <button id="notifications-menu">Platform Notifications</button>
+        <PlatformNotificationsContainer
+          aria-labelledby="notifications-menu"
+          baseEnvUrl={baseEnvUrl}
+          baseServicesUrl={baseServicesUrl}
+          id="notifications-container"
+          initialNotifications={notificationsObj.notifications}
+          isActive={true}
+          setHasNewNotifications={() => true}
+        />
+      </>
+    );
+    const results = await axe(container);
+    expect(results).toHaveNoViolations();
   });
 });

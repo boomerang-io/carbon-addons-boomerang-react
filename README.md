@@ -9,10 +9,10 @@ Install the the addons package, carbon and all of the required peer-dependencies
 Run the following command using [pnpm](https://pnpm.io). Other package managers like `npm` and `yarn` work as well.
 
 ```bash
-pnpm install @carbon/react @boomerang-io/carbon-addons-boomerang-react axios formik react-router-dom yup
+pnpm install @carbon/react @boomerang-io/carbon-addons-boomerang-react axios@0.27.2 formik react-router-dom@5 yup
 ```
 
-Upgrading from a previous version? View our [migration guide](/docs/v3-migration.md).
+Upgrading from a previous version? View our [migration guide](/docs/v4-migration.md).
 
 ## Styles
 
@@ -24,7 +24,7 @@ You need to use Sass, as we are built on top of Carbon and import the entry styl
 @use "@boomerang-io/carbon-addons-boomerang-react/scss/global";
 ```
 
-Make sure to import this file in the JavaScript code to ensure that it is included in your bundle.
+Import this file in the JavaScript code to ensure that it is included in your bundle.
 
 ## Carbon themes
 
@@ -138,7 +138,7 @@ We use [react-toastify](https://github.com/fkhadra/react-toastify) to create not
 
 Because of the potential time and difficulty involved in a migration to Carbon v11, we will maintain a maintenance v2 of the component library that is compatible with Carbon v10 for a period of time. It will recieve critical functionality and security updates. The code is found on the [v2 branch](https://github.com/boomerang-io/carbon-addons-boomerang-react/tree/v2) and is published under the `2.x.x` semantic version and `classic` tag.
 
-Please view the support table below. 
+Please view the support table below.
 
 ## Support Schedule
 
@@ -146,11 +146,12 @@ Please view the support table below.
 | ------- | --------------- | ----------- |
 | v1      | **End-of-Life** | 2022-03-18  |
 | v2      | **Maintenance** | 2023-04-30  |
-| v3      | **Current**     | TBD         |
+| v3      | **End-of-Life** | 2023-01-16  |
+| v4      | **Current**     | TBD         |
 
 ## 📚 Docs
 
-You can find more information about how to use each Component by checking out our [Storybook](https://carbon-addons-boomerang-react.netlify.app/).
+You can find more information about how to use each component by checking out our [Storybook](https://carbon-addons-boomerang-react.netlify.app/).
 
 ## 🤲 Contributing
 
