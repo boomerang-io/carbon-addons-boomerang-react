@@ -1,10 +1,10 @@
-# v4 Migration Guide
+# v4 Upgrade Guide
 
-Follow the sections below for migrating from v3 to v4.
+Follow the sections below for upgrading from v3 to v4.
 
 ## Prerequisites
 
-Moving to v4 of this library requires you to be coming from v3. If you are are upgrading from v2, first follow the migration guide for v3 and then come back here to continue with the v4 upgrade.
+Moving to v4 of this library requires you to be coming from v3. If you are are upgrading from v2, first follow the upgrade guide for v3 and then come back here to continue with the v4 upgrade.
 
 ## Removed Components
 
