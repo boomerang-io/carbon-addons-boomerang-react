@@ -8,7 +8,7 @@ import type { Props as ModalProps } from "../Modal";
 
 export type Props = {
   affirmativeAction?: () => any;
-  affirmativeButtonProps?: React.ComponentPropsWithRef<"button">;
+  affirmativeButtonProps?: any;
   affirmativeText?: React.ReactNode;
   appElement?: string;
   children?: React.ReactNode;
@@ -19,7 +19,7 @@ export type Props = {
   modalProps?: Omit<ModalProps, "isOpen">;
   modalTrigger?: ModalTrigger;
   negativeAction?: () => any;
-  negativeButtonProps?: React.ComponentPropsWithRef<"button">;
+  negativeButtonProps?: any;
   negativeText?: React.ReactNode;
   onCloseModal?: () => any;
   selectorPrimaryFocus?: string;
