@@ -63,7 +63,7 @@ class Component3 extends React.Component {
           <p>This component will ask if you really wanna close the modal when pressing the close modal button</p>
         </ModalBody>
         <ModalFooter>
-          <Button onClick={(this.props as any).requestPreviousStep}>Previous</Button>
+          <Button kind="secondary" onClick={(this.props as any).requestPreviousStep}>Previous</Button>
           <Button onClick={(this.props as any).forceCloseModal}>Force Close Modal</Button>
         </ModalFooter>
       </FlowModalForm>

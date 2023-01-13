@@ -5,6 +5,8 @@ import Modal from "../Modal";
 import cx from "classnames";
 import useSetState from "../../tools/useSetState";
 import { prefix } from "../../internal/settings";
+import type { Props as ModalProps } from "../Modal";
+import type { Props as ConfirmModalProps } from "../ConfirmModal";
 import type { ModalTrigger } from "types";
 
 FlowModalContainer.defaultProps = {
@@ -13,19 +15,28 @@ FlowModalContainer.defaultProps = {
   modalHeaderProps: {},
 };
 
+type State = {
+  formData: { [key: string]: any };
+  isConfirmModalOpen: boolean;
+  isOpen: boolean;
+  shouldConfirmModalClose: boolean;
+  step: number;
+  [key: string]: any;
+};
+
 type OwnProps = {
   appElement?: string;
   children?: React.ReactNode;
   components?: any[];
-  composedModalProps?: any;
-  confirmModalProps?: any;
-  initialState?: any;
+  composedModalProps?: Omit<ModalProps, "isOpen">;
+  confirmModalProps?: ConfirmModalProps;
+  initialState?: Record<string, any>;
   isOpen?: boolean;
   modalHeaderChildren?: React.ReactElement;
   modalHeaderProps?: any;
-  modalTrigger?: ModalTrigger
+  modalTrigger?: ModalTrigger;
   onCloseModal?: (...args: any[]) => any;
-  onFormDataChange?: (...args: any[]) => any;
+  onFormDataChange?: (formData: State["formData"]) => any;
   progressSteps?: {
     label?: string;
   }[];
@@ -34,13 +45,7 @@ type OwnProps = {
 type Props = OwnProps & typeof FlowModalContainer.defaultProps;
 
 export function FlowModalContainer(props: Props) {
-  const [state, setState] = useSetState<{
-    isConfirmModalOpen: boolean;
-    isOpen: boolean;
-    shouldConfirmModalClose: boolean;
-    step: number;
-    [key: string]: any;
-  }>({
+  const [state, setState] = useSetState<State>({
     formData: new Map(),
     isConfirmModalOpen: false,
     isOpen: props.isOpen,

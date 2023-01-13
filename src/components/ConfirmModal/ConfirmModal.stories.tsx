@@ -13,9 +13,8 @@ export default {
           "A pre-built confirm modal that has built in state management, modal header, exposed trigger and renders children.",
       },
     },
-  }
+  },
 };
-
 
 export const Default = (args) => {
   return (
@@ -59,4 +58,4 @@ export const ExternallyControlled = (args) => {
       <div>Affirmative action should close modal after 2 seconds and negative after 1 second</div>
     </ConfirmModal>
   );
-}
+};

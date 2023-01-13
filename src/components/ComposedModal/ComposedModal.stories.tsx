@@ -19,28 +19,28 @@ export default {
 
 function Component1(props) {
   return (
-    <ModalForm title="Testing some text here">
+    <ModalForm title="Enter details">
       <ModalBody>
         <TextInput
-          label="test"
-          tooltipContent="testing testingtestingtestingtestingtesting testing testingtestingtestingtestingtestingtesting testingtestingtestingtestingtestingtesting testingtestingtestingtestingtestingtesting testingtestingtestingtestingtestingtesting testingtestingtestingtestingtesting"
+          label="Name"
+          tooltipContent="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
           id="testing"
           onChange={() => {}}
-          placeholder="This is an input"
+          placeholder="e.g. Button"
         />
         <TextInput
-          label="test"
-          tooltipContent="testing testingtestingtestingtestingtesting testing testingtestingtestingtestingtestingtesting testingtestingtestingtestingtestingtesting testingtestingtestingtestingtestingtesting testingtestingtestingtestingtestingtesting testingtestingtestingtestingtesting"
+          label="Version"
+          tooltipContent="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
           id="testing2"
           onChange={() => {}}
-          placeholder="This is another input"
+          placeholder="e.g. 1.0.0"
         />
       </ModalBody>
       <ModalFooter>
         <Button kind="secondary" onClick={props.closeModal}>
           Cancel
         </Button>
-        <Button onClick={props.closeModal}>Done</Button>
+        <Button onClick={props.closeModal}>Create</Button>
       </ModalFooter>
     </ModalForm>
   );
@@ -52,13 +52,13 @@ export const Default = (args) => {
       appElement="#root"
       composedModalProps={{ selectorPrimaryFocus: 'input[id="testing"]' }}
       confirmModalProps={{
-        title: "Close Composed Modal?",
+        title: "Close Composed ?",
         children: <div>You will need to start from the first component</div>,
       }}
       modalHeaderProps={{
-        title: "Composed Modal",
-        label: "Single child as a function",
-        subtitle: "Even more info here",
+        title: "Create Component",
+        label: "Use the form",
+        subtitle: "Create a reusable component",
       }}
       modalTrigger={({ openModal }) => <Button onClick={openModal}>Open modal composed</Button>}
       {...args}
