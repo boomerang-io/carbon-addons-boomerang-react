@@ -180,24 +180,27 @@ function CreatableComponent({
       <div className={`${prefix}--bmrg-creatable__input`}>
         {createKeyValuePair ? (
           <div className={`${prefix}--bmrg-creatable__key-value-inputs`}>
-            <TextInput
-              disabled={disableInputs}
-              id={`${id}-key`}
-              invalid={isKeyInputValid}
-              invalidText={keyInputInvalidText}
-              helperText={keyHelperText}
-              labelText={inputKeyLabel}
-              onBlur={onKeyBlur}
-              onChange={onKeyChange}
-              placeholder={keyPlaceholder}
-              type={type}
-              value={keyValue}
+            <div
               style={{
                 marginBottom: hasBothHelperText || keyHelperText ? "0" : valueHelperText ? "1.5rem" : "0rem",
                 marginTop: hasBothLabelText || inputKeyLabel ? "0" : inputValueLabel ? "1.5rem" : "0.5rem",
               }}
-              {...textInputProps}
-            />
+            >
+              <TextInput
+                disabled={disableInputs}
+                id={`${id}-key`}
+                invalid={isKeyInputValid}
+                invalidText={keyInputInvalidText}
+                helperText={keyHelperText}
+                labelText={inputKeyLabel}
+                onBlur={onKeyBlur}
+                onChange={onKeyChange}
+                placeholder={keyPlaceholder}
+                type={type}
+                value={keyValue}
+                {...textInputProps}
+              />
+            </div>
             <span
               className={`${prefix}--bmrg-creatable__colon`}
               style={{
@@ -206,24 +209,27 @@ function CreatableComponent({
             >
               :
             </span>
-            <TextInput
-              disabled={disableInputs}
-              id={`${id}-value`}
-              invalid={isValueInputValid}
-              invalidText={valueInputInvalidText}
-              helperText={valueHelperText}
-              labelText={inputValueLabel}
-              onBlur={onValueBlur}
-              onChange={onValueChange}
-              placeholder={valuePlaceholder}
-              type={type}
-              value={value}
+            <div
               style={{
                 marginBottom: hasBothHelperText || valueHelperText ? "0" : keyHelperText ? "1.5rem" : "0rem",
                 marginTop: hasBothLabelText || inputValueLabel ? "0" : inputKeyLabel ? "1.5rem" : "0.5rem",
               }}
-              {...textInputProps}
-            />
+            >
+              <TextInput
+                disabled={disableInputs}
+                id={`${id}-value`}
+                invalid={isValueInputValid}
+                invalidText={valueInputInvalidText}
+                helperText={valueHelperText}
+                labelText={inputValueLabel}
+                onBlur={onValueBlur}
+                onChange={onValueChange}
+                placeholder={valuePlaceholder}
+                type={type}
+                value={value}
+                {...textInputProps}
+              />
+            </div>
           </div>
         ) : (
           <TextInput
