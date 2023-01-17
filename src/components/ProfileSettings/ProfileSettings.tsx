@@ -86,7 +86,7 @@ function ProfileSettings({ baseServicesUrl, src, userName, isOpen, closeModal }:
     setTeams(initialTeams);
   }
 
-  async function handleSubmit({ closeModal }: { closeModal: Function }) {
+  async function handleSubmit() {
     const body = {
       lowerLevelGroups: teams,
     };
@@ -223,7 +223,7 @@ function ProfileSettings({ baseServicesUrl, src, userName, isOpen, closeModal }:
           type="submit"
           onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
             e.preventDefault();
-            handleSubmit({ closeModal: handleClose });
+            handleSubmit();
           }}
         >
           {mutateUserProfileError ? "Try Again" : mutateUserProfileIsLoading ? "Saving..." : "Save changes"}
