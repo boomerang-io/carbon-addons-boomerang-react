@@ -2,9 +2,7 @@
 
 ## v4
 
-### Changes
-
-`UIShell` and associated components have received a major rewrite. The focus was on the use of Carbon components to replace custom code, and accessibility improvements. The implementation is much simpler and the experience for end users has been improved. Carbon and React have come a long way in the time since we wrote the first implementation and these was a much needed update.
+The `UIShell` and associated components have received a major rewrite. The focus was on the use of Carbon components to replace custom code, and accessibility improvements. The implementation is much simpler and the experience for end users has been improved. Carbon and React have come a long way in the time since we wrote the first implementation and these was a much needed update.
 
 We also removed components that were marked as deprecated in the last major release and internal components that are no longer needed. There is less for us to maintain and has decreased the bundle size.
 
@@ -61,7 +59,7 @@ The API for the `UIShell` and associated components have been changed for simpli
 
 ### Upgrading
 
-View our [v4 upgrade guide](https://github.com/boomerang-io/carbon-addons-boomerang-react/blob/main/docs/v4-migration.md)  for migrating from v3 to v4. Still on v2 and looking to upgrade? See our [v3 upgrade guide](https://github.com/boomerang-io/carbon-addons-boomerang-react/blob/main/docs/v3-migration.md) which is more involved. v4 is comparatively much simpler because it assumes you are on Carbon v11.
+View our [v4 upgrade guide](https://github.com/boomerang-io/carbon-addons-boomerang-react/blob/main/docs/v4-migration.md) for migrating from v3 to v4. Still on v2 and looking to upgrade? See our [v3 upgrade guide](https://github.com/boomerang-io/carbon-addons-boomerang-react/blob/main/docs/v3-migration.md) which is more involved. v4 is comparatively much simpler because it assumes you are on Carbon v11.
 
 ## v3
 
@@ -92,6 +90,10 @@ The following components are still in the library but have been marked as deprec
 - OptionsGrid
 - Sidenav
 
+### Upgrading
+
+View our [v3 upgrade guide](https://github.com/boomerang-io/carbon-addons-boomerang-react/blob/main/docs/v3-migration.md) for migrating from v2 to v3. 
+
 ## v2
 
 The big change here is finally supporting tree-shaking properly. This should reduce bundle size and builds times, sometimes drastically based on your use case. [View the migration guide](./documentation/guides/v2-migration.md) for updating to v2.
@@ -102,9 +104,13 @@ The big change here is finally supporting tree-shaking properly. This should red
 - Storybook v6 migration
 - Dependency updates and security fixes
 
-### Breaking Changes\*\*
+### Breaking Changes
 
 - Move `@carbon/react/icons` to a peer dependency
 - Move `carbon-icons` to a peer dependency
 - Remove `@carbon/elements` as a dependency
 - No longer publish `UMD` builds
+
+### Upgrading
+
+View our [v2 upgrade guide](https://github.com/boomerang-io/carbon-addons-boomerang-react/blob/main/docs/v2-migration.md) for migrating from v1 to v2. 
