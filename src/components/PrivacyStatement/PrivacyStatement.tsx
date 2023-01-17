@@ -97,7 +97,7 @@ function PrivacyStatement({
     >
       <ModalHeader
         closeModal={handleClose}
-        label={`Effective as of ${statementQuery.data ? formatDateTimestamp(statementQuery.data?.effectiveDate) : ""}`}
+        label={`Effective as of ${statementQuery.data ? formatDateTimestamp(statementQuery.data.effectiveDate) : ""}`}
         title="Privacy Statement"
       />
       <ModalBody key={resetKey}>
@@ -108,7 +108,7 @@ function PrivacyStatement({
             <ErrorMessage style={{ color: "#F2F4F8" }} />
           ) : (
             statementQuery.data &&
-            statementQuery.data?.formContent?.sections?.length > 0 && (
+            statementQuery.data.formContent?.sections?.length > 0 && (
               <>
                 <Accordion>
                   {statementQuery.data.formContent.sections.map((section) => {
