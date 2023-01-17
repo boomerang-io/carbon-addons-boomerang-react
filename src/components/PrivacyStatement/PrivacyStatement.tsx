@@ -19,6 +19,17 @@ function formatDateTimestamp(timestamp: string) {
   });
 }
 
+type PrivacyStatementContent = {
+  effectiveDate: string;
+  version: string;
+  formContent: {
+    sections: {
+      title: string;
+      content: string;
+    }[];
+  };
+};
+
 type Props = {
   baseServicesUrl: string;
   closeModal: () => void;
@@ -37,7 +48,7 @@ function PrivacyStatement({
   const [resetKey, setResetKey] = React.useState(0);
   const [isConfirmModalOpen, setIsConfirmModalOpen] = React.useState(false);
   const statementUrl = serviceUrl.getStatement({ baseServicesUrl });
-  const statementQuery = useQuery({
+  const statementQuery = useQuery<PrivacyStatementContent>({
     queryKey: statementUrl,
     queryFn: resolver.query(statementUrl),
   });
@@ -57,7 +68,7 @@ function PrivacyStatement({
   async function handleSubmit() {
     const body = {
       hasConsented: false,
-      version: statementQuery.data.version,
+      version: statementQuery.data?.version,
     };
 
     try {
@@ -86,7 +97,7 @@ function PrivacyStatement({
     >
       <ModalHeader
         closeModal={handleClose}
-        label={`Effective as of ${statementQuery.data ? formatDateTimestamp(statementQuery.data.effectiveDate) : ""}`}
+        label={`Effective as of ${statementQuery.data ? formatDateTimestamp(statementQuery.data?.effectiveDate) : ""}`}
         title="Privacy Statement"
       />
       <ModalBody key={resetKey}>
@@ -96,10 +107,11 @@ function PrivacyStatement({
           ) : statementQuery.error ? (
             <ErrorMessage style={{ color: "#F2F4F8" }} />
           ) : (
+            statementQuery.data &&
             statementQuery.data?.formContent?.sections?.length > 0 && (
               <>
                 <Accordion>
-                  {statementQuery.data.formContent.sections.map((section: any) => {
+                  {statementQuery.data.formContent.sections.map((section) => {
                     return (
                       <AccordionItem title={section.title} key={section.title}>
                         <p
