@@ -161,6 +161,7 @@ export function UIShellKitchenSink(args) {
   mock.onPatch(`${BASE_SERVICES_URL}/users/profile`).reply(200);
   mock.onPost(`${BASE_SERVICES_URL}/support/contact`).reply(200);
   mock.onPut(`${BASE_SERVICES_URL}/notifications`).reply(200, {});
+  mock.onPut(`${BASE_SERVICES_URL}/users/consent`).reply(200, {});
   const [isTutorialOpen, setIsTutorialOpen] = React.useState(false);
   return (
     <Router>

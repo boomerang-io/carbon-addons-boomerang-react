@@ -19,6 +19,17 @@ function formatDateTimestamp(timestamp: string) {
   });
 }
 
+type PrivacyStatementContent = {
+  effectiveDate: string;
+  version: string;
+  formContent: {
+    sections: {
+      title: string;
+      content: string;
+    }[];
+  };
+};
+
 type Props = {
   baseServicesUrl: string;
   closeModal: () => void;
@@ -37,28 +48,27 @@ function PrivacyStatement({
   const [resetKey, setResetKey] = React.useState(0);
   const [isConfirmModalOpen, setIsConfirmModalOpen] = React.useState(false);
   const statementUrl = serviceUrl.getStatement({ baseServicesUrl });
-  const statementQuery = useQuery({
+  const statementQuery = useQuery<PrivacyStatementContent>({
     queryKey: statementUrl,
     queryFn: resolver.query(statementUrl),
   });
 
   const { mutateAsync, error: mutateUserConsentError } = useMutation(resolver.putUserConsent);
 
+  function closeConfirmModal() {
+    setIsConfirmModalOpen(false);
+  }
+
   function handleClose() {
     closeModal();
+    closeConfirmModal();
     setResetKey(resetKey + 1);
   }
 
-  async function handleSubmit({
-    closeAlertModal,
-    closeModal,
-  }: {
-    closeAlertModal: () => void;
-    closeModal: () => void;
-  }) {
+  async function handleSubmit() {
     const body = {
       hasConsented: false,
-      version: statementQuery.data.version,
+      version: statementQuery.data?.version,
     };
 
     try {
@@ -67,13 +77,13 @@ function PrivacyStatement({
         <ToastNotification subtitle="Successfully requested account deletion" title="Delete Account" kind="success" />,
         { containerId: `${prefix}--bmrg-header-notifications` }
       );
-      closeAlertModal();
+      closeConfirmModal();
       closeModal();
       if (window.location) {
         window.location.reload();
       }
     } catch (e) {
-      closeAlertModal();
+      closeConfirmModal();
     }
   }
 
@@ -83,6 +93,7 @@ function PrivacyStatement({
       className={`${prefix}--bmrg-privacy-statement-container ${prefix}--bmrg-header-modal`}
       onClose={handleClose}
       open={isOpen}
+      preventCloseOnClickOutside={isConfirmModalOpen}
     >
       <ModalHeader
         closeModal={handleClose}
@@ -96,10 +107,11 @@ function PrivacyStatement({
           ) : statementQuery.error ? (
             <ErrorMessage style={{ color: "#F2F4F8" }} />
           ) : (
-            statementQuery.data?.formContent?.sections?.length > 0 && (
+            statementQuery.data &&
+            statementQuery.data.formContent?.sections?.length > 0 && (
               <>
                 <Accordion>
-                  {statementQuery.data.formContent.sections.map((section: any) => {
+                  {statementQuery.data.formContent.sections.map((section) => {
                     return (
                       <AccordionItem title={section.title} key={section.title}>
                         <p
@@ -136,12 +148,8 @@ function PrivacyStatement({
           Request account deletion
         </Button>
         <div className={`${prefix}--bmrg-privacy-statement-delete`}>
-          <ComposedModal open={isConfirmModalOpen}>
-            <ModalHeader
-              closeModal={() => setIsConfirmModalOpen(false)}
-              label="Delete Account"
-              title="Request account deletion"
-            />
+          <ComposedModal onClose={closeConfirmModal} open={isConfirmModalOpen}>
+            <ModalHeader closeModal={closeConfirmModal} label="Delete Account" title="Request account deletion" />
             <ModalBody>
               <p className={`${prefix}--bmrg-privacy-statement-delete__desc`}>
                 By selecting to delete your account, your account will be deleted along with all of your user data from
@@ -149,17 +157,11 @@ function PrivacyStatement({
                 sure you want to delete your account?
               </p>
             </ModalBody>
-            <ModalFooter style={{ marginTop: "1.125rem" }}>
-              <Button data-modal-primary-focus kind="secondary" onClick={() => setIsConfirmModalOpen(false)}>
+            <ModalFooter>
+              <Button data-modal-primary-focus kind="secondary" onClick={closeConfirmModal}>
                 No, go back to Privacy Statement
               </Button>
-              <Button
-                kind="danger"
-                type="submit"
-                onClick={() => {
-                  handleSubmit({ closeAlertModal: () => setIsConfirmModalOpen(false), closeModal });
-                }}
-              >
+              <Button kind="danger" type="submit" onClick={handleSubmit}>
                 Yes, delete my account
               </Button>
             </ModalFooter>

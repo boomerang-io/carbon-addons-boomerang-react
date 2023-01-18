@@ -165,7 +165,6 @@ exports[`Privacy Statement - snapshot 1`] = `
                     </div>
                     <div
                       class="cds--modal-footer cds--btn-set"
-                      style="margin-top: 1.125rem;"
                     >
                       <button
                         class="cds--btn cds--btn--secondary"
