@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import AutoSuggest, { ChangeEvent } from "react-autosuggest";
+import AutoSuggest, { ChangeEvent, RenderSuggestionsContainerParams } from "react-autosuggest";
 import { matchSorter as ms } from "match-sorter";
 import { prefix } from "../../internal/settings";
 
@@ -49,7 +49,7 @@ class AutoSuggestBmrg extends Component<AutoSuggestProps, AutoSuggestState> {
     }
   }
 
-  renderSuggestion = (suggestion: Suggestion) => <div>{suggestion.label}</div>;
+  renderSuggestion = (suggestion: Suggestion) => suggestion.label;
 
   onSuggestionsFetchRequested = () => {
     this.setState(() => ({
@@ -137,18 +137,29 @@ class AutoSuggestBmrg extends Component<AutoSuggestProps, AutoSuggestState> {
     return (
       <div className={`${prefix}--bmrg-auto-suggest`}>
         <AutoSuggest
+          focusInputOnSuggestionClick={false}
           getSuggestionValue={this.getSuggestionValue}
           inputProps={finalInputProps}
           onSuggestionsClearRequested={this.onSuggestionsClearRequested}
           onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
           renderInputComponent={(props) => React.cloneElement(children, { ...props, ref: this.inputRef })}
           renderSuggestion={this.renderSuggestion}
+          renderSuggestionsContainer={renderSuggestionsContainer}
           suggestions={this.state.suggestions}
           {...rest}
         />
       </div>
     );
   }
+}
+
+// Needed to add aria-label for a11y
+function renderSuggestionsContainer({ containerProps, children }: RenderSuggestionsContainerParams) {
+  return (
+    <div aria-label="AutoSuggest listbox" {...containerProps}>
+      {children}
+    </div>
+  );
 }
 
 export default AutoSuggestBmrg;

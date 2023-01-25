@@ -1,8 +1,8 @@
 import React from "react";
 import { expect, test } from "vitest";
 import { render, screen } from "@testing-library/react";
-import { axe } from "jest-axe";
 import userEvent from "@testing-library/user-event";
+import { axe } from "jest-axe";
 
 import TooltipHover from "./TooltipHover";
 
