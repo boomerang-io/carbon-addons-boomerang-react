@@ -101,8 +101,8 @@ $use-theme-boomerang: false !default;
 
   .#{$prefix}--modal {
     background-color: shell.$bmrg-header-modal-overlay; //default isrgba(theme.$layer-accent-01, 0.5)
-    z-index: 9999;
   }
+  
   .#{$prefix}--modal-close {
     &:hover {
       background-color: shell.$bmrg-header-hover-background;
