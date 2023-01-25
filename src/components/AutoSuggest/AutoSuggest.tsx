@@ -137,7 +137,6 @@ class AutoSuggestBmrg extends Component<AutoSuggestProps, AutoSuggestState> {
     return (
       <div className={`${prefix}--bmrg-auto-suggest`}>
         <AutoSuggest
-          focusInputOnSuggestionClick={false}
           getSuggestionValue={this.getSuggestionValue}
           inputProps={finalInputProps}
           onSuggestionsClearRequested={this.onSuggestionsClearRequested}
@@ -154,9 +153,9 @@ class AutoSuggestBmrg extends Component<AutoSuggestProps, AutoSuggestState> {
 }
 
 // Needed to add aria-label for a11y
-function renderSuggestionsContainer({ containerProps, children }: RenderSuggestionsContainerParams) {
+function renderSuggestionsContainer({ containerProps, children, ...rest }: RenderSuggestionsContainerParams) {
   return (
-    <div aria-label="AutoSuggest listbox" {...containerProps}>
+    <div aria-label="AutoSuggest listbox" {...containerProps} {...rest}>
       {children}
     </div>
   );
