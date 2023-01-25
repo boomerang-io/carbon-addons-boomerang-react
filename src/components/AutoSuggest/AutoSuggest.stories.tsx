@@ -30,6 +30,7 @@ export default {
     },
   },
   decorators: [(story: any) => <div style={{ maxWidth: "25rem", minHeight: "20rem" }}>{story()}</div>],
+  excludeStories: /animals.*/,
   argTypes: {
     autoSuggestions: { control: "array", defaultValue: animals },
     inputProps: {

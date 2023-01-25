@@ -3,10 +3,9 @@ import { expect, test } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { axe } from "jest-axe";
-
 import AutoSuggest from "./AutoSuggest";
-import { animals } from "./AutoSuggest.stories";
 import TextInput from "../TextInput";
+import { animals } from "./AutoSuggest.stories";
 
 const props = {
   autoSuggestions: animals,
