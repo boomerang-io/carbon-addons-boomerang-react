@@ -45,7 +45,7 @@ export default {
 export const Default = (args) => {
   return (
     <AutoSuggest onChange={action("Auto suggest change")} {...args}>
-      <TextInput id="auto-suggest"/>
+      <TextInput id="auto-suggest" />
     </AutoSuggest>
   );
 };
