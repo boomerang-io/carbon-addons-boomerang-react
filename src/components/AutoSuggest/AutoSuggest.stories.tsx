@@ -3,7 +3,7 @@ import { action } from "@storybook/addon-actions";
 import TextInput from "../TextInput";
 import AutoSuggest from "./AutoSuggest";
 
-const animals = [
+export const animals = [
   { label: "caribou", value: "caribou" },
   { label: "cat", value: "cat" },
   { label: "catfish", value: "catfish" },
@@ -24,11 +24,13 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: "An enhanced TextInput that supports selecting from a provided list of options.",
+        component:
+          "An enhanced TextInput that supports selecting from a provided list of options that enables suggestions per word in input. It is a wrapper around react-autosuggest",
       },
     },
   },
   decorators: [(story: any) => <div style={{ maxWidth: "25rem", minHeight: "20rem" }}>{story()}</div>],
+  excludeStories: /animals.*/,
   argTypes: {
     autoSuggestions: { control: "array", defaultValue: animals },
     inputProps: {
@@ -45,7 +47,7 @@ export default {
 export const Default = (args) => {
   return (
     <AutoSuggest onChange={action("Auto suggest change")} {...args}>
-      <TextInput id="auto-suggest"/>
+      <TextInput id="auto-suggest" />
     </AutoSuggest>
   );
 };

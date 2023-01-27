@@ -7,7 +7,7 @@ import type { TooltipHoverProps } from "../TooltipHover";
 
 type CheckboxListItem = {
   id: string;
-  labelText: string;
+  labelText: React.ReactNode;
 };
 
 type Props = {

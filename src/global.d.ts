@@ -2,7 +2,6 @@ declare module "@carbon/react";
 declare module "@carbon/react/icons";
 declare module "jest-axe";
 declare module "mock-socket";
-declare module "react-autosuggest";
 
 declare module "*.svg" {
   import { ReactElement, SVGProps } from "react";
