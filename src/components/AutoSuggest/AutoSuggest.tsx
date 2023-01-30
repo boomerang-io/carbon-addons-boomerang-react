@@ -26,6 +26,7 @@ interface AutoSuggestState {
   value: string;
   caretIndex: number;
   suggestions: Suggestion[];
+  lastSuggestion: string;
 }
 
 class AutoSuggestBmrg extends Component<AutoSuggestProps, AutoSuggestState> {
@@ -37,6 +38,7 @@ class AutoSuggestBmrg extends Component<AutoSuggestProps, AutoSuggestState> {
     value: this.props.initialValue ?? "",
     caretIndex: 0,
     suggestions: [],
+    lastSuggestion: "",
   };
 
   // Each time the component updates we want to refocus the input and keep the cursor in the correct place
@@ -80,21 +82,23 @@ class AutoSuggestBmrg extends Component<AutoSuggestProps, AutoSuggestState> {
    * find the last word (space-delimited) and replace it in input
    */
   getSuggestionValue = (suggestion: Suggestion) => {
+    this.setState({lastSuggestion: suggestion.value});
+    const { value, lastSuggestion, caretIndex } = this.state;
     const substringWordList = this.findWordsBeforeCurrentLocation();
-
     /*
      * Find the position of the caret, get the string up to that point
      * and find the index of the last word in that substring
      * This gives use the word to suggest matches for
      */
     const closestWord = substringWordList.at(-1) as string;
-    const position = this.state.value.slice(0, this.state.caretIndex).lastIndexOf(closestWord);
+    const positionFound = value.slice(0, caretIndex).lastIndexOf(lastSuggestion ? lastSuggestion : closestWord);
+    const position = positionFound < 0 ? 0 : positionFound;
 
     // Sub in the new property suggestion
     return (
-      this.state.value.substring(0, position) +
+      value.substring(0, position) +
       suggestion.value +
-      this.state.value.substring(position + closestWord.length)
+      value.substring(position + substringWordList.join().length)
     );
   };
 
@@ -122,6 +126,7 @@ class AutoSuggestBmrg extends Component<AutoSuggestProps, AutoSuggestState> {
   onSuggestionsClearRequested = () => {
     this.setState({
       suggestions: [],
+      lastSuggestion: "",
     });
   };
 
