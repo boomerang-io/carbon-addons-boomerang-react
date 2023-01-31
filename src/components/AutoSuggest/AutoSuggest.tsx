@@ -91,8 +91,10 @@ class AutoSuggestBmrg extends Component<AutoSuggestProps, AutoSuggestState> {
      * This gives use the word to suggest matches for
      */
     const closestWord = substringWordList.at(-1) as string;
-    const positionFound = value.slice(0, caretIndex).lastIndexOf(lastSuggestion ? lastSuggestion : closestWord);
-    const position = positionFound < 0 ? 0 : positionFound;
+    const valueSlice = value.slice(0, caretIndex);
+    const suggestionPosition = valueSlice.lastIndexOf(lastSuggestion);
+    const closestWordPosition = valueSlice.lastIndexOf(closestWord);
+    const position = !lastSuggestion || suggestionPosition < closestWordPosition ? closestWordPosition : suggestionPosition;
 
     // Sub in the new property suggestion
     return (
