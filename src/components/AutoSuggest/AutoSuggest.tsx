@@ -26,7 +26,7 @@ interface AutoSuggestState {
   value: string;
   caretIndex: number;
   suggestions: Suggestion[];
-  lastSuggestion: string;
+  lastSuggestion?: string;
 }
 
 class AutoSuggestBmrg extends Component<AutoSuggestProps, AutoSuggestState> {
@@ -66,12 +66,24 @@ class AutoSuggestBmrg extends Component<AutoSuggestProps, AutoSuggestState> {
    */
 
   onInputChange = (event: React.FormEvent<HTMLElement>, { newValue, method }: ChangeEvent) => {
-    this.setState((prevState: AutoSuggestState) => ({
-      value: newValue,
-      caretIndex: SELECT_METHODS.includes(method)
-        ? prevState.caretIndex + (newValue.length - prevState.value.length)
-        : this.inputRef.current?.selectionStart ?? 0,
-    }));
+    this.setState((prevState: AutoSuggestState) => {
+      if(prevState.lastSuggestion === this.state.lastSuggestion) {
+        return({
+          value: newValue,
+          caretIndex: SELECT_METHODS.includes(method)
+            ? prevState.caretIndex + (newValue.length - prevState.value.length)
+            : this.inputRef.current?.selectionStart ?? 0,
+          lastSuggestion: "",
+        })
+      } else {
+        return({
+          value: newValue,
+          caretIndex: SELECT_METHODS.includes(method)
+            ? prevState.caretIndex + (newValue.length - prevState.value.length)
+            : this.inputRef.current?.selectionStart ?? 0,
+        })
+      }
+    });
     this.props.onChange(newValue);
   };
 
@@ -94,7 +106,7 @@ class AutoSuggestBmrg extends Component<AutoSuggestProps, AutoSuggestState> {
     const valueSlice = value.slice(0, caretIndex);
     const suggestionPosition = valueSlice.lastIndexOf(lastSuggestion);
     const closestWordPosition = valueSlice.lastIndexOf(closestWord);
-    const position = !lastSuggestion || suggestionPosition < closestWordPosition ? closestWordPosition : suggestionPosition;
+    const position = !lastSuggestion || suggestionPosition < 0 ? closestWordPosition : suggestionPosition;
 
     // Sub in the new property suggestion
     return (
