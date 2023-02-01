@@ -68,19 +68,23 @@ class AutoSuggestBmrg extends Component<AutoSuggestProps, AutoSuggestState> {
   onInputChange = (event: React.FormEvent<HTMLElement>, { newValue, method }: ChangeEvent) => {
     this.setState((prevState: AutoSuggestState) => {
       const caretIndex = SELECT_METHODS.includes(method)
-      ? prevState.caretIndex + (newValue.length - prevState.value.length)
-      : this.inputRef.current?.selectionStart ?? 0;
-      if(prevState.lastSuggestion === this.state.lastSuggestion) {
-        return({
+        ? prevState.caretIndex + (newValue.length - prevState.value.length)
+        : this.inputRef.current?.selectionStart ?? 0;
+      if (prevState.lastSuggestion === this.state.lastSuggestion) {
+        return {
           value: newValue,
           caretIndex: caretIndex,
+          /**
+           * Resets the last suggestion when there is no suggestion focused to
+           * avoid replacing previously selected suggestions
+           */
           lastSuggestion: "",
-        })
+        };
       } else {
-        return({
+        return {
           value: newValue,
           caretIndex: caretIndex,
-        })
+        };
       }
     });
     this.props.onChange(newValue);
@@ -93,25 +97,26 @@ class AutoSuggestBmrg extends Component<AutoSuggestProps, AutoSuggestState> {
    * find the last word (space-delimited) and replace it in input
    */
   getSuggestionValue = (suggestion: Suggestion) => {
-    this.setState({lastSuggestion: suggestion.value});
+    // Set the latest suggestion so we can verify changes on the input
+    this.setState({ lastSuggestion: suggestion.value });
     const { value, lastSuggestion, caretIndex } = this.state;
     const substringWordList = this.findWordsBeforeCurrentLocation();
     /*
      * Find the position of the caret, get the string up to that point
-     * and find the index of the last word in that substring
+     * and find the index of the last word or suggestion in that substring
      * This gives use the word to suggest matches for
      */
     const closestWord = substringWordList.at(-1) as string;
     const valueSlice = value.slice(0, caretIndex);
+    // Need to check for suggestions since this one can have spaced values
     const suggestionPosition = valueSlice.lastIndexOf(lastSuggestion);
     const closestWordPosition = valueSlice.lastIndexOf(closestWord);
+    // If we have no suggestion, just use the position of the closest word
     const position = !lastSuggestion || suggestionPosition < 0 ? closestWordPosition : suggestionPosition;
 
     // Sub in the new property suggestion
     return (
-      value.substring(0, position) +
-      suggestion.value +
-      value.substring(position + substringWordList.join().length)
+      value.substring(0, position) + suggestion.value + value.substring(position + substringWordList.join().length)
     );
   };
 
