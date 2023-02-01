@@ -67,20 +67,19 @@ class AutoSuggestBmrg extends Component<AutoSuggestProps, AutoSuggestState> {
 
   onInputChange = (event: React.FormEvent<HTMLElement>, { newValue, method }: ChangeEvent) => {
     this.setState((prevState: AutoSuggestState) => {
+      const caretIndex = SELECT_METHODS.includes(method)
+      ? prevState.caretIndex + (newValue.length - prevState.value.length)
+      : this.inputRef.current?.selectionStart ?? 0;
       if(prevState.lastSuggestion === this.state.lastSuggestion) {
         return({
           value: newValue,
-          caretIndex: SELECT_METHODS.includes(method)
-            ? prevState.caretIndex + (newValue.length - prevState.value.length)
-            : this.inputRef.current?.selectionStart ?? 0,
+          caretIndex: caretIndex,
           lastSuggestion: "",
         })
       } else {
         return({
           value: newValue,
-          caretIndex: SELECT_METHODS.includes(method)
-            ? prevState.caretIndex + (newValue.length - prevState.value.length)
-            : this.inputRef.current?.selectionStart ?? 0,
+          caretIndex: caretIndex,
         })
       }
     });
