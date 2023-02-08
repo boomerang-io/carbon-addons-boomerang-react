@@ -113,10 +113,11 @@ class AutoSuggestBmrg extends Component<AutoSuggestProps, AutoSuggestState> {
     const closestWordPosition = valueSlice.lastIndexOf(closestWord);
     // If we have no suggestion, just use the position of the closest word
     const position = !lastSuggestion || suggestionPosition < 0 ? closestWordPosition : suggestionPosition;
+    const wordToReplace = !lastSuggestion || suggestionPosition < 0 ? closestWord : lastSuggestion;
 
     // Sub in the new property suggestion
     return (
-      value.substring(0, position) + suggestion.value + value.substring(position + substringWordList.join().length)
+      value.substring(0, position) + suggestion.value + value.substring(position + wordToReplace.length)
     );
   };
 
