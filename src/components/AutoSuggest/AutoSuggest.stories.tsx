@@ -12,10 +12,14 @@ export const animals = [
   { label: "dog", value: "dog" },
   { label: "dolphin", value: "dolphin" },
   { label: "dove", value: "dove" },
+  { label: "fish", value: "fish" },
+  { label: "flying fish", value: "flying fish" },
+  { label: "sword fish", value: "sword fish" },
   { label: "panda", value: "panda" },
   { label: "parrot", value: "parrot" },
   { label: "peacock", value: "peacock" },
   { label: "penguin", value: "penguin" },
+  { label: "test", value: "test val" },
 ];
 
 export default {
