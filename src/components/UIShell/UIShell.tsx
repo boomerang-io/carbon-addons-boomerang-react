@@ -19,6 +19,7 @@ type Props = {
       "consent.enabled"?: boolean;
       "docs.enabled"?: boolean;
       "eventing.enabled"?: boolean;
+      "internal.enabled"?: boolean;
       "feedback.enabled"?: boolean;
       "homePage.enabled"?: boolean;
       "partner.enabled"?: boolean;
@@ -96,6 +97,7 @@ function UIShell({
    */
   const isAppSwitcherEnabled = Boolean(features?.["appSwitcher.enabled"]);
   const isFeedbackEnabled = Boolean(features?.["feedback.enabled"]);
+  const isInternalEnabled = Boolean(features?.["internal.enabled"]);
   const isNotificationsEnabled = Boolean(features?.["notifications.enabled"]);
   const isSupportEnabled = Boolean(features?.["support.enabled"]);
 
@@ -142,6 +144,7 @@ function UIShell({
             <ProfileSettingsMenuItem
               key="profile-settings"
               baseServicesUrl={platform.baseServicesUrl}
+              isInternal={isInternalEnabled}
               src={`${platform.baseServicesUrl}/users/image/${user?.email}`}
               userName={user?.name}
             />

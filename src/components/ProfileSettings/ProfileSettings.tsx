@@ -38,13 +38,14 @@ function determineIfConfigIsDifferent(teams: LowerLevelGroup[], initialTeams: Lo
 
 type Props = {
   closeModal: () => void;
-  isOpen: boolean;
   baseServicesUrl: string;
+  isInternal: boolean;
+  isOpen: boolean;
   src: string;
   userName?: string;
 };
 
-function ProfileSettings({ baseServicesUrl, src, userName, isOpen, closeModal }: Props) {
+function ProfileSettings({ baseServicesUrl, userName, isOpen, closeModal }: Props) {
   const queryClient = useQueryClient();
   const [initialTeams, setInitialTeams] = useState<LowerLevelGroup[]>([]);
   const [teams, setTeams] = useState<LowerLevelGroup[]>([]);
@@ -71,9 +72,6 @@ function ProfileSettings({ baseServicesUrl, src, userName, isOpen, closeModal }:
       queryClient.invalidateQueries(profileUrl);
     },
   });
-
-  // Only disable when we have a user and we know that there aren' any lower level groups to manage
-  const disableModal = user && user?.lowerLevelGroups === undefined;
 
   useEffect(() => {
     const teams = user?.lowerLevelGroups ?? [];
@@ -123,15 +121,6 @@ function ProfileSettings({ baseServicesUrl, src, userName, isOpen, closeModal }:
       updatedTeams.push(newTeam);
     }
     setTeams(updatedTeams);
-  }
-
-  if (disableModal) {
-    return (
-      <div className={`${prefix}--bmrg-profile-menu-user`}>
-        <Avatar size="medium" src={src} userName={userName} />
-        <p className={`${prefix}--bmrg-profile-menu-user__name`}> {userName ? userName : ""} </p>
-      </div>
-    );
   }
 
   return (
@@ -246,7 +235,12 @@ function ProfileSettingsMenuItem(props: Omit<Props, "isOpen" | "closeModal">) {
     }, 0);
   };
 
-  return (
+  return props.isInternal ? (
+    <li className={`${prefix}--bmrg-profile-menu-user`} role="menuitem">
+      <Avatar size="medium" src={props.src} userName={props.userName} />
+      <span className={`${prefix}--bmrg-profile-menu-user__name`}> {props.userName ? props.userName : ""} </span>
+    </li>
+  ) : (
     <>
       <HeaderMenuItem
         onClick={() => setIsOpen(!isOpen)}

@@ -58,6 +58,7 @@ exports[`AutoSuggest > snapshot 1`] = `
           aria-label="AutoSuggest listbox"
           class="react-autosuggest__suggestions-container"
           id="react-autowhatever-1"
+          query=""
           role="listbox"
         />
       </div>
