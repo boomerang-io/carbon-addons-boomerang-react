@@ -250,6 +250,7 @@ export type User = {
     }
   ];
   name: string;
+  displayName?: string;
   notificationSettings: any;
   personalizations: any;
   projects: null | any;
