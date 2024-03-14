@@ -27,6 +27,7 @@ function FeatureNavTab({
   const classNames = cx(
     `${prefix}--tabs__nav-item`,
     `${prefix}--tabs__nav-link`,
+    `${prefix}--bmrg-feature-nav-tab--tab`,
     {
       [`${prefix}--tabs__nav-item--disabled`]: disabled,
     },
