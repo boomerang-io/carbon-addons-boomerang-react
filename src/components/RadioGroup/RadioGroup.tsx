@@ -60,6 +60,18 @@ function RadioGroupComponent({
   const hasVerticalHelperText = isVertical && helperText;
   const hasHorizontalHelperText = !isVertical && helperText;
 
+  // add "title" attribute to radio buttons labels so they show a tooltip with the content
+  React.useEffect(() => {
+    if (Array.isArray(options)) {
+      options.forEach((option, index) => {
+        const inputElement = document.getElementById(option.value);
+        if (Boolean(inputElement) && inputElement !== null) {
+          inputElement.parentNode?.children[1]?.children[1]?.setAttribute("title", options[index].labelText);
+        }
+      });
+    }
+  });
+
   return (
     //Defined a css var --height to be used on the wrapped container to determine the number of radios displayed in each column
     <div key={id} className={`${prefix}--bmrg-radio-group`} style={{ ["--height" as string]: columnHeight }}>

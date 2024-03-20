@@ -19,10 +19,13 @@
 }
 
 .#{$prefix}--radio-button__label {
+  width: var(--height);
+
   > span + span {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    width: calc(100% - 1.875rem);
   }
 }
 
