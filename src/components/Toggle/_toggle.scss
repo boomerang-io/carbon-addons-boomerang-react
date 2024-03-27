@@ -24,12 +24,22 @@
     .#{$prefix}--toggle-input__label .#{$prefix}--toggle__switch {
       margin-top: 0.5rem;
     }
+
+    .#{$prefix}--bmrg-toggle__title {
+      margin-bottom: 1rem;
+    }
   }
 
   &.--reversed.--vertical {
     flex-direction: column-reverse;
+
     .#{$prefix}--form-item {
       margin-bottom: 0.5rem;
+    }
+
+    .#{$prefix}--bmrg-toggle__title {
+      margin-top: 0.25rem;
+      margin-bottom: 0;
     }
   }
 }
