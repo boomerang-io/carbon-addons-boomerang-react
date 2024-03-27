@@ -143,7 +143,7 @@ function UIShell({
               key="profile-settings"
               baseServicesUrl={platform.baseServicesUrl}
               src={`${platform.baseServicesUrl}/users/image/${user?.email}`}
-              userName={user?.name}
+              userName={user?.displayName ?? user?.name}
             />
           ),
           isAboutPlatformEnabled && (
