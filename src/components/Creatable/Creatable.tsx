@@ -168,7 +168,21 @@ function CreatableComponent({
       setKeyValue("");
       setValue("");
     } else {
-      input && items.push(input);
+      if (input) {
+        // Check if input is a JSON object
+        const inputToTest = input.trim();
+        if (inputToTest.slice(0, 1) === "{" && inputToTest.slice(-1) === "}") {
+          const inputJsonObject: { [index: string]: string | string[] } = JSON.parse(input);
+          if (typeof inputJsonObject === "object" && inputJsonObject !== null) {
+            for (const [key, values] of Object.entries(inputJsonObject)) {
+              const valuesArray = [...values];
+              valuesArray.forEach((value) => items.push(`${key}:${value}`));
+            }
+          }
+        } else {
+          items.push(input);
+        }
+      }
       setInput("");
     }
 
