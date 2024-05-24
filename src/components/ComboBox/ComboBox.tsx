@@ -88,7 +88,7 @@ function ComboBoxComponent({
    * onInputChange has a fresh value. `onChange` is called, then `onInputChange` when selecting an item
    */
   const defaultOnChange = React.useCallback(
-    ({ selectedItem }) => {
+    ({ selectedItem }: ({ selectedItem: any })) => {
       if (!selectedItem) {
         selectedItemRef.current = selectedItem;
       }

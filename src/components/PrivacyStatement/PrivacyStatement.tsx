@@ -102,42 +102,44 @@ function PrivacyStatement({
       />
       <ModalBody key={resetKey}>
         <div className={`${prefix}--bmrg-privacy-statement`}>
-          {statementQuery.isLoading ? (
-            <Loading />
-          ) : statementQuery.error ? (
-            <ErrorMessage style={{ color: "#F2F4F8" }} />
-          ) : (
-            statementQuery.data &&
-            statementQuery.data.formContent?.sections?.length > 0 && (
-              <>
-                <Accordion>
-                  {statementQuery.data.formContent.sections.map((section) => {
-                    return (
-                      <AccordionItem title={section.title} key={section.title}>
-                        <p
-                          className={`${prefix}--bmrg-privacy-statement__content`}
-                          dangerouslySetInnerHTML={{
-                            __html: dompurify.sanitize(section.content),
-                          }}
-                        />
-                      </AccordionItem>
-                    );
-                  })}
-                </Accordion>
-                <p className={`${prefix}--bmrg-privacy-statement__message`}>
-                  {`For any questions or concerns about business and personal information captured on
-                  ${organization}, please contact${" "}`}
-                  <a href={`mailto:${platformEmail}?subject=${organization} Privacy Statement`}>{platformEmail}</a>.
-                </p>
-              </>
-            )
-          )}
+          <>
+            {statementQuery.isLoading ? (
+              <Loading />
+            ) : statementQuery.error ? (
+              <ErrorMessage style={{ color: "#F2F4F8" }} />
+            ) : (
+              statementQuery.data &&
+              statementQuery.data.formContent?.sections?.length > 0 && (
+                <>
+                  <Accordion>
+                    {statementQuery.data.formContent.sections.map((section) => {
+                      return (
+                        <AccordionItem title={section.title} key={section.title}>
+                          <p
+                            className={`${prefix}--bmrg-privacy-statement__content`}
+                            dangerouslySetInnerHTML={{
+                              __html: dompurify.sanitize(section.content),
+                            }}
+                          />
+                        </AccordionItem>
+                      );
+                    })}
+                  </Accordion>
+                  <p className={`${prefix}--bmrg-privacy-statement__message`}>
+                    {`For any questions or concerns about business and personal information captured on
+                    ${organization}, please contact${" "}`}
+                    <a href={`mailto:${platformEmail}?subject=${organization} Privacy Statement`}>{platformEmail}</a>.
+                  </p>
+                </>
+              )
+            )}
 
-          {mutateUserConsentError && (
-            <p className={`${prefix}--bmrg-privacy-statement__error`}>
-              Failed to receive deletion request. Please try again.
-            </p>
-          )}
+            {mutateUserConsentError && (
+              <p className={`${prefix}--bmrg-privacy-statement__error`}>
+                Failed to receive deletion request. Please try again.
+              </p>
+            )}
+          </>
         </div>
       </ModalBody>
       <ModalFooter>

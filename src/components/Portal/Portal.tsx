@@ -7,7 +7,7 @@ import usePortal from "../../hooks/usePortal";
  *   <p>Thinking with portals</p>
  * </Portal>
  */
-const Portal = ({ id, children }: any) => {
+const Portal: any = ({ id, children }: any) => {
   const target: any = usePortal(id);
   return createPortal(children, target);
 };
