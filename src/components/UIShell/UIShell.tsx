@@ -58,6 +58,7 @@ type Props = {
     className?: string;
   };
   supportMenuItems?: React.ReactNode[];
+  triggerEvent?: (props: any) => any;
   user?: User;
 };
 
@@ -72,6 +73,7 @@ function UIShell({
   renderPrivacyStatement = true,
   rightPanel,
   skipToContentProps,
+  triggerEvent,
   user,
 }: Props) {
   // Support base header .e.g for an error state
@@ -137,6 +139,7 @@ function UIShell({
         rightPanel={rightPanel}
         requestSummary={user?.requestSummary}
         skipToContentProps={skipToContentProps}
+        triggerEvent={triggerEvent}
         profileMenuItems={[
           isUserEnabled && (
             <ProfileSettingsMenuItem
