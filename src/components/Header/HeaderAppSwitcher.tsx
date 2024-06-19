@@ -208,6 +208,8 @@ function ServiceList(props: ServiceListProps) {
     );
   }
 
+  console.log(triggerEvent, "TRIGGER EVENT");
+
   if (!!servicesQuery.data) {
     if (Boolean(servicesQuery.data?.length)) {
       return (
@@ -223,10 +225,10 @@ function ServiceList(props: ServiceListProps) {
                 onClick={() => handleLinkClick(service)}
                 {...(isExternalLink ? externalProps : undefined)}
               >
-                <>
+                <div onClick={() => handleLinkClick(service)} role="button">
                   <span>{service.name}</span>
                   {isExternalLink ? <Launch size={16} title="Opens page in new tab" /> : undefined}
-                </>
+                </div>
               </SideNavMenuItem>
             );
           })}
