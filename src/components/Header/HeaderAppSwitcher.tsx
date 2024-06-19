@@ -24,9 +24,10 @@ type HeaderAppSwitcherProps = {
   baseServicesUrl: string;
   id: string;
   isOpen?: boolean;
+  triggerEvent?: (props: any) => any;
 };
 
-export default function HeaderAppSwitcher({ baseServicesUrl, baseEnvUrl, id, isOpen }: HeaderAppSwitcherProps) {
+export default function HeaderAppSwitcher({ baseServicesUrl, baseEnvUrl, id, isOpen, triggerEvent }: HeaderAppSwitcherProps) {
   const userTeamsUrl = serviceUrl.getUserTeams({ baseServicesUrl });
   const teamsQuery = useQuery<UserTeams>(userTeamsUrl, resolver.query(userTeamsUrl));
 
@@ -65,6 +66,7 @@ export default function HeaderAppSwitcher({ baseServicesUrl, baseEnvUrl, id, isO
                 baseServicesUrl={baseServicesUrl}
                 isMember={true}
                 team={team}
+                triggerEvent={triggerEvent}
               />
             ))}
             {accountTeams?.map((account) => (
@@ -76,6 +78,7 @@ export default function HeaderAppSwitcher({ baseServicesUrl, baseEnvUrl, id, isO
                   isAccount={true}
                   isMember={account.isAccountTeamMember}
                   team={account}
+                  triggerEvent={triggerEvent}
                 />
                 {Boolean(account.projectTeams) &&
                   account.projectTeams.map((project) => (
@@ -85,6 +88,7 @@ export default function HeaderAppSwitcher({ baseServicesUrl, baseEnvUrl, id, isO
                       baseServicesUrl={baseServicesUrl}
                       isMember={true}
                       team={project}
+                      triggerEvent={triggerEvent}
                     />
                   ))}
               </div>
@@ -113,9 +117,10 @@ type TeamServiceListMenuProps = {
   isAccount?: boolean;
   isMember: boolean;
   team: SimpleIdNameMap;
+  triggerEvent?: (props: any) => any;
 };
 
-function TeamServiceListMenu({ baseServicesUrl, baseEnvUrl, isAccount, isMember, team }: TeamServiceListMenuProps) {
+function TeamServiceListMenu({ baseServicesUrl, baseEnvUrl, isAccount, isMember, team, triggerEvent }: TeamServiceListMenuProps) {
   const { id, name } = team;
   const [isSelected, setIsSelected] = React.useState(false);
   const teamsServicesUrl = serviceUrl.getTeamServices({ baseServicesUrl, teamId: id });
@@ -170,7 +175,7 @@ function TeamServiceListMenu({ baseServicesUrl, baseEnvUrl, isAccount, isMember,
       title={isNameTruncated ? name : undefined}
     >
       <SideNavMenu title={name}>
-        <ServiceList baseEnvUrl={baseEnvUrl} isAccount={isAccount} servicesQuery={servicesQuery} />
+        <ServiceList baseEnvUrl={baseEnvUrl} isAccount={isAccount} servicesQuery={servicesQuery} triggerEvent={triggerEvent} />
       </SideNavMenu>
       {isInlineLoadingVisible && (
         <DelayedRender delay={200}>
@@ -185,10 +190,15 @@ type ServiceListProps = {
   baseEnvUrl?: string;
   isAccount?: boolean;
   servicesQuery: UseQueryResult<SimpleTeamService[], unknown>;
+  triggerEvent?: (props: any) => any;
 };
 
 function ServiceList(props: ServiceListProps) {
-  const { baseEnvUrl = "", isAccount, servicesQuery } = props;
+  const { baseEnvUrl = "", isAccount, servicesQuery, triggerEvent } = props;
+
+  const handleLinkClick = (service: SimpleTeamService) => {
+    triggerEvent && triggerEvent(service);
+  };
 
   if (servicesQuery.error) {
     return (
@@ -210,6 +220,7 @@ function ServiceList(props: ServiceListProps) {
                 key={service.name}
                 href={service.url}
                 title={isNameTruncated ? service.name : undefined}
+                onClick={() => handleLinkClick(service)}
                 {...(isExternalLink ? externalProps : undefined)}
               >
                 <>
