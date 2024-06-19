@@ -208,8 +208,6 @@ function ServiceList(props: ServiceListProps) {
     );
   }
 
-  console.log(triggerEvent, "TRIGGER EVENT");
-
   if (!!servicesQuery.data) {
     if (Boolean(servicesQuery.data?.length)) {
       return (
