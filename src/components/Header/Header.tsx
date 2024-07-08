@@ -15,7 +15,6 @@ import {
 } from "@carbon/react";
 import {
   Close,
-  Collaborate,
   Help,
   Notification,
   NotificationNew,
@@ -27,7 +26,6 @@ import HeaderAppSwitcher from "./HeaderAppSwitcher";
 import HeaderMenu from "./HeaderMenu";
 import NotificationsContainer from "../Notifications/NotificationsContainer";
 import PlatformNotificationsContainer from "../PlatformNotifications";
-import UserRequests from "./UserRequests";
 import useHeaderMenu from "../../hooks/useHeaderMenu";
 import useWindowSize from "../../hooks/useWindowSize";
 import { prefix } from "../../internal/settings";
