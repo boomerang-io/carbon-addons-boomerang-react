@@ -130,11 +130,13 @@ export default function Header(props: Props) {
               : null}
           </HeaderNavigation>
           <HeaderGlobalBar>
-            <RequestsMenu
-              baseEnvUrl={baseEnvUrl}
-              enabled={Boolean(props.requestSummary)}
-              summary={props.requestSummary}
-            />
+            {/* Commented for ISEEC-4882
+              <RequestsMenu
+                baseEnvUrl={baseEnvUrl}
+                enabled={Boolean(props.requestSummary)}
+                summary={props.requestSummary}
+              /> 
+            */}
             <NotificationsMenu
               baseEnvUrl={baseEnvUrl}
               baseServicesUrl={baseServicesUrl}
@@ -162,34 +164,34 @@ export default function Header(props: Props) {
   );
 }
 
-function RequestsMenu(props: { baseEnvUrl?: string; enabled: boolean; summary: Props["requestSummary"] }) {
-  const { isOpen, toggleActive, ref } = useHeaderMenu<HTMLDivElement>(MenuButtonId.Requests);
+// function RequestsMenu(props: { baseEnvUrl?: string; enabled: boolean; summary: Props["requestSummary"] }) {
+//   const { isOpen, toggleActive, ref } = useHeaderMenu<HTMLDivElement>(MenuButtonId.Requests);
 
-  if (!props.enabled) {
-    return null;
-  }
+//   if (!props.enabled) {
+//     return null;
+//   }
 
-  return (
-    <div style={{ position: "relative" }} ref={ref}>
-      <button
-        aria-controls={MenuListId.Requests}
-        aria-expanded={isOpen}
-        aria-haspopup="menu"
-        aria-label={MenuAriaLabelRecord.Requests}
-        className={headerButtonClassNames}
-        id={MenuButtonId.Requests}
-        onClick={toggleActive}
-      >
-        <Collaborate size={20} />
-      </button>
-      {isOpen ? (
-        <HeaderMenu aria-labelledby={MenuButtonId.Requests} id={MenuListId.Requests}>
-          <UserRequests baseEnvUrl={props.baseEnvUrl} summary={props.summary} />
-        </HeaderMenu>
-      ) : null}
-    </div>
-  );
-}
+//   return (
+//     <div style={{ position: "relative" }} ref={ref}>
+//       <button
+//         aria-controls={MenuListId.Requests}
+//         aria-expanded={isOpen}
+//         aria-haspopup="menu"
+//         aria-label={MenuAriaLabelRecord.Requests}
+//         className={headerButtonClassNames}
+//         id={MenuButtonId.Requests}
+//         onClick={toggleActive}
+//       >
+//         <Collaborate size={20} />
+//       </button>
+//       {isOpen ? (
+//         <HeaderMenu aria-labelledby={MenuButtonId.Requests} id={MenuListId.Requests}>
+//           <UserRequests baseEnvUrl={props.baseEnvUrl} summary={props.summary} />
+//         </HeaderMenu>
+//       ) : null}
+//     </div>
+//   );
+// }
 
 function NotificationsMenu(props: { enabled: boolean; baseEnvUrl?: string; baseServicesUrl?: string }) {
   const { isOpen, toggleActive, ref } = useHeaderMenu<HTMLDivElement>(MenuButtonId.Notifcations);
