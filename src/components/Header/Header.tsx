@@ -32,7 +32,6 @@ import useHeaderMenu from "../../hooks/useHeaderMenu";
 import useWindowSize from "../../hooks/useWindowSize";
 import { prefix } from "../../internal/settings";
 import type { NavLink } from "../../types";
-import "wicg-inert";
 
 type Props = {
   baseServicesUrl?: string;
