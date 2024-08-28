@@ -2,43 +2,103 @@
 @use "../../global/config" as *;
 @use "../../global/utils";
 @use "../../global/themes/shell-tokens" as shell;
-@use '@carbon/themes/scss/tokens' as theme;
 
 // Necessary for the Boomerang theme to work
 :root {
   .#{$prefix}--header {
-    background: shell.$bmrg-primary !important;
+    background: shell.$bmrg-theme-background !important;
+    border-block-end-color: shell.$bmrg-theme-border;
+
+    .#{$prefix}--header__name {
+      color: shell.$bmrg-theme-primary;
+    }
 
     // Background overrides
     .#{$prefix}--side-nav,
     .#{$prefix}--header-panel {
-      background: shell.$bmrg-primary !important;
+      background: shell.$bmrg-theme-background !important;
     }
 
     .#{$prefix}--header__action {
       border-radius: 0 !important;
     }
+    .#{$prefix}--header__action[aria-expanded=true] {
+      background-color: shell.$bmrg-theme-active-icon;
+    }
 
     .#{$prefix}--header__menu-item--current::after {
-      border-bottom-color: shell.$bmrg-accent;
+      border-bottom-color: red;
     }
 
     // Global action buttion
     .#{$prefix}--header__action--active {
-      background-color: shell.$bmrg-header-hover-background;
+      background-color: shell.$bmrg-theme-active;
     }
 
     // Side nav overrides
     .#{$prefix}--side-nav__item--active .#{$prefix}--side-nav__submenu[aria-expanded="false"]::before {
-      background-color: shell.$bmrg-accent;
+      background-color: green;
+    }
+
+    .#{$prefix}--header__nav::before {
+      background-color: shell.$bmrg-theme-border;
     }
 
     .#{$prefix}--side-nav__link--current::before {
-      background-color: shell.$bmrg-accent;
+      background-color: yellow;
+    }
+    .#{$prefix}--bmrg-header-drop-down {
+      background: shell.$bmrg-theme-background;
+      border-top: shell.$bmrg-theme-menu-border;
+
+      a.#{$prefix}--header__menu-item {
+        color: shell.$bmrg-theme-primary!important;
+        background-color: shell.$bmrg-theme-active!important;
+        &:hover{
+          color: shell.$bmrg-theme-primary !important;
+          background-color: shell.$bmrg-theme-secondary !important;
+        }
+        span {
+          color: shell.$bmrg-theme-primary!important;
+        }
+      }
+    }
+
+    svg, path {
+      fill: shell.$bmrg-theme-primary !important;
+    }
+    // span, p, a, div {
+    //   color: shell.$bmrg-theme-primary;
+    //   &:hover {
+    //     color: shell.$bmrg-theme-primary !important;
+    //   }
+    // }
+  }
+}
+
+.#{$prefix}--side-nav__item {
+  a.#{$prefix}--header__menu-item {
+    color: shell.$bmrg-theme-primary!important;
+    // background-color: shell.$bmrg-theme-background;
+    &:hover{
+      color: shell.$bmrg-theme-primary !important;
     }
   }
 }
 
-a.cds--header__menu-item {
-  background: shell.$bmrg-primary;
+a.#{$prefix}--header__menu-item {
+  color: shell.$bmrg-theme-primary!important;
+  background-color: shell.$bmrg-theme-background!important;
+  &:hover{
+    color: shell.$bmrg-theme-primary !important;
+    background-color: shell.$bmrg-theme-active !important;
+  }
 }
+
+span.#{$prefix}--side-nav__link-text {
+  color: shell.$bmrg-theme-secondary !important;
+  &:hover{
+    color: shell.$bmrg-theme-primary !important;
+  }
+}
+

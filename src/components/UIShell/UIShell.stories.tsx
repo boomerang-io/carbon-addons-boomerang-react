@@ -151,6 +151,76 @@ export const UIShellDefault = (args) => {
   );
 };
 
+export const UIShellDefaultWhite = (args) => {
+  const mock = new MockAdapter(axios);
+  mock.onGet(`${BASE_SERVICES_URL}/users/consents`).reply(200, PRIVACY_DATA);
+  mock.onGet(`${BASE_SERVICES_URL}/launchpad/user`).reply(200, PROFILE_SETTINGS_DATA);
+  mock.onGet(`${BASE_SERVICES_URL}/users/teams`).reply(withDelay(1000, [200, TEAMS_DATA]));
+  mock.onGet(`${BASE_SERVICES_URL}/launchpad/teams/1/services`).reply(withDelay(4000, [200, SERVICES_DATA]));
+  mock.onGet(`${BASE_SERVICES_URL}/launchpad/teams/2/services`).reply(withDelay(4000, [200, []]));
+  mock.onPost(`${BASE_SERVICES_URL}/support/contact`).reply(200);
+
+  return (
+    <>
+      <UIShell
+        theme="white"
+        config={{
+          features: {
+            "appSwitcher.enabled": true,
+            "notifications.enabled": true,
+            "support.enabled": true,
+            "feedback.enabled": true,
+          },
+          navigation: [
+            {
+              name: "Launchpad",
+              url: "javascript:voido(0)",
+            },
+            {
+              name: "Admin",
+              url: "javascript:voido(0)",
+            },
+            {
+              name: "Docs",
+              url: "javascript:voido(0)",
+            },
+          ],
+          platform: {
+            baseEnvUrl: BASE_ENV_URL,
+            baseServicesUrl: BASE_SERVICES_URL,
+            name: "Boomerang",
+            version: "4.0.0",
+            signOutUrl: "#",
+            communityUrl: "#",
+            platformName: "Boomerang",
+            platformOrganization: "IBM",
+          },
+          platformMessage: {
+            kind: "info",
+            message: "Message Goes Here",
+            title: "Testing Platform Title",
+          },
+        }}
+        skipToContentProps={{ href: "#id" }}
+        user={
+          {
+            name: "Rick Deckard",
+            email: "rdeckard@ibm.com",
+            hasConsented: true,
+            status: "active",
+            requestSummary: {
+              requireUserAction: 0,
+              submittedByUser: 17,
+            },
+          } as User
+        }
+        {...args}
+      />
+      <MainContent />
+    </>
+  );
+};
+
 export function UIShellKitchenSink(args) {
   const mock = new MockAdapter(axios);
   mock.onGet(`${BASE_SERVICES_URL}/launchpad/user`).reply(200, PROFILE_SETTINGS_DATA);

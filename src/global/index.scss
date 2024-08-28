@@ -7,6 +7,7 @@
 
 // Defaults
 $use-theme-boomerang: false !default;
+$use-theme-advantage-white: false !default;
 
 // ====================//
 // Imports and Exports //
@@ -19,10 +20,12 @@ $use-theme-boomerang: false !default;
 @use "./themes/default" as theme-default;
 @use "./themes/boomerang" as theme-boomerang;
 @use "./themes/shell-tokens" as shell;
+@use "./themes/advantage" as advantage;
 @use "./utils";
 
 // Import local styles for custom components
 @use '../components/AboutPlatform/aboutPlatform';
+@use '../components/AdvantageSideNav/advantageSideNav';
 @use '../components/AutoSuggest/autoSuggest';
 @use '../components/Avatar/avatar';
 @use '../components/CheckboxList/checkboxList';
@@ -70,7 +73,11 @@ $use-theme-boomerang: false !default;
 
 // UIShell tokens, create css properties for them by default
 :root {
-  @include utils.create-properties(theme-default.$shell-tokens);
+  @if ($use-theme-advantage-white) {
+    @include utils.create-properties(theme-default.$shell-white-tokens);
+  } @else {
+    @include utils.create-properties(theme-default.$shell-tokens);
+  }
 }
 
 // Styles for the UIShell from addons

@@ -73,6 +73,8 @@ export type ModalFunctionChildrenProps = {
 export type SimpleIdNameMap = {
   id: string;
   name: string;
+  isTeamMember?: boolean;
+  privateTeam?: boolean;
 };
 
 export type SimpleTeamService = {
@@ -80,6 +82,12 @@ export type SimpleTeamService = {
   url: string;
 };
 
+export interface SideNavTeam extends SimpleIdNameMap {
+  services:Array<SimpleTeamService>
+}
+export interface SideNavAccount extends SimpleIdNameMap {
+  teams:Array<SimpleIdNameMap>
+}
 export type Team = {
   id: string;
   name: string;

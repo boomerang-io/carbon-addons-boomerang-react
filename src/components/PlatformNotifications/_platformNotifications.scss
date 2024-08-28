@@ -6,8 +6,8 @@
 
 .#{$prefix}--bmrg-notifications {
   animation: fade-in motion.$duration-moderate-01 motion.motion("standard");
-  background-color: shell.$bmrg-tertiary;
-  border-top: 0.375rem solid shell.$bmrg-header-menu-options-top-border;
+  background-color: shell.$bmrg-theme-background;
+  border-top: shell.$bmrg-theme-menu-border;
   cursor: auto;
   display: none;
   position: absolute;
@@ -31,7 +31,7 @@
 }
 
 .#{$prefix}--bmrg-notifications-header__newNotifications {
-  color: theme.$text-on-color;
+  color: shell.$bmrg-theme-primary;
   font-size: 0.875rem;
   height: 1.25rem;
   line-height: 1.125rem;
@@ -41,7 +41,7 @@
 .#{$prefix}--bmrg-notifications-header__clear {
   background-color: inherit;
   border: none;
-  color: theme.$text-on-color;
+  color: shell.$bmrg-theme-background;
   cursor: pointer;
   font-size: 0.75rem;
   height: 1rem;
@@ -94,7 +94,7 @@
 }
 
 .#{$prefix}--bmrg-notification-content__creator {
-  color: theme.$text-on-color;
+  color: shell.$bmrg-theme-background;
   font-size: 0.75rem;
   font-weight: 500;
   height: 2.375rem;
@@ -109,7 +109,7 @@
 }
 
 .#{$prefix}--bmrg-notification-content__title {
-  color: theme.$text-on-color;
+  color: shell.$bmrg-theme-background;
   font-size: 0.875rem;
   font-weight: 500;
   line-height: 1.125rem;
@@ -117,7 +117,7 @@
 }
 
 .#{$prefix}--bmrg-notification-content__desc {
-  color: theme.$text-on-color;
+  color: shell.$bmrg-theme-background;
   display: block;
   font-size: 0.75rem;
   min-height: 2rem;
@@ -157,7 +157,7 @@
 .#{$prefix}--bmrg-notifications-footer__notification-link {
   position: relative;
   top: 25%;
-  color: theme.$text-on-color;
+  color: shell.$bmrg-theme-background;
   cursor: pointer;
 }
 
@@ -180,7 +180,7 @@
 }
 
 .#{$prefix}--bmrg-notifications-empty__no-news {
-  color: theme.$text-on-color;
+  color: shell.$bmrg-theme-background;
   font-size: utils.rem(14px);
   font-weight: 400;
   line-height: utils.rem(18px);
@@ -190,7 +190,7 @@
 }
 
 .#{$prefix}--bmrg-notifications-empty__view-old {
-  color: theme.$text-on-color;
+  color: shell.$bmrg-theme-background;
   font-size: utils.rem(12px);
   font-weight: 300;
   line-height: utils.rem(15px);
@@ -205,7 +205,7 @@
 }
 
 .#{$prefix}--bmrg-notifications__notifications-redirect-link {
-  color: theme.$text-on-color;
+  color: shell.$bmrg-theme-background;
   font-size: 0.875rem;
   outline: utils.rem(2px) solid transparent;
   outline-offset: utils.rem(-2px);
@@ -214,8 +214,8 @@
   padding: 0.625rem;
   width: 100%;
   &:hover {
-    color: shell.$bmrg-header-active-text;
-    background: shell.$bmrg-header-hover-background;
+    color: shell.$bmrg-theme-hover;
+    background: shell.$bmrg-theme-active;
   }
   &:focus {
     outline: utils.rem(2px) solid shell.$bmrg-header-active-text;
