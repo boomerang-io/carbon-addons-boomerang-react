@@ -1,1 +1,1 @@
-export { default as AdvantageSideNav } from "./AdvantageSideNav";
+export { default } from "./AdvantageSideNav";

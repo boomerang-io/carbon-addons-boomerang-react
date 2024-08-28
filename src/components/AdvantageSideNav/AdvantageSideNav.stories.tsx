@@ -32,7 +32,7 @@ const sidenavProps = {
     {id:"4444", name: "Account4", teams: []},
   ],
   baseEnvUrl:"https://baseurl.com",
-  app: "testapp"
+  app: "testapp",
 };
 
 export const AdvantageSideNavCustomLinks = (args) => {

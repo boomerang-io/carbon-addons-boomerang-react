@@ -1,5 +1,5 @@
 @use "../../global/config" as *;
-@use '@carbon/themes/scss/tokens' as theme;
+@use "../../global/themes/shell-tokens" as shell;
 
 .#{$prefix}--sidenav__items { 
   &:hover{
@@ -9,14 +9,21 @@
   }
 }
 
+.#{$prefix}--side-nav__overlay-active{
+  background-color: transparent;
+}
+
 .#{$prefix}--bmrg-advantage-sidenav-container {
+  border-right: 0.0625rem solid shell.$bmrg-theme-border;
   height: calc(100% - 3rem);
   overflow-y: hidden;
+  
+  &.--isOpen {
+    width: 16rem;
+  }
   .#{$prefix}--side-nav--ux{
     overflow-y: hidden !important;
   }
-  // .#{$prefix}--side-nav__items:hover {
-  // }
   &:hover {
     position: fixed;
   }
@@ -36,16 +43,15 @@
 .#{$prefix}--bmrg-advantage-sidenav-submenu {
   visibility: hidden;
 
-  &:hover{
+  &.--open{
     visibility: visible !important;
   }
 }
 
 .#{$prefix}--bmrg-advantage-sidenav-submenu-wrapper {
-  // position: fixed;
-  position: fixed;
   left: 16rem;
   margin-top: -2rem;
+  position: fixed;
 
   &:hover{
     ul {
@@ -55,15 +61,19 @@
 }
 
 .#{$prefix}--bmrg-advantage-sidenav-services-submenu {
-  background-color: theme.$layer-01;
-  left: 16rem;
+  background-color: var(--cds-layer-hover-01);
   max-height: 10rem;
   overflow-x: auto;
-  position: static;
-  z-index: 9999;
+  position: relative;
 
   &:hover{
     visibility: visible !important;
+  }
+
+  &>:last-child {
+    span {
+      border-bottom: none;
+    }
   }
 }
 
@@ -79,15 +89,17 @@
 .#{$prefix}--bmrg-advantage-sidenav-team {
   padding-inline-start: 1rem !important;
 }
-.#{$prefix}--bmrg-advantage-sidenav-submenu-link {
+.#{$prefix}--bmrg-advantage-sidenav-submenu-link{
   padding-inline-start: 1rem !important;
   width: 12.9375rem;
+  span {
+    padding: 0.325rem 0;
+    border-bottom: 0.0625rem solid shell.$bmrg-theme-border;
+  }
 }
+
 .#{$prefix}--side-nav__link-text {
   display: flex;
   justify-content: space-between;
   width: 100%;
 }
-// .#{$prefix}--bmrg-advantage-sidenav-overflow-menu {
-//   background-color: red;
-// }
