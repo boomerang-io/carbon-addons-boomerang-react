@@ -83,7 +83,7 @@ $use-theme-advantage-white: false !default;
 // Styles for the UIShell from addons
 .#{$prefix}--bmrg-header-modal {
   .#{$prefix}--modal-container {
-    background-color: shell.$bmrg-header-modal-background;
+    background-color: shell.$bmrg-theme-background;
     border-radius: var(--cds-border-radius, 0);
 
     * {
@@ -117,6 +117,9 @@ $use-theme-advantage-white: false !default;
     &:focus {
       outline: utils.rem(1px) solid shell.$bmrg-secondary;
     }
+    svg {
+      fill: shell.$bmrg-theme-primary;
+    }
   }
 
   .#{$prefix}--modal-content {
@@ -124,13 +127,13 @@ $use-theme-advantage-white: false !default;
   }
 
   .#{$prefix}--modal-header__label {
-    color: theme.$text-on-color;
+    color: shell.$bmrg-theme-primary;
     text-transform: initial;
   }
 
   .#{$prefix}--modal-header__heading {
     height: utils.rem(26px);
-    color: theme.$text-on-color;
+    color: shell.$bmrg-theme-primary;
     font-size: utils.rem(20px);
   }
 

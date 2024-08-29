@@ -42,6 +42,7 @@
       padding-right: 1rem;
     }
     .#{$prefix}--bmrg-privacy-statement {
+      color: shell.$bmrg-theme-primary;
       height: utils.rem(368px);
       margin-top: utils.rem(16px);
       overflow-y: auto;
@@ -52,11 +53,11 @@
 
       &__content {
         h3 {
-          color: shell.$bmrg-brand-white;
+          color: shell.$bmrg-theme-secondary;
           padding: 1rem 0 0.3125rem;
         }
         a {
-          color: shell.$bmrg-secondary;
+          color: shell.$bmrg-theme-link;
           text-decoration: none;
         }
       }
@@ -69,7 +70,7 @@
         margin-bottom: utils.rem(24px);
 
         a {
-          color: theme.$text-on-color;
+          color: shell.$bmrg-theme-primary;
         }
       }
       &__error {
@@ -85,14 +86,18 @@
     .#{$prefix}--accordion__arrow {
       transform: rotate(90deg);
       path {
-        fill: shell.$bmrg-brand-white;
+        fill: shell.$bmrg-theme-primary;
       }
     }
 
     .#{$prefix}--accordion__item {
-      border-top-color: rgba(251, 252, 252, 0.1);
+      border-top-color: shell.$bmrg-theme-accordion-hover;
+      // border-block-start-color: shell.$bmrg-theme-accordion-hover;
+      .#{$prefix}--accordion__heading:hover{
+        background-color: shell.$bmrg-theme-accordion-hover;
+      }
       &:last-child {
-        border-bottom-color: rgba(251, 252, 252, 0.1);
+        border-bottom-color: shell.$bmrg-theme-accordion-top-border;
       }
       &--active {
         .#{$prefix}--accordion__heading > .#{$prefix}--accordion__arrow {
@@ -103,20 +108,20 @@
 
     .#{$prefix}--accordion__heading:focus {
       .#{$prefix}--accordion__arrow {
-        outline: utils.rem(1px) solid shell.$bmrg-secondary;
+        outline: utils.rem(1px) solid shell.$bmrg-theme-secondary;
       }
     }
 
     .#{$prefix}--accordion__title {
       height: utils.rem(18px);
-      color: shell.$bmrg-brand-white;
+      color: shell.$bmrg-theme-primary;
       font-size: utils.rem(14px);
       font-weight: 600;
       line-height: utils.rem(18px);
     }
 
     .#{$prefix}--accordion__content {
-      color: theme.$text-on-color;
+      color: shell.$bmrg-theme-primary;
       font-family: "IBM Plex Sans", "Helvetica Neue", Arial, Helvetica, sans-serif;
       font-size: utils.rem(14px);
       line-height: utils.rem(18px);

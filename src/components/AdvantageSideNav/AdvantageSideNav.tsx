@@ -3,7 +3,7 @@ import { Loading, SideNav, SideNavDivider, SideNavItems, SideNavLink , SideNavMe
 import cx from "classnames";
 import { AddAlt, ChatBot, ChevronRight, GroupAccount, Home, Locked, Unlocked, UserMultiple } from "@carbon/react/icons";
 import { prefix } from "../../internal/settings";
-import { SideNavTeam, SideNavAccount } from "types";
+import { NavLink, SideNavTeam, SideNavAccount } from "types";
 
 type Props = {
   homeLink?: string;
@@ -17,23 +17,34 @@ type Props = {
   isOpen?: boolean;
   className?: string;
   app?: string;
+  navLinks?: NavLink[];
 };
 
 export function AdvantageSideNav(props: Props) {
-  const { app, homeLink, assistantLink, defaultAssistantLink, joinCreateTrigger, isLoading, isOpen, teams, accounts, baseEnvUrl, className, ...rest } = props;
+  const { app, homeLink, assistantLink, defaultAssistantLink, joinCreateTrigger, isLoading, isOpen, teams, accounts, baseEnvUrl, className, navLinks, ...rest } = props;
   const [activeSubmenu, setActiveSubmenu] = React.useState("");
+  const [activeMenu, setActiveMenu] = React.useState(false);
+  const isMenuOpen = isOpen || activeMenu;
 
   return (
     <SideNav
       className={cx(`${prefix}--bmrg-advantage-sidenav-container`, className, {
       })}
       isRail
-      expanded={isOpen}
+      expanded={isMenuOpen}
       onToggle={() => setActiveSubmenu("")}
+      onMouseEnter={() => setActiveMenu(true)}
+      onMouseLeave={() => setActiveMenu(false)}
       {...rest}
     >
-      {isLoading ? <Loading /> : (
+      {(
         <SideNavItems>
+          {navLinks?.length ? (
+            <div>
+              {navLinks.map((link) =>(<SideNavLink href={link.url} style={{fontWeight: "600"}}>{link.name}</SideNavLink>))}
+              <SideNavDivider />
+            </div>
+          ) : null}
           <div onMouseEnter={() => setActiveSubmenu("")}>
             {homeLink ? <SideNavLink renderIcon={Home} href={homeLink} style={{fontWeight: "600"}}>Home</SideNavLink> : null}
             {assistantLink ? <SideNavLink renderIcon={ChatBot} href={assistantLink} style={{fontWeight: "400"}}>{`Start a ${defaultAssistantLink ? "" : "New "}Chat`}</SideNavLink> : null}
@@ -84,18 +95,18 @@ export function AdvantageSideNav(props: Props) {
                   <li>
                     <SideNavLink className={`${prefix}--bmrg-advantage-sidenav-team`} renderIcon={team.privateTeam ? Locked : Unlocked} href={`${baseEnvUrl}/${app}/teams/${team.id}`} onMouseEnter={() => setActiveSubmenu(team.id)}>
                       {team.name}
-                      {Boolean(team?.teams?.length) ? <ChevronRight /> : null}
+                      {Boolean(team?.projectTeams?.length) ? <ChevronRight /> : null}
                     </SideNavLink>
-                    {Boolean(team?.teams?.length) ? 
+                    {Boolean(team?.projectTeams?.length) ? 
                       <ul className={cx(`${prefix}--bmrg-advantage-sidenav-submenu`, {
                         "--open": team.id === activeSubmenu
                       })}>
                         <li className={`${prefix}--bmrg-advantage-sidenav-submenu-wrapper`}>
                           <ul className={`${prefix}--bmrg-advantage-sidenav-services-submenu`}>
-                            <SideNavLink className={`${prefix}--bmrg-advantage-sidenav-submenu-link`} href={`${baseEnvUrl}/${app}/teams/${team.id}`}>
+                            <SideNavLink className={`${prefix}--bmrg-advantage-sidenav-submenu-link`} href={`${baseEnvUrl}/${app}/projectTeams/${team.id}`}>
                               {team.name}
                             </SideNavLink>
-                              {team.teams?.map((accTeam) => (
+                              {team.projectTeams?.map((accTeam) => (
                                 <SideNavLink className={`${prefix}--bmrg-advantage-sidenav-submenu-link`} href={`${baseEnvUrl}/${app}/teams/${accTeam.id}`}>
                                   {accTeam.name}
                                 </SideNavLink> 

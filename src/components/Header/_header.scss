@@ -13,6 +13,12 @@
       color: shell.$bmrg-theme-primary;
     }
 
+    .#{$prefix}--header__action {
+      svg, path {
+        fill: shell.$bmrg-theme-primary !important;
+      }
+    }
+
     // Background overrides
     .#{$prefix}--side-nav,
     .#{$prefix}--header-panel {
@@ -27,7 +33,7 @@
     }
 
     .#{$prefix}--header__menu-item--current::after {
-      border-bottom-color: red;
+      background-color: shell.$bmrg-accent;
     }
 
     // Global action buttion
@@ -37,7 +43,7 @@
 
     // Side nav overrides
     .#{$prefix}--side-nav__item--active .#{$prefix}--side-nav__submenu[aria-expanded="false"]::before {
-      background-color: green;
+      background-color: shell.$bmrg-accent;
     }
 
     .#{$prefix}--header__nav::before {
@@ -45,7 +51,7 @@
     }
 
     .#{$prefix}--side-nav__link--current::before {
-      background-color: yellow;
+      background-color: shell.$bmrg-accent;
     }
     .#{$prefix}--bmrg-header-drop-down {
       background: shell.$bmrg-theme-background;
@@ -53,20 +59,20 @@
 
       a.#{$prefix}--header__menu-item {
         color: shell.$bmrg-theme-primary!important;
-        background-color: shell.$bmrg-theme-active!important;
+        background-color: shell.$bmrg-theme-menu-background!important;
         &:hover{
           color: shell.$bmrg-theme-primary !important;
-          background-color: shell.$bmrg-theme-secondary !important;
+          background-color: shell.$bmrg-theme-menu-hover !important;
         }
         span {
           color: shell.$bmrg-theme-primary!important;
+          svg, path {
+            fill: shell.$bmrg-theme-primary !important;
+          }
         }
       }
     }
 
-    svg, path {
-      fill: shell.$bmrg-theme-primary !important;
-    }
     // span, p, a, div {
     //   color: shell.$bmrg-theme-primary;
     //   &:hover {

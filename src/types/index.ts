@@ -86,7 +86,7 @@ export interface SideNavTeam extends SimpleIdNameMap {
   services:Array<SimpleTeamService>
 }
 export interface SideNavAccount extends SimpleIdNameMap {
-  teams:Array<SimpleIdNameMap>
+  projectTeams:Array<SimpleIdNameMap>
 }
 export type Team = {
   id: string;

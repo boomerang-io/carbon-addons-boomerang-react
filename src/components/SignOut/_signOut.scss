@@ -1,4 +1,5 @@
 @use '@carbon/themes/scss/tokens' as theme;
+@use '../../global/themes/shell-tokens' as shell;
 @use "../../global/config" as *;
 @use "../../global/utils";
 
@@ -16,7 +17,7 @@
     margin-top: 1rem;
     margin-bottom: 2rem;
     &__message {
-      color: theme.$text-on-color;
+      color: shell.$bmrg-theme-primary;
       font-size: utils.rem(14px);
       line-height: utils.rem(18px);
     }
