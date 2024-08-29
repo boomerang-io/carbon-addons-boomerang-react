@@ -33,6 +33,7 @@ const sidenavProps = {
   ],
   baseEnvUrl:"https://baseurl.com",
   app: "testapp",
+  isOpen: false
 };
 
 export const AdvantageSideNavCustomLinks = (args) => {

@@ -3,6 +3,7 @@ import React from "react";
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
 import { BrowserRouter as Router, Link } from "react-router-dom";
+import AdvantageSideNav from "../AdvantageSideNav";
 import HeaderMenuItem from "../Header/HeaderMenuItem";
 import { Button, Modal, SideNav, SideNavDivider, SideNavLink, SideNavItems, SideNavMenu, SideNavMenuItem } from "@carbon/react";
 import { Help, OpenPanelRight, ServiceDesk } from "@carbon/react/icons";
@@ -62,6 +63,27 @@ const SERVICES_DATA = [
   { name: "Service 3", url: "https://ibm.com" },
   { name: "Service 4 with a loooong long long long name", url: "https://google.com" },
 ];
+
+const sidenavProps = {
+  homeLink: "http://test.home.com",
+  assistantLink: "http://test.ai.com",
+  joinCreateTrigger: () => console.log("Trigger modal if exists"),
+  teams: [
+    {id:"11", name: "Team1", privateTeam: true, services: [{url: 1, name: "service1"}, {url:2, name:"service12"}, {url:3, name:"service13"}, {url: 4, name: "service2"}, {url:5, name:"service22"}, {url: 4, name: "service2"}, {url:5, name:"service22"}]},
+    {id:"22", name: "Team2", privateTeam: false, services: [{url: 4, name: "service2"}, {url:5, name:"service22"}]},
+    {id:"33", name: "Team3", privateTeam: false, services: [{url: 6, name: "service3"}]},
+    {id:"44", name: "Team4", privateTeam: true, services: []},
+  ],
+  accounts: [
+    {id:"1111", name: "Account1", projectTeams: [{id: 111, name: "team1", isTeamMember: true}, {id:211, name:"team12", isTeamMember: true}, {id:223, name:"team13", isTeamMember: true}]},
+    {id:"2222", name: "Account2", projectTeams: [{id: 222, name: "team2", isTeamMember: true}, {id:221, name:"team22", isTeamMember: true}]},
+    {id:"3333", name: "Account3", projectTeams: [{id: 333, name: "team3", isTeamMember: true}]},
+    {id:"4444", name: "Account4", projectTeams: []},
+  ],
+  baseEnvUrl:"https://baseurl.com",
+  app: "testapp",
+  isOpen: false
+};
 
 const withDelay = (delay: number, response: any) => (): Promise<any> => {
   return new Promise(function (resolve) {
@@ -516,6 +538,12 @@ export const KitchenSink = (args) => {
   return <UIShellKitchenSink {...args} />;
 };
 
+export const LeftPanel = (args) => {
+  return <UIShellDefault {...args} leftPanel={({isOpen, navLinks}) => (
+    <AdvantageSideNav {...sidenavProps} isOpen={isOpen} navLinks={navLinks}/>
+  )}/>;
+};
+
 export const UserNotConsented = (args) => {
   return <UIShellUserNotConsented {...args} />;
 };
@@ -527,3 +555,4 @@ export const UserPendingDeletion = (args) => {
 export const EmptyState = (args) => {
   return <UIShellEmptyState {...args} />;
 };
+

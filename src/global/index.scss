@@ -20,7 +20,6 @@ $use-theme-advantage-white: false !default;
 @use "./themes/default" as theme-default;
 @use "./themes/boomerang" as theme-boomerang;
 @use "./themes/shell-tokens" as shell;
-@use "./themes/advantage" as advantage;
 @use "./utils";
 
 // Import local styles for custom components

@@ -2,7 +2,7 @@
 @use "../../global/themes/shell-tokens" as shell;
 
 .#{$prefix}--sidenav__items { 
-  &:hover{
+  &:hover {
     .#{$prefix}--bmrg-advantage-sidenav-submenu {
       visibility: visible !important;
     }
@@ -61,7 +61,7 @@
 }
 
 .#{$prefix}--bmrg-advantage-sidenav-services-submenu {
-  background-color: var(--cds-layer-hover-01) !important;
+  background-color: shell.$bmrg-theme-submenu-background !important;
   max-height: 10rem;
   overflow-x: auto;
   position: relative;
@@ -102,6 +102,9 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
+  .#{$prefix}--side-nav__icon.#{$prefix}--side-nav__icon--small > svg {
+    fill: shell.$bmrg-theme-primary !important;
+  }
 }
 .#{$prefix}--side-nav__submenu-title {
   color: shell.$bmrg-theme-secondary;

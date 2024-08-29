@@ -368,16 +368,11 @@ function SidenavMenu(props: { leftPanel?: Props["leftPanel"]; navLinks: Props["n
           isCollapsible={true}
           onClick={toggleActive}
         />
-        {
-          // @ts-ignore
-          <div inert={isOpen ? undefined : "true"}>
-            {props.leftPanel({
-              isOpen: isOpen,
-              close: closeMenu,
-              navLinks: isMobileSidenavActive ? props.navLinks : undefined,
-            })}
-          </div>
-        }
+          {props.leftPanel({
+            isOpen: isOpen,
+            close: closeMenu,
+            navLinks: isMobileSidenavActive ? props.navLinks : undefined,
+          })}
       </div>
     );
   }
