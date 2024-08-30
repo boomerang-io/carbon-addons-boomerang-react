@@ -34,7 +34,7 @@ export function AdvantageSideNav(props: Props) {
       expanded={isMenuOpen}
       onToggle={() => setActiveSubmenu("")}
       onMouseEnter={() => setActiveMenu(true)}
-      onMouseLeave={() => setActiveMenu(false)}
+      onMouseLeave={() => {setActiveMenu(false); setActiveSubmenu("")}}
       {...rest}
     >
       {(
@@ -46,9 +46,9 @@ export function AdvantageSideNav(props: Props) {
             </div>
           ) : null}
           <div onMouseEnter={() => setActiveSubmenu("")}>
-            {homeLink ? <SideNavLink renderIcon={Home} href={homeLink} style={{fontWeight: "600"}}>Home</SideNavLink> : null}
-            {assistantLink ? <SideNavLink renderIcon={ChatBot} href={assistantLink} style={{fontWeight: "400"}}>{`Start a ${defaultAssistantLink ? "" : "New "}Chat`}</SideNavLink> : null}
-            {joinCreateTrigger ? <SideNavLink renderIcon={AddAlt} onClick={joinCreateTrigger} style={{fontWeight: "400"}}>Create or Join Team</SideNavLink> : null}
+            {homeLink ? <SideNavLink renderIcon={Home} href={homeLink}>Home</SideNavLink> : null}
+            {assistantLink ? <SideNavLink renderIcon={ChatBot} href={assistantLink}>{`Start a ${defaultAssistantLink ? "" : "New "}Chat`}</SideNavLink> : null}
+            {joinCreateTrigger ? <SideNavLink renderIcon={AddAlt} onClick={joinCreateTrigger}>Create or Join Team</SideNavLink> : null}
           </div>
           <SideNavDivider />
           <SideNavMenu renderIcon={UserMultiple} title="Teams" className={`${prefix}--bmrg-advantage-sidenav-menu`}>

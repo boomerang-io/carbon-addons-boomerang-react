@@ -79,6 +79,13 @@ $use-theme-advantage-white: false !default;
   }
 }
 
+//style for advantage sidenav icons
+.#{$prefix}--side-nav__items {
+  svg {
+    fill: shell.$bmrg-theme-primary !important;
+  }
+} 
+
 // Styles for the UIShell from addons
 .#{$prefix}--bmrg-header-modal {
   .#{$prefix}--modal-container {

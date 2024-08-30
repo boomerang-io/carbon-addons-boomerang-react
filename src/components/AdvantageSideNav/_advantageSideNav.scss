@@ -13,6 +13,10 @@
   background-color: transparent;
 }
 
+.#{$prefix}--side-nav__divider{
+  background-color: shell.$bmrg-theme-border !important;
+}
+
 .#{$prefix}--bmrg-advantage-sidenav-container {
   border-right: 0.0625rem solid shell.$bmrg-theme-border;
   height: calc(100% - 3rem);
@@ -101,6 +105,7 @@
 .#{$prefix}--side-nav__link-text {
   display: flex;
   justify-content: space-between;
+  font-weight: 400;
   width: 100%;
   .#{$prefix}--side-nav__icon.#{$prefix}--side-nav__icon--small > svg {
     fill: shell.$bmrg-theme-primary !important;
