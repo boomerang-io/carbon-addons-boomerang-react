@@ -1,5 +1,5 @@
 import React from "react";
-import { Loading, SideNav, SideNavDivider, SideNavItems, SideNavLink , SideNavMenu } from "@carbon/react";
+import { SideNav, SideNavDivider, SideNavItems, SideNavLink , SideNavMenu } from "@carbon/react";
 import cx from "classnames";
 import { AddAlt, ChatBot, ChevronRight, GroupAccount, Home, Locked, Unlocked, UserMultiple } from "@carbon/react/icons";
 import { prefix } from "../../internal/settings";
@@ -103,7 +103,7 @@ export function AdvantageSideNav(props: Props) {
                       })}>
                         <li className={`${prefix}--bmrg-advantage-sidenav-submenu-wrapper`}>
                           <ul className={`${prefix}--bmrg-advantage-sidenav-services-submenu`}>
-                            <SideNavLink className={`${prefix}--bmrg-advantage-sidenav-submenu-link`} href={`${baseEnvUrl}/${app}/projectTeams/${team.id}`}>
+                            <SideNavLink className={`${prefix}--bmrg-advantage-sidenav-submenu-link`} href={`${baseEnvUrl}/${app}/teams/${team.id}`}>
                               {team.name}
                             </SideNavLink>
                               {team.projectTeams?.map((accTeam) => (

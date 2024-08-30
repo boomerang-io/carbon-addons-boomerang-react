@@ -103,6 +103,7 @@
 }
 
 .#{$prefix}--side-nav__link-text {
+  cursor: pointer;
   display: flex;
   justify-content: space-between;
   font-weight: 400;
