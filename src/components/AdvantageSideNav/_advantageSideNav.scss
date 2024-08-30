@@ -13,8 +13,16 @@
   background-color: transparent;
 }
 
+// .#{$prefix}--side-nav--rail {
+//   overflow-y: hidden;
+// }
+
 .#{$prefix}--side-nav__divider{
   background-color: shell.$bmrg-theme-border !important;
+}
+
+.#{$prefix}--side-nav__items{
+  padding-bottom: 3rem;
 }
 
 .#{$prefix}--bmrg-advantage-sidenav-container {
@@ -36,12 +44,26 @@
   }
 }
 
+.#{$prefix}--bmrg-advantage-sidenav-no-teams__text{
+  color: shell.$bmrg-theme-secondary;
+  font-size: 0.875rem;
+  padding: 1rem;
+  text-align: center;
+}
+
 .#{$prefix}--bmrg-advantage-sidenav-menu {
   font-weight: 400;
   .#{$prefix}--side-nav__menu {
     display: flex;
     flex-direction: column;
   }
+}
+
+.#{$prefix}--bmrg-advantage-sidenav-teams__title {
+  display: block;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  width: 8.5rem;
 }
 
 .#{$prefix}--bmrg-advantage-sidenav-submenu {
@@ -96,6 +118,16 @@
 .#{$prefix}--bmrg-advantage-sidenav-submenu-link{
   padding-inline-start: 1rem !important;
   width: 12.9375rem;
+
+  .#{$prefix}--side-nav__link-text {
+    cursor: pointer;
+    display: block;
+    font-weight: 400;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    width: 12rem;
+  }
+
   span {
     padding: 0.325rem 0;
     border-bottom: 0.0625rem solid shell.$bmrg-theme-border;
@@ -108,6 +140,7 @@
   justify-content: space-between;
   font-weight: 400;
   width: 100%;
+
   .#{$prefix}--side-nav__icon.#{$prefix}--side-nav__icon--small > svg {
     fill: shell.$bmrg-theme-primary !important;
   }
