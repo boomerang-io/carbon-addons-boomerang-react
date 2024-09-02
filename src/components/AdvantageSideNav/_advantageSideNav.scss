@@ -30,8 +30,8 @@
   height: calc(100% - 3rem);
   overflow-y: hidden;
   
-  &.--isOpen {
-    width: 16rem;
+  &.--closed {
+    inline-size: 3rem !important;
   }
   .#{$prefix}--side-nav--ux{
     overflow-y: hidden !important;

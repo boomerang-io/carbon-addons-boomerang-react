@@ -25,14 +25,14 @@ export function AdvantageSideNav(props: Props) {
   const [activeSubmenu, setActiveSubmenu] = React.useState("");
   const [activeMenu, setActiveMenu] = React.useState(false);
   const isMenuOpen = isOpen || activeMenu;
+  const windowLocation = window.location;
 
   return (
     <SideNav
       className={cx(`${prefix}--bmrg-advantage-sidenav-container`, className, {
+        "--closed": !isMenuOpen
       })}
       isRail
-      //test focus
-      addFocusListeners={false}
       expanded={isMenuOpen}
       onToggle={() => setActiveSubmenu("")}
       onMouseEnter={() => setActiveMenu(true)}
@@ -48,8 +48,8 @@ export function AdvantageSideNav(props: Props) {
             </div>
           ) : null}
           <div onMouseEnter={() => setActiveSubmenu("")}>
-            {homeLink ? <SideNavLink renderIcon={Home} href={homeLink}>Home</SideNavLink> : null}
-            {assistantLink ? <SideNavLink renderIcon={ChatBot} href={assistantLink}>{`Start a ${defaultAssistantLink ? "" : "New "}Chat`}</SideNavLink> : null}
+            {homeLink ? <SideNavLink isActive={windowLocation.href.includes(homeLink)} renderIcon={Home} href={homeLink}>Home</SideNavLink> : null}
+            {assistantLink ? <SideNavLink isActive={windowLocation.href.includes(assistantLink)} renderIcon={ChatBot} href={assistantLink}>{`Start a ${defaultAssistantLink ? "" : "New "}Chat`}</SideNavLink> : null}
             {joinCreateTrigger ? <SideNavLink renderIcon={AddAlt} onClick={joinCreateTrigger}>Create or Join Team</SideNavLink> : null}
           </div>
             {!Boolean(teams?.length) && !Boolean(accounts?.length) && isMenuOpen ?
@@ -63,10 +63,10 @@ export function AdvantageSideNav(props: Props) {
               <>
                 <SideNavDivider />
                 <SideNavMenu renderIcon={UserMultiple} title="Teams" className={`${prefix}--bmrg-advantage-sidenav-menu`} isSideNavExpanded={isMenuOpen}>
-                  {teams?.map(team =>(
+                  {isMenuOpen ? teams?.map(team =>(
                     <>
                       <li>
-                        <SideNavLink className={`${prefix}--bmrg-advantage-sidenav-team`} renderIcon={team.privateTeam ? Locked : Unlocked} href={`${baseEnvUrl}/${app}/teams/${team.id}`} onMouseEnter={() => setActiveSubmenu(team.id)}>
+                        <SideNavLink isActive={windowLocation.href.includes(team.id)} className={`${prefix}--bmrg-advantage-sidenav-team`} renderIcon={team.privateTeam ? Locked : Unlocked} href={`${baseEnvUrl}/${app}/teams/${team.id}`} onMouseEnter={() => setActiveSubmenu(team.id)}>
                           <p className={`${prefix}--bmrg-advantage-sidenav-teams__title`}>
                             {team.name}
                           </p>
@@ -92,17 +92,17 @@ export function AdvantageSideNav(props: Props) {
                         }
                       </li>
                     </>
-                  ))}
+                  )) : null }
                 </SideNavMenu> 
               </>: null}
           {Boolean(accounts?.length) ?
             <>
               <SideNavDivider />
               <SideNavMenu renderIcon={GroupAccount} title="Accounts" isSideNavExpanded={isMenuOpen}>
-                {accounts?.map(team =>(
+                {isMenuOpen ? accounts?.map(team =>(
                   <>
                     <li>
-                      <SideNavLink className={`${prefix}--bmrg-advantage-sidenav-team`} renderIcon={team.privateTeam ? Locked : Unlocked} href={`${baseEnvUrl}/${app}/teams/${team.id}`} onMouseEnter={() => setActiveSubmenu(team.id)}>
+                      <SideNavLink isActive={windowLocation.href.includes(team.id)} className={`${prefix}--bmrg-advantage-sidenav-team`} renderIcon={team.privateTeam ? Locked : Unlocked} href={`${baseEnvUrl}/${app}/teams/${team.id}`} onMouseEnter={() => setActiveSubmenu(team.id)}>
                         <p className={`${prefix}--bmrg-advantage-sidenav-teams__title`}>
                           {team.name}
                         </p>
@@ -128,7 +128,7 @@ export function AdvantageSideNav(props: Props) {
                       }
                     </li>
                   </>
-                ))}
+                )) : null}
               </SideNavMenu> 
             </> : null}
         </SideNavItems>
