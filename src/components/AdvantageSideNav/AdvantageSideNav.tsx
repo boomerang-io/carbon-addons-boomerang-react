@@ -26,8 +26,6 @@ export function AdvantageSideNav(props: Props) {
   const [activeMenu, setActiveMenu] = React.useState(false);
   const isMenuOpen = isOpen || activeMenu;
 
-  console.log("isOPen", isOpen, "active", activeMenu,"menu upen", isMenuOpen);
-
   return (
     <SideNav
       className={cx(`${prefix}--bmrg-advantage-sidenav-container`, className, {
@@ -39,7 +37,6 @@ export function AdvantageSideNav(props: Props) {
       onToggle={() => setActiveSubmenu("")}
       onMouseEnter={() => setActiveMenu(true)}
       onMouseLeave={() => {setActiveMenu(false); setActiveSubmenu("")}}
-      onClick={(e: any) => e.preventDefault()}
       {...rest}
     >
       {(
@@ -117,9 +114,9 @@ export function AdvantageSideNav(props: Props) {
                         })}>
                           <li className={`${prefix}--bmrg-advantage-sidenav-submenu-wrapper`}>
                             <ul className={`${prefix}--bmrg-advantage-sidenav-services-submenu`}>
-                              <SideNavLink className={`${prefix}--bmrg-advantage-sidenav-submenu-link`} href={`${baseEnvUrl}/${app}/teams/${team.id}`}>
+                              {/* <SideNavLink className={`${prefix}--bmrg-advantage-sidenav-submenu-link`} href={`${baseEnvUrl}/${app}/teams/${team.id}`}>
                                 Account Page
-                              </SideNavLink>
+                              </SideNavLink> */}
                                 {team.projectTeams?.map((accTeam) => (
                                   <SideNavLink className={`${prefix}--bmrg-advantage-sidenav-submenu-link`} href={`${baseEnvUrl}/${app}/teams/${accTeam.id}`}>
                                     {accTeam.name}
