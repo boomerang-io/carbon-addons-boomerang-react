@@ -47,7 +47,7 @@ export function AdvantageSideNav(props: Props) {
   const [activeMenu, setActiveMenu] = React.useState(false);
   const isMenuOpen = isOpen || activeMenu;
   const windowLocation = window.location;
-  const isPartnerUser = user.type === USER_PLATFORM_ROLE.Partner;
+  const isPartnerUser = user?.type === USER_PLATFORM_ROLE.Partner;
   const standardTeamsList = [...personalTeams.map(pteams => ({...pteams, isPersonal: true})), ...teams];
 
   // Functions to track IBM Instrumentation on Segment
