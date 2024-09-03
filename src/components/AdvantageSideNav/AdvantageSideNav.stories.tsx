@@ -21,7 +21,7 @@ const sidenavProps = {
   joinCreateTrigger: () => console.log("Trigger modal if exists"),
   teams: [
     {id:"11", name: "Team1", privateTeam: true, services: [{url: 1, name: "service1 with a really long name so we can test elipsis"}, {url:2, name:"service12"}, {url:3, name:"service13"}, {url: 4, name: "service2"}, {url:5, name:"service22"}, {url: 4, name: "service2"}, {url:5, name:"service22"}]},
-    {id:"22", name: "Team2", privateTeam: false, services: [{url: 4, name: "service2"}, {url:5, name:"service22"}]},
+    {id:"22", name: "Team2", privateTeam: false, displayName:"Test Display Name", services: [{url: 4, name: "service2"}, {url:5, name:"service22"}]},
     {id:"33", name: "Team3 with a really long name so we can test elipsis", privateTeam: false, services: [{url: 6, name: "service3"}]},
     {id:"44", name: "Team4", privateTeam: true, services: []},
   ],

@@ -75,6 +75,7 @@ export type SimpleIdNameMap = {
   name: string;
   isTeamMember?: boolean;
   privateTeam?: boolean;
+  displayName?: string;
 };
 
 export type SimpleTeamService = {
