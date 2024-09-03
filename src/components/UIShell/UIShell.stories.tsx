@@ -80,9 +80,11 @@ const sidenavProps = {
     {id:"g3333", name: "Account3", projectTeams: [{id: 333, name: "team3", isTeamMember: true}]},
     {id:"h4444", name: "Account4 with a really long name so we can test elipsis", projectTeams: []},
   ],
+  personalTeams: [{id:"11111", name: "Team4", privateTeam: true, services: []}],
   baseEnvUrl:"https://baseurl.com",
   app: "testapp",
-  isOpen: false
+  isOpen: false,
+  user: {type: "admin"},
 };
 
 const withDelay = (delay: number, response: any) => (): Promise<any> => {

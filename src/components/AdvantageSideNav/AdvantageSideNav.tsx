@@ -1,9 +1,10 @@
 import React from "react";
 import { SideNav, SideNavDivider, SideNavItems, SideNavLink , SideNavMenu } from "@carbon/react";
 import cx from "classnames";
-import { AddAlt, ChatBot, ChevronRight, GroupAccount, Home, Locked, Unlocked, UserMultiple } from "@carbon/react/icons";
+import { AddAlt, ChatBot, ChevronRight, GroupAccount, Home, Locked, Unlocked, User as UserIcon, UserMultiple } from "@carbon/react/icons";
+import { USER_PLATFORM_ROLE } from "../../constants/UserType";
 import { prefix } from "../../internal/settings";
-import { NavLink, SideNavTeam, SideNavAccount } from "types";
+import { NavLink, SideNavTeam, SideNavAccount, User } from "types";
 
 type Props = {
   accounts?: Array<SideNavAccount>;
@@ -17,8 +18,10 @@ type Props = {
   isLoading?: boolean;
   isOpen?: boolean;
   navLinks?: NavLink[];
+  personalTeams?: Array<SideNavTeam>;
   teams?: Array<SideNavTeam>;
   triggerEvent?: (props: any) => void;
+  user: User;
 };
 
 export function AdvantageSideNav(props: Props) {
@@ -30,18 +33,22 @@ export function AdvantageSideNav(props: Props) {
     joinCreateTrigger,
     isLoading,
     isOpen,
-    teams,
+    teams=[],
     triggerEvent,
-    accounts,
+    accounts=[],
     baseEnvUrl,
     className,
     navLinks,
+    personalTeams=[],
+    user,
     ...rest
   } = props;
   const [activeSubmenu, setActiveSubmenu] = React.useState("");
   const [activeMenu, setActiveMenu] = React.useState(false);
   const isMenuOpen = isOpen || activeMenu;
   const windowLocation = window.location;
+  const isPartnerUser = user.type === USER_PLATFORM_ROLE.Partner;
+  const standardTeamsList = [...personalTeams.map(pteams => ({...pteams, isPersonal: true})), ...teams];
 
   // Functions to track IBM Instrumentation on Segment
   const handleHomeClick = () => {
@@ -91,9 +98,9 @@ export function AdvantageSideNav(props: Props) {
 
   // add or remove refs
 
-  if (teamsRef.current.length !== teams?.length) {
+  if (teamsRef.current.length !== standardTeamsList?.length) {
     //@ts-ignore
-    teamsRef.current = Array(teams?.length).fill().map((_, i) => teamsRef.current[i] || React.createRef());
+    teamsRef.current = Array(standardTeamsList?.length).fill().map((_, i) => teamsRef.current[i] || React.createRef());
   }
 
   if (accountsRef.current.length !== accounts?.length) {
@@ -123,26 +130,26 @@ export function AdvantageSideNav(props: Props) {
           ) : null}
           <div onMouseEnter={() => setActiveSubmenu("")}>
             {homeLink ? <SideNavLink isActive={windowLocation.href === homeLink} renderIcon={Home} href={homeLink} onClick={handleHomeClick}>Home</SideNavLink> : null}
-            {assistantLink ? <SideNavLink isActive={windowLocation.href.includes(assistantLink)} renderIcon={ChatBot} href={assistantLink} onClick={handleAssistantClick}>{`Start a ${defaultAssistantLink ? "" : "New "}Chat`}</SideNavLink> : null}
-            {joinCreateTrigger ? <SideNavLink renderIcon={AddAlt} onClick={(e: any) => {joinCreateTrigger(e); handleCreateJoinClick();}}>Create or Join Team</SideNavLink> : null}
+            {(!isPartnerUser && assistantLink) ? <SideNavLink isActive={windowLocation.href.includes(assistantLink)} renderIcon={ChatBot} href={assistantLink} onClick={handleAssistantClick}>{`Start a ${defaultAssistantLink ? "" : "New "}Chat`}</SideNavLink> : null}
+            {(!isPartnerUser && joinCreateTrigger) ? <SideNavLink renderIcon={AddAlt} onClick={(e: any) => {joinCreateTrigger(e); handleCreateJoinClick();}}>Create or Join Team</SideNavLink> : null}
           </div>
-            {!Boolean(teams?.length) && !Boolean(accounts?.length) && isMenuOpen ?
+            {!Boolean(standardTeamsList?.length) && !Boolean(accounts?.length) && isMenuOpen ?
               <>
                 <SideNavDivider />
                 <p className={`${prefix}--bmrg-advantage-sidenav-no-teams__text`}>No teams or accounts available.</p>
               </>
               : null
             }
-            {Boolean(teams?.length) ?
+            {Boolean(standardTeamsList?.length) ?
               <>
                 <SideNavDivider />
-                <SideNavMenu renderIcon={UserMultiple} title="Teams" className={`${prefix}--bmrg-advantage-sidenav-menu`} isSideNavExpanded={isMenuOpen}>
-                  {isMenuOpen ? teams?.map((team, i) => {
+                <SideNavMenu renderIcon={UserMultiple} title="Teams" isActive={standardTeamsList.some(t => windowLocation.href.includes(t.id))} className={`${prefix}--bmrg-advantage-sidenav-menu`} isSideNavExpanded={isMenuOpen}>
+                  {isMenuOpen ? standardTeamsList?.map((team, i) => {
                     const topPosition = document?.getElementById(team.id)?.getBoundingClientRect()?.top ?? 0;
                     return(
                       <>
                         <li className={`${prefix}--bmrg-advantage-sidenav-team-item`}>
-                          <SideNavLink id={team.id} ref={teamsRef.current[i]} isActive={windowLocation.href.includes(team.id)} className={`${prefix}--bmrg-advantage-sidenav-team`} renderIcon={team.privateTeam ? Locked : Unlocked} href={`${baseEnvUrl}/${app}/teams/${team.id}`} onMouseEnter={() => setActiveSubmenu(team.id)} onClick={() => handleTeamClick(team)}>
+                          <SideNavLink id={team.id} ref={teamsRef.current[i]} isActive={windowLocation.href.includes(team.id)} className={`${prefix}--bmrg-advantage-sidenav-team`} renderIcon={team?.isPersonal ? UserIcon : (team.privateTeam ? Locked : Unlocked)} href={`${baseEnvUrl}/${app}/teams/${team.id}`} onMouseEnter={() => setActiveSubmenu(team.id)} onClick={() => handleTeamClick(team)}>
                             <p className={`${prefix}--bmrg-advantage-sidenav-teams__title`}>
                               {Boolean(team.displayName) ? team.displayName : team.name}
                             </p>
@@ -176,7 +183,7 @@ export function AdvantageSideNav(props: Props) {
           {Boolean(accounts?.length) ?
             <>
               <SideNavDivider />
-              <SideNavMenu renderIcon={GroupAccount} title="Accounts" isSideNavExpanded={isMenuOpen}>
+              <SideNavMenu renderIcon={GroupAccount} title="Accounts" isSideNavExpanded={isMenuOpen} isActive={accounts.some(a => windowLocation.href.includes(a.id))} >
                 {isMenuOpen ? accounts?.map((team, i) => {
                   const topPosition = document?.getElementById(team.id)?.getBoundingClientRect()?.top ?? 0;
                   return(

@@ -57,6 +57,7 @@
 
 .#{$prefix}--bmrg-advantage-sidenav-teams__title {
   display: block;
+  font-size: 0.875rem;
   overflow-x: hidden;
   text-overflow: ellipsis;
   width: 8.5rem;
@@ -68,7 +69,7 @@
   position: fixed;
   right: auto;
   visibility: hidden;
-  width: 16rem;
+  width: 12.9375rem;
   z-index: 1000;
 
   &.--open{
@@ -95,7 +96,7 @@
   background-color: shell.$bmrg-theme-submenu-background !important;
   display: block;
   height: 100%;
-  max-height: 10rem;
+  max-height: 20rem;
   overflow-y: auto;
   padding: 0;
   position: static;
@@ -140,7 +141,7 @@
     font-weight: 400;
     overflow-x: hidden;
     text-overflow: ellipsis;
-    width: 12rem;
+    width: 12.9375rem;
   }
 
   span {
@@ -162,8 +163,8 @@
 }
 
 .#{$prefix}--side-nav__submenu-title {
-  color: shell.$bmrg-theme-secondary;
+  color: shell.$bmrg-theme-secondary !important;
   &:hover{
-    color: shell.$bmrg-theme-primary;
-  }
+    color: shell.$bmrg-theme-primary !important;
+  } 
 }

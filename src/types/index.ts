@@ -84,7 +84,8 @@ export type SimpleTeamService = {
 };
 
 export interface SideNavTeam extends SimpleIdNameMap {
-  services:Array<SimpleTeamService>
+  services:Array<SimpleTeamService>;
+  isPersonal?: boolean;
 }
 export interface SideNavAccount extends SimpleIdNameMap {
   projectTeams:Array<SimpleIdNameMap>
@@ -280,6 +281,10 @@ export type User = {
     id: string;
     name: string;
   };
+  hasPersonalTeam?: boolean;
+  hasOpenPersonalTeamRequest?: boolean;
+  personalTeamAssistantsAccess?: boolean;
+  personalTeamAssistantsAccessRequested?: boolean;
 };
 
 export type UserTeams = {
