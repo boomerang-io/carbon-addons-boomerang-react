@@ -25,12 +25,14 @@ type OwnProps = {
   subtitle: React.ReactNode;
   role: string;
   caption?: React.ReactNode;
+  lowContrast?: boolean;
   onCloseButtonClick?: (...args: any[]) => any;
   iconDescription: string;
   notificationType?: string;
   hideCloseButton?: boolean;
   timeout?: number;
   toastProps?: any;
+  [index: string]: any;
 };
 
 type Props = OwnProps & typeof ToastNotification.defaultProps;
