@@ -3,13 +3,12 @@
 
 .#{$prefix}--bmrg-toastify-container {
   .Toastify__toast {
-    background: theme.$background-inverse !important;
     border-radius: var(--cds-border-radius, 0);
     padding: 0 !important;
     & > svg {
-      fill: theme.$text-inverse;
-      margin-top: 1.375rem;
-      margin-right: 1rem;
+      position: absolute;
+      right: 1rem;
+      top: 1.375rem;
     }
   }
 
@@ -30,7 +29,6 @@
 
 .#{$prefix}--bmrg-toast-notification-container {
   .#{$prefix}--toast-notification {
-    background: theme.$background-inverse;
     box-shadow: none;
     height: 100%;
     margin-bottom: 0;
@@ -44,9 +42,5 @@
 
   .#{$prefix}--toast-notification:first-child {
     margin-top: 0;
-  }
-  .#{$prefix}--toast-notification__subtitle,
-  .#{$prefix}--toast-notification__title {
-    color: theme.$text-inverse;
   }
 }

@@ -234,7 +234,8 @@ function DataDrivenInput(props: DataDrivenInputProps) {
     };
   } else if (Object.values(SELECT_TYPES).includes(type)) {
     const items = governingOptions || formatSelectOptions(options);
-    const selectedItem = items.find((item: any) => item.value === value) ?? {};
+    const selectedItem = items.find((item: any) => item.value === value) ?? { label: "", value: "" };
+
     Component = Select;
     componentProps = {
       ...allInputProps,
