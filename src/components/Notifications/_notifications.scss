@@ -36,6 +36,10 @@
     width: 100%;
   }
 
+  .#{$prefix}--toast-notification__details {
+    margin-right: 3rem;
+  }
+
   .#{$prefix}--toast-notification__icon {
     margin-top: 1.375rem;
   }
