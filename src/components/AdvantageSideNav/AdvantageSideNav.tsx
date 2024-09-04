@@ -49,7 +49,6 @@ export function AdvantageSideNav(props: Props) {
   const windowLocation = window.location;
   const isPartnerUser = user?.type === USER_PLATFORM_ROLE.Partner;
   const standardTeamsList = [...personalTeams.map(pteams => ({...pteams, isPersonal: true})), ...teams];
-
   // Functions to track IBM Instrumentation on Segment
   const handleHomeClick = () => {
     triggerEvent && triggerEvent({
@@ -190,7 +189,7 @@ export function AdvantageSideNav(props: Props) {
                   return(
                     <>
                       <li className={`${prefix}--bmrg-advantage-sidenav-team-item`}>
-                        <SideNavLink id={team.id} isActive={windowLocation.href.includes(team.id)} ref={accountsRef.current[i]} className={`${prefix}--bmrg-advantage-sidenav-team`} renderIcon={team.privateTeam ? Locked : Unlocked} href={`${baseEnvUrl}/${app}/teams/${team.id}`} onMouseEnter={() => setActiveSubmenu(team.id)} onClick={() => handleTeamClick(team)}>
+                        <SideNavLink id={team.id} isActive={windowLocation.href.includes(team.id)} ref={accountsRef.current[i]} className={`${prefix}--bmrg-advantage-sidenav-account`} href={`${baseEnvUrl}/${app}/teams/${team.id}`} onMouseEnter={() => setActiveSubmenu(team.id)} onClick={() => handleTeamClick(team)}>
                           <p className={`${prefix}--bmrg-advantage-sidenav-teams__title`}>
                             {Boolean(team.displayName) ? team.displayName : team.name}
                           </p>
