@@ -111,7 +111,7 @@ export default function Header(props: Props) {
         <CarbonHeader aria-label="App navigation header" className={className}>
           {skipToContentProps ? <SkipToContent {...skipToContentProps} /> : null}
           <SidenavMenu leftPanel={props.leftPanel} navLinks={props.navLinks} />
-          <HeaderName href={baseEnvUrl} prefix={prefixName}>
+          <HeaderName href={baseEnvUrl} prefix={prefixName} data-testid="header-product">
             {productName}
           </HeaderName>
           <HeaderNavigation aria-label="Platform navigation">
@@ -119,6 +119,7 @@ export default function Header(props: Props) {
               ? navLinks.map((link) => (
                   <HeaderMenuItem
                     aria-label={`Link for ${link.name}`}
+                    data-testid="header-menu-link"
                     href={link.url}
                     isCurrentPage={
                       window?.location?.href && link.url ? window.location.href.startsWith(link.url) : false
@@ -180,6 +181,7 @@ function RequestsMenu(props: { baseEnvUrl?: string; enabled: boolean; summary: P
         aria-label={MenuAriaLabelRecord.Requests}
         className={headerButtonClassNames}
         id={MenuButtonId.Requests}
+        data-testid="header-requests-link"
         onClick={toggleActive}
       >
         <Collaborate size={20} />
@@ -211,6 +213,7 @@ function NotificationsMenu(props: { enabled: boolean; baseEnvUrl?: string; baseS
         aria-haspopup="dialog"
         aria-label={MenuAriaLabelRecord.Notifcations}
         className={headerButtonClassNames}
+        data-testid="header-notifications-link"
         id={MenuButtonId.Notifcations}
         onClick={toggleActive}
       >
@@ -243,6 +246,7 @@ function SupportMenu(props: { enabled: Boolean; menuItems: Props["supportMenuIte
         aria-haspopup="menu"
         aria-label={MenuAriaLabelRecord.Support}
         className={headerButtonClassNames}
+        data-testid="header-support-link"
         id={MenuButtonId.Support}
         onClick={toggleActive}
       >
@@ -272,6 +276,7 @@ function ProfileMenu(props: { enabled: boolean; menuItems?: Props["profileMenuIt
         aria-haspopup="menu"
         aria-label={MenuAriaLabelRecord.Profile}
         className={headerButtonClassNames}
+        data-testid="header-profile-link"
         id={MenuButtonId.Profile}
         onClick={toggleActive}
       >
@@ -301,6 +306,7 @@ function AppSwitcherMenu(props: { enabled?: boolean; baseEnvUrl?: string; baseSe
         aria-haspopup="menu"
         aria-label={MenuAriaLabelRecord.Switcher}
         className={headerButtonClassNames}
+        data-testid="header-appswitcher-link"
         id={MenuButtonId.Switcher}
         onClick={toggleActive}
       >
@@ -332,6 +338,7 @@ function RightPanelMenu(props: { enabled: boolean; icon?: React.ReactNode; compo
         aria-haspopup="dialog"
         aria-label={MenuAriaLabelRecord.RightPanel}
         className={headerButtonClassNames}
+        data-testid="header-right-panel"
         id={MenuButtonId.RightPanel}
         onClick={toggleActive}
       >
@@ -360,7 +367,7 @@ function SidenavMenu(props: { leftPanel?: Props["leftPanel"]; navLinks: Props["n
 
   if (typeof props.leftPanel === "function") {
     return (
-      <div ref={ref}>
+      <div ref={ref} data-testid="header-sidenav-menu">
         <HeaderMenuButton
           aria-label="Sidenav menu"
           id={MenuButtonId.SideNav}
@@ -378,7 +385,7 @@ function SidenavMenu(props: { leftPanel?: Props["leftPanel"]; navLinks: Props["n
   }
 
   return (
-    <div ref={ref}>
+    <div ref={ref} data-testid="header-sidenav-menu">
       {isMobileSidenavActive ? (
         <>
           <HeaderMenuButton

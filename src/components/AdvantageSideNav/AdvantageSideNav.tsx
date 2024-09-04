@@ -113,6 +113,7 @@ export function AdvantageSideNav(props: Props) {
       className={cx(`${prefix}--bmrg-advantage-sidenav-container`, className, {
         "--closed": !isMenuOpen
       })}
+      data-testid="sidenav-container"
       isRail
       expanded={isMenuOpen}
       onToggle={() => setActiveSubmenu("")}
@@ -129,9 +130,9 @@ export function AdvantageSideNav(props: Props) {
             </div>
           ) : null}
           <div onMouseEnter={() => setActiveSubmenu("")}>
-            {homeLink ? <SideNavLink isActive={windowLocation.href === homeLink} renderIcon={Home} href={homeLink} onClick={handleHomeClick}>Home</SideNavLink> : null}
-            {(!isPartnerUser && assistantLink) ? <SideNavLink isActive={windowLocation.href.includes(assistantLink)} renderIcon={ChatBot} href={assistantLink} onClick={handleAssistantClick}>{`Start a ${defaultAssistantLink ? "" : "New "}Chat`}</SideNavLink> : null}
-            {(!isPartnerUser && joinCreateTrigger) ? <SideNavLink renderIcon={AddAlt} onClick={(e: any) => {joinCreateTrigger(e); handleCreateJoinClick();}}>Create or Join Team</SideNavLink> : null}
+            {homeLink ? <SideNavLink data-testid="sidenav-home-link" isActive={windowLocation.href === homeLink} renderIcon={Home} href={homeLink} onClick={handleHomeClick}>Home</SideNavLink> : null}
+            {(!isPartnerUser && assistantLink) ? <SideNavLink data-testid="sidenav-assistant-link" isActive={windowLocation.href.includes(assistantLink)} renderIcon={ChatBot} href={assistantLink} onClick={handleAssistantClick}>{`Start a ${defaultAssistantLink ? "" : "New "}Chat`}</SideNavLink> : null}
+            {(!isPartnerUser && joinCreateTrigger) ? <SideNavLink data-testid="sidenav-create-join-trigger" renderIcon={AddAlt} onClick={(e: any) => {joinCreateTrigger(e); handleCreateJoinClick();}}>Create or Join Team</SideNavLink> : null}
           </div>
             {!Boolean(standardTeamsList?.length) && !Boolean(accounts?.length) && isMenuOpen ?
               <>
@@ -143,13 +144,13 @@ export function AdvantageSideNav(props: Props) {
             {Boolean(standardTeamsList?.length) ?
               <>
                 <SideNavDivider />
-                <SideNavMenu renderIcon={UserMultiple} title="Teams" isActive={standardTeamsList.some(t => windowLocation.href.includes(t.id))} className={`${prefix}--bmrg-advantage-sidenav-menu`} isSideNavExpanded={isMenuOpen}>
+                <SideNavMenu renderIcon={UserMultiple} title="Teams" data-testid="sidenav-teams" isActive={standardTeamsList.some(t => windowLocation.href.includes(t.id))} className={`${prefix}--bmrg-advantage-sidenav-menu`} isSideNavExpanded={isMenuOpen}>
                   {isMenuOpen ? standardTeamsList?.map((team, i) => {
                     const topPosition = document?.getElementById(team.id)?.getBoundingClientRect()?.top ?? 0;
                     return(
                       <>
                         <li className={`${prefix}--bmrg-advantage-sidenav-team-item`}>
-                          <SideNavLink id={team.id} ref={teamsRef.current[i]} isActive={windowLocation.href.includes(team.id)} className={`${prefix}--bmrg-advantage-sidenav-team`} renderIcon={team?.isPersonal ? UserIcon : (team.privateTeam ? Locked : Unlocked)} href={`${baseEnvUrl}/${app}/teams/${team.id}`} onMouseEnter={() => setActiveSubmenu(team.id)} onClick={() => handleTeamClick(team)}>
+                          <SideNavLink data-testid="sidenav-team-link" id={team.id} ref={teamsRef.current[i]} isActive={windowLocation.href.includes(team.id)} className={`${prefix}--bmrg-advantage-sidenav-team`} renderIcon={team?.isPersonal ? UserIcon : (team.privateTeam ? Locked : Unlocked)} href={`${baseEnvUrl}/${app}/teams/${team.id}`} onMouseEnter={() => setActiveSubmenu(team.id)} onClick={() => handleTeamClick(team)}>
                             <p className={`${prefix}--bmrg-advantage-sidenav-teams__title`}>
                               {Boolean(team.displayName) ? team.displayName : team.name}
                             </p>
@@ -163,11 +164,11 @@ export function AdvantageSideNav(props: Props) {
                             >
                               <li className={`${prefix}--bmrg-advantage-sidenav-submenu-wrapper`}>
                                 <ul className={`${prefix}--bmrg-advantage-sidenav-services-submenu`}>
-                                  <SideNavLink className={`${prefix}--bmrg-advantage-sidenav-submenu-link`} href={`${baseEnvUrl}/${app}/teams/${team.id}`} onClick={() => handleTeamClick(team)}>
+                                  <SideNavLink className={`${prefix}--bmrg-advantage-sidenav-submenu-link`} data-testid="sidenav-team-submenu-link" href={`${baseEnvUrl}/${app}/teams/${team.id}`} onClick={() => handleTeamClick(team)}>
                                     Team Page
                                   </SideNavLink>
                                   {team.services?.map((service) => (
-                                    <SideNavLink className={`${prefix}--bmrg-advantage-sidenav-submenu-link`} href={service.url} onClick={() => handleServiceClick(service)}>
+                                    <SideNavLink className={`${prefix}--bmrg-advantage-sidenav-submenu-link`} data-testid="sidenav-service-submenu-link" href={service.url} onClick={() => handleServiceClick(service)}>
                                       {service.name}
                                     </SideNavLink>
                                   )) ?? null}                 
@@ -183,7 +184,7 @@ export function AdvantageSideNav(props: Props) {
           {Boolean(accounts?.length) ?
             <>
               <SideNavDivider />
-              <SideNavMenu renderIcon={GroupAccount} title="Accounts" isSideNavExpanded={isMenuOpen} isActive={accounts.some(a => windowLocation.href.includes(a.id))} >
+              <SideNavMenu renderIcon={GroupAccount} title="Accounts" data-testid="sidenav-accounts" isSideNavExpanded={isMenuOpen} isActive={accounts.some(a => windowLocation.href.includes(a.id))} >
                 {isMenuOpen ? accounts?.map((team, i) => {
                   const topPosition = document?.getElementById(team.id)?.getBoundingClientRect()?.top ?? 0;
                   return(
@@ -207,7 +208,7 @@ export function AdvantageSideNav(props: Props) {
                                   Account Page
                                 </SideNavLink> */}
                                   {team.projectTeams?.map((accTeam) => (
-                                    <SideNavLink className={`${prefix}--bmrg-advantage-sidenav-submenu-link`} href={`${baseEnvUrl}/${app}/teams/${accTeam.id}`} onClick={() => handleTeamClick(accTeam)}>
+                                    <SideNavLink className={`${prefix}--bmrg-advantage-sidenav-submenu-link`} data-testid="sidenav-account-submenu-link" href={`${baseEnvUrl}/${app}/teams/${accTeam.id}`} onClick={() => handleTeamClick(accTeam)}>
                                       {accTeam.name}
                                     </SideNavLink> 
                                   )) ?? null}                 

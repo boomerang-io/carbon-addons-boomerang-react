@@ -137,7 +137,7 @@ export default class PlatformNotificationsContainer extends React.Component<Prop
 
   renderNotifications() {
     return this.state.currentNotifications.slice(0, 5).map((notification) => (
-      <li key={notification.id}>
+      <li key={notification.id} data-testid="header-notification">
         <Notification readNotification={this.handleReadNotification.bind(this)} data={notification} />
       </li>
     ));
@@ -153,6 +153,7 @@ export default class PlatformNotificationsContainer extends React.Component<Prop
         className={cx(`${prefix}--bmrg-notifications`, {
           "--is-active": this.props.isOpen,
         })}
+        data-testid="header-notifications"
         id={this.props.id}
         role="dialog"
       >
@@ -162,6 +163,7 @@ export default class PlatformNotificationsContainer extends React.Component<Prop
           </h1>
           <button
             className={`${prefix}--bmrg-notifications-header__clear`}
+            data-testid="header-notifications-all-read"
             disabled={!currentNotifications.length}
             onClick={this.handleReadAllNotifications.bind(this)}
             aria-label="Mark all read"
@@ -183,6 +185,7 @@ export default class PlatformNotificationsContainer extends React.Component<Prop
             aria-label="Link for notification center"
             href={`${baseEnvUrl}/launchpad/notifications`}
             className={`${prefix}--bmrg-notifications__notifications-redirect-link`}
+            data-testid="header-notifications-center-link"
           >
             Open Notification Center
           </a>

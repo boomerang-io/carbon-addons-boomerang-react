@@ -57,7 +57,7 @@ export default function HeaderAppSwitcher({ baseServicesUrl, baseEnvUrl, id, isO
     const { accountTeams, standardTeams } = teamsQuery.data;
     if (accountTeams?.length || standardTeams?.length) {
       return (
-        <HeaderPanel aria-label="App Switcher" className={panelClassName} expanded={isOpen} id={id} role="menu">
+        <HeaderPanel aria-label="App Switcher" className={panelClassName} data-testid="header-app-switcher" expanded={isOpen} id={id} role="menu">
           <div className={cx(contentClassName, { "--is-hidden": !isOpen })}>
             {standardTeams?.map((team) => (
               <TeamServiceListMenu
@@ -99,7 +99,7 @@ export default function HeaderAppSwitcher({ baseServicesUrl, baseEnvUrl, id, isO
     }
 
     return (
-      <HeaderPanel aria-label="App Switcher" className={panelClassName} expanded={isOpen} id={id} role="menu">
+      <HeaderPanel aria-label="App Switcher" className={panelClassName} data-testid="header-app-switcher" expanded={isOpen} id={id} role="menu">
         <div className={cx(contentClassName, "--is-empty", { "--is-hidden": !isOpen })}>
           <h1 className={`${prefix}--bmrg-header-switcher__empty-title`}>No teams</h1>
           <p className={`${prefix}--bmrg-header-switcher__empty-subtitle`}>You must be new here</p>
@@ -157,7 +157,7 @@ function TeamServiceListMenu({ baseServicesUrl, baseEnvUrl, isAccount, isMember,
   if (!isMember) {
     return (
       <div className={`${prefix}--side-nav__item`} title={isNameTruncated ? name : undefined}>
-        <button disabled className={`${prefix}--side-nav__submenu`}>
+        <button disabled className={`${prefix}--side-nav__submenu`} data-testid="header-app-switcher-service">
           <span className={`${prefix}--side-nav__submenu-title`}>{name}</span>
         </button>
       </div>
@@ -202,7 +202,7 @@ function ServiceList(props: ServiceListProps) {
 
   if (servicesQuery.error) {
     return (
-      <div className={`${prefix}--bmrg-header-team__message`}>{`Failed to fetch the services for this ${
+      <div className={`${prefix}--bmrg-header-team__message`} data-testid="header-service-list">{`Failed to fetch the services for this ${
         isAccount ? "account" : "team"
       }`}</div>
     );
@@ -221,6 +221,7 @@ function ServiceList(props: ServiceListProps) {
                 href={service.url}
                 title={isNameTruncated ? service.name : undefined}
                 onClick={() => handleLinkClick(service)}
+                data-testid="header-app-switcher-service"
                 {...(isExternalLink ? externalProps : undefined)}
               >
                 <div onClick={() => handleLinkClick(service)} role="button">
@@ -234,7 +235,7 @@ function ServiceList(props: ServiceListProps) {
       );
     } else {
       return (
-        <div className={`${prefix}--bmrg-header-team__message`}>{`This ${
+        <div className={`${prefix}--bmrg-header-team__message`} data-testid="header-app-switcher-service">{`This ${
           isAccount ? "account" : "team"
         } has no services`}</div>
       );
