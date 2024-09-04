@@ -55,6 +55,10 @@
   }
 }
 
+.#{$prefix}--side-nav__submenu[aria-expanded=true] + .#{$prefix}--side-nav__menu {
+  max-block-size: none;
+}
+
 .#{$prefix}--bmrg-advantage-sidenav-teams__title {
   display: block;
   font-size: 0.875rem;
