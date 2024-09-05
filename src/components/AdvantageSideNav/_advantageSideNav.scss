@@ -13,6 +13,13 @@
   background-color: transparent;
 }
 
+.#{$prefix}--bmrg-side-nav__tooltip {
+  width: 13rem;
+  div {
+    text-align: center;
+  }
+}
+
 .#{$prefix}--side-nav__divider{
   background-color: shell.$bmrg-theme-border !important;
 }
@@ -129,6 +136,17 @@
   min-height: 35px;
   position: static;
   width: 100%;
+}
+
+.#{$prefix}--side-nav__link[disabled]{
+  cursor: auto;
+  span, span:hover {
+    color: shell.$bmrg-theme-disabled !important;
+    cursor: auto;
+  }
+  svg {
+    fill: shell.$bmrg-theme-disabled !important;
+  }
 }
 
 .#{$prefix}--bmrg-advantage-sidenav-team {
