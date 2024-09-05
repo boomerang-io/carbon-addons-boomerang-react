@@ -165,13 +165,13 @@ export function AdvantageSideNav(props: Props) {
             {Boolean(standardTeamsList?.length) ?
               <>
                 <SideNavDivider />
-                <SideNavMenu renderIcon={UserMultiple} title="Teams" data-testid="sidenav-teams" defaultExpanded={isMenuOpen} isActive={standardTeamsList.some(t => windowLocation.href.includes(t.id))} className={`${prefix}--bmrg-advantage-sidenav-menu`} isSideNavExpanded={isMenuOpen}>
+                <SideNavMenu renderIcon={UserMultiple} title="Teams" data-testid="sidenav-teams" isActive={standardTeamsList.some(t => windowLocation.href.includes(t.id))} className={`${prefix}--bmrg-advantage-sidenav-menu`} isSideNavExpanded={isMenuOpen}>
                   {isMenuOpen ? standardTeamsList?.map((team, i) => {
                     const topPosition = document?.getElementById(team.id)?.getBoundingClientRect()?.top ?? 0;
                     return(
                       <>
                         <li className={`${prefix}--bmrg-advantage-sidenav-team-item`}>
-                          <SideNavLink data-testid="sidenav-team-link" id={team.id} ref={teamsRef.current[i]} isActive={windowLocation.href.includes(team.id)} className={`${prefix}--bmrg-advantage-sidenav-team`} renderIcon={team?.isPersonal ? UserIcon : (team.privateTeam ? Locked : Unlocked)} href={`${baseEnvUrl}/${app}/teams/${team.id}`} onMouseEnter={() => setActiveSubmenu(team.id)} onClick={() => handleTeamClick(team)}>
+                          <SideNavLink data-testid="sidenav-team-link" id={team.id} ref={teamsRef.current[i]} isActive={windowLocation.href.includes(team.id) && isMenuOpen} className={`${prefix}--bmrg-advantage-sidenav-team`} renderIcon={team?.isPersonal ? UserIcon : (team.privateTeam ? Locked : Unlocked)} href={`${baseEnvUrl}/${app}/teams/${team.id}`} onMouseEnter={() => setActiveSubmenu(team.id)} onClick={() => handleTeamClick(team)}>
                             <p className={`${prefix}--bmrg-advantage-sidenav-teams__title`}>
                               {Boolean(team.displayName) ? team.displayName : team.name}
                             </p>
@@ -205,7 +205,7 @@ export function AdvantageSideNav(props: Props) {
           {Boolean(accounts?.length) ?
             <>
               <SideNavDivider />
-              <SideNavMenu renderIcon={GroupAccount} title="Accounts" data-testid="sidenav-accounts" isSideNavExpanded={isMenuOpen} defaultExpanded={isMenuOpen} isActive={accounts.some(a => windowLocation.href.includes(a.id))} >
+              <SideNavMenu renderIcon={GroupAccount} title="Accounts" data-testid="sidenav-accounts" isSideNavExpanded={isMenuOpen} isActive={accounts.some(a => windowLocation.href.includes(a.id)) && isMenuOpen}>
                 {isMenuOpen ? accounts?.map((team, i) => {
                   const topPosition = document?.getElementById(team.id)?.getBoundingClientRect()?.top ?? 0;
                   return(
