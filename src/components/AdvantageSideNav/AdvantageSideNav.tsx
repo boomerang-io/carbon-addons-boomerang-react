@@ -165,7 +165,7 @@ export function AdvantageSideNav(props: Props) {
             {Boolean(standardTeamsList?.length) ?
               <>
                 <SideNavDivider />
-                <SideNavMenu renderIcon={UserMultiple} title="Teams" data-testid="sidenav-teams" isActive={standardTeamsList.some(t => windowLocation.href.includes(t.id))} className={`${prefix}--bmrg-advantage-sidenav-menu`} isSideNavExpanded={isMenuOpen}>
+                <SideNavMenu renderIcon={UserMultiple} title="Teams" data-testid="sidenav-teams" aria-expanded={isMenuOpen} isActive={standardTeamsList.some(t => windowLocation.href.includes(t.id))} className={`${prefix}--bmrg-advantage-sidenav-menu`} isSideNavExpanded={isMenuOpen}>
                   {isMenuOpen ? standardTeamsList?.map((team, i) => {
                     const topPosition = document?.getElementById(team.id)?.getBoundingClientRect()?.top ?? 0;
                     return(
@@ -205,7 +205,7 @@ export function AdvantageSideNav(props: Props) {
           {Boolean(accounts?.length) ?
             <>
               <SideNavDivider />
-              <SideNavMenu renderIcon={GroupAccount} title="Accounts" data-testid="sidenav-accounts" isSideNavExpanded={isMenuOpen} isActive={accounts.some(a => windowLocation.href.includes(a.id)) && isMenuOpen}>
+              <SideNavMenu renderIcon={GroupAccount} title="Accounts" data-testid="sidenav-accounts" aria-expanded={isMenuOpen} isSideNavExpanded={isMenuOpen} isActive={accounts.some(a => windowLocation.href.includes(a.id)) && isMenuOpen}>
                 {isMenuOpen ? accounts?.map((team, i) => {
                   const topPosition = document?.getElementById(team.id)?.getBoundingClientRect()?.top ?? 0;
                   return(
