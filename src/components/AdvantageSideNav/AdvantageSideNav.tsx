@@ -12,16 +12,18 @@ type Props = {
   app?: string;
   assistantLink?: string;
   baseEnvUrl?: string;
-  chatRequestPending?: boolean;
   className?: string;
   defaultAssistantLink?: string;
+  enableChatButton?: boolean;
   homeLink?: string;
   joinCreateTrigger?: (props: any) => void;
   isLoading?: boolean;
   isOpen?: boolean;
   navLinks?: NavLink[];
   personalTeams?: Array<SideNavTeam>;
+  showChatTooltip?: boolean;
   teams?: Array<SideNavTeam>;
+  tooltipMessage?: string;
   triggerEvent?: (props: any) => void;
   user: User;
 };
@@ -29,7 +31,7 @@ type Props = {
 export function AdvantageSideNav(props: Props) {
   const { 
     app,
-    chatRequestPending,
+    enableChatButton=true,
     homeLink,
     assistantLink,
     defaultAssistantLink,
@@ -44,6 +46,8 @@ export function AdvantageSideNav(props: Props) {
     navLinks,
     personalTeams=[],
     user,
+    showChatTooltip,
+    tooltipMessage,
     ...rest
   } = props;
   const [activeSubmenu, setActiveSubmenu] = React.useState("");
@@ -113,12 +117,12 @@ export function AdvantageSideNav(props: Props) {
   const assistantSideNavLink = assistantLink && (
     <SideNavLink
       data-testid="sidenav-assistant-link"
-      className={!chatRequestPending && `${prefix}--bmrg-advantage-sidenav__inactive-link`}
-      disabled={chatRequestPending}
+      className={!enableChatButton && `${prefix}--bmrg-advantage-sidenav__inactive-link`}
+      disabled={Boolean(!enableChatButton)}
       isActive={windowLocation.href.includes(assistantLink)}
       renderIcon={ChatBot}
-      href={!chatRequestPending && assistantLink}
-      onClick={!chatRequestPending ? handleAssistantClick : (e: any) => e.preventDefault()}
+      href={enableChatButton && assistantLink}
+      onClick={enableChatButton ? handleAssistantClick : (e: any) => e.preventDefault()}
     >{`Start a ${defaultAssistantLink ? "" : "New "}Chat`}</SideNavLink>
   );
 
@@ -146,8 +150,8 @@ export function AdvantageSideNav(props: Props) {
           <div onMouseEnter={() => setActiveSubmenu("")}>
             {homeLink ? <SideNavLink data-testid="sidenav-home-link" isActive={windowLocation.href === homeLink} renderIcon={Home} href={homeLink} onClick={handleHomeClick}>Home</SideNavLink> : null}
             {!isPartnerUser && assistantLink && (
-              chatRequestPending ? (
-                <TooltipHover className={`${prefix}--bmrg-side-nav__tooltip`} content="Chat request is being reviewed. Please try again later." direction="right">
+              showChatTooltip ? (
+                <TooltipHover className={`${prefix}--bmrg-side-nav__tooltip`} content={tooltipMessage} direction="right">
                   <span>{assistantSideNavLink}</span>
                 </TooltipHover>
               ) : (
@@ -205,7 +209,7 @@ export function AdvantageSideNav(props: Props) {
           {Boolean(accounts?.length) ?
             <>
               <SideNavDivider />
-              <SideNavMenu renderIcon={GroupAccount} title="Accounts" data-testid="sidenav-accounts" aria-expanded={isMenuOpen} isSideNavExpanded={isMenuOpen} isActive={accounts.some(a => windowLocation.href.includes(a.id)) && isMenuOpen}>
+              <SideNavMenu renderIcon={GroupAccount} className="teste" title="Accounts" data-testid="sidenav-accounts" aria-expanded={isMenuOpen} isSideNavExpanded={isMenuOpen} isActive={accounts.some(a => windowLocation.href.includes(a.id)) && isMenuOpen}>
                 {isMenuOpen ? accounts?.map((team, i) => {
                   const topPosition = document?.getElementById(team.id)?.getBoundingClientRect()?.top ?? 0;
                   return(

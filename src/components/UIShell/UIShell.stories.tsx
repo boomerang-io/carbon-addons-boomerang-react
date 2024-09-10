@@ -70,7 +70,7 @@ const sidenavProps = {
   joinCreateTrigger: () => console.log("Trigger modal if exists"),
   teams: [
     {id:"a11", name: "Team1", privateTeam: true, services: [{url: 1, name: "service1 with a really long name so we can test elipsis"}, {url:2, name:"service12"}, {url:3, name:"service13"}, {url: 4, name: "service2"}, {url:5, name:"service22"}, {url: 4, name: "service2"}, {url:5, name:"service22"}]},
-    {id:"b22", name: "Team2", privateTeam: false, displayName:"Test Display Name", services: [{url: 4, name: "service2"}, {url:5, name:"service22"}]},
+    {id:"platform-uishell--left-panel", name: "Team2", privateTeam: false, displayName:"Test Display Name", services: [{url: 4, name: "service2"}, {url:5, name:"service22"}]},
     {id:"c33", name: "Team3 with a really long name so we can test elipsis", privateTeam: false, services: [{url: 6, name: "service3"}]},
     {id:"d44", name: "Team4", privateTeam: true, services: []},
   ],
@@ -80,11 +80,14 @@ const sidenavProps = {
     {id:"g3333", name: "Account3", projectTeams: [{id: 333, name: "team3", isTeamMember: true}]},
     {id:"h4444", name: "Account4 with a really long name so we can test elipsis", projectTeams: []},
   ],
-  personalTeams: [{id:"11111", name: "Team4", privateTeam: true, services: []}],
+  personalTeams: [{id:"11111", name: "Team4", displayName: "Display Name"}],
   baseEnvUrl:"https://baseurl.com",
   app: "testapp",
   isOpen: false,
   user: {type: "admin"},
+  // enableChatButton: false,
+  tooltipMessage: "Test tooltip message for ui shell",
+  showChatTooltip: true,
 };
 
 const withDelay = (delay: number, response: any) => (): Promise<any> => {

@@ -31,7 +31,7 @@ const sidenavProps = {
     {id:"3333", name: "Account3", projectTeams: [{id: 333, name: "team3", isTeamMember: true}]},
     {id:"4444", name: "Account4 with a really long name so we can test elipsis", projectTeams: []},
   ],
-  personalTeams: [{id:"11111", name: "Team4", privateTeam: true, services: []}],
+  personalTeams: [{id:"11111", name: "Team4", displayName: "Display Name"}],
   baseEnvUrl:"https://baseurl.com",
   app: "testapp",
   isOpen: false,
