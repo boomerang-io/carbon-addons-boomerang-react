@@ -200,7 +200,7 @@ export function AdvantageSideNav(props: Props) {
                 <SideNavDivider />
                 <SideNavMenu 
                   className={cx(`${prefix}--bmrg-advantage-sidenav-menu`, {
-                    // "--active-closed": !isMenuOpen && standardTeamsList.some(t => windowLocation.href.includes(t.id))
+                    "--active-closed": !isMenuOpen && standardTeamsList.some(t => windowLocation.href.includes(t.id))
                   })}
                   renderIcon={UserMultiple}
                   title="Teams"
@@ -274,7 +274,7 @@ export function AdvantageSideNav(props: Props) {
               <SideNavDivider />
               <SideNavMenu 
                 className={cx(`${prefix}--bmrg-advantage-sidenav-menu`, {
-                  // "--active-closed": !isMenuOpen && standardTeamsList.some(t => windowLocation.href.includes(t.id))
+                  "--active-closed": !isMenuOpen && accounts.some(t => windowLocation.href.includes(t.id))
                 })}
                 renderIcon={GroupAccount}
                 title="Accounts"

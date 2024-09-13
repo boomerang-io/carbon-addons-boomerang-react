@@ -60,19 +60,21 @@
     display: flex;
     flex-direction: column;
   }
-  // &.--active-closed {
-    // background-color: rgba(141, 141, 141, 0.24);
-    // >button::before {
-    //   position: absolute;
-    //   background-color: #0072c3;
-    //   box-sizing: inherit;
-    //   content: "";
-    //   inline-size: 3px;
-    //   inset-block-end: 0;
-    //   inset-block-start: 0;
-    //   inset-inline-start: 0;
-    // }
-  // }
+  &.--active-closed {
+    background-color: var(--cds-background-selected);
+    position: relative;
+
+    >button::before {
+      background-color: var(--cds-border-interactive);
+      box-sizing: inherit;
+      content: "";
+      inline-size: 0.1875rem;
+      inset-block-end: 0;
+      inset-block-start: 0;
+      inset-inline-start: 0;
+      position: absolute;
+    }
+  }
 }
 
 .#{$prefix}--side-nav__submenu[aria-expanded=true] + .#{$prefix}--side-nav__menu {
