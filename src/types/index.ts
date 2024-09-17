@@ -60,6 +60,7 @@ export type InputGovernor = {
 export type LowerLevelGroup = {
   id: string;
   name?: string;
+  displayName?: string;
   userProperties: any[];
   visible: boolean;
 };

@@ -173,7 +173,7 @@ function ProfileSettings({ baseServicesUrl, src, userName, isOpen, closeModal }:
               </StructuredListRow>
             </StructuredListHead>
             <StructuredListBody>
-              {(sortBy(teams, "name") as LowerLevelGroup[]).map(({ name, id, visible }) => (
+              {(sortBy(teams, "name") as LowerLevelGroup[]).map(({ name, displayName, id, visible }) => (
                 <StructuredListRow
                   key={id}
                   className={!visible ? `${prefix}--bmrg-profile-settings-list__row--disabled` : ""}
@@ -182,7 +182,7 @@ function ProfileSettings({ baseServicesUrl, src, userName, isOpen, closeModal }:
                     <Checkbox
                       checked={visible}
                       id={id}
-                      labelText={name}
+                      labelText={Boolean(displayName) ? displayName : name}
                       onChange={(
                         _: React.ChangeEvent<HTMLInputElement>,
                         { checked, id }: { checked: boolean; id: string }
