@@ -2,6 +2,7 @@
 @use "../../global/config" as *;
 @use "../../global/utils";
 @use "../../global/themes/shell-tokens" as shell;
+@use '@carbon/themes/scss/tokens' as theme;
 
 // Necessary for the Boomerang theme to work
 :root {
@@ -73,6 +74,26 @@
       }
     }
 
+    .#{$prefix}--bmrg-header-notifications-badge__icon-container {
+      position: relative;
+      display: flex;
+    }
+
+    .#{$prefix}--bmrg-header-notifications-badge__icon-badge {
+      position: absolute;
+      top: -1px;
+      right: -8px;
+      background-color: theme.$support-error-inverse;
+      color: theme.$text-on-color;
+      border-radius: 50%;
+      width: 15px;
+      height: 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 10px;
+    }
+    
     // span, p, a, div {
     //   color: shell.$bmrg-theme-primary;
     //   &:hover {

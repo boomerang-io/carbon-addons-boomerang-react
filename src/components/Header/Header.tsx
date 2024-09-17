@@ -39,6 +39,7 @@ type Props = {
   className?: string;
   enableAppSwitcher?: boolean;
   enableNotifications?: boolean;
+  enableNotificationsCount?: boolean;
   leftPanel?: (args: { close: () => void; isOpen: boolean; navLinks?: NavLink[] }) => React.ReactNode;
   navLinks?: NavLink[];
   platformMessage?: string;
@@ -141,6 +142,7 @@ export default function Header(props: Props) {
               baseEnvUrl={baseEnvUrl}
               baseServicesUrl={baseServicesUrl}
               enabled={Boolean(props.enableNotifications)}
+              countEnabled={Boolean(props.enableNotificationsCount)}
             />
             <SupportMenu
               enabled={Array.isArray(props.supportMenuItems) && props.supportMenuItems.length > 0}
@@ -195,15 +197,36 @@ function RequestsMenu(props: { baseEnvUrl?: string; enabled: boolean; summary: P
   );
 }
 
-function NotificationsMenu(props: { enabled: boolean; baseEnvUrl?: string; baseServicesUrl?: string }) {
+function NotificationBadge(props: { count: number }) {
+  return (
+    <div className={`${prefix}--bmrg-header-notifications-badge__icon-container`}>
+      <Notification size={20} />
+      {props.count > 0 && (
+        <span className={`${prefix}--bmrg-header-notifications-badge__icon-badge`}>{props.count}</span>
+      )}
+    </div>
+  );
+}
+
+function NotificationsMenu(props: {
+  enabled: boolean;
+  countEnabled: boolean;
+  baseEnvUrl?: string;
+  baseServicesUrl?: string;
+}) {
   const { isOpen, toggleActive, ref } = useHeaderMenu<HTMLDivElement>(MenuButtonId.Notifcations);
   const [hasNewNotifications, setHasNewNotifications] = React.useState(false);
+  const [notificationsCount, setNotificationsCount] = React.useState(0);
+  let icon = null;
 
   if (!props.enabled || !props.baseEnvUrl || !props.baseServicesUrl) {
     return null;
   }
 
-  const icon = hasNewNotifications ? <NotificationNew size={20} /> : <Notification size={20} />;
+  icon = hasNewNotifications ? <NotificationNew size={20} /> : <Notification size={20} />;
+  if (props.countEnabled && hasNewNotifications) {
+    icon = <NotificationBadge count={notificationsCount} />;
+  }
 
   return (
     <div style={{ position: "relative" }} ref={ref}>
@@ -226,6 +249,7 @@ function NotificationsMenu(props: { enabled: boolean; baseEnvUrl?: string; baseS
         id={MenuListId.Notifcations}
         isOpen={isOpen}
         setHasNewNotifications={setHasNewNotifications}
+        setNotificationsCount={setNotificationsCount}
       />
     </div>
   );
@@ -291,7 +315,12 @@ function ProfileMenu(props: { enabled: boolean; menuItems?: Props["profileMenuIt
   );
 }
 
-function AppSwitcherMenu(props: { enabled?: boolean; baseEnvUrl?: string; baseServicesUrl?: string; triggerEvent?: any }) {
+function AppSwitcherMenu(props: {
+  enabled?: boolean;
+  baseEnvUrl?: string;
+  baseServicesUrl?: string;
+  triggerEvent?: any;
+}) {
   const { isOpen, toggleActive, ref } = useHeaderMenu<HTMLDivElement>(MenuButtonId.Switcher);
 
   if (!props.enabled || !props.baseServicesUrl) {
@@ -375,11 +404,11 @@ function SidenavMenu(props: { leftPanel?: Props["leftPanel"]; navLinks: Props["n
           isCollapsible={true}
           onClick={toggleActive}
         />
-          {props.leftPanel({
-            isOpen: isOpen,
-            close: closeMenu,
-            navLinks: isMobileSidenavActive ? props.navLinks : undefined,
-          })}
+        {props.leftPanel({
+          isOpen: isOpen,
+          close: closeMenu,
+          navLinks: isMobileSidenavActive ? props.navLinks : undefined,
+        })}
       </div>
     );
   }

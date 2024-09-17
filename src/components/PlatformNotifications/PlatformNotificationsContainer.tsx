@@ -13,6 +13,7 @@ type Props = {
   initialNotifications?: PlatformNotification[];
   isOpen: boolean;
   setHasNewNotifications: (hasNewNotifications: boolean) => void;
+  setNotificationsCount: (notificationsCount: number) => void;
 };
 
 type State = { currentNotifications: PlatformNotification[]; numNotifications: number; error: boolean };
@@ -60,10 +61,15 @@ export default class PlatformNotificationsContainer extends React.Component<Prop
       if (data.length > 0) {
         this.props.setHasNewNotifications(true);
       }
-      this.setState((prevState) => ({
-        currentNotifications: [...data, ...prevState.currentNotifications],
-        numNotifications: prevState.numNotifications + data.length,
-      }));
+      this.setState(
+        (prevState) => ({
+          currentNotifications: [...data, ...prevState.currentNotifications],
+          numNotifications: prevState.numNotifications + data.length,
+        }),
+        () => {
+          this.props.setNotificationsCount(this.state.numNotifications);
+        }
+      );
     } else {
       this.setState({
         error: true, // TOOD something here related to the error
@@ -84,10 +90,15 @@ export default class PlatformNotificationsContainer extends React.Component<Prop
         // This has to be declared because this function can be triggered from the notification page in Launchpad
         this.props.setHasNewNotifications(false);
       }
-      this.setState({
-        currentNotifications: data,
-        numNotifications: data.length,
-      });
+      this.setState(
+        {
+          currentNotifications: data,
+          numNotifications: data.length,
+        },
+        () => {
+          this.props.setNotificationsCount(this.state.numNotifications);
+        }
+      );
     } else {
       this.setState({
         error: true, // TOOD something here related to the error
@@ -109,6 +120,7 @@ export default class PlatformNotificationsContainer extends React.Component<Prop
       () => {
         if (this.state.numNotifications === 0) {
           this.props.setHasNewNotifications(false);
+          this.props.setNotificationsCount(0);
           // when we clear out notifications, check to to see if there are new notifications available
           this.ws.publish({ destination: "/app/all", body: {} });
         }

@@ -24,6 +24,7 @@ type Props = {
       "partner.enabled"?: boolean;
       "metering.enabled"?: boolean;
       "notifications.enabled"?: boolean;
+      "notificationsCount.enabled"?: boolean;
       "support.enabled"?: boolean;
       "welcome.enabled"?: boolean;
     };
@@ -84,6 +85,7 @@ function UIShell({
         baseServicesUrl=""
         enableAppSwitcher={false}
         enableNotifications={false}
+        enableNotificationsCount={false}
         productName={productName || platformName || ""}
       />
     );
@@ -99,6 +101,7 @@ function UIShell({
   const isAppSwitcherEnabled = Boolean(features?.["appSwitcher.enabled"]);
   const isFeedbackEnabled = Boolean(features?.["feedback.enabled"]);
   const isNotificationsEnabled = Boolean(features?.["notifications.enabled"]);
+  const isNotificationsCountEnabled = Boolean(features?.["notificationsCount.enabled"]);
   const isSupportEnabled = Boolean(features?.["support.enabled"]);
 
   /**
@@ -131,6 +134,7 @@ function UIShell({
         baseServicesUrl={platform.baseServicesUrl}
         enableAppSwitcher={isAppSwitcherEnabled}
         enableNotifications={isNotificationsEnabled}
+        enableNotificationsCount={isNotificationsCountEnabled}
         leftPanel={leftPanel}
         navLinks={navigation}
         platformMessage={platformMessage}
