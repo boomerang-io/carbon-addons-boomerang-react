@@ -274,7 +274,10 @@ export function AdvantageSideNav(props: Props) {
               <SideNavDivider />
               <SideNavMenu 
                 className={cx(`${prefix}--bmrg-advantage-sidenav-menu`, {
-                  "--active-closed": !isMenuOpen && accounts.some(t => windowLocation.href.includes(t.id))
+                  "--active-closed": !isMenuOpen && (accounts.some(t => {
+                    const pIds = t?.projectTeams?.map(project => project.id) ?? [];
+                    return windowLocation.href.includes(t.id) || pIds.some(id => windowLocation.href.includes(id));
+                  }))
                 })}
                 renderIcon={GroupAccount}
                 title="Accounts"
@@ -285,13 +288,16 @@ export function AdvantageSideNav(props: Props) {
                 {isMenuOpen ? accounts?.map((team, i) => {
                   const topPosition = document?.getElementById(team.id)?.getBoundingClientRect()?.top ?? 0;
                   const teamDisplayName = Boolean(team.displayName) ? team.displayName : team.name;
+                  const projectIds = team?.projectTeams?.map(project => project.id) ?? []; 
+                  const isAccountActive = windowLocation.href.includes(team.id) || projectIds.some(id => windowLocation.href.includes(id));
+                  
                   return (
                     <>
                       <li className={`${prefix}--bmrg-advantage-sidenav-team-item`}>
                         <SideNavLink
                           title={teamDisplayName}
                           id={team.id}
-                          isActive={windowLocation.href.includes(team.id)}
+                          isActive={isAccountActive}
                           ref={accountsRef.current[i]}
                           className={`${prefix}--bmrg-advantage-sidenav-account`}
                           href={`${baseEnvUrl}/${app}/teams/${team.id}`}
