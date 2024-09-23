@@ -1,6 +1,6 @@
 import React from "react";
 import cx from "classnames";
-import { SideNav, SideNavDivider, SideNavItems, SideNavLink , SideNavMenu, Tooltip } from "@carbon/react";
+import { SideNav, SideNavDivider, SideNavItems, SideNavLink , SideNavMenu } from "@carbon/react";
 import TooltipHover from "../TooltipHover";
 import { AddAlt, ChatBot, ChevronRight, GroupAccount, Home, Locked, Unlocked, User as UserIcon, UserMultiple } from "@carbon/react/icons";
 import { USER_PLATFORM_ROLE } from "../../constants/UserType";
@@ -26,6 +26,7 @@ type Props = {
   tooltipMessage?: string;
   triggerEvent?: (props: any) => void;
   user: User;
+  isLaunchpad?: boolean;
   children?: React.ReactNode;
 };
 
@@ -49,6 +50,7 @@ export function AdvantageSideNav(props: Props) {
     user,
     showChatTooltip,
     tooltipMessage,
+    isLaunchpad=false,
     children,
     ...rest
   } = props;
@@ -223,7 +225,7 @@ export function AdvantageSideNav(props: Props) {
                             ref={teamsRef.current[i]}
                             className={`${prefix}--bmrg-advantage-sidenav-team`}
                             renderIcon={team?.isPersonal ? UserIcon : (team.privateTeam ? Locked : Unlocked)}
-                            href={`${baseEnvUrl}/${app}/teams/${team.id}`}
+                            href={isLaunchpad ? `/teams/${team.id}` : `${baseEnvUrl}/${app}/teams/${team.id}`}
                             onMouseEnter={() => setActiveSubmenu(team.id)}
                             onClick={() => handleTeamClick(team)}
                           >
@@ -244,7 +246,7 @@ export function AdvantageSideNav(props: Props) {
                                     title="Team Page"
                                     className={`${prefix}--bmrg-advantage-sidenav-submenu-link`}
                                     data-testid="sidenav-team-submenu-link"
-                                    href={`${baseEnvUrl}/${app}/teams/${team.id}`}
+                                    href={isLaunchpad ? `/teams/${team.id}` : `${baseEnvUrl}/${app}/teams/${team.id}`}
                                     onClick={() => handleTeamClick(team)}
                                   >
                                     Team Page
@@ -300,7 +302,7 @@ export function AdvantageSideNav(props: Props) {
                           isActive={isAccountActive}
                           ref={accountsRef.current[i]}
                           className={`${prefix}--bmrg-advantage-sidenav-account`}
-                          href={`${baseEnvUrl}/${app}/teams/${team.id}`}
+                          href={isLaunchpad ? `/teams/${team.id}` : `${baseEnvUrl}/${app}/teams/${team.id}`}
                           onMouseEnter={() => setActiveSubmenu(team.id)}
                           onClick={() => handleTeamClick(team)}
                         >
@@ -325,7 +327,7 @@ export function AdvantageSideNav(props: Props) {
                                       title={accTeam.name}
                                       className={`${prefix}--bmrg-advantage-sidenav-submenu-link`}
                                       data-testid="sidenav-account-submenu-link"
-                                      href={`${baseEnvUrl}/${app}/teams/${accTeam.id}`}
+                                      href={isLaunchpad ? `/teams/${accTeam.id}` : `${baseEnvUrl}/${app}/teams/${accTeam.id}`}
                                       onClick={() => handleTeamClick(accTeam)}
                                     >
                                       {accTeam.name}
