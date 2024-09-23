@@ -160,7 +160,13 @@ export function AdvantageSideNav(props: Props) {
                 isActive={`${baseEnvUrl}/${app}/`.includes(windowLocation.href)}
                 renderIcon={Home}
                 href={homeLink}
-                onClick={handleHomeClick}
+                onClick={(e: any) => {
+                  if(isLaunchpad) {
+                    e.preventDefault();
+                    history.push(homeLink);
+                  }
+                  handleHomeClick();
+                }}
               >
                 Home
               </SideNavLink> : null
@@ -232,10 +238,9 @@ export function AdvantageSideNav(props: Props) {
                             onClick={(e: any) => {
                               if(isLaunchpad) {
                                 e.preventDefault();
-                                history.push(`/teams/${team.id}`)
-                              } else {
-                                handleTeamClick(team);
+                                history.push(`/teams/${team.id}`);
                               }
+                              handleTeamClick(team);
                             }}
                           >
                             <p className={`${prefix}--bmrg-advantage-sidenav-teams__title`}>
@@ -259,10 +264,9 @@ export function AdvantageSideNav(props: Props) {
                                     onClick={(e: any) => {
                                       if(isLaunchpad) {
                                         e.preventDefault();
-                                        history.push(`/teams/${team.id}`)
-                                      } else {
-                                        handleTeamClick(team);
+                                        history.push(`/teams/${team.id}`);
                                       }
+                                      handleTeamClick(team);
                                     }}
                                   >
                                     Team Page
@@ -323,10 +327,9 @@ export function AdvantageSideNav(props: Props) {
                           onClick={(e: any) => {
                             if(isLaunchpad) {
                               e.preventDefault();
-                              history.push(`/teams/${team.id}`)
-                            } else {
-                              handleTeamClick(team);
+                              history.push(`/teams/${team.id}`);
                             }
+                            handleTeamClick(team);
                           }}
                         >
                           <p className={`${prefix}--bmrg-advantage-sidenav-teams__title`}>
@@ -354,10 +357,9 @@ export function AdvantageSideNav(props: Props) {
                                       onClick={(e: any) => {
                                         if(isLaunchpad) {
                                           e.preventDefault();
-                                          history.push(`/teams/${accTeam.id}`)
-                                        } else {
-                                          handleTeamClick(accTeam);
+                                          history.push(`/teams/${accTeam.id}`);
                                         }
+                                        handleTeamClick(accTeam);
                                       }}
                                     >
                                       {accTeam.name}
