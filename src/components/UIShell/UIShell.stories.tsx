@@ -88,7 +88,8 @@ const sidenavProps = {
   // enableChatButton: false,
   tooltipMessage: "Test tooltip message for ui shell",
   showChatTooltip: true,
-};
+  // isLaunchpad: true,
+}
 
 const withDelay = (delay: number, response: any) => (): Promise<any> => {
   return new Promise(function (resolve) {

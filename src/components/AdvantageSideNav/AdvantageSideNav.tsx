@@ -27,6 +27,7 @@ type Props = {
   triggerEvent?: (props: any) => void;
   user: User;
   isLaunchpad?: boolean;
+  history?: any;
   children?: React.ReactNode;
 };
 
@@ -51,6 +52,7 @@ export function AdvantageSideNav(props: Props) {
     showChatTooltip,
     tooltipMessage,
     isLaunchpad=false,
+    history,
     children,
     ...rest
   } = props;
@@ -225,9 +227,16 @@ export function AdvantageSideNav(props: Props) {
                             ref={teamsRef.current[i]}
                             className={`${prefix}--bmrg-advantage-sidenav-team`}
                             renderIcon={team?.isPersonal ? UserIcon : (team.privateTeam ? Locked : Unlocked)}
-                            href={isLaunchpad ? `/teams/${team.id}` : `${baseEnvUrl}/${app}/teams/${team.id}`}
+                            href={`${baseEnvUrl}/${app}/teams/${team.id}`}
                             onMouseEnter={() => setActiveSubmenu(team.id)}
-                            onClick={() => handleTeamClick(team)}
+                            onClick={(e: any) => {
+                              if(isLaunchpad) {
+                                e.preventDefault();
+                                history.push(`/teams/${team.id}`)
+                              } else {
+                                handleTeamClick(team);
+                              }
+                            }}
                           >
                             <p className={`${prefix}--bmrg-advantage-sidenav-teams__title`}>
                               {teamDisplayName}
@@ -246,8 +255,15 @@ export function AdvantageSideNav(props: Props) {
                                     title="Team Page"
                                     className={`${prefix}--bmrg-advantage-sidenav-submenu-link`}
                                     data-testid="sidenav-team-submenu-link"
-                                    href={isLaunchpad ? `/teams/${team.id}` : `${baseEnvUrl}/${app}/teams/${team.id}`}
-                                    onClick={() => handleTeamClick(team)}
+                                    href={`${baseEnvUrl}/${app}/teams/${team.id}`}
+                                    onClick={(e: any) => {
+                                      if(isLaunchpad) {
+                                        e.preventDefault();
+                                        history.push(`/teams/${team.id}`)
+                                      } else {
+                                        handleTeamClick(team);
+                                      }
+                                    }}
                                   >
                                     Team Page
                                   </SideNavLink>
@@ -302,9 +318,16 @@ export function AdvantageSideNav(props: Props) {
                           isActive={isAccountActive}
                           ref={accountsRef.current[i]}
                           className={`${prefix}--bmrg-advantage-sidenav-account`}
-                          href={isLaunchpad ? `/teams/${team.id}` : `${baseEnvUrl}/${app}/teams/${team.id}`}
+                          href={`${baseEnvUrl}/${app}/teams/${team.id}`}
                           onMouseEnter={() => setActiveSubmenu(team.id)}
-                          onClick={() => handleTeamClick(team)}
+                          onClick={(e: any) => {
+                            if(isLaunchpad) {
+                              e.preventDefault();
+                              history.push(`/teams/${team.id}`)
+                            } else {
+                              handleTeamClick(team);
+                            }
+                          }}
                         >
                           <p className={`${prefix}--bmrg-advantage-sidenav-teams__title`}>
                             {teamDisplayName}
@@ -327,8 +350,15 @@ export function AdvantageSideNav(props: Props) {
                                       title={accTeam.name}
                                       className={`${prefix}--bmrg-advantage-sidenav-submenu-link`}
                                       data-testid="sidenav-account-submenu-link"
-                                      href={isLaunchpad ? `/teams/${accTeam.id}` : `${baseEnvUrl}/${app}/teams/${accTeam.id}`}
-                                      onClick={() => handleTeamClick(accTeam)}
+                                      href={`${baseEnvUrl}/${app}/teams/${accTeam.id}`}
+                                      onClick={(e: any) => {
+                                        if(isLaunchpad) {
+                                          e.preventDefault();
+                                          history.push(`/teams/${accTeam.id}`)
+                                        } else {
+                                          handleTeamClick(accTeam);
+                                        }
+                                      }}
                                     >
                                       {accTeam.name}
                                     </SideNavLink> 
