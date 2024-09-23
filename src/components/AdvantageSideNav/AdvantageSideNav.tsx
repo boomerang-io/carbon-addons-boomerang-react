@@ -157,7 +157,7 @@ export function AdvantageSideNav(props: Props) {
             {homeLink ? 
               <SideNavLink
                 data-testid="sidenav-home-link"
-                isActive={homeLink.includes(windowLocation.href)}
+                isActive={`${baseEnvUrl}/${app}/`.includes(windowLocation.href)}
                 renderIcon={Home}
                 href={homeLink}
                 onClick={handleHomeClick}
