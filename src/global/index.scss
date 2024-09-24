@@ -79,12 +79,24 @@ $use-theme-advantage-white: false !default;
   }
 }
 
-//style for advantage sidenav icons
+//style for advantage sidenav
 .#{$prefix}--side-nav__items {
   svg {
     fill: shell.$bmrg-theme-primary !important;
   }
 } 
+
+.#{$prefix}--side-nav__submenu, .#{$prefix}--header__action {
+  &:focus {
+    border-color: shell.$bmrg-accent;
+    outline: shell.$bmrg-accent 0.0625rem solid !important;
+  }
+}
+
+.#{$prefix}--skip-to-content {
+  background-color: shell.$bmrg-theme-background !important;
+  color: shell.$bmrg-theme-primary !important;
+}
 
 // Styles for the UIShell from addons
 .#{$prefix}--bmrg-header-modal {

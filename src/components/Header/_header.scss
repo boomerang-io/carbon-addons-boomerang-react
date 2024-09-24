@@ -12,11 +12,20 @@
 
     .#{$prefix}--header__name {
       color: shell.$bmrg-theme-primary;
+      &:focus {
+        border-color: var(--cds-border-interactive);
+      }
     }
 
     .#{$prefix}--header__action {
+      border-radius: 0 !important;
+
       svg, path {
         fill: shell.$bmrg-theme-primary !important;
+      }
+
+      &:focus {
+        box-shadow: none;
       }
     }
 
@@ -26,9 +35,6 @@
       background: shell.$bmrg-theme-background !important;
     }
 
-    .#{$prefix}--header__action {
-      border-radius: 0 !important;
-    }
     .#{$prefix}--header__action[aria-expanded=true] {
       background-color: shell.$bmrg-theme-active-icon;
     }

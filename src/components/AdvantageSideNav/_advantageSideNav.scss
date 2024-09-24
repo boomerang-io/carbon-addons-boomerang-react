@@ -153,6 +153,12 @@
   width: 100%;
 }
 
+.#{$prefix}--side-nav__link {
+  &:focus {
+    outline: var(--cds-border-interactive) 0.0625rem solid !important;
+  }
+}
+
 .#{$prefix}--side-nav__link[disabled]{
   cursor: auto;
   span, span:hover {

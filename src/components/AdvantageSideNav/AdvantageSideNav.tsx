@@ -62,6 +62,8 @@ export function AdvantageSideNav(props: Props) {
   const windowLocation = window.location;
   const isPartnerUser = user?.type === USER_PLATFORM_ROLE.Partner;
   const standardTeamsList = [...personalTeams.map(pteams => ({...pteams, isPersonal: true})), ...teams];
+  const teamsMenuRef = React.useRef(null);
+  const accountsMenuRef = React.useRef(null);
   // Functions to track IBM Instrumentation on Segment
   const handleHomeClick = () => {
     triggerEvent && triggerEvent({
@@ -163,6 +165,10 @@ export function AdvantageSideNav(props: Props) {
                 onClick={(e: any) => {
                   if(isLaunchpad) {
                     e.preventDefault();
+                    // remediation to close menu, submenu and accordion when select a team on Launchpad
+                    //@ts-ignore
+                    setActiveMenu(false);
+                    setActiveSubmenu("");
                     history.push(homeLink);
                   }
                   handleHomeClick();
@@ -215,7 +221,8 @@ export function AdvantageSideNav(props: Props) {
                   renderIcon={UserMultiple}
                   title="Teams"
                   data-testid="sidenav-teams"
-                  aria-expanded={isMenuOpen}
+                  id="sidenav-teams"
+                  ref={teamsMenuRef}
                   isActive={standardTeamsList.some(t => windowLocation.href.includes(t.id))}
                   isSideNavExpanded={isMenuOpen}
                 >
@@ -230,14 +237,21 @@ export function AdvantageSideNav(props: Props) {
                             name={team.name}
                             data-testid="sidenav-team-link"
                             id={team.id}
+                            isActive={windowLocation.href.includes(team.id)}
                             ref={teamsRef.current[i]}
                             className={`${prefix}--bmrg-advantage-sidenav-team`}
                             renderIcon={team?.isPersonal ? UserIcon : (team.privateTeam ? Locked : Unlocked)}
                             href={`${baseEnvUrl}/${app}/teams/${team.id}`}
                             onMouseEnter={() => setActiveSubmenu(team.id)}
+                            onFocus={() => setActiveSubmenu(team.id)}
                             onClick={(e: any) => {
                               if(isLaunchpad) {
                                 e.preventDefault();
+                                // remediation to close menu, submenu and accordion when select a team on Launchpad
+                                //@ts-ignore
+                                teamsMenuRef.current.click();
+                                setActiveMenu(false);
+                                setActiveSubmenu("");
                                 history.push(`/teams/${team.id}`);
                               }
                               handleTeamClick(team);
@@ -264,6 +278,11 @@ export function AdvantageSideNav(props: Props) {
                                     onClick={(e: any) => {
                                       if(isLaunchpad) {
                                         e.preventDefault();
+                                        // remediation to close menu, submenu and accordion when select a team on Launchpad
+                                        //@ts-ignore
+                                        teamsMenuRef.current.click();
+                                        setActiveMenu(false);
+                                        setActiveSubmenu("");
                                         history.push(`/teams/${team.id}`);
                                       }
                                       handleTeamClick(team);
@@ -304,6 +323,8 @@ export function AdvantageSideNav(props: Props) {
                 renderIcon={GroupAccount}
                 title="Accounts"
                 data-testid="sidenav-accounts"
+                id="sidenav-accounts"
+                ref={accountsMenuRef}
                 aria-expanded={isMenuOpen}
                 isSideNavExpanded={isMenuOpen}
               >
@@ -324,9 +345,15 @@ export function AdvantageSideNav(props: Props) {
                           className={`${prefix}--bmrg-advantage-sidenav-account`}
                           href={`${baseEnvUrl}/${app}/teams/${team.id}`}
                           onMouseEnter={() => setActiveSubmenu(team.id)}
+                          onFocus={() => setActiveSubmenu(team.id)}
                           onClick={(e: any) => {
                             if(isLaunchpad) {
                               e.preventDefault();
+                              // remediation to close menu, submenu and accordion when select a team on Launchpad
+                              //@ts-ignore
+                              teamsMenuRef.current.click();
+                              setActiveMenu(false);
+                              setActiveSubmenu("");
                               history.push(`/teams/${team.id}`);
                             }
                             handleTeamClick(team);
@@ -357,6 +384,11 @@ export function AdvantageSideNav(props: Props) {
                                       onClick={(e: any) => {
                                         if(isLaunchpad) {
                                           e.preventDefault();
+                                          // remediation to close menu, submenu and accordion when select a team on Launchpad
+                                          //@ts-ignore
+                                          accountsMenuRef.current.click();
+                                          setActiveMenu(false);
+                                          setActiveSubmenu("");
                                           history.push(`/teams/${accTeam.id}`);
                                         }
                                         handleTeamClick(accTeam);
