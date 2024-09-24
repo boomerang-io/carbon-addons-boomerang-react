@@ -355,7 +355,7 @@ export function AdvantageSideNav(props: Props) {
                               e.preventDefault();
                               // remediation to close menu, submenu and accordion when select a team on Launchpad
                               //@ts-ignore
-                              teamsMenuRef.current.click();
+                              accountsMenuRef.current.click();
                               setActiveMenu(false);
                               setActiveSubmenu("");
                               Boolean(hamburguerMenu) && hamburguerMenu?.click();
