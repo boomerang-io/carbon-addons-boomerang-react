@@ -88,7 +88,7 @@ const sidenavProps = {
   // enableChatButton: false,
   tooltipMessage: "Test tooltip message for ui shell",
   showChatTooltip: true,
-  // isLaunchpad: true,
+  isLaunchpad: true,
 }
 
 const withDelay = (delay: number, response: any) => (): Promise<any> => {
@@ -394,7 +394,7 @@ export function UIShellKitchenSink(args) {
             </div>
           ),
         }}
-        skipToContentProps={{ href: "#id" }}
+        skipToContentProps={null}
         supportMenuItems={[
           <HeaderMenuItem onClick={() => setIsTutorialOpen(true)} type="button" text="Tutorial" key="tutorial" />,
         ]}

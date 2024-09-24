@@ -108,6 +108,18 @@ export function AdvantageSideNav(props: Props) {
     });
   };
 
+  const handleLaunchpadLink = (event: any) => {
+    event.preventDefault();
+    // remediation to close menu, submenu and accordion when select a team on Launchpad
+    //@ts-ignore
+    teamsMenuRef.current.click();
+    //@ts-ignore
+    accountsMenuRef.current.click();
+    setActiveMenu(false);
+    setActiveSubmenu("");
+    Boolean(hamburguerMenu) && hamburguerMenu?.click();
+  }
+
   const teamsRef = React.useRef([]);
   const accountsRef = React.useRef([]);
 
@@ -165,12 +177,7 @@ export function AdvantageSideNav(props: Props) {
                 href={homeLink}
                 onClick={(e: any) => {
                   if(isLaunchpad) {
-                    e.preventDefault();
-                    // remediation to close menu, submenu and accordion when select a team on Launchpad
-                    //@ts-ignore
-                    setActiveMenu(false);
-                    setActiveSubmenu("");
-                    Boolean(hamburguerMenu) && hamburguerMenu?.click();
+                    handleLaunchpadLink(e);
                     history.push(homeLink);
                   }
                   handleHomeClick();
@@ -248,13 +255,7 @@ export function AdvantageSideNav(props: Props) {
                             onFocus={() => setActiveSubmenu(team.id)}
                             onClick={(e: any) => {
                               if(isLaunchpad) {
-                                e.preventDefault();
-                                // remediation to close menu, submenu and accordion when select a team on Launchpad
-                                //@ts-ignore
-                                teamsMenuRef.current.click();
-                                setActiveMenu(false);
-                                setActiveSubmenu("");
-                                Boolean(hamburguerMenu) && hamburguerMenu?.click();
+                                handleLaunchpadLink(e);
                                 history.push(`/teams/${team.id}`);
                               }
                               handleTeamClick(team);
@@ -280,13 +281,7 @@ export function AdvantageSideNav(props: Props) {
                                     href={`${baseEnvUrl}/${app}/teams/${team.id}`}
                                     onClick={(e: any) => {
                                       if(isLaunchpad) {
-                                        e.preventDefault();
-                                        // remediation to close menu, submenu and accordion when select a team on Launchpad
-                                        //@ts-ignore
-                                        teamsMenuRef.current.click();
-                                        setActiveMenu(false);
-                                        setActiveSubmenu("");
-                                        Boolean(hamburguerMenu) && hamburguerMenu?.click();
+                                        handleLaunchpadLink(e);
                                         history.push(`/teams/${team.id}`);
                                       }
                                       handleTeamClick(team);
@@ -352,13 +347,7 @@ export function AdvantageSideNav(props: Props) {
                           onFocus={() => setActiveSubmenu(team.id)}
                           onClick={(e: any) => {
                             if(isLaunchpad) {
-                              e.preventDefault();
-                              // remediation to close menu, submenu and accordion when select a team on Launchpad
-                              //@ts-ignore
-                              accountsMenuRef.current.click();
-                              setActiveMenu(false);
-                              setActiveSubmenu("");
-                              Boolean(hamburguerMenu) && hamburguerMenu?.click();
+                              handleLaunchpadLink(e);
                               history.push(`/teams/${team.id}`);
                             }
                             handleTeamClick(team);
@@ -388,13 +377,7 @@ export function AdvantageSideNav(props: Props) {
                                       href={`${baseEnvUrl}/${app}/teams/${accTeam.id}`}
                                       onClick={(e: any) => {
                                         if(isLaunchpad) {
-                                          e.preventDefault();
-                                          // remediation to close menu, submenu and accordion when select a team on Launchpad
-                                          //@ts-ignore
-                                          accountsMenuRef.current.click();
-                                          setActiveMenu(false);
-                                          setActiveSubmenu("");
-                                          Boolean(hamburguerMenu) && hamburguerMenu?.click();
+                                          handleLaunchpadLink(e);
                                           history.push(`/teams/${accTeam.id}`);
                                         }
                                         handleTeamClick(accTeam);
