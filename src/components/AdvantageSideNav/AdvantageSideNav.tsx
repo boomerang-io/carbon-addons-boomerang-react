@@ -64,6 +64,7 @@ export function AdvantageSideNav(props: Props) {
   const standardTeamsList = [...personalTeams.map(pteams => ({...pteams, isPersonal: true})), ...teams];
   const teamsMenuRef = React.useRef(null);
   const accountsMenuRef = React.useRef(null);
+  const hamburguerMenu = document.getElementById("header-sidenav-menu-button");
   // Functions to track IBM Instrumentation on Segment
   const handleHomeClick = () => {
     triggerEvent && triggerEvent({
@@ -169,6 +170,7 @@ export function AdvantageSideNav(props: Props) {
                     //@ts-ignore
                     setActiveMenu(false);
                     setActiveSubmenu("");
+                    Boolean(hamburguerMenu) && hamburguerMenu?.click();
                     history.push(homeLink);
                   }
                   handleHomeClick();
@@ -252,6 +254,7 @@ export function AdvantageSideNav(props: Props) {
                                 teamsMenuRef.current.click();
                                 setActiveMenu(false);
                                 setActiveSubmenu("");
+                                Boolean(hamburguerMenu) && hamburguerMenu?.click();
                                 history.push(`/teams/${team.id}`);
                               }
                               handleTeamClick(team);
@@ -283,6 +286,7 @@ export function AdvantageSideNav(props: Props) {
                                         teamsMenuRef.current.click();
                                         setActiveMenu(false);
                                         setActiveSubmenu("");
+                                        Boolean(hamburguerMenu) && hamburguerMenu?.click();
                                         history.push(`/teams/${team.id}`);
                                       }
                                       handleTeamClick(team);
@@ -354,6 +358,7 @@ export function AdvantageSideNav(props: Props) {
                               teamsMenuRef.current.click();
                               setActiveMenu(false);
                               setActiveSubmenu("");
+                              Boolean(hamburguerMenu) && hamburguerMenu?.click();
                               history.push(`/teams/${team.id}`);
                             }
                             handleTeamClick(team);
@@ -389,6 +394,7 @@ export function AdvantageSideNav(props: Props) {
                                           accountsMenuRef.current.click();
                                           setActiveMenu(false);
                                           setActiveSubmenu("");
+                                          Boolean(hamburguerMenu) && hamburguerMenu?.click();
                                           history.push(`/teams/${accTeam.id}`);
                                         }
                                         handleTeamClick(accTeam);
