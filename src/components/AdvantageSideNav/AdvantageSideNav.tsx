@@ -112,12 +112,22 @@ export function AdvantageSideNav(props: Props) {
     event.preventDefault();
     // remediation to close menu, submenu and accordion when select a team on Launchpad
     //@ts-ignore
-    teamsMenuRef.current.click();
+    if(Boolean(teamsMenuRef.current.ariaExpanded)) {
+      //@ts-ignore
+      teamsMenuRef.current.click();
+    }
     //@ts-ignore
-    accountsMenuRef.current.click();
+    if(Boolean(accountsMenuRef.current.ariaExpanded)) {
+      //@ts-ignore
+      accountsMenuRef.current.click();
+    }
+    //@ts-ignore
+    if(Boolean(hamburguerMenu) && hamburguerMenu.className.includes("active")) {
+      //@ts-ignore
+      Boolean(hamburguerMenu) && hamburguerMenu?.click();
+    }
     setActiveMenu(false);
     setActiveSubmenu("");
-    Boolean(hamburguerMenu) && hamburguerMenu?.click();
   }
 
   const teamsRef = React.useRef([]);
