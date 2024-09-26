@@ -49,7 +49,7 @@
 }
 
 .#{$prefix}--bmrg-header-menu-user__name {
-  color: #ffffff;
+  color: shell.$bmrg-theme-primary;
   font-family: "IBM Plex Sans", "Helvetica Neue", Arial, Helvetica, sans-serif;
   font-size: utils.rem(14px);
   font-weight: 300;

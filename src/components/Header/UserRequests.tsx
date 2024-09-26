@@ -19,7 +19,7 @@ function UserRequests(props: Props) {
 
   return (
     <>
-      <HeaderMenuItem href={`${baseEnvUrl}/launchpad/requests/action`}>
+      <HeaderMenuItem href={`${baseEnvUrl}/launchpad/requests/action`} data-testid="header-owned-requests">
         <div className="cds--bmrg-requests">
           <span
             className={cx(`${prefix}--bmrg-requests__title`, {
@@ -32,7 +32,7 @@ function UserRequests(props: Props) {
           <span className={`${prefix}--bmrg-requests__text`}>requiring your action</span>
         </div>
       </HeaderMenuItem>
-      <HeaderMenuItem href={`${baseEnvUrl}/launchpad/requests/mine`}>
+      <HeaderMenuItem href={`${baseEnvUrl}/launchpad/requests/mine`} data-testid="header-user-requests">
         <div className="cds--bmrg-requests">
           <span
             className={cx(`${prefix}--bmrg-requests__title`, {

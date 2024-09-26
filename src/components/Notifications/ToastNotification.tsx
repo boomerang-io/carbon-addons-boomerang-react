@@ -20,20 +20,22 @@ type OwnProps = {
   children?: React.ReactNode;
   className?: string;
   closeToast?: (...args: any[]) => any;
-  kind: "error" | "info" | "success" | "warning";
+  kind?: "error" | "info" | "success" | "warning";
   title: string;
-  subtitle: React.ReactNode;
-  role: string;
+  subtitle?: React.ReactNode;
+  role?: string;
   caption?: React.ReactNode;
+  lowContrast?: boolean;
   onCloseButtonClick?: (...args: any[]) => any;
-  iconDescription: string;
+  iconDescription?: string;
   notificationType?: string;
   hideCloseButton?: boolean;
   timeout?: number;
   toastProps?: any;
+  [index: string]: any;
 };
 
-type Props = OwnProps & typeof ToastNotification.defaultProps;
+type Props = OwnProps;
 
 function ToastNotification({ iconDescription, closeToast, toastProps, notificationType, ...rest }: Props) {
   return (

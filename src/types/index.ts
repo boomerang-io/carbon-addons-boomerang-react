@@ -60,6 +60,7 @@ export type InputGovernor = {
 export type LowerLevelGroup = {
   id: string;
   name?: string;
+  displayName?: string;
   userProperties: any[];
   visible: boolean;
 };
@@ -73,6 +74,9 @@ export type ModalFunctionChildrenProps = {
 export type SimpleIdNameMap = {
   id: string;
   name: string;
+  isTeamMember?: boolean;
+  privateTeam?: boolean;
+  displayName?: string;
 };
 
 export type SimpleTeamService = {
@@ -80,6 +84,13 @@ export type SimpleTeamService = {
   url: string;
 };
 
+export interface SideNavTeam extends SimpleIdNameMap {
+  services:Array<SimpleTeamService>;
+  isPersonal?: boolean;
+}
+export interface SideNavAccount extends SimpleIdNameMap {
+  projectTeams:Array<SimpleIdNameMap>
+}
 export type Team = {
   id: string;
   name: string;
@@ -271,6 +282,10 @@ export type User = {
     id: string;
     name: string;
   };
+  hasPersonalTeam?: boolean;
+  hasOpenPersonalTeamRequest?: boolean;
+  personalTeamAssistantsAccess?: boolean;
+  personalTeamAssistantsAccessRequested?: boolean;
 };
 
 export type UserTeams = {

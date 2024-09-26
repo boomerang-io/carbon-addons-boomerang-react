@@ -1,3 +1,4 @@
+export { default as AdvantageSideNav } from "./components/AdvantageSideNav";
 export { default as AutoSuggest } from "./components/AutoSuggest";
 export { default as Avatar } from "./components/Avatar";
 export { default as Header } from "./components/Header";

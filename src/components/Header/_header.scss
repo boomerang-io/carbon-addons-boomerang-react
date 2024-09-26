@@ -7,25 +7,45 @@
 // Necessary for the Boomerang theme to work
 :root {
   .#{$prefix}--header {
-    background: shell.$bmrg-primary !important;
+    background: shell.$bmrg-theme-background !important;
+    border-block-end-color: shell.$bmrg-theme-border;
 
-    // Background overrides
-    .#{$prefix}--side-nav,
-    .#{$prefix}--header-panel {
-      background: shell.$bmrg-primary !important;
+    .#{$prefix}--header__name {
+      color: shell.$bmrg-theme-primary;
+      &:focus {
+        border-color: var(--cds-border-interactive);
+      }
     }
 
     .#{$prefix}--header__action {
       border-radius: 0 !important;
+
+      svg, path {
+        fill: shell.$bmrg-theme-primary !important;
+      }
+
+      &:focus {
+        box-shadow: none;
+      }
+    }
+
+    // Background overrides
+    .#{$prefix}--side-nav,
+    .#{$prefix}--header-panel {
+      background: shell.$bmrg-theme-background !important;
+    }
+
+    .#{$prefix}--header__action[aria-expanded=true] {
+      background-color: shell.$bmrg-theme-active-icon;
     }
 
     .#{$prefix}--header__menu-item--current::after {
-      border-bottom-color: shell.$bmrg-accent;
+      background-color: shell.$bmrg-accent;
     }
 
     // Global action buttion
     .#{$prefix}--header__action--active {
-      background-color: shell.$bmrg-header-hover-background;
+      background-color: shell.$bmrg-theme-active;
     }
 
     // Side nav overrides
@@ -33,12 +53,85 @@
       background-color: shell.$bmrg-accent;
     }
 
+    .#{$prefix}--header__nav::before {
+      background-color: shell.$bmrg-theme-border;
+    }
+
     .#{$prefix}--side-nav__link--current::before {
       background-color: shell.$bmrg-accent;
+    }
+    .#{$prefix}--bmrg-header-drop-down {
+      background: shell.$bmrg-theme-background;
+      border-top: shell.$bmrg-theme-menu-border;
+
+      a.#{$prefix}--header__menu-item {
+        color: shell.$bmrg-theme-primary!important;
+        background-color: shell.$bmrg-theme-menu-background!important;
+        &:hover{
+          color: shell.$bmrg-theme-primary !important;
+          background-color: shell.$bmrg-theme-menu-hover !important;
+        }
+        span {
+          color: shell.$bmrg-theme-primary!important;
+          svg, path {
+            fill: shell.$bmrg-theme-primary !important;
+          }
+        }
+      }
+    }
+
+    .#{$prefix}--bmrg-header-notifications-badge__icon-container {
+      position: relative;
+      display: flex;
+    }
+
+    .#{$prefix}--bmrg-header-notifications-badge__icon-badge {
+      position: absolute;
+      top: -1px;
+      right: -8px;
+      background-color: theme.$support-error-inverse;
+      color: theme.$text-on-color;
+      border-radius: 50%;
+      width: 15px;
+      height: 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 10px;
+    }
+    
+    // span, p, a, div {
+    //   color: shell.$bmrg-theme-primary;
+    //   &:hover {
+    //     color: shell.$bmrg-theme-primary !important;
+    //   }
+    // }
+  }
+}
+
+.#{$prefix}--side-nav__item {
+  a.#{$prefix}--header__menu-item {
+    color: shell.$bmrg-theme-primary!important;
+    // background-color: shell.$bmrg-theme-background;
+    &:hover{
+      color: shell.$bmrg-theme-primary !important;
     }
   }
 }
 
-a.cds--header__menu-item {
-  background: shell.$bmrg-primary;
+a.#{$prefix}--header__menu-item {
+  color: shell.$bmrg-theme-primary!important;
+  background-color: shell.$bmrg-theme-background!important;
+  &:hover{
+    color: shell.$bmrg-theme-primary !important;
+    background-color: shell.$bmrg-theme-active !important;
+  }
 }
+
+span.#{$prefix}--side-nav__link-text {
+  color: shell.$bmrg-theme-secondary !important;
+  &:hover{
+    color: shell.$bmrg-theme-primary !important;
+  }
+}
+

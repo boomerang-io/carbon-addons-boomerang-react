@@ -8,7 +8,7 @@
 }
 
 .#{$prefix}--bmrg-header-switcher {
-  background: shell.$bmrg-primary;
+  background: shell.$bmrg-theme-background;
   height: 100%;
   padding: 1rem 0;
 
@@ -73,8 +73,8 @@
   .#{$prefix}--side-nav__link {
     gap: 0.5rem;
     justify-content: space-between;
-    svg {
-      fill: theme.$icon-secondary;
+    svg, path {
+      fill: shell.$bmrg-theme-primary !important;
       min-width: 1rem;
     }
   }

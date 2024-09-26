@@ -7,6 +7,7 @@
 
 // Defaults
 $use-theme-boomerang: false !default;
+$use-theme-advantage-white: false !default;
 
 // ====================//
 // Imports and Exports //
@@ -23,6 +24,7 @@ $use-theme-boomerang: false !default;
 
 // Import local styles for custom components
 @use '../components/AboutPlatform/aboutPlatform';
+@use '../components/AdvantageSideNav/advantageSideNav';
 @use '../components/AutoSuggest/autoSuggest';
 @use '../components/Avatar/avatar';
 @use '../components/CheckboxList/checkboxList';
@@ -70,13 +72,36 @@ $use-theme-boomerang: false !default;
 
 // UIShell tokens, create css properties for them by default
 :root {
-  @include utils.create-properties(theme-default.$shell-tokens);
+  @if ($use-theme-advantage-white) {
+    @include utils.create-properties(theme-default.$shell-white-tokens);
+  } @else {
+    @include utils.create-properties(theme-default.$shell-tokens);
+  }
+}
+
+//style for advantage sidenav
+.#{$prefix}--side-nav__items {
+  svg {
+    fill: shell.$bmrg-theme-primary !important;
+  }
+} 
+
+.#{$prefix}--side-nav__submenu, .#{$prefix}--header__action {
+  &:focus {
+    border-color: shell.$bmrg-accent;
+    outline: shell.$bmrg-accent 0.0625rem solid !important;
+  }
+}
+
+.#{$prefix}--skip-to-content {
+  background-color: shell.$bmrg-theme-background !important;
+  color: shell.$bmrg-theme-primary !important;
 }
 
 // Styles for the UIShell from addons
 .#{$prefix}--bmrg-header-modal {
   .#{$prefix}--modal-container {
-    background-color: shell.$bmrg-header-modal-background;
+    background-color: shell.$bmrg-theme-background;
     border-radius: var(--cds-border-radius, 0);
 
     * {
@@ -110,6 +135,9 @@ $use-theme-boomerang: false !default;
     &:focus {
       outline: utils.rem(1px) solid shell.$bmrg-secondary;
     }
+    svg {
+      fill: shell.$bmrg-theme-primary;
+    }
   }
 
   .#{$prefix}--modal-content {
@@ -117,13 +145,13 @@ $use-theme-boomerang: false !default;
   }
 
   .#{$prefix}--modal-header__label {
-    color: theme.$text-on-color;
+    color: shell.$bmrg-theme-primary;
     text-transform: initial;
   }
 
   .#{$prefix}--modal-header__heading {
     height: utils.rem(26px);
-    color: theme.$text-on-color;
+    color: shell.$bmrg-theme-primary;
     font-size: utils.rem(20px);
   }
 

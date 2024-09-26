@@ -13,6 +13,7 @@ type Props = {
   initialNotifications?: PlatformNotification[];
   isOpen: boolean;
   setHasNewNotifications: (hasNewNotifications: boolean) => void;
+  setNotificationsCount: (notificationsCount: number) => void;
 };
 
 type State = { currentNotifications: PlatformNotification[]; numNotifications: number; error: boolean };
@@ -60,10 +61,15 @@ export default class PlatformNotificationsContainer extends React.Component<Prop
       if (data.length > 0) {
         this.props.setHasNewNotifications(true);
       }
-      this.setState((prevState) => ({
-        currentNotifications: [...data, ...prevState.currentNotifications],
-        numNotifications: prevState.numNotifications + data.length,
-      }));
+      this.setState(
+        (prevState) => ({
+          currentNotifications: [...data, ...prevState.currentNotifications],
+          numNotifications: prevState.numNotifications + data.length,
+        }),
+        () => {
+          this.props.setNotificationsCount(this.state.numNotifications);
+        }
+      );
     } else {
       this.setState({
         error: true, // TOOD something here related to the error
@@ -84,10 +90,15 @@ export default class PlatformNotificationsContainer extends React.Component<Prop
         // This has to be declared because this function can be triggered from the notification page in Launchpad
         this.props.setHasNewNotifications(false);
       }
-      this.setState({
-        currentNotifications: data,
-        numNotifications: data.length,
-      });
+      this.setState(
+        {
+          currentNotifications: data,
+          numNotifications: data.length,
+        },
+        () => {
+          this.props.setNotificationsCount(this.state.numNotifications);
+        }
+      );
     } else {
       this.setState({
         error: true, // TOOD something here related to the error
@@ -109,6 +120,7 @@ export default class PlatformNotificationsContainer extends React.Component<Prop
       () => {
         if (this.state.numNotifications === 0) {
           this.props.setHasNewNotifications(false);
+          this.props.setNotificationsCount(0);
           // when we clear out notifications, check to to see if there are new notifications available
           this.ws.publish({ destination: "/app/all", body: {} });
         }
@@ -137,7 +149,7 @@ export default class PlatformNotificationsContainer extends React.Component<Prop
 
   renderNotifications() {
     return this.state.currentNotifications.slice(0, 5).map((notification) => (
-      <li key={notification.id}>
+      <li key={notification.id} data-testid="header-notification">
         <Notification readNotification={this.handleReadNotification.bind(this)} data={notification} />
       </li>
     ));
@@ -153,6 +165,7 @@ export default class PlatformNotificationsContainer extends React.Component<Prop
         className={cx(`${prefix}--bmrg-notifications`, {
           "--is-active": this.props.isOpen,
         })}
+        data-testid="header-notifications"
         id={this.props.id}
         role="dialog"
       >
@@ -162,6 +175,7 @@ export default class PlatformNotificationsContainer extends React.Component<Prop
           </h1>
           <button
             className={`${prefix}--bmrg-notifications-header__clear`}
+            data-testid="header-notifications-all-read"
             disabled={!currentNotifications.length}
             onClick={this.handleReadAllNotifications.bind(this)}
             aria-label="Mark all read"
@@ -183,6 +197,7 @@ export default class PlatformNotificationsContainer extends React.Component<Prop
             aria-label="Link for notification center"
             href={`${baseEnvUrl}/launchpad/notifications`}
             className={`${prefix}--bmrg-notifications__notifications-redirect-link`}
+            data-testid="header-notifications-center-link"
           >
             Open Notification Center
           </a>

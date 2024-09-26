@@ -1,5 +1,6 @@
 @use "../../global/config" as *;
 @use "../../global/utils";
+@use "../../global/themes/shell-tokens" as shell;
 
 .#{$prefix}--bmrg-profile-settings-container {
   .#{$prefix}--modal-container {
@@ -20,9 +21,9 @@
   }
 
   .#{$prefix}--modal-content {
-    color: #f2f4f8;
+    color: shell.$bmrg-theme-primary;
     .#{$prefix}--bmrg-profile-settings__title {
-      color: #f2f4f8;
+      color: shell.$bmrg-theme-primary;
       font-size: utils.rem(14px);
       letter-spacing: utils.rem(0.16px);
       line-height: utils.rem(18px);
@@ -30,7 +31,7 @@
     }
 
     .#{$prefix}--bmrg-profile-settings__subtitle {
-      color: #f2f4f8;
+      color: shell.$bmrg-theme-primary;
       font-size: utils.rem(16px);
       letter-spacing: utils.rem(0.18px);
       line-height: utils.rem(20px);
@@ -38,7 +39,7 @@
     }
 
     .#{$prefix}--bmrg-profile-settings__description {
-      color: #c1c7cd;
+      color: shell.$bmrg-theme-secondary;
       font-size: utils.rem(12px);
       letter-spacing: utils.rem(0.32px);
       line-height: utils.rem(15px);
@@ -48,17 +49,17 @@
     .#{$prefix}--bmrg-profile-settings-list {
       .#{$prefix}--checkbox:checked + .#{$prefix}--checkbox-label::before,
       .#{$prefix}--checkbox:indeterminate + .#{$prefix}--checkbox-label::before {
-        background-color: #f2f4f8;
-        border-color: #f2f4f8;
+        background-color: shell.$bmrg-theme-primary;
+        border-color: shell.$bmrg-theme-border;
       }
 
       .#{$prefix}--checkbox:checked + .#{$prefix}--checkbox-label::after {
-        border-bottom: 2px solid black;
-        border-left: 2px solid black;
+        border-bottom: 2px solid shell.$bmrg-theme-border;
+        border-left: 2px solid shell.$bmrg-theme-border;
       }
 
       .#{$prefix}--checkbox:indeterminate + .#{$prefix}--checkbox-label::after {
-        border-bottom: 2px solid black;
+        border-bottom: 2px solid shell.$bmrg-theme-border;
       }
     }
 
@@ -81,7 +82,7 @@
 
     .#{$prefix}--structured-list-th,
     .#{$prefix}--checkbox-label-text {
-      color: #f2f4f8;
+      color: shell.$bmrg-theme-primary;
       padding-left: 1rem;
     }
 
@@ -100,7 +101,7 @@
 }
 
 .#{$prefix}--bmrg-profile-menu-user__name {
-  color: #ffffff;
+  color: shell.$bmrg-theme-primary;
   font-family: "IBM Plex Sans", "Helvetica Neue", Arial, Helvetica, sans-serif;
   font-size: utils.rem(14px);
   font-weight: 300;

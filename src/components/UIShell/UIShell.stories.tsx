@@ -3,6 +3,7 @@ import React from "react";
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
 import { BrowserRouter as Router, Link } from "react-router-dom";
+import AdvantageSideNav from "../AdvantageSideNav";
 import HeaderMenuItem from "../Header/HeaderMenuItem";
 import { Button, Modal, SideNav, SideNavDivider, SideNavLink, SideNavItems, SideNavMenu, SideNavMenuItem } from "@carbon/react";
 import { Help, OpenPanelRight, ServiceDesk } from "@carbon/react/icons";
@@ -63,6 +64,33 @@ const SERVICES_DATA = [
   { name: "Service 4 with a loooong long long long name", url: "https://google.com" },
 ];
 
+const sidenavProps = {
+  homeLink: "http://test.home.com",
+  assistantLink: "http://test.ai.com",
+  joinCreateTrigger: () => console.log("Trigger modal if exists"),
+  teams: [
+    {id:"a11", name: "Team1", privateTeam: true, services: [{url: 1, name: "service1 with a really long name so we can test elipsis"}, {url:2, name:"service12"}, {url:3, name:"service13"}, {url: 4, name: "service2"}, {url:5, name:"service22"}, {url: 4, name: "service2"}, {url:5, name:"service22"}]},
+    {id:"platform-uishell--left-panel", name: "Team2", privateTeam: false, displayName:"Test Display Name", services: [{url: 4, name: "service2"}, {url:5, name:"service22"}]},
+    {id:"c33", name: "Team3 with a really long name so we can test elipsis", privateTeam: false, services: [{url: 6, name: "service3"}]},
+    {id:"d44", name: "Team4", privateTeam: true, services: []},
+  ],
+  accounts: [
+    {id:"e1111", name: "Account1 with a really long name so we can test elipsis", projectTeams: [{id: 111, name: "team1", isTeamMember: true}, {id:211, name:"team12 with a really long name so we can test elipsis", isTeamMember: true}, {id:223, name:"team13 with a really long name so we can test elipsis", isTeamMember: true}]},
+    {id:"f2222", name: "Account2", projectTeams: [{id: 222, name: "team2", isTeamMember: true}, {id:221, name:"team22 with a really long name so we can test elipsis", isTeamMember: true}]},
+    {id:"g3333", name: "Account3", projectTeams: [{id: 333, name: "team3", isTeamMember: true}]},
+    {id:"h4444", name: "Account4 with a really long name so we can test elipsis", projectTeams: []},
+  ],
+  personalTeams: [{id:"11111", name: "Team4", displayName: "Display Name"}],
+  baseEnvUrl:"https://baseurl.com",
+  app: "testapp",
+  isOpen: false,
+  user: {type: "admin"},
+  // enableChatButton: false,
+  tooltipMessage: "Test tooltip message for ui shell",
+  showChatTooltip: true,
+  isLaunchpad: true,
+}
+
 const withDelay = (delay: number, response: any) => (): Promise<any> => {
   return new Promise(function (resolve) {
     setTimeout(function () {
@@ -94,6 +122,76 @@ export const UIShellDefault = (args) => {
   return (
     <>
       <UIShell
+        config={{
+          features: {
+            "appSwitcher.enabled": true,
+            "notifications.enabled": true,
+            "support.enabled": true,
+            "feedback.enabled": true,
+          },
+          navigation: [
+            {
+              name: "Launchpad",
+              url: "javascript:voido(0)",
+            },
+            {
+              name: "Admin",
+              url: "javascript:voido(0)",
+            },
+            {
+              name: "Docs",
+              url: "javascript:voido(0)",
+            },
+          ],
+          platform: {
+            baseEnvUrl: BASE_ENV_URL,
+            baseServicesUrl: BASE_SERVICES_URL,
+            name: "Boomerang",
+            version: "4.0.0",
+            signOutUrl: "#",
+            communityUrl: "#",
+            platformName: "Boomerang",
+            platformOrganization: "IBM",
+          },
+          platformMessage: {
+            kind: "info",
+            message: "Message Goes Here",
+            title: "Testing Platform Title",
+          },
+        }}
+        skipToContentProps={{ href: "#id" }}
+        user={
+          {
+            name: "Rick Deckard",
+            email: "rdeckard@ibm.com",
+            hasConsented: true,
+            status: "active",
+            requestSummary: {
+              requireUserAction: 0,
+              submittedByUser: 17,
+            },
+          } as User
+        }
+        {...args}
+      />
+      <MainContent />
+    </>
+  );
+};
+
+export const UIShellDefaultWhite = (args) => {
+  const mock = new MockAdapter(axios);
+  mock.onGet(`${BASE_SERVICES_URL}/users/consents`).reply(200, PRIVACY_DATA);
+  mock.onGet(`${BASE_SERVICES_URL}/launchpad/user`).reply(200, PROFILE_SETTINGS_DATA);
+  mock.onGet(`${BASE_SERVICES_URL}/users/teams`).reply(withDelay(1000, [200, TEAMS_DATA]));
+  mock.onGet(`${BASE_SERVICES_URL}/launchpad/teams/1/services`).reply(withDelay(4000, [200, SERVICES_DATA]));
+  mock.onGet(`${BASE_SERVICES_URL}/launchpad/teams/2/services`).reply(withDelay(4000, [200, []]));
+  mock.onPost(`${BASE_SERVICES_URL}/support/contact`).reply(200);
+
+  return (
+    <>
+      <UIShell
+        theme="white"
         config={{
           features: {
             "appSwitcher.enabled": true,
@@ -296,7 +394,7 @@ export function UIShellKitchenSink(args) {
             </div>
           ),
         }}
-        skipToContentProps={{ href: "#id" }}
+        skipToContentProps={null}
         supportMenuItems={[
           <HeaderMenuItem onClick={() => setIsTutorialOpen(true)} type="button" text="Tutorial" key="tutorial" />,
         ]}
@@ -446,6 +544,12 @@ export const KitchenSink = (args) => {
   return <UIShellKitchenSink {...args} />;
 };
 
+export const LeftPanel = (args) => {
+  return <UIShellDefault {...args} leftPanel={({isOpen, navLinks}) => (
+    <AdvantageSideNav {...sidenavProps} isOpen={isOpen} navLinks={navLinks}/>
+  )}/>;
+};
+
 export const UserNotConsented = (args) => {
   return <UIShellUserNotConsented {...args} />;
 };
@@ -457,3 +561,4 @@ export const UserPendingDeletion = (args) => {
 export const EmptyState = (args) => {
   return <UIShellEmptyState {...args} />;
 };
+
