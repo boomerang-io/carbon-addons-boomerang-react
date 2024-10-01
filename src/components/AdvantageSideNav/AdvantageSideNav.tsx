@@ -238,7 +238,7 @@ export function AdvantageSideNav(props: Props) {
                 </div>
               </> : null
             }
-            {((!Boolean(standardTeamsList?.length) && !Boolean(accounts?.length)) || userTeamsError) && isMenuOpen ?
+            {((!Boolean(standardTeamsList?.length) && !Boolean(accounts?.length) && !userTeamsLoading) || userTeamsError) && isMenuOpen ?
               <>
                 <p className={`${prefix}--bmrg-advantage-sidenav-no-teams__text`}>{noTeamsMessage}</p>
               </>

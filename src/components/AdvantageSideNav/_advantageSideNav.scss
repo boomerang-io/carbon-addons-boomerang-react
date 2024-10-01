@@ -15,13 +15,11 @@
 
 .#{$prefix}--bmrg-advantage-sidenav-loading {
   align-self: center;
-  background-color: var(--cds-field-hover-01) !important;
-  // background-color: #292929 !important;
+  background-color: shell.$bmrg-theme-loading-01 !important;
   height: 2rem;
   width: 100%;
   &::before {
-    background-color: var(--cds-layer-active-01) !important;
-    // background-color: #393939 !important;
+    background-color: shell.$bmrg-theme-loading-02 !important;
   }
 }
 
