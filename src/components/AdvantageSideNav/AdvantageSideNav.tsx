@@ -1,6 +1,6 @@
 import React from "react";
 import cx from "classnames";
-import { SideNav, SideNavDivider, SideNavItems, SideNavLink , SideNavMenu } from "@carbon/react";
+import { SideNav, SideNavDivider, SideNavItems, SideNavLink , SideNavMenu, SkeletonPlaceholder } from "@carbon/react";
 import TooltipHover from "../TooltipHover";
 import { AddAlt, ChatBot, ChevronRight, GroupAccount, Home, Locked, Unlocked, User as UserIcon, UserMultiple } from "@carbon/react/icons";
 import { USER_PLATFORM_ROLE } from "../../constants/UserType";
@@ -28,6 +28,7 @@ type Props = {
   user: User;
   isLaunchpad?: boolean;
   userTeamsError?: boolean;
+  userTeamsLoading?: boolean;
   history?: any;
   children?: React.ReactNode;
 };
@@ -54,6 +55,7 @@ export function AdvantageSideNav(props: Props) {
     tooltipMessage,
     isLaunchpad=false,
     userTeamsError=false,
+    userTeamsLoading=false,
     history,
     children,
     ...rest
@@ -67,7 +69,7 @@ export function AdvantageSideNav(props: Props) {
   const teamsMenuRef = React.useRef(null);
   const accountsMenuRef = React.useRef(null);
   const hamburguerMenu = document.getElementById("header-sidenav-menu-button");
-  const noTeamsMessage = userTeamsError ? "Failed to get teams list. Try Again later." : "No teams or accounts available.";
+  const noTeamsMessage = userTeamsError ? "Failed to get teams, please try again later." : "No teams or accounts available.";
   // Functions to track IBM Instrumentation on Segment
   const handleHomeClick = () => {
     triggerEvent && triggerEvent({
@@ -103,13 +105,13 @@ export function AdvantageSideNav(props: Props) {
     });
   };
 
-  // const handleServiceClick = (service: any) => {
-  //   triggerEvent && triggerEvent({
-  //     action: "Clicked on SideNav Service link",
-  //     category: "Sidenav",
-  //     destinationPath: service.url,
-  //   });
-  // };
+  const handleServiceClick = (service: any) => {
+    triggerEvent && triggerEvent({
+      action: "Clicked on SideNav Service link",
+      category: "Sidenav",
+      destinationPath: service.url,
+    });
+  };
 
   const handleLaunchpadLink = (event: any) => {
     event.preventDefault();
@@ -226,9 +228,18 @@ export function AdvantageSideNav(props: Props) {
                 {children}
               </> : null
             }
-            {!Boolean(standardTeamsList?.length) && !Boolean(accounts?.length) && isMenuOpen ?
+            {userTeamsLoading && isMenuOpen ?
               <>
                 <SideNavDivider />
+                <div className={`${prefix}--bmrg-advantage-sidenav-loading-container`}>
+                  <SkeletonPlaceholder className={`${prefix}--bmrg-advantage-sidenav-loading`}/>
+                  <SkeletonPlaceholder className={`${prefix}--bmrg-advantage-sidenav-loading`}/>
+                  <SkeletonPlaceholder className={`${prefix}--bmrg-advantage-sidenav-loading`}/>
+                </div>
+              </> : null
+            }
+            {((!Boolean(standardTeamsList?.length) && !Boolean(accounts?.length)) || userTeamsError) && isMenuOpen ?
+              <>
                 <p className={`${prefix}--bmrg-advantage-sidenav-no-teams__text`}>{noTeamsMessage}</p>
               </>
               : null
@@ -249,7 +260,7 @@ export function AdvantageSideNav(props: Props) {
                   isSideNavExpanded={isMenuOpen}
                 >
                   {isMenuOpen ? standardTeamsList?.map((team, i) => {
-                    // const topPosition = document?.getElementById(team.id)?.getBoundingClientRect()?.top ?? 0;
+                    const topPosition = document?.getElementById(team.id)?.getBoundingClientRect()?.top ?? 0;
                     const teamDisplayName = Boolean(team.displayName) ? team.displayName : team.name;
                     return (
                       <>
@@ -277,48 +288,45 @@ export function AdvantageSideNav(props: Props) {
                             <p className={`${prefix}--bmrg-advantage-sidenav-teams__title`}>
                               {teamDisplayName}
                             </p>
-                            {
-                            // Boolean(team?.services?.length) ? <ChevronRight /> : null
-                            }
+                            {Boolean(team?.services?.length) ? <ChevronRight /> : null}
                           </SideNavLink>
-                          {
-                          // Boolean(team?.services?.length) && team.id === activeSubmenu ?
-                          //   <ul className={cx(`${prefix}--bmrg-advantage-sidenav-submenu`, {
-                          //     "--open": team.id === activeSubmenu
-                          //   })}
-                          //     style={{top: `${window.scrollY + topPosition}px`}}
-                          //   >
-                          //     <li className={`${prefix}--bmrg-advantage-sidenav-submenu-wrapper`}>
-                          //       <ul className={`${prefix}--bmrg-advantage-sidenav-services-submenu`}>
-                          //         <SideNavLink
-                          //           title="Team Page"
-                          //           className={`${prefix}--bmrg-advantage-sidenav-submenu-link`}
-                          //           data-testid="sidenav-team-submenu-link"
-                          //           href={`${baseEnvUrl}/${app}/teams/${team.id}`}
-                          //           onClick={(e: any) => {
-                          //             if(isLaunchpad) {
-                          //               handleLaunchpadLink(e);
-                          //               history.push(`/teams/${team.id}`);
-                          //             }
-                          //             handleTeamClick(team);
-                          //           }}
-                          //         >
-                          //           Team Page
-                          //         </SideNavLink>
-                          //         {team.services?.map((service) => (
-                          //           <SideNavLink
-                          //             title={service.name}
-                          //             className={`${prefix}--bmrg-advantage-sidenav-submenu-link`}
-                          //             data-testid="sidenav-service-submenu-link"
-                          //             href={service.url}
-                          //             onClick={() => handleServiceClick(service)}
-                          //           >
-                          //             {service.name}
-                          //           </SideNavLink>
-                          //         )) ?? null}                 
-                          //       </ul>
-                          //     </li>
-                          //   </ul> : null
+                          {Boolean(team?.services?.length) && team.id === activeSubmenu ?
+                            <ul className={cx(`${prefix}--bmrg-advantage-sidenav-submenu`, {
+                              "--open": team.id === activeSubmenu
+                            })}
+                              style={{top: `${window.scrollY + topPosition}px`}}
+                            >
+                              <li className={`${prefix}--bmrg-advantage-sidenav-submenu-wrapper`}>
+                                <ul className={`${prefix}--bmrg-advantage-sidenav-services-submenu`}>
+                                  <SideNavLink
+                                    title="Team Page"
+                                    className={`${prefix}--bmrg-advantage-sidenav-submenu-link`}
+                                    data-testid="sidenav-team-submenu-link"
+                                    href={`${baseEnvUrl}/${app}/teams/${team.id}`}
+                                    onClick={(e: any) => {
+                                      if(isLaunchpad) {
+                                        handleLaunchpadLink(e);
+                                        history.push(`/teams/${team.id}`);
+                                      }
+                                      handleTeamClick(team);
+                                    }}
+                                  >
+                                    Team Page
+                                  </SideNavLink>
+                                  {team.services?.map((service) => (
+                                    <SideNavLink
+                                      title={service.name}
+                                      className={`${prefix}--bmrg-advantage-sidenav-submenu-link`}
+                                      data-testid="sidenav-service-submenu-link"
+                                      href={service.url}
+                                      onClick={() => handleServiceClick(service)}
+                                    >
+                                      {service.name}
+                                    </SideNavLink>
+                                  )) ?? null}                 
+                                </ul>
+                              </li>
+                            </ul> : null
                           }
                         </li>
                       </>

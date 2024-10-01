@@ -13,6 +13,27 @@
   background-color: transparent;
 }
 
+.#{$prefix}--bmrg-advantage-sidenav-loading {
+  align-self: center;
+  background-color: var(--cds-field-hover-01) !important;
+  // background-color: #292929 !important;
+  height: 2rem;
+  width: 100%;
+  &::before {
+    background-color: var(--cds-layer-active-01) !important;
+    // background-color: #393939 !important;
+  }
+}
+
+.#{$prefix}--bmrg-advantage-sidenav-loading-container {
+  display: flex;
+  flex-direction: column;
+  height: 9rem;
+  justify-content: space-between;
+  padding: 1rem;
+  width: 100%;
+}
+
 .#{$prefix}--bmrg-side-nav__tooltip {
   width: 13rem;
   div {
