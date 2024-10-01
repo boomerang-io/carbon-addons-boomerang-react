@@ -276,7 +276,7 @@ export function AdvantageSideNav(props: Props) {
                             </p>
                             {Boolean(team?.services?.length) ? <ChevronRight /> : null}
                           </SideNavLink>
-                          {Boolean(team?.services?.length) ?
+                          {Boolean(team?.services?.length) && team.id === activeSubmenu ?
                             <ul className={cx(`${prefix}--bmrg-advantage-sidenav-submenu`, {
                               "--open": team.id === activeSubmenu
                             })}
@@ -368,7 +368,7 @@ export function AdvantageSideNav(props: Props) {
                           </p>
                           {Boolean(team?.projectTeams?.length) ? <ChevronRight /> : null}
                         </SideNavLink>
-                        {Boolean(team?.projectTeams?.length) ? 
+                        {Boolean(team?.projectTeams?.length) && team.id === activeSubmenu ? 
                           <ul className={cx(`${prefix}--bmrg-advantage-sidenav-submenu`, {
                             "--open": team.id === activeSubmenu
                           })}
