@@ -1,6 +1,6 @@
 import React from "react";
 import cx from "classnames";
-import { SideNav, SideNavDivider, SideNavItems, SideNavLink , SideNavMenu } from "@carbon/react";
+import { SideNav, SideNavDivider, SideNavItems, SideNavLink , SideNavMenu, SkeletonPlaceholder } from "@carbon/react";
 import TooltipHover from "../TooltipHover";
 import { AddAlt, ChatBot, ChevronRight, GroupAccount, Home, Locked, Unlocked, User as UserIcon, UserMultiple } from "@carbon/react/icons";
 import { USER_PLATFORM_ROLE } from "../../constants/UserType";
@@ -27,6 +27,8 @@ type Props = {
   triggerEvent?: (props: any) => void;
   user: User;
   isLaunchpad?: boolean;
+  userTeamsError?: boolean;
+  userTeamsLoading?: boolean;
   history?: any;
   children?: React.ReactNode;
 };
@@ -52,6 +54,8 @@ export function AdvantageSideNav(props: Props) {
     showChatTooltip,
     tooltipMessage,
     isLaunchpad=false,
+    userTeamsError=false,
+    userTeamsLoading=false,
     history,
     children,
     ...rest
@@ -65,6 +69,7 @@ export function AdvantageSideNav(props: Props) {
   const teamsMenuRef = React.useRef(null);
   const accountsMenuRef = React.useRef(null);
   const hamburguerMenu = document.getElementById("header-sidenav-menu-button");
+  const noTeamsMessage = userTeamsError ? "Failed to get teams, please try again later." : "No teams or accounts available.";
   // Functions to track IBM Instrumentation on Segment
   const handleHomeClick = () => {
     triggerEvent && triggerEvent({
@@ -223,10 +228,19 @@ export function AdvantageSideNav(props: Props) {
                 {children}
               </> : null
             }
-            {!Boolean(standardTeamsList?.length) && !Boolean(accounts?.length) && isMenuOpen ?
+            {userTeamsLoading && isMenuOpen ?
               <>
                 <SideNavDivider />
-                <p className={`${prefix}--bmrg-advantage-sidenav-no-teams__text`}>No teams or accounts available.</p>
+                <div className={`${prefix}--bmrg-advantage-sidenav-loading-container`}>
+                  <SkeletonPlaceholder className={`${prefix}--bmrg-advantage-sidenav-loading`}/>
+                  <SkeletonPlaceholder className={`${prefix}--bmrg-advantage-sidenav-loading`}/>
+                  <SkeletonPlaceholder className={`${prefix}--bmrg-advantage-sidenav-loading`}/>
+                </div>
+              </> : null
+            }
+            {((!Boolean(standardTeamsList?.length) && !Boolean(accounts?.length) && !userTeamsLoading) || userTeamsError) && isMenuOpen ?
+              <>
+                <p className={`${prefix}--bmrg-advantage-sidenav-no-teams__text`}>{noTeamsMessage}</p>
               </>
               : null
             }
