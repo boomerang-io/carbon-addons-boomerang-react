@@ -38,7 +38,12 @@
 }
 
 .#{$prefix}--bmrg-header-switcher__skeleton {
+  background-color: shell.$bmrg-theme-loading-01 !important;
   height: 2rem;
+  
+  &::before {
+    background-color: shell.$bmrg-theme-loading-02 !important;
+  }
 }
 
 .#{$prefix}--side-nav__submenu:disabled {
