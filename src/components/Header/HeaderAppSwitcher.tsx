@@ -1,13 +1,9 @@
 import React from "react";
-import { useQuery, UseQueryResult } from "react-query";
-import { HeaderPanel, InlineLoading, SkeletonText, SideNavMenu, SideNavMenuItem, SwitcherDivider } from "@carbon/react";
+import { HeaderPanel, SkeletonText, SideNavMenu, SideNavMenuItem, SwitcherDivider } from "@carbon/react";
 import { Launch } from "@carbon/react/icons";
-import DelayedRender from "../DelayedRender";
 import ErrorMessage from "../ErrorMessage";
 import cx from "classnames";
-import { serviceUrl, resolver } from "../../config/servicesConfig";
-import { match, keys } from "../../internal/keyboard";
-import { SimpleIdNameMap, SimpleTeamService, UserTeams } from "../../types";
+import { SimpleIdNameMap, SimpleTeamService } from "../../types";
 import { prefix } from "../../internal/settings";
 
 const externalProps = {
@@ -25,13 +21,12 @@ type HeaderAppSwitcherProps = {
   id: string;
   isOpen?: boolean;
   triggerEvent?: (props: any) => any;
+  userTeams?: {data: any, isLoading: boolean, error: any};
 };
 
-export default function HeaderAppSwitcher({ baseServicesUrl, baseEnvUrl, id, isOpen, triggerEvent }: HeaderAppSwitcherProps) {
-  const userTeamsUrl = serviceUrl.getUserTeamsServices({ baseServicesUrl });
-  const teamsQuery = useQuery<UserTeams>(userTeamsUrl, resolver.query(userTeamsUrl));
+export default function HeaderAppSwitcher({ baseServicesUrl, baseEnvUrl, id, isOpen, triggerEvent, userTeams }: HeaderAppSwitcherProps) {
 
-  if (teamsQuery.isLoading) {
+  if (userTeams?.isLoading) {
     return (
       <HeaderPanel aria-label="App Switcher" className={panelClassName} expanded={isOpen} id={id} role="menu">
         <div className={cx(contentClassName, "--is-loading", { "--is-hidden": !isOpen })}>
@@ -45,7 +40,7 @@ export default function HeaderAppSwitcher({ baseServicesUrl, baseEnvUrl, id, isO
     );
   }
 
-  if (teamsQuery.error) {
+  if (userTeams?.error) {
     return (
       <HeaderPanel aria-label="App Switcher" id={id} role="menu" className={panelClassName} expanded={isOpen}>
         <ErrorMessage className={cx(contentClassName, { "--is-hidden": !isOpen })} />
@@ -53,8 +48,8 @@ export default function HeaderAppSwitcher({ baseServicesUrl, baseEnvUrl, id, isO
     );
   }
 
-  if (teamsQuery.data) {
-    const { accountTeams, standardTeams, personalTeam } = teamsQuery.data;
+  if (userTeams?.data) {
+    const { accountTeams, standardTeams, personalTeam } = userTeams?.data;
     if (accountTeams?.length || standardTeams?.length) {
       return (
         <HeaderPanel aria-label="App Switcher" className={panelClassName} data-testid="header-app-switcher" expanded={isOpen} id={id} role="menu">
@@ -69,7 +64,7 @@ export default function HeaderAppSwitcher({ baseServicesUrl, baseEnvUrl, id, isO
                 triggerEvent={triggerEvent}
               />
             ))}
-            {accountTeams?.map((account) => (
+            {accountTeams?.map((account: any) => (
               <div key={account.id}>
                 <SwitcherDivider />
                 <TeamServiceListMenu
@@ -81,7 +76,7 @@ export default function HeaderAppSwitcher({ baseServicesUrl, baseEnvUrl, id, isO
                   triggerEvent={triggerEvent}
                 />
                 {Boolean(account.projectTeams) &&
-                  account.projectTeams.map((project) => (
+                  account.projectTeams.map((project: any) => (
                     <TeamServiceListMenu
                       key={project.id}
                       baseEnvUrl={baseEnvUrl}

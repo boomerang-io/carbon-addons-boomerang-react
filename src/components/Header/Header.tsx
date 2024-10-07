@@ -54,6 +54,7 @@ type Props = {
   skipToContentProps?: { href?: string; children?: string; className?: string };
   supportMenuItems?: React.ReactNode[];
   triggerEvent?: (props: any) => any;
+  userTeams?: {data: any, isLoading: boolean, error: any};
 };
 
 type MenuType = "Notifcations" | "Profile" | "Requests" | "RightPanel" | "SideNav" | "Support" | "Switcher";
@@ -104,6 +105,7 @@ export default function Header(props: Props) {
     rightPanel,
     skipToContentProps,
     triggerEvent,
+    userTeams,
   } = props;
 
   return (
@@ -157,6 +159,7 @@ export default function Header(props: Props) {
               baseServicesUrl={baseServicesUrl}
               enabled={props.enableAppSwitcher}
               triggerEvent={triggerEvent}
+              userTeams={userTeams}
             />
             <RightPanelMenu enabled={Boolean(rightPanel && Object.keys(rightPanel).length)} {...rightPanel} />
           </HeaderGlobalBar>
@@ -320,6 +323,7 @@ function AppSwitcherMenu(props: {
   baseEnvUrl?: string;
   baseServicesUrl?: string;
   triggerEvent?: any;
+  userTeams?: {data: any, isLoading: boolean, error: any};
 }) {
   const { isOpen, toggleActive, ref } = useHeaderMenu<HTMLDivElement>(MenuButtonId.Switcher);
 
@@ -347,6 +351,7 @@ function AppSwitcherMenu(props: {
         id={MenuListId.Switcher}
         isOpen={isOpen}
         triggerEvent={props.triggerEvent}
+        userTeams={props.userTeams}
       />
     </div>
   );
