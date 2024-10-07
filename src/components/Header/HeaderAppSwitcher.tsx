@@ -1,13 +1,9 @@
 import React from "react";
-import { useQuery, UseQueryResult } from "react-query";
-import { HeaderPanel, InlineLoading, SkeletonText, SideNavMenu, SideNavMenuItem, SwitcherDivider } from "@carbon/react";
+import { HeaderPanel, SkeletonText, SideNavMenu, SideNavMenuItem, SwitcherDivider } from "@carbon/react";
 import { Launch } from "@carbon/react/icons";
-import DelayedRender from "../DelayedRender";
 import ErrorMessage from "../ErrorMessage";
 import cx from "classnames";
-import { serviceUrl, resolver } from "../../config/servicesConfig";
-import { match, keys } from "../../internal/keyboard";
-import { SimpleIdNameMap, SimpleTeamService, UserTeams } from "../../types";
+import { SimpleIdNameMap, SimpleTeamService } from "../../types";
 import { prefix } from "../../internal/settings";
 
 const externalProps = {
@@ -25,13 +21,12 @@ type HeaderAppSwitcherProps = {
   id: string;
   isOpen?: boolean;
   triggerEvent?: (props: any) => any;
+  userTeams?: {data: any, isLoading: boolean, error: any};
 };
 
-export default function HeaderAppSwitcher({ baseServicesUrl, baseEnvUrl, id, isOpen, triggerEvent }: HeaderAppSwitcherProps) {
-  const userTeamsUrl = serviceUrl.getUserTeams({ baseServicesUrl });
-  const teamsQuery = useQuery<UserTeams>(userTeamsUrl, resolver.query(userTeamsUrl));
+export default function HeaderAppSwitcher({ baseServicesUrl, baseEnvUrl, id, isOpen, triggerEvent, userTeams }: HeaderAppSwitcherProps) {
 
-  if (teamsQuery.isLoading) {
+  if (userTeams?.isLoading) {
     return (
       <HeaderPanel aria-label="App Switcher" className={panelClassName} expanded={isOpen} id={id} role="menu">
         <div className={cx(contentClassName, "--is-loading", { "--is-hidden": !isOpen })}>
@@ -45,7 +40,7 @@ export default function HeaderAppSwitcher({ baseServicesUrl, baseEnvUrl, id, isO
     );
   }
 
-  if (teamsQuery.error) {
+  if (userTeams?.error) {
     return (
       <HeaderPanel aria-label="App Switcher" id={id} role="menu" className={panelClassName} expanded={isOpen}>
         <ErrorMessage className={cx(contentClassName, { "--is-hidden": !isOpen })} />
@@ -53,13 +48,13 @@ export default function HeaderAppSwitcher({ baseServicesUrl, baseEnvUrl, id, isO
     );
   }
 
-  if (teamsQuery.data) {
-    const { accountTeams, standardTeams } = teamsQuery.data;
+  if (userTeams?.data) {
+    const { accountTeams, standardTeams, personalTeam } = userTeams?.data;
     if (accountTeams?.length || standardTeams?.length) {
       return (
         <HeaderPanel aria-label="App Switcher" className={panelClassName} data-testid="header-app-switcher" expanded={isOpen} id={id} role="menu">
           <div className={cx(contentClassName, { "--is-hidden": !isOpen })}>
-            {standardTeams?.map((team) => (
+            {[...personalTeam, ...standardTeams].map((team) => (
               <TeamServiceListMenu
                 key={team.id}
                 baseEnvUrl={baseEnvUrl}
@@ -69,7 +64,7 @@ export default function HeaderAppSwitcher({ baseServicesUrl, baseEnvUrl, id, isO
                 triggerEvent={triggerEvent}
               />
             ))}
-            {accountTeams?.map((account) => (
+            {accountTeams?.map((account: any) => (
               <div key={account.id}>
                 <SwitcherDivider />
                 <TeamServiceListMenu
@@ -81,7 +76,7 @@ export default function HeaderAppSwitcher({ baseServicesUrl, baseEnvUrl, id, isO
                   triggerEvent={triggerEvent}
                 />
                 {Boolean(account.projectTeams) &&
-                  account.projectTeams.map((project) => (
+                  account.projectTeams.map((project: any) => (
                     <TeamServiceListMenu
                       key={project.id}
                       baseEnvUrl={baseEnvUrl}
@@ -120,45 +115,17 @@ type TeamServiceListMenuProps = {
   triggerEvent?: (props: any) => any;
 };
 
-function TeamServiceListMenu({ baseServicesUrl, baseEnvUrl, isAccount, isMember, team, triggerEvent }: TeamServiceListMenuProps) {
-  const { id, name } = team;
-  const [isSelected, setIsSelected] = React.useState(false);
-  const teamsServicesUrl = serviceUrl.getTeamServices({ baseServicesUrl, teamId: id });
+function TeamServiceListMenu({ baseEnvUrl, isAccount, isMember, team, triggerEvent }: TeamServiceListMenuProps) {
+  const { name, displayName, services } = team;
 
-  const servicesQuery = useQuery<SimpleTeamService[]>({
-    queryKey: teamsServicesUrl,
-    queryFn: resolver.query(teamsServicesUrl),
-    enabled: false,
-  });
-
-  async function getServices() {
-    if (!servicesQuery.isFetching && !servicesQuery.data && !servicesQuery.error) {
-      try {
-        servicesQuery.refetch();
-      } catch (e) {
-        // no-op on error
-      }
-    }
-  }
-
-  function handleOnClick() {
-    setIsSelected(true);
-  }
-
-  function handleOnKeyDown(e: React.KeyboardEvent) {
-    if (match(e, keys.Enter) || match(e, keys.Space)) {
-      setIsSelected(true);
-    }
-  }
-
-  const isInlineLoadingVisible = isSelected && servicesQuery.isLoading;
-  const isNameTruncated = name?.length > 30;
+  const nameToDisplay = displayName ? displayName : name;
+  const isNameTruncated = nameToDisplay?.length > 30;
 
   if (!isMember) {
     return (
-      <div className={`${prefix}--side-nav__item`} title={isNameTruncated ? name : undefined}>
+      <div className={`${prefix}--side-nav__item`} title={isNameTruncated ? nameToDisplay : undefined}>
         <button disabled className={`${prefix}--side-nav__submenu`} data-testid="header-app-switcher-service">
-          <span className={`${prefix}--side-nav__submenu-title`}>{name}</span>
+          <span className={`${prefix}--side-nav__submenu-title`}>{nameToDisplay}</span>
         </button>
       </div>
     );
@@ -167,21 +134,12 @@ function TeamServiceListMenu({ baseServicesUrl, baseEnvUrl, isAccount, isMember,
   return (
     // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
     <ul
-      className={cx(`${prefix}--bmrg-header-team`, { "--is-loading": isInlineLoadingVisible })}
-      onClick={handleOnClick}
-      onFocus={getServices}
-      onKeyDown={handleOnKeyDown}
-      onMouseOver={getServices}
-      title={isNameTruncated ? name : undefined}
+      className={`${prefix}--bmrg-header-team`}
+      title={isNameTruncated ? nameToDisplay : undefined}
     >
-      <SideNavMenu title={name}>
-        <ServiceList baseEnvUrl={baseEnvUrl} isAccount={isAccount} servicesQuery={servicesQuery} triggerEvent={triggerEvent} />
+      <SideNavMenu title={nameToDisplay}>
+        <ServiceList baseEnvUrl={baseEnvUrl} isAccount={isAccount} servicesData={services} triggerEvent={triggerEvent} />
       </SideNavMenu>
-      {isInlineLoadingVisible && (
-        <DelayedRender delay={200}>
-          <InlineLoading />
-        </DelayedRender>
-      )}
     </ul>
   );
 }
@@ -189,30 +147,22 @@ function TeamServiceListMenu({ baseServicesUrl, baseEnvUrl, isAccount, isMember,
 type ServiceListProps = {
   baseEnvUrl?: string;
   isAccount?: boolean;
-  servicesQuery: UseQueryResult<SimpleTeamService[], unknown>;
+  servicesData?: Array<{name: string; url: string}>;
   triggerEvent?: (props: any) => any;
 };
 
 function ServiceList(props: ServiceListProps) {
-  const { baseEnvUrl = "", isAccount, servicesQuery, triggerEvent } = props;
+  const { baseEnvUrl = "", isAccount, servicesData, triggerEvent } = props;
 
   const handleLinkClick = (service: SimpleTeamService) => {
     triggerEvent && triggerEvent(service);
   };
 
-  if (servicesQuery.error) {
-    return (
-      <div className={`${prefix}--bmrg-header-team__message`} data-testid="header-service-list">{`Failed to fetch the services for this ${
-        isAccount ? "account" : "team"
-      }`}</div>
-    );
-  }
-
-  if (!!servicesQuery.data) {
-    if (Boolean(servicesQuery.data?.length)) {
+  if (!!servicesData) {
+    if (Boolean(servicesData?.length)) {
       return (
         <>
-          {servicesQuery.data.map((service) => {
+          {servicesData.map((service) => {
             const isExternalLink = !service.url.includes(baseEnvUrl);
             const isNameTruncated = isExternalLink ? service.name.length > 28 : service.name.length > 32;
             return (
@@ -224,7 +174,7 @@ function ServiceList(props: ServiceListProps) {
                 data-testid="header-app-switcher-service"
                 {...(isExternalLink ? externalProps : undefined)}
               >
-                <div onClick={() => handleLinkClick(service)} role="button">
+                <div onClick={() => handleLinkClick(service)} onKeyDown={() => handleLinkClick(service)} tabIndex={0} role="button">
                   <span>{service.name}</span>
                   {isExternalLink ? <Launch size={16} title="Opens page in new tab" /> : undefined}
                 </div>

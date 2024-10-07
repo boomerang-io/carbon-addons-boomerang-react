@@ -77,6 +77,7 @@ export type SimpleIdNameMap = {
   isTeamMember?: boolean;
   privateTeam?: boolean;
   displayName?: string;
+  services?: Array<{name: string; url: string}>;
 };
 
 export type SimpleTeamService = {
@@ -293,9 +294,11 @@ export type UserTeams = {
     id: string;
     name: string;
     isAccountTeamMember: boolean;
+    services?: Array<{name: string; url: string}>;
     projectTeams: SimpleIdNameMap[];
   }[];
   standardTeams: SimpleIdNameMap[];
+  personalTeam: SimpleIdNameMap[];
 };
 
 export type PlatformNotification = {

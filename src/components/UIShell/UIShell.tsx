@@ -61,6 +61,7 @@ type Props = {
   supportMenuItems?: React.ReactNode[];
   triggerEvent?: (props: any) => any;
   user?: User;
+  userTeams?: {data: any, isLoading: boolean, error: any};
 };
 
 function UIShell({
@@ -76,6 +77,7 @@ function UIShell({
   skipToContentProps,
   triggerEvent,
   user,
+  userTeams,
 }: Props) {
   // Support base header .e.g for an error state
   if (!config) {
@@ -211,6 +213,7 @@ function UIShell({
           ),
           ...supportMenuItems,
         ].filter(Boolean)}
+        userTeams={userTeams}
       />
       {isPrivacyModalRendered ? (
         <PrivacyRedirectModal

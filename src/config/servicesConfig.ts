@@ -9,7 +9,7 @@ export const serviceUrl = {
   getLaunchpadUser: ({ baseServicesUrl }: any) => `${baseServicesUrl}/launchpad/user`,
   getStatement: ({ baseServicesUrl }: any) => `${baseServicesUrl}/users/consents`,
   getTeamServices: ({ baseServicesUrl, teamId }: any) => `${baseServicesUrl}/launchpad/teams/${teamId}/services`,
-  getUserTeams: ({ baseServicesUrl }: any) => `${baseServicesUrl}/users/teams`,
+  getUserTeamsServices: ({ baseServicesUrl }: any) => `${baseServicesUrl}/users/teams/services`,
   resourceUserConsent: ({ baseServicesUrl }: any) => `${baseServicesUrl}/users/consent`,
   resourceUserProfile: ({ baseServicesUrl }: any) => `${baseServicesUrl}/users/profile`,
 };
