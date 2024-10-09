@@ -79,6 +79,14 @@ $use-theme-advantage-white: false !default;
   }
 }
 
+.#{$prefix}--side-nav__item:not(.cds--side-nav__item--active) {
+  >.cds--side-nav__link:hover {
+    >span {
+      color: shell.$bmrg-theme-primary;
+    }
+  }
+}
+
 //style for advantage sidenav
 .#{$prefix}--side-nav__icon {
   svg {

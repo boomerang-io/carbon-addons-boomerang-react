@@ -129,14 +129,24 @@ a.#{$prefix}--header__menu-item {
 }
 
 a.#{$prefix}--side-nav__link {
-  &:hover{
-    color: shell.$bmrg-theme-primary;
-  }
-  .#{$prefix}--side-nav__link-text {
-    color: shell.$bmrg-theme-secondary;
-    &:hover{
+  color: shell.$bmrg-theme-secondary;
+  &--current {
+    span, p {
       color: shell.$bmrg-theme-primary;
     }
   }
+  &:hover {
+    .#{$prefix}--side-nav__link-text {
+      color: shell.$bmrg-theme-primary;
+    }
+    span, p {
+      color: shell.$bmrg-theme-primary;
+    }    
+  }
+  .#{$prefix}--side-nav__link-text {
+    color: shell.$bmrg-theme-secondary;
+  }
+  svg {
+    fill: shell.$bmrg-theme-primary;
+  }
 }
-

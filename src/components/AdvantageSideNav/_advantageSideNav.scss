@@ -138,7 +138,7 @@
 }
 
 .#{$prefix}--bmrg-advantage-sidenav-services-submenu {
-  background-color: shell.$bmrg-theme-submenu-background !important;
+  background-color: shell.$bmrg-theme-submenu-background;
   display: block;
   height: 100%;
   max-height: 20rem;
@@ -228,9 +228,18 @@
   }
 }
 
+.#{$prefix}--side-nav__item--active {
+  .#{$prefix}--side-nav__submenu-title {
+    color: shell.$bmrg-theme-secondary;
+    &:hover{
+      color: shell.$bmrg-theme-primary;
+    } 
+  }  
+}
+
 .#{$prefix}--side-nav__submenu-title {
-  color: shell.$bmrg-theme-secondary !important;
+  color: shell.$bmrg-theme-secondary;
   &:hover{
-    color: shell.$bmrg-theme-primary !important;
+    color: shell.$bmrg-theme-primary;
   } 
 }
