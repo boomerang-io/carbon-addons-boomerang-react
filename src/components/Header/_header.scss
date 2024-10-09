@@ -128,10 +128,12 @@ a.#{$prefix}--header__menu-item {
   }
 }
 
-span.#{$prefix}--side-nav__link-text {
-  color: shell.$bmrg-theme-secondary !important;
-  &:hover{
-    color: shell.$bmrg-theme-primary !important;
+a.#{$prefix}--side-nav__link {
+  .#{$prefix}--side-nav__link-text {
+    color: shell.$bmrg-theme-secondary;
+    &:hover{
+      color: shell.$bmrg-theme-primary;
+    }
   }
 }
 
