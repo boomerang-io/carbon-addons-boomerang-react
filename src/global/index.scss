@@ -79,12 +79,29 @@ $use-theme-advantage-white: false !default;
   }
 }
 
+.#{$prefix}--side-nav__item:not(.#{$prefix}--side-nav__item--active) {
+  >.#{$prefix}--side-nav__link:hover {
+    >span {
+      color: shell.$bmrg-theme-primary;
+    }
+  }
+}
+
 //style for advantage sidenav
-.#{$prefix}--side-nav__items {
+.#{$prefix}--side-nav__icon {
   svg {
-    fill: shell.$bmrg-theme-primary !important;
+    fill: shell.$bmrg-theme-primary;
   }
 } 
+
+.#{$prefix}--side-nav__item--active {
+  .#{$prefix}--side-nav__icon {
+    svg {
+      fill: shell.$bmrg-theme-primary;
+    }
+  }
+}
+
 
 .#{$prefix}--side-nav__submenu, .#{$prefix}--header__action {
   &:focus {
