@@ -1,0 +1,19 @@
+@use "../../global/config" as *;
+@use "../../global/utils";
+@use '@carbon/themes/scss/tokens' as theme;
+
+// .#{$prefix}--bmrg-image-modal-container {
+
+// }
+
+.#{$prefix}--bmrg-image-modal {
+  height: auto !important;
+  max-height: calc(100vh - 4rem);
+  max-width: calc(100vw - 4rem);
+}
+
+.#{$prefix}--bmrg-image-modal__trigger {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
