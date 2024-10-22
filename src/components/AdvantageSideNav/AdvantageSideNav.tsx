@@ -169,6 +169,7 @@ export function AdvantageSideNav(props: Props) {
 
   return (
     <SideNav
+      aria-label="sidenav-container"
       className={cx(`${prefix}--bmrg-advantage-sidenav-container`, className, {
         "--closed": !isMenuOpen
       })}
