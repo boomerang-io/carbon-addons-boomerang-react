@@ -23,6 +23,7 @@ type Props = {
   personalTeams?: Array<SideNavTeam>;
   showChatTooltip?: boolean;
   teams?: Array<SideNavTeam>;
+  templateMeteringEvent?: (props: any) => void;
   tooltipMessage?: string;
   triggerEvent?: (props: any) => void;
   user: User;
@@ -52,6 +53,7 @@ export function AdvantageSideNav(props: Props) {
     personalTeams=[],
     user,
     showChatTooltip,
+    templateMeteringEvent,
     tooltipMessage,
     isLaunchpad=false,
     userTeamsError=false,
@@ -105,7 +107,10 @@ export function AdvantageSideNav(props: Props) {
     });
   };
 
-  const handleServiceClick = (service: any) => {
+  const handleServiceClick = ({ service, team }: any) => {
+    if (templateMeteringEvent) {
+      templateMeteringEvent({ service, team });
+    }
     triggerEvent && triggerEvent({
       action: "Clicked on SideNav Service link",
       category: "Sidenav",
@@ -319,7 +324,7 @@ export function AdvantageSideNav(props: Props) {
                                       className={`${prefix}--bmrg-advantage-sidenav-submenu-link`}
                                       data-testid="sidenav-service-submenu-link"
                                       href={service.url}
-                                      onClick={() => handleServiceClick(service)}
+                                      onClick={() => handleServiceClick({ service, team })}
                                     >
                                       {service.name}
                                     </SideNavLink>
