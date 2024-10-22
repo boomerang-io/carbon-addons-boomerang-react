@@ -158,7 +158,7 @@ export function AdvantageSideNav(props: Props) {
   const assistantSideNavLink = assistantLink && (
     <SideNavLink
       data-testid="sidenav-assistant-link"
-      className={!enableChatButton && `${prefix}--bmrg-advantage-sidenav__inactive-link`}
+      className={!enableChatButton ? `${prefix}--bmrg-advantage-sidenav__inactive-link` : ""}
       disabled={Boolean(!enableChatButton)}
       isActive={windowLocation.href.includes(assistantLink)}
       renderIcon={ChatBot}

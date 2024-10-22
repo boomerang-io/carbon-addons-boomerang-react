@@ -163,7 +163,7 @@ function ServiceList(props: ServiceListProps) {
       return (
         <>
           {servicesData.map((service) => {
-            const isExternalLink = !service.url.includes(baseEnvUrl);
+            const isExternalLink = !service?.url?.includes(baseEnvUrl);
             const isNameTruncated = isExternalLink ? service.name.length > 28 : service.name.length > 32;
             return (
               <SideNavMenuItem
