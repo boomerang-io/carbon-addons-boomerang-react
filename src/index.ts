@@ -35,6 +35,7 @@ export {
   FeatureSideNavLinks,
 } from "./components/FeatureSideNav";
 export { default as FeatureSideNavLink } from "./components/FeatureSideNavLink";
+export { default as ImageModal } from "./components/ImageModal";
 export { default as Loading } from "./components/Loading";
 export { default as MemberBar } from "./components/MemberBar";
 export { default as Modal } from "./components/Modal";
