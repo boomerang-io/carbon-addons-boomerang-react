@@ -42,9 +42,7 @@ export function ImageModal(props: Props) {
           renderIcon={Close}
           className={`${prefix}--bmrg-image-modal__close`}
           onClick={() => setIsModalOpen(false)}
-        >
-          Button
-        </Button>
+        />
         <img className={`${prefix}--bmrg-image-modal__open-image`} alt="modal-content" src={imageSrc}/>
       </Modal>
       <button 

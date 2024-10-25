@@ -8,8 +8,12 @@
 
 .#{$prefix}--bmrg-image-modal {
   height: auto !important;
-  max-height: calc(100vh - 4rem);
+  max-height: calc(100vh - 4rem) !important;
   max-width: calc(100vw - 4rem);
+
+  .#{$prefix}--popover {
+    display: none !important;
+  }
 }
 
 .#{$prefix}--bmrg-image-modal__image {
@@ -19,15 +23,17 @@
 }
 
 .#{$prefix}--bmrg-image-modal__open-image {
-  border: solid 0.3125rem var(--cds-border-subtle-01);
+  border: solid 0.3125rem var(--cds-bmrg-theme-background);
+  max-height: calc(100vh - 4rem) !important;
 }
 
 .#{$prefix}--bmrg-image-modal__close {
+  margin: 0.3125rem;
   position: absolute;
   right: 0;
 
   svg {
-    fill: var(--cds-border-subtle-01);
+    fill: var(--cds-field-01) !important;
   }
 }
 
