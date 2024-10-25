@@ -1,5 +1,7 @@
 import React from "react";
 import ReactModal from "react-modal";
+import { Button } from "@carbon/react"
+import { Close } from "@carbon/react/icons";
 import Modal from "../Modal";
 import cx from "classnames";
 import { prefix } from "../../internal/settings";
@@ -33,7 +35,17 @@ export function ImageModal(props: Props) {
         onRequestClose={() => setIsModalOpen(false)}
         {...modalProps}
       >
-        <img alt="modal-content" src={imageSrc}/>
+        <Button
+          kind="ghost"
+          size="lg"
+          hasIconOnly
+          renderIcon={Close}
+          className={`${prefix}--bmrg-image-modal__close`}
+          onClick={() => setIsModalOpen(false)}
+        >
+          Button
+        </Button>
+        <img className={`${prefix}--bmrg-image-modal__open-image`} alt="modal-content" src={imageSrc}/>
       </Modal>
       <button 
         tabIndex={0}
