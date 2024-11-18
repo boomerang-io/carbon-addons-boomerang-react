@@ -75,6 +75,18 @@ $use-theme-advantage-white: false !default;
 :root {
   @if ($use-theme-advantage-white) {
     @include utils.create-properties(theme-default.$shell-white-tokens);
+    &[data-carbon-theme="white"] {
+      .#{$prefix}--header__action[aria-expanded=true] {
+        background-color: blue !important;
+      }
+    }
+    
+    &[data-carbon-theme="g10"] {
+      .#{$prefix}--header__action[aria-expanded=true] {
+        background-color: red !important;
+      }
+    }
+    
   } @else {
     @include utils.create-properties(theme-default.$shell-tokens);
   }

@@ -35,9 +35,9 @@
       background: shell.$bmrg-theme-background !important;
     }
 
-    .#{$prefix}--header__action[aria-expanded=true] {
-      background-color: shell.$bmrg-theme-active-icon;
-    }
+    // .#{$prefix}--header__action[aria-expanded=true] {
+    //   background-color: shell.$bmrg-theme-active-icon;
+    // }
 
     .#{$prefix}--header__menu-item--current::after {
       background-color: shell.$bmrg-accent;
