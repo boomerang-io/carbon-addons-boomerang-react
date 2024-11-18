@@ -28,7 +28,7 @@ type HeaderAppSwitcherProps = {
 
 export default function HeaderAppSwitcher({ baseServicesUrl, baseEnvUrl, id, isOpen, triggerEvent, userTeams }: HeaderAppSwitcherProps) {
   const hasUserTeams = Boolean(userTeams);
-  const userTeamsUrl = serviceUrl.getUserTeamsServices(baseServicesUrl);
+  const userTeamsUrl = serviceUrl.getUserTeamsServices({baseServicesUrl});
   const teamsQuery = useQuery({
     queryKey: userTeamsUrl,
     queryFn: resolver.query(userTeamsUrl, null),
