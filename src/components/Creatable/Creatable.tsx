@@ -16,6 +16,8 @@ type Props = {
   id?: string;
   initialValues?: string | string[];
   invalid?: boolean;
+  trimInput?: boolean;
+  removeOnlyFirst?: boolean;
   invalidText?: string;
   helperText?: string;
   key?: string;
@@ -86,6 +88,8 @@ function CreatableComponent({
   valuePlaceholder,
   value: externalValues,
   values,
+  trimInput = false,
+  removeOnlyFirst = false,
 }: Props) {
   const [keyValue, setKeyValue] = useState("");
   const [value, setValue] = useState("");
@@ -130,7 +134,7 @@ function CreatableComponent({
   const tagItems = (finalValues || finalExternalValues ? finalValues || finalExternalValues : createdItems) as string[]; // Externally controlled if values props exists
 
   const initialTagItems = finalExternalInitialValues || initialItems || []; // Externally controlled if initialValues props exists
-  const existValue = (keyValue && value) || input;
+  const existValue = (keyValue && value) || (trimInput ? input?.trim() : input);
 
   const hasBothHelperText = keyHelperText && valueHelperText;
   const hasBothLabelText = inputKeyLabel && inputValueLabel;
@@ -192,7 +196,16 @@ function CreatableComponent({
   };
 
   const removeValue = (value: string) => {
-    const items = tagItems.filter((item) => item !== value);
+    let items;
+    if (removeOnlyFirst) {
+      items = [...tagItems];
+      const index = items.indexOf(value);
+      if (index !== -1) {
+        items.splice(index, 1);
+      }
+    } else {
+      items = tagItems.filter((item) => item !== value);
+    }
     setCreatedItems(items);
     if (onChange) onChange(items);
   };
