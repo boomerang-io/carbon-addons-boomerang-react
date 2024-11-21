@@ -1,9 +1,11 @@
 import React from "react";
+import { useQuery } from "react-query";
 import { HeaderPanel, SkeletonText, SideNavMenu, SideNavMenuItem, SwitcherDivider } from "@carbon/react";
 import { Launch } from "@carbon/react/icons";
 import ErrorMessage from "../ErrorMessage";
 import cx from "classnames";
 import { SimpleIdNameMap, SimpleTeamService } from "../../types";
+import { resolver, serviceUrl } from "../../config/servicesConfig";
 import { prefix } from "../../internal/settings";
 
 const externalProps = {
@@ -25,8 +27,15 @@ type HeaderAppSwitcherProps = {
 };
 
 export default function HeaderAppSwitcher({ baseServicesUrl, baseEnvUrl, id, isOpen, triggerEvent, userTeams }: HeaderAppSwitcherProps) {
+  const hasUserTeams = Boolean(userTeams);
+  const userTeamsUrl = serviceUrl.getUserTeamsServices({baseServicesUrl});
+  const teamsQuery = useQuery({
+    queryKey: userTeamsUrl,
+    queryFn: resolver.query(userTeamsUrl, null),
+    enabled: !hasUserTeams
+  });
 
-  if (userTeams?.isLoading) {
+  if (userTeams?.isLoading || teamsQuery?.isLoading) {
     return (
       <HeaderPanel aria-label="App Switcher" className={panelClassName} expanded={isOpen} id={id} role="menu">
         <div className={cx(contentClassName, "--is-loading", { "--is-hidden": !isOpen })}>
@@ -40,7 +49,7 @@ export default function HeaderAppSwitcher({ baseServicesUrl, baseEnvUrl, id, isO
     );
   }
 
-  if (userTeams?.error) {
+  if (userTeams?.error || teamsQuery?.error) {
     return (
       <HeaderPanel aria-label="App Switcher" id={id} role="menu" className={panelClassName} expanded={isOpen}>
         <ErrorMessage className={cx(contentClassName, { "--is-hidden": !isOpen })} />
@@ -48,8 +57,18 @@ export default function HeaderAppSwitcher({ baseServicesUrl, baseEnvUrl, id, isO
     );
   }
 
-  if (userTeams?.data) {
-    const { accountTeams, standardTeams, personalTeam } = userTeams?.data;
+  if (userTeams?.data || teamsQuery?.data) {
+    let accountTeams, standardTeams, personalTeam : any = [];
+    if(hasUserTeams) {
+      accountTeams = userTeams?.data?.accountTeams;
+      standardTeams = userTeams?.data?.standardTeams;
+      personalTeam = userTeams?.data?.personalTeam;
+    } else {
+      accountTeams = teamsQuery?.data?.accountTeams;
+      standardTeams = teamsQuery?.data?.standardTeams;
+      personalTeam = teamsQuery?.data?.personalTeam;
+    }
+    
     if (accountTeams?.length || standardTeams?.length) {
       return (
         <HeaderPanel aria-label="App Switcher" className={panelClassName} data-testid="header-app-switcher" expanded={isOpen} id={id} role="menu">
@@ -163,7 +182,7 @@ function ServiceList(props: ServiceListProps) {
       return (
         <>
           {servicesData.map((service) => {
-            const isExternalLink = !service.url.includes(baseEnvUrl);
+            const isExternalLink = typeof service?.url?.includes === "function" && !service.url.includes(baseEnvUrl);
             const isNameTruncated = isExternalLink ? service.name.length > 28 : service.name.length > 32;
             return (
               <SideNavMenuItem

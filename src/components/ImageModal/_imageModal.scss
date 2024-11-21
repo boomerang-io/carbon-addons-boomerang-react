@@ -1,0 +1,44 @@
+@use "../../global/config" as *;
+@use "../../global/utils";
+@use "../../global/themes/shell-tokens" as shell;
+
+// .#{$prefix}--bmrg-image-modal-container {
+
+// }
+
+.#{$prefix}--bmrg-image-modal {
+  height: auto !important;
+  max-height: calc(100vh - 4rem) !important;
+  max-width: calc(100vw - 4rem);
+
+  .#{$prefix}--popover {
+    display: none !important;
+  }
+}
+
+.#{$prefix}--bmrg-image-modal__image {
+  &:hover {
+    box-shadow: 0 0.25rem 0.25rem 0 #00000040;
+  }
+}
+
+.#{$prefix}--bmrg-image-modal__open-image {
+  border: solid 0.3125rem var(--cds-bmrg-theme-background);
+  max-height: calc(100vh - 4rem) !important;
+}
+
+.#{$prefix}--bmrg-image-modal__close {
+  margin: 0.3125rem;
+  position: absolute;
+  right: 0;
+
+  svg {
+    fill: var(--cds-field-01) !important;
+  }
+}
+
+.#{$prefix}--bmrg-image-modal__trigger {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}

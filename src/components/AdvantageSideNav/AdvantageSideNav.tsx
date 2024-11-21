@@ -23,6 +23,7 @@ type Props = {
   personalTeams?: Array<SideNavTeam>;
   showChatTooltip?: boolean;
   teams?: Array<SideNavTeam>;
+  templateMeteringEvent?: (props: any) => void;
   tooltipMessage?: string;
   triggerEvent?: (props: any) => void;
   user: User;
@@ -52,6 +53,7 @@ export function AdvantageSideNav(props: Props) {
     personalTeams=[],
     user,
     showChatTooltip,
+    templateMeteringEvent,
     tooltipMessage,
     isLaunchpad=false,
     userTeamsError=false,
@@ -105,7 +107,10 @@ export function AdvantageSideNav(props: Props) {
     });
   };
 
-  const handleServiceClick = (service: any) => {
+  const handleServiceClick = ({ service, team }: any) => {
+    if (templateMeteringEvent) {
+      templateMeteringEvent({ service, team });
+    }
     triggerEvent && triggerEvent({
       action: "Clicked on SideNav Service link",
       category: "Sidenav",
@@ -153,7 +158,7 @@ export function AdvantageSideNav(props: Props) {
   const assistantSideNavLink = assistantLink && (
     <SideNavLink
       data-testid="sidenav-assistant-link"
-      className={!enableChatButton && `${prefix}--bmrg-advantage-sidenav__inactive-link`}
+      className={!enableChatButton ? `${prefix}--bmrg-advantage-sidenav__inactive-link` : ""}
       disabled={Boolean(!enableChatButton)}
       isActive={windowLocation.href.includes(assistantLink)}
       renderIcon={ChatBot}
@@ -164,6 +169,7 @@ export function AdvantageSideNav(props: Props) {
 
   return (
     <SideNav
+      aria-label="sidenav-container"
       className={cx(`${prefix}--bmrg-advantage-sidenav-container`, className, {
         "--closed": !isMenuOpen
       })}
@@ -319,7 +325,7 @@ export function AdvantageSideNav(props: Props) {
                                       className={`${prefix}--bmrg-advantage-sidenav-submenu-link`}
                                       data-testid="sidenav-service-submenu-link"
                                       href={service.url}
-                                      onClick={() => handleServiceClick(service)}
+                                      onClick={() => handleServiceClick({ service, team })}
                                     >
                                       {service.name}
                                     </SideNavLink>
