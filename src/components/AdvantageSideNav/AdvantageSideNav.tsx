@@ -15,6 +15,7 @@ type Props = {
   className?: string;
   defaultAssistantLink?: string;
   enableChatButton?: boolean;
+  showChatButton?: boolean;
   homeLink?: string;
   joinCreateTrigger?: (props: any) => void;
   isLoading?: boolean;
@@ -38,6 +39,7 @@ export function AdvantageSideNav(props: Props) {
   const { 
     app,
     enableChatButton=true,
+    showChatButton=true,
     homeLink,
     assistantLink,
     defaultAssistantLink,
@@ -207,7 +209,7 @@ export function AdvantageSideNav(props: Props) {
                 Home
               </SideNavLink> : null
             }
-            {!isPartnerUser && assistantLink && (
+            {!isPartnerUser && assistantLink && showChatButton && (
               showChatTooltip ? (
                 <TooltipHover className={`${prefix}--bmrg-side-nav__tooltip`} content={tooltipMessage} direction="right">
                   <span>{assistantSideNavLink}</span>
