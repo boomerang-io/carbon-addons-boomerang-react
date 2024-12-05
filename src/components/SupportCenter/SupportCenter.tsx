@@ -34,12 +34,11 @@ function SupportCenter({closeModal, isOpen, supportRedirect ,baseServicesUrl}: P
 
       async function handleSubmit(e:any) {
         const body = {
-            isShowSupport: false,
+            isShowSupport: false
         };
     
         try {
           await mutateUserProfile({ baseServicesUrl, body });
-          closeModal();
         } catch (e) {
           // noop
         }
