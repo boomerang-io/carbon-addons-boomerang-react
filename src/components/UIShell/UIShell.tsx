@@ -59,6 +59,7 @@ type Props = {
     className?: string;
   };
   supportMenuItems?: React.ReactNode[];
+  templateMeteringEvent?: (props: any) => void;
   triggerEvent?: (props: any) => any;
   user?: User;
   userTeams?: {data: any, isLoading: boolean, error: any};
@@ -75,6 +76,7 @@ function UIShell({
   renderPrivacyStatement = true,
   rightPanel,
   skipToContentProps,
+  templateMeteringEvent,
   triggerEvent,
   user,
   userTeams,
@@ -145,6 +147,7 @@ function UIShell({
         rightPanel={rightPanel}
         requestSummary={user?.requestSummary}
         skipToContentProps={skipToContentProps}
+        templateMeteringEvent={templateMeteringEvent}
         triggerEvent={triggerEvent}
         profileMenuItems={[
           isUserEnabled && (

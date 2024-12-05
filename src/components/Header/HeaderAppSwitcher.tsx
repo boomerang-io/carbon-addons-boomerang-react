@@ -22,11 +22,12 @@ type HeaderAppSwitcherProps = {
   baseServicesUrl: string;
   id: string;
   isOpen?: boolean;
+  templateMeteringEvent?: (props: any) => void;
   triggerEvent?: (props: any) => any;
   userTeams?: {data: any, isLoading: boolean, error: any};
 };
 
-export default function HeaderAppSwitcher({ baseServicesUrl, baseEnvUrl, id, isOpen, triggerEvent, userTeams }: HeaderAppSwitcherProps) {
+export default function HeaderAppSwitcher({ baseServicesUrl, baseEnvUrl, id, isOpen, templateMeteringEvent, triggerEvent, userTeams }: HeaderAppSwitcherProps) {
   const hasUserTeams = Boolean(userTeams);
   const userTeamsUrl = serviceUrl.getUserTeamsServices({baseServicesUrl});
   const teamsQuery = useQuery({
@@ -80,6 +81,7 @@ export default function HeaderAppSwitcher({ baseServicesUrl, baseEnvUrl, id, isO
                 baseServicesUrl={baseServicesUrl}
                 isMember={true}
                 team={team}
+                templateMeteringEvent={templateMeteringEvent}
                 triggerEvent={triggerEvent}
               />
             ))}
@@ -92,6 +94,7 @@ export default function HeaderAppSwitcher({ baseServicesUrl, baseEnvUrl, id, isO
                   isAccount={true}
                   isMember={account.isAccountTeamMember}
                   team={account}
+                  templateMeteringEvent={templateMeteringEvent}
                   triggerEvent={triggerEvent}
                 />
                 {Boolean(account.projectTeams) &&
@@ -102,6 +105,7 @@ export default function HeaderAppSwitcher({ baseServicesUrl, baseEnvUrl, id, isO
                       baseServicesUrl={baseServicesUrl}
                       isMember={true}
                       team={project}
+                      templateMeteringEvent={templateMeteringEvent}
                       triggerEvent={triggerEvent}
                     />
                   ))}
@@ -131,10 +135,11 @@ type TeamServiceListMenuProps = {
   isAccount?: boolean;
   isMember: boolean;
   team: SimpleIdNameMap;
+  templateMeteringEvent?: (props: any) => void;
   triggerEvent?: (props: any) => any;
 };
 
-function TeamServiceListMenu({ baseEnvUrl, isAccount, isMember, team, triggerEvent }: TeamServiceListMenuProps) {
+function TeamServiceListMenu({ baseEnvUrl, isAccount, isMember, team, templateMeteringEvent, triggerEvent }: TeamServiceListMenuProps) {
   const { name, displayName, services } = team;
 
   const nameToDisplay = displayName ? displayName : name;
@@ -157,7 +162,7 @@ function TeamServiceListMenu({ baseEnvUrl, isAccount, isMember, team, triggerEve
       title={isNameTruncated ? nameToDisplay : undefined}
     >
       <SideNavMenu title={nameToDisplay}>
-        <ServiceList baseEnvUrl={baseEnvUrl} isAccount={isAccount} servicesData={services} triggerEvent={triggerEvent} />
+        <ServiceList baseEnvUrl={baseEnvUrl} isAccount={isAccount} servicesData={services} team={team} templateMeteringEvent={templateMeteringEvent} triggerEvent={triggerEvent} />
       </SideNavMenu>
     </ul>
   );
@@ -167,13 +172,18 @@ type ServiceListProps = {
   baseEnvUrl?: string;
   isAccount?: boolean;
   servicesData?: Array<{name: string; url: string}>;
+  team: SimpleIdNameMap;
+  templateMeteringEvent?: (props: any) => void;
   triggerEvent?: (props: any) => any;
 };
 
 function ServiceList(props: ServiceListProps) {
-  const { baseEnvUrl = "", isAccount, servicesData, triggerEvent } = props;
+  const { baseEnvUrl = "", isAccount, servicesData, team, templateMeteringEvent, triggerEvent } = props;
 
   const handleLinkClick = (service: SimpleTeamService) => {
+    if (templateMeteringEvent) {
+      templateMeteringEvent({ service, team });
+    }
     triggerEvent && triggerEvent(service);
   };
 
