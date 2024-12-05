@@ -24,7 +24,7 @@ function SupportCenter({closeModal, isOpen, supportRedirect ,baseServicesUrl}: P
 
     const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setDoNotAskAgain(event.target.checked);
-        handleSubmit(event.target.checked)
+        handleSubmit();
     };
     const {mutateAsync: mutateUserProfile,} = useMutation(resolver.patchUserProfile, {
         onSuccess: () => {
@@ -32,7 +32,7 @@ function SupportCenter({closeModal, isOpen, supportRedirect ,baseServicesUrl}: P
         },
       });
 
-      async function handleSubmit(e:any) {
+      async function handleSubmit() {
         const body = {
             isShowSupport: false
         };
@@ -56,7 +56,7 @@ function SupportCenter({closeModal, isOpen, supportRedirect ,baseServicesUrl}: P
             <ModalBody>
                 <div className={`${prefix}--bmrg-feedback`}>
                     <p>
-                        Review your open cases or open a new case at IBM Support For support tickets related to IBM Consulting Advantage, use Product "Consulting Advantage
+                        Review your open cases or open a new case at IBM Support For support tickets related to IBM Consulting Advantage, use Product "Consulting Advantage".
                     </p>
                     <Checkbox
                         id="supportCheckboxId"
@@ -73,7 +73,7 @@ function SupportCenter({closeModal, isOpen, supportRedirect ,baseServicesUrl}: P
                     Cancel
                 </Button>
                 <Button data-modal-primary-focus kind="primary" onClick={supportRedirect}>
-                    IBM Support
+                    Continue to IBM Support
                 </Button>
             </ModalFooter>
         </ComposedModal>
