@@ -5,6 +5,7 @@ export const PROFILE_SETTINGS_DATA = {
   isFirstVisit: false,
   type: "admin",
   isShowHelp: true,
+  showSupport:true,
   firstLoginDate: "2020-03-19T13:46:46.168+00:00",
   lastLoginDate: "2020-11-23T14:59:47.076+00:00",
   lowerLevelGroups: [

@@ -6,6 +6,7 @@ import HeaderMenuItem from "../Header/HeaderMenuItem";
 import PrivacyRedirectModal from "../PrivacyRedirect";
 import { AboutPlatformMenuItem } from "../AboutPlatform";
 import { FeedbackMenuItem } from "../Feedback";
+import { SupportCenterMenuItem } from "../SupportCenter";
 import { PrivacyStatementMenuItem } from "../PrivacyStatement";
 import { ProfileSettingsMenuItem } from "../ProfileSettings";
 import { queryClient } from "../../config/servicesConfig";
@@ -62,8 +63,9 @@ type Props = {
   templateMeteringEvent?: (props: any) => void;
   triggerEvent?: (props: any) => any;
   user?: User;
-  userTeams?: {data: any, isLoading: boolean, error: any};
+  userTeams?: { data: any, isLoading: boolean, error: any };
 };
+
 
 function UIShell({
   config,
@@ -94,11 +96,10 @@ function UIShell({
       />
     );
   }
-
   const { features, navigation, platform, platformMessage } = config;
   const names = getProductAndPlatformNames({ productName, platformName, platform });
   const sendIdeasUrl = platform?.feedbackUrl || "https://ideas.ibm.com";
-
+  const supportLink = "https://ibmsf.my.site.com/ibminternalproducts/s/";
   /**
    * Check feature enablement via explicit feature flags
    */
@@ -116,6 +117,7 @@ function UIShell({
   const isSendMailEnabled = Boolean(platform.sendMail);
   const isSignOutEnabled = Boolean(platform?.signOutUrl);
   const isUserEnabled = Boolean(user?.id);
+  const supportFlagCheck = user?.showSupport;
 
   /**
    * Checking for conditions when we explicitly set "renderPrivacyRedirect" to false (it defaults to true) OR
@@ -187,14 +189,23 @@ function UIShell({
         ].filter(Boolean)}
         supportMenuItems={[
           isSupportEnabled && (
-            <HeaderMenuItem
-              key="support-center"
-              href={`${platform.baseEnvUrl}/support/center`}
-              icon={<HelpDesk />}
-              kind="internal"
-              text="Support Center"
-              type="link"
-            />
+            supportFlagCheck ?
+            <SupportCenterMenuItem
+                key="support-center"
+                platformName={platform?.platformName}
+                platformOrganization={platform?.platformOrganization}
+                supportLink={supportLink}
+                baseServicesUrl={platform.baseServicesUrl}
+              />
+             :
+             <HeaderMenuItem
+             key="support-center"
+             href={supportLink}
+             icon={<HelpDesk />}
+             kind="external"
+             text="Support Center"
+             type="link"
+           />   
           ),
           isCommunityEnabled && (
             <HeaderMenuItem

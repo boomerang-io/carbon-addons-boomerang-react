@@ -184,6 +184,7 @@ export const UIShellDefault = (args) => {
             email: "rdeckard@ibm.com",
             hasConsented: true,
             status: "active",
+            showSupport:true,
             requestSummary: {
               requireUserAction: 0,
               submittedByUser: 17,
