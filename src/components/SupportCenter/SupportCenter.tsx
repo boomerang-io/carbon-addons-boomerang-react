@@ -23,8 +23,9 @@ function SupportCenter({closeModal, isOpen, supportRedirect ,baseServicesUrl}: P
     const profileUrl = serviceUrl.resourceUserProfile({ baseServicesUrl });
 
     const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setDoNotAskAgain(event.target.checked);
-        handleSubmit();
+        const shouldNotAskAgain = event.target.checked;
+        setDoNotAskAgain(shouldNotAskAgain);
+        handleSubmit(!shouldNotAskAgain);
     };
     const {mutateAsync: mutateUserProfile,} = useMutation(resolver.patchUserProfile, {
         onSuccess: () => {
@@ -32,9 +33,9 @@ function SupportCenter({closeModal, isOpen, supportRedirect ,baseServicesUrl}: P
         },
       });
 
-      async function handleSubmit() {
+      async function handleSubmit(showSupport: boolean) {
         const body = {
-            isShowSupport: false
+            showSupport
         };
     
         try {
