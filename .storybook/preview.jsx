@@ -24,7 +24,6 @@ export const globalTypes = {
 };
 
 export const parameters = {
-  actions: { argTypesRegex: "^on.*" },
   backgrounds: {
     // https://storybook.js.org/docs/react/essentials/backgrounds#grid
     grid: {
@@ -149,3 +148,4 @@ export const decorators = [
     );
   },
 ];
+export const tags = ["autodocs"];

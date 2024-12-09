@@ -47,11 +47,11 @@ function Component1({ setIsOpen }) {
 export const Default = () => {
   const [isOpen, setIsOpen] = React.useState(false);
   return (
-    <>
+    <div id="root">
       <Button onClick={() => setIsOpen(true)}>Open Modal</Button>
       <Modal isOpen={isOpen} appElement="#root">
         <Component1 setIsOpen={setIsOpen} />
       </Modal>
-    </>
+    </div>
   );
 };
