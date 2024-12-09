@@ -34,7 +34,7 @@ function SupportCenter({closeModal, isOpen, supportRedirect ,baseServicesUrl}: P
 
       async function handleSubmit() {
         const body = {
-            isShowSupport: false
+            showSupport: false
         };
     
         try {

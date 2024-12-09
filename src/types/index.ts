@@ -249,7 +249,7 @@ export type User = {
   id: string;
   isFirstVisit: boolean | null;
   isShowHelp: boolean | null;
-  isShowSupport: boolean | null;
+  showSupport: boolean | null;
   lastLoginDate: string;
   approvedDate?: string;
   launchpadTutorialState: null | -1 | 0 | 1 | 2 | 3;

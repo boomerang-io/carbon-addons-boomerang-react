@@ -115,7 +115,7 @@ function UIShell({
   const isSendMailEnabled = Boolean(platform.sendMail);
   const isSignOutEnabled = Boolean(platform?.signOutUrl);
   const isUserEnabled = Boolean(user?.id);
-  const supportFlagCheck = user?.isShowSupport;
+  const supportFlagCheck = user?.showSupport;
 
   /**
    * Checking for conditions when we explicitly set "renderPrivacyRedirect" to false (it defaults to true) OR
