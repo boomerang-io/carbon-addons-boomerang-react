@@ -49,7 +49,7 @@ function SupportCenter({closeModal, isOpen, supportRedirect ,baseServicesUrl}: P
         <ComposedModal
             aria-label="Feedback"
             open={isOpen}
-            className={`${prefix}--description-modal`}
+            className={`${prefix}--support-description-modal`}
             onClose={closeModal}
             onKeyDown={(e: any) => e.stopPropagation()}
         >
