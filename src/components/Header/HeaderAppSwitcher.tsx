@@ -203,10 +203,8 @@ function ServiceList(props: ServiceListProps) {
                 data-testid="header-app-switcher-service"
                 {...(isExternalLink ? externalProps : undefined)}
               >
-                <div onClick={() => handleLinkClick(service)} onKeyDown={() => handleLinkClick(service)} tabIndex={0} role="button">
-                  <span>{service.name}</span>
-                  {isExternalLink ? <Launch size={16} title="Opens page in new tab" /> : undefined}
-                </div>
+                <span>{service.name}</span>
+                {isExternalLink ? <Launch size={16} title="Opens page in new tab" /> : undefined}
               </SideNavMenuItem>
             );
           })}
