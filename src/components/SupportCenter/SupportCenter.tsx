@@ -49,7 +49,7 @@ function SupportCenter({closeModal, isOpen, supportRedirect ,baseServicesUrl}: P
         <ComposedModal
             aria-label="Feedback"
             open={isOpen}
-            className={`${prefix}--descriptionModal`}
+            className={`${prefix}--description-modal`}
             onClose={closeModal}
             onKeyDown={(e: any) => e.stopPropagation()}
         >
@@ -84,9 +84,6 @@ function SupportCenter({closeModal, isOpen, supportRedirect ,baseServicesUrl}: P
 function SupportCenterMenuItem(props: Omit<Props, "isOpen" | "closeModal" | "supportRedirect">) {
     const menuItemRef = React.useRef<HTMLLinkElement>(null);
     const [isOpen, setIsOpen] = React.useState(false);
-
-
-
 
     const handleClose = () => {
         setIsOpen(false);

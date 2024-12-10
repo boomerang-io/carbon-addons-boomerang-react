@@ -63,6 +63,7 @@ $use-theme-advantage-white: false !default;
 @use '../components/ProtectedRoute/protectedRoute';
 @use '../components/RadioGroup/radioGroup';
 @use '../components/SignOut/signOut';
+@use '../components/SupportCenter/supportCenter';
 @use '../components/TextArea/textArea';
 @use '../components/TextInput/textInput';
 @use '../components/Toggle/toggle' as addons-toggle;
@@ -136,7 +137,7 @@ $use-theme-advantage-white: false !default;
     }
 
     .#{$prefix}--modal-content {
-      color: var(--cds-text-on-color);
+      color: var(--cds-text-primary);
       padding: 0 1rem;
       margin-bottom: 4rem;
     }

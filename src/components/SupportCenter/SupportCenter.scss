@@ -1,12 +1,9 @@
 @use "../../global/config" as *;
 @use "../../global/utils";
 
-.#{$prefix}--descriptionModal {
+.#{$prefix}--description-modal {
   max-height: 60rem;
-  max-width: 70.625rem;
-  outline: none;
- // position: relative;
-  width: 100vw;
-  color: #a2a9b0;
-  background-color: #f4f4f4 !important; 
+  .#{$prefix}--modal-container {
+    max-width: 70.625rem;
+  }
 }
