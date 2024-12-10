@@ -49,15 +49,15 @@ function SupportCenter({closeModal, isOpen, supportRedirect ,baseServicesUrl}: P
         <ComposedModal
             aria-label="Feedback"
             open={isOpen}
-            className={`${prefix}--bmrg-feedback-container ${prefix}--bmrg-header-modal`}
+            className={`${prefix}--descriptionModal`}
             onClose={closeModal}
             onKeyDown={(e: any) => e.stopPropagation()}
         >
-            <ModalHeader title="IBM Support Overview" closeModal={closeModal} />
+            <ModalHeader title="Support Center Overview" closeModal={closeModal} />
             <ModalBody>
                 <div className={`${prefix}--bmrg-feedback`}>
                     <p>
-                        Review your open cases or open a new case at IBM Support For support tickets related to IBM Consulting Advantage, use Product "Consulting Advantage".
+                        Review your open cases or open a new case at IBM Support. For support tickets related to IBM Consulting Advantage, use Product "Consulting Advantage".
                     </p>
                     <Checkbox
                         id="supportCheckboxId"
@@ -70,7 +70,7 @@ function SupportCenter({closeModal, isOpen, supportRedirect ,baseServicesUrl}: P
                 </div>
             </ModalBody>
             <ModalFooter>
-                <Button data-modal-secondary-focus kind="secondary" onClick={closeModal}>
+                <Button  kind="secondary" onClick={closeModal}>
                     Cancel
                 </Button>
                 <Button data-modal-primary-focus kind="primary" onClick={supportRedirect}>
