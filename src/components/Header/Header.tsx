@@ -53,6 +53,7 @@ type Props = {
   };
   skipToContentProps?: { href?: string; children?: string; className?: string };
   supportMenuItems?: React.ReactNode[];
+  templateMeteringEvent?: (props: any) => void;
   triggerEvent?: (props: any) => any;
   userTeams?: {data: any, isLoading: boolean, error: any};
 };
@@ -104,6 +105,7 @@ export default function Header(props: Props) {
     prefixName = "",
     rightPanel,
     skipToContentProps,
+    templateMeteringEvent,
     triggerEvent,
     userTeams,
   } = props;
@@ -158,6 +160,7 @@ export default function Header(props: Props) {
               baseEnvUrl={baseEnvUrl}
               baseServicesUrl={baseServicesUrl}
               enabled={props.enableAppSwitcher}
+              templateMeteringEvent={templateMeteringEvent}
               triggerEvent={triggerEvent}
               userTeams={userTeams}
             />
@@ -322,6 +325,7 @@ function AppSwitcherMenu(props: {
   enabled?: boolean;
   baseEnvUrl?: string;
   baseServicesUrl?: string;
+  templateMeteringEvent?: (props: any) => void;
   triggerEvent?: any;
   userTeams?: {data: any, isLoading: boolean, error: any};
 }) {
@@ -350,6 +354,7 @@ function AppSwitcherMenu(props: {
         baseServicesUrl={props.baseServicesUrl}
         id={MenuListId.Switcher}
         isOpen={isOpen}
+        templateMeteringEvent={props.templateMeteringEvent}
         triggerEvent={props.triggerEvent}
         userTeams={props.userTeams}
       />

@@ -36,8 +36,26 @@ const TEAMS_DATA = {
       id: "1",
       name: "Team 1",
       displayName: "Team 1 display with a loooong long long long display name",
+      services: [
+        {
+          name: "Test Service 1",
+          url: "test1.com"
+        },
+        {
+          name: "Test Service 2",
+          url: "test2.com"
+        }
+      ]
     },
-    { id: "2", name: "Team 2", displayName: null },
+    { id: "2", name: "Team 2", displayName: null, services: [] },
+  ],
+  personalTeam: [
+    {
+      id: "111",
+      name: "Personal Workspace",
+      services: [],
+      displayName: "Personal Workspace"
+    }
   ],
   accountTeams: [
     {
@@ -45,14 +63,14 @@ const TEAMS_DATA = {
       isAccountTeamMember: true,
       name: "Account 1",
       projectTeams: [
-        { accountTeamId: "11", id: "111", name: "Project 1 1", displayName: "Project 1 1 display" },
-        { accountTeamId: "11", id: "112", name: "Project 1 2", displayName: null },
+        { accountTeamId: "11", id: "111", name: "Project 1 1", displayName: "Project 1 1 display", services: [] },
+        { accountTeamId: "11", id: "112", name: "Project 1 2", displayName: null, services: [] },
       ],
     },
     {
       id: "12",
       name: "Account 2 has an exceptionally long name",
-      projectTeams: [{ accountTeamId: "12", id: "121", name: "Project 2 1", displayName: null }],
+      projectTeams: [{ accountTeamId: "12", id: "121", name: "Project 2 1", displayName: null, services: [] }],
     },
   ],
 };
@@ -114,7 +132,7 @@ export const UIShellDefault = (args) => {
   const mock = new MockAdapter(axios);
   mock.onGet(`${BASE_SERVICES_URL}/users/consents`).reply(200, PRIVACY_DATA);
   mock.onGet(`${BASE_SERVICES_URL}/launchpad/user`).reply(200, PROFILE_SETTINGS_DATA);
-  mock.onGet(`${BASE_SERVICES_URL}/users/teams`).reply(withDelay(1000, [200, TEAMS_DATA]));
+  mock.onGet(`${BASE_SERVICES_URL}/users/teams/services`).reply(withDelay(1000, [200, TEAMS_DATA]));
   mock.onGet(`${BASE_SERVICES_URL}/launchpad/teams/1/services`).reply(withDelay(4000, [200, SERVICES_DATA]));
   mock.onGet(`${BASE_SERVICES_URL}/launchpad/teams/2/services`).reply(withDelay(4000, [200, []]));
   mock.onPost(`${BASE_SERVICES_URL}/support/contact`).reply(200);
