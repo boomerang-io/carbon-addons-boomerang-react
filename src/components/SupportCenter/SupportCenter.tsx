@@ -49,16 +49,17 @@ function SupportCenter({closeModal, isOpen, supportRedirect ,baseServicesUrl}: P
         <ComposedModal
             aria-label="Feedback"
             open={isOpen}
-            className={`${prefix}--bmrg-feedback-container ${prefix}--bmrg-header-modal`}
+            className={`${prefix}--support-description-modal`}
             onClose={closeModal}
             onKeyDown={(e: any) => e.stopPropagation()}
         >
-            <ModalHeader title="IBM Support Overview" closeModal={closeModal} />
+            <ModalHeader title="Support Center Overview" closeModal={closeModal} />
             <ModalBody>
                 <div className={`${prefix}--bmrg-feedback`}>
                     <p>
-                        Review your open cases or open a new case at IBM Support For support tickets related to IBM Consulting Advantage, use Product "Consulting Advantage".
+                        Review your open cases or open a new case at IBM Support Center. For support tickets related to IBM Consulting Advantage, use Product "Consulting Advantage".
                     </p>
+                    &nbsp;
                     <Checkbox
                         id="supportCheckboxId"
                         labelText="Don't show again. Always proceed to IBM Support Center."
@@ -70,11 +71,11 @@ function SupportCenter({closeModal, isOpen, supportRedirect ,baseServicesUrl}: P
                 </div>
             </ModalBody>
             <ModalFooter>
-                <Button data-modal-secondary-focus kind="secondary" onClick={closeModal}>
+                <Button  kind="secondary" onClick={closeModal}>
                     Cancel
                 </Button>
                 <Button data-modal-primary-focus kind="primary" onClick={supportRedirect}>
-                    Continue to IBM Support
+                    Continue to IBM Support Center
                 </Button>
             </ModalFooter>
         </ComposedModal>
@@ -84,9 +85,6 @@ function SupportCenter({closeModal, isOpen, supportRedirect ,baseServicesUrl}: P
 function SupportCenterMenuItem(props: Omit<Props, "isOpen" | "closeModal" | "supportRedirect">) {
     const menuItemRef = React.useRef<HTMLLinkElement>(null);
     const [isOpen, setIsOpen] = React.useState(false);
-
-
-
 
     const handleClose = () => {
         setIsOpen(false);

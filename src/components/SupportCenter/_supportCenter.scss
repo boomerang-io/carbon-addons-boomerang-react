@@ -1,0 +1,9 @@
+@use "../../global/config" as *;
+@use "../../global/utils";
+
+.#{$prefix}--support-description-modal {
+  max-height: 60rem;
+  .#{$prefix}--modal-container {
+    max-width: 70.625rem;
+  }
+}
