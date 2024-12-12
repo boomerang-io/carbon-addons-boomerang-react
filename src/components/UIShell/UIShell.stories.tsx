@@ -185,6 +185,7 @@ export const UIShellDefault = (args) => {
             hasConsented: true,
             status: "active",
             showSupport:true,
+            type: "partner",
             requestSummary: {
               requireUserAction: 0,
               submittedByUser: 17,
