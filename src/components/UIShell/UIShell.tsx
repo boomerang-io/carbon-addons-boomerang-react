@@ -15,6 +15,7 @@ import type { NavLink, User } from "../../types";
 import { USER_PLATFORM_ROLE } from "../../constants/UserType";
 
 type Props = {
+  carbonTheme?: "white" | "g10" | "g90" | "g100";
   config?: {
     features?: {
       "appSwitcher.enabled"?: boolean;
@@ -69,6 +70,7 @@ type Props = {
 
 
 function UIShell({
+  carbonTheme="g10",
   config,
   leftPanel,
   platformName,
@@ -90,6 +92,7 @@ function UIShell({
       <Header
         baseEnvUrl=""
         baseServicesUrl=""
+        carbonTheme={carbonTheme}
         enableAppSwitcher={false}
         enableNotifications={false}
         enableNotificationsCount={false}
@@ -141,6 +144,7 @@ function UIShell({
       <Header
         baseEnvUrl={platform.baseEnvUrl}
         baseServicesUrl={platform.baseServicesUrl}
+        carbonTheme={carbonTheme}
         enableAppSwitcher={isAppSwitcherEnabled}
         enableNotifications={isNotificationsEnabled}
         enableNotificationsCount={isNotificationsCountEnabled}
