@@ -24,23 +24,26 @@ function FeatureNavTab({
   style,
   ...rest
 }: Props) {
-  const classNames = cx(
-    `${prefix}--tabs__nav-item`,
-    `${prefix}--tabs__nav-link`,
-    `${prefix}--bmrg-feature--tabs__nav-item`,
-    {
-      [`${prefix}--tabs__nav-item--disabled`]: disabled,
-    },
-    className
-  );
-  const activeClassNames = cx(`${prefix}--tabs__nav-item--selected`, activeClassName);
+  const classNames = ({ isActive }: { isActive: boolean }) => {
+    return cx(
+      `${prefix}--tabs__nav-item`,
+      `${prefix}--tabs__nav-link`,
+      `${prefix}--bmrg-feature--tabs__nav-item`,
+      {
+        [`${prefix}--tabs__nav-item--disabled`]: disabled,
+        [`${prefix}--tabs__nav-item--selected`]: isActive,
+        [activeClassName]: isActive && activeClassName
+      },
+      className
+    );
+  }
 
   return isLoading ? (
     <div className={`${prefix}--bmrg-feature-nav-tab--loading`}>
       <SkeletonPlaceholder className={`${prefix}--bmrg-feature-nav-tab--loading__skeleton`} />
     </div>
   ) : (
-    <NavLink className={classNames} activeClassName={activeClassNames} style={style} {...rest}>
+    <NavLink className={({ isActive }: any) => classNames({ isActive })} style={style} {...rest}>
       {label}
     </NavLink>
   );

@@ -16,12 +16,22 @@ type Props = NavLinkProps & {
 };
 
 function FeatureSideNavLink(props: Props) {
-  const { children, className, activeClassName, iconProps, icon: Icon, hasDivider = false, ...rest } = props;
+  const { children, className, activeClassName = "", iconProps, icon: Icon, hasDivider = false, ...rest } = props;
+   const classNames = ({ isActive }: { isActive: boolean }) => {
+    return cx(
+      `${prefix}--bmrg-feature-sidenav-link`,
+      {
+        [`${prefix}--bmrg-feature-sidenav-active-link`]: isActive,
+        [activeClassName]: isActive && activeClassName
+      },
+      className
+    );
+  }
+
   return (
     <>
       <NavLink
-        className={cx(`${prefix}--bmrg-feature-sidenav-link`, className)}
-        activeClassName={cx(`${prefix}--bmrg-feature-sidenav-active-link`, activeClassName)}
+        className={({ isActive }: any) => classNames({ isActive })}
         {...rest}
       >
         {Icon && <Icon {...iconProps} />}
