@@ -27,7 +27,7 @@ function ProtectedRoute({
   ...rest
 }: Props) {
   return (
-    <Route {...rest}>
+    <Route {...(rest as any)}>
       {checkAuth(userRole, allowedUserRoles) ? component : <Error403 message={message} title={title} />}
     </Route>
   );
