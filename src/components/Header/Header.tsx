@@ -112,7 +112,7 @@ export default function Header(props: Props) {
 
   return (
     <>
-      <Theme theme="g10">
+      <Theme theme="g100">
         <CarbonHeader aria-label="App navigation header" className={className}>
           {skipToContentProps ? <SkipToContent {...skipToContentProps} /> : null}
           <SidenavMenu leftPanel={props.leftPanel} navLinks={props.navLinks} />
