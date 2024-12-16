@@ -36,6 +36,7 @@ import type { NavLink } from "../../types";
 type Props = {
   baseServicesUrl?: string;
   baseEnvUrl?: string;
+  carbonTheme?: "white" | "g10" | "g90" | "g100";
   className?: string;
   enableAppSwitcher?: boolean;
   enableNotifications?: boolean;
@@ -100,6 +101,7 @@ export default function Header(props: Props) {
     productName,
     baseEnvUrl,
     baseServicesUrl,
+    carbonTheme = "g10",
     className,
     navLinks,
     prefixName = "",
@@ -112,7 +114,7 @@ export default function Header(props: Props) {
 
   return (
     <>
-      <Theme theme="g10">
+      <Theme theme={carbonTheme}>
         <CarbonHeader aria-label="App navigation header" className={className}>
           {skipToContentProps ? <SkipToContent {...skipToContentProps} /> : null}
           <SidenavMenu leftPanel={props.leftPanel} navLinks={props.navLinks} />
