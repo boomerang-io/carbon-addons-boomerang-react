@@ -12,8 +12,10 @@ import { ProfileSettingsMenuItem } from "../ProfileSettings";
 import { queryClient } from "../../config/servicesConfig";
 import { SignOutMenuItem } from "../SignOut";
 import type { NavLink, User } from "../../types";
+import { USER_PLATFORM_ROLE } from "../../constants/UserType";
 
 type Props = {
+  carbonTheme?: "white" | "g10" | "g90" | "g100";
   config?: {
     features?: {
       "appSwitcher.enabled"?: boolean;
@@ -68,6 +70,7 @@ type Props = {
 
 
 function UIShell({
+  carbonTheme="g10",
   config,
   leftPanel,
   platformName,
@@ -89,6 +92,7 @@ function UIShell({
       <Header
         baseEnvUrl=""
         baseServicesUrl=""
+        carbonTheme={carbonTheme}
         enableAppSwitcher={false}
         enableNotifications={false}
         enableNotificationsCount={false}
@@ -100,6 +104,7 @@ function UIShell({
   const names = getProductAndPlatformNames({ productName, platformName, platform });
   const sendIdeasUrl = platform?.feedbackUrl || "https://ideas.ibm.com";
   const supportLink = "https://ibmsf.my.site.com/ibminternalproducts/s/";
+  const partnerEmailId="ica-support@ibm.com";
   /**
    * Check feature enablement via explicit feature flags
    */
@@ -117,6 +122,7 @@ function UIShell({
   const isSendMailEnabled = Boolean(platform.sendMail);
   const isSignOutEnabled = Boolean(platform?.signOutUrl);
   const isUserEnabled = Boolean(user?.id);
+  const isPartnerUser = Boolean(user?.type === USER_PLATFORM_ROLE.Partner);
   const supportFlagCheck = user?.showSupport;
 
   /**
@@ -138,6 +144,7 @@ function UIShell({
       <Header
         baseEnvUrl={platform.baseEnvUrl}
         baseServicesUrl={platform.baseServicesUrl}
+        carbonTheme={carbonTheme}
         enableAppSwitcher={isAppSwitcherEnabled}
         enableNotifications={isNotificationsEnabled}
         enableNotificationsCount={isNotificationsCountEnabled}
@@ -189,12 +196,14 @@ function UIShell({
         ].filter(Boolean)}
         supportMenuItems={[
           isSupportEnabled && (
-            supportFlagCheck ?
+            (supportFlagCheck|| isPartnerUser) ?
             <SupportCenterMenuItem
                 key="support-center"
                 platformName={platform?.platformName}
                 platformOrganization={platform?.platformOrganization}
                 supportLink={supportLink}
+                partnerEmailId={partnerEmailId}
+                enablePartner={isPartnerUser}
                 baseServicesUrl={platform.baseServicesUrl}
               />
              :
