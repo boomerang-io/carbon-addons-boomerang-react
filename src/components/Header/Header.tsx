@@ -56,7 +56,7 @@ type Props = {
   supportMenuItems?: React.ReactNode[];
   templateMeteringEvent?: (props: any) => void;
   triggerEvent?: (props: any) => any;
-  userTeams?: {data: any, isLoading: boolean, error: any};
+  userTeams?: { data: any; isLoading: boolean; error: any };
 };
 
 type MenuType = "Notifcations" | "Profile" | "Requests" | "RightPanel" | "SideNav" | "Support" | "Switcher";
@@ -329,7 +329,7 @@ function AppSwitcherMenu(props: {
   baseServicesUrl?: string;
   templateMeteringEvent?: (props: any) => void;
   triggerEvent?: any;
-  userTeams?: {data: any, isLoading: boolean, error: any};
+  userTeams?: { data: any; isLoading: boolean; error: any };
 }) {
   const { isOpen, toggleActive, ref } = useHeaderMenu<HTMLDivElement>(MenuButtonId.Switcher);
 
@@ -410,7 +410,7 @@ function SidenavMenu(props: { leftPanel?: Props["leftPanel"]; navLinks: Props["n
     return (
       <div ref={ref} data-testid="header-sidenav-menu">
         <HeaderMenuButton
-          aria-label="Sidenav menu"
+          aria-label={isOpen ? "Close Side Nav" : "Expand Side Nav"}
           id={MenuButtonId.SideNav}
           isActive={isOpen}
           isCollapsible={true}
@@ -430,7 +430,7 @@ function SidenavMenu(props: { leftPanel?: Props["leftPanel"]; navLinks: Props["n
       {isMobileSidenavActive ? (
         <>
           <HeaderMenuButton
-            aria-label="Sidenav menu"
+            aria-label={isOpen ? "Close Side Nav" : "Expand Side Nav"}
             id={MenuButtonId.SideNav}
             isActive={isOpen}
             isCollapsible={false}
