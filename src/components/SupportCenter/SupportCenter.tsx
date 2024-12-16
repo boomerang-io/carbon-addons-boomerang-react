@@ -49,28 +49,22 @@ function SupportCenter({ closeModal, isOpen, supportRedirect, baseServicesUrl, e
 
     return (
         <ComposedModal
-            aria-label="Feedback"
+            aria-label="SupportCenter"
             open={isOpen}
             className={`${prefix}--support-description-modal`}
             onClose={closeModal}
             onKeyDown={(e: any) => e.stopPropagation()}
+            data-testid="composed-modal-supportcenter"
         >
-            <ModalHeader title="Having an issue?" closeModal={closeModal} />
+            <ModalHeader data-testid="supportcenter-modal-header" title="Having an issue?" closeModal={closeModal} />
             <ModalBody>
                 {enablePartner ?
                     <div className={`${prefix}--bmrg-feedback`}>
                         <p>
                             Please email any issues with a description and images to
                             {" " /* We need to force a space before the link tag */}
-                            <a
-                                aria-describedby="new-window-aria-desc-0"
-                                href={partnerEmailId}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
+                            <a href="mailto:ica-support@ibm.com">{partnerEmailId}</a>{"."}
 
-                                {partnerEmailId}
-                            </a>
                         </p>
                     </div>
                     :
@@ -81,6 +75,7 @@ function SupportCenter({ closeModal, isOpen, supportRedirect, baseServicesUrl, e
                         &nbsp;
                         <Checkbox
                             id="supportCheckboxId"
+                            data-testid="supportcenter-modal-checkbox"
                             labelText="Don't show again. Always proceed to IBM Support Center."
                             invalidText="Error message goes here"
                             onChange={handleCheckboxChange}
@@ -91,13 +86,13 @@ function SupportCenter({ closeModal, isOpen, supportRedirect, baseServicesUrl, e
             </ModalBody>
             <ModalFooter>
 
-                {enablePartner ? "" : <Button kind="secondary" onClick={closeModal}>
+                {enablePartner ? "" : <Button kind="secondary" data-testid="supportcenter-modal-cancel-button" onClick={closeModal}>
                     Cancel
                 </Button>}
-                {enablePartner ? <Button data-modal-primary-focus kind="primary" onClick={closeModal}>
+                {enablePartner ? <Button data-modal-primary-focus kind="primary" data-testid="supportcenter-modal-close-button" onClick={closeModal}>
                     Close
                 </Button> :
-                    <Button data-modal-primary-focus kind="primary" onClick={supportRedirect}>
+                    <Button data-modal-primary-focus kind="primary" data-testid="supportcenter-modal-continue-button" onClick={supportRedirect}>
                         Continue to IBM Support Center
                     </Button>
                 }
@@ -128,6 +123,7 @@ function SupportCenterMenuItem(props: Omit<Props, "isOpen" | "closeModal" | "sup
                 onClick={() => setIsOpen(!isOpen)}
                 ref={menuItemRef}
                 text="Support Center"
+                data-testid="supportcenter-modal-headermenuitem"
                 type="button"
             />
             <SupportCenter isOpen={isOpen} closeModal={handleClose} supportRedirect={supportHandle} {...props} />
