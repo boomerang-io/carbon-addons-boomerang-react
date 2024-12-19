@@ -9,8 +9,14 @@
   }
 }
 
-.#{$prefix}--side-nav__overlay-active{
+.#{$prefix}--side-nav__overlay-active {
   background-color: transparent;
+}
+
+@media (max-width: 65.98rem) {
+  .#{$prefix}--side-nav__overlay-active {
+    display: none;
+  }
 }
 
 .#{$prefix}--bmrg-advantage-sidenav-loading {
