@@ -7,10 +7,13 @@ type Props = React.ComponentPropsWithoutRef<"img"> & {
   src: string;
   style?: React.CSSProperties;
   userName?: string;
+  plainTooltip?: boolean;
 };
 
-const UserIcon = (props: React.SVGProps<SVGSVGElement> & { description?: string; userName?: string }) => {
-  const { description, userName, ...rest } = props;
+const UserIcon = (
+  props: React.SVGProps<SVGSVGElement> & { description?: string; userName?: string; plainTooltip?: boolean }
+) => {
+  const { description, userName, plainTooltip, ...rest } = props;
   return (
     <svg
       version="1.1"
@@ -23,7 +26,7 @@ const UserIcon = (props: React.SVGProps<SVGSVGElement> & { description?: string;
       role="img"
       {...rest}
     >
-      <title>{`User icon for ${userName ?? "user"}`}</title>
+      <title>{plainTooltip || !userName ? "Profile Image" : `User icon for ${userName}`}</title>
       {description && <desc>{description}</desc>}
       <g>
         <path
@@ -49,14 +52,21 @@ function Avatar({
   style,
   title,
   userName,
+  plainTooltip = false,
   ...rest
 }: Props) {
   const [error, setError] = useState(false);
 
-  const altText = `Avatar for ${userName}`;
+  const altText = plainTooltip || !userName ? "Profile Image" : `Avatar for ${userName}`;
 
   return error || !src ? (
-    <UserIcon className={`${className} --${size || ""}`} description={altText} style={style} />
+    <UserIcon
+      userName={userName}
+      plainTooltip={plainTooltip}
+      className={`${className} --${size || ""}`}
+      description={altText}
+      style={style}
+    />
   ) : (
     <img
       alt={alt ?? altText}
