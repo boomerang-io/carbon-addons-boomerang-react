@@ -1,3 +1,10 @@
+/*
+IBM Confidential
+694970X, 69497O0
+© Copyright IBM Corp. 2022, 2024
+*/
+
+
 // eslint-disable no-unused-vars
 import React from "react";
 import { ToastNotification as CarbonToastNotification } from "@carbon/react";

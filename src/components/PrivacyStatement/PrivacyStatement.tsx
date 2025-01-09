@@ -1,3 +1,10 @@
+/*
+IBM Confidential
+694970X, 69497O0
+© Copyright IBM Corp. 2022, 2024
+*/
+
+
 import React from "react";
 import { Accordion, AccordionItem, Button, ComposedModal, ModalHeader, ModalBody, ModalFooter } from "@carbon/react";
 import { Locked } from "@carbon/react/icons";

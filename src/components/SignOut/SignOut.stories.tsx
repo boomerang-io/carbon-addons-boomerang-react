@@ -1,3 +1,10 @@
+/*
+IBM Confidential
+694970X, 69497O0
+© Copyright IBM Corp. 2022, 2024
+*/
+
+
 import React from "react";
 import SignOut from "./SignOut";
 import { headerModalProps } from "../../internal/helpers";
