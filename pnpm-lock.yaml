@@ -193,8 +193,8 @@ importers:
         specifier: 16.14.0
         version: 16.14.0(react@16.14.0)
       react-router-dom:
-        specifier: ^5.3.0
-        version: 5.3.4(react@16.14.0)
+        specifier: ^7.0.2
+        version: 7.0.2(react-dom@16.14.0(react@16.14.0))(react@16.14.0)
       release-it:
         specifier: ^15.4.2
         version: 15.11.0
@@ -2438,6 +2438,9 @@ packages:
   '@types/babel__traverse@7.20.6':
     resolution: {integrity: sha512-r1bzfrm0tomOI8g1SzvCaQHo6Lcv6zu0EA+W2kHrt8dyrHQxGzBBL4kdkzIS+jBMV+EYcMAEAqXqYaLJq5rOZg==}
 
+  '@types/cookie@0.6.0':
+    resolution: {integrity: sha512-4Kh9a6B2bQciAhf7FSuMRRkUWecJgJu9nPnx3yzpsfXX/c50REIqpHY4C82bXP90qrLtXtkDxTZosYO3UpOwlA==}
+
   '@types/dompurify@2.4.0':
     resolution: {integrity: sha512-IDBwO5IZhrKvHFUl+clZxgf3hn2b/lU6H1KaBShPkQyGJUQ0xwebezIPSuiyGwfz1UzJWQl4M7BDxtHtCCPlTg==}
 
@@ -3798,6 +3801,10 @@ packages:
   cookie@0.5.0:
     resolution: {integrity: sha512-YZ3GUyn/o8gfKJlnlX7g7xq4gyO6OSuhGPKaaGssGB2qgDUS0gPgtTvoyZLTt9Ab6dC4hfc9dV5arkvc/OCmrw==}
     engines: {node: '>= 0.6'}
+
+  cookie@1.0.2:
+    resolution: {integrity: sha512-9Kr/j4O16ISv8zBBhJoi4bXOYNTkFLOqSL3UDB0njXxCXNezjeyVrJyGOWtgfs/q2km1gwBcfH8q1yEGoMYunA==}
+    engines: {node: '>=18'}
 
   copy-concurrently@1.0.5:
     resolution: {integrity: sha512-f2domd9fsVDFtaFcbaRZuYXwtdmnzqbADSwhSWYxYB/Q8zsdUUFMXVRwXGDMWmbEzAn1kdRrtI1T/KTFOL4X2A==}
@@ -5169,9 +5176,6 @@ packages:
   highlight.js@10.7.3:
     resolution: {integrity: sha512-tzcUFauisWKNHaRkN4Wjl/ZA07gENAjFl3J/c480dprkGTg5EQstgaNFqBfUqCq54kZRIEcreTsAgF/m2quD7A==}
 
-  history@4.10.1:
-    resolution: {integrity: sha512-36nwAD620w12kuzPAsyINPWJqlNbij+hpK1k9XRloDtym8mxzGYl2c17LnV6IAGB2Dmg4tEa7G7DlawS0+qjew==}
-
   hmac-drbg@1.0.1:
     resolution: {integrity: sha512-Tti3gMqLdZfhOQY1Mzf/AanLiqh1WTiJgEj26ZuYQ9fbkLomzGchCws4FyrSd4VkpBfiNhaE1On+lOz894jvXg==}
 
@@ -5708,9 +5712,6 @@ packages:
   is-yarn-global@0.4.1:
     resolution: {integrity: sha512-/kppl+R+LO5VmhYSEWARUFjodS25D68gvj8W7z0I7OWhUla5xWu8KL6CtB2V0R6yqhnRgbcaREMr4EEM6htLPQ==}
     engines: {node: '>=12'}
-
-  isarray@0.0.1:
-    resolution: {integrity: sha512-D2S+3GLxWH+uhrNEcoh/fnmYeP8E8/zHl644d/jdA0g2uyXvy3sb0qxotE+ne0LtccHknQzWwZEzhak7oJ0COQ==}
 
   isarray@1.0.0:
     resolution: {integrity: sha512-VLghIWNM6ELQzo7zwmcg0NmTVyWKYjvIeM83yjp0wRDTmUnrM678fQbcKBo6n2CJEF0szoG//ytg+TKla89ALQ==}
@@ -6887,9 +6888,6 @@ packages:
   path-to-regexp@0.1.7:
     resolution: {integrity: sha512-5DFkuoqlv1uYQKxy8omFBeJPQcdoE07Kv2sferDCrAq1ohOU+MSDswDIbnx3YAM60qIOnYa53wBhXW0EbMonrQ==}
 
-  path-to-regexp@1.8.0:
-    resolution: {integrity: sha512-n43JRhlUKUAlibEJhPeir1ncUID16QnEjNpwzNdO3Lm4ywrBpBZ5oLD0I6br9evr1Y9JTqwRtAh7JLoOzAQdVA==}
-
   path-type@1.1.0:
     resolution: {integrity: sha512-S4eENJz1pkiQn9Znv33Q+deTOKmbl+jj1Fl+qiP/vYezj+S8x+J3Uo0ISrx/QoEvIlOaDWJhPaRd1flJ9HXZqg==}
     engines: {node: '>=0.10.0'}
@@ -7314,15 +7312,22 @@ packages:
     resolution: {integrity: sha512-jCvmsr+1IUSMUyzOkRcvnVbX3ZYC6g9TDrDbFuFmRDq7PD4yaGbLKNQL6k2jnArV8hjYxh7hVhAZB6s9HDGpZA==}
     engines: {node: '>=0.10.0'}
 
-  react-router-dom@5.3.4:
-    resolution: {integrity: sha512-m4EqFMHv/Ih4kpcBCONHbkT68KoAeHN4p3lAGoNryfHi0dMy0kCzEZakiKRsvg5wHZ/JLrLW8o8KomWiz/qbYQ==}
+  react-router-dom@7.0.2:
+    resolution: {integrity: sha512-VJOQ+CDWFDGaWdrG12Nl+d7yHtLaurNgAQZVgaIy7/Xd+DojgmYLosFfZdGz1wpxmjJIAkAMVTKWcvkx1oggAw==}
+    engines: {node: '>=20.0.0'}
     peerDependencies:
-      react: '>=15'
+      react: '>=18'
+      react-dom: '>=18'
 
-  react-router@5.3.4:
-    resolution: {integrity: sha512-Ys9K+ppnJah3QuaRiLxk+jDWOR1MekYQrlytiXxC1RyfbdsZkS5pvKAzCCr031xHixZwpnsYNT5xysdFHQaYsA==}
+  react-router@7.0.2:
+    resolution: {integrity: sha512-m5AcPfTRUcjwmhBzOJGEl6Y7+Crqyju0+TgTQxoS4SO+BkWbhOrcfZNq6wSWdl2BBbJbsAoBUb8ZacOFT+/JlA==}
+    engines: {node: '>=20.0.0'}
     peerDependencies:
-      react: '>=15'
+      react: '>=18'
+      react-dom: '>=18'
+    peerDependenciesMeta:
+      react-dom:
+        optional: true
 
   react-sizeme@3.0.2:
     resolution: {integrity: sha512-xOIAOqqSSmKlKFJLO3inBQBdymzDuXx4iuwkNcJmC96jeiOg5ojByvL+g3MW9LPEsojLbC6pf68zOfobK8IPlw==}
@@ -7532,9 +7537,6 @@ packages:
     resolution: {integrity: sha512-zFa12V4OLtT5XUX/Q4VLvTfBf+Ok0SPc1FNGM/z9ctUdiU618qwKpWnd0CHs3+RqROfyEg/DhuHbMWYqcgljEw==}
     engines: {node: '>=8'}
 
-  resolve-pathname@3.0.0:
-    resolution: {integrity: sha512-C7rARubxI8bXFNB/hqcp/4iUeIXJhJZvFPFPiSPRnhU5UPxzMFIl+2E6yY6c4k9giDJAhtV+enfA+G89N6Csng==}
-
   resolve-url@0.2.1:
     resolution: {integrity: sha512-ZuF55hVUQaaczgOIwqWzkEcEidmlD/xl44x1UZnhOXcYuFN2S6+rcxpG+C1N3So0wvNI3DmJICUFfu2SxhBmvg==}
     deprecated: https://github.com/lydell/resolve-url#deprecated
@@ -7742,6 +7744,9 @@ packages:
 
   set-blocking@2.0.0:
     resolution: {integrity: sha512-KiKBS8AnWGEyLzofFfmvKwpdPzqiy16LvQfK3yv/fVH7Bj13/wl3JSR1J+rfgRE9q7xUJK4qvgS8raSOeLUehw==}
+
+  set-cookie-parser@2.7.1:
+    resolution: {integrity: sha512-IOc8uWeOZgnb3ptbCURJWNjWUPcO3ZnTTdzsurqERrP6nPyv+paC55vJM0LpOlT2ne+Ix+9+CRG1MNLlyZ4GjQ==}
 
   set-function-length@1.2.2:
     resolution: {integrity: sha512-pgRc4hJ4/sNjWCSS9AmnS40x3bNMDTknHgL5UaMBTMyJnU90EgWh1Rz+MC9eFu4BuN/UwZjKQuY/1v3rM7HMfg==}
@@ -8224,9 +8229,6 @@ packages:
     resolution: {integrity: sha512-9phl76Cqm6FhSX9Xe1ZUAMLtm1BLkKj2Qd5ApyWkXzsMRaA7dgr81kf4wJmQf/hAvg8EEyJxDo3du/0KlhPiKQ==}
     engines: {node: '>=0.6.0'}
 
-  tiny-invariant@1.3.3:
-    resolution: {integrity: sha512-+FbBPE1o9QAYvviau/qC5SE3caw21q3xkvWKBtja5vgqOWIHHJ3ioaq1VPfn/Szqctz2bU/oYeKd9/z5BL+PVg==}
-
   tiny-warning@1.0.3:
     resolution: {integrity: sha512-lBN9zLN/oAf68o3zNXYrdCt1kP8WsiGW8Oo2ka41b2IM5JL/S1CTyX1rW0mb/zSuJun0ZUrDxx4sqvYS2FWzPA==}
 
@@ -8390,6 +8392,9 @@ packages:
 
   tty-browserify@0.0.0:
     resolution: {integrity: sha512-JVa5ijo+j/sOoHGjw0sxw734b1LhBkQ3bvUGNdxnVXDCX81Yx7TFgnZygxrIIWn23hbfTaMYLwRmAxFyDuFmIw==}
+
+  turbo-stream@2.4.0:
+    resolution: {integrity: sha512-FHncC10WpBd2eOmGwpmQsWLDoK4cqsA/UT/GqNoaKOQnT8uzhtCbg3EoUDMvqpOSAI0S26mr0rkjzbOO6S3v1g==}
 
   type-check@0.3.2:
     resolution: {integrity: sha512-ZCmOJdvOWDBYJlzAoFkC+Q0+bUyEOS1ltgp1MGU03fqHG+dbi9tBFU2Rd9QKiDZFAYrhPh2JUf7rZRIuHRKtOg==}
@@ -8675,9 +8680,6 @@ packages:
 
   validate-npm-package-license@3.0.4:
     resolution: {integrity: sha512-DpKm2Ui/xN7/HQKCtpZxoRWBhZ9Z0kqtygG8XCgNQ8ZlDnxuQmWhj566j8fN4Cu3/JmbhsDo7fcAJq4s9h27Ew==}
-
-  value-equal@1.0.1:
-    resolution: {integrity: sha512-NOJ6JZCAWr0zlxZt+xqCHNTEKOsrks2HQd4MqhP1qy4z1SkbEP467eNx6TgDKXMvUOb+OENfJCZwM+16n7fRfw==}
 
   vary@1.1.2:
     resolution: {integrity: sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==}
@@ -12170,6 +12172,8 @@ snapshots:
     dependencies:
       '@babel/types': 7.24.0
 
+  '@types/cookie@0.6.0': {}
+
   '@types/dompurify@2.4.0':
     dependencies:
       '@types/trusted-types': 2.0.7
@@ -13898,6 +13902,8 @@ snapshots:
   cookie-signature@1.0.6: {}
 
   cookie@0.5.0: {}
+
+  cookie@1.0.2: {}
 
   copy-concurrently@1.0.5:
     dependencies:
@@ -15773,15 +15779,6 @@ snapshots:
 
   highlight.js@10.7.3: {}
 
-  history@4.10.1:
-    dependencies:
-      '@babel/runtime': 7.24.0
-      loose-envify: 1.4.0
-      resolve-pathname: 3.0.0
-      tiny-invariant: 1.3.3
-      tiny-warning: 1.0.3
-      value-equal: 1.0.1
-
   hmac-drbg@1.0.1:
     dependencies:
       hash.js: 1.1.7
@@ -16274,8 +16271,6 @@ snapshots:
   is-yarn-global@0.3.0: {}
 
   is-yarn-global@0.4.1: {}
-
-  isarray@0.0.1: {}
 
   isarray@1.0.0: {}
 
@@ -17627,10 +17622,6 @@ snapshots:
 
   path-to-regexp@0.1.7: {}
 
-  path-to-regexp@1.8.0:
-    dependencies:
-      isarray: 0.0.1
-
   path-type@1.1.0:
     dependencies:
       graceful-fs: 4.2.11
@@ -18095,29 +18086,21 @@ snapshots:
 
   react-refresh@0.14.2: {}
 
-  react-router-dom@5.3.4(react@16.14.0):
+  react-router-dom@7.0.2(react-dom@16.14.0(react@16.14.0))(react@16.14.0):
     dependencies:
-      '@babel/runtime': 7.24.0
-      history: 4.10.1
-      loose-envify: 1.4.0
-      prop-types: 15.8.1
       react: 16.14.0
-      react-router: 5.3.4(react@16.14.0)
-      tiny-invariant: 1.3.3
-      tiny-warning: 1.0.3
+      react-dom: 16.14.0(react@16.14.0)
+      react-router: 7.0.2(react-dom@16.14.0(react@16.14.0))(react@16.14.0)
 
-  react-router@5.3.4(react@16.14.0):
+  react-router@7.0.2(react-dom@16.14.0(react@16.14.0))(react@16.14.0):
     dependencies:
-      '@babel/runtime': 7.24.0
-      history: 4.10.1
-      hoist-non-react-statics: 3.3.2
-      loose-envify: 1.4.0
-      path-to-regexp: 1.8.0
-      prop-types: 15.8.1
+      '@types/cookie': 0.6.0
+      cookie: 1.0.2
       react: 16.14.0
-      react-is: 16.13.1
-      tiny-invariant: 1.3.3
-      tiny-warning: 1.0.3
+      set-cookie-parser: 2.7.1
+      turbo-stream: 2.4.0
+    optionalDependencies:
+      react-dom: 16.14.0(react@16.14.0)
 
   react-sizeme@3.0.2:
     dependencies:
@@ -18434,8 +18417,6 @@ snapshots:
     dependencies:
       global-dirs: 0.1.1
 
-  resolve-pathname@3.0.0: {}
-
   resolve-url@0.2.1: {}
 
   resolve@1.22.8:
@@ -18695,6 +18676,8 @@ snapshots:
       - supports-color
 
   set-blocking@2.0.0: {}
+
+  set-cookie-parser@2.7.1: {}
 
   set-function-length@1.2.2:
     dependencies:
@@ -19241,8 +19224,6 @@ snapshots:
     dependencies:
       setimmediate: 1.0.5
 
-  tiny-invariant@1.3.3: {}
-
   tiny-warning@1.0.3: {}
 
   tinybench@2.6.0: {}
@@ -19391,6 +19372,8 @@ snapshots:
       typescript: 4.9.5
 
   tty-browserify@0.0.0: {}
+
+  turbo-stream@2.4.0: {}
 
   type-check@0.3.2:
     dependencies:
@@ -19640,7 +19623,7 @@ snapshots:
       schema-utils: 3.3.0
       webpack: 4.47.0
     optionalDependencies:
-      file-loader: 6.2.0(webpack@4.47.0)
+      file-loader: 6.2.0(webpack@5.90.3(esbuild@0.17.19))
 
   url-parse-lax@3.0.0:
     dependencies:
@@ -19701,8 +19684,6 @@ snapshots:
     dependencies:
       spdx-correct: 3.2.0
       spdx-expression-parse: 3.0.1
-
-  value-equal@1.0.1: {}
 
   vary@1.1.2: {}
 

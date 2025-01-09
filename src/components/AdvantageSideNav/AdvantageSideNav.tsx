@@ -39,6 +39,7 @@ type Props = {
   userTeamsError?: boolean;
   userTeamsLoading?: boolean;
   history?: any;
+  navigate?: any;
   children?: React.ReactNode;
 };
 
@@ -68,6 +69,7 @@ export function AdvantageSideNav(props: Props) {
     userTeamsError=false,
     userTeamsLoading=false,
     history,
+    navigate,
     children,
     ...rest
   } = props;
@@ -208,7 +210,11 @@ export function AdvantageSideNav(props: Props) {
                 onClick={(e: any) => {
                   if(isLaunchpad) {
                     handleLaunchpadLink(e);
-                    history.push(homeLink);
+                    if (navigate) {
+                      navigate(homeLink);
+                    } else if (history) {
+                      history.push(homeLink);
+                    }
                   }
                   handleHomeClick();
                 }}
@@ -295,7 +301,11 @@ export function AdvantageSideNav(props: Props) {
                             onClick={(e: any) => {
                               if(isLaunchpad) {
                                 handleLaunchpadLink(e);
-                                history.push(`/teams/${team.id}`);
+                                if (navigate) {
+                                  navigate(`/teams/${team.id}`);
+                                } else if (history) {
+                                  history.push(`/teams/${team.id}`);
+                                }
                               }
                               handleTeamClick(team);
                             }}
@@ -321,7 +331,11 @@ export function AdvantageSideNav(props: Props) {
                                     onClick={(e: any) => {
                                       if(isLaunchpad) {
                                         handleLaunchpadLink(e);
-                                        history.push(`/teams/${team.id}`);
+                                        if (navigate) {
+                                          navigate(`/teams/${team.id}`);
+                                        } else if (history) {
+                                          history.push(`/teams/${team.id}`);
+                                        }
                                       }
                                       handleTeamClick(team);
                                     }}
@@ -387,7 +401,11 @@ export function AdvantageSideNav(props: Props) {
                           onClick={(e: any) => {
                             if(isLaunchpad) {
                               handleLaunchpadLink(e);
-                              history.push(`/teams/${team.id}`);
+                              if (navigate) {
+                                navigate(`/teams/${team.id}`);
+                              } else if (history) {
+                                history.push(`/teams/${team.id}`);
+                              }
                             }
                             handleTeamClick(team);
                           }}
@@ -417,7 +435,11 @@ export function AdvantageSideNav(props: Props) {
                                       onClick={(e: any) => {
                                         if(isLaunchpad) {
                                           handleLaunchpadLink(e);
-                                          history.push(`/teams/${accTeam.id}`);
+                                          if (navigate) {
+                                            navigate(`/teams/${accTeam.id}`);
+                                          } else if (history) {
+                                            history.push(`/teams/${accTeam.id}`);
+                                          }
                                         }
                                         handleTeamClick(accTeam);
                                       }}
