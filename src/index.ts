@@ -1,3 +1,10 @@
+/*
+IBM Confidential
+694970X, 69497O0
+© Copyright IBM Corp. 2022, 2024
+*/
+
+
 export { default as AdvantageSideNav } from "./components/AdvantageSideNav";
 export { default as AutoSuggest } from "./components/AutoSuggest";
 export { default as Avatar } from "./components/Avatar";

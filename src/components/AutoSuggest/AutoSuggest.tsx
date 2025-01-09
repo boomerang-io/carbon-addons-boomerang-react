@@ -1,3 +1,10 @@
+/*
+IBM Confidential
+694970X, 69497O0
+© Copyright IBM Corp. 2022, 2024
+*/
+
+
 import React, { Component } from "react";
 import AutoSuggest, { ChangeEvent, RenderSuggestionsContainerParams } from "react-autosuggest";
 import { matchSorter as ms } from "match-sorter";
