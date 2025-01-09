@@ -1,3 +1,10 @@
+/*
+IBM Confidential
+694970X, 69497O0
+© Copyright IBM Corp. 2022, 2024
+*/
+
+
 import { useCallback, useState } from "react";
 
 // https://github.com/streamich/react-use/blob/master/src/useSetState.ts

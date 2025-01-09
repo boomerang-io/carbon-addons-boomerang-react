@@ -1,3 +1,10 @@
+/*
+IBM Confidential
+694970X, 69497O0
+© Copyright IBM Corp. 2022, 2024
+*/
+
+
 import React from "react";
 import { QueryClientProvider } from "react-query";
 import { Forum, HelpDesk, Email } from "@carbon/react/icons";

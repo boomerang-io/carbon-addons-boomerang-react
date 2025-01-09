@@ -1,3 +1,10 @@
+/*
+IBM Confidential
+694970X, 69497O0
+© Copyright IBM Corp. 2022, 2024
+*/
+
+
 import React from "react";
 import { Tag } from "@carbon/react";
 import { WarningFilled } from "@carbon/react/icons";

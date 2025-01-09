@@ -1,3 +1,10 @@
+/*
+IBM Confidential
+694970X, 69497O0
+© Copyright IBM Corp. 2022, 2024
+*/
+
+
 export const PROFILE_SETTINGS_DATA = {
   id: "5e7377c6a97b78000125ed7c",
   email: "rdeckard@ibm.com",

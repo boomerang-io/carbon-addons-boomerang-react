@@ -1,3 +1,10 @@
+/*
+IBM Confidential
+694970X, 69497O0
+© Copyright IBM Corp. 2022, 2024
+*/
+
+
 import React from "react";
 import axios from "axios";
 import { QueryClient, QueryClientProvider } from "react-query";

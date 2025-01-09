@@ -1,3 +1,10 @@
+/*
+IBM Confidential
+694970X, 69497O0
+© Copyright IBM Corp. 2022, 2024
+*/
+
+
 import { createPortal } from "react-dom";
 import usePortal from "../../hooks/usePortal";
 

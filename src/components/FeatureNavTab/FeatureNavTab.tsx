@@ -1,3 +1,10 @@
+/*
+IBM Confidential
+694970X, 69497O0
+© Copyright IBM Corp. 2022, 2024
+*/
+
+
 import React from "react";
 import { NavLink, NavLinkProps } from "react-router-dom";
 import { SkeletonPlaceholder } from "@carbon/react";

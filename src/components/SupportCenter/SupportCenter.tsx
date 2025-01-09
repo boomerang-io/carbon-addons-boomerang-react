@@ -1,3 +1,10 @@
+/*
+IBM Confidential
+694970X, 69497O0
+© Copyright IBM Corp. 2022, 2024
+*/
+
+
 import React from "react";
 import { Button, ComposedModal, ModalHeader, ModalBody, ModalFooter, Checkbox } from "@carbon/react";
 import { HelpDesk } from "@carbon/react/icons";

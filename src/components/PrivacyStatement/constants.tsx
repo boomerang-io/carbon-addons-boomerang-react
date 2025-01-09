@@ -1,3 +1,10 @@
+/*
+IBM Confidential
+694970X, 69497O0
+© Copyright IBM Corp. 2022, 2024
+*/
+
+
 export const PRIVACY_DATA = {
   id: "5af1c4545755960f83a7a671",
   version: 1,
