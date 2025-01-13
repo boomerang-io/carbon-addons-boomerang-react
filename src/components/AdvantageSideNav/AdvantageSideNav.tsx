@@ -152,8 +152,6 @@ export function AdvantageSideNav(props: Props) {
     setActiveSubmenu("");
   }
 
-  
-
   // add or remove refs
 
   if (teamsRef.current.length !== standardTeamsList?.length) {
