@@ -131,12 +131,10 @@ export function AdvantageSideNav(props: Props) {
   };
 
   const handleLaunchpadLink = (event: any) => {
-    console.log("ACCOUNTS REFS", accountsMenuRef, " Other refs : ", accountsRef);
-    console.log("TEAMS REFS", teamsMenuRef, " Other refs : ", teamsRef);
     event.preventDefault();
     // remediation to close menu, submenu and accordion when select a team on Launchpad
     //@ts-ignore
-    if(Boolean(teamsMenuRef.current.ariaExpanded === "true")) {
+    if(Boolean(teamsMenuRef.current?.ariaExpanded === "true")) {
       //@ts-ignore
       teamsMenuRef.current.click();
     }
