@@ -81,6 +81,9 @@ export function AdvantageSideNav(props: Props) {
   const accountsMenuRef = React.useRef(null);
   const hamburguerMenu = document.getElementById("header-sidenav-menu-button");
   const noTeamsMessage = userTeamsError ? "Failed to get teams, please try again later." : "No teams or accounts available.";
+  
+  const teamsRef = React.useRef([]);
+  const accountsRef = React.useRef([]);
   // Functions to track IBM Instrumentation on Segment
   const handleHomeClick = () => {
     triggerEvent && triggerEvent({
@@ -131,12 +134,12 @@ export function AdvantageSideNav(props: Props) {
     event.preventDefault();
     // remediation to close menu, submenu and accordion when select a team on Launchpad
     //@ts-ignore
-    if(Boolean(teamsMenuRef.current.ariaExpanded === "true")) {
+    if(Boolean(teamsMenuRef.current?.ariaExpanded === "true")) {
       //@ts-ignore
       teamsMenuRef.current.click();
     }
     //@ts-ignore
-    if(accountsMenuRef.current?.ariaExpanded === "true") {
+    if(Boolean(accountsMenuRef.current?.ariaExpanded === "true")) {
       //@ts-ignore
       accountsMenuRef.current.click();
     }
@@ -148,9 +151,6 @@ export function AdvantageSideNav(props: Props) {
     setActiveMenu(false);
     setActiveSubmenu("");
   }
-
-  const teamsRef = React.useRef([]);
-  const accountsRef = React.useRef([]);
 
   // add or remove refs
 
