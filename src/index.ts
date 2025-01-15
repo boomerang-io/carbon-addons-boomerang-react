@@ -56,6 +56,7 @@ export { default as PrivacyStatement } from "./components/PrivacyStatement";
 export { default as ProtectedRoute } from "./components/ProtectedRoute";
 export { default as RadioGroup } from "./components/RadioGroup";
 export { default as TextArea } from "./components/TextArea";
+export { default as RichTextArea } from "./components/RichTextArea";
 export { default as TextInput } from "./components/TextInput";
 export { default as Toggle } from "./components/Toggle";
 export { default as TooltipHover } from "./components/TooltipHover";

@@ -1,0 +1,58 @@
+@use "../../global/config" as *;
+@use '@carbon/themes/scss/tokens' as theme;
+
+.#{$prefix}--rich-text-editor {
+  border: none !important;
+  background: theme.$layer-01;
+  border-bottom: 1px solid theme.$border-strong-01 !important;
+  height: 6rem;
+
+  .ql-container {
+    height: 6rem;
+  }
+
+  .ql-editor {
+    padding: 1rem;
+    border-top: 1px solid theme.$border-subtle-00;
+    height: 6rem;
+
+    p {
+      font-size: 0.875rem;
+    }
+
+    &.ql-blank {
+      &::before {
+        font-style: normal;
+      }
+    }
+  }
+}
+
+.#{$prefix}--rich-text-editor-toolbar {
+  background: theme.$layer-01;
+}
+
+.#{$prefix}--rich-text-editor-labels {
+  display: flex;
+  justify-content: space-between;
+}
+
+.#{$prefix}--rich-text-editor-footer {
+  display: flex;
+  flex-direction: column;
+}
+
+.#{$prefix}--rich-text-editor-error {
+  color: theme.$text-error;
+}
+
+.#{$prefix}--rich-text-editor-url-input {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid theme.$border-strong-01;
+  max-width: 20rem;
+
+  .#{$prefix}--text-input {
+    border-block-end: none;
+  }
+}
