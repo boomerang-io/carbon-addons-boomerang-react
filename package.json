@@ -1,7 +1,7 @@
 {
   "name": "@boomerang-io/carbon-addons-boomerang-react",
   "description": "Carbon Addons for Boomerang apps",
-  "version": "4.5.1-beta.3",
+  "version": "4.5.2-beta.11",
   "author": {
     "name": "Tim Bula",
     "email": "timrbula@gmail.com"
@@ -47,6 +47,7 @@
     "release": "release-it"
   },
   "dependencies": {
+    "@carbon/ibm-products": "^2.57.1",
     "@stomp/stompjs": "6.1.2",
     "@tippyjs/react": "4.2.6",
     "classnames": "2.3.2",
@@ -75,7 +76,6 @@
   },
   "devDependencies": {
     "@carbon/react": "1.61.0",
-    "@carbon/ibm-products": "^2.57.1",
     "@commitlint/cli": "^17.0.3",
     "@commitlint/config-conventional": "^17.0.3",
     "@rollup/plugin-commonjs": "^23.0.3",

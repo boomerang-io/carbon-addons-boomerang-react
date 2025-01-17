@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@carbon/ibm-products':
+        specifier: ^2.57.1
+        version: 2.57.1(@carbon/grid@11.24.0)(@carbon/layout@11.23.0)(@carbon/motion@11.19.0)(@carbon/react@1.61.0(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(sass@1.77.2))(@carbon/themes@11.37.0)(@carbon/type@11.28.0)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)
       '@stomp/stompjs':
         specifier: 6.1.2
         version: 6.1.2
@@ -54,9 +57,6 @@ importers:
         specifier: 9.1.1
         version: 9.1.1(react-dom@16.14.0(react@16.14.0))(react@16.14.0)
     devDependencies:
-      '@carbon/ibm-products':
-        specifier: ^2.57.1
-        version: 2.57.1(@carbon/grid@11.24.0)(@carbon/layout@11.23.0)(@carbon/motion@11.19.0)(@carbon/react@1.61.0(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(sass@1.77.2))(@carbon/themes@11.37.0)(@carbon/type@11.28.0)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)
       '@carbon/react':
         specifier: 1.61.0
         version: 1.61.0(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(sass@1.77.2)
@@ -11608,7 +11608,7 @@ snapshots:
       case-sensitive-paths-webpack-plugin: 2.4.0
       core-js: 3.36.0
       css-loader: 3.6.0(webpack@4.47.0)
-      file-loader: 6.2.0(webpack@5.90.3(esbuild@0.17.19))
+      file-loader: 6.2.0(webpack@4.47.0)
       find-up: 5.0.0
       fork-ts-checker-webpack-plugin: 4.1.6(eslint@8.57.0)(typescript@4.9.5)(webpack@4.47.0)
       glob: 7.2.3
@@ -12049,7 +12049,7 @@ snapshots:
       core-js: 3.36.0
       css-loader: 3.6.0(webpack@4.47.0)
       express: 4.18.3
-      file-loader: 6.2.0(webpack@4.47.0)
+      file-loader: 6.2.0(webpack@5.90.3(esbuild@0.17.19))
       find-up: 5.0.0
       fs-extra: 9.1.0
       html-webpack-plugin: 4.5.2(webpack@4.47.0)

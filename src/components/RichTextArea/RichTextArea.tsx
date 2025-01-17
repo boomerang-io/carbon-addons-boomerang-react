@@ -1,3 +1,9 @@
+/*
+IBM Confidential
+694970X, 69497O0
+© Copyright IBM Corp. 2022, 2025
+*/
+
 import React, { useEffect, useRef, useState } from "react";
 import Quill from "quill";
 import { Toolbar, ToolbarButton, ToolbarGroup, pkg } from "@carbon/ibm-products";
@@ -45,11 +51,13 @@ const RichTextAreaComponent = React.forwardRef<any, Props>(function RichTextArea
         quillRef.current.clipboard.dangerouslyPasteHTML(value);
         const length = quillRef.current.getLength();
         quillRef.current.setSelection(length, 0);
+        setWordCount(getWordCount());
       }
       quill.on("text-change", () => {
-        setWordCount(getWordCount());
+        const currentCount = getWordCount();
+        setWordCount(currentCount);
         if (onChange) {
-          onChange(quill.getSemanticHTML());
+          onChange({ value: quill.getSemanticHTML(), error: maxWordCount && currentCount > maxWordCount });
         }
       });
     }
@@ -172,7 +180,13 @@ const RichTextAreaComponent = React.forwardRef<any, Props>(function RichTextArea
           </Button>
         </div>
       )}
-      <div className={`${prefix}--rich-text-editor`} onFocus={() => setNoSelection(false)} ref={editorRef}></div>
+      <div
+        className={cx({
+          [`${prefix}--rich-text-editor-error-border`]: maxWordCount && wordCount > maxWordCount,
+        })}
+      >
+        <div className={`${prefix}--rich-text-editor`} onFocus={() => setNoSelection(false)} ref={editorRef}></div>
+      </div>
       <div className={`${prefix}--rich-text-editor-footer`}>
         {helperText ? <div className={`${prefix}--label`}>{helperText}</div> : null}
         {maxWordCount && wordCount > maxWordCount ? (

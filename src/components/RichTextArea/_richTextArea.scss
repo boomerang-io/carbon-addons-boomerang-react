@@ -1,3 +1,9 @@
+/*
+IBM Confidential
+694970X, 69497O0
+© Copyright IBM Corp. 2022, 2025
+*/
+
 @use "../../global/config" as *;
 @use '@carbon/themes/scss/tokens' as theme;
 
@@ -17,6 +23,7 @@
     height: 6rem;
 
     p {
+      font-family: "IBM Plex Sans", "Helvetica Neue", Arial, Helvetica, sans-serif;
       font-size: 0.875rem;
     }
 
@@ -26,6 +33,10 @@
       }
     }
   }
+}
+
+.#{$prefix}--rich-text-editor-error-border {
+  outline: 2px solid theme.$support-error;
 }
 
 .#{$prefix}--rich-text-editor-toolbar {
@@ -38,6 +49,7 @@
 }
 
 .#{$prefix}--rich-text-editor-footer {
+  margin-top: 0.5rem;
   display: flex;
   flex-direction: column;
 }
