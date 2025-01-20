@@ -1,7 +1,7 @@
 {
   "name": "@boomerang-io/carbon-addons-boomerang-react",
   "description": "Carbon Addons for Boomerang apps",
-  "version": "4.5.1",
+  "version": "4.5.2-beta.17",
   "author": {
     "name": "Tim Bula",
     "email": "timrbula@gmail.com"
@@ -47,6 +47,7 @@
     "release": "release-it"
   },
   "dependencies": {
+    "@carbon/ibm-products": "^2.57.1",
     "@stomp/stompjs": "6.1.2",
     "@tippyjs/react": "4.2.6",
     "classnames": "2.3.2",
@@ -57,10 +58,12 @@
     "lodash.isequal": "4.5.0",
     "lodash.sortby": "4.7.0",
     "match-sorter": "6.3.1",
+    "quill": "^2.0.3",
     "react-autosuggest": "10.1.0",
     "react-modal": "3.16.1",
     "react-query": "^3.34.12",
-    "react-toastify": "9.1.1"
+    "react-toastify": "9.1.1",
+    "sanitize-html": "^2.14.0"
   },
   "peerDependencies": {
     "@carbon/react": "^1.61.0",
@@ -101,6 +104,7 @@
     "@types/react-dom": "^16.9.8",
     "@types/react-modal": "^3.13.1",
     "@types/react-router-dom": "5.3.3",
+    "@types/sanitize-html": "^2.13.0",
     "@types/testing-library__jest-dom": "^5.14.5",
     "@vitejs/plugin-react": "^4.3.0",
     "axios": "^1.7.3",

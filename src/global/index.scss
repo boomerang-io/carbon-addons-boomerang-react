@@ -71,6 +71,7 @@ $use-theme-advantage-white: false !default;
 @use '../components/RadioGroup/radioGroup';
 @use '../components/SignOut/signOut';
 @use '../components/SupportCenter/supportCenter';
+@use '../components/RichTextArea/richTextArea';
 @use '../components/TextArea/textArea';
 @use '../components/TextInput/textInput';
 @use '../components/Toggle/toggle' as addons-toggle;
