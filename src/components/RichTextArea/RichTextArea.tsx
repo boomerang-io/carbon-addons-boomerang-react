@@ -12,10 +12,12 @@ import { prefix } from "../../internal/settings";
 import { TextBold, TextItalic, TextUnderline, ListBulleted, ListNumbered, Link } from "@carbon/react/icons";
 import { TextInput, Button } from "@carbon/react";
 import cx from "classnames";
+import sanitizeHtml from "sanitize-html";
 
 type Props = React.ComponentPropsWithRef<"input"> & {
   value?: string;
   onChange?: (...args: any) => any;
+  setError?: (...args: any) => any;
   helperText?: React.ReactNode;
   invalid?: boolean;
   label?: string;
@@ -24,7 +26,7 @@ type Props = React.ComponentPropsWithRef<"input"> & {
 };
 
 const RichTextAreaComponent = React.forwardRef<any, Props>(function RichTextAreaComponent(
-  { label, labelText, maxWordCount, value, helperText, placeholder, onChange },
+  { label, labelText, maxWordCount, value, helperText, placeholder, onChange, setError },
   ref
 ) {
   pkg.component.ToolbarGroup = pkg.component.Toolbar = pkg.component.ToolbarButton = true;
@@ -48,16 +50,29 @@ const RichTextAreaComponent = React.forwardRef<any, Props>(function RichTextArea
       });
       quillRef.current = quill;
       if (value) {
-        quillRef.current.clipboard.dangerouslyPasteHTML(value);
+        const cleanHtml = sanitizeHtml(value, {
+          allowedTags: ["p", "strong", "b", "i", "em", "u", "ol", "ul", "li", "a"],
+          allowedAttributes: {
+            a: ["href", "rel", "target"],
+          },
+        });
+        quillRef.current.clipboard.dangerouslyPasteHTML(cleanHtml);
         const length = quillRef.current.getLength();
         quillRef.current.setSelection(length, 0);
         setWordCount(getWordCount());
+        if (setError) {
+          setError(maxWordCount && getWordCount() > maxWordCount);
+        }
       }
       quill.on("text-change", () => {
         const currentCount = getWordCount();
         setWordCount(currentCount);
-        if (onChange) {
-          onChange({ value: quill.getSemanticHTML(), error: maxWordCount && currentCount > maxWordCount });
+        const wordCountExceeded = maxWordCount && currentCount > maxWordCount;
+        if (onChange && !wordCountExceeded) {
+          onChange(quill.getSemanticHTML());
+        }
+        if (setError) {
+          setError(wordCountExceeded);
         }
       });
     }
@@ -119,6 +134,8 @@ const RichTextAreaComponent = React.forwardRef<any, Props>(function RichTextArea
     }
     return 0;
   };
+
+  const wordCountExceeded = maxWordCount && wordCount > maxWordCount;
 
   return (
     <>
@@ -182,14 +199,16 @@ const RichTextAreaComponent = React.forwardRef<any, Props>(function RichTextArea
       )}
       <div
         className={cx({
-          [`${prefix}--rich-text-editor-error-border`]: maxWordCount && wordCount > maxWordCount,
+          [`${prefix}--rich-text-editor-error-border`]: wordCountExceeded,
         })}
       >
         <div className={`${prefix}--rich-text-editor`} onFocus={() => setNoSelection(false)} ref={editorRef}></div>
       </div>
       <div className={`${prefix}--rich-text-editor-footer`}>
-        {helperText ? <div className={`${prefix}--label`}>{helperText}</div> : null}
-        {maxWordCount && wordCount > maxWordCount ? (
+        {!noSelection && !wordCountExceeded && helperText ? (
+          <div className={`${prefix}--label`}>{helperText}</div>
+        ) : null}
+        {wordCountExceeded ? (
           <div className={cx(`${prefix}--label`, `${prefix}--rich-text-editor-error`)}>Exceeded Word Count</div>
         ) : null}
         {noSelection ? (
