@@ -62,7 +62,6 @@ IBM Confidential
   display: flex;
   flex-direction: row;
   border: 1px solid theme.$border-strong-01;
-  max-width: 20rem;
 
   .#{$prefix}--text-input {
     border-block-end: none;
