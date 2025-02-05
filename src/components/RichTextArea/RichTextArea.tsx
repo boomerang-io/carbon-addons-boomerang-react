@@ -21,12 +21,13 @@ type Props = React.ComponentPropsWithRef<"input"> & {
   helperText?: React.ReactNode;
   invalid?: boolean;
   label?: string;
+  error?: string;
   labelText?: React.ReactNode;
   maxWordCount?: number;
 };
 
 const RichTextAreaComponent = React.forwardRef<any, Props>(function RichTextAreaComponent(
-  { label, labelText, maxWordCount, value, helperText, placeholder, onChange, setError },
+  { label, labelText, maxWordCount, value, helperText, placeholder, onChange, setError, invalid, error },
   ref
 ) {
   pkg.component.ToolbarGroup = pkg.component.Toolbar = pkg.component.ToolbarButton = true;
@@ -214,6 +215,11 @@ const RichTextAreaComponent = React.forwardRef<any, Props>(function RichTextArea
         {noSelection ? (
           <div className={cx(`${prefix}--label`, `${prefix}--rich-text-editor-error`)}>
             Select text before adding link
+          </div>
+        ) : null}
+        {invalid ? (
+          <div className={cx(`${prefix}--label`, `${prefix}--rich-text-editor-error`)}>
+            {error}
           </div>
         ) : null}
       </div>
