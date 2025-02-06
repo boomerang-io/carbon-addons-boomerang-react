@@ -21,13 +21,13 @@ type Props = React.ComponentPropsWithRef<"input"> & {
   helperText?: React.ReactNode;
   invalid?: boolean;
   label?: string;
-  error?: string;
+  customError?: string;
   labelText?: React.ReactNode;
   maxWordCount?: number;
 };
 
 const RichTextAreaComponent = React.forwardRef<any, Props>(function RichTextAreaComponent(
-  { label, labelText, maxWordCount, value, helperText, placeholder, onChange, setError, invalid, error },
+  { label, labelText, maxWordCount, value, helperText, placeholder, onChange, setError, invalid, customError },
   ref
 ) {
   pkg.component.ToolbarGroup = pkg.component.Toolbar = pkg.component.ToolbarButton = true;
@@ -238,7 +238,7 @@ const RichTextAreaComponent = React.forwardRef<any, Props>(function RichTextArea
             {helperText}
           </div>
         ) : null}
-        {wordCountExceeded ? (
+        {wordCountExceeded && !customError ? (
           <div
             data-testid="rich-text-editor-wordCount-error"
             className={cx(`${prefix}--label`, `${prefix}--rich-text-editor-error`)}
@@ -256,7 +256,7 @@ const RichTextAreaComponent = React.forwardRef<any, Props>(function RichTextArea
         ) : null}
         {invalid ? (
           <div className={cx(`${prefix}--label`, `${prefix}--rich-text-editor-error`)}>
-            {error}
+            {customError}
           </div>
         ) : null}
       </div>
