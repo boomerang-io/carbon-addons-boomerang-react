@@ -13,6 +13,10 @@ IBM Confidential
   border-bottom: 1px solid theme.$border-strong-01 !important;
   height: 6rem;
 
+  em {
+    font-style: italic;
+  }
+
   .ql-container {
     height: 6rem;
   }
