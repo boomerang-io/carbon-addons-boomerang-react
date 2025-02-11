@@ -221,7 +221,7 @@ function ServiceList(props: ServiceListProps) {
       return (
         <div className={`${prefix}--bmrg-header-team__message`} data-testid="header-app-switcher-service">{`This ${
           isAccount ? "account" : "team"
-        } has no services`}</div>
+        } has no assets`}</div>
       );
     }
   }

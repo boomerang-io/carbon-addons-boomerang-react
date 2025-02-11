@@ -21,12 +21,13 @@ type Props = React.ComponentPropsWithRef<"input"> & {
   helperText?: React.ReactNode;
   invalid?: boolean;
   label?: string;
+  customError?: string;
   labelText?: React.ReactNode;
   maxWordCount?: number;
 };
 
 const RichTextAreaComponent = React.forwardRef<any, Props>(function RichTextAreaComponent(
-  { label, labelText, maxWordCount, value, helperText, placeholder, onChange, setError },
+  { label, labelText, maxWordCount, value, helperText, placeholder, onChange, setError, invalid, customError },
   ref
 ) {
   pkg.component.ToolbarGroup = pkg.component.Toolbar = pkg.component.ToolbarButton = true;
@@ -140,37 +141,52 @@ const RichTextAreaComponent = React.forwardRef<any, Props>(function RichTextArea
   return (
     <>
       <div className={`${prefix}--rich-text-editor-labels`}>
-        {labelValue ? <div className={`${prefix}--label`}>{labelValue}</div> : null}
+        {labelValue ? (
+          <div data-testid="rich-text-editor-label" className={`${prefix}--label`}>
+            {labelValue}
+          </div>
+        ) : null}
         {maxWordCount ? (
           <div
+            data-testid="rich-text-editor-word-count"
             className={cx(`${prefix}--label`, { [`${prefix}--rich-text-editor-error`]: wordCount > maxWordCount })}
           >{`${wordCount}/${maxWordCount}`}</div>
         ) : null}
       </div>
       <Toolbar className={`${prefix}--rich-text-editor-toolbar`}>
         <ToolbarGroup>
-          <ToolbarButton onClick={handleBold} label="Bold" renderIcon={(props) => <TextBold size={16} {...props} />} />
           <ToolbarButton
+            data-testid="rich-text-editor-bold-btn"
+            onClick={handleBold}
+            label="Bold"
+            renderIcon={(props) => <TextBold size={16} {...props} />}
+          />
+          <ToolbarButton
+            data-testid="rich-text-editor-italic-btn"
             onClick={handleItalic}
             label="Italic"
             renderIcon={(props) => <TextItalic size={16} {...props} />}
           />
           <ToolbarButton
+            data-testid="rich-text-editor-underline-btn"
             onClick={handleUnderline}
             label="Underline"
             renderIcon={(props) => <TextUnderline size={16} {...props} />}
           />
           <ToolbarButton
+            data-testid="rich-text-editor-bullet-list-btn"
             onClick={handleBulletList}
             label="Bulleted List"
             renderIcon={(props) => <ListBulleted size={16} {...props} />}
           />
           <ToolbarButton
+            data-testid="rich-text-editor-numbered-list-btn"
             onClick={handleOrderedList}
             label="Numbered List"
             renderIcon={(props) => <ListNumbered size={16} {...props} />}
           />
           <ToolbarButton
+            data-testid="rich-text-editor-hyperlink-btn"
             onClick={() => handleLinkBtn()}
             label="Hyperlink"
             renderIcon={(props) => <Link size={16} {...props} />}
@@ -184,36 +200,63 @@ const RichTextAreaComponent = React.forwardRef<any, Props>(function RichTextArea
               setUrl(e.target.value);
             }}
             id="hyperlink-input"
+            data-testid="rich-text-editor-hyperlink-input"
             placeholder="Enter URL"
             size="sm"
             type="url"
             labelText=""
           />
-          <Button onClick={() => handleLinkInsert()} kind="ghost" size="sm">
+          <Button
+            data-testid="rich-text-editor-hyperlink-input-ok-btn"
+            onClick={() => handleLinkInsert()}
+            kind="ghost"
+            size="sm"
+          >
             OK
           </Button>
-          <Button onClick={() => handleLinkCancel()} kind="ghost" size="sm">
+          <Button
+            data-testid="rich-text-editor-hyperlink-input-cancel-btn"
+            onClick={() => handleLinkCancel()}
+            kind="ghost"
+            size="sm"
+          >
             Cancel
           </Button>
         </div>
       )}
       <div
+        data-testid="rich-text-editor-text-area"
         className={cx({
           [`${prefix}--rich-text-editor-error-border`]: wordCountExceeded,
         })}
       >
         <div className={`${prefix}--rich-text-editor`} onFocus={() => setNoSelection(false)} ref={editorRef}></div>
       </div>
-      <div className={`${prefix}--rich-text-editor-footer`}>
+      <div data-testid="rich-text-editor-footer" className={`${prefix}--rich-text-editor-footer`}>
         {!noSelection && !wordCountExceeded && helperText ? (
-          <div className={`${prefix}--label`}>{helperText}</div>
+          <div data-testid="rich-text-editor-helper-text" className={`${prefix}--label`}>
+            {helperText}
+          </div>
         ) : null}
-        {wordCountExceeded ? (
-          <div className={cx(`${prefix}--label`, `${prefix}--rich-text-editor-error`)}>Exceeded Word Count</div>
+        {wordCountExceeded && !customError ? (
+          <div
+            data-testid="rich-text-editor-wordCount-error"
+            className={cx(`${prefix}--label`, `${prefix}--rich-text-editor-error`)}
+          >
+            Exceeded Word Count
+          </div>
         ) : null}
         {noSelection ? (
-          <div className={cx(`${prefix}--label`, `${prefix}--rich-text-editor-error`)}>
+          <div
+            data-testid="rich-text-editor-link-input-error"
+            className={cx(`${prefix}--label`, `${prefix}--rich-text-editor-error`)}
+          >
             Select text before adding link
+          </div>
+        ) : null}
+        {invalid ? (
+          <div className={cx(`${prefix}--label`, `${prefix}--rich-text-editor-error`)}>
+            {customError}
           </div>
         ) : null}
       </div>
