@@ -7,7 +7,7 @@ IBM Confidential
 
 import React from "react";
 import { QueryClientProvider } from "react-query";
-import { Forum, HelpDesk, Email } from "@carbon/react/icons";
+import { Forum, HelpDesk, Email, ChatLaunch } from "@carbon/react/icons";
 import Header from "../Header"; // Using default export
 import HeaderMenuItem from "../Header/HeaderMenuItem";
 import PrivacyRedirectModal from "../PrivacyRedirect";
@@ -241,6 +241,14 @@ function UIShell({
               sendIdeasUrl={sendIdeasUrl}
             />
           ),
+          <HeaderMenuItem
+          key="chat-launch"
+          href="https://w3.ibm.com/services/ask-ica/coinx/#/home"
+          icon={< ChatLaunch/>}
+          kind="external"
+          text="AskICA"
+          type="link"
+        />,
           ...supportMenuItems,
         ].filter(Boolean)}
         userTeams={userTeams}
