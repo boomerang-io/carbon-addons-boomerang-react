@@ -241,6 +241,7 @@ function UIShell({
               sendIdeasUrl={sendIdeasUrl}
             />
           ),
+          (!isPartnerUser?(
           <HeaderMenuItem
           key="chat-launch"
           href="https://w3.ibm.com/services/ask-ica/coinx/#/home"
@@ -248,7 +249,7 @@ function UIShell({
           kind="external"
           text="AskICA"
           type="link"
-        />,
+        />):null),
           ...supportMenuItems,
         ].filter(Boolean)}
         userTeams={userTeams}
