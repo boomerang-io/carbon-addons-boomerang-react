@@ -112,6 +112,7 @@ function UIShell({
   const sendIdeasUrl = platform?.feedbackUrl || "https://ideas.ibm.com";
   const supportLink = "https://ibmsf.my.site.com/ibminternalproducts/s/";
   const partnerEmailId="ica-support@ibm.com";
+  const askICALink="https://w3.ibm.com/services/ask-ica/coinx/#/home";
   /**
    * Check feature enablement via explicit feature flags
    */
@@ -244,8 +245,9 @@ function UIShell({
           (!isPartnerUser?(
           <HeaderMenuItem
           key="chat-launch"
-          href="https://w3.ibm.com/services/ask-ica/coinx/#/home"
+          href={askICALink}
           icon={< ChatLaunch/>}
+          data-testid="askICA-chatlaunch"
           kind="external"
           text="AskICA"
           type="link"
