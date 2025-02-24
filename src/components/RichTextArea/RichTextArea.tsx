@@ -24,10 +24,11 @@ type Props = React.ComponentPropsWithRef<"input"> & {
   customError?: string;
   labelText?: React.ReactNode;
   maxWordCount?: number;
+  readonly?:boolean;
 };
 
 const RichTextAreaComponent = React.forwardRef<any, Props>(function RichTextAreaComponent(
-  { label, labelText, maxWordCount, value, helperText, placeholder, onChange, setError, invalid, customError },
+  { label, labelText, maxWordCount, value, helperText, placeholder, onChange, setError, invalid, customError, readOnly},
   ref
 ) {
   pkg.component.ToolbarGroup = pkg.component.Toolbar = pkg.component.ToolbarButton = true;
@@ -48,6 +49,7 @@ const RichTextAreaComponent = React.forwardRef<any, Props>(function RichTextArea
           toolbar: false,
         },
         placeholder,
+        readOnly:readOnly
       });
       quillRef.current = quill;
       if (value) {
