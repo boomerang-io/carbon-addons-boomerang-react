@@ -25,6 +25,7 @@ type Props = React.ComponentPropsWithRef<"input"> & {
   labelText?: React.ReactNode;
   maxWordCount?: number;
   readonly?: boolean;
+  quillProps?: any;
 };
 
 const RichTextAreaComponent = React.forwardRef<any, Props>(function RichTextAreaComponent(
@@ -40,6 +41,7 @@ const RichTextAreaComponent = React.forwardRef<any, Props>(function RichTextArea
     invalid,
     customError,
     readOnly,
+    quillProps,
   },
   ref
 ) {
@@ -62,6 +64,7 @@ const RichTextAreaComponent = React.forwardRef<any, Props>(function RichTextArea
         },
         placeholder: !readOnly ? placeholder : "",
         readOnly,
+        ...quillProps,
       });
       quillRef.current = quill;
       if (value) {
