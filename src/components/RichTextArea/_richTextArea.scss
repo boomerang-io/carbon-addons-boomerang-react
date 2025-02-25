@@ -39,6 +39,12 @@ IBM Confidential
   }
 }
 
+.#{$prefix}--rich-text-editor-disabled {
+  background: none;
+  border-bottom: none !important;
+  color: theme.$text-placeholder;
+}
+
 .#{$prefix}--rich-text-editor-error-border {
   outline: 2px solid theme.$support-error;
 }

@@ -24,11 +24,23 @@ type Props = React.ComponentPropsWithRef<"input"> & {
   customError?: string;
   labelText?: React.ReactNode;
   maxWordCount?: number;
-  readonly?:boolean;
+  readonly?: boolean;
 };
 
 const RichTextAreaComponent = React.forwardRef<any, Props>(function RichTextAreaComponent(
-  { label, labelText, maxWordCount, value, helperText, placeholder, onChange, setError, invalid, customError, readOnly},
+  {
+    label,
+    labelText,
+    maxWordCount,
+    value,
+    helperText,
+    placeholder,
+    onChange,
+    setError,
+    invalid,
+    customError,
+    readOnly,
+  },
   ref
 ) {
   pkg.component.ToolbarGroup = pkg.component.Toolbar = pkg.component.ToolbarButton = true;
@@ -48,8 +60,8 @@ const RichTextAreaComponent = React.forwardRef<any, Props>(function RichTextArea
         modules: {
           toolbar: false,
         },
-        placeholder,
-        readOnly:readOnly
+        placeholder: !readOnly ? placeholder : "",
+        readOnly,
       });
       quillRef.current = quill;
       if (value) {
@@ -161,36 +173,42 @@ const RichTextAreaComponent = React.forwardRef<any, Props>(function RichTextArea
             data-testid="rich-text-editor-bold-btn"
             onClick={handleBold}
             label="Bold"
+            disabled={readOnly}
             renderIcon={(props) => <TextBold size={16} {...props} />}
           />
           <ToolbarButton
             data-testid="rich-text-editor-italic-btn"
             onClick={handleItalic}
             label="Italic"
+            disabled={readOnly}
             renderIcon={(props) => <TextItalic size={16} {...props} />}
           />
           <ToolbarButton
             data-testid="rich-text-editor-underline-btn"
             onClick={handleUnderline}
             label="Underline"
+            disabled={readOnly}
             renderIcon={(props) => <TextUnderline size={16} {...props} />}
           />
           <ToolbarButton
             data-testid="rich-text-editor-bullet-list-btn"
             onClick={handleBulletList}
             label="Bulleted List"
+            disabled={readOnly}
             renderIcon={(props) => <ListBulleted size={16} {...props} />}
           />
           <ToolbarButton
             data-testid="rich-text-editor-numbered-list-btn"
             onClick={handleOrderedList}
             label="Numbered List"
+            disabled={readOnly}
             renderIcon={(props) => <ListNumbered size={16} {...props} />}
           />
           <ToolbarButton
             data-testid="rich-text-editor-hyperlink-btn"
             onClick={() => handleLinkBtn()}
             label="Hyperlink"
+            disabled={readOnly}
             renderIcon={(props) => <Link size={16} {...props} />}
           />
         </ToolbarGroup>
@@ -232,7 +250,13 @@ const RichTextAreaComponent = React.forwardRef<any, Props>(function RichTextArea
           [`${prefix}--rich-text-editor-error-border`]: wordCountExceeded,
         })}
       >
-        <div className={`${prefix}--rich-text-editor`} onFocus={() => setNoSelection(false)} ref={editorRef}></div>
+        <div
+          className={cx(`${prefix}--rich-text-editor`, {
+            [`${prefix}--rich-text-editor-disabled`]: readOnly,
+          })}
+          onFocus={() => setNoSelection(false)}
+          ref={editorRef}
+        ></div>
       </div>
       <div data-testid="rich-text-editor-footer" className={`${prefix}--rich-text-editor-footer`}>
         {!noSelection && !wordCountExceeded && helperText ? (
@@ -257,9 +281,7 @@ const RichTextAreaComponent = React.forwardRef<any, Props>(function RichTextArea
           </div>
         ) : null}
         {invalid ? (
-          <div className={cx(`${prefix}--label`, `${prefix}--rich-text-editor-error`)}>
-            {customError}
-          </div>
+          <div className={cx(`${prefix}--label`, `${prefix}--rich-text-editor-error`)}>{customError}</div>
         ) : null}
       </div>
     </>
