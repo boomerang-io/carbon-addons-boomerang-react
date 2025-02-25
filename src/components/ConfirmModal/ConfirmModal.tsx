@@ -23,6 +23,7 @@ export type Props = {
   isExternallyControlled?: boolean;
   isOpen?: boolean;
   label?: string;
+  modalHeaderProps?: Record<string, any>;
   modalProps?: Omit<ModalProps, "isOpen">;
   modalTrigger?: ModalTrigger;
   negativeAction?: () => any;
@@ -43,6 +44,7 @@ function ConfirmModal(props: Props) {
     containerClassName,
     isExternallyControlled,
     label,
+    modalHeaderProps = {},
     modalProps,
     modalTrigger = () => void 0,
     negativeAction,
@@ -94,7 +96,7 @@ function ConfirmModal(props: Props) {
         selectorPrimaryFocus={selectorPrimaryFocus}
         {...modalProps}
       >
-        <ModalHeader closeModal={closeModal} iconDescription="Close" label={label} title={title} />
+        <ModalHeader closeModal={closeModal} iconDescription="Close" label={label} title={title} {...modalHeaderProps}/>
         <div id="confirm-modal-container">
           <ModalBody>
             <div className={`${prefix}--modal-content__text`}>{children}</div>
