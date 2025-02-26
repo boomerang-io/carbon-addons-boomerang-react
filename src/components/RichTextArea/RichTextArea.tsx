@@ -170,52 +170,48 @@ const RichTextAreaComponent = React.forwardRef<any, Props>(function RichTextArea
           >{`${wordCount}/${maxWordCount}`}</div>
         ) : null}
       </div>
+      {(!readOnly)?
       <Toolbar className={`${prefix}--rich-text-editor-toolbar`}>
         <ToolbarGroup>
           <ToolbarButton
             data-testid="rich-text-editor-bold-btn"
             onClick={handleBold}
             label="Bold"
-            disabled={readOnly}
             renderIcon={(props) => <TextBold size={16} {...props} />}
           />
           <ToolbarButton
             data-testid="rich-text-editor-italic-btn"
             onClick={handleItalic}
             label="Italic"
-            disabled={readOnly}
             renderIcon={(props) => <TextItalic size={16} {...props} />}
           />
           <ToolbarButton
             data-testid="rich-text-editor-underline-btn"
             onClick={handleUnderline}
             label="Underline"
-            disabled={readOnly}
             renderIcon={(props) => <TextUnderline size={16} {...props} />}
           />
           <ToolbarButton
             data-testid="rich-text-editor-bullet-list-btn"
             onClick={handleBulletList}
             label="Bulleted List"
-            disabled={readOnly}
             renderIcon={(props) => <ListBulleted size={16} {...props} />}
           />
           <ToolbarButton
             data-testid="rich-text-editor-numbered-list-btn"
             onClick={handleOrderedList}
             label="Numbered List"
-            disabled={readOnly}
             renderIcon={(props) => <ListNumbered size={16} {...props} />}
           />
           <ToolbarButton
             data-testid="rich-text-editor-hyperlink-btn"
             onClick={() => handleLinkBtn()}
             label="Hyperlink"
-            disabled={readOnly}
             renderIcon={(props) => <Link size={16} {...props} />}
           />
         </ToolbarGroup>
       </Toolbar>
+      :null}
       {showUrlInput && (
         <div className={`${prefix}--rich-text-editor-url-input`}>
           <TextInput

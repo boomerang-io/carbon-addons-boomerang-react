@@ -40,7 +40,10 @@ IBM Confidential
 }
 
 .#{$prefix}--rich-text-editor-disabled {
-  color: theme.$text-placeholder;
+  background: none;
+  border: none !important;
+  border-top: none !important;
+  //color: theme.$text-placeholder;
 }
 
 .#{$prefix}--rich-text-editor-error-border {
