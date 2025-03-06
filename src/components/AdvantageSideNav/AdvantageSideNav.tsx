@@ -194,7 +194,11 @@ export function AdvantageSideNav(props: Props) {
         <SideNavItems>
           {isMenuOpen && navLinks?.length ? (
             <div>
-              {navLinks.map((link) =>(<SideNavLink href={link.url}>{link.name}</SideNavLink>))}
+              {navLinks.map((link) =>
+                (
+                  <SideNavLink href={link.url} target={link.isExternal ? "_blank" : undefined} rel={link.isExternal ? "noopener noreferrer" : undefined}>{link.name}</SideNavLink>
+                )
+              )}
               <SideNavDivider />
             </div>
           ) : null}

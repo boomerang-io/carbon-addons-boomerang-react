@@ -327,4 +327,5 @@ export type PlatformNotification = {
 export type NavLink = {
   name: string;
   url: string;
+  isExternal?: boolean;
 };

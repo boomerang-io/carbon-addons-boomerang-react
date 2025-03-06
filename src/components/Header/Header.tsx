@@ -4,7 +4,6 @@ IBM Confidential
 © Copyright IBM Corp. 2022, 2024
 */
 
-
 import React from "react";
 import {
   Header as CarbonHeader,
@@ -139,6 +138,8 @@ export default function Header(props: Props) {
                       window?.location?.href && link.url ? window.location.href.startsWith(link.url) : false
                     }
                     key={link.name}
+                    target={link.isExternal ? "_blank" : undefined}
+                    rel={link.isExternal ? "noopener noreferrer" : undefined}
                   >
                     {link.name}
                   </HeaderMenuItem>
