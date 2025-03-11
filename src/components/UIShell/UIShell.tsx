@@ -51,8 +51,10 @@ type Props = {
       privateTeams?: boolean;
       sendIdeasUrl?: string;
       sendMail?: boolean;
+      askICAEnabled?:boolean;
       signOutUrl?: string;
       version?: string;
+      askICAUrl?:string;
     };
     platformMessage?: any;
   };
@@ -112,7 +114,6 @@ function UIShell({
   const sendIdeasUrl = platform?.feedbackUrl || "https://ideas.ibm.com";
   const supportLink = "https://ibmsf.my.site.com/ibminternalproducts/s/";
   const partnerEmailId="ica-support@ibm.com";
-  const askICALink="https://w3.ibm.com/services/ask-ica/coinx/#/home";
   /**
    * Check feature enablement via explicit feature flags
    */
@@ -121,7 +122,6 @@ function UIShell({
   const isNotificationsEnabled = Boolean(features?.["notifications.enabled"]);
   const isNotificationsCountEnabled = Boolean(features?.["notificationsCount.enabled"]);
   const isSupportEnabled = Boolean(features?.["support.enabled"]);
-
   /**
    * Check feature enablement via value truthiness
    */
@@ -132,6 +132,7 @@ function UIShell({
   const isUserEnabled = Boolean(user?.id);
   const isPartnerUser = Boolean(user?.type === USER_PLATFORM_ROLE.Partner);
   const supportFlagCheck = user?.showSupport;
+  const askICAEnabled=Boolean(platform?.askICAEnabled);
 
   /**
    * Checking for conditions when we explicitly set "renderPrivacyRedirect" to false (it defaults to true) OR
@@ -242,10 +243,10 @@ function UIShell({
               sendIdeasUrl={sendIdeasUrl}
             />
           ),
-          (!isPartnerUser?(
+          ((!isPartnerUser|| askICAEnabled)?(
           <HeaderMenuItem
           key="chat-launch"
-          href={askICALink}
+          href={platform?.askICAUrl as string}
           icon={< ChatLaunch/>}
           data-testid="askICA-chatlaunch"
           kind="external"
