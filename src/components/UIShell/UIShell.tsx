@@ -243,7 +243,7 @@ function UIShell({
               sendIdeasUrl={sendIdeasUrl}
             />
           ),
-          ((!isPartnerUser|| askICAEnabled)?(
+          ((!isPartnerUser && askICAEnabled)?(
           <HeaderMenuItem
           key="chat-launch"
           href={platform?.askICAUrl as string}
