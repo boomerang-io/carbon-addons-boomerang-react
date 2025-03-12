@@ -626,12 +626,14 @@ const TYPE_PROPS = {
   }),
 
   [INPUT_GROUPS.SELECT]: (formikProps: any, input: DynamicInput, inputs: DynamicInput[]) => {
-    const { key } = input;
+    const { key, value } = input;
 
     let typeProps: any = {
       onChange: async ({ selectedItem }: any) => {
-        await formikProps.setFieldTouched(`['${key}']`, true);
-        formikProps.setFieldValue(`['${key}']`, selectedItem ? selectedItem.value : "");
+        if(selectedItem.value !== value) {
+          await formikProps.setFieldTouched(`['${key}']`, true);
+          formikProps.setFieldValue(`['${key}']`, selectedItem ? selectedItem.value : "");
+        }
       },
       onInputBlur: () => formikProps.setFieldTouched(`['${key}']`, true, true),
     };
