@@ -12,7 +12,7 @@ importers:
         specifier: 2.57.1
         version: 2.57.1(@carbon/grid@11.32.0)(@carbon/layout@11.30.0)(@carbon/motion@11.25.0)(@carbon/react@1.77.0(react-dom@16.14.0(react@16.14.0))(react-is@18.2.0)(react@16.14.0)(sass@1.77.2))(@carbon/themes@11.47.0)(@carbon/type@11.36.0)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)
       '@carbon/react':
-        specifier: ^1.75.0
+        specifier: 1.77.0
         version: 1.77.0(react-dom@16.14.0(react@16.14.0))(react-is@18.2.0)(react@16.14.0)(sass@1.77.2)
       '@stomp/stompjs':
         specifier: 6.1.2
@@ -27,8 +27,8 @@ importers:
         specifier: ^1.11.11
         version: 1.11.11
       dompurify:
-        specifier: 3.2.3
-        version: 3.2.3
+        specifier: 3.2.4
+        version: 3.2.4
       downshift:
         specifier: 6.1.7
         version: 6.1.7(react@16.14.0)
@@ -4317,8 +4317,8 @@ packages:
     resolution: {integrity: sha512-cgwlv/1iFQiFnU96XXgROh8xTeetsnJiDsTc7TYCLFd9+/WNkIqPTxiM/8pSd8VIrhXGTf1Ny1q1hquVqDJB5w==}
     engines: {node: '>= 4'}
 
-  dompurify@3.2.3:
-    resolution: {integrity: sha512-U1U5Hzc2MO0oW3DF+G9qYN0aT7atAou4AgI0XjWz061nyBPbdxkfdhfy5uMgGn6+oLFCfn44ZGbdDqCzVmlOWA==}
+  dompurify@3.2.4:
+    resolution: {integrity: sha512-ysFSFEDVduQpyhzAob/kkuJjf5zWkZD8/A9ywSp1byueyuCfHamrCBa14/Oc2iiB0e51B+NpxSl5gmzn+Ms/mg==}
 
   domutils@2.8.0:
     resolution: {integrity: sha512-w96Cjofp72M5IIhpjgobBimYEfoPjx1Vx0BSX9P30WBdZW2WIKU0T1Bd0kz2eNZ9ikjKgHbEyKx8BB6H1L3h3A==}
@@ -13469,7 +13469,7 @@ snapshots:
 
   babel-plugin-macros@3.1.0:
     dependencies:
-      '@babel/runtime': 7.24.0
+      '@babel/runtime': 7.26.9
       cosmiconfig: 7.1.0
       resolve: 1.22.8
 
@@ -13531,7 +13531,7 @@ snapshots:
       '@babel/preset-env': 7.24.0(@babel/core@7.24.0)
       '@babel/preset-react': 7.23.3(@babel/core@7.24.0)
       '@babel/preset-typescript': 7.23.3(@babel/core@7.24.0)
-      '@babel/runtime': 7.24.0
+      '@babel/runtime': 7.26.9
       babel-plugin-macros: 3.1.0
       babel-plugin-transform-react-remove-prop-types: 0.4.24
     transitivePeerDependencies:
@@ -14675,7 +14675,7 @@ snapshots:
     dependencies:
       domelementtype: 2.3.0
 
-  dompurify@3.2.3:
+  dompurify@3.2.4:
     optionalDependencies:
       '@types/trusted-types': 2.0.7
 
@@ -16998,7 +16998,7 @@ snapshots:
 
   lazy-universal-dotenv@3.0.1:
     dependencies:
-      '@babel/runtime': 7.24.0
+      '@babel/runtime': 7.26.9
       app-root-dir: 1.0.2
       core-js: 3.36.0
       dotenv: 8.6.0
@@ -18095,7 +18095,7 @@ snapshots:
 
   polished@4.3.1:
     dependencies:
-      '@babel/runtime': 7.24.0
+      '@babel/runtime': 7.26.9
 
   popmotion@11.0.3:
     dependencies:
@@ -18418,7 +18418,7 @@ snapshots:
     dependencies:
       '@babel/core': 7.24.0
       '@babel/generator': 7.23.6
-      '@babel/runtime': 7.24.0
+      '@babel/runtime': 7.26.9
       ast-types: 0.14.2
       commander: 2.20.3
       doctrine: 3.0.0
@@ -18466,7 +18466,7 @@ snapshots:
 
   react-inspector@5.1.1(react@16.14.0):
     dependencies:
-      '@babel/runtime': 7.24.0
+      '@babel/runtime': 7.26.9
       is-dom: 1.1.0
       prop-types: 15.8.1
       react: 16.14.0
@@ -18536,7 +18536,7 @@ snapshots:
 
   react-syntax-highlighter@15.5.0(react@16.14.0):
     dependencies:
-      '@babel/runtime': 7.24.0
+      '@babel/runtime': 7.26.9
       highlight.js: 10.7.3
       lowlight: 1.20.0
       prismjs: 1.29.0
@@ -18559,7 +18559,7 @@ snapshots:
 
   react-window@1.8.11(react-dom@16.14.0(react@16.14.0))(react@16.14.0):
     dependencies:
-      '@babel/runtime': 7.24.0
+      '@babel/runtime': 7.26.9
       memoize-one: 5.2.1
       react: 16.14.0
       react-dom: 16.14.0(react@16.14.0)
@@ -18682,7 +18682,7 @@ snapshots:
 
   regenerator-transform@0.15.2:
     dependencies:
-      '@babel/runtime': 7.24.0
+      '@babel/runtime': 7.26.9
 
   regex-not@1.0.2:
     dependencies:
@@ -19998,7 +19998,7 @@ snapshots:
 
   unload@2.2.0:
     dependencies:
-      '@babel/runtime': 7.24.0
+      '@babel/runtime': 7.26.9
       detect-node: 2.1.0
 
   unpipe@1.0.0: {}
