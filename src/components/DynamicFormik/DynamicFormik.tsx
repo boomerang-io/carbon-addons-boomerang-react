@@ -203,20 +203,21 @@ async function handleGoverningSelectChange({
   isInputBeingChanged,
   selectedItem,
 }: HandleGoverningSelectChangeType) {
-  const { key } = input;
+  const { key, value } = input;
   const inputsGovernedByCurrentOne = inputs.filter((formikInput) => formikInput.governingKey === key);
-
-  /** Erase value of governed inputs */
-  if (inputsGovernedByCurrentOne.length) {
-    await inputsGovernedByCurrentOne.forEach(async (input) => {
-      await handleGoverningSelectChange({ formikProps, input, inputs, isInputBeingChanged: false, selectedItem: null });
-    });
+  if(selectedItem?.value !== value) {
+    /** Erase value of governed inputs */
+    if (inputsGovernedByCurrentOne.length) {
+      await inputsGovernedByCurrentOne.forEach(async (input) => {
+        await handleGoverningSelectChange({ formikProps, input, inputs, isInputBeingChanged: false, selectedItem: null });
+      });
+    }
+  
+    // only the top governing select should display warnings if changed and reset touched status for governed ones
+    await formikProps.setFieldTouched(`['${key}']`, isInputBeingChanged);
+    formikProps.setFieldValue(`['${key}']`, selectedItem ? selectedItem.value : "");
+    formikProps.setFieldValue(`['${key}-keyLabel']`, selectedItem ? selectedItem.label : "");
   }
-
-  // only the top governing select should display warnings if changed and reset touched status for governed ones
-  await formikProps.setFieldTouched(`['${key}']`, isInputBeingChanged);
-  formikProps.setFieldValue(`['${key}']`, selectedItem ? selectedItem.value : "");
-  formikProps.setFieldValue(`['${key}-keyLabel']`, selectedItem ? selectedItem.label : "");
 }
 
 /**
