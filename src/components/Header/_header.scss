@@ -37,6 +37,15 @@ IBM Confidential
     }
 
     // Background overrides
+    .#{$prefix}--header__global {
+      .#{$prefix}--modal-close {
+        svg {
+          path {
+            fill: shell.$bmrg-theme-primary !important;
+          }
+        }
+      }
+    }
     .#{$prefix}--side-nav,
     .#{$prefix}--header-panel {
       background: shell.$bmrg-theme-background !important;
