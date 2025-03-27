@@ -4,8 +4,8 @@ IBM Confidential
 © Copyright IBM Corp. 2022, 2025
 */
 
-import React, { useEffect, useRef, useState } from "react";
-import Quill from "quill";
+import React, { lazy, useEffect, useRef, useState } from "react";
+// import Quill from "quill";
 import { Toolbar, ToolbarButton, ToolbarGroup, pkg } from "@carbon/ibm-products";
 import "quill/dist/quill.snow.css";
 import { prefix } from "../../internal/settings";
@@ -27,7 +27,8 @@ type Props = React.ComponentPropsWithRef<"input"> & {
   readonly?: boolean;
   quillProps?: any;
 };
-
+//@ts-ignore
+const Quill: any = lazy(() => import('quill'));
 const RichTextAreaComponent = React.forwardRef<any, Props>(function RichTextAreaComponent(
   {
     label,
@@ -53,7 +54,7 @@ const RichTextAreaComponent = React.forwardRef<any, Props>(function RichTextArea
   const [savedSelection, setSavedSelection] = useState<any>(null);
   const [showUrlInput, setShowUrlInput] = useState(false);
   const [noSelection, setNoSelection] = useState(false);
-  const quillRef = useRef<Quill | null>(null);
+  const quillRef = useRef<any>(null);
 
   useEffect(() => {
     if (editorRef.current) {
@@ -148,7 +149,7 @@ const RichTextAreaComponent = React.forwardRef<any, Props>(function RichTextArea
     if (quillRef.current && maxWordCount) {
       const text = quillRef.current.getText();
       const words = text.trim().split(/\s+/);
-      return words.filter((word) => word.length > 0).length;
+      return words.filter((word: any) => word.length > 0).length;
     }
     return 0;
   };
