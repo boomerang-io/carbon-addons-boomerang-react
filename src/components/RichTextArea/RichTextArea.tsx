@@ -5,7 +5,6 @@ IBM Confidential
 */
 
 import React, { useEffect, useRef, useState } from "react";
-import Quill from "quill";
 import { Toolbar, ToolbarButton, ToolbarGroup, pkg } from "@carbon/ibm-products";
 import "quill/dist/quill.snow.css";
 import { prefix } from "../../internal/settings";
@@ -53,47 +52,53 @@ const RichTextAreaComponent = React.forwardRef<any, Props>(function RichTextArea
   const [savedSelection, setSavedSelection] = useState<any>(null);
   const [showUrlInput, setShowUrlInput] = useState(false);
   const [noSelection, setNoSelection] = useState(false);
-  const quillRef = useRef<Quill | null>(null);
+  const quillRef = useRef<any>(null);
 
   useEffect(() => {
-    if (editorRef.current) {
-      const quill = new Quill(editorRef.current, {
-        theme: "snow",
-        modules: {
-          toolbar: false,
-        },
-        placeholder: !readOnly ? placeholder : "",
-        readOnly,
-        ...quillProps,
-      });
-      quillRef.current = quill;
-      if (value) {
-        const cleanHtml = sanitizeHtml(value, {
-          allowedTags: ["p", "strong", "b", "i", "em", "u", "ol", "ul", "li", "a"],
-          allowedAttributes: {
-            a: ["href", "rel", "target"],
+    (async () => {
+      const {default: Quill} = await import("quill");
+      if (editorRef.current) {
+        const quill = new Quill(editorRef.current, {
+          theme: "snow",
+          modules: {
+            toolbar: false,
           },
+          placeholder: !readOnly ? placeholder : "",
+          readOnly,
+          ...quillProps,
         });
-        quillRef.current.clipboard.dangerouslyPasteHTML(cleanHtml);
-        const length = quillRef.current.getLength();
-        quillRef.current.setSelection(length, 0);
-        setWordCount(getWordCount());
-        if (setError) {
-          setError(maxWordCount && getWordCount() > maxWordCount);
+        quillRef.current = quill;
+        if (value) {
+          const cleanHtml = sanitizeHtml(value, {
+            allowedTags: ["p", "strong", "b", "i", "em", "u", "ol", "ul", "li", "a"],
+            allowedAttributes: {
+              a: ["href", "rel", "target"],
+            },
+          });
+          quillRef.current.clipboard.dangerouslyPasteHTML(cleanHtml);
+          const length = quillRef.current.getLength();
+          quillRef.current.setSelection(length, 0);
+          setWordCount(getWordCount());
+          if (setError) {
+            setError(maxWordCount && getWordCount() > maxWordCount);
+          }
         }
+        quill.on("text-change", () => {
+          const currentCount = getWordCount();
+          setWordCount(currentCount);
+          const wordCountExceeded = maxWordCount && currentCount > maxWordCount;
+          if (onChange && !wordCountExceeded) {
+            onChange(quill.getSemanticHTML());
+          }
+          if (setError) {
+            setError(wordCountExceeded);
+          }
+        });
       }
-      quill.on("text-change", () => {
-        const currentCount = getWordCount();
-        setWordCount(currentCount);
-        const wordCountExceeded = maxWordCount && currentCount > maxWordCount;
-        if (onChange && !wordCountExceeded) {
-          onChange(quill.getSemanticHTML());
-        }
-        if (setError) {
-          setError(wordCountExceeded);
-        }
-      });
-    }
+    })()
+    .catch(error => {
+      console.error(error);
+    });
   }, []);
 
   const handleBold = () => {
@@ -148,7 +153,7 @@ const RichTextAreaComponent = React.forwardRef<any, Props>(function RichTextArea
     if (quillRef.current && maxWordCount) {
       const text = quillRef.current.getText();
       const words = text.trim().split(/\s+/);
-      return words.filter((word) => word.length > 0).length;
+      return words.filter((word: any) => word.length > 0).length;
     }
     return 0;
   };
