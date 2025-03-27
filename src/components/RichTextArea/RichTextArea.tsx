@@ -27,8 +27,21 @@ type Props = React.ComponentPropsWithRef<"input"> & {
   readonly?: boolean;
   quillProps?: any;
 };
-//@ts-ignore
-const Quill: any = lazy(() => import('quill'));
+
+// (async () => {
+//   const {default: Quill} = await import("quill");
+//   let qi = new Quill();
+//   // ...
+// })()
+// .catch(error => {
+//   // Handle/report error
+//   console.error(error);
+// });
+
+// const Quill = lazy(async () => await import(/* webpackChunkName: "Quill" */ "quill").then(module => {
+//   console.log("MODULEE", module);
+//   return { default: module.Quill };
+// }));
 const RichTextAreaComponent = React.forwardRef<any, Props>(function RichTextAreaComponent(
   {
     label,
@@ -57,44 +70,89 @@ const RichTextAreaComponent = React.forwardRef<any, Props>(function RichTextArea
   const quillRef = useRef<any>(null);
 
   useEffect(() => {
-    if (editorRef.current) {
-      const quill = new Quill(editorRef.current, {
-        theme: "snow",
-        modules: {
-          toolbar: false,
-        },
-        placeholder: !readOnly ? placeholder : "",
-        readOnly,
-        ...quillProps,
-      });
-      quillRef.current = quill;
-      if (value) {
-        const cleanHtml = sanitizeHtml(value, {
-          allowedTags: ["p", "strong", "b", "i", "em", "u", "ol", "ul", "li", "a"],
-          allowedAttributes: {
-            a: ["href", "rel", "target"],
+    (async () => {
+      const {default: Quill} = await import("quill");
+      if (editorRef.current) {
+        const quill = new Quill(editorRef.current, {
+          theme: "snow",
+          modules: {
+            toolbar: false,
           },
+          placeholder: !readOnly ? placeholder : "",
+          readOnly,
+          ...quillProps,
         });
-        quillRef.current.clipboard.dangerouslyPasteHTML(cleanHtml);
-        const length = quillRef.current.getLength();
-        quillRef.current.setSelection(length, 0);
-        setWordCount(getWordCount());
-        if (setError) {
-          setError(maxWordCount && getWordCount() > maxWordCount);
+        quillRef.current = quill;
+        if (value) {
+          const cleanHtml = sanitizeHtml(value, {
+            allowedTags: ["p", "strong", "b", "i", "em", "u", "ol", "ul", "li", "a"],
+            allowedAttributes: {
+              a: ["href", "rel", "target"],
+            },
+          });
+          quillRef.current.clipboard.dangerouslyPasteHTML(cleanHtml);
+          const length = quillRef.current.getLength();
+          quillRef.current.setSelection(length, 0);
+          setWordCount(getWordCount());
+          if (setError) {
+            setError(maxWordCount && getWordCount() > maxWordCount);
+          }
         }
+        quill.on("text-change", () => {
+          const currentCount = getWordCount();
+          setWordCount(currentCount);
+          const wordCountExceeded = maxWordCount && currentCount > maxWordCount;
+          if (onChange && !wordCountExceeded) {
+            onChange(quill.getSemanticHTML());
+          }
+          if (setError) {
+            setError(wordCountExceeded);
+          }
+        });
       }
-      quill.on("text-change", () => {
-        const currentCount = getWordCount();
-        setWordCount(currentCount);
-        const wordCountExceeded = maxWordCount && currentCount > maxWordCount;
-        if (onChange && !wordCountExceeded) {
-          onChange(quill.getSemanticHTML());
-        }
-        if (setError) {
-          setError(wordCountExceeded);
-        }
-      });
-    }
+    })()
+    .catch(error => {
+      console.error(error);
+    });
+    
+    // if (editorRef.current) {
+    //   const quill = new Quill(editorRef.current, {
+    //     theme: "snow",
+    //     modules: {
+    //       toolbar: false,
+    //     },
+    //     placeholder: !readOnly ? placeholder : "",
+    //     readOnly,
+    //     ...quillProps,
+    //   });
+    //   quillRef.current = quill;
+    //   if (value) {
+    //     const cleanHtml = sanitizeHtml(value, {
+    //       allowedTags: ["p", "strong", "b", "i", "em", "u", "ol", "ul", "li", "a"],
+    //       allowedAttributes: {
+    //         a: ["href", "rel", "target"],
+    //       },
+    //     });
+    //     quillRef.current.clipboard.dangerouslyPasteHTML(cleanHtml);
+    //     const length = quillRef.current.getLength();
+    //     quillRef.current.setSelection(length, 0);
+    //     setWordCount(getWordCount());
+    //     if (setError) {
+    //       setError(maxWordCount && getWordCount() > maxWordCount);
+    //     }
+    //   }
+    //   quill.on("text-change", () => {
+    //     const currentCount = getWordCount();
+    //     setWordCount(currentCount);
+    //     const wordCountExceeded = maxWordCount && currentCount > maxWordCount;
+    //     if (onChange && !wordCountExceeded) {
+    //       onChange(quill.getSemanticHTML());
+    //     }
+    //     if (setError) {
+    //       setError(wordCountExceeded);
+    //     }
+    //   });
+    // }
   }, []);
 
   const handleBold = () => {
