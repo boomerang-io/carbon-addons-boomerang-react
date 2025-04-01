@@ -24,10 +24,25 @@ type Props = React.ComponentPropsWithRef<"input"> & {
   customError?: string;
   labelText?: React.ReactNode;
   maxWordCount?: number;
+  readonly?: boolean;
+  quillProps?: any;
 };
 
 const RichTextAreaComponent = React.forwardRef<any, Props>(function RichTextAreaComponent(
-  { label, labelText, maxWordCount, value, helperText, placeholder, onChange, setError, invalid, customError },
+  {
+    label,
+    labelText,
+    maxWordCount,
+    value,
+    helperText,
+    placeholder,
+    onChange,
+    setError,
+    invalid,
+    customError,
+    readOnly,
+    quillProps,
+  },
   ref
 ) {
   pkg.component.ToolbarGroup = pkg.component.Toolbar = pkg.component.ToolbarButton = true;
@@ -47,7 +62,9 @@ const RichTextAreaComponent = React.forwardRef<any, Props>(function RichTextArea
         modules: {
           toolbar: false,
         },
-        placeholder,
+        placeholder: !readOnly ? placeholder : "",
+        readOnly,
+        ...quillProps,
       });
       quillRef.current = quill;
       if (value) {
@@ -153,6 +170,7 @@ const RichTextAreaComponent = React.forwardRef<any, Props>(function RichTextArea
           >{`${wordCount}/${maxWordCount}`}</div>
         ) : null}
       </div>
+      {(!readOnly)?
       <Toolbar className={`${prefix}--rich-text-editor-toolbar`}>
         <ToolbarGroup>
           <ToolbarButton
@@ -193,6 +211,7 @@ const RichTextAreaComponent = React.forwardRef<any, Props>(function RichTextArea
           />
         </ToolbarGroup>
       </Toolbar>
+      :null}
       {showUrlInput && (
         <div className={`${prefix}--rich-text-editor-url-input`}>
           <TextInput
@@ -230,7 +249,13 @@ const RichTextAreaComponent = React.forwardRef<any, Props>(function RichTextArea
           [`${prefix}--rich-text-editor-error-border`]: wordCountExceeded,
         })}
       >
-        <div className={`${prefix}--rich-text-editor`} onFocus={() => setNoSelection(false)} ref={editorRef}></div>
+        <div
+          className={cx(`${prefix}--rich-text-editor`, {
+            [`${prefix}--rich-text-editor-disabled`]: readOnly,
+          })}
+          onFocus={() => setNoSelection(false)}
+          ref={editorRef}
+        ></div>
       </div>
       <div data-testid="rich-text-editor-footer" className={`${prefix}--rich-text-editor-footer`}>
         {!noSelection && !wordCountExceeded && helperText ? (
@@ -255,9 +280,7 @@ const RichTextAreaComponent = React.forwardRef<any, Props>(function RichTextArea
           </div>
         ) : null}
         {invalid ? (
-          <div className={cx(`${prefix}--label`, `${prefix}--rich-text-editor-error`)}>
-            {customError}
-          </div>
+          <div className={cx(`${prefix}--label`, `${prefix}--rich-text-editor-error`)}>{customError}</div>
         ) : null}
       </div>
     </>

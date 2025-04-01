@@ -23,6 +23,7 @@ type Props = {
   defaultAssistantLink?: string;
   enableChatButton?: boolean;
   showChatButton?: boolean;
+  showSelectTeamPurpose?: boolean;
   homeLink?: string;
   joinCreateTrigger?: (props: any) => void;
   isLoading?: boolean;
@@ -47,6 +48,7 @@ export function AdvantageSideNav(props: Props) {
     app,
     enableChatButton=true,
     showChatButton=true,
+    showSelectTeamPurpose = false,
     homeLink,
     assistantLink,
     defaultAssistantLink,
@@ -76,6 +78,7 @@ export function AdvantageSideNav(props: Props) {
   const isMenuOpen = isOpen || activeMenu;
   const windowLocation = window.location;
   const isPartnerUser = user?.type === USER_PLATFORM_ROLE.Partner;
+  const joinButtontitle = showSelectTeamPurpose?"Create Team":"Create or Join Team";
   const standardTeamsList = [...personalTeams.map(pteams => ({...pteams, isPersonal: true})), ...teams];
   const teamsMenuRef = React.useRef(null);
   const accountsMenuRef = React.useRef(null);
@@ -194,7 +197,11 @@ export function AdvantageSideNav(props: Props) {
         <SideNavItems>
           {isMenuOpen && navLinks?.length ? (
             <div>
-              {navLinks.map((link) =>(<SideNavLink href={link.url}>{link.name}</SideNavLink>))}
+              {navLinks.map((link) =>
+                (
+                  <SideNavLink href={link.url} target={link.isExternal ? "_blank" : undefined} rel={link.isExternal ? "noopener noreferrer" : undefined}>{link.name}</SideNavLink>
+                )
+              )}
               <SideNavDivider />
             </div>
           ) : null}
@@ -233,7 +240,7 @@ export function AdvantageSideNav(props: Props) {
                   handleCreateJoinClick();
                 }}
               >
-                Create or Join Team
+                {joinButtontitle}
               </SideNavLink> : null
             }
           </div>
