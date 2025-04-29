@@ -124,7 +124,7 @@ export default function Header(props: Props) {
         <CarbonHeader aria-label="App navigation header" className={className}>
           {skipToContentProps ? <SkipToContent {...skipToContentProps} /> : null}
           <SidenavMenu leftPanel={props.leftPanel} navLinks={props.navLinks} />
-          <HeaderName href={baseEnvUrl} prefix={prefixName} data-testid="header-product">
+          <HeaderName href={`${baseEnvUrl}/launchpad`} prefix={prefixName} data-testid="header-product">
             {productName}
           </HeaderName>
           <HeaderNavigation aria-label="Platform navigation">
