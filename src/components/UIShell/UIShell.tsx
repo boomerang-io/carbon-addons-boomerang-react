@@ -58,6 +58,7 @@ type Props = {
       agentsVersion?:string;
       scribeFlowVersion?:string;
       askICAUrl?:string;
+      supportUrl?:string;
     };
     platformMessage?: any;
   };
@@ -115,7 +116,7 @@ function UIShell({
   const { features, navigation, platform, platformMessage } = config;
   const names = getProductAndPlatformNames({ productName, platformName, platform });
   const sendIdeasUrl = platform?.feedbackUrl || "https://ideas.ibm.com";
-  const supportLink = "https://ibmsf.my.site.com/ibminternalproducts/s/";
+  const supportLink = platform?.supportUrl;
   const partnerEmailId="ica-support@ibm.com";
   /**
    * Check feature enablement via explicit feature flags
@@ -214,7 +215,7 @@ function UIShell({
              :
              <HeaderMenuItem
              key="support-center"
-             href={supportLink}
+             href={platform?.supportUrl as string}
              icon={<HelpDesk />}
              kind="external"
              text="Support Center"
