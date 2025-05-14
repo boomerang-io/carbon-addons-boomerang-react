@@ -16,20 +16,42 @@ type Props = {
   isOpen: boolean;
   name: string;
   version: string;
+  assistantVersion:string;
+  agentsVersion:string;
+  scribeFlowVersion:string
 };
 
-function AboutPlatform({ closeModal, isOpen = false, version, name }: Props) {
+function AboutPlatform({ closeModal, isOpen = false, version, name, assistantVersion, agentsVersion, scribeFlowVersion }: Props) {
   return (
     <ComposedModal
       open={isOpen}
-      className={`${prefix}--bmrg-aboutPlatform-container ${prefix}--bmrg-header-modal`}
+      className={`${prefix}--bmrg-aboutPlatform-container ${prefix}--bmrg-header-modal ${prefix}--bmrg-aboutPlatform-modalheader`}
       onClose={closeModal}
     >
-      <ModalHeader label={`${name}  |  Version ${version}`} title="About the Platform" closeModal={closeModal} />
+      <ModalHeader className={`${prefix}--bmrg-aboutPlatform-modaltitle`} title="About the Platform" closeModal={closeModal} />
       <ModalBody>
-        <footer className={`${prefix}--bmrg-aboutPlatform-footer`}>
+        <div>
+          <h5 className={`${prefix}--bmrg-aboutPlatform-component-header`}>Components</h5>
+          <ul >
+            <li className={`${prefix}--bmrg-aboutPlatform-li-between-first`} >
+              <div className={`${prefix}--bmrg-aboutPlatform-li`}>IBM Consulting Advantage </div>
+              <div className={`${prefix}--bmrg-aboutPlatform-li-version`}>{version}</div>
+            </li>
+            <li className={`${prefix}--bmrg-aboutPlatform-li-between`}>
+              <div className={`${prefix}--bmrg-aboutPlatform-li`}>Assistants </div>
+              <span className={`${prefix}--bmrg-aboutPlatform-li-version`}>{assistantVersion}</span>
+            </li>
+            <li className={`${prefix}--bmrg-aboutPlatform-li-between`}>
+              <div className={`${prefix}--bmrg-aboutPlatform-li`}>Agents</div>
+              <span className={`${prefix}--bmrg-aboutPlatform-li-version`}>{agentsVersion}</span>
+            </li>
+            <li className={`${prefix}--bmrg-aboutPlatform-li-between-last`} >
+              <div className={`${prefix}--bmrg-aboutPlatform-li`}>Scribeflow</div>
+              <span className={`${prefix}--bmrg-aboutPlatform-li-version`}>{scribeFlowVersion}</span>
+            </li>
+          </ul>
           <h1 className={`${prefix}--bmrg-aboutPlatform-footer__header`}>Copyright IBM Corp. 2022, 2025</h1>
-        </footer>
+        </div>
       </ModalBody>
     </ComposedModal>
   );
@@ -54,7 +76,7 @@ function AboutPlatformMenuItem(props: Omit<Props, "isOpen" | "closeModal">) {
         icon={<Information />}
         onClick={() => setIsOpen(!isOpen)}
         ref={menuItemRef}
-        text="About Platform"
+        text="About the Platform"
         type="button"
       />
       <AboutPlatform isOpen={isOpen} closeModal={handleClose} {...props} />

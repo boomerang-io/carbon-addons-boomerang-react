@@ -54,7 +54,11 @@ type Props = {
       askICAEnabled?:boolean;
       signOutUrl?: string;
       version?: string;
+      assistantVersion?:string;
+      agentsVersion?:string;
+      scribeFlowVersion?:string;
       askICAUrl?:string;
+      supportUrl?:string;
     };
     platformMessage?: any;
   };
@@ -112,7 +116,7 @@ function UIShell({
   const { features, navigation, platform, platformMessage } = config;
   const names = getProductAndPlatformNames({ productName, platformName, platform });
   const sendIdeasUrl = platform?.feedbackUrl || "https://ideas.ibm.com";
-  const supportLink = "https://ibmsf.my.site.com/ibminternalproducts/s/";
+  const supportLink = platform?.supportUrl;
   const partnerEmailId="ica-support@ibm.com";
   /**
    * Check feature enablement via explicit feature flags
@@ -176,13 +180,6 @@ function UIShell({
               userName={user?.displayName ?? user?.name}
             />
           ),
-          isAboutPlatformEnabled && (
-            <AboutPlatformMenuItem
-              key="about-platform"
-              name={platform.name as string}
-              version={platform.version as string}
-            />
-          ),
           isSendMailEnabled && (
             <HeaderMenuItem
               key="email-preferences"
@@ -218,7 +215,7 @@ function UIShell({
              :
              <HeaderMenuItem
              key="support-center"
-             href={supportLink}
+             href={platform?.supportUrl as string}
              icon={<HelpDesk />}
              kind="external"
              text="Support Center"
@@ -253,6 +250,16 @@ function UIShell({
           text="AskICA"
           type="link"
         />):null),
+        isAboutPlatformEnabled && (
+          <AboutPlatformMenuItem
+            key="about-platform"
+            name={platform.name as string}
+            version={platform.version as string}
+            assistantVersion={platform.assistantVersion as string}
+            agentsVersion={platform.agentsVersion as string}
+            scribeFlowVersion={platform.scribeFlowVersion as string}
+          />
+        ),
           ...supportMenuItems,
         ].filter(Boolean)}
         userTeams={userTeams}
