@@ -54,6 +54,9 @@ type Props = {
       askICAEnabled?:boolean;
       signOutUrl?: string;
       version?: string;
+      assistantVersion?:string;
+      agentsVersion?:string;
+      scribeFlowVersion?:string;
       askICAUrl?:string;
     };
     platformMessage?: any;
@@ -176,13 +179,6 @@ function UIShell({
               userName={user?.displayName ?? user?.name}
             />
           ),
-          isAboutPlatformEnabled && (
-            <AboutPlatformMenuItem
-              key="about-platform"
-              name={platform.name as string}
-              version={platform.version as string}
-            />
-          ),
           isSendMailEnabled && (
             <HeaderMenuItem
               key="email-preferences"
@@ -253,6 +249,16 @@ function UIShell({
           text="AskICA"
           type="link"
         />):null),
+        isAboutPlatformEnabled && (
+          <AboutPlatformMenuItem
+            key="about-platform"
+            name={platform.name as string}
+            version={platform.version as string}
+            assistantVersion={platform.assistantVersion as string}
+            agentsVersion={platform.agentsVersion as string}
+            scribeFlowVersion={platform.scribeFlowVersion as string}
+          />
+        ),
           ...supportMenuItems,
         ].filter(Boolean)}
         userTeams={userTeams}
