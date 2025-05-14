@@ -99,6 +99,18 @@ IBM Confidential
   .#{$prefix}--bmrg-aboutPlatform-li-between {
     display: flex;
     height: 4.5rem;
+    padding: 1rem 1.5rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    align-self: stretch;
+    border-bottom: 1px solid var(--Border-border-subtle-01, #C6C6C6);
+    background: var(--Layer-layer-02, #FFF);
+  }
+  
+  .#{$prefix}--bmrg-aboutPlatform-li-between-first{
+    display: flex;
+    height: 4.5rem;
     padding: 1rem 0.5rem;
     flex-direction: column;
     justify-content: center;
@@ -111,11 +123,14 @@ IBM Confidential
   .#{$prefix}--bmrg-aboutPlatform-li-between-last {
     display: flex;
     height: 4.5rem;
-    padding: 1rem 0.5rem;
+    padding: 1rem 1.5rem;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
     align-self: stretch;
     padding-bottom: 0.5rem;
+  }
+  .#{$prefix}--bmrg-aboutPlatform-li-version {
+    color: var(--Text-text-secondary, #525252);
   }
 }
