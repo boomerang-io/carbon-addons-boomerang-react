@@ -34,19 +34,19 @@ function AboutPlatform({ closeModal, isOpen = false, version, name, assistantVer
           <h5 className={`${prefix}--bmrg-aboutPlatform-component-header`}>Components</h5>
           <ul >
             <li className={`${prefix}--bmrg-aboutPlatform-li-between-first`} >
-              <div className={`${prefix}--bmrg-aboutPlatform-li`}>IBM Consulting Advantage </div>
-              <div className={`${prefix}--bmrg-aboutPlatform-li-version`}>{version}</div>
+              <span className={`${prefix}--bmrg-aboutPlatform-li`}>IBM Consulting Advantage </span>
+              <span className={`${prefix}--bmrg-aboutPlatform-li-version`}>{version}</span>
             </li>
             <li className={`${prefix}--bmrg-aboutPlatform-li-between`}>
-              <div className={`${prefix}--bmrg-aboutPlatform-li`}>Assistants </div>
+              <span className={`${prefix}--bmrg-aboutPlatform-li`}>Assistants </span>
               <span className={`${prefix}--bmrg-aboutPlatform-li-version`}>{assistantVersion}</span>
             </li>
             <li className={`${prefix}--bmrg-aboutPlatform-li-between`}>
-              <div className={`${prefix}--bmrg-aboutPlatform-li`}>Agents</div>
+              <span className={`${prefix}--bmrg-aboutPlatform-li`}>Agents</span>
               <span className={`${prefix}--bmrg-aboutPlatform-li-version`}>{agentsVersion}</span>
             </li>
             <li className={`${prefix}--bmrg-aboutPlatform-li-between-last`} >
-              <div className={`${prefix}--bmrg-aboutPlatform-li`}>Scribeflow</div>
+              <span className={`${prefix}--bmrg-aboutPlatform-li`}>Scribeflow</span>
               <span className={`${prefix}--bmrg-aboutPlatform-li-version`}>{scribeFlowVersion}</span>
             </li>
           </ul>
