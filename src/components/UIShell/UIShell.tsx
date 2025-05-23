@@ -7,7 +7,7 @@ IBM Confidential
 
 import React from "react";
 import { QueryClientProvider } from "react-query";
-import { Forum, HelpDesk, Email, ChatLaunch } from "@carbon/react/icons";
+import { Forum, HelpDesk, Email, ChatLaunch, Cognitive } from "@carbon/react/icons";
 import Header from "../Header"; // Using default export
 import HeaderMenuItem from "../Header/HeaderMenuItem";
 import PrivacyRedirectModal from "../PrivacyRedirect";
@@ -79,6 +79,7 @@ type Props = {
   triggerEvent?: (props: any) => any;
   user?: User;
   userTeams?: { data: any, isLoading: boolean, error: any };
+  enableIcaMacs?: boolean;
 };
 
 
@@ -98,6 +99,7 @@ function UIShell({
   triggerEvent,
   user,
   userTeams,
+  enableIcaMacs,
 }: Props) {
   // Support base header .e.g for an error state
   if (!config) {
@@ -250,6 +252,17 @@ function UIShell({
           text="AskICA"
           type="link"
         />):null),
+        (!isPartnerUser && enableIcaMacs &&
+        <HeaderMenuItem
+          key="launch-ideation-agent"
+          href={`${platform.baseEnvUrl}/launchpad/macs`}
+          icon={<Cognitive/>}
+          data-testid="launch-ideation-agent"
+          kind="app"
+          text="watsonx Challenge Ideation"
+          type="link"
+        />
+        ),
         isAboutPlatformEnabled && (
           <AboutPlatformMenuItem
             key="about-platform"
