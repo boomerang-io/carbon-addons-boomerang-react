@@ -80,7 +80,7 @@ type Props = {
   user?: User;
   userTeams?: { data: any, isLoading: boolean, error: any };
   enableIcaMacs?: boolean;
-  setShowTutorial?: Function;
+  handleShowTutorial?: Function;
   tutorialScreenToShow?: string;
 };
 
@@ -96,7 +96,7 @@ function UIShell({
   renderPrivacyRedirect = true,
   renderPrivacyStatement = true,
   rightPanel,
-  setShowTutorial,
+  handleShowTutorial,
   skipToContentProps,
   templateMeteringEvent,
   triggerEvent,
@@ -277,10 +277,10 @@ function UIShell({
             scribeFlowVersion={platform.scribeFlowVersion as string}
           />
         ),
-        (tutorialScreenToShow && setShowTutorial &&
+        (tutorialScreenToShow && handleShowTutorial &&
           <HeaderMenuItem
             key="launch-tutorial"
-            onClick={() => setShowTutorial(true)}
+            onClick={handleShowTutorial as () => void}
             icon={<Book />}
             data-testid="launch-tutorial"
             text="Launch Tutorial"

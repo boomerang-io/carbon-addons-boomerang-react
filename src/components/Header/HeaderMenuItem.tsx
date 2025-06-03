@@ -48,6 +48,7 @@ function HeaderMenuItem(props: Props, ref: React.ForwardedRef<HTMLLinkElement>) 
     return (
       <CarbonHeaderMenuItem
         // eslint-disable-next-line no-script-url
+        href={"javascript:void(0)"}
         onClick={onClick}
         role="menuitem"
         ref={ref}
