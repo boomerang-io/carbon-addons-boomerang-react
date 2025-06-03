@@ -1,4 +1,4 @@
-// Vitest Snapshot v1
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`AutoSuggest > snapshot 1`] = `
 <body>
@@ -24,6 +24,7 @@ exports[`AutoSuggest > snapshot 1`] = `
             >
               <label
                 class="cds--label"
+                dir="auto"
                 for="suggestions"
               >
                 <div
@@ -45,10 +46,18 @@ exports[`AutoSuggest > snapshot 1`] = `
                   aria-autocomplete="list"
                   aria-controls="react-autowhatever-1"
                   autocomplete="off"
-                  class="cds--text-input react-autosuggest__input cds--text-input--md"
+                  class="cds--text-input"
+                  control="object"
                   id="suggestions"
                   type="text"
                   value=""
+                />
+                
+                <span
+                  aria-atomic="true"
+                  aria-live="assertive"
+                  class="cds--text-input__counter-alert"
+                  role="alert"
                 />
               </div>
             </div>
@@ -58,6 +67,7 @@ exports[`AutoSuggest > snapshot 1`] = `
           aria-label="AutoSuggest listbox"
           class="react-autosuggest__suggestions-container"
           id="react-autowhatever-1"
+          query=""
           role="listbox"
         />
       </div>

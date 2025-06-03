@@ -1,21 +1,23 @@
-// Vitest Snapshot v1
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`UIShell > snapshot 1`] = `
 <body>
   <div>
     <div
-      class="cds--g100 cds--layer-one"
+      class="cds--g10 cds--layer-one"
     >
       <header
         aria-label="App navigation header"
         class="cds--header"
       >
-        <div>
+        <div
+          data-testid="header-sidenav-menu"
+        >
           <button
-            aria-label="Sidenav menu"
+            aria-label="Expand Side Nav"
             class="cds--header__action cds--header__menu-trigger cds--header__menu-toggle cds--header__menu-toggle__hidden"
             id="header-sidenav-menu-button"
-            title="Sidenav menu"
+            title="Expand Side Nav"
             type="button"
           >
             <svg
@@ -42,6 +44,8 @@ exports[`UIShell > snapshot 1`] = `
             <nav
               aria-label="Side navigation"
               class="cds--side-nav__navigation cds--side-nav cds--side-nav--ux cds--side-nav--hidden"
+              inert="-1"
+              tabindex="-1"
             >
               <ul
                 class="cds--side-nav__items"
@@ -51,7 +55,8 @@ exports[`UIShell > snapshot 1`] = `
         </div>
         <a
           class="cds--header__name"
-          href=""
+          data-testid="header-product"
+          href="/launchpad"
         >
           
           Boomerang

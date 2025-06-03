@@ -43,22 +43,21 @@ describe("ComboBoxMultiSelect", () => {
   });
 
   test("select and remove items", async () => {
-    const { getByRole, getByPlaceholderText, getByText, queryByLabelText } = render(<ComboBoxMultiSelect {...props} />);
+    const { getByRole, getByPlaceholderText, getByText, queryByLabelText, findAllByLabelText } = render(<ComboBoxMultiSelect {...props} />);
     const input = getByPlaceholderText(/select some animals/i);
     fireEvent.click(getByText(/panda/i));
     fireEvent.click(input);
     fireEvent.click(getByText(/cat/i));
     fireEvent.click(input);
+    let clearFilters = await findAllByLabelText("Clear filter");
     await waitFor(() => {
-      expect(queryByLabelText(/Clear filter dog/i)).toBeInTheDocument();
-      expect(queryByLabelText(/Clear filter cat/i)).toBeInTheDocument();
+      expect(clearFilters[0]).toBeInTheDocument();
+      expect(clearFilters[1]).toBeInTheDocument();
     });
     const clearButton = getByRole("button", { name: "Clear selected item" });
     fireEvent.click(clearButton);
     await waitFor(() => {
-      expect(queryByLabelText(/Clear filter panda/i)).not.toBeInTheDocument();
-      expect(queryByLabelText(/Clear filter dog/i)).not.toBeInTheDocument();
-      expect(queryByLabelText(/Clear filter cat/i)).not.toBeInTheDocument();
+      expect(queryByLabelText("Clear filter")).not.toBeInTheDocument();
     });
   });
 });
