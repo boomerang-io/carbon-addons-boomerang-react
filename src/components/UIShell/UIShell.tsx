@@ -23,6 +23,7 @@ import { USER_PLATFORM_ROLE } from "../../constants/UserType";
 
 type Props = {
   carbonTheme?: "white" | "g10" | "g90" | "g100";
+  baseEnvUrl?: string;
   config?: {
     features?: {
       "appSwitcher.enabled"?: boolean;
@@ -84,6 +85,7 @@ type Props = {
 
 
 function UIShell({
+  baseEnvUrl,
   carbonTheme="g10",
   config,
   leftPanel,
@@ -105,7 +107,7 @@ function UIShell({
   if (!config) {
     return (
       <Header
-        baseEnvUrl=""
+        baseEnvUrl={baseEnvUrl ?? ""}
         baseServicesUrl=""
         carbonTheme={carbonTheme}
         enableAppSwitcher={false}
