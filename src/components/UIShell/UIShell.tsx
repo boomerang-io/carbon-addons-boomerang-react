@@ -7,7 +7,7 @@ IBM Confidential
 
 import React from "react";
 import { QueryClientProvider } from "react-query";
-import { Forum, HelpDesk, Email, ChatLaunch, Cognitive } from "@carbon/react/icons";
+import { Book, Forum, HelpDesk, Email, ChatLaunch, Cognitive } from "@carbon/react/icons";
 import Header from "../Header"; // Using default export
 import HeaderMenuItem from "../Header/HeaderMenuItem";
 import PrivacyRedirectModal from "../PrivacyRedirect";
@@ -81,6 +81,8 @@ type Props = {
   user?: User;
   userTeams?: { data: any, isLoading: boolean, error: any };
   enableIcaMacs?: boolean;
+  handleShowTutorial?: Function;
+  tutorialScreenToShow?: string;
 };
 
 
@@ -96,9 +98,11 @@ function UIShell({
   renderPrivacyRedirect = true,
   renderPrivacyStatement = true,
   rightPanel,
+  handleShowTutorial,
   skipToContentProps,
   templateMeteringEvent,
   triggerEvent,
+  tutorialScreenToShow,
   user,
   userTeams,
   enableIcaMacs,
@@ -273,6 +277,16 @@ function UIShell({
             assistantVersion={platform.assistantVersion as string}
             agentsVersion={platform.agentsVersion as string}
             scribeFlowVersion={platform.scribeFlowVersion as string}
+          />
+        ),
+        (tutorialScreenToShow && handleShowTutorial &&
+          <HeaderMenuItem
+            key="launch-tutorial"
+            onClick={handleShowTutorial as () => void}
+            icon={<Book />}
+            data-testid="launch-tutorial"
+            text="Launch Tutorial"
+            type="button"
           />
         ),
           ...supportMenuItems,

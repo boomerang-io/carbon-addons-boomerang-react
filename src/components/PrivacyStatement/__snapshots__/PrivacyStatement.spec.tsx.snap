@@ -1,15 +1,12 @@
-// Vitest Snapshot v1
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Privacy Statement - snapshot 1`] = `
-<body
-  class="cds--body--with-modal-open"
->
+<body>
   <div>
     <div
       aria-hidden="false"
-      class="cds--modal is-visible cds--bmrg-privacy-statement-container cds--bmrg-header-modal"
+      class="cds--layer-one cds--modal is-visible cds--bmrg-privacy-statement-container cds--bmrg-header-modal"
       role="presentation"
-      tabindex="-1"
     >
       <div
         aria-label="Privacy Statement"
@@ -26,6 +23,7 @@ exports[`Privacy Statement - snapshot 1`] = `
         <div
           class="cds--modal-container-body"
         >
+          
           <div
             class="cds--modal-header"
           >
@@ -34,61 +32,87 @@ exports[`Privacy Statement - snapshot 1`] = `
             >
               Effective as of 
             </h2>
-            <h3
+            <h2
               class="cds--modal-header__heading cds--type-beta"
             >
               Privacy Statement
-            </h3>
-            <button
-              aria-label="Close"
-              class="cds--modal-close"
-              title="Close"
-              type="button"
+            </h2>
+            <div
+              class="cds--modal-close-button"
             >
-              <svg
-                aria-hidden="true"
-                class="cds--modal-close__icon"
-                fill="currentColor"
-                focusable="false"
-                height="20"
-                preserveAspectRatio="xMidYMid meet"
-                viewBox="0 0 32 32"
-                width="20"
-                xmlns="http://www.w3.org/2000/svg"
+              <span
+                class="cds--popover-container cds--popover--caret cds--popover--high-contrast cds--popover--left cds--tooltip cds--icon-tooltip"
               >
-                <path
-                  d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z"
-                />
-              </svg>
-            </button>
+                <div
+                  class="cds--tooltip-trigger__wrapper"
+                >
+                  <button
+                    aria-label="Close"
+                    aria-labelledby="tooltip-2"
+                    class="cds--btn--icon-only cds--modal-close cds--btn cds--btn--primary"
+                    type="button"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      class="cds--modal-close__icon"
+                      fill="currentColor"
+                      focusable="false"
+                      height="20"
+                      preserveAspectRatio="xMidYMid meet"
+                      viewBox="0 0 32 32"
+                      width="20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M17.4141 16L24 9.4141 22.5859 8 16 14.5859 9.4143 8 8 9.4141 14.5859 16 8 22.5859 9.4143 24 16 17.4141 22.5859 24 24 22.5859 17.4141 16z"
+                      />
+                    </svg>
+                  </button>
+                </div>
+                <span
+                  aria-hidden="true"
+                  class="cds--popover"
+                  id="tooltip-2"
+                  role="tooltip"
+                >
+                  <span
+                    class="cds--popover-content cds--tooltip-content"
+                  >
+                    Close
+                  </span>
+                  <span
+                    class="cds--popover-caret"
+                  />
+                </span>
+              </span>
+            </div>
           </div>
           <div
-            class="cds--modal-content"
+            class="cds--layer-two cds--modal-content"
           >
             <div
               class="cds--bmrg-privacy-statement"
             />
           </div>
           <div
+            aria-busy="false"
             class="cds--modal-footer cds--btn-set"
           >
             <button
               class="cds--btn cds--btn--secondary"
               data-modal-primary-focus="true"
-              tabindex="0"
               type="button"
             >
               Close
             </button>
             <button
-              aria-describedby="danger-description-2"
+              aria-describedby="danger-description-4"
               class="cds--btn cds--btn--danger"
-              tabindex="0"
               type="button"
             >
               <span
                 class="cds--visually-hidden"
-                id="danger-description-2"
+                id="danger-description-4"
               >
                 danger
               </span>
@@ -99,9 +123,8 @@ exports[`Privacy Statement - snapshot 1`] = `
             >
               <div
                 aria-hidden="true"
-                class="cds--modal"
+                class="cds--layer-one cds--modal"
                 role="presentation"
-                tabindex="-1"
               >
                 <div
                   aria-label="Delete Account"
@@ -118,6 +141,7 @@ exports[`Privacy Statement - snapshot 1`] = `
                   <div
                     class="cds--modal-container-body"
                   >
+                    
                     <div
                       class="cds--modal-header"
                     >
@@ -126,36 +150,63 @@ exports[`Privacy Statement - snapshot 1`] = `
                       >
                         Delete Account
                       </h2>
-                      <h3
+                      <h2
                         class="cds--modal-header__heading cds--type-beta"
                       >
                         Request account deletion
-                      </h3>
-                      <button
-                        aria-label="Close"
-                        class="cds--modal-close"
-                        title="Close"
-                        type="button"
+                      </h2>
+                      <div
+                        class="cds--modal-close-button"
                       >
-                        <svg
-                          aria-hidden="true"
-                          class="cds--modal-close__icon"
-                          fill="currentColor"
-                          focusable="false"
-                          height="20"
-                          preserveAspectRatio="xMidYMid meet"
-                          viewBox="0 0 32 32"
-                          width="20"
-                          xmlns="http://www.w3.org/2000/svg"
+                        <span
+                          class="cds--popover-container cds--popover--caret cds--popover--high-contrast cds--popover--left cds--tooltip cds--icon-tooltip"
                         >
-                          <path
-                            d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z"
-                          />
-                        </svg>
-                      </button>
+                          <div
+                            class="cds--tooltip-trigger__wrapper"
+                          >
+                            <button
+                              aria-label="Close"
+                              aria-labelledby="tooltip-6"
+                              class="cds--btn--icon-only cds--modal-close cds--btn cds--btn--primary"
+                              type="button"
+                            >
+                              <svg
+                                aria-hidden="true"
+                                class="cds--modal-close__icon"
+                                fill="currentColor"
+                                focusable="false"
+                                height="20"
+                                preserveAspectRatio="xMidYMid meet"
+                                viewBox="0 0 32 32"
+                                width="20"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M17.4141 16L24 9.4141 22.5859 8 16 14.5859 9.4143 8 8 9.4141 14.5859 16 8 22.5859 9.4143 24 16 17.4141 22.5859 24 24 22.5859 17.4141 16z"
+                                />
+                              </svg>
+                            </button>
+                          </div>
+                          <span
+                            aria-hidden="true"
+                            class="cds--popover"
+                            id="tooltip-6"
+                            role="tooltip"
+                          >
+                            <span
+                              class="cds--popover-content cds--tooltip-content"
+                            >
+                              Close
+                            </span>
+                            <span
+                              class="cds--popover-caret"
+                            />
+                          </span>
+                        </span>
+                      </div>
                     </div>
                     <div
-                      class="cds--modal-content"
+                      class="cds--layer-two cds--modal-content"
                     >
                       <p
                         class="cds--bmrg-privacy-statement-delete__desc"
@@ -164,25 +215,24 @@ exports[`Privacy Statement - snapshot 1`] = `
                       </p>
                     </div>
                     <div
+                      aria-busy="false"
                       class="cds--modal-footer cds--btn-set"
                     >
                       <button
                         class="cds--btn cds--btn--secondary"
                         data-modal-primary-focus="true"
-                        tabindex="0"
                         type="button"
                       >
                         No, go back to Privacy Statement
                       </button>
                       <button
-                        aria-describedby="danger-description-4"
+                        aria-describedby="danger-description-8"
                         class="cds--btn cds--btn--danger"
-                        tabindex="0"
                         type="submit"
                       >
                         <span
                           class="cds--visually-hidden"
-                          id="danger-description-4"
+                          id="danger-description-8"
                         >
                           danger
                         </span>

@@ -34,7 +34,7 @@ function AboutPlatform({ closeModal, isOpen = false, version, name, assistantVer
           <h5 className={`${prefix}--bmrg-aboutPlatform-component-header`}>Components</h5>
           <ul >
             <li className={`${prefix}--bmrg-aboutPlatform-li-between-first`} >
-              <span className={`${prefix}--bmrg-aboutPlatform-li`}>IBM Consulting Advantage </span>
+              <span className={`${prefix}--bmrg-aboutPlatform-li`}>{name}</span>
               <span className={`${prefix}--bmrg-aboutPlatform-li-version`}>{version}</span>
             </li>
             <li className={`${prefix}--bmrg-aboutPlatform-li-between`}>
