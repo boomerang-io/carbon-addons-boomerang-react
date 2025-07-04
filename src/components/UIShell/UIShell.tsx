@@ -261,7 +261,7 @@ function UIShell({
           icon={<Cognitive/>}
           data-testid="launch-ideation-agent"
           kind="app"
-          text="watsonx Challenge Ideation"
+          text="AI Proposal Feedback Tool"
           type="link"
         />
         ),
