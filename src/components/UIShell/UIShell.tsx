@@ -48,6 +48,8 @@ type Props = {
       name?: string; // Used in About Plaform modal
       platformEmail?: string;
       platformName: string; // Used in UIShell
+      platformVersion: string;
+      platformVersionError: boolean;
       platformOrganization?: string;
       privateTeams?: boolean;
       sendIdeasUrl?: string;
@@ -265,7 +267,7 @@ function UIShell({
           icon={<Cognitive/>}
           data-testid="launch-ideation-agent"
           kind="app"
-          text="watsonx Challenge Ideation"
+          text="AI Proposal Feedback Tool"
           type="link"
         />
         ),
@@ -274,6 +276,8 @@ function UIShell({
             key="about-platform"
             name={platform.name as string}
             version={platform.version as string}
+            platformVersion={platform.platformVersion as string}
+            platformVersionError={platform.platformVersionError}
             assistantVersion={platform.assistantVersion as string}
             agentsVersion={platform.agentsVersion as string}
             scribeFlowVersion={platform.scribeFlowVersion as string}

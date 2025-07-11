@@ -11,7 +11,8 @@ IBM Confidential
 
 .#{$prefix}--bmrg-aboutPlatform-container {
   .#{$prefix}--modal-container {
-    height: 28.375rem; // Set to desired rem height
+    height: 29rem; // Set to desired rem height
+    max-height: 84vh;
     width: 28.4375rem; // Set to desired rem width
   }
 
@@ -61,6 +62,19 @@ IBM Confidential
     width: auto;
   }
 
+  .#{$prefix}--bmrg-aboutPlatform-platform-version {
+    align-items: center;
+    display: flex;
+    margin-top: 1rem;
+  }
+
+  .#{$prefix}--bmrg-aboutPlatform-platform-version-text {
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.125rem;
+    margin-right: 0.5rem;
+  }
+
   .#{$prefix}--bmrg-aboutPlatform-component-header {
     color: var(--cds-text-primary);
     font-size: 0.875rem;
@@ -70,7 +84,6 @@ IBM Confidential
     /* 142.857% */
     letter-spacing: 0.01rem;
     padding-top: 1rem;
-    padding-bottom: 1rem;
   }
 
   .#{$prefix}--bmrg-aboutPlatform-ul {
@@ -103,17 +116,6 @@ IBM Confidential
     height: 4.5rem;
     justify-content: center;
     padding: 1rem 1.5rem;
-  }
-
-  .#{$prefix}--bmrg-aboutPlatform-li-between-first {
-    align-items: flex-start;
-    align-self: stretch;
-    border-bottom: 0.0625rem solid var(--cds-border-subtle-01);
-    display: flex;
-    flex-direction: column;
-    height: 4.5rem;
-    justify-content: center;
-    padding: 1rem 0.5rem;
   }
 
   .#{$prefix}--bmrg-aboutPlatform-li-between-last {
