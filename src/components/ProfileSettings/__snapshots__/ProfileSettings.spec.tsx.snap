@@ -1,15 +1,12 @@
-// Vitest Snapshot v1
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Profile Settings > snapshot 1`] = `
-<body
-  class="cds--body--with-modal-open"
->
+<body>
   <div>
     <div
       aria-hidden="false"
-      class="cds--modal is-visible cds--bmrg-profile-settings-container cds--bmrg-header-modal"
+      class="cds--layer-one cds--modal is-visible cds--bmrg-profile-settings-container cds--bmrg-header-modal"
       role="presentation"
-      tabindex="-1"
     >
       <div
         aria-label="Profile Settings"
@@ -26,39 +23,67 @@ exports[`Profile Settings > snapshot 1`] = `
         <div
           class="cds--modal-container-body"
         >
+          
           <div
             class="cds--modal-header"
           >
-            <h3
+            <h2
               class="cds--modal-header__heading cds--type-beta"
             >
               User profile - Boomerang Joe
-            </h3>
-            <button
-              aria-label="Close"
-              class="cds--modal-close"
-              title="Close"
-              type="button"
+            </h2>
+            <div
+              class="cds--modal-close-button"
             >
-              <svg
-                aria-hidden="true"
-                class="cds--modal-close__icon"
-                fill="currentColor"
-                focusable="false"
-                height="20"
-                preserveAspectRatio="xMidYMid meet"
-                viewBox="0 0 32 32"
-                width="20"
-                xmlns="http://www.w3.org/2000/svg"
+              <span
+                class="cds--popover-container cds--popover--caret cds--popover--high-contrast cds--popover--left cds--tooltip cds--icon-tooltip"
               >
-                <path
-                  d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z"
-                />
-              </svg>
-            </button>
+                <div
+                  class="cds--tooltip-trigger__wrapper"
+                >
+                  <button
+                    aria-label="Close"
+                    aria-labelledby="tooltip-2"
+                    class="cds--btn--icon-only cds--modal-close cds--btn cds--btn--primary"
+                    type="button"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      class="cds--modal-close__icon"
+                      fill="currentColor"
+                      focusable="false"
+                      height="20"
+                      preserveAspectRatio="xMidYMid meet"
+                      viewBox="0 0 32 32"
+                      width="20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M17.4141 16L24 9.4141 22.5859 8 16 14.5859 9.4143 8 8 9.4141 14.5859 16 8 22.5859 9.4143 24 16 17.4141 22.5859 24 24 22.5859 17.4141 16z"
+                      />
+                    </svg>
+                  </button>
+                </div>
+                <span
+                  aria-hidden="true"
+                  class="cds--popover"
+                  id="tooltip-2"
+                  role="tooltip"
+                >
+                  <span
+                    class="cds--popover-content cds--tooltip-content"
+                  >
+                    Close
+                  </span>
+                  <span
+                    class="cds--popover-caret"
+                  />
+                </span>
+              </span>
+            </div>
           </div>
           <div
-            class="cds--modal-content"
+            class="cds--layer-two cds--modal-content"
             style="max-height: 31.5rem;"
           >
             <p
@@ -174,12 +199,12 @@ exports[`Profile Settings > snapshot 1`] = `
             </div>
           </div>
           <div
+            aria-busy="false"
             class="cds--modal-footer cds--btn-set"
           >
             <button
               class="cds--btn cds--btn--secondary"
               data-modal-primary-focus="true"
-              tabindex="0"
               type="button"
             >
               Cancel
@@ -187,7 +212,6 @@ exports[`Profile Settings > snapshot 1`] = `
             <button
               class="cds--btn cds--btn--primary cds--btn--disabled"
               disabled=""
-              tabindex="0"
               type="submit"
             >
               Save changes

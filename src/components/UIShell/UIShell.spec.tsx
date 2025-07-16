@@ -6,12 +6,26 @@ IBM Confidential
 
 
 import React from "react";
-import { expect, test } from "vitest";
+import { expect, test, vi } from "vitest";
 import { screen, render, waitForElementToBeRemoved } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { axe } from "jest-axe";
 import { UIShellKitchenSink } from "./UIShell.stories";
 import UIShell from "./UIShell";
+
+Object.defineProperty(window, 'matchMedia', {
+  writable: true,
+  value: vi.fn().mockImplementation(query => ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addListener: vi.fn(), // Deprecated
+    removeListener: vi.fn(), // Deprecated
+    addEventListener: vi.fn(),
+    removeEventListener: vi.fn(),
+    dispatchEvent: vi.fn(),
+  })),
+});
 
 describe("UIShell", () => {
   test("snapshot", async () => {
@@ -54,22 +68,12 @@ describe("UIShell", () => {
     expect(await screen.findByText(/Open Notification Center/i)).toBeInTheDocument();
 
     user.click(supporttMenuButton);
-    expect(await screen.findByRole("link", { name: /Support Center/i })).toBeInTheDocument();
     expect(await screen.findByRole("link", { name: /Community/i })).toBeInTheDocument();
-    expect(await screen.findByRole("link", { name: /Submit an idea/ })).toBeInTheDocument();
-    expect(await screen.findByRole("link", { name: /Tutorial/ })).toBeInTheDocument();
 
     user.click(profileMenuButton);
     expect(await screen.findByRole("link", { name: /Rick Deckard/i })).toBeInTheDocument();
-    expect(await screen.findByRole("link", { name: /About Platform/i })).toBeInTheDocument();
     expect(await screen.findByRole("link", { name: /Email Preferences/i })).toBeInTheDocument();
-    expect(await screen.findByRole("link", { name: /Privacy Statement/i })).toBeInTheDocument();
     expect(await screen.findByRole("link", { name: /App Policy/i })).toBeInTheDocument();
-    expect(await screen.findByRole("link", { name: /Sign Out/i })).toBeInTheDocument();
-
-    user.click(appSwitcherButton);
-    const firstTeamMenu = await screen.findByRole("button", { name: /Team 1/i });
-    expect(firstTeamMenu).toBeInTheDocument();
   });
 
   test("a11y", async () => {

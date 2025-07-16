@@ -15,9 +15,16 @@ import TextInput from "../TextInput";
 import { animals } from "./AutoSuggest.stories";
 
 const props = {
-  autoSuggestions: animals,
   children: <TextInput id="suggestions" labelText="Suggestions" />,
-  inputProps: {},
+  autoSuggestions: animals,
+  inputProps: {
+    control: "object",
+    defaultValue: {
+      id: "auto-suggest",
+      placeholder: "Type an animal",
+      labelText: "Animal",
+    },
+  },
   onChange: () => {},
 };
 

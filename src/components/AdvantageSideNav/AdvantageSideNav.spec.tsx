@@ -6,9 +6,23 @@ IBM Confidential
 
 
 import React from "react";
-import { expect, test } from "vitest";
+import { expect, test, vi } from "vitest";
 import { render } from "@testing-library/react";
 import AdvantageSideNav from "../AdvantageSideNav";
+
+Object.defineProperty(window, 'matchMedia', {
+  writable: true,
+  value: vi.fn().mockImplementation(query => ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addListener: vi.fn(), // Deprecated
+    removeListener: vi.fn(), // Deprecated
+    addEventListener: vi.fn(),
+    removeEventListener: vi.fn(),
+    dispatchEvent: vi.fn(),
+  })),
+});
 
 const sidenavProps = {
   homeLink: "http://test.home.com",
@@ -28,6 +42,7 @@ const sidenavProps = {
   ],
   baseEnvUrl:"https://baseurl.com",
   app: "testapp",
+  user: { id: "1" }
 };
 
 describe("FeatureSideNav", () => {
