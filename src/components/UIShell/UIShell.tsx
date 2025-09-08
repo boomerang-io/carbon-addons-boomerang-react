@@ -297,14 +297,14 @@ function UIShell({
         ].filter(Boolean)}
         userTeams={userTeams}
       />
-      {isPrivacyModalRendered ? (
+      {/* {isPrivacyModalRendered ? (
         <PrivacyRedirectModal
           isOpen
           baseEnvUrl={platform.baseEnvUrl as string}
           platformName={platform?.name}
           user={user}
         />
-      ) : null}
+      ) : null} */}
     </QueryClientProvider>
   );
 }
