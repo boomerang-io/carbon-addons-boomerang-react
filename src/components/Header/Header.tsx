@@ -214,7 +214,7 @@ function InstanceSwitcherMenu(props: { enabled: Boolean; menuItems: Props["insta
         <Help size={20} />
       </button>
       {isOpen ? (
-        <HeaderMenu aria-labelledby={MenuButtonId.InstanceSwitcher} id={MenuListId.instanceSwitchernstanceSwitcher}>
+        <HeaderMenu aria-labelledby={MenuButtonId.InstanceSwitcher} id={MenuListId.instanceSwitcher}>
            <HeaderMenuItem key="Global" text="Global" type="link" kind="app" href="https://servicesessentials.ibm.com/launchpad" target="_self"/>,
            <HeaderMenuItem key="Australlia" text="Australlia" type="link" kind="app" href="au.ica.ibm.com" target="_self"/>,
            <HeaderMenuItem key="Canada" text="Australlia" type="link" kind="app" href="canada.ica.ibm.com" target="_self"/>,
