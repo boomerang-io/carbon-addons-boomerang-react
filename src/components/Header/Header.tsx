@@ -60,12 +60,13 @@ type Props = {
   };
   skipToContentProps?: { href?: string; children?: string; className?: string };
   supportMenuItems?: React.ReactNode[];
+  instanceSwitcherMenuItems?:React.ReactNode[];
   templateMeteringEvent?: (props: any) => void;
   triggerEvent?: (props: any) => any;
   userTeams?: { data: any; isLoading: boolean; error: any };
 };
 
-type MenuType = "Notifcations" | "Profile" | "Requests" | "RightPanel" | "SideNav" | "Support" | "Switcher";
+type MenuType = "Notifcations" | "Profile" | "Requests" | "RightPanel" | "SideNav" | "Support" | "InstanceSwitcher" | "Switcher";
 
 const MenuListId = {
   Notifcations: "header-notifications-dialog",
@@ -74,6 +75,7 @@ const MenuListId = {
   RightPanel: "header-right-panel-dialog",
   SideNav: "header-sidenav-menu",
   Support: "header-support-menu",
+  instanceSwitcher:"header-instanceSwitcher-menu",
   Switcher: "header-switcher-menu",
 } as const;
 
@@ -86,6 +88,7 @@ const MenuButtonId: Record<MenuType, `${MenuListType[keyof MenuListType]}-button
   RightPanel: "header-right-panel-dialog-button",
   SideNav: "header-sidenav-menu-button",
   Support: "header-support-menu-button",
+  InstanceSwitcher: "header-instanceSwitcher-menu-button",
   Switcher: "header-switcher-menu-button",
 };
 
@@ -95,6 +98,7 @@ const MenuAriaLabelRecord: Record<keyof MenuListType, string> = {
   Requests: "Requests menu",
   RightPanel: "RightPanel dialog",
   SideNav: "SideNav menu",
+  instanceSwitcher:"Instance Switcher Menu",
   Support: "Support menu",
   Switcher: "Switcher menu",
 };
@@ -147,6 +151,11 @@ export default function Header(props: Props) {
               : null}
           </HeaderNavigation>
           <HeaderGlobalBar>
+            <InstanceSwitcherMenu
+               enabled={true}
+              // enabled={Array.isArray(props.instanceSwitcherMenuItems) && props.instanceSwitcherMenuItems.length > 0}
+              menuItems={props.instanceSwitcherMenuItems}
+            />
             <RequestsMenu
               baseEnvUrl={baseEnvUrl}
               enabled={Boolean(props.requestSummary)}
@@ -180,6 +189,39 @@ export default function Header(props: Props) {
       </Theme>
       <NotificationsContainer enableMultiContainer containerId={`${prefix}--bmrg-header-notifications`} />
     </>
+  );
+}
+
+function InstanceSwitcherMenu(props: { enabled: Boolean; menuItems: Props["instanceSwitcherMenuItems"] }) {
+  const { isOpen, toggleActive, ref } = useHeaderMenu<HTMLDivElement>(MenuButtonId.InstanceSwitcher);
+
+  if (!props.enabled) {
+    return null;
+  }
+
+  return (
+    <div style={{ position: "relative" }} ref={ref}>
+      <button
+        aria-controls={MenuListId.instanceSwitcher}
+        aria-expanded={isOpen}
+        aria-haspopup="menu"
+        aria-label={MenuAriaLabelRecord.instanceSwitcher}
+        className={headerButtonClassNames}
+        data-testid="header-instanceSwitcher-link"
+        id={MenuButtonId.InstanceSwitcher}
+        onClick={toggleActive}
+      >
+        <Help size={20} />
+      </button>
+      {isOpen ? (
+        <HeaderMenu aria-labelledby={MenuButtonId.InstanceSwitcher} id={MenuListId.instanceSwitchernstanceSwitcher}>
+           <HeaderMenuItem key="Global" text="Global" type="link" kind="app" href="https://servicesessentials.ibm.com/launchpad" target="_self"/>,
+           <HeaderMenuItem key="Australlia" text="Australlia" type="link" kind="app" href="au.ica.ibm.com" target="_self"/>,
+           <HeaderMenuItem key="Canada" text="Australlia" type="link" kind="app" href="canada.ica.ibm.com" target="_self"/>,
+          {/* {props.menuItems} */}
+        </HeaderMenu>
+      ) : null}
+    </div>
   );
 }
 
