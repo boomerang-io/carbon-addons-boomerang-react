@@ -200,7 +200,7 @@ function InstanceSwitcherMenu(props: { enabled: Boolean; menuItems: Props["insta
   }
 
   return (
-    <div style={{ position: "relative" }} ref={ref}>
+    <div className={`${prefix}--bmrg-header-instance-switcher`} style={{ position: "relative" }} ref={ref} >
       <button
         aria-controls={MenuListId.instanceSwitcher}
         aria-expanded={isOpen}
