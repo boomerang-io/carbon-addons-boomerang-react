@@ -17,17 +17,18 @@ import {
   SideNav,
   SideNavItems,
   SideNavLink,
-  Theme,
-} from "@carbon/react";
+  Theme} from "@carbon/react";
 import {
   Close,
   Collaborate,
   Help,
+  Wikis,
   Notification,
   NotificationNew,
   Switcher,
   OpenPanelFilledRight,
   UserAvatar,
+  Checkmark
 } from "@carbon/react/icons";
 import HeaderAppSwitcher from "./HeaderAppSwitcher";
 import HeaderMenu from "./HeaderMenu";
@@ -45,6 +46,7 @@ type Props = {
   carbonTheme?: "white" | "g10" | "g90" | "g100";
   className?: string;
   enableAppSwitcher?: boolean;
+  instanceSwitcherEnabled?:boolean;
   enableNotifications?: boolean;
   enableNotificationsCount?: boolean;
   leftPanel?: (args: { close: () => void; isOpen: boolean; navLinks?: NavLink[] }) => React.ReactNode;
@@ -105,7 +107,7 @@ const MenuAriaLabelRecord: Record<keyof MenuListType, string> = {
 
 const headerButtonClassNames =
   "cds--btn--icon-only cds--header__action cds--btn cds--btn--primary cds--btn--icon-only cds--btn cds--btn--primary";
-
+const instanceCheckMarkStyle="instance-checkmark-style";
 export default function Header(props: Props) {
   const {
     productName,
@@ -152,8 +154,7 @@ export default function Header(props: Props) {
           </HeaderNavigation>
           <HeaderGlobalBar>
             <InstanceSwitcherMenu
-               enabled={true}
-              // enabled={Array.isArray(props.instanceSwitcherMenuItems) && props.instanceSwitcherMenuItems.length > 0}
+              enabled={Boolean(props.instanceSwitcherEnabled)}
               menuItems={props.instanceSwitcherMenuItems}
             />
             <RequestsMenu
@@ -193,6 +194,19 @@ export default function Header(props: Props) {
 }
 
 function InstanceSwitcherMenu(props: { enabled: Boolean; menuItems: Props["instanceSwitcherMenuItems"] }) {
+   // const currentURL= window.location.href;
+  const currentURL="https://canada.ica.ibm.com/ica/launchpad";
+ const isUKIInstance= currentURL.includes("uki");
+ const isREMEAInstance= currentURL.includes("remea");
+ const isCanadaInstance= currentURL.includes("canada");
+ const isUSAInstance= currentURL.includes("us");
+ const isAUInstance= currentURL.includes("au");
+ const isJapanInstance= currentURL.includes("japan");
+ const isGlobalInstance= currentURL.includes("serviceessentials");
+
+  console.log("currentURL",currentURL);
+  console.log("isCanadaInstance",isCanadaInstance);
+ 
   const { isOpen, toggleActive, ref } = useHeaderMenu<HTMLDivElement>(MenuButtonId.InstanceSwitcher);
 
   if (!props.enabled) {
@@ -211,13 +225,17 @@ function InstanceSwitcherMenu(props: { enabled: Boolean; menuItems: Props["insta
         id={MenuButtonId.InstanceSwitcher}
         onClick={toggleActive}
       >
-        <Help size={20} />
+        <Wikis size={20} />
       </button>
       {isOpen ? (
         <HeaderMenu aria-labelledby={MenuButtonId.InstanceSwitcher} id={MenuListId.instanceSwitcher}>
+           <HeaderMenuItem key="UKI" text="UKI" type="link" kind="app" href="http://uki.ica.ibm.com" target="_self">UKI</HeaderMenuItem>
+           <HeaderMenuItem key="R-EMEA" text="R-EMEA" type="link" kind="app" href="http://remea.ica.ibm.com" target="_self">R-EMEA</HeaderMenuItem>
+           <HeaderMenuItem key="Canada" text="Canada" type="link" kind="app" href="https://canada.ica.ibm.com" target="_self"><div>Canada</div>{isCanadaInstance ? (<span className={instanceCheckMarkStyle}><Checkmark /></span>) :"" }</HeaderMenuItem>
+           <HeaderMenuItem key="USA" text="USA" type="link" kind="app" href="http://us.ica.ibm.com" target="_self">USA</HeaderMenuItem>
+           <HeaderMenuItem key="Australia" text="Australlia" type="link" kind="app" href="https://au.ica.ibm.com" target="_self">Australia</HeaderMenuItem>
+           <HeaderMenuItem key="Japan" text="Global" type="link" kind="app" href="http://japan.ica.ibm.com" target="_self">Japan</HeaderMenuItem>
            <HeaderMenuItem key="Global" text="Global" type="link" kind="app" href="https://servicesessentials.ibm.com/launchpad" target="_self">Global</HeaderMenuItem>
-           <HeaderMenuItem key="Australlia" text="Australlia" type="link" kind="app" href="https://au.ica.ibm.com" target="_self">Australlia</HeaderMenuItem>
-           <HeaderMenuItem key="Canada" text="Australlia" type="link" kind="app" href="https://canada.ica.ibm.com" target="_self">Canada</HeaderMenuItem>
           {/* {props.menuItems} */}
         </HeaderMenu>
       ) : null}

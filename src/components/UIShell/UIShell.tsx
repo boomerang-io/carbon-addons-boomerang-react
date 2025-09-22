@@ -26,6 +26,7 @@ type Props = {
   baseEnvUrl?: string;
   config?: {
     features?: {
+      "instanceSwitcherEnabled"?:boolean;
       "appSwitcher.enabled"?: boolean;
       "consent.enabled"?: boolean;
       "docs.enabled"?: boolean;
@@ -132,6 +133,7 @@ function UIShell({
    * Check feature enablement via explicit feature flags
    */
   const isAppSwitcherEnabled = Boolean(features?.["appSwitcher.enabled"]);
+  const instanceSwitcherEnabled = Boolean(features?.["instanceSwitcherEnabled"]);
   const isFeedbackEnabled = Boolean(features?.["feedback.enabled"]);
   const isNotificationsEnabled = Boolean(features?.["notifications.enabled"]);
   const isNotificationsCountEnabled = Boolean(features?.["notificationsCount.enabled"]);
@@ -169,6 +171,7 @@ function UIShell({
         baseServicesUrl={platform.baseServicesUrl}
         carbonTheme={carbonTheme}
         enableAppSwitcher={isAppSwitcherEnabled}
+        instanceSwitcherEnabled={instanceSwitcherEnabled}
         enableNotifications={isNotificationsEnabled}
         enableNotificationsCount={isNotificationsCountEnabled}
         leftPanel={leftPanel}

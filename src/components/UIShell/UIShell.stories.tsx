@@ -149,6 +149,7 @@ export const UIShellDefault = (args) => {
       <UIShell
         config={{
           features: {
+            "instanceSwitcherEnabled":true,
             "appSwitcher.enabled": true,
             "notifications.enabled": true,
             "support.enabled": true,
@@ -226,6 +227,7 @@ export const UIShellDefaultWhite = (args) => {
         theme="white"
         config={{
           features: {
+            "instanceSwitcherEnabled":true,
             "appSwitcher.enabled": true,
             "notifications.enabled": true,
             "support.enabled": true,
@@ -299,6 +301,7 @@ export function UIShellKitchenSink(args) {
         productName="Flow"
         config={{
           features: {
+            "instanceSwitcherEnabled":true,
             "appSwitcher.enabled": true,
             "consent.enabled": true,
             "notifications.enabled": true,
@@ -463,6 +466,7 @@ export const UIShellUserNotConsented = (args) => {
     <UIShell
       config={{
         features: {
+          "instanceSwitcherEnabled":true,
           "notifications.enabled": true,
           "support.enabled": true,
         },
@@ -516,6 +520,7 @@ export const UIShellUserPendingDeletion = (args) => {
     <UIShell
       config={{
         features: {
+          "instanceSwitcherEnabled":true,
           "notifications.enabled": true,
           "support.enabled": true,
         },
