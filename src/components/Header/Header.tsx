@@ -231,8 +231,9 @@ function InstanceSwitcherMenu(props: { enabled: Boolean; menuItems: Props["insta
         <HeaderMenu aria-labelledby={MenuButtonId.InstanceSwitcher} id={MenuListId.instanceSwitcher}>
            <HeaderMenuItem key="UKI" text="UKI" type="link" kind="app" href="http://uki.ica.ibm.com" target="_self">UKI</HeaderMenuItem>
            <HeaderMenuItem key="R-EMEA" text="R-EMEA" type="link" kind="app" href="http://remea.ica.ibm.com" target="_self">R-EMEA</HeaderMenuItem>
+           <HeaderMenuItem key="Canada" text="Canada" type="link" kind="app" href="https://canada.ica.ibm.com" target="_self">
            <div><span>Canada</span>{isCanadaInstance ? <span className={instanceCheckMarkStyle}><Checkmark /> </span> :""}</div>
-           <HeaderMenuItem key="Canada" text="Canada" type="link" kind="app" href="https://canada.ica.ibm.com" target="_self"></HeaderMenuItem>
+           </HeaderMenuItem>
            <HeaderMenuItem key="USA" text="USA" type="link" kind="app" href="http://us.ica.ibm.com" target="_self">USA</HeaderMenuItem>
            <HeaderMenuItem key="Australia" text="Australlia" type="link" kind="app" href="https://au.ica.ibm.com" target="_self">Australia</HeaderMenuItem>
            <HeaderMenuItem key="Japan" text="Global" type="link" kind="app" href="http://japan.ica.ibm.com" target="_self">Japan</HeaderMenuItem>
