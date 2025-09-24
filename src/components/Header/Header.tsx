@@ -51,6 +51,7 @@ type Props = {
   enableNotificationsCount?: boolean;
   leftPanel?: (args: { close: () => void; isOpen: boolean; navLinks?: NavLink[] }) => React.ReactNode;
   navLinks?: NavLink[];
+  platform?:any;
   platformMessage?: string;
   prefixName?: string;
   productName: string;
@@ -116,6 +117,7 @@ export default function Header(props: Props) {
     carbonTheme = "g10",
     className,
     navLinks,
+    platform,
     prefixName = "",
     rightPanel,
     skipToContentProps,
@@ -123,6 +125,8 @@ export default function Header(props: Props) {
     triggerEvent,
     userTeams,
   } = props;
+console.log("platform",platform);
+console.log("enabled",platform?.instanceSwitcherEnabled);
 
   return (
     <>
@@ -153,10 +157,11 @@ export default function Header(props: Props) {
               : null}
           </HeaderNavigation>
           <HeaderGlobalBar>
+            {platform?.instanceSwitcherEnabled && 
             <InstanceSwitcherMenu
               enabled={Boolean(props.instanceSwitcherEnabled)}
-              menuItems={props.instanceSwitcherMenuItems}
-            />
+              menuItems={platform?.instances}
+            />}
             <RequestsMenu
               baseEnvUrl={baseEnvUrl}
               enabled={Boolean(props.requestSummary)}
@@ -193,20 +198,8 @@ export default function Header(props: Props) {
   );
 }
 
-function InstanceSwitcherMenu(props: { enabled: Boolean; menuItems: Props["instanceSwitcherMenuItems"] }) {
-   // const currentURL= window.location.href;
-  const currentURL="https://canada.ica.ibm.com/ica/launchpad";
- const isUKIInstance= currentURL.includes("uki");
- const isREMEAInstance= currentURL.includes("remea");
- const isCanadaInstance= currentURL.includes("canada");
- const isUSAInstance= currentURL.includes("us");
- const isAUInstance= currentURL.includes("au");
- const isJapanInstance= currentURL.includes("japan");
- const isGlobalInstance= currentURL.includes("serviceessentials");
-
-  console.log("currentURL",currentURL);
-  console.log("isCanadaInstance",isCanadaInstance);
- 
+function InstanceSwitcherMenu(props: { enabled: Boolean; menuItems: any}) {
+  const currentURL= window.location.href;
   const { isOpen, toggleActive, ref } = useHeaderMenu<HTMLDivElement>(MenuButtonId.InstanceSwitcher);
 
   if (!props.enabled) {
@@ -229,16 +222,23 @@ function InstanceSwitcherMenu(props: { enabled: Boolean; menuItems: Props["insta
       </button>
       {isOpen ? (
         <HeaderMenu aria-labelledby={MenuButtonId.InstanceSwitcher} id={MenuListId.instanceSwitcher}>
-           <HeaderMenuItem key="UKI" text="UKI" type="link" kind="app" href="http://uki.ica.ibm.com" target="_self">UKI</HeaderMenuItem>
-           <HeaderMenuItem key="R-EMEA" text="R-EMEA" type="link" kind="app" href="http://remea.ica.ibm.com" target="_self">R-EMEA</HeaderMenuItem>
-           <HeaderMenuItem key="Canada" text="Canada" type="link" kind="app" href="https://canada.ica.ibm.com" target="_self">
-           <div><span>Canada</span>{isCanadaInstance ? <span className={instanceCheckMarkStyle}><Checkmark /> </span> :""}</div>
-           </HeaderMenuItem>
-           <HeaderMenuItem key="USA" text="USA" type="link" kind="app" href="http://us.ica.ibm.com" target="_self">USA</HeaderMenuItem>
-           <HeaderMenuItem key="Australia" text="Australlia" type="link" kind="app" href="https://au.ica.ibm.com" target="_self">Australia</HeaderMenuItem>
-           <HeaderMenuItem key="Japan" text="Global" type="link" kind="app" href="http://japan.ica.ibm.com" target="_self">Japan</HeaderMenuItem>
-           <HeaderMenuItem key="Global" text="Global" type="link" kind="app" href="https://servicesessentials.ibm.com/launchpad" target="_self">Global</HeaderMenuItem>
-          {/* {props.menuItems} */}
+           {Array.isArray(props.menuItems)
+              ? props.menuItems.map((item) => (
+                  <HeaderMenuItem
+                    aria-label={`Instance Switcher for ${item.instanceName}`}
+                    data-testid="header-menu-instance-switcher"
+                    href={item.url}
+                    isCurrentPage={
+                      window?.location?.href && item.url ? window.location.href.startsWith(item.url) : false
+                    }
+                    key={item.instanceName}
+                    target="_self"
+                    rel="noopener noreferrer"
+                  >
+                 <div><span>{item.instanceName}</span>{item.instanceName && currentURL.includes((item.instanceName).toLowerCase()) ? <span className={instanceCheckMarkStyle}><Checkmark /> </span> :""}</div>
+                  </HeaderMenuItem>
+                ))
+              : null}
         </HeaderMenu>
       ) : null}
     </div>

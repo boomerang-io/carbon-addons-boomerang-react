@@ -58,6 +58,8 @@ type Props = {
       askICAEnabled?:boolean;
       signOutUrl?: string;
       version?: string;
+      instanceSwitcherEnabled?: boolean;
+      instances?:any[];
       assistantVersion?:string;
       agentsVersion?:string;
       scribeFlowVersion?:string;
@@ -176,6 +178,7 @@ function UIShell({
         enableNotificationsCount={isNotificationsCountEnabled}
         leftPanel={leftPanel}
         navLinks={navigation}
+        platform={platform}
         platformMessage={platformMessage}
         prefixName={names.platformName}
         productName={names.productName}

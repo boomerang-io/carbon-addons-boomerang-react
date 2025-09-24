@@ -179,6 +179,17 @@ export const UIShellDefault = (args) => {
             assistantVersion: "25.06.0",
             agentsVersion: "25.05.1",
             scribeFlowVersion: "25.05.0",
+            instanceSwitcherEnabled: true,
+            instances: [
+                {
+                    "instanceName": "Canada",
+                    "url": "https://canada.ica.ibm.com"
+                },
+                {
+                    "instanceName": "UKI",
+                    "url": "https://uki.ica.ibm.com"
+                }
+            ],
             signOutUrl: "#",
             communityUrl: "#",
             platformName: "IBM Consulting Advantage",
