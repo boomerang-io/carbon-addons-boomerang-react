@@ -125,7 +125,7 @@ export default function Header(props: Props) {
     triggerEvent,
     userTeams,
   } = props;
-
+console.log("platform",platform);
   return (
     <>
       <Theme theme={carbonTheme}>
