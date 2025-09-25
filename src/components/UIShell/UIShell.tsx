@@ -57,6 +57,8 @@ type Props = {
       askICAEnabled?:boolean;
       signOutUrl?: string;
       version?: string;
+      instanceSwitcherEnabled?: boolean;
+      instances?:any[];
       assistantVersion?:string;
       agentsVersion?:string;
       scribeFlowVersion?:string;
@@ -132,6 +134,7 @@ function UIShell({
    * Check feature enablement via explicit feature flags
    */
   const isAppSwitcherEnabled = Boolean(features?.["appSwitcher.enabled"]);
+  const instanceSwitcherEnabled = Boolean(platform?.["instanceSwitcherEnabled"]);
   const isFeedbackEnabled = Boolean(features?.["feedback.enabled"]);
   const isNotificationsEnabled = Boolean(features?.["notifications.enabled"]);
   const isNotificationsCountEnabled = Boolean(features?.["notificationsCount.enabled"]);
@@ -169,10 +172,12 @@ function UIShell({
         baseServicesUrl={platform.baseServicesUrl}
         carbonTheme={carbonTheme}
         enableAppSwitcher={isAppSwitcherEnabled}
+        instanceSwitcherEnabled={instanceSwitcherEnabled}
         enableNotifications={isNotificationsEnabled}
         enableNotificationsCount={isNotificationsCountEnabled}
         leftPanel={leftPanel}
         navLinks={navigation}
+        platform={platform}
         platformMessage={platformMessage}
         prefixName={names.platformName}
         productName={names.productName}

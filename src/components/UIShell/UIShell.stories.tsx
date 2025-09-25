@@ -149,6 +149,7 @@ export const UIShellDefault = (args) => {
       <UIShell
         config={{
           features: {
+            "instanceSwitcherEnabled":true,
             "appSwitcher.enabled": true,
             "notifications.enabled": true,
             "support.enabled": true,
@@ -178,6 +179,17 @@ export const UIShellDefault = (args) => {
             assistantVersion: "25.06.0",
             agentsVersion: "25.05.1",
             scribeFlowVersion: "25.05.0",
+            instanceSwitcherEnabled: true,
+            instances: [
+                {
+                    "instanceName": "Canada",
+                    "url": "https://canada.ica.ibm.com"
+                },
+                {
+                    "instanceName": "UKI",
+                    "url": "https://uki.ica.ibm.com"
+                }
+            ],
             signOutUrl: "#",
             communityUrl: "#",
             platformName: "IBM Consulting Advantage",
@@ -226,6 +238,7 @@ export const UIShellDefaultWhite = (args) => {
         theme="white"
         config={{
           features: {
+            "instanceSwitcherEnabled":true,
             "appSwitcher.enabled": true,
             "notifications.enabled": true,
             "support.enabled": true,
@@ -299,6 +312,7 @@ export function UIShellKitchenSink(args) {
         productName="Flow"
         config={{
           features: {
+            "instanceSwitcherEnabled":true,
             "appSwitcher.enabled": true,
             "consent.enabled": true,
             "notifications.enabled": true,
@@ -463,6 +477,7 @@ export const UIShellUserNotConsented = (args) => {
     <UIShell
       config={{
         features: {
+          "instanceSwitcherEnabled":true,
           "notifications.enabled": true,
           "support.enabled": true,
         },
@@ -516,6 +531,7 @@ export const UIShellUserPendingDeletion = (args) => {
     <UIShell
       config={{
         features: {
+          "instanceSwitcherEnabled":true,
           "notifications.enabled": true,
           "support.enabled": true,
         },

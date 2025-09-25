@@ -17,17 +17,18 @@ import {
   SideNav,
   SideNavItems,
   SideNavLink,
-  Theme,
-} from "@carbon/react";
+  Theme} from "@carbon/react";
 import {
   Close,
   Collaborate,
   Help,
+  Wikis,
   Notification,
   NotificationNew,
   Switcher,
   OpenPanelFilledRight,
   UserAvatar,
+  Checkmark
 } from "@carbon/react/icons";
 import HeaderAppSwitcher from "./HeaderAppSwitcher";
 import HeaderMenu from "./HeaderMenu";
@@ -45,10 +46,12 @@ type Props = {
   carbonTheme?: "white" | "g10" | "g90" | "g100";
   className?: string;
   enableAppSwitcher?: boolean;
+  instanceSwitcherEnabled?:boolean;
   enableNotifications?: boolean;
   enableNotificationsCount?: boolean;
   leftPanel?: (args: { close: () => void; isOpen: boolean; navLinks?: NavLink[] }) => React.ReactNode;
   navLinks?: NavLink[];
+  platform?:any;
   platformMessage?: string;
   prefixName?: string;
   productName: string;
@@ -60,12 +63,13 @@ type Props = {
   };
   skipToContentProps?: { href?: string; children?: string; className?: string };
   supportMenuItems?: React.ReactNode[];
+  instanceSwitcherMenuItems?:React.ReactNode[];
   templateMeteringEvent?: (props: any) => void;
   triggerEvent?: (props: any) => any;
   userTeams?: { data: any; isLoading: boolean; error: any };
 };
 
-type MenuType = "Notifcations" | "Profile" | "Requests" | "RightPanel" | "SideNav" | "Support" | "Switcher";
+type MenuType = "Notifcations" | "Profile" | "Requests" | "RightPanel" | "SideNav" | "Support" | "InstanceSwitcher" | "Switcher";
 
 const MenuListId = {
   Notifcations: "header-notifications-dialog",
@@ -74,6 +78,7 @@ const MenuListId = {
   RightPanel: "header-right-panel-dialog",
   SideNav: "header-sidenav-menu",
   Support: "header-support-menu",
+  instanceSwitcher:"header-instanceSwitcher-menu",
   Switcher: "header-switcher-menu",
 } as const;
 
@@ -86,6 +91,7 @@ const MenuButtonId: Record<MenuType, `${MenuListType[keyof MenuListType]}-button
   RightPanel: "header-right-panel-dialog-button",
   SideNav: "header-sidenav-menu-button",
   Support: "header-support-menu-button",
+  InstanceSwitcher: "header-instanceSwitcher-menu-button",
   Switcher: "header-switcher-menu-button",
 };
 
@@ -95,13 +101,14 @@ const MenuAriaLabelRecord: Record<keyof MenuListType, string> = {
   Requests: "Requests menu",
   RightPanel: "RightPanel dialog",
   SideNav: "SideNav menu",
+  instanceSwitcher:"Instance Switcher Menu",
   Support: "Support menu",
   Switcher: "Switcher menu",
 };
 
 const headerButtonClassNames =
   "cds--btn--icon-only cds--header__action cds--btn cds--btn--primary cds--btn--icon-only cds--btn cds--btn--primary";
-
+const instanceCheckMarkStyle="instance-checkmark-style";
 export default function Header(props: Props) {
   const {
     productName,
@@ -110,6 +117,7 @@ export default function Header(props: Props) {
     carbonTheme = "g10",
     className,
     navLinks,
+    platform,
     prefixName = "",
     rightPanel,
     skipToContentProps,
@@ -117,7 +125,6 @@ export default function Header(props: Props) {
     triggerEvent,
     userTeams,
   } = props;
-
   return (
     <>
       <Theme theme={carbonTheme}>
@@ -147,6 +154,11 @@ export default function Header(props: Props) {
               : null}
           </HeaderNavigation>
           <HeaderGlobalBar>
+            {props?.instanceSwitcherEnabled && 
+            <InstanceSwitcherMenu
+              enabled={Boolean(props.instanceSwitcherEnabled)}
+              menuItems={platform?.instances}
+            />}
             <RequestsMenu
               baseEnvUrl={baseEnvUrl}
               enabled={Boolean(props.requestSummary)}
@@ -180,6 +192,53 @@ export default function Header(props: Props) {
       </Theme>
       <NotificationsContainer enableMultiContainer containerId={`${prefix}--bmrg-header-notifications`} />
     </>
+  );
+}
+
+function InstanceSwitcherMenu(props: { enabled: Boolean; menuItems: any}) {
+  const currentURL= window.location.href;
+  const { isOpen, toggleActive, ref } = useHeaderMenu<HTMLDivElement>(MenuButtonId.InstanceSwitcher);
+
+  if (!props.enabled) {
+    return null;
+  }
+
+  return (
+    <div className={`${prefix}--bmrg-header-instance-switcher`} style={{ position: "relative" }} ref={ref} >
+      <button
+        aria-controls={MenuListId.instanceSwitcher}
+        aria-expanded={isOpen}
+        aria-haspopup="menu"
+        aria-label={MenuAriaLabelRecord.instanceSwitcher}
+        className={headerButtonClassNames}
+        data-testid="header-instanceSwitcher-link"
+        id={MenuButtonId.InstanceSwitcher}
+        onClick={toggleActive}
+      >
+        <Wikis size={20} />
+      </button>
+      {isOpen ? (
+        <HeaderMenu aria-labelledby={MenuButtonId.InstanceSwitcher} id={MenuListId.instanceSwitcher}>
+           {Array.isArray(props.menuItems)
+              ? props.menuItems.map((item) => (
+                  <HeaderMenuItem
+                    aria-label={`Instance Switcher for ${item.instanceName}`}
+                    data-testid="header-menu-instance-switcher"
+                    href={item.url}
+                    isCurrentPage={
+                      window?.location?.href && item.url ? window.location.href.startsWith(item.url) : false
+                    }
+                    key={item.instanceName}
+                    target="_self"
+                    rel="noopener noreferrer"
+                  >
+                 <div><span>{item.instanceName}</span>{item.instanceName && currentURL.includes((item.instanceName).toLowerCase()) ? <span className={instanceCheckMarkStyle}><Checkmark /> </span> :""}</div>
+                  </HeaderMenuItem>
+                ))
+              : null}
+        </HeaderMenu>
+      ) : null}
+    </div>
   );
 }
 

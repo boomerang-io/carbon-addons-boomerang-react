@@ -115,7 +115,15 @@ IBM Confidential
       align-items: center;
       font-size: 10px;
     }
-    
+  .#{$prefix}--bmrg-header-instance-switcher .cds--bmrg-header-drop-down a.cds--header__menu-item
+  {
+       padding: 10px 15px !important;
+       border-bottom: 1px solid lightgrey !important;
+  }   
+  .instance-checkmark-style
+  {
+    padding-left: 8rem;
+  }
     // span, p, a, div {
     //   color: shell.$bmrg-theme-primary;
     //   &:hover {
@@ -142,8 +150,8 @@ a.#{$prefix}--header__menu-item {
     color: shell.$bmrg-theme-primary !important;
     background-color: shell.$bmrg-theme-active !important;
   }
+  
 }
-
 a.#{$prefix}--side-nav__link {
   color: shell.$bmrg-theme-secondary;
   &--current {
