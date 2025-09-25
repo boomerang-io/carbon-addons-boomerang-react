@@ -155,7 +155,7 @@ console.log("platform",platform);
               : null}
           </HeaderNavigation>
           <HeaderGlobalBar>
-            {platform?.instanceSwitcherEnabled && 
+            {props?.instanceSwitcherEnabled && 
             <InstanceSwitcherMenu
               enabled={Boolean(props.instanceSwitcherEnabled)}
               menuItems={platform?.instances}
