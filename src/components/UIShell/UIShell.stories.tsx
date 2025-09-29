@@ -4,7 +4,6 @@ IBM Confidential
 © Copyright IBM Corp. 2022, 2024
 */
 
-
 /* eslint-disable no-script-url */
 import React from "react";
 import axios from "axios";
@@ -12,7 +11,16 @@ import MockAdapter from "axios-mock-adapter";
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import AdvantageSideNav from "../AdvantageSideNav";
 import HeaderMenuItem from "../Header/HeaderMenuItem";
-import { Button, Modal, SideNav, SideNavDivider, SideNavLink, SideNavItems, SideNavMenu, SideNavMenuItem } from "@carbon/react";
+import {
+  Button,
+  Modal,
+  SideNav,
+  SideNavDivider,
+  SideNavLink,
+  SideNavItems,
+  SideNavMenu,
+  SideNavMenuItem,
+} from "@carbon/react";
 import { Help, OpenPanelRight, ServiceDesk } from "@carbon/react/icons";
 import { PRIVACY_DATA } from "../PrivacyStatement/constants";
 import { PROFILE_SETTINGS_DATA } from "../ProfileSettings/constants";
@@ -46,13 +54,13 @@ const TEAMS_DATA = {
       services: [
         {
           name: "Test Service 1",
-          url: "test1.com"
+          url: "test1.com",
         },
         {
           name: "Test Service 2",
-          url: "test2.com"
-        }
-      ]
+          url: "test2.com",
+        },
+      ],
     },
     { id: "2", name: "Team 2", displayName: null, services: [] },
   ],
@@ -61,8 +69,8 @@ const TEAMS_DATA = {
       id: "111",
       name: "Personal Workspace",
       services: [],
-      displayName: "Personal Workspace"
-    }
+      displayName: "Personal Workspace",
+    },
   ],
   accountTeams: [
     {
@@ -94,27 +102,69 @@ const sidenavProps = {
   assistantLink: "http://test.ai.com",
   joinCreateTrigger: () => console.log("Trigger modal if exists"),
   teams: [
-    {id:"a11", name: "Team1", privateTeam: true, services: [{url: 1, name: "service1 with a really long name so we can test elipsis"}, {url:2, name:"service12"}, {url:3, name:"service13"}, {url: 4, name: "service2"}, {url:5, name:"service22"}, {url: 4, name: "service2"}, {url:5, name:"service22"}]},
-    {id:"platform-uishell--left-panel", name: "Team2", privateTeam: false, displayName:"Test Display Name", services: [{url: 4, name: "service2"}, {url:5, name:"service22"}]},
-    {id:"c33", name: "Team3 with a really long name so we can test elipsis", privateTeam: false, services: [{url: 6, name: "service3"}]},
-    {id:"d44", name: "Team4", privateTeam: true, services: []},
+    {
+      id: "a11",
+      name: "Team1",
+      privateTeam: true,
+      services: [
+        { url: 1, name: "service1 with a really long name so we can test elipsis" },
+        { url: 2, name: "service12" },
+        { url: 3, name: "service13" },
+        { url: 4, name: "service2" },
+        { url: 5, name: "service22" },
+        { url: 4, name: "service2" },
+        { url: 5, name: "service22" },
+      ],
+    },
+    {
+      id: "platform-uishell--left-panel",
+      name: "Team2",
+      privateTeam: false,
+      displayName: "Test Display Name",
+      services: [
+        { url: 4, name: "service2" },
+        { url: 5, name: "service22" },
+      ],
+    },
+    {
+      id: "c33",
+      name: "Team3 with a really long name so we can test elipsis",
+      privateTeam: false,
+      services: [{ url: 6, name: "service3" }],
+    },
+    { id: "d44", name: "Team4", privateTeam: true, services: [] },
   ],
   accounts: [
-    {id:"e1111", name: "Account1 with a really long name so we can test elipsis", projectTeams: [{id: 111, name: "team1", isTeamMember: true}, {id:211, name:"team12 with a really long name so we can test elipsis", isTeamMember: true}, {id:223, name:"team13 with a really long name so we can test elipsis", isTeamMember: true}]},
-    {id:"f2222", name: "Account2", projectTeams: [{id: 222, name: "team2", isTeamMember: true}, {id:221, name:"team22 with a really long name so we can test elipsis", isTeamMember: true}]},
-    {id:"g3333", name: "Account3", projectTeams: [{id: 333, name: "team3", isTeamMember: true}]},
-    {id:"h4444", name: "Account4 with a really long name so we can test elipsis", projectTeams: []},
+    {
+      id: "e1111",
+      name: "Account1 with a really long name so we can test elipsis",
+      projectTeams: [
+        { id: 111, name: "team1", isTeamMember: true },
+        { id: 211, name: "team12 with a really long name so we can test elipsis", isTeamMember: true },
+        { id: 223, name: "team13 with a really long name so we can test elipsis", isTeamMember: true },
+      ],
+    },
+    {
+      id: "f2222",
+      name: "Account2",
+      projectTeams: [
+        { id: 222, name: "team2", isTeamMember: true },
+        { id: 221, name: "team22 with a really long name so we can test elipsis", isTeamMember: true },
+      ],
+    },
+    { id: "g3333", name: "Account3", projectTeams: [{ id: 333, name: "team3", isTeamMember: true }] },
+    { id: "h4444", name: "Account4 with a really long name so we can test elipsis", projectTeams: [] },
   ],
-  personalTeams: [{id:"11111", name: "Team4", displayName: "Display Name"}],
-  baseEnvUrl:"https://baseurl.com",
+  personalTeams: [{ id: "11111", name: "Team4", displayName: "Display Name" }],
+  baseEnvUrl: "https://baseurl.com",
   app: "testapp",
   isOpen: false,
-  user: {type: "admin"},
+  user: { type: "admin" },
   // enableChatButton: false,
   tooltipMessage: "Test tooltip message for ui shell",
   showChatTooltip: true,
   isLaunchpad: true,
-}
+};
 
 const withDelay = (delay: number, response: any) => (): Promise<any> => {
   return new Promise(function (resolve) {
@@ -149,7 +199,7 @@ export const UIShellDefault = (args) => {
       <UIShell
         config={{
           features: {
-            "instanceSwitcherEnabled":true,
+            instanceSwitcherEnabled: true,
             "appSwitcher.enabled": true,
             "notifications.enabled": true,
             "support.enabled": true,
@@ -181,14 +231,18 @@ export const UIShellDefault = (args) => {
             scribeFlowVersion: "25.05.0",
             instanceSwitcherEnabled: true,
             instances: [
-                {
-                    "instanceName": "Canada",
-                    "url": "https://canada.ica.ibm.com"
-                },
-                {
-                    "instanceName": "UKI",
-                    "url": "https://uki.ica.ibm.com"
-                }
+              {
+                instanceName: "Australia",
+                url: "https://au.ica.ibm.com",
+              },
+              {
+                instanceName: "Storybook",
+                url: "http://localhost:6006",
+              },
+              {
+                instanceName: "UKI",
+                url: "https://uki.ica.ibm.com",
+              },
             ],
             signOutUrl: "#",
             communityUrl: "#",
@@ -208,7 +262,7 @@ export const UIShellDefault = (args) => {
             email: "rdeckard@ibm.com",
             hasConsented: true,
             status: "active",
-            showSupport:true,
+            showSupport: true,
             type: "partner",
             requestSummary: {
               requireUserAction: 0,
@@ -238,7 +292,7 @@ export const UIShellDefaultWhite = (args) => {
         theme="white"
         config={{
           features: {
-            "instanceSwitcherEnabled":true,
+            instanceSwitcherEnabled: true,
             "appSwitcher.enabled": true,
             "notifications.enabled": true,
             "support.enabled": true,
@@ -312,7 +366,7 @@ export function UIShellKitchenSink(args) {
         productName="Flow"
         config={{
           features: {
-            "instanceSwitcherEnabled":true,
+            instanceSwitcherEnabled: true,
             "appSwitcher.enabled": true,
             "consent.enabled": true,
             "notifications.enabled": true,
@@ -477,7 +531,7 @@ export const UIShellUserNotConsented = (args) => {
     <UIShell
       config={{
         features: {
-          "instanceSwitcherEnabled":true,
+          instanceSwitcherEnabled: true,
           "notifications.enabled": true,
           "support.enabled": true,
         },
@@ -531,7 +585,7 @@ export const UIShellUserPendingDeletion = (args) => {
     <UIShell
       config={{
         features: {
-          "instanceSwitcherEnabled":true,
+          instanceSwitcherEnabled: true,
           "notifications.enabled": true,
           "support.enabled": true,
         },
@@ -593,9 +647,12 @@ export const KitchenSink = (args) => {
 };
 
 export const LeftPanel = (args) => {
-  return <UIShellDefault {...args} leftPanel={({isOpen, navLinks}) => (
-    <AdvantageSideNav {...sidenavProps} isOpen={isOpen} navLinks={navLinks}/>
-  )}/>;
+  return (
+    <UIShellDefault
+      {...args}
+      leftPanel={({ isOpen, navLinks }) => <AdvantageSideNav {...sidenavProps} isOpen={isOpen} navLinks={navLinks} />}
+    />
+  );
 };
 
 export const UserNotConsented = (args) => {
@@ -609,4 +666,3 @@ export const UserPendingDeletion = (args) => {
 export const EmptyState = (args) => {
   return <UIShellEmptyState {...args} />;
 };
-
