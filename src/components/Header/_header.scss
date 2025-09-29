@@ -4,7 +4,6 @@ IBM Confidential
 © Copyright IBM Corp. 2022, 2024
 */
 
-
 @use "@carbon/react/scss/motion";
 @use "../../global/config" as *;
 @use "../../global/utils";
@@ -27,7 +26,8 @@ IBM Confidential
     .#{$prefix}--header__action {
       border-radius: 0 !important;
 
-      svg, path {
+      svg,
+      path {
         fill: shell.$bmrg-theme-primary !important;
       }
 
@@ -51,7 +51,7 @@ IBM Confidential
       background: shell.$bmrg-theme-background !important;
     }
 
-    .#{$prefix}--header__action[aria-expanded=true] {
+    .#{$prefix}--header__action[aria-expanded="true"] {
       background-color: shell.$bmrg-theme-active-icon;
     }
 
@@ -81,15 +81,16 @@ IBM Confidential
       border-top: shell.$bmrg-theme-menu-border;
 
       a.#{$prefix}--header__menu-item {
-        color: shell.$bmrg-theme-primary!important;
-        background-color: shell.$bmrg-theme-menu-background!important;
-        &:hover{
+        color: shell.$bmrg-theme-primary !important;
+        background-color: shell.$bmrg-theme-menu-background !important;
+        &:hover {
           color: shell.$bmrg-theme-primary !important;
           background-color: shell.$bmrg-theme-menu-hover !important;
         }
         span {
-          color: shell.$bmrg-theme-primary!important;
-          svg, path {
+          color: shell.$bmrg-theme-primary !important;
+          svg,
+          path {
             fill: shell.$bmrg-theme-primary !important;
           }
         }
@@ -115,15 +116,16 @@ IBM Confidential
       align-items: center;
       font-size: 10px;
     }
-  .#{$prefix}--bmrg-header-instance-switcher .cds--bmrg-header-drop-down a.cds--header__menu-item
-  {
-       padding: 10px 15px !important;
-       border-bottom: 1px solid lightgrey !important;
-  }   
-  .instance-checkmark-style
-  {
-    padding-left: 8rem;
-  }
+    .#{$prefix}--bmrg-header-instance-switcher .cds--bmrg-header-drop-down a.cds--header__menu-item {
+      padding: 10px 15px !important;
+      border-bottom: 1px solid lightgrey !important;
+    }
+
+    .instance-checkmark-style-container {
+      display: flex;
+      justify-content: space-between;
+      width: 13rem;
+    }
     // span, p, a, div {
     //   color: shell.$bmrg-theme-primary;
     //   &:hover {
@@ -135,27 +137,27 @@ IBM Confidential
 
 .#{$prefix}--side-nav__item {
   a.#{$prefix}--header__menu-item {
-    color: shell.$bmrg-theme-primary!important;
+    color: shell.$bmrg-theme-primary !important;
     // background-color: shell.$bmrg-theme-background;
-    &:hover{
+    &:hover {
       color: shell.$bmrg-theme-primary !important;
     }
   }
 }
 
 a.#{$prefix}--header__menu-item {
-  color: shell.$bmrg-theme-primary!important;
-  background-color: shell.$bmrg-theme-background!important;
-  &:hover{
+  color: shell.$bmrg-theme-primary !important;
+  background-color: shell.$bmrg-theme-background !important;
+  &:hover {
     color: shell.$bmrg-theme-primary !important;
     background-color: shell.$bmrg-theme-active !important;
   }
-  
 }
 a.#{$prefix}--side-nav__link {
   color: shell.$bmrg-theme-secondary;
   &--current {
-    span, p {
+    span,
+    p {
       color: shell.$bmrg-theme-primary;
     }
   }
@@ -163,9 +165,10 @@ a.#{$prefix}--side-nav__link {
     .#{$prefix}--side-nav__link-text {
       color: shell.$bmrg-theme-primary;
     }
-    span, p {
+    span,
+    p {
       color: shell.$bmrg-theme-primary;
-    }    
+    }
   }
   .#{$prefix}--side-nav__link-text {
     color: shell.$bmrg-theme-secondary;

@@ -17,7 +17,8 @@ import {
   SideNav,
   SideNavItems,
   SideNavLink,
-  Theme} from "@carbon/react";
+  Theme,
+} from "@carbon/react";
 import {
   Close,
   Collaborate,
@@ -28,7 +29,7 @@ import {
   Switcher,
   OpenPanelFilledRight,
   UserAvatar,
-  Checkmark
+  Checkmark,
 } from "@carbon/react/icons";
 import HeaderAppSwitcher from "./HeaderAppSwitcher";
 import HeaderMenu from "./HeaderMenu";
@@ -46,12 +47,12 @@ type Props = {
   carbonTheme?: "white" | "g10" | "g90" | "g100";
   className?: string;
   enableAppSwitcher?: boolean;
-  instanceSwitcherEnabled?:boolean;
+  instanceSwitcherEnabled?: boolean;
   enableNotifications?: boolean;
   enableNotificationsCount?: boolean;
   leftPanel?: (args: { close: () => void; isOpen: boolean; navLinks?: NavLink[] }) => React.ReactNode;
   navLinks?: NavLink[];
-  platform?:any;
+  platform?: any;
   platformMessage?: string;
   prefixName?: string;
   productName: string;
@@ -63,13 +64,21 @@ type Props = {
   };
   skipToContentProps?: { href?: string; children?: string; className?: string };
   supportMenuItems?: React.ReactNode[];
-  instanceSwitcherMenuItems?:React.ReactNode[];
+  instanceSwitcherMenuItems?: React.ReactNode[];
   templateMeteringEvent?: (props: any) => void;
   triggerEvent?: (props: any) => any;
   userTeams?: { data: any; isLoading: boolean; error: any };
 };
 
-type MenuType = "Notifcations" | "Profile" | "Requests" | "RightPanel" | "SideNav" | "Support" | "InstanceSwitcher" | "Switcher";
+type MenuType =
+  | "Notifcations"
+  | "Profile"
+  | "Requests"
+  | "RightPanel"
+  | "SideNav"
+  | "Support"
+  | "InstanceSwitcher"
+  | "Switcher";
 
 const MenuListId = {
   Notifcations: "header-notifications-dialog",
@@ -78,7 +87,7 @@ const MenuListId = {
   RightPanel: "header-right-panel-dialog",
   SideNav: "header-sidenav-menu",
   Support: "header-support-menu",
-  instanceSwitcher:"header-instanceSwitcher-menu",
+  instanceSwitcher: "header-instanceSwitcher-menu",
   Switcher: "header-switcher-menu",
 } as const;
 
@@ -101,14 +110,14 @@ const MenuAriaLabelRecord: Record<keyof MenuListType, string> = {
   Requests: "Requests menu",
   RightPanel: "RightPanel dialog",
   SideNav: "SideNav menu",
-  instanceSwitcher:"Instance Switcher Menu",
+  instanceSwitcher: "Instance Switcher Menu",
   Support: "Support menu",
   Switcher: "Switcher menu",
 };
 
 const headerButtonClassNames =
   "cds--btn--icon-only cds--header__action cds--btn cds--btn--primary cds--btn--icon-only cds--btn cds--btn--primary";
-const instanceCheckMarkStyle="instance-checkmark-style";
+const instanceCheckMarkContainerClass = "instance-checkmark-style-container";
 export default function Header(props: Props) {
   const {
     productName,
@@ -154,11 +163,9 @@ export default function Header(props: Props) {
               : null}
           </HeaderNavigation>
           <HeaderGlobalBar>
-            {props?.instanceSwitcherEnabled && 
-            <InstanceSwitcherMenu
-              enabled={Boolean(props.instanceSwitcherEnabled)}
-              menuItems={platform?.instances}
-            />}
+            {props?.instanceSwitcherEnabled && (
+              <InstanceSwitcherMenu enabled={Boolean(props.instanceSwitcherEnabled)} menuItems={platform?.instances} />
+            )}
             <RequestsMenu
               baseEnvUrl={baseEnvUrl}
               enabled={Boolean(props.requestSummary)}
@@ -195,8 +202,8 @@ export default function Header(props: Props) {
   );
 }
 
-function InstanceSwitcherMenu(props: { enabled: Boolean; menuItems: any}) {
-  const currentURL= window.location.href;
+function InstanceSwitcherMenu(props: { enabled: Boolean; menuItems: any }) {
+  const currentURL = window?.location?.href;
   const { isOpen, toggleActive, ref } = useHeaderMenu<HTMLDivElement>(MenuButtonId.InstanceSwitcher);
 
   if (!props.enabled) {
@@ -204,7 +211,7 @@ function InstanceSwitcherMenu(props: { enabled: Boolean; menuItems: any}) {
   }
 
   return (
-    <div className={`${prefix}--bmrg-header-instance-switcher`} style={{ position: "relative" }} ref={ref} >
+    <div className={`${prefix}--bmrg-header-instance-switcher`} style={{ position: "relative" }} ref={ref}>
       <button
         aria-controls={MenuListId.instanceSwitcher}
         aria-expanded={isOpen}
@@ -219,23 +226,29 @@ function InstanceSwitcherMenu(props: { enabled: Boolean; menuItems: any}) {
       </button>
       {isOpen ? (
         <HeaderMenu aria-labelledby={MenuButtonId.InstanceSwitcher} id={MenuListId.instanceSwitcher}>
-           {Array.isArray(props.menuItems)
-              ? props.menuItems.map((item) => (
-                  <HeaderMenuItem
-                    aria-label={`Instance Switcher for ${item.instanceName}`}
-                    data-testid="header-menu-instance-switcher"
-                    href={item.url}
-                    isCurrentPage={
-                      window?.location?.href && item.url ? window.location.href.startsWith(item.url) : false
-                    }
-                    key={item.instanceName}
-                    target="_self"
-                    rel="noopener noreferrer"
-                  >
-                 <div><span>{item.instanceName}</span>{item.instanceName && currentURL.includes((item.instanceName).toLowerCase() + ".") ? <span className={instanceCheckMarkStyle}><Checkmark /> </span> :""}</div>
-                  </HeaderMenuItem>
-                ))
-              : null}
+          {Array.isArray(props.menuItems)
+            ? props.menuItems.map((item) => (
+                <HeaderMenuItem
+                  aria-label={`Instance Switcher for ${item.instanceName}`}
+                  data-testid="header-menu-instance-switcher"
+                  href={item.url}
+                  key={item.instanceName}
+                  target="_self"
+                  rel="noopener noreferrer"
+                >
+                  <div className={instanceCheckMarkContainerClass}>
+                    <span>{item.instanceName}</span>
+                    {item.url && currentURL?.includes(item.url) ? (
+                      <span>
+                        <Checkmark />{" "}
+                      </span>
+                    ) : (
+                      ""
+                    )}
+                  </div>
+                </HeaderMenuItem>
+              ))
+            : null}
         </HeaderMenu>
       ) : null}
     </div>
