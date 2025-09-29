@@ -182,8 +182,8 @@ export const UIShellDefault = (args) => {
             instanceSwitcherEnabled: true,
             instances: [
                 {
-                    "instanceName": "Canada",
-                    "url": "https://canada.ica.ibm.com"
+                    "instanceName": "AU",
+                    "url": "https://au.ica.ibm.com"
                 },
                 {
                     "instanceName": "UKI",

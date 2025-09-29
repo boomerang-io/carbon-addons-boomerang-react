@@ -232,7 +232,7 @@ function InstanceSwitcherMenu(props: { enabled: Boolean; menuItems: any}) {
                     target="_self"
                     rel="noopener noreferrer"
                   >
-                 <div><span>{item.instanceName}</span>{item.instanceName && currentURL.includes((item.instanceName).toLowerCase()) ? <span className={instanceCheckMarkStyle}><Checkmark /> </span> :""}</div>
+                 <div><span>{item.instanceName}</span>{item.instanceName && currentURL.includes((item.instanceName).toLowerCase() + ".") ? <span className={instanceCheckMarkStyle}><Checkmark /> </span> :""}</div>
                   </HeaderMenuItem>
                 ))
               : null}
