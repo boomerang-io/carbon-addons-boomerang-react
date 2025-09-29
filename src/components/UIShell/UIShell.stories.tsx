@@ -182,7 +182,7 @@ export const UIShellDefault = (args) => {
             instanceSwitcherEnabled: true,
             instances: [
                 {
-                    "instanceName": "AU",
+                    "instanceName": "Australia",
                     "url": "https://au.ica.ibm.com"
                 },
                 {
