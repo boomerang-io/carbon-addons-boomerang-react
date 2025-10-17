@@ -140,7 +140,7 @@ function UIShell({
   /**
    * Check feature enablement via value truthiness
    */
-  const isAboutPlatformEnabled = Boolean(platform.name && platform.version);
+  const isAboutPlatformEnabled = Boolean(platform.name);
   const isCommunityEnabled = Boolean(platform?.communityUrl);
   const isSendMailEnabled = Boolean(platform.sendMail);
   const isSignOutEnabled = Boolean(platform?.signOutUrl);
