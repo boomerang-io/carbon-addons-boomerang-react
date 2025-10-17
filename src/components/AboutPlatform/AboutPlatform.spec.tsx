@@ -31,7 +31,7 @@ const queryClient = new QueryClient({
 
 describe("AboutPlatform", () => {
   const mock = new MockAdapter(axios);
-  mock.onGet(`${BASE_SERVICES_URL}/platform/version`).reply(200, PLATFORM_VERSION_DATA);
+  mock.onGet(`${BASE_SERVICES_URL}/users/platform/version`).reply(200, PLATFORM_VERSION_DATA);
   test("snapshot", () => {
     const { baseElement } = render(
       <QueryClientProvider client={queryClient}>
@@ -43,7 +43,7 @@ describe("AboutPlatform", () => {
 
   test("functional", () => {
     const mock = new MockAdapter(axios);
-    mock.onGet(`${BASE_SERVICES_URL}/platform/version`).reply(200, PLATFORM_VERSION_DATA);
+    mock.onGet(`${BASE_SERVICES_URL}/users/platform/version`).reply(200, PLATFORM_VERSION_DATA);
     // Render new instance in every test to prevent leaking state
     const { getByText } = render(
       <QueryClientProvider client={queryClient}>

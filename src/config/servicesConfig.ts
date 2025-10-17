@@ -13,7 +13,7 @@ export const queryClient = new QueryClient({
 
 export const serviceUrl = {
   getLaunchpadUser: ({ baseServicesUrl }: any) => `${baseServicesUrl}/launchpad/user`,
-  getPlatformVersion: ({ baseServicesUrl }: any) => `${baseServicesUrl}/platform/version`,
+  getPlatformVersion: ({ baseServicesUrl }: any) => `${baseServicesUrl}/users/platform/version`,
   getStatement: ({ baseServicesUrl }: any) => `${baseServicesUrl}/users/consents`,
   getTeamServices: ({ baseServicesUrl, teamId }: any) => `${baseServicesUrl}/launchpad/teams/${teamId}/services`,
   getUserTeamsServices: ({ baseServicesUrl }: any) => `${baseServicesUrl}/users/teams/services`,
