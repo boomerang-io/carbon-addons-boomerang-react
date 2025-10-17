@@ -97,6 +97,15 @@ const SERVICES_DATA = [
   { name: "Service 4 with a loooong long long long name", url: "https://google.com" },
 ];
 
+const PLATFORM_VERSION_DATA = {
+  version: "25.09.0",
+  assistantVersion: "25.09.0",
+  agentsVersion: "25.09.0",
+  scribeFlowVersion: "Cannot Retrieve Version Number. Try Again Later.",
+  platformVersion: "25.09",
+  platformVersionError: true,
+};
+
 const sidenavProps = {
   homeLink: "http://test.home.com",
   assistantLink: "http://test.ai.com",
@@ -188,6 +197,7 @@ function MainContent(props: { children?: React.ReactNode }) {
 export const UIShellDefault = (args) => {
   const mock = new MockAdapter(axios);
   mock.onGet(`${BASE_SERVICES_URL}/users/consents`).reply(200, PRIVACY_DATA);
+  mock.onGet(`${BASE_SERVICES_URL}/platform/version`).reply(200, PLATFORM_VERSION_DATA);
   mock.onGet(`${BASE_SERVICES_URL}/launchpad/user`).reply(200, PROFILE_SETTINGS_DATA);
   mock.onGet(`${BASE_SERVICES_URL}/users/teams/services`).reply(withDelay(1000, [200, TEAMS_DATA]));
   mock.onGet(`${BASE_SERVICES_URL}/launchpad/teams/1/services`).reply(withDelay(4000, [200, SERVICES_DATA]));
@@ -280,6 +290,7 @@ export const UIShellDefault = (args) => {
 export const UIShellDefaultWhite = (args) => {
   const mock = new MockAdapter(axios);
   mock.onGet(`${BASE_SERVICES_URL}/users/consents`).reply(200, PRIVACY_DATA);
+  mock.onGet(`${BASE_SERVICES_URL}/platform/version`).reply(200, PLATFORM_VERSION_DATA);
   mock.onGet(`${BASE_SERVICES_URL}/launchpad/user`).reply(200, PROFILE_SETTINGS_DATA);
   mock.onGet(`${BASE_SERVICES_URL}/users/teams`).reply(withDelay(1000, [200, TEAMS_DATA]));
   mock.onGet(`${BASE_SERVICES_URL}/launchpad/teams/1/services`).reply(withDelay(4000, [200, SERVICES_DATA]));
@@ -354,6 +365,7 @@ export function UIShellKitchenSink(args) {
   mock.onGet(`${BASE_SERVICES_URL}/launchpad/teams/1/services`).reply(withDelay(3000, [200, SERVICES_DATA]));
   mock.onGet(`${BASE_SERVICES_URL}/launchpad/teams/2/services`).reply(withDelay(3000, [200, []]));
   mock.onGet(`${BASE_SERVICES_URL}/users/consents`).reply(200, PRIVACY_DATA);
+  mock.onGet(`${BASE_SERVICES_URL}/platform/version`).reply(200, PLATFORM_VERSION_DATA);
   mock.onGet(`${BASE_SERVICES_URL}/users/teams`).reply(200, TEAMS_DATA);
   mock.onPatch(`${BASE_SERVICES_URL}/users/profile`).reply(200);
   mock.onPost(`${BASE_SERVICES_URL}/support/contact`).reply(200);

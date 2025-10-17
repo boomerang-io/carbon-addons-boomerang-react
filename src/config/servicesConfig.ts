@@ -4,7 +4,6 @@ IBM Confidential
 © Copyright IBM Corp. 2022, 2024
 */
 
-
 import axios from "axios";
 import { QueryClient } from "react-query";
 
@@ -14,6 +13,7 @@ export const queryClient = new QueryClient({
 
 export const serviceUrl = {
   getLaunchpadUser: ({ baseServicesUrl }: any) => `${baseServicesUrl}/launchpad/user`,
+  getPlatformVersion: ({ baseServicesUrl }: any) => `${baseServicesUrl}/platform/version`,
   getStatement: ({ baseServicesUrl }: any) => `${baseServicesUrl}/users/consents`,
   getTeamServices: ({ baseServicesUrl, teamId }: any) => `${baseServicesUrl}/launchpad/teams/${teamId}/services`,
   getUserTeamsServices: ({ baseServicesUrl }: any) => `${baseServicesUrl}/users/teams/services`,

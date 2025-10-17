@@ -4,7 +4,6 @@ IBM Confidential
 © Copyright IBM Corp. 2022, 2024
 */
 
-
 import React from "react";
 import { QueryClientProvider } from "react-query";
 import { Book, Forum, HelpDesk, Email, ChatLaunch, Cognitive } from "@carbon/react/icons";
@@ -54,16 +53,16 @@ type Props = {
       privateTeams?: boolean;
       sendIdeasUrl?: string;
       sendMail?: boolean;
-      askICAEnabled?:boolean;
+      askICAEnabled?: boolean;
       signOutUrl?: string;
       version?: string;
       instanceSwitcherEnabled?: boolean;
-      instances?:any[];
-      assistantVersion?:string;
-      agentsVersion?:string;
-      scribeFlowVersion?:string;
-      askICAUrl?:string;
-      supportUrl?:string;
+      instances?: any[];
+      assistantVersion?: string;
+      agentsVersion?: string;
+      scribeFlowVersion?: string;
+      askICAUrl?: string;
+      supportUrl?: string;
     };
     platformMessage?: any;
   };
@@ -83,16 +82,15 @@ type Props = {
   templateMeteringEvent?: (props: any) => void;
   triggerEvent?: (props: any) => any;
   user?: User;
-  userTeams?: { data: any, isLoading: boolean, error: any };
+  userTeams?: { data: any; isLoading: boolean; error: any };
   enableIcaMacs?: boolean;
   handleShowTutorial?: Function;
   tutorialScreenToShow?: string;
 };
 
-
 function UIShell({
   baseEnvUrl,
-  carbonTheme="g10",
+  carbonTheme = "g10",
   config,
   leftPanel,
   platformName,
@@ -129,7 +127,7 @@ function UIShell({
   const names = getProductAndPlatformNames({ productName, platformName, platform });
   const sendIdeasUrl = platform?.feedbackUrl || "https://ideas.ibm.com";
   const supportLink = platform?.supportUrl;
-  const partnerEmailId="ica-support@ibm.com";
+  const partnerEmailId = "ica-support@ibm.com";
   /**
    * Check feature enablement via explicit feature flags
    */
@@ -149,7 +147,7 @@ function UIShell({
   const isUserEnabled = Boolean(user?.id);
   const isPartnerUser = Boolean(user?.type === USER_PLATFORM_ROLE.Partner);
   const supportFlagCheck = user?.showSupport;
-  const askICAEnabled=Boolean(platform?.askICAEnabled);
+  const askICAEnabled = Boolean(platform?.askICAEnabled);
 
   /**
    * Checking for conditions when we explicitly set "renderPrivacyRedirect" to false (it defaults to true) OR
@@ -216,9 +214,9 @@ function UIShell({
           isSignOutEnabled && <SignOutMenuItem key="Sign Out" signOutLink={platform.signOutUrl as string} />,
         ].filter(Boolean)}
         supportMenuItems={[
-          isSupportEnabled && (
-            (supportFlagCheck|| isPartnerUser) ?
-            <SupportCenterMenuItem
+          isSupportEnabled &&
+            (supportFlagCheck || isPartnerUser ? (
+              <SupportCenterMenuItem
                 key="support-center"
                 platformName={platform?.platformName}
                 platformOrganization={platform?.platformOrganization}
@@ -227,16 +225,16 @@ function UIShell({
                 enablePartner={isPartnerUser}
                 baseServicesUrl={platform.baseServicesUrl}
               />
-             :
-             <HeaderMenuItem
-             key="support-center"
-             href={platform?.supportUrl as string}
-             icon={<HelpDesk />}
-             kind="external"
-             text="Support Center"
-             type="link"
-           />   
-          ),
+            ) : (
+              <HeaderMenuItem
+                key="support-center"
+                href={platform?.supportUrl as string}
+                icon={<HelpDesk />}
+                kind="external"
+                text="Support Center"
+                type="link"
+              />
+            )),
           isCommunityEnabled && (
             <HeaderMenuItem
               key="community"
@@ -255,49 +253,45 @@ function UIShell({
               sendIdeasUrl={sendIdeasUrl}
             />
           ),
-          ((!isPartnerUser && askICAEnabled)?(
-          <HeaderMenuItem
-          key="chat-launch"
-          href={platform?.askICAUrl as string}
-          icon={< ChatLaunch/>}
-          data-testid="askICA-chatlaunch"
-          kind="external"
-          text="AskICA"
-          type="link"
-        />):null),
-        (!isPartnerUser && enableIcaMacs &&
-        <HeaderMenuItem
-          key="launch-ideation-agent"
-          href={`${platform.baseEnvUrl}/launchpad/macs`}
-          icon={<Cognitive/>}
-          data-testid="launch-ideation-agent"
-          kind="app"
-          text="AI Proposal Feedback Tool"
-          type="link"
-        />
-        ),
-        isAboutPlatformEnabled && (
-          <AboutPlatformMenuItem
-            key="about-platform"
-            name={platform.name as string}
-            version={platform.version as string}
-            platformVersion={platform.platformVersion as string}
-            platformVersionError={platform.platformVersionError}
-            assistantVersion={platform.assistantVersion as string}
-            agentsVersion={platform.agentsVersion as string}
-            scribeFlowVersion={platform.scribeFlowVersion as string}
-          />
-        ),
-        (tutorialScreenToShow && handleShowTutorial &&
-          <HeaderMenuItem
-            key="launch-tutorial"
-            onClick={handleShowTutorial as () => void}
-            icon={<Book />}
-            data-testid="launch-tutorial"
-            text="Launch Tutorial"
-            type="button"
-          />
-        ),
+          !isPartnerUser && askICAEnabled ? (
+            <HeaderMenuItem
+              key="chat-launch"
+              href={platform?.askICAUrl as string}
+              icon={<ChatLaunch />}
+              data-testid="askICA-chatlaunch"
+              kind="external"
+              text="AskICA"
+              type="link"
+            />
+          ) : null,
+          !isPartnerUser && enableIcaMacs && (
+            <HeaderMenuItem
+              key="launch-ideation-agent"
+              href={`${platform.baseEnvUrl}/launchpad/macs`}
+              icon={<Cognitive />}
+              data-testid="launch-ideation-agent"
+              kind="app"
+              text="AI Proposal Feedback Tool"
+              type="link"
+            />
+          ),
+          isAboutPlatformEnabled && (
+            <AboutPlatformMenuItem
+              key="about-platform"
+              name={platform.name as string}
+              baseServicesUrl={platform.baseServicesUrl}
+            />
+          ),
+          tutorialScreenToShow && handleShowTutorial && (
+            <HeaderMenuItem
+              key="launch-tutorial"
+              onClick={handleShowTutorial as () => void}
+              icon={<Book />}
+              data-testid="launch-tutorial"
+              text="Launch Tutorial"
+              type="button"
+            />
+          ),
           ...supportMenuItems,
         ].filter(Boolean)}
         userTeams={userTeams}

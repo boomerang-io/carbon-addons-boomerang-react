@@ -29,7 +29,7 @@ exports[`AboutPlatform > snapshot 1`] = `
             <h2
               class="cds--modal-header__heading cds--type-beta"
             >
-              About the Platform
+              About IBM Consulting Advantage
             </h2>
             <div
               class="cds--modal-close-button"
@@ -83,76 +83,27 @@ exports[`AboutPlatform > snapshot 1`] = `
           </div>
           <div
             class="cds--layer-two cds--modal-content"
+            style="display: flex; align-items: center; justify-content: center;"
           >
-            <div>
-              <h5
-                class="cds--bmrg-aboutPlatform-component-header"
+            <div
+              aria-atomic="true"
+              aria-live="assertive"
+              class="cds--loading"
+            >
+              <svg
+                class="cds--loading__svg"
+                viewBox="0 0 100 100"
               >
-                Components
-              </h5>
-              <ul>
-                <li
-                  class="cds--bmrg-aboutPlatform-li-between-first"
-                >
-                  <span
-                    class="cds--bmrg-aboutPlatform-li"
-                  >
-                    IBM Consulting Advantage
-                  </span>
-                  <span
-                    class="cds--bmrg-aboutPlatform-li-version"
-                  >
-                    1.2.1
-                  </span>
-                </li>
-                <li
-                  class="cds--bmrg-aboutPlatform-li-between"
-                >
-                  <span
-                    class="cds--bmrg-aboutPlatform-li"
-                  >
-                    Assistants 
-                  </span>
-                  <span
-                    class="cds--bmrg-aboutPlatform-li-version"
-                  >
-                    1.0.0
-                  </span>
-                </li>
-                <li
-                  class="cds--bmrg-aboutPlatform-li-between"
-                >
-                  <span
-                    class="cds--bmrg-aboutPlatform-li"
-                  >
-                    Agents
-                  </span>
-                  <span
-                    class="cds--bmrg-aboutPlatform-li-version"
-                  >
-                    1.0.0
-                  </span>
-                </li>
-                <li
-                  class="cds--bmrg-aboutPlatform-li-between-last"
-                >
-                  <span
-                    class="cds--bmrg-aboutPlatform-li"
-                  >
-                    Scribeflow
-                  </span>
-                  <span
-                    class="cds--bmrg-aboutPlatform-li-version"
-                  >
-                    1.0.0
-                  </span>
-                </li>
-              </ul>
-              <h1
-                class="cds--bmrg-aboutPlatform-footer__header"
-              >
-                Copyright IBM Corp. 2022, 2025
-              </h1>
+                <title>
+                  loading
+                </title>
+                <circle
+                  class="cds--loading__stroke"
+                  cx="50%"
+                  cy="50%"
+                  r="44"
+                />
+              </svg>
             </div>
           </div>
         </div>

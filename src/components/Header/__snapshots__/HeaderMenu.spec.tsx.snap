@@ -118,6 +118,7 @@ exports[`Feedback > snapshot 1`] = `
       >
         <a
           class="cds--header__menu-item"
+          href="javascript:void(0)"
           tabindex="0"
         >
           <span
