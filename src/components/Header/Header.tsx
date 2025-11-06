@@ -18,6 +18,7 @@ import {
   SideNavItems,
   SideNavLink,
   Theme,
+  Dropdown
 } from "@carbon/react";
 import {
   Close,
@@ -78,6 +79,7 @@ type MenuType =
   | "SideNav"
   | "Support"
   | "InstanceSwitcher"
+  | "defaultTeamsFlowMenu"
   | "Switcher";
 
 const MenuListId = {
@@ -88,6 +90,7 @@ const MenuListId = {
   SideNav: "header-sidenav-menu",
   Support: "header-support-menu",
   instanceSwitcher: "header-instanceSwitcher-menu",
+  defaultTeamsFlowMenu:"header-defaultTeamsFlowMenu-menu",
   Switcher: "header-switcher-menu",
 } as const;
 
@@ -101,6 +104,7 @@ const MenuButtonId: Record<MenuType, `${MenuListType[keyof MenuListType]}-button
   SideNav: "header-sidenav-menu-button",
   Support: "header-support-menu-button",
   InstanceSwitcher: "header-instanceSwitcher-menu-button",
+  defaultTeamsFlowMenu:"header-defaultTeamsFlowMenu-menu-button",
   Switcher: "header-switcher-menu-button",
 };
 
@@ -111,6 +115,7 @@ const MenuAriaLabelRecord: Record<keyof MenuListType, string> = {
   RightPanel: "RightPanel dialog",
   SideNav: "SideNav menu",
   instanceSwitcher: "Instance Switcher Menu",
+  defaultTeamsFlowMenu:"Default Teams Flow Menu",
   Support: "Support menu",
   Switcher: "Switcher menu",
 };
@@ -134,6 +139,34 @@ export default function Header(props: Props) {
     triggerEvent,
     userTeams,
   } = props;
+
+// const hasUserTeams = Boolean(userTeams);
+// console.log("hasUserTeams",hasUserTeams);
+// let accountTeams, standardTeams, personalTeam : any = [];
+// if (userTeams?.data) {
+//     if(hasUserTeams) {
+//       accountTeams = userTeams?.data?.accountTeams;
+//       standardTeams = userTeams?.data?.standardTeams;
+//       personalTeam = userTeams?.data?.personalTeam;
+//     }
+//   }
+//   console.log("personalTeam",personalTeam);
+//   console.log("accountTeams",accountTeams);
+//   console.log("standardTeams",standardTeams);
+//   const combinedArray = [...standardTeams,...accountTeams,...personalTeam];
+//   console.log("combinedArray",combinedArray);
+
+ const handleTeamClick = ({ team, type }: { team: any; type?: string }) => {
+    triggerEvent &&
+      triggerEvent({
+        action: "Clicked on SideNav Team link",
+        category: "Sidenav",
+        destinationPath: `${baseEnvUrl}/launchpad/teams/${team.id}`,
+        teamId: team.id,
+        teamType: type,
+      });
+  };
+
   return (
     <>
       <Theme theme={carbonTheme}>
@@ -163,6 +196,7 @@ export default function Header(props: Props) {
               : null}
           </HeaderNavigation>
           <HeaderGlobalBar>
+            <DefaultTeamsFlowMenu menuItems={userTeams?.data?.standardTeams}/>
             {props?.instanceSwitcherEnabled && (
               <InstanceSwitcherMenu enabled={Boolean(props.instanceSwitcherEnabled)} menuItems={platform?.instances} />
             )}
@@ -251,6 +285,62 @@ function InstanceSwitcherMenu(props: { enabled: Boolean; menuItems: any }) {
             : null}
         </HeaderMenu>
       ) : null}
+    </div>
+  );
+}
+
+function DefaultTeamsFlowMenu(props: { menuItems:any }) {
+  const currentURL = window?.location?.href;
+  const { isOpen, toggleActive, ref } = useHeaderMenu<HTMLDivElement>(MenuButtonId.defaultTeamsFlowMenu);
+
+  // if (!props.enabled) {
+  //   return null;
+  // }
+
+
+  return (
+    <div className={`${prefix}--bmrg-header-instance-switcher`} style={{ position: "relative" }} ref={ref}>
+      
+     <Dropdown
+        style={{ width: "10rem", marginBottom: "1rem" }}
+        label="Test"
+        title="Dropdown"
+        items={props.menuItems}
+        itemToString={(item: any) => (item ? item.name : "d")}/>
+      
+             {/* <a href={`/BMRG_APP_ROOT_CONTEXT/launchpad/teams/${item.id}`}>
+                   {item ? item.name : "d"}
+             </a>
+         }
+         }
+        /> */}
+      {/* {isOpen ? ( */}
+        {/* <HeaderMenu aria-labelledby={MenuButtonId.defaultTeamsFlowMenu} id={MenuListId.defaultTeamsFlowMenu}>
+          {Array.isArray(props.menuItems)
+            ? props.menuItems.map((item) => (
+                <HeaderMenuItem
+                  aria-label={`Default Teams for ${item.name}`}
+                  data-testid="header-menu-default-teams-flow"
+                  href={item.url}
+                  key={item.name}
+                  target="_self"
+                  rel="noopener noreferrer"
+                >
+                  <div className={instanceCheckMarkContainerClass}>
+                    <span>{item.name}</span>
+                    {item.url && currentURL?.includes(item.url) ? (
+                      <span>
+                        <Checkmark />{" "}
+                      </span>
+                    ) : (
+                      ""
+                    )}
+                  </div>
+                </HeaderMenuItem>
+              ))
+            : null}
+        </HeaderMenu> */}
+      {/* ) : null} */}
     </div>
   );
 }
