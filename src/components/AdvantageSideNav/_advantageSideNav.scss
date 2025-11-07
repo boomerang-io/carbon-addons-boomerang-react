@@ -256,3 +256,6 @@ IBM Confidential
     color: shell.$bmrg-theme-primary;
   } 
 }
+.#{$prefix}--teamSelectModalBody {
+  overflow: visible;
+}

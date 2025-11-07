@@ -6,7 +6,7 @@ IBM Confidential
 
 import React from "react";
 import cx from "classnames";
-import { SideNav, SideNavDivider, SideNavItems, SideNavLink, SideNavMenu, SkeletonPlaceholder } from "@carbon/react";
+import { SideNav, SideNavDivider, SideNavItems, SideNavLink, SideNavMenu, SkeletonPlaceholder, ComposedModal, ModalHeader,ModalBody, ModalFooter, Dropdown, Button } from "@carbon/react";
 import TooltipHover from "../TooltipHover";
 import {
   AddAlt,
@@ -26,6 +26,8 @@ import { NavLink, SideNavTeam, SideNavAccount, User } from "types";
 type Props = {
   accounts?: Array<SideNavAccount>;
   app?: string;
+  appLink: any,
+  regionalTeam?: any;
   assistantLink?: string;
   baseEnvUrl?: string;
   className?: string;
@@ -55,6 +57,8 @@ type Props = {
 export function AdvantageSideNav(props: Props) {
   const {
     app,
+    appLink,
+    regionalTeam,
     enableChatButton = true,
     showChatButton = true,
     showSelectTeamPurpose = false,
@@ -84,6 +88,9 @@ export function AdvantageSideNav(props: Props) {
   } = props;
   const [activeSubmenu, setActiveSubmenu] = React.useState("");
   const [activeMenu, setActiveMenu] = React.useState(false);
+  const [teamList, setTeamList] = React.useState<{ id: string; name: string }[] | null>(null);
+  const [regionalModalIsOpen, setRegionalModalIsOpen] = React.useState(false);
+  const [selectedTeam, setSelectedTeam] = React.useState<{ id: string; name: string } | null>(null);
   const isMenuOpen = isOpen || activeMenu;
   const windowLocation = window.location;
   const isPartnerUser = user?.type === USER_PLATFORM_ROLE.Partner;
@@ -107,8 +114,21 @@ export function AdvantageSideNav(props: Props) {
         destinationPath: homeLink,
       });
   };
+  const handleRegionalNewStartNewChat = (team: { id: string; name: string }) => {
+    const assistantLink = `${appLink?.newChatRedirect()}?teamName=${team.name}&teamId=${team.id}`;
+    window.open(assistantLink, "_self", "noopener,noreferrer");
+  };
 
   const handleAssistantClick = () => {
+    if (regionalTeam?.length > 1) {
+      setRegionalModalIsOpen(true);
+      setTeamList(
+        regionalTeam?.map((team: { id: any; name: any; }) => ({
+          id: team.id,
+          name: team.name,
+        }))
+      );
+    }
     triggerEvent &&
       triggerEvent({
         action: "Clicked on SideNav Assistant link",
@@ -184,12 +204,13 @@ export function AdvantageSideNav(props: Props) {
     accountsRef.current = Array(accounts?.length).fill().map((_, i) => accountsRef.current[i] || React.createRef());
   }
 
-  const assistantSideNavLink = assistantLink && (
+  const assistantSideNavLink = (
+    // assistantLink && 
     <SideNavLink
       data-testid="sidenav-assistant-link"
       className={!enableChatButton ? `${prefix}--bmrg-advantage-sidenav__inactive-link` : ""}
       disabled={Boolean(!enableChatButton)}
-      isActive={windowLocation.href.includes(assistantLink)}
+      isActive={assistantLink? windowLocation.href.includes(assistantLink):''}
       renderIcon={ChatBot}
       href={enableChatButton && assistantLink}
       onClick={enableChatButton ? handleAssistantClick : (e: any) => e.preventDefault()}
@@ -248,7 +269,7 @@ export function AdvantageSideNav(props: Props) {
               </SideNavLink>
             ) : null}
             {!isPartnerUser &&
-              assistantLink &&
+            // assistantLink &&
               showChatButton &&
               (showChatTooltip ? (
                 <TooltipHover
@@ -261,6 +282,48 @@ export function AdvantageSideNav(props: Props) {
               ) : (
                 assistantSideNavLink
               ))}
+            {regionalModalIsOpen && <ComposedModal
+              className={`${prefix}--teamSelectionModalContainer`}
+              open={regionalModalIsOpen}
+              onClose={() => setRegionalModalIsOpen(false)}
+              onKeyDown={(e: any) => e.stopPropagation()}
+              data-testid="select-team-chat-modal"
+            >
+              <ModalHeader title="Select Team to Start a New Chat" closeModal={() => setRegionalModalIsOpen(false)} />
+              <ModalBody className={`${prefix}--teamSelectModalBody`}>
+                <Dropdown
+                  items={teamList}
+                  disabled={!teamList?.length}
+                  id="select-team-chat-modal-dropdown"
+                  selectedItem={selectedTeam}
+                  size="md"
+                  data-testid="select-team-chat-modal-dropdown"
+                  itemToString={(item: any) => item?.name}
+                  label="Choose a team"
+                  onChange={({ selectedItem }: any) => setSelectedTeam(selectedItem)}
+                />
+              </ModalBody>
+              <ModalFooter>
+                <Button kind="secondary" data-testid="select-team-chat-modal-cancel-button" onClick={() => setRegionalModalIsOpen(false)}>
+                  Cancel
+                </Button>
+                <Button
+                  data-modal-primary-focus
+                  kind="primary"
+                  disabled={!selectedTeam}
+                  data-testid="select-team-chat-modal-continue-button"
+                  onClick={() => {
+                    if (selectedTeam) {
+                      handleRegionalNewStartNewChat(selectedTeam);
+                      setRegionalModalIsOpen(false)
+                      // closeModal();
+                    }
+                  }}
+                >
+                  Continue
+                </Button>
+              </ModalFooter>
+            </ComposedModal>}
             {!isPartnerUser && joinCreateTrigger ? (
               <SideNavLink
                 data-testid="sidenav-create-join-trigger"
@@ -292,7 +355,7 @@ export function AdvantageSideNav(props: Props) {
           ) : null}
           {((!Boolean(standardTeamsList?.length) && !Boolean(accounts?.length) && !userTeamsLoading) ||
             userTeamsError) &&
-          isMenuOpen ? (
+            isMenuOpen ? (
             <>
               <p className={`${prefix}--bmrg-advantage-sidenav-no-teams__text`}>{noTeamsMessage}</p>
             </>
@@ -314,77 +377,77 @@ export function AdvantageSideNav(props: Props) {
               >
                 {isMenuOpen
                   ? standardTeamsList?.map((team, i) => {
-                      const topPosition = document?.getElementById(team.id)?.getBoundingClientRect()?.top ?? 0;
-                      const teamDisplayName = Boolean(team.displayName) ? team.displayName : team.name;
-                      return (
-                        <>
-                          <li className={`${prefix}--bmrg-advantage-sidenav-team-item`}>
-                            <SideNavLink
-                              title={teamDisplayName}
-                              name={team.name}
-                              data-testid="sidenav-team-link"
-                              id={team.id}
-                              isActive={windowLocation.href.includes(team.id)}
-                              ref={teamsRef.current[i]}
-                              className={`${prefix}--bmrg-advantage-sidenav-team`}
-                              renderIcon={team?.isPersonal ? UserIcon : team.privateTeam ? Locked : Unlocked}
-                              href={`${baseEnvUrl}/${app}/teams/${team.id}`}
-                              onMouseEnter={() => setActiveSubmenu(team.id)}
-                              onFocus={() => setActiveSubmenu(team.id)}
-                              onClick={(e: any) => {
-                                if (isLaunchpad) {
-                                  handleLaunchpadLink(e);
-                                  history.push(`/teams/${team.id}`);
-                                }
-                                handleTeamClick({ team, type: team.isPersonal ? "personal" : "standard" });
-                              }}
+                    const topPosition = document?.getElementById(team.id)?.getBoundingClientRect()?.top ?? 0;
+                    const teamDisplayName = Boolean(team.displayName) ? team.displayName : team.name;
+                    return (
+                      <>
+                        <li className={`${prefix}--bmrg-advantage-sidenav-team-item`}>
+                          <SideNavLink
+                            title={teamDisplayName}
+                            name={team.name}
+                            data-testid="sidenav-team-link"
+                            id={team.id}
+                            isActive={windowLocation.href.includes(team.id)}
+                            ref={teamsRef.current[i]}
+                            className={`${prefix}--bmrg-advantage-sidenav-team`}
+                            renderIcon={team?.isPersonal ? UserIcon : team.privateTeam ? Locked : Unlocked}
+                            href={`${baseEnvUrl}/${app}/teams/${team.id}`}
+                            onMouseEnter={() => setActiveSubmenu(team.id)}
+                            onFocus={() => setActiveSubmenu(team.id)}
+                            onClick={(e: any) => {
+                              if (isLaunchpad) {
+                                handleLaunchpadLink(e);
+                                history.push(`/teams/${team.id}`);
+                              }
+                              handleTeamClick({ team, type: team.isPersonal ? "personal" : "standard" });
+                            }}
+                          >
+                            <p className={`${prefix}--bmrg-advantage-sidenav-teams__title`}>{teamDisplayName}</p>
+                            {Boolean(team?.services?.length) ? <ChevronRight /> : null}
+                          </SideNavLink>
+                          {Boolean(team?.services?.length) && team.id === activeSubmenu ? (
+                            <ul
+                              className={cx(`${prefix}--bmrg-advantage-sidenav-submenu`, {
+                                "--open": team.id === activeSubmenu,
+                              })}
+                              style={{ top: `${window.scrollY + topPosition}px` }}
                             >
-                              <p className={`${prefix}--bmrg-advantage-sidenav-teams__title`}>{teamDisplayName}</p>
-                              {Boolean(team?.services?.length) ? <ChevronRight /> : null}
-                            </SideNavLink>
-                            {Boolean(team?.services?.length) && team.id === activeSubmenu ? (
-                              <ul
-                                className={cx(`${prefix}--bmrg-advantage-sidenav-submenu`, {
-                                  "--open": team.id === activeSubmenu,
-                                })}
-                                style={{ top: `${window.scrollY + topPosition}px` }}
-                              >
-                                <li className={`${prefix}--bmrg-advantage-sidenav-submenu-wrapper`}>
-                                  <ul className={`${prefix}--bmrg-advantage-sidenav-services-submenu`}>
+                              <li className={`${prefix}--bmrg-advantage-sidenav-submenu-wrapper`}>
+                                <ul className={`${prefix}--bmrg-advantage-sidenav-services-submenu`}>
+                                  <SideNavLink
+                                    title="Team Page"
+                                    className={`${prefix}--bmrg-advantage-sidenav-submenu-link`}
+                                    data-testid="sidenav-team-submenu-link"
+                                    href={`${baseEnvUrl}/${app}/teams/${team.id}`}
+                                    onClick={(e: any) => {
+                                      if (isLaunchpad) {
+                                        handleLaunchpadLink(e);
+                                        history.push(`/teams/${team.id}`);
+                                      }
+                                      handleTeamClick({ team, type: team.isPersonal ? "personal" : "standard" });
+                                    }}
+                                  >
+                                    Team Page
+                                  </SideNavLink>
+                                  {team.services?.map((service) => (
                                     <SideNavLink
-                                      title="Team Page"
+                                      title={service.name}
                                       className={`${prefix}--bmrg-advantage-sidenav-submenu-link`}
-                                      data-testid="sidenav-team-submenu-link"
-                                      href={`${baseEnvUrl}/${app}/teams/${team.id}`}
-                                      onClick={(e: any) => {
-                                        if (isLaunchpad) {
-                                          handleLaunchpadLink(e);
-                                          history.push(`/teams/${team.id}`);
-                                        }
-                                        handleTeamClick({ team, type: team.isPersonal ? "personal" : "standard" });
-                                      }}
+                                      data-testid="sidenav-service-submenu-link"
+                                      href={service.url}
+                                      onClick={() => handleServiceClick({ service, team })}
                                     >
-                                      Team Page
+                                      {service.name}
                                     </SideNavLink>
-                                    {team.services?.map((service) => (
-                                      <SideNavLink
-                                        title={service.name}
-                                        className={`${prefix}--bmrg-advantage-sidenav-submenu-link`}
-                                        data-testid="sidenav-service-submenu-link"
-                                        href={service.url}
-                                        onClick={() => handleServiceClick({ service, team })}
-                                      >
-                                        {service.name}
-                                      </SideNavLink>
-                                    )) ?? null}
-                                  </ul>
-                                </li>
-                              </ul>
-                            ) : null}
-                          </li>
-                        </>
-                      );
-                    })
+                                  )) ?? null}
+                                </ul>
+                              </li>
+                            </ul>
+                          ) : null}
+                        </li>
+                      </>
+                    );
+                  })
                   : null}
               </SideNavMenu>
             </>
@@ -411,73 +474,73 @@ export function AdvantageSideNav(props: Props) {
               >
                 {isMenuOpen
                   ? accounts?.map((team, i) => {
-                      const topPosition = document?.getElementById(team.id)?.getBoundingClientRect()?.top ?? 0;
-                      const teamDisplayName = Boolean(team.displayName) ? team.displayName : team.name;
-                      const projectIds = team?.projectTeams?.map((project) => project.id) ?? [];
-                      const isAccountActive =
-                        windowLocation.href.includes(team.id) ||
-                        projectIds.some((id) => windowLocation.href.includes(id));
+                    const topPosition = document?.getElementById(team.id)?.getBoundingClientRect()?.top ?? 0;
+                    const teamDisplayName = Boolean(team.displayName) ? team.displayName : team.name;
+                    const projectIds = team?.projectTeams?.map((project) => project.id) ?? [];
+                    const isAccountActive =
+                      windowLocation.href.includes(team.id) ||
+                      projectIds.some((id) => windowLocation.href.includes(id));
 
-                      return (
-                        <>
-                          <li className={`${prefix}--bmrg-advantage-sidenav-team-item`}>
-                            <SideNavLink
-                              title={teamDisplayName}
-                              id={team.id}
-                              isActive={isAccountActive}
-                              ref={accountsRef.current[i]}
-                              className={`${prefix}--bmrg-advantage-sidenav-account`}
-                              href={`${baseEnvUrl}/${app}/teams/${team.id}`}
-                              onMouseEnter={() => setActiveSubmenu(team.id)}
-                              onFocus={() => setActiveSubmenu(team.id)}
-                              onClick={(e: any) => {
-                                if (isLaunchpad) {
-                                  handleLaunchpadLink(e);
-                                  history.push(`/teams/${team.id}`);
-                                }
-                                handleTeamClick({ team, type: "account" });
-                              }}
+                    return (
+                      <>
+                        <li className={`${prefix}--bmrg-advantage-sidenav-team-item`}>
+                          <SideNavLink
+                            title={teamDisplayName}
+                            id={team.id}
+                            isActive={isAccountActive}
+                            ref={accountsRef.current[i]}
+                            className={`${prefix}--bmrg-advantage-sidenav-account`}
+                            href={`${baseEnvUrl}/${app}/teams/${team.id}`}
+                            onMouseEnter={() => setActiveSubmenu(team.id)}
+                            onFocus={() => setActiveSubmenu(team.id)}
+                            onClick={(e: any) => {
+                              if (isLaunchpad) {
+                                handleLaunchpadLink(e);
+                                history.push(`/teams/${team.id}`);
+                              }
+                              handleTeamClick({ team, type: "account" });
+                            }}
+                          >
+                            <p className={`${prefix}--bmrg-advantage-sidenav-teams__title`}>{teamDisplayName}</p>
+                            {Boolean(team?.projectTeams?.length) ? <ChevronRight /> : null}
+                          </SideNavLink>
+                          {Boolean(team?.projectTeams?.length) && team.id === activeSubmenu ? (
+                            <ul
+                              className={cx(`${prefix}--bmrg-advantage-sidenav-submenu`, {
+                                "--open": team.id === activeSubmenu,
+                              })}
+                              style={{ top: `${window.scrollY + topPosition}px` }}
                             >
-                              <p className={`${prefix}--bmrg-advantage-sidenav-teams__title`}>{teamDisplayName}</p>
-                              {Boolean(team?.projectTeams?.length) ? <ChevronRight /> : null}
-                            </SideNavLink>
-                            {Boolean(team?.projectTeams?.length) && team.id === activeSubmenu ? (
-                              <ul
-                                className={cx(`${prefix}--bmrg-advantage-sidenav-submenu`, {
-                                  "--open": team.id === activeSubmenu,
-                                })}
-                                style={{ top: `${window.scrollY + topPosition}px` }}
-                              >
-                                <li className={`${prefix}--bmrg-advantage-sidenav-submenu-wrapper`}>
-                                  <ul className={`${prefix}--bmrg-advantage-sidenav-services-submenu`}>
-                                    {/* <SideNavLink className={`${prefix}--bmrg-advantage-sidenav-submenu-link`} href={`${baseEnvUrl}/${app}/teams/${team.id}`}>
+                              <li className={`${prefix}--bmrg-advantage-sidenav-submenu-wrapper`}>
+                                <ul className={`${prefix}--bmrg-advantage-sidenav-services-submenu`}>
+                                  {/* <SideNavLink className={`${prefix}--bmrg-advantage-sidenav-submenu-link`} href={`${baseEnvUrl}/${app}/teams/${team.id}`}>
                                   Account Page
                                 </SideNavLink> */}
-                                    {team.projectTeams?.map((accTeam) => (
-                                      <SideNavLink
-                                        title={accTeam.name}
-                                        className={`${prefix}--bmrg-advantage-sidenav-submenu-link`}
-                                        data-testid="sidenav-account-submenu-link"
-                                        href={`${baseEnvUrl}/${app}/teams/${accTeam.id}`}
-                                        onClick={(e: any) => {
-                                          if (isLaunchpad) {
-                                            handleLaunchpadLink(e);
-                                            history.push(`/teams/${accTeam.id}`);
-                                          }
-                                          handleTeamClick({ team: accTeam, type: "project" });
-                                        }}
-                                      >
-                                        {accTeam.name}
-                                      </SideNavLink>
-                                    )) ?? null}
-                                  </ul>
-                                </li>
-                              </ul>
-                            ) : null}
-                          </li>
-                        </>
-                      );
-                    })
+                                  {team.projectTeams?.map((accTeam) => (
+                                    <SideNavLink
+                                      title={accTeam.name}
+                                      className={`${prefix}--bmrg-advantage-sidenav-submenu-link`}
+                                      data-testid="sidenav-account-submenu-link"
+                                      href={`${baseEnvUrl}/${app}/teams/${accTeam.id}`}
+                                      onClick={(e: any) => {
+                                        if (isLaunchpad) {
+                                          handleLaunchpadLink(e);
+                                          history.push(`/teams/${accTeam.id}`);
+                                        }
+                                        handleTeamClick({ team: accTeam, type: "project" });
+                                      }}
+                                    >
+                                      {accTeam.name}
+                                    </SideNavLink>
+                                  )) ?? null}
+                                </ul>
+                              </li>
+                            </ul>
+                          ) : null}
+                        </li>
+                      </>
+                    );
+                  })
                   : null}
               </SideNavMenu>
             </>
