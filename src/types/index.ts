@@ -4,7 +4,6 @@ IBM Confidential
 © Copyright IBM Corp. 2022, 2024
 */
 
-
 import React from "react";
 export type DynamicInput = FormInput & InputGovernor;
 
@@ -84,7 +83,7 @@ export type SimpleIdNameMap = {
   isTeamMember?: boolean;
   privateTeam?: boolean;
   displayName?: string;
-  services?: Array<{name: string; url: string}>;
+  services?: Array<{ name: string; url: string }>;
 };
 
 export type SimpleTeamService = {
@@ -93,11 +92,11 @@ export type SimpleTeamService = {
 };
 
 export interface SideNavTeam extends SimpleIdNameMap {
-  services:Array<SimpleTeamService>;
+  services: Array<SimpleTeamService>;
   isPersonal?: boolean;
 }
 export interface SideNavAccount extends SimpleIdNameMap {
-  projectTeams:Array<SimpleIdNameMap>
+  projectTeams: Array<SimpleIdNameMap>;
 }
 export type Team = {
   id: string;
@@ -295,6 +294,7 @@ export type User = {
   hasOpenPersonalTeamRequest?: boolean;
   personalTeamAssistantsAccess?: boolean;
   personalTeamAssistantsAccessRequested?: boolean;
+  teamInstanceSwitcherDefault?: string | null;
 };
 
 export type UserTeams = {
@@ -302,7 +302,7 @@ export type UserTeams = {
     id: string;
     name: string;
     isAccountTeamMember: boolean;
-    services?: Array<{name: string; url: string}>;
+    services?: Array<{ name: string; url: string }>;
     projectTeams: SimpleIdNameMap[];
   }[];
   standardTeams: SimpleIdNameMap[];

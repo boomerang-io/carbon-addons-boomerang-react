@@ -1,10 +1,11 @@
 /*
 IBM Confidential
 694970X, 69497O0
-© Copyright IBM Corp. 2022, 2024
+© Copyright IBM Corp. 2022, 2025
 */
 
 import React from "react";
+import { useQuery, UseQueryResult } from "react-query";
 import {
   Header as CarbonHeader,
   HeaderGlobalBar,
@@ -32,24 +33,30 @@ import {
   Checkmark,
 } from "@carbon/react/icons";
 import HeaderAppSwitcher from "./HeaderAppSwitcher";
+import HeaderTeamSwitcher from "./HeaderTeamSwitcher";
 import HeaderMenu from "./HeaderMenu";
 import NotificationsContainer from "../Notifications/NotificationsContainer";
 import PlatformNotificationsContainer from "../PlatformNotifications";
 import UserRequests from "./UserRequests";
 import useHeaderMenu from "../../hooks/useHeaderMenu";
 import useWindowSize from "../../hooks/useWindowSize";
+import { resolver, serviceUrl } from "../../config/servicesConfig";
 import { prefix } from "../../internal/settings";
-import type { NavLink } from "../../types";
+import type { NavLink, User } from "../../types";
 
 type Props = {
+  analyticsHelpers?: any;
   baseServicesUrl?: string;
   baseEnvUrl?: string;
   carbonTheme?: "white" | "g10" | "g90" | "g100";
   className?: string;
+  createJoinTeamTrigger?: Function;
   enableAppSwitcher?: boolean;
   instanceSwitcherEnabled?: boolean;
   enableNotifications?: boolean;
   enableNotificationsCount?: boolean;
+  history?: any;
+  isLaunchpad?: boolean;
   leftPanel?: (args: { close: () => void; isOpen: boolean; navLinks?: NavLink[] }) => React.ReactNode;
   navLinks?: NavLink[];
   platform?: any;
@@ -66,7 +73,9 @@ type Props = {
   supportMenuItems?: React.ReactNode[];
   instanceSwitcherMenuItems?: React.ReactNode[];
   templateMeteringEvent?: (props: any) => void;
+  trackEvent?: Function;
   triggerEvent?: (props: any) => any;
+  user?: User;
   userTeams?: { data: any; isLoading: boolean; error: any };
 };
 
@@ -78,7 +87,8 @@ type MenuType =
   | "SideNav"
   | "Support"
   | "InstanceSwitcher"
-  | "Switcher";
+  | "Switcher"
+  | "TeamSwitcher";
 
 const MenuListId = {
   Notifcations: "header-notifications-dialog",
@@ -89,6 +99,7 @@ const MenuListId = {
   Support: "header-support-menu",
   instanceSwitcher: "header-instanceSwitcher-menu",
   Switcher: "header-switcher-menu",
+  TeamSwitcher: "header-team-switcher-menu",
 } as const;
 
 type MenuListType = typeof MenuListId;
@@ -102,6 +113,7 @@ const MenuButtonId: Record<MenuType, `${MenuListType[keyof MenuListType]}-button
   Support: "header-support-menu-button",
   InstanceSwitcher: "header-instanceSwitcher-menu-button",
   Switcher: "header-switcher-menu-button",
+  TeamSwitcher: "header-team-switcher-menu-button",
 };
 
 const MenuAriaLabelRecord: Record<keyof MenuListType, string> = {
@@ -113,27 +125,45 @@ const MenuAriaLabelRecord: Record<keyof MenuListType, string> = {
   instanceSwitcher: "Instance Switcher Menu",
   Support: "Support menu",
   Switcher: "Switcher menu",
+  TeamSwitcher: "Team Switcher menu",
 };
 
 const headerButtonClassNames =
   "cds--btn--icon-only cds--header__action cds--btn cds--btn--primary cds--btn--icon-only cds--btn cds--btn--primary";
+
 const instanceCheckMarkContainerClass = "instance-checkmark-style-container";
+
 export default function Header(props: Props) {
   const {
+    analyticsHelpers,
     productName,
     baseEnvUrl,
     baseServicesUrl,
     carbonTheme = "g10",
     className,
+    createJoinTeamTrigger,
+    history,
+    isLaunchpad = false,
     navLinks,
     platform,
     prefixName = "",
     rightPanel,
     skipToContentProps,
     templateMeteringEvent,
+    trackEvent,
     triggerEvent,
+    user,
     userTeams,
   } = props;
+
+  const hasUserTeams = Boolean(userTeams);
+  const userTeamsUrl = serviceUrl.getUserTeamsServices({ baseServicesUrl });
+  const teamsQuery = useQuery({
+    queryKey: userTeamsUrl,
+    queryFn: resolver.query(userTeamsUrl, null),
+    enabled: !hasUserTeams,
+  });
+
   return (
     <>
       <Theme theme={carbonTheme}>
@@ -163,6 +193,21 @@ export default function Header(props: Props) {
               : null}
           </HeaderNavigation>
           <HeaderGlobalBar>
+            <HeaderTeamSwitcher
+              analyticsHelpers={analyticsHelpers}
+              baseServicesUrl={baseServicesUrl}
+              createJoinTeamTrigger={createJoinTeamTrigger}
+              history={history}
+              isLaunchpad={isLaunchpad}
+              menuAriaLabelRecord={MenuAriaLabelRecord.TeamSwitcher}
+              menuButtonId={MenuButtonId.TeamSwitcher}
+              menuListId={MenuListId.TeamSwitcher}
+              navigationPlatform={platform}
+              teamsQuery={teamsQuery}
+              trackEvent={trackEvent}
+              user={user}
+              userTeams={userTeams}
+            />
             {props?.instanceSwitcherEnabled && (
               <InstanceSwitcherMenu enabled={Boolean(props.instanceSwitcherEnabled)} menuItems={platform?.instances} />
             )}
@@ -189,6 +234,7 @@ export default function Header(props: Props) {
               baseEnvUrl={baseEnvUrl}
               baseServicesUrl={baseServicesUrl}
               enabled={props.enableAppSwitcher}
+              teamsQuery={teamsQuery}
               templateMeteringEvent={templateMeteringEvent}
               triggerEvent={triggerEvent}
               userTeams={userTeams}
@@ -407,6 +453,7 @@ function AppSwitcherMenu(props: {
   enabled?: boolean;
   baseEnvUrl?: string;
   baseServicesUrl?: string;
+  teamsQuery: UseQueryResult<any>;
   templateMeteringEvent?: (props: any) => void;
   triggerEvent?: any;
   userTeams?: { data: any; isLoading: boolean; error: any };
@@ -436,6 +483,7 @@ function AppSwitcherMenu(props: {
         baseServicesUrl={props.baseServicesUrl}
         id={MenuListId.Switcher}
         isOpen={isOpen}
+        teamsQuery={props.teamsQuery}
         templateMeteringEvent={props.templateMeteringEvent}
         triggerEvent={props.triggerEvent}
         userTeams={props.userTeams}
