@@ -350,11 +350,11 @@ export default function HeaderTeamSwitcher({
                         id={`${team.id}-personal-menu-item`}
                         aria-selected={isTeamSelected}
                         className={headerDropdownMenuItemContainerClassname}
-                        onClick={(e: any) => {
-                          e.stopPropagation();
+                        onClick={() => {
                           handleTeamClick({ team, type: "personal" });
                         }}
-                        href={teamLink({ teamId: team.id })}
+                        // eslint-disable-next-line no-script-url
+                        href={"javascript:void(0)"}
                         data-testid="header-team-switcher-menu-item"
                       >
                         <div className={headerDropdownMenuItemClassname}>
@@ -415,12 +415,12 @@ export default function HeaderTeamSwitcher({
                           id={`${team.id}-account-menu-item`}
                           aria-selected={isTeamSelected}
                           className={headerDropdownMenuItemContainerClassname}
-                          onClick={(e: any) => {
-                            e.stopPropagation();
+                          onClick={() => {
                             handleTeamClick({ team, type: "account" });
                           }}
                           data-testid="header-team-switcher-menu-account-accordion-item"
-                          href={teamLink({ teamId: team.id })}
+                          // eslint-disable-next-line no-script-url
+                          href={"javascript:void(0)"}
                         >
                           <div className={headerDropdownMenuItemClassname} style={{ paddingLeft: "1rem" }}>
                             <span title={team.nameToDisplay} className={headerDropdownMenuItemTextClassname}>
@@ -439,12 +439,12 @@ export default function HeaderTeamSwitcher({
                                   <HeaderMenuItem
                                     aria-selected={isTeamSelected}
                                     className={headerDropdownMenuItemContainerClassname}
-                                    onClick={(e: any) => {
-                                      e.stopPropagation();
+                                    onClick={() => {
                                       handleTeamClick({ team, type: "project" });
                                     }}
                                     data-testid="header-team-switcher-menu-account-accordion-item"
-                                    href={teamLink({ teamId: team.id })}
+                                    // eslint-disable-next-line no-script-url
+                                    href={"javascript:void(0)"}
                                   >
                                     <div className={headerDropdownMenuItemClassname} style={{ paddingLeft: "1rem" }}>
                                       <span title={team.nameToDisplay} className={headerDropdownMenuItemTextClassname}>
@@ -472,12 +472,12 @@ export default function HeaderTeamSwitcher({
                       <HeaderMenuItem
                         aria-selected={isTeamSelected}
                         className={headerDropdownMenuItemContainerClassname}
-                        onClick={(e: any) => {
-                          e.stopPropagation();
+                        onClick={() => {
                           handleTeamClick({ team, type: "standard" });
                         }}
                         data-testid="header-team-switcher-menu-item"
-                        href={teamLink({ teamId: team.id })}
+                        // eslint-disable-next-line no-script-url
+                        href={"javascript:void(0)"}
                       >
                         <div className={headerDropdownMenuItemClassname}>
                           <span title={team.nameToDisplay} className={headerDropdownMenuItemTextClassname}>
