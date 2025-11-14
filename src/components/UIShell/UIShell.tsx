@@ -70,6 +70,9 @@ type Props = {
   };
   history?: any;
   isLaunchpad?: boolean;
+  isLoadingTeamSwitcher?: boolean;
+  isSuccessTeamSwitcher?: boolean;
+  setIsSuccessTeamSwitcher?: Function;
   leftPanel?: (args: { close: () => void; isOpen: boolean; navLinks?: NavLink[] }) => React.ReactNode;
   platformName?: string;
   productName?: string;
@@ -101,6 +104,9 @@ function UIShell({
   createJoinTeamTrigger,
   history,
   isLaunchpad = false,
+  isLoadingTeamSwitcher,
+  isSuccessTeamSwitcher,
+  setIsSuccessTeamSwitcher,
   leftPanel,
   platformName,
   productName,
@@ -311,6 +317,9 @@ function UIShell({
         ].filter(Boolean)}
         history={history}
         isLaunchpad={isLaunchpad}
+        isLoadingTeamSwitcher={isLoadingTeamSwitcher}
+        isSuccessTeamSwitcher={isSuccessTeamSwitcher}
+        setIsSuccessTeamSwitcher={setIsSuccessTeamSwitcher}
         trackEvent={trackEvent}
         user={user}
         userTeams={userTeams}

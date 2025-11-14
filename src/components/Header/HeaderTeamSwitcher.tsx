@@ -14,6 +14,9 @@ import { resolver, serviceUrl } from "../../config/servicesConfig";
 import { prefix } from "../../internal/settings";
 import { User } from "../../types";
 
+const headerDropdownMenuContainerClassname = `${prefix}--header-dropdown-menu-container`;
+const headerDropdownMenuLoadingClassname = `${prefix}--header-dropdown-menu-loading`;
+const headerDropdownMenuSuccessClassname = `${prefix}--header-dropdown-menu-success`;
 const headerDropdownMenuClassname = `${prefix}--header-dropdown-menu`;
 const headerDropdownMenuListClassname = `${prefix}--bmrg-header-drop-down`;
 
@@ -50,6 +53,9 @@ type HeaderTeamSwitcherProps = {
   createJoinTeamTrigger?: Function;
   history?: any;
   isLaunchpad: boolean;
+  isLoadingTeamSwitcher?: boolean;
+  isSuccessTeamSwitcher?: boolean;
+  setIsSuccessTeamSwitcher?: Function;
   menuAriaLabelRecord: string;
   menuButtonId: string;
   menuListId: string;
@@ -66,6 +72,9 @@ export default function HeaderTeamSwitcher({
   createJoinTeamTrigger,
   history,
   isLaunchpad,
+  isLoadingTeamSwitcher,
+  isSuccessTeamSwitcher,
+  setIsSuccessTeamSwitcher,
   menuAriaLabelRecord,
   menuButtonId,
   menuListId,
@@ -84,6 +93,9 @@ export default function HeaderTeamSwitcher({
   const userTeamInstanceSwitcherDefault = user?.teamInstanceSwitcherDefault;
 
   const profileUrl = serviceUrl.resourceUserProfile({ baseServicesUrl });
+  const teamLink = ({ teamId }: { teamId: string }) => {
+    return `${navigationPlatform.baseEnvUrl}/launchpad/teams/${teamId}`;
+  };
 
   const { mutateAsync: mutateUserProfile, isLoading: mutateUserProfileIsLoading } = useMutation(
     resolver.patchUserProfile,
@@ -93,6 +105,17 @@ export default function HeaderTeamSwitcher({
       },
     }
   );
+
+  React.useEffect(() => {
+    let timer: any;
+    if (isSuccessTeamSwitcher && setIsSuccessTeamSwitcher) {
+      timer = setTimeout(() => {
+        setIsSuccessTeamSwitcher(false);
+      }, 3000);
+    }
+
+    return () => clearTimeout(timer);
+  }, [isSuccessTeamSwitcher, setIsSuccessTeamSwitcher]);
 
   useEffect(() => {
     let accountTeams,
@@ -131,9 +154,15 @@ export default function HeaderTeamSwitcher({
         if (userHasPersonalTeam) {
           handleSelectTeam({ team: personalTeam[0] });
         } else if (userHasAccountTeams) {
-          handleSelectTeam({ team: accountTeams[0] });
+          const sortedAccounts = sortBy(accountTeams, [
+            (account) => (account.displayName ? account.displayName : account.name),
+          ]);
+          handleSelectTeam({ team: sortedAccounts[0] });
         } else if (userHasStandardTeams) {
-          handleSelectTeam({ team: standardTeams[0] });
+          const sortedStandardTeams = sortBy(standardTeams, [
+            (standardTeam) => (standardTeam.displayName ? standardTeam.displayName : standardTeam.name),
+          ]);
+          handleSelectTeam({ team: sortedStandardTeams[0] });
         }
       } else if (selectedTeam?.id !== userTeamInstanceSwitcherDefault) {
         let allProjectTeams: UserTeam[] = [];
@@ -163,12 +192,17 @@ export default function HeaderTeamSwitcher({
     userTeams?.data?.standardTeams,
   ]);
 
+  const handleHeaderMenuClick = () => {
+    setOpenAccountSubmenuId("");
+  };
+
   const handleTeamClick = ({ team, type }: { team: UserTeam; type: string }) => {
+    setOpenAccountSubmenuId("");
     if (analyticsHelpers?.navigateEventHandler && trackEvent) {
       analyticsHelpers.navigateEventHandler({
         action: `Clicked ${team.name} in Team Switcher`,
         category: "Team Switcher",
-        destinationPath: `${navigationPlatform.baseEnvUrl}/launchpad/teams/${team.id}`,
+        destinationPath: teamLink({ teamId: team.id }),
         teamId: team.id,
         teamType: type,
         trackEvent,
@@ -178,7 +212,7 @@ export default function HeaderTeamSwitcher({
     if (isLaunchpad && Boolean(history)) {
       history.push(`/teams/${team.id}`);
     } else {
-      window.open(`${navigationPlatform.baseEnvUrl}/launchpad/teams/${team.id}`, "_self");
+      window.open(teamLink({ teamId: team.id }), "_self");
     }
   };
 
@@ -267,160 +301,198 @@ export default function HeaderTeamSwitcher({
 
     let selectedTeamName = selectedTeam?.displayName ? selectedTeam.displayName : selectedTeam?.name;
 
-    if (selectedTeamName && selectedTeamName.length > 42) {
-      selectedTeamName = selectedTeamName.slice(0, 42) + "...";
+    if (selectedTeamName && selectedTeamName.length > 65) {
+      selectedTeamName = selectedTeamName.slice(0, 65) + "...";
     }
 
     return (
-      <CarbonHeaderMenu
-        aria-label={menuAriaLabelRecord}
-        className={headerDropdownMenuClassname}
-        menuLinkName={selectedTeamName ? selectedTeamName : "No team selected"}
-        data-testid="header-team-switcher-menu"
-      >
-        <HeaderMenu aria-labelledby={menuButtonId} className={headerDropdownMenuListClassname} id={menuListId}>
-          <HeaderMenuItem
-            className={headerTeamSwitcherCreateTeamButtonContainerClassname}
-            onClick={handleCreateJoinTeamClick}
-            // eslint-disable-next-line no-script-url
-            href={"javascript:void(0)"}
-            role="menuitem"
-            data-testid="header-team-switcher-create-join-team-button"
-          >
-            <div className={headerTeamSwitcherCreateTeamButtonClassname}>
-              <span className={headerTeamSwitcherCreateTeamButtonTextClassname}>{createTeamButtonText}</span>
-              <AddAlt className={headerTeamSwitcherCreateTeamButtonIconClassname} />
-            </div>
-          </HeaderMenuItem>
-          {personalTeam.length > 0
-            ? personalTeam.map((team: UserTeam) => {
-                const teamName = team.displayName ? team.displayName : team.name;
-                const isTeamSelected = team.id === selectedTeam?.id;
-                return (
-                  <HeaderMenuItem
-                    key={team.id}
-                    aria-selected={isTeamSelected}
-                    className={headerDropdownMenuItemContainerClassname}
-                    onClick={() => handleTeamClick({ team, type: "personal" })}
-                    // eslint-disable-next-line no-script-url
-                    href={"javascript:void(0)"}
-                    data-testid="header-team-switcher-menu-item"
-                  >
-                    <div className={headerDropdownMenuItemClassname}>
-                      <span title={teamName} className={headerDropdownMenuItemTextClassname}>
-                        {teamName}
-                      </span>
-                      {isTeamSelected ? <CheckmarkFilled className={headerDropdownMenuItemIconClassname} /> : null}
-                    </div>
-                  </HeaderMenuItem>
-                );
-              })
-            : null}
-          {accountTeams.length > 0
-            ? sortedAccountTeamsWithNamesToDisplay.map((team: UserTeam) => {
-                const isSubmenuOpen = team.id === openAccountSubmenuId;
-                const isProjectTeamSelected =
-                  team.projectTeams &&
-                  team.projectTeams.length > 0 &&
-                  team.projectTeams.some((team: UserTeam) => team.id === selectedTeam?.id);
-                const isTeamSelected = team.id === selectedTeam?.id;
-                const isMenuSelected = isTeamSelected || isProjectTeamSelected;
-
-                return (
-                  <>
-                    <HeaderMenuItem
-                      aria-expanded={isSubmenuOpen}
-                      aria-selected={isMenuSelected}
-                      className={headerDropdownMenuItemAccountContainerClassname}
-                      onClick={(e: any) => handleOpenAccountSubmenu({ e, id: team.id })}
-                      // eslint-disable-next-line no-script-url
-                      href={"javascript:void(0)"}
-                      data-testid="header-team-switcher-menu-account-accordion"
-                    >
-                      <div className={headerDropdownMenuItemAccountClassname}>
-                        <div className={headerDropdownMenuItemTextIconClassname}>
-                          <span title={team.nameToDisplay} className={headerDropdownMenuItemTextClassname}>
-                            {team.nameToDisplay}
-                          </span>
-                          {isMenuSelected ? <CheckmarkFilled className={headerDropdownMenuItemIconClassname} /> : null}
-                        </div>
-                        <div className={headerDropdownMenuItemAccountIconsClassname}>
-                          <GroupAccount className={headerDropdownMenuItemAccountGroupIconClassname} />
-                          <ChevronDown className={headerDropdownMenuItemAccountChevronIconClassname} />
-                        </div>
-                      </div>
-                    </HeaderMenuItem>
-                    <div aria-expanded={isSubmenuOpen} className={headerDropdownMenuItemAccountSubmenuClassname}>
+      <div className={headerDropdownMenuContainerClassname}>
+        {isLoadingTeamSwitcher ? (
+          <div className={headerDropdownMenuLoadingClassname}>
+            <InlineLoading />
+          </div>
+        ) : isSuccessTeamSwitcher ? (
+          <div className={headerDropdownMenuSuccessClassname}>
+            <CheckmarkFilled />
+          </div>
+        ) : null}
+        <CarbonHeaderMenu
+          id="header-team-switcher-menu"
+          aria-label={menuAriaLabelRecord}
+          className={headerDropdownMenuClassname}
+          menuLinkName={selectedTeamName ? selectedTeamName : "No team selected"}
+          onClick={handleHeaderMenuClick}
+          data-testid="header-team-switcher-menu"
+        >
+          <HeaderMenu aria-labelledby={menuButtonId} className={headerDropdownMenuListClassname} id={menuListId}>
+            <HeaderMenuItem
+              id="header-team-switcher-create-join-team-button"
+              className={headerTeamSwitcherCreateTeamButtonContainerClassname}
+              onClick={handleCreateJoinTeamClick}
+              // eslint-disable-next-line no-script-url
+              href={"javascript:void(0)"}
+              role="menuitem"
+              data-testid="header-team-switcher-create-join-team-button"
+            >
+              <div className={headerTeamSwitcherCreateTeamButtonClassname}>
+                <span className={headerTeamSwitcherCreateTeamButtonTextClassname}>{createTeamButtonText}</span>
+                <AddAlt className={headerTeamSwitcherCreateTeamButtonIconClassname} />
+              </div>
+            </HeaderMenuItem>
+            {personalTeam.length > 0
+              ? personalTeam.map((team: UserTeam) => {
+                  const teamName = team.displayName ? team.displayName : team.name;
+                  const isTeamSelected = team.id === selectedTeam?.id;
+                  return (
+                    <div key={team.id} id={`${team.id}-personal-menu-item-id`}>
                       <HeaderMenuItem
+                        key={team.id}
+                        id={`${team.id}-personal-menu-item`}
                         aria-selected={isTeamSelected}
                         className={headerDropdownMenuItemContainerClassname}
-                        onClick={() => handleTeamClick({ team, type: "account" })}
-                        data-testid="header-team-switcher-menu-account-accordion-item"
-                        // eslint-disable-next-line no-script-url
-                        href={"javascript:void(0)"}
+                        onClick={(e: any) => {
+                          e.stopPropagation();
+                          handleTeamClick({ team, type: "personal" });
+                        }}
+                        href={teamLink({ teamId: team.id })}
+                        data-testid="header-team-switcher-menu-item"
                       >
-                        <div className={headerDropdownMenuItemClassname} style={{ paddingLeft: "1rem" }}>
-                          <span title={team.nameToDisplay} className={headerDropdownMenuItemTextClassname}>
-                            Account Page
+                        <div className={headerDropdownMenuItemClassname}>
+                          <span title={teamName} className={headerDropdownMenuItemTextClassname}>
+                            {teamName}
                           </span>
                           {isTeamSelected ? <CheckmarkFilled className={headerDropdownMenuItemIconClassname} /> : null}
                         </div>
                       </HeaderMenuItem>
-                      {team.projectTeams && team.projectTeams.length > 0
-                        ? team.projectTeams.map((team: UserTeam) => {
-                            const isTeamSelected = team.id === selectedTeam?.id;
-                            return (
-                              <HeaderMenuItem
-                                key={team.id}
-                                aria-selected={isTeamSelected}
-                                className={headerDropdownMenuItemContainerClassname}
-                                onClick={() => handleTeamClick({ team, type: "project" })}
-                                data-testid="header-team-switcher-menu-account-accordion-item"
-                                // eslint-disable-next-line no-script-url
-                                href={"javascript:void(0)"}
-                              >
-                                <div className={headerDropdownMenuItemClassname} style={{ paddingLeft: "1rem" }}>
-                                  <span title={team.nameToDisplay} className={headerDropdownMenuItemTextClassname}>
-                                    {team.nameToDisplay}
-                                  </span>
-                                  {isTeamSelected ? (
-                                    <CheckmarkFilled className={headerDropdownMenuItemIconClassname} />
-                                  ) : null}
+                    </div>
+                  );
+                })
+              : null}
+            {accountTeams.length > 0
+              ? sortedAccountTeamsWithNamesToDisplay.map((team: UserTeam) => {
+                  const isSubmenuOpen = team.id === openAccountSubmenuId;
+                  const isProjectTeamSelected =
+                    team.projectTeams &&
+                    team.projectTeams.length > 0 &&
+                    team.projectTeams.some((team: UserTeam) => team.id === selectedTeam?.id);
+                  const isTeamSelected = team.id === selectedTeam?.id;
+                  const isMenuSelected = isTeamSelected || isProjectTeamSelected;
+
+                  return (
+                    <div key={team.id} id={`${team.id}-account-menu`}>
+                      <HeaderMenuItem
+                        aria-expanded={isSubmenuOpen}
+                        aria-selected={isMenuSelected}
+                        className={headerDropdownMenuItemAccountContainerClassname}
+                        onClick={(e: any) => handleOpenAccountSubmenu({ e, id: team.id })}
+                        // eslint-disable-next-line no-script-url
+                        href={"javascript:void(0)"}
+                        data-testid="header-team-switcher-menu-account-accordion"
+                      >
+                        <div className={headerDropdownMenuItemAccountClassname}>
+                          <div className={headerDropdownMenuItemTextIconClassname}>
+                            <span title={team.nameToDisplay} className={headerDropdownMenuItemTextClassname}>
+                              {team.nameToDisplay}
+                            </span>
+                            {isMenuSelected ? (
+                              <CheckmarkFilled className={headerDropdownMenuItemIconClassname} />
+                            ) : null}
+                          </div>
+                          <div className={headerDropdownMenuItemAccountIconsClassname}>
+                            <GroupAccount className={headerDropdownMenuItemAccountGroupIconClassname} />
+                            <ChevronDown className={headerDropdownMenuItemAccountChevronIconClassname} />
+                          </div>
+                        </div>
+                      </HeaderMenuItem>
+                      <div
+                        id={`${team.id}-account-submenu`}
+                        key={`${team.id}-account-submenu`}
+                        aria-expanded={isSubmenuOpen}
+                        className={headerDropdownMenuItemAccountSubmenuClassname}
+                      >
+                        <HeaderMenuItem
+                          key={`${team.id}-menu-item`}
+                          id={`${team.id}-account-menu-item`}
+                          aria-selected={isTeamSelected}
+                          className={headerDropdownMenuItemContainerClassname}
+                          onClick={(e: any) => {
+                            e.stopPropagation();
+                            handleTeamClick({ team, type: "account" });
+                          }}
+                          data-testid="header-team-switcher-menu-account-accordion-item"
+                          href={teamLink({ teamId: team.id })}
+                        >
+                          <div className={headerDropdownMenuItemClassname} style={{ paddingLeft: "1rem" }}>
+                            <span title={team.nameToDisplay} className={headerDropdownMenuItemTextClassname}>
+                              Account Page
+                            </span>
+                            {isTeamSelected ? (
+                              <CheckmarkFilled className={headerDropdownMenuItemIconClassname} />
+                            ) : null}
+                          </div>
+                        </HeaderMenuItem>
+                        {team.projectTeams && team.projectTeams.length > 0
+                          ? team.projectTeams.map((team: UserTeam) => {
+                              const isTeamSelected = team.id === selectedTeam?.id;
+                              return (
+                                <div key={team.id} id={`${team.id}-project-menu-item`}>
+                                  <HeaderMenuItem
+                                    aria-selected={isTeamSelected}
+                                    className={headerDropdownMenuItemContainerClassname}
+                                    onClick={(e: any) => {
+                                      e.stopPropagation();
+                                      handleTeamClick({ team, type: "project" });
+                                    }}
+                                    data-testid="header-team-switcher-menu-account-accordion-item"
+                                    href={teamLink({ teamId: team.id })}
+                                  >
+                                    <div className={headerDropdownMenuItemClassname} style={{ paddingLeft: "1rem" }}>
+                                      <span title={team.nameToDisplay} className={headerDropdownMenuItemTextClassname}>
+                                        {team.nameToDisplay}
+                                      </span>
+                                      {isTeamSelected ? (
+                                        <CheckmarkFilled className={headerDropdownMenuItemIconClassname} />
+                                      ) : null}
+                                    </div>
+                                  </HeaderMenuItem>
                                 </div>
-                              </HeaderMenuItem>
-                            );
-                          })
-                        : null}
+                              );
+                            })
+                          : null}
+                      </div>
                     </div>
-                  </>
-                );
-              })
-            : null}
-          {standardTeams.length > 0
-            ? sortedStandardTeamsWithNamesToDisplay.map((team: UserTeam) => {
-                const isTeamSelected = team.id === selectedTeam?.id;
-                return (
-                  <HeaderMenuItem
-                    key={team.id}
-                    aria-selected={isTeamSelected}
-                    className={headerDropdownMenuItemContainerClassname}
-                    onClick={() => handleTeamClick({ team, type: "standard" })}
-                    data-testid="header-team-switcher-menu-item"
-                    // eslint-disable-next-line no-script-url
-                    href={"javascript:void(0)"}
-                  >
-                    <div className={headerDropdownMenuItemClassname}>
-                      <span title={team.nameToDisplay} className={headerDropdownMenuItemTextClassname}>
-                        {team.nameToDisplay}
-                      </span>
-                      {isTeamSelected ? <CheckmarkFilled className={headerDropdownMenuItemIconClassname} /> : null}
+                  );
+                })
+              : null}
+            {standardTeams.length > 0
+              ? sortedStandardTeamsWithNamesToDisplay.map((team: UserTeam) => {
+                  const isTeamSelected = team.id === selectedTeam?.id;
+                  return (
+                    <div key={team.id} id={`${team.id}-standard-menu-item`}>
+                      <HeaderMenuItem
+                        aria-selected={isTeamSelected}
+                        className={headerDropdownMenuItemContainerClassname}
+                        onClick={(e: any) => {
+                          e.stopPropagation();
+                          handleTeamClick({ team, type: "standard" });
+                        }}
+                        data-testid="header-team-switcher-menu-item"
+                        href={teamLink({ teamId: team.id })}
+                      >
+                        <div className={headerDropdownMenuItemClassname}>
+                          <span title={team.nameToDisplay} className={headerDropdownMenuItemTextClassname}>
+                            {team.nameToDisplay}
+                          </span>
+                          {isTeamSelected ? <CheckmarkFilled className={headerDropdownMenuItemIconClassname} /> : null}
+                        </div>
+                      </HeaderMenuItem>
                     </div>
-                  </HeaderMenuItem>
-                );
-              })
-            : null}
-        </HeaderMenu>
-      </CarbonHeaderMenu>
+                  );
+                })
+              : null}
+          </HeaderMenu>
+        </CarbonHeaderMenu>
+      </div>
     );
   }
 

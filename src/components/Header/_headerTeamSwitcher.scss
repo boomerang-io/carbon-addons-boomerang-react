@@ -10,9 +10,27 @@ IBM Confidential
 @use "../../global/themes/shell-tokens" as shell;
 
 :root {
+  .#{$prefix}--header-dropdown-menu-container {
+    display: flex;
+  }
+
+  .#{$prefix}--header-dropdown-menu-loading {
+    align-items: center;
+    display: flex;
+  }
+
+  .#{$prefix}--header-dropdown-menu-success {
+    align-items: center;
+    display: flex;
+
+    svg path {
+      fill: var(--cds-tag-border-green);
+    }
+  }
+
   .#{$prefix}--header-dropdown-menu {
     list-style: none;
-    width: 15rem;
+    max-width: 18.5625rem;
 
     .#{$prefix}--header__menu-title {
       display: flex;
@@ -33,14 +51,17 @@ IBM Confidential
 
     .#{$prefix}--header__menu {
       box-shadow: none;
-      width: 18.5625rem;
+      min-width: 18.5625rem;
+      position: relative;
+      width: 100%;
 
       .#{$prefix}--bmrg-header-drop-down {
-        position: absolute;
-        max-height: 48rem;
+        max-height: min(48rem, 84vh);
+        min-width: 18.5625rem;
         overflow-y: auto;
-        margin-right: 3.5625rem;
-        width: 18.5625rem;
+        position: absolute;
+        right: 0;
+        width: 100%;
 
         a.#{$prefix}--header__menu-item {
           cursor: pointer;
@@ -78,7 +99,8 @@ IBM Confidential
             justify-content: space-between;
           }
 
-          .#{$prefix}--header__menu-item[aria-selected="true"] {
+          .#{$prefix}--header__menu-item[aria-selected="true"],
+          .#{$prefix}--header__menu-item:hover {
             background-color: var(--cds-layer-hover-01) !important;
           }
         }
@@ -109,6 +131,10 @@ IBM Confidential
             }
           }
 
+          .#{$prefix}--header__menu-item:hover {
+            background-color: var(--cds-layer-hover-01) !important;
+          }
+
           .#{$prefix}--header__menu-item[aria-expanded="true"] {
             background-color: var(--cds-layer-hover-01) !important;
 
@@ -129,7 +155,7 @@ IBM Confidential
           transition: max-height 150ms ease-in-out, opacity 150ms ease-in-out;
 
           &[aria-expanded="true"] {
-            max-height: 40rem;
+            max-height: 100rem;
             opacity: 1;
             overflow-y: auto;
           }
@@ -137,6 +163,10 @@ IBM Confidential
 
         .#{$prefix}--header-team-switcher-create-team-button-container {
           border-bottom: 0.0625rem solid var(--cds-border-subtle-00);
+
+          .#{$prefix}--header__menu-item:hover {
+            background-color: var(--cds-layer-hover-01) !important;
+          }
         }
 
         .#{$prefix}--header-team-switcher-create-team-button {

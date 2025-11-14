@@ -63,6 +63,21 @@ const TEAMS_DATA = {
       ],
     },
     { id: "2", name: "Team 2", displayName: null, services: [] },
+    { id: "3", name: "Team 3", displayName: null, services: [] },
+    { id: "4", name: "Team 4", displayName: null, services: [] },
+    { id: "5", name: "Team 5", displayName: null, services: [] },
+    { id: "6", name: "Team 6", displayName: null, services: [] },
+    { id: "7", name: "Team 7", displayName: null, services: [] },
+    { id: "8", name: "Team 8", displayName: null, services: [] },
+    { id: "9", name: "Team 9", displayName: null, services: [] },
+    { id: "10", name: "Team 10", displayName: null, services: [] },
+    { id: "11", name: "Team 11", displayName: null, services: [] },
+    { id: "12", name: "Team 12", displayName: null, services: [] },
+    { id: "13", name: "Team 13", displayName: null, services: [] },
+    { id: "14", name: "Team 14", displayName: null, services: [] },
+    { id: "15", name: "Team 15", displayName: null, services: [] },
+    { id: "16", name: "Team 16", displayName: null, services: [] },
+    { id: "17", name: "Team 17", displayName: null, services: [] },
   ],
   personalTeam: [
     {
@@ -117,7 +132,32 @@ const PLATFORM_VERSION_DATA = {
 const sidenavProps = {
   homeLink: "http://test.home.com",
   assistantLink: "http://test.ai.com",
+  toolsLink: "http://test.tools.com",
+  agentAssistantStudioLink: "http://test.agent.assistant.studio.com",
+  agentAssistantLibraryLink: "http://test.agent.assistant.library.com",
+  documentCollectionsLink: "http://test.document.collections.com",
+  settingsLink: "http://test.settings.com",
   joinCreateTrigger: () => console.log("Trigger modal if exists"),
+  navigation: {
+    navigation: [
+      {
+        name: "Launchpad",
+        url: "javascript:void(0)",
+      },
+      {
+        name: "Catalog",
+        url: "javascript:void(0)",
+      },
+      {
+        name: "Admin",
+        url: "javascript:void(0)",
+      },
+      {
+        name: "Docs",
+        url: "javascript:void(0)",
+      },
+    ],
+  },
   teams: [
     {
       id: "a11",
@@ -165,8 +205,8 @@ const sidenavProps = {
       id: "f2222",
       name: "Account2",
       projectTeams: [
-        { id: 222, name: "team2", isTeamMember: true },
-        { id: 221, name: "team22 with a really long name so we can test elipsis", isTeamMember: true },
+        { id: "222", name: "team2", isTeamMember: true },
+        { id: "221", name: "team22 with a really long name so we can test elipsis", isTeamMember: true },
       ],
     },
     { id: "g3333", name: "Account3", projectTeams: [{ id: 333, name: "team3", isTeamMember: true }] },
@@ -176,7 +216,10 @@ const sidenavProps = {
   baseEnvUrl: "https://baseurl.com",
   app: "testapp",
   isOpen: false,
-  user: { type: "admin" },
+  user: {
+    teamInstanceSwitcherDefault: "221",
+    type: "admin",
+  },
   // enableChatButton: false,
   tooltipMessage: "Test tooltip message for ui shell",
   showChatTooltip: true,
@@ -226,15 +269,19 @@ export const UIShellDefault = (args) => {
           navigation: [
             {
               name: "Launchpad",
-              url: "javascript:voido(0)",
+              url: "javascript:void(0)",
+            },
+            {
+              name: "Catalog",
+              url: "javascript:void(0)",
             },
             {
               name: "Admin",
-              url: "javascript:voido(0)",
+              url: "javascript:void(0)",
             },
             {
               name: "Docs",
-              url: "javascript:voido(0)",
+              url: "javascript:void(0)",
             },
           ],
           platform: {
@@ -286,7 +333,7 @@ export const UIShellDefault = (args) => {
               requireUserAction: 0,
               submittedByUser: 17,
             },
-            teamInstanceSwitcherDefault: "121",
+            teamInstanceSwitcherDefault: "111",
           } as User
         }
         {...args}
@@ -321,15 +368,19 @@ export const UIShellDefaultWhite = (args) => {
           navigation: [
             {
               name: "Launchpad",
-              url: "javascript:voido(0)",
+              url: "javascript:void(0)",
+            },
+            {
+              name: "Catalog",
+              url: "javascript:void(0)",
             },
             {
               name: "Admin",
-              url: "javascript:voido(0)",
+              url: "javascript:void(0)",
             },
             {
               name: "Docs",
-              url: "javascript:voido(0)",
+              url: "javascript:void(0)",
             },
           ],
           platform: {
@@ -398,6 +449,10 @@ export function UIShellKitchenSink(args) {
             {
               name: "Launchpad",
               url: "#",
+            },
+            {
+              name: "Catalog",
+              url: "javascript:void(0)",
             },
             {
               name: "Admin",
@@ -560,6 +615,10 @@ export const UIShellUserNotConsented = (args) => {
           {
             name: "Launchpad",
             url: "#",
+          },
+          {
+            name: "Catalog",
+            url: "javascript:void(0)",
           },
           {
             name: "Admin",

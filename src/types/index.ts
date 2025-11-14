@@ -324,6 +324,81 @@ export type PlatformNotification = {
   userId: string;
 };
 
+export interface Navigation {
+  features: {
+    "appSwitcher.enabled": boolean;
+    "docs.enabled": boolean;
+    "eventing.enabled": boolean;
+    "feedback.enabled": boolean;
+    "homePage.enabled": boolean;
+    "metering.enabled": boolean;
+    "notifications.enabled": boolean;
+    "notificationsCount.enabled": boolean;
+    "partner.enabled": boolean;
+    "support.enabled": boolean;
+    "welcome.enabled": boolean;
+  };
+  improveQuestions: [
+    {
+      key: string;
+      options: [string];
+      question: string;
+      type: string;
+    }
+  ];
+  navigation: [
+    {
+      name: string;
+      url: string;
+    }
+  ];
+  platform: {
+    addServiceRequestUrl: string;
+    baseEnvUrl: string;
+    baseServicesUrl: string;
+    cashEIAEnabled: boolean;
+    catalogContributorUrl: string;
+    catalogItemRequestLimit: number;
+    catalogRecipeRequestLimit: number;
+    communityUrl: string;
+    displayLogo: boolean;
+    feedbackUrl: string;
+    footerEnabled: boolean;
+    gaEnabled: boolean;
+    linkCatalogId: string;
+    instanceSwitcherEnabled: boolean;
+    inviteTime: number;
+    name: string;
+    onPremDeploymentEnabled: boolean;
+    personalTeamEnabled: boolean;
+    partnerRegex: string;
+    platformName: string;
+    platformOrganization: string;
+    pocTeamEnabled: boolean;
+    privateTeams: boolean;
+    requireTeamPurpose: boolean;
+    segmentEnabled: boolean;
+    sendMail: boolean;
+    signOutUrl: string;
+    standardUserIDCPInviteEnabled: boolean;
+    teamInviteTime: number;
+    temporayModalEnabled: boolean;
+    tilesEnabled: boolean;
+    tutorialEnabled: boolean;
+    tutorialVideoLink1: string;
+    tutorialVideoLink2: string;
+    tutorialVideoLink3: string;
+    tutorialVideoLink4: string;
+    tutorialVideoLink5: string;
+    version: string;
+  };
+  platformMessage: null | {
+    kind: string;
+    message: string;
+    title: string;
+  };
+}
+
 export type NavLink = {
   name: string;
   url: string;

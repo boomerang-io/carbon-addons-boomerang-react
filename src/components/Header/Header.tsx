@@ -57,6 +57,9 @@ type Props = {
   enableNotificationsCount?: boolean;
   history?: any;
   isLaunchpad?: boolean;
+  isLoadingTeamSwitcher?: boolean;
+  isSuccessTeamSwitcher?: boolean;
+  setIsSuccessTeamSwitcher?: Function;
   leftPanel?: (args: { close: () => void; isOpen: boolean; navLinks?: NavLink[] }) => React.ReactNode;
   navLinks?: NavLink[];
   platform?: any;
@@ -144,6 +147,9 @@ export default function Header(props: Props) {
     createJoinTeamTrigger,
     history,
     isLaunchpad = false,
+    isLoadingTeamSwitcher,
+    isSuccessTeamSwitcher,
+    setIsSuccessTeamSwitcher,
     navLinks,
     platform,
     prefixName = "",
@@ -161,7 +167,7 @@ export default function Header(props: Props) {
   const teamsQuery = useQuery({
     queryKey: userTeamsUrl,
     queryFn: resolver.query(userTeamsUrl, null),
-    enabled: !hasUserTeams,
+    enabled: !hasUserTeams && Boolean(baseServicesUrl),
   });
 
   return (
@@ -199,6 +205,9 @@ export default function Header(props: Props) {
               createJoinTeamTrigger={createJoinTeamTrigger}
               history={history}
               isLaunchpad={isLaunchpad}
+              isLoadingTeamSwitcher={isLoadingTeamSwitcher}
+              isSuccessTeamSwitcher={isSuccessTeamSwitcher}
+              setIsSuccessTeamSwitcher={setIsSuccessTeamSwitcher}
               menuAriaLabelRecord={MenuAriaLabelRecord.TeamSwitcher}
               menuButtonId={MenuButtonId.TeamSwitcher}
               menuListId={MenuListId.TeamSwitcher}
