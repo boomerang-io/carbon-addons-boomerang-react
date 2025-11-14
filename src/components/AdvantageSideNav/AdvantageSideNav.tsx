@@ -387,7 +387,7 @@ export function AdvantageSideNav(props: Props) {
             {agentAssistantStudioLink ? (
               <SideNavLink
                 data-testid="sidenav-agent-assistant-studio-link"
-                isActive={`${baseEnvUrl}/${app}/agent-assistant-studio`.includes(windowLocation.href)}
+                isActive={windowLocation.href.includes(`/launchpad/agent-assistant-studio`)}
                 renderIcon={IntentRequestCreate}
                 href={agentAssistantStudioLink}
                 onClick={(e: any) => {
