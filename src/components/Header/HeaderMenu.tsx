@@ -4,12 +4,12 @@ IBM Confidential
 © Copyright IBM Corp. 2022, 2024
 */
 
-
 import React from "react";
 import { prefix } from "../../internal/settings";
 
 type Props = {
   ["aria-labelledby"]: string;
+  className?: string;
   children?: any;
   id: string;
 };

@@ -4,7 +4,6 @@ IBM Confidential
 © Copyright IBM Corp. 2022, 2024
 */
 
-
 /**
  * Copyright IBM Corp. 2016, 2018
  *
@@ -55,6 +54,7 @@ $use-theme-advantage-white: false !default;
 @use '../components/PrivacyRedirect/privacyRedirect';
 @use '../components/Header/header';
 @use '../components/Header/headerAppSwitcher';
+@use '../components/Header/headerTeamSwitcher';
 @use '../components/Header/headerMenu';
 @use '../components/Header/headerMenuItem';
 @use '../components/Header/userRequests';
@@ -77,7 +77,6 @@ $use-theme-advantage-white: false !default;
 @use '../components/Toggle/toggle' as addons-toggle;
 @use '../components/TooltipHover/tooltip' as addons-tooltip;
 
-
 // css for external libs
 @use "./tippy";
 
@@ -91,8 +90,8 @@ $use-theme-advantage-white: false !default;
 }
 
 .#{$prefix}--side-nav__item:not(.#{$prefix}--side-nav__item--active) {
-  >.#{$prefix}--side-nav__link:hover {
-    >span {
+  > .#{$prefix}--side-nav__link:hover {
+    > span {
       color: shell.$bmrg-theme-primary;
     }
   }
@@ -103,7 +102,7 @@ $use-theme-advantage-white: false !default;
   svg {
     fill: shell.$bmrg-theme-primary;
   }
-} 
+}
 
 .#{$prefix}--side-nav__item--active {
   .#{$prefix}--side-nav__icon {
@@ -113,8 +112,8 @@ $use-theme-advantage-white: false !default;
   }
 }
 
-
-.#{$prefix}--side-nav__submenu, .#{$prefix}--header__action {
+.#{$prefix}--side-nav__submenu,
+.#{$prefix}--header__action {
   &:focus {
     border-color: shell.$bmrg-accent;
     outline: shell.$bmrg-accent 0.0625rem solid !important;
@@ -155,7 +154,7 @@ $use-theme-advantage-white: false !default;
   .#{$prefix}--modal {
     background-color: shell.$bmrg-header-modal-overlay; //default isrgba(theme.$layer-accent-01, 0.5)
   }
-  
+
   .#{$prefix}--modal-close {
     &:hover {
       background-color: shell.$bmrg-header-hover-background;
