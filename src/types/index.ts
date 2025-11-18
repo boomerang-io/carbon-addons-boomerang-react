@@ -4,7 +4,6 @@ IBM Confidential
 © Copyright IBM Corp. 2022, 2024
 */
 
-
 import React from "react";
 export type DynamicInput = FormInput & InputGovernor;
 
@@ -84,7 +83,7 @@ export type SimpleIdNameMap = {
   isTeamMember?: boolean;
   privateTeam?: boolean;
   displayName?: string;
-  services?: Array<{name: string; url: string}>;
+  services?: Array<{ name: string; url: string }>;
 };
 
 export type SimpleTeamService = {
@@ -93,11 +92,11 @@ export type SimpleTeamService = {
 };
 
 export interface SideNavTeam extends SimpleIdNameMap {
-  services:Array<SimpleTeamService>;
+  services: Array<SimpleTeamService>;
   isPersonal?: boolean;
 }
 export interface SideNavAccount extends SimpleIdNameMap {
-  projectTeams:Array<SimpleIdNameMap>
+  projectTeams: Array<SimpleIdNameMap>;
 }
 export type Team = {
   id: string;
@@ -295,6 +294,7 @@ export type User = {
   hasOpenPersonalTeamRequest?: boolean;
   personalTeamAssistantsAccess?: boolean;
   personalTeamAssistantsAccessRequested?: boolean;
+  teamInstanceSwitcherDefault?: string | null;
 };
 
 export type UserTeams = {
@@ -302,7 +302,7 @@ export type UserTeams = {
     id: string;
     name: string;
     isAccountTeamMember: boolean;
-    services?: Array<{name: string; url: string}>;
+    services?: Array<{ name: string; url: string }>;
     projectTeams: SimpleIdNameMap[];
   }[];
   standardTeams: SimpleIdNameMap[];
@@ -323,6 +323,81 @@ export type PlatformNotification = {
   type: string;
   userId: string;
 };
+
+export interface Navigation {
+  features: {
+    "appSwitcher.enabled": boolean;
+    "docs.enabled": boolean;
+    "eventing.enabled": boolean;
+    "feedback.enabled": boolean;
+    "homePage.enabled": boolean;
+    "metering.enabled": boolean;
+    "notifications.enabled": boolean;
+    "notificationsCount.enabled": boolean;
+    "partner.enabled": boolean;
+    "support.enabled": boolean;
+    "welcome.enabled": boolean;
+  };
+  improveQuestions: [
+    {
+      key: string;
+      options: [string];
+      question: string;
+      type: string;
+    }
+  ];
+  navigation: [
+    {
+      name: string;
+      url: string;
+    }
+  ];
+  platform: {
+    addServiceRequestUrl: string;
+    baseEnvUrl: string;
+    baseServicesUrl: string;
+    cashEIAEnabled: boolean;
+    catalogContributorUrl: string;
+    catalogItemRequestLimit: number;
+    catalogRecipeRequestLimit: number;
+    communityUrl: string;
+    displayLogo: boolean;
+    feedbackUrl: string;
+    footerEnabled: boolean;
+    gaEnabled: boolean;
+    linkCatalogId: string;
+    instanceSwitcherEnabled: boolean;
+    inviteTime: number;
+    name: string;
+    onPremDeploymentEnabled: boolean;
+    personalTeamEnabled: boolean;
+    partnerRegex: string;
+    platformName: string;
+    platformOrganization: string;
+    pocTeamEnabled: boolean;
+    privateTeams: boolean;
+    requireTeamPurpose: boolean;
+    segmentEnabled: boolean;
+    sendMail: boolean;
+    signOutUrl: string;
+    standardUserIDCPInviteEnabled: boolean;
+    teamInviteTime: number;
+    temporayModalEnabled: boolean;
+    tilesEnabled: boolean;
+    tutorialEnabled: boolean;
+    tutorialVideoLink1: string;
+    tutorialVideoLink2: string;
+    tutorialVideoLink3: string;
+    tutorialVideoLink4: string;
+    tutorialVideoLink5: string;
+    version: string;
+  };
+  platformMessage: null | {
+    kind: string;
+    message: string;
+    title: string;
+  };
+}
 
 export type NavLink = {
   name: string;
