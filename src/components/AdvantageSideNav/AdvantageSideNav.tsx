@@ -279,6 +279,13 @@ export function AdvantageSideNav(props: Props) {
   const catalogNavlink = navigation?.navigation?.find((navlink) => navlink.name === "Catalog");
   const adminNavlink = navigation?.navigation?.find((navlink) => navlink.name === "Admin");
 
+  const showSecondDivider =
+    (!isPartnerUser && showChatButton) ||
+    toolsLink ||
+    agentAssistantStudioLink ||
+    agentAssistantLibraryLink ||
+    documentCollectionsLink;
+
   return (
     <SideNav
       aria-label="sidenav-container"
@@ -387,7 +394,10 @@ export function AdvantageSideNav(props: Props) {
             {agentAssistantStudioLink ? (
               <SideNavLink
                 data-testid="sidenav-agent-assistant-studio-link"
-                isActive={windowLocation.href.includes(`/launchpad/agent-assistant-studio`)}
+                isActive={
+                  windowLocation.href.includes(`/launchpad/agent-assistant-studio`) ||
+                  windowLocation.href.includes(`/launchpad/agenticapps`)
+                }
                 renderIcon={IntentRequestCreate}
                 href={agentAssistantStudioLink}
                 onClick={(e: any) => {
@@ -425,7 +435,7 @@ export function AdvantageSideNav(props: Props) {
                 Document Collections
               </SideNavLink>
             ) : null}
-            <SideNavDivider />
+            {showSecondDivider ? <SideNavDivider /> : null}
             {catalogNavlink ? (
               <SideNavLink href={catalogNavlink.url} renderIcon={Catalog}>
                 {catalogNavlink.name}
