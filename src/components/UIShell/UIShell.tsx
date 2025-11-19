@@ -21,7 +21,9 @@ import type { NavLink, User } from "../../types";
 import { USER_PLATFORM_ROLE } from "../../constants/UserType";
 
 type Props = {
+  analyticsHelpers?: any;
   carbonTheme?: "white" | "g10" | "g90" | "g100";
+  createJoinTeamTrigger?: Function;
   baseEnvUrl?: string;
   config?: {
     features?: {
@@ -69,6 +71,11 @@ type Props = {
     };
     platformMessage?: any;
   };
+  history?: any;
+  isLaunchpad?: boolean;
+  isLoadingTeamSwitcher?: boolean;
+  isSuccessTeamSwitcher?: boolean;
+  setIsSuccessTeamSwitcher?: Function;
   leftPanel?: (args: { close: () => void; isOpen: boolean; navLinks?: NavLink[] }) => React.ReactNode;
   platformName?: string;
   productName?: string;
@@ -83,6 +90,7 @@ type Props = {
   };
   supportMenuItems?: React.ReactNode[];
   templateMeteringEvent?: (props: any) => void;
+  trackEvent?: Function;
   triggerEvent?: (props: any) => any;
   user?: User;
   userTeams?: { data: any; isLoading: boolean; error: any };
@@ -92,9 +100,16 @@ type Props = {
 };
 
 function UIShell({
+  analyticsHelpers,
   baseEnvUrl,
   carbonTheme = "g10",
   config,
+  createJoinTeamTrigger,
+  history,
+  isLaunchpad = false,
+  isLoadingTeamSwitcher,
+  isSuccessTeamSwitcher,
+  setIsSuccessTeamSwitcher,
   leftPanel,
   platformName,
   productName,
@@ -106,6 +121,7 @@ function UIShell({
   handleShowTutorial,
   skipToContentProps,
   templateMeteringEvent,
+  trackEvent,
   triggerEvent,
   tutorialScreenToShow,
   user,
@@ -115,15 +131,18 @@ function UIShell({
   // Support base header .e.g for an error state
   if (!config) {
     return (
-      <Header
-        baseEnvUrl={baseEnvUrl ?? ""}
-        baseServicesUrl=""
-        carbonTheme={carbonTheme}
-        enableAppSwitcher={false}
-        enableNotifications={false}
-        enableNotificationsCount={false}
-        productName={productName || platformName || ""}
-      />
+      <QueryClientProvider client={queryClient}>
+        <Header
+          baseEnvUrl={baseEnvUrl ?? ""}
+          baseServicesUrl=""
+          carbonTheme={carbonTheme}
+          enableAppSwitcher={false}
+          enableNotifications={false}
+          enableNotificationsCount={false}
+          productName={productName || platformName || ""}
+          user={user}
+        />
+      </QueryClientProvider>
     );
   }
   const { features, navigation, platform, platformMessage } = config;
@@ -169,9 +188,11 @@ function UIShell({
   return (
     <QueryClientProvider client={queryClient}>
       <Header
+        analyticsHelpers={analyticsHelpers}
         baseEnvUrl={platform.baseEnvUrl}
         baseServicesUrl={platform.baseServicesUrl}
         carbonTheme={carbonTheme}
+        createJoinTeamTrigger={createJoinTeamTrigger}
         enableAppSwitcher={isAppSwitcherEnabled}
         instanceSwitcherEnabled={instanceSwitcherEnabled}
         enableNotifications={isNotificationsEnabled}
@@ -325,6 +346,13 @@ function UIShell({
           ),
           ...supportMenuItems,
         ].filter(Boolean)}
+        history={history}
+        isLaunchpad={isLaunchpad}
+        isLoadingTeamSwitcher={isLoadingTeamSwitcher}
+        isSuccessTeamSwitcher={isSuccessTeamSwitcher}
+        setIsSuccessTeamSwitcher={setIsSuccessTeamSwitcher}
+        trackEvent={trackEvent}
+        user={user}
         userTeams={userTeams}
       />
       {isPrivacyModalRendered ? (
