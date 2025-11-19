@@ -6,7 +6,7 @@ IBM Confidential
 
 import React from "react";
 import { QueryClientProvider } from "react-query";
-import { Book, Forum, HelpDesk, Email, ChatLaunch, Cognitive, Document,Policy } from "@carbon/react/icons";
+import { Book, Forum, HelpDesk, Email, ChatLaunch, Cognitive, Document,Policy ,CatalogPublish} from "@carbon/react/icons";
 import Header from "../Header"; // Using default export
 import HeaderMenuItem from "../Header/HeaderMenuItem";
 import PrivacyRedirectModal from "../PrivacyRedirect";
@@ -271,7 +271,7 @@ function UIShell({
              <HeaderMenuItem
               key="release-notes"
               href={platform?.releaseNotesUrl as string}
-              icon={<Book />}
+              icon={<CatalogPublish />}
               data-testid="release-notes"
               kind="app"
               text="Release Notes"
