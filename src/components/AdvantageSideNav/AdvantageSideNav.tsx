@@ -266,9 +266,8 @@ export function AdvantageSideNav(props: Props) {
       Chat
     </SideNavLink>
   );
-
-  const catalogNavlink = navigation?.navigation?.find((navlink) => navlink.name === "Catalog");
-  const adminNavlink = navigation?.navigation?.find((navlink) => navlink.name === "Admin");
+  const catalogNavlink = navigation?.platform?.catalog?.url;
+  const adminNavlink = navigation?.platform?.admin?.url;
 
   const showSecondDivider =
     (!isPartnerUser && showChatButton) ||
@@ -356,7 +355,7 @@ export function AdvantageSideNav(props: Props) {
               </SideNavLink>
             ) : null}
             <SideNavDivider />
-            {!isPartnerUser &&
+            {
               // assistantLink &&
               showChatButton &&
               (showChatTooltip ? (
@@ -428,8 +427,8 @@ export function AdvantageSideNav(props: Props) {
             ) : null}
             {showSecondDivider ? <SideNavDivider /> : null}
             {catalogNavlink ? (
-              <SideNavLink href={catalogNavlink.url} renderIcon={Catalog}>
-                {catalogNavlink.name}
+              <SideNavLink href={catalogNavlink} renderIcon={Catalog}>
+                Catalog
               </SideNavLink>
             ) : null}
             {settingsLink ? (
@@ -445,8 +444,8 @@ export function AdvantageSideNav(props: Props) {
               </SideNavLink>
             ) : null}
             {adminNavlink ? (
-              <SideNavLink href={adminNavlink.url} renderIcon={LicenseThirdParty}>
-                {adminNavlink.name}
+              <SideNavLink href={adminNavlink} renderIcon={LicenseThirdParty}>
+                Admin
               </SideNavLink>
             ) : null}
           </div>

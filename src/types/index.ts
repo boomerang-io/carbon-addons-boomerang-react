@@ -364,6 +364,9 @@ export interface Navigation {
     displayLogo: boolean;
     feedbackUrl: string;
     footerEnabled: boolean;
+    admin:{url:string};
+    docs:{url:string};
+    catalog:{url:string};
     gaEnabled: boolean;
     linkCatalogId: string;
     instanceSwitcherEnabled: boolean;
