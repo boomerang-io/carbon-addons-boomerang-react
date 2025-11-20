@@ -364,7 +364,7 @@ export function AdvantageSideNav(props: Props) {
               </SideNavLink>
             ) : null}
             <SideNavDivider />
-            {!isPartnerUser &&
+            {
               // assistantLink &&
               showChatButton &&
               (showChatTooltip ? (
