@@ -215,7 +215,7 @@ export function AdvantageSideNav(props: Props) {
       triggerEvent({
         action: "Clicked on SideNav Assistant link",
         category: "Sidenav",
-        destinationPath: assistantLink? assistantLink : redirectLink,
+        destinationPath: redirectLink,
       });
       window.open(redirectLink, "_self", "noopener,noreferrer");
   };
@@ -258,9 +258,9 @@ export function AdvantageSideNav(props: Props) {
       data-testid="sidenav-assistant-link"
       className={!enableChatButton ? `${prefix}--bmrg-advantage-sidenav__inactive-link` : ""}
       disabled={Boolean(!enableChatButton)}
-      isActive={assistantLink ? windowLocation.href.includes(assistantLink) : ""}
+      // isActive={assistantLink }
       renderIcon={ChatBot}
-      href={enableChatButton && assistantLink}
+      // href={enableChatButton}
       onClick={enableChatButton ? handleAssistantClick : (e: any) => e.preventDefault()}
     >
       Chat
