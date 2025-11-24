@@ -18,10 +18,11 @@ export default {
       },
     },
   },
-  decorators: [(story) => <Router>{story()}</Router>],
+  decorators: [(story: any) => <Router>{story()}</Router>],
 };
 
 const sidenavProps = {
+  appLink: { newChatRedirect: "" },
   joinCreateTrigger: () => console.log("Trigger modal if exists"),
   teams: [
     {
@@ -146,7 +147,7 @@ const sidenavProps = {
   ],
 };
 
-export const AdvantageSideNavCustomLinks = (args) => {
+export const AdvantageSideNavCustomLinks = (args: any) => {
   return <AdvantageSideNav {...sidenavProps} />;
 };
 

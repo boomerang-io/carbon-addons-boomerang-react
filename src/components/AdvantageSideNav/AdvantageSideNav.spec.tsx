@@ -24,6 +24,7 @@ Object.defineProperty(window, "matchMedia", {
 });
 
 const sidenavProps = {
+  appLink: { newChatRedirect: "" },
   joinCreateTrigger: () => console.log("Trigger modal if exists"),
   teams: [
     {
