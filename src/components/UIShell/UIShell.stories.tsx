@@ -130,13 +130,6 @@ const PLATFORM_VERSION_DATA = {
 };
 
 const sidenavProps = {
-  homeLink: "http://test.home.com",
-  assistantLink: "http://test.ai.com",
-  toolsLink: "http://test.tools.com",
-  agentAssistantStudioLink: "http://test.agent.assistant.studio.com",
-  agentAssistantLibraryLink: "http://test.agent.assistant.library.com",
-  documentCollectionsLink: "http://test.document.collections.com",
-  settingsLink: "http://test.settings.com",
   joinCreateTrigger: () => console.log("Trigger modal if exists"),
   navigation: {
     navigation: [
@@ -224,6 +217,68 @@ const sidenavProps = {
   tooltipMessage: "Test tooltip message for ui shell",
   showChatTooltip: true,
   isLaunchpad: true,
+  sideNavUrls: [
+    {
+      name: "Home",
+      url: "https://ocp2.cloud.boomerangplatform.net/dev/launchpad/",
+      key: "home",
+      icon: "Home",
+    },
+    {
+      name: "Chat",
+      url: "https://ocp2.cloud.boomerangplatform.net/dev/curatorai/apps/ui/new-chat?teamName=10thSeptTeamFinal&teamId=68c16b4f56a126227190a280",
+      key: "chat",
+      icon: "ChatBot",
+    },
+    {
+      name: "Tools",
+      url: "https://ocp2.cloud.boomerangplatform.net/dev/curatorai/apps/ui/connectors?teamName=10thSeptTeamFinal&teamId=68c16b4f56a126227190a280",
+      key: "tools",
+      icon: "Api",
+    },
+    {
+      name: "Team Page",
+      url: "https://ocp2.cloud.boomerangplatform.net/dev/launchpad/teams/68c16b4f56a126227190a280",
+      key: "teamPage",
+      icon: "UserMultiple",
+    },
+    {
+      name: "Agent & Assistant Library",
+      url: "https://ocp2.cloud.boomerangplatform.net/dev/curatorai/apps/ui/explore-prompts-assistants?teamName=10thSeptTeamFinal&teamId=68c16b4f56a126227190a280",
+      key: "agentLibrary",
+      icon: "Folders",
+    },
+    {
+      name: "Agent & Assistant Studio",
+      url: "https://ocp2.cloud.boomerangplatform.net/dev/launchpad/agent-assistant-studio",
+      key: "agentStudio",
+      icon: "",
+    },
+    {
+      name: "Document Collections",
+      url: "https://ocp2.cloud.boomerangplatform.net/dev/curatorai/apps/ui/chat-with-documents?teamName=10thSeptTeamFinal&teamId=68c16b4f56a126227190a280",
+      key: "documentCollections",
+      icon: "DocumentMultiple_02",
+    },
+    {
+      name: "Settings",
+      url: "https://ocp2.cloud.boomerangplatform.net/dev/curatorai/apps/ui/settings?teamName=10thSeptTeamFinal&teamId=68c16b4f56a126227190a280",
+      key: "settings",
+      icon: "Settings",
+    },
+    {
+      name: "Catalog",
+      url: "https://ocp2.cloud.boomerangplatform.net/dev/catalog/",
+      key: "catalog",
+      icon: "Catalog",
+    },
+    {
+      name: "Admin",
+      url: "https://ocp2.cloud.boomerangplatform.net/dev/admin/",
+      key: "admin",
+      icon: "Admin",
+    },
+  ],
 };
 
 const withDelay = (delay: number, response: any) => (): Promise<any> => {
