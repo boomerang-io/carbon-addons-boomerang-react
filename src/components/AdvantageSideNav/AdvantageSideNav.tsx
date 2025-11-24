@@ -39,7 +39,7 @@ const SideNavUrlKeys = {
 };
 
 type Props = {
-  accounts?: Array<SideNavAccount>;
+  accounts?: Array<SideNavAccount> | null;
   app?: string;
   appLink: any;
   regionalTeam?: any;
@@ -53,7 +53,7 @@ type Props = {
   isLoading?: boolean;
   isOpen?: boolean;
   navLinks?: NavLink[];
-  personalTeams?: Array<SideNavTeam>;
+  personalTeams?: Array<SideNavTeam> | null;
   showChatTooltip?: boolean;
   sideNavUrls?: {
     key: string;
@@ -61,7 +61,7 @@ type Props = {
     url: string;
     icon: string;
   }[];
-  teams?: Array<SideNavTeam>;
+  teams?: Array<SideNavTeam> | null;
   templateMeteringEvent?: (props: any) => void;
   tooltipMessage?: string;
   triggerEvent?: (props: any) => void;
@@ -128,7 +128,7 @@ export function AdvantageSideNav(props: Props) {
   // get current selected team
   let teamSwitcherTeam: any = null;
 
-  if (personalTeams.length > 0) {
+  if (Array.isArray(personalTeams) && personalTeams.length > 0) {
     personalTeams.forEach((team) => {
       if (team.id === user?.teamInstanceSwitcherDefault) {
         teamSwitcherTeam = { ...team, isPersonal: true };
@@ -136,7 +136,7 @@ export function AdvantageSideNav(props: Props) {
     });
   }
 
-  if (teams.length > 0) {
+  if (Array.isArray(teams) && teams.length > 0) {
     teams.forEach((team) => {
       if (team.id === user?.teamInstanceSwitcherDefault) {
         teamSwitcherTeam = { ...team, isStandard: true };
@@ -144,11 +144,11 @@ export function AdvantageSideNav(props: Props) {
     });
   }
 
-  if (accounts.length > 0) {
+  if (Array.isArray(accounts) && accounts.length > 0) {
     accounts.forEach((account) => {
       if (account.id === user?.teamInstanceSwitcherDefault) {
         teamSwitcherTeam = { ...account, isAccount: true };
-      } else if (account.projectTeams && account.projectTeams?.length > 0) {
+      } else if (Array.isArray(account.projectTeams) && account.projectTeams.length > 0) {
         account.projectTeams.forEach((projectTeam) => {
           if (projectTeam.id === user?.teamInstanceSwitcherDefault) {
             teamSwitcherTeam = { ...projectTeam, isProject: true };
