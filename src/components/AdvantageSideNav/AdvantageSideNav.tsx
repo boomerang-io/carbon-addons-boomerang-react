@@ -111,7 +111,7 @@ export function AdvantageSideNav(props: Props) {
   } = props;
   const [activeMenu, setActiveMenu] = React.useState(false);
   const [teamList, setTeamList] = React.useState<{ id: string; name: string }[] | null>(null);
-  const [regionalModalIsOpen, setRegionalModalIsOpen] = React.useState(false);
+  // const [regionalModalIsOpen, setRegionalModalIsOpen] = React.useState(false);
   const [selectedTeam, setSelectedTeam] = React.useState<{ id: string; name: string } | null>(null);
   const isMenuOpen = isOpen || activeMenu;
   const windowLocation = window.location;
@@ -161,10 +161,6 @@ export function AdvantageSideNav(props: Props) {
         destinationPath: homeLink,
       });
   };
-  const handleRegionalNewStartNewChat = (team: { id: string; name: string }) => {
-    const assistantLink = `${appLink?.newChatRedirect()}?teamName=${team.name}&teamId=${team.id}`;
-    window.open(assistantLink, "_self", "noopener,noreferrer");
-  };
 
   const handleToolsClick = () => {
     triggerEvent &&
@@ -212,21 +208,16 @@ export function AdvantageSideNav(props: Props) {
   };
 
   const handleAssistantClick = () => {
-    if (regionalTeam?.length > 1) {
-      setRegionalModalIsOpen(true);
-      setTeamList(
-        regionalTeam?.map((team: { id: any; name: any }) => ({
-          id: team.id,
-          name: team.name,
-        }))
-      );
-    }
+    let redirectLink = `${appLink.newChatRedirect()}?teamName=${teamSwitcherTeam.name}&teamId=${
+          teamSwitcherTeam.id
+        }`;
     triggerEvent &&
       triggerEvent({
         action: "Clicked on SideNav Assistant link",
         category: "Sidenav",
-        destinationPath: assistantLink,
+        destinationPath: redirectLink,
       });
+      window.open(redirectLink, "_self", "noopener,noreferrer");
   };
 
   const handleCreateJoinClick = () => {
@@ -267,9 +258,9 @@ export function AdvantageSideNav(props: Props) {
       data-testid="sidenav-assistant-link"
       className={!enableChatButton ? `${prefix}--bmrg-advantage-sidenav__inactive-link` : ""}
       disabled={Boolean(!enableChatButton)}
-      isActive={assistantLink ? windowLocation.href.includes(assistantLink) : ""}
+      // isActive={assistantLink }
       renderIcon={ChatBot}
-      href={enableChatButton && assistantLink}
+      // href={enableChatButton}
       onClick={enableChatButton ? handleAssistantClick : (e: any) => e.preventDefault()}
     >
       Chat
@@ -457,54 +448,6 @@ export function AdvantageSideNav(props: Props) {
                 Admin
               </SideNavLink>
             ) : null}
-            {regionalModalIsOpen && (
-              <ComposedModal
-                className={`${prefix}--teamSelectionModalContainer`}
-                open={regionalModalIsOpen}
-                onClose={() => setRegionalModalIsOpen(false)}
-                onKeyDown={(e: any) => e.stopPropagation()}
-                data-testid="select-team-chat-modal"
-              >
-                <ModalHeader title="Select Team to Start a New Chat" closeModal={() => setRegionalModalIsOpen(false)} />
-                <ModalBody className={`${prefix}--teamSelectModalBody`}>
-                  <Dropdown
-                    items={teamList}
-                    disabled={!teamList?.length}
-                    id="select-team-chat-modal-dropdown"
-                    selectedItem={selectedTeam}
-                    size="md"
-                    data-testid="select-team-chat-modal-dropdown"
-                    itemToString={(item: any) => item?.name}
-                    label="Choose a team"
-                    onChange={({ selectedItem }: any) => setSelectedTeam(selectedItem)}
-                  />
-                </ModalBody>
-                <ModalFooter>
-                  <Button
-                    kind="secondary"
-                    data-testid="select-team-chat-modal-cancel-button"
-                    onClick={() => setRegionalModalIsOpen(false)}
-                  >
-                    Cancel
-                  </Button>
-                  <Button
-                    data-modal-primary-focus
-                    kind="primary"
-                    disabled={!selectedTeam}
-                    data-testid="select-team-chat-modal-continue-button"
-                    onClick={() => {
-                      if (selectedTeam) {
-                        handleRegionalNewStartNewChat(selectedTeam);
-                        setRegionalModalIsOpen(false);
-                        // closeModal();
-                      }
-                    }}
-                  >
-                    Continue
-                  </Button>
-                </ModalFooter>
-              </ComposedModal>
-            )}
           </div>
           {children ? (
             <>
