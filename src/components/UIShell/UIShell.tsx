@@ -6,7 +6,17 @@ IBM Confidential
 
 import React from "react";
 import { QueryClientProvider } from "react-query";
-import { Book, Forum, HelpDesk, Email, ChatLaunch, Cognitive,Document,Policy ,CatalogPublish } from "@carbon/react/icons";
+import {
+  Book,
+  Forum,
+  HelpDesk,
+  Email,
+  ChatLaunch,
+  Cognitive,
+  Document,
+  Policy,
+  CatalogPublish,
+} from "@carbon/react/icons";
 import Header from "../Header"; // Using default export
 import HeaderMenuItem from "../Header/HeaderMenuItem";
 import PrivacyRedirectModal from "../PrivacyRedirect";
@@ -45,8 +55,8 @@ type Props = {
       baseEnvUrl: string;
       baseServicesUrl: string;
       communityUrl?: string;
-      releaseNotesUrl?:string;
-      legalTermsUrl?:string;
+      releaseNotesUrl?: string;
+      legalTermsUrl?: string;
       feedbackUrl?: string;
       name?: string; // Used in About Plaform modal
       platformEmail?: string;
@@ -54,7 +64,7 @@ type Props = {
       platformVersion: string;
       platformVersionError: boolean;
       platformOrganization?: string;
-      docs?:{url:string};
+      docs?: { url: string };
       privateTeams?: boolean;
       sendIdeasUrl?: string;
       sendMail?: boolean;
@@ -238,7 +248,8 @@ function UIShell({
           isSignOutEnabled && <SignOutMenuItem key="Sign Out" signOutLink={platform.signOutUrl as string} />,
         ].filter(Boolean)}
         supportMenuItems={[
-           <HeaderMenuItem
+          !isPartnerUser && (
+            <HeaderMenuItem
               key="docs"
               href={platform?.docs?.url as string}
               icon={<Document />}
@@ -246,7 +257,8 @@ function UIShell({
               kind="app"
               text="Docs"
               type="link"
-            />,
+            />
+          ),
           isSupportEnabled &&
             (supportFlagCheck || isPartnerUser ? (
               <SupportCenterMenuItem
@@ -268,25 +280,25 @@ function UIShell({
                 type="link"
               />
             )),
-            <HeaderMenuItem
-              key="release-notes"
-              href={platform?.releaseNotesUrl as string}
-              icon={<CatalogPublish />}
-              data-testid="release-notes"
-              kind="app"
-              text="Release Notes"
-              type="link"
-            />,
-             <HeaderMenuItem
-              key="legal-terms"
-              href={platform?.legalTermsUrl as string}
-              icon={<Policy />}
-              data-testid="legal-terms"
-              kind="app"
-              text="Legal Terms"
-              type="link"
-            />,
-          <span style={{"borderBottom": "1px solid #b8c1c1"}}></span>,
+          <HeaderMenuItem
+            key="release-notes"
+            href={platform?.releaseNotesUrl as string}
+            icon={<CatalogPublish />}
+            data-testid="release-notes"
+            kind="app"
+            text="Release Notes"
+            type="link"
+          />,
+          <HeaderMenuItem
+            key="legal-terms"
+            href={platform?.legalTermsUrl as string}
+            icon={<Policy />}
+            data-testid="legal-terms"
+            kind="app"
+            text="Legal Terms"
+            type="link"
+          />,
+          <span style={{ borderBottom: "1px solid #b8c1c1" }}></span>,
           isCommunityEnabled && (
             <HeaderMenuItem
               key="community"

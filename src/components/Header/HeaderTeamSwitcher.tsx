@@ -13,6 +13,7 @@ import HeaderMenu from "./HeaderMenu";
 import { resolver, serviceUrl } from "../../config/servicesConfig";
 import { prefix } from "../../internal/settings";
 import { User } from "../../types";
+import { USER_PLATFORM_ROLE } from "../../constants/UserType";
 
 const headerDropdownMenuContainerClassname = `${prefix}--header-dropdown-menu-container`;
 const headerDropdownMenuLoadingClassname = `${prefix}--header-dropdown-menu-loading`;
@@ -305,6 +306,8 @@ export default function HeaderTeamSwitcher({
       selectedTeamName = selectedTeamName.slice(0, 65) + "...";
     }
 
+    const isPartnerUser = Boolean(user?.type === USER_PLATFORM_ROLE.Partner);
+
     return (
       <div className={headerDropdownMenuContainerClassname}>
         {isLoadingTeamSwitcher ? (
@@ -325,20 +328,22 @@ export default function HeaderTeamSwitcher({
           data-testid="header-team-switcher-menu"
         >
           <HeaderMenu aria-labelledby={menuButtonId} className={headerDropdownMenuListClassname} id={menuListId}>
-            <HeaderMenuItem
-              id="header-team-switcher-create-join-team-button"
-              className={headerTeamSwitcherCreateTeamButtonContainerClassname}
-              onClick={handleCreateJoinTeamClick}
-              // eslint-disable-next-line no-script-url
-              href={"javascript:void(0)"}
-              role="menuitem"
-              data-testid="header-team-switcher-create-join-team-button"
-            >
-              <div className={headerTeamSwitcherCreateTeamButtonClassname}>
-                <span className={headerTeamSwitcherCreateTeamButtonTextClassname}>{createTeamButtonText}</span>
-                <AddAlt className={headerTeamSwitcherCreateTeamButtonIconClassname} />
-              </div>
-            </HeaderMenuItem>
+            {!isPartnerUser && (
+              <HeaderMenuItem
+                id="header-team-switcher-create-join-team-button"
+                className={headerTeamSwitcherCreateTeamButtonContainerClassname}
+                onClick={handleCreateJoinTeamClick}
+                // eslint-disable-next-line no-script-url
+                href={"javascript:void(0)"}
+                role="menuitem"
+                data-testid="header-team-switcher-create-join-team-button"
+              >
+                <div className={headerTeamSwitcherCreateTeamButtonClassname}>
+                  <span className={headerTeamSwitcherCreateTeamButtonTextClassname}>{createTeamButtonText}</span>
+                  <AddAlt className={headerTeamSwitcherCreateTeamButtonIconClassname} />
+                </div>
+              </HeaderMenuItem>
+            )}
             {personalTeam.length > 0
               ? personalTeam.map((team: UserTeam) => {
                   const teamName = team.displayName ? team.displayName : team.name;
