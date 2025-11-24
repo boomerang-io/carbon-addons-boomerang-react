@@ -42,6 +42,8 @@ type Props = {
   accounts?: Array<SideNavAccount> | null;
   app?: string;
   appLink: any;
+  agentStudioPath?: string;
+  agenticAppsPath?: string;
   regionalTeam?: any;
   baseEnvUrl?: string;
   className?: string;
@@ -77,6 +79,8 @@ export function AdvantageSideNav(props: Props) {
   const {
     app,
     appLink,
+    agenticAppsPath = "",
+    agentStudioPath = "",
     regionalTeam,
     enableChatButton = true,
     showChatButton = true,
@@ -385,15 +389,15 @@ export function AdvantageSideNav(props: Props) {
               <SideNavLink
                 data-testid="sidenav-agent-assistant-studio-link"
                 isActive={
-                  windowLocation.href.includes(`/launchpad/agent-assistant-studio`) ||
-                  windowLocation.href.includes(`/launchpad/agenticapps`)
+                  (agentStudioPath && windowLocation.href.includes(`/launchpad${agentStudioPath}`)) ||
+                  (agenticAppsPath && windowLocation.href.includes(`/launchpad${agenticAppsPath}`))
                 }
                 renderIcon={IntentRequestCreate}
                 href={agentAssistantStudioLink}
                 onClick={(e: any) => {
                   if (isLaunchpad) {
                     handleLaunchpadLink(e);
-                    history.push(agentAssistantStudioLink);
+                    history.push(agentStudioPath);
                   }
                   handleAgentAssistantStudioClick();
                 }}
