@@ -238,7 +238,7 @@ function UIShell({
           isSignOutEnabled && <SignOutMenuItem key="Sign Out" signOutLink={platform.signOutUrl as string} />,
         ].filter(Boolean)}
         supportMenuItems={[
-           <HeaderMenuItem
+           !isPartnerUser && <HeaderMenuItem
               key="docs"
               href={platform?.docs?.url as string}
               icon={<Document />}
