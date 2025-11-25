@@ -130,13 +130,7 @@ const PLATFORM_VERSION_DATA = {
 };
 
 const sidenavProps = {
-  homeLink: "http://test.home.com",
-  assistantLink: "http://test.ai.com",
-  toolsLink: "http://test.tools.com",
-  agentAssistantStudioLink: "http://test.agent.assistant.studio.com",
-  agentAssistantLibraryLink: "http://test.agent.assistant.library.com",
-  documentCollectionsLink: "http://test.document.collections.com",
-  settingsLink: "http://test.settings.com",
+  appLink: { newChatRedirect: "" },
   joinCreateTrigger: () => console.log("Trigger modal if exists"),
   navigation: {
     navigation: [
@@ -224,6 +218,68 @@ const sidenavProps = {
   tooltipMessage: "Test tooltip message for ui shell",
   showChatTooltip: true,
   isLaunchpad: true,
+  sideNavUrls: [
+    {
+      name: "Home",
+      url: "https://ocp2.cloud.boomerangplatform.net/dev/launchpad/",
+      key: "home",
+      icon: "Home",
+    },
+    {
+      name: "Chat",
+      url: "https://ocp2.cloud.boomerangplatform.net/dev/curatorai/apps/ui/new-chat?teamName=10thSeptTeamFinal&teamId=68c16b4f56a126227190a280",
+      key: "chat",
+      icon: "ChatBot",
+    },
+    {
+      name: "Tools",
+      url: "https://ocp2.cloud.boomerangplatform.net/dev/curatorai/apps/ui/connectors?teamName=10thSeptTeamFinal&teamId=68c16b4f56a126227190a280",
+      key: "tools",
+      icon: "Api",
+    },
+    {
+      name: "Team Page",
+      url: "https://ocp2.cloud.boomerangplatform.net/dev/launchpad/teams/68c16b4f56a126227190a280",
+      key: "teamPage",
+      icon: "UserMultiple",
+    },
+    {
+      name: "Agent & Assistant Library",
+      url: "https://ocp2.cloud.boomerangplatform.net/dev/curatorai/apps/ui/explore-prompts-assistants?teamName=10thSeptTeamFinal&teamId=68c16b4f56a126227190a280",
+      key: "agentLibrary",
+      icon: "Folders",
+    },
+    {
+      name: "Agent & Assistant Studio",
+      url: "https://ocp2.cloud.boomerangplatform.net/dev/launchpad/agent-assistant-studio",
+      key: "agentStudio",
+      icon: "",
+    },
+    {
+      name: "Document Collections",
+      url: "https://ocp2.cloud.boomerangplatform.net/dev/curatorai/apps/ui/chat-with-documents?teamName=10thSeptTeamFinal&teamId=68c16b4f56a126227190a280",
+      key: "documentCollections",
+      icon: "DocumentMultiple_02",
+    },
+    {
+      name: "Settings",
+      url: "https://ocp2.cloud.boomerangplatform.net/dev/curatorai/apps/ui/settings?teamName=10thSeptTeamFinal&teamId=68c16b4f56a126227190a280",
+      key: "settings",
+      icon: "Settings",
+    },
+    {
+      name: "Catalog",
+      url: "https://ocp2.cloud.boomerangplatform.net/dev/catalog/",
+      key: "catalog",
+      icon: "Catalog",
+    },
+    {
+      name: "Admin",
+      url: "https://ocp2.cloud.boomerangplatform.net/dev/admin/",
+      key: "admin",
+      icon: "Admin",
+    },
+  ],
 };
 
 const withDelay = (delay: number, response: any) => (): Promise<any> => {
@@ -245,7 +301,7 @@ function MainContent(props: { children?: React.ReactNode }) {
   );
 }
 
-export const UIShellDefault = (args) => {
+export const UIShellDefault = (args: any) => {
   const mock = new MockAdapter(axios);
   mock.onGet(`${BASE_SERVICES_URL}/users/consents`).reply(200, PRIVACY_DATA);
   mock.onGet(`${BASE_SERVICES_URL}/users/platform/version`).reply(200, PLATFORM_VERSION_DATA);
@@ -343,7 +399,7 @@ export const UIShellDefault = (args) => {
   );
 };
 
-export const UIShellDefaultWhite = (args) => {
+export const UIShellDefaultWhite = (args: any) => {
   const mock = new MockAdapter(axios);
   mock.onGet(`${BASE_SERVICES_URL}/users/consents`).reply(200, PRIVACY_DATA);
   mock.onGet(`${BASE_SERVICES_URL}/users/platform/version`).reply(200, PLATFORM_VERSION_DATA);
@@ -419,7 +475,7 @@ export const UIShellDefaultWhite = (args) => {
   );
 };
 
-export function UIShellKitchenSink(args) {
+export function UIShellKitchenSink(args: any) {
   const mock = new MockAdapter(axios);
   mock.onGet(`${BASE_SERVICES_URL}/launchpad/user`).reply(200, PROFILE_SETTINGS_DATA);
   mock.onGet(`${BASE_SERVICES_URL}/launchpad/teams/1/services`).reply(withDelay(3000, [200, SERVICES_DATA]));
@@ -483,21 +539,21 @@ export function UIShellKitchenSink(args) {
           <SideNav isChildOfHeader aria-label="Sidenav" expanded={isOpen} isPersistent={false} onOverlayClick={close}>
             <SideNavItems>
               {navLinks?.map((navLink) => (
-                <SideNavLink large element={Link} to="." onClick={close}>
+                <SideNavLink large href="." onClick={close}>
                   {navLink.name}
                 </SideNavLink>
               ))}
               {navLinks ? <SideNavDivider /> : null}
-              <SideNavLink element={Link} to="." onClick={close}>
+              <SideNavLink href="." onClick={close}>
                 React Router Link
               </SideNavLink>
-              <SideNavLink isActive element={Link} renderIcon={ServiceDesk} to="." onClick={close}>
+              <SideNavLink isActive renderIcon={ServiceDesk} href="." onClick={close}>
                 Active React Router link with icon
               </SideNavLink>
-              <SideNavLink element={Link} large to="." onClick={close}>
+              <SideNavLink large href="." onClick={close}>
                 Large React Router link
               </SideNavLink>
-              <SideNavLink isActive element={Link} renderIcon={ServiceDesk} to="." large onClick={close}>
+              <SideNavLink isActive renderIcon={ServiceDesk} href="." large onClick={close}>
                 Large React Router active link with icon
               </SideNavLink>
               <SideNavMenu title="Menu">
@@ -600,7 +656,7 @@ export function UIShellKitchenSink(args) {
   );
 }
 
-export const UIShellUserNotConsented = (args) => {
+export const UIShellUserNotConsented = (args: any) => {
   const mock = new MockAdapter(axios);
   mock.onGet(`${BASE_SERVICES_URL}/users/consents`).reply(200, PRIVACY_DATA);
   return (
@@ -658,7 +714,7 @@ export const UIShellUserNotConsented = (args) => {
   );
 };
 
-export const UIShellUserPendingDeletion = (args) => {
+export const UIShellUserPendingDeletion = (args: any) => {
   const mock = new MockAdapter(axios);
   mock.onGet(`${BASE_SERVICES_URL}/users/consents`).reply(200, PRIVACY_DATA);
   return (
@@ -712,37 +768,39 @@ export const UIShellUserPendingDeletion = (args) => {
   );
 };
 
-const UIShellEmptyState = (args) => {
+const UIShellEmptyState = (args: any) => {
   const mock = new MockAdapter(axios);
   mock.onGet(`${BASE_SERVICES_URL}/users/consents`).reply(200, PRIVACY_DATA);
   return <UIShell productName="Boomerang" {...args} />;
 };
 
-export const Default = (args) => {
+export const Default = (args: any) => {
   return <UIShellDefault {...args} />;
 };
 
-export const KitchenSink = (args) => {
+export const KitchenSink = (args: any) => {
   return <UIShellKitchenSink {...args} />;
 };
 
-export const LeftPanel = (args) => {
+export const LeftPanel = (args: any) => {
   return (
     <UIShellDefault
       {...args}
-      leftPanel={({ isOpen, navLinks }) => <AdvantageSideNav {...sidenavProps} isOpen={isOpen} navLinks={navLinks} />}
+      leftPanel={({ isOpen, navLinks }: any) => (
+        <AdvantageSideNav {...sidenavProps} isOpen={isOpen} navLinks={navLinks} />
+      )}
     />
   );
 };
 
-export const UserNotConsented = (args) => {
+export const UserNotConsented = (args: any) => {
   return <UIShellUserNotConsented {...args} />;
 };
 
-export const UserPendingDeletion = (args) => {
+export const UserPendingDeletion = (args: any) => {
   return <UIShellUserPendingDeletion {...args} />;
 };
 
-export const EmptyState = (args) => {
+export const EmptyState = (args: any) => {
   return <UIShellEmptyState {...args} />;
 };

@@ -6,18 +6,7 @@ IBM Confidential
 
 import React from "react";
 import cx from "classnames";
-import {
-  SideNav,
-  SideNavDivider,
-  SideNavItems,
-  SideNavLink,
-  ComposedModal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  Dropdown,
-  Button,
-} from "@carbon/react";
+import { SideNav, SideNavDivider, SideNavItems, SideNavLink } from "@carbon/react";
 import TooltipHover from "../TooltipHover";
 import {
   AddAlt,
@@ -34,34 +23,47 @@ import {
 } from "@carbon/react/icons";
 import { USER_PLATFORM_ROLE } from "../../constants/UserType";
 import { prefix } from "../../internal/settings";
-import { NavLink, Navigation, SideNavTeam, SideNavAccount, User } from "types";
+import { NavLink, SideNavTeam, SideNavAccount, User } from "types";
+
+const SideNavUrlKeys = {
+  Home: "home",
+  TeamPage: "teamPage",
+  Chat: "chat",
+  Tools: "tools",
+  AgentStudio: "agentStudio",
+  AgentLibrary: "agentLibrary",
+  DocumentCollections: "documentCollections",
+  Catalog: "catalog",
+  Settings: "settings",
+  Admin: "admin",
+};
 
 type Props = {
-  accounts?: Array<SideNavAccount>;
+  accounts?: Array<SideNavAccount> | null;
   app?: string;
   appLink: any;
+  agentStudioPath?: string;
+  agenticAppsPath?: string;
   regionalTeam?: any;
-  assistantLink?: string;
   baseEnvUrl?: string;
   className?: string;
   defaultAssistantLink?: string;
   enableChatButton?: boolean;
   showChatButton?: boolean;
   showSelectTeamPurpose?: boolean;
-  homeLink?: string;
-  agentAssistantStudioLink?: string;
-  agentAssistantLibraryLink?: string;
-  documentCollectionsLink?: string;
-  settingsLink?: string;
-  toolsLink?: string;
   joinCreateTrigger?: (props: any) => void;
   isLoading?: boolean;
   isOpen?: boolean;
-  navigation?: Navigation;
   navLinks?: NavLink[];
-  personalTeams?: Array<SideNavTeam>;
+  personalTeams?: Array<SideNavTeam> | null;
   showChatTooltip?: boolean;
-  teams?: Array<SideNavTeam>;
+  sideNavUrls?: {
+    key: string;
+    name: string;
+    url: string;
+    icon: string;
+  }[];
+  teams?: Array<SideNavTeam> | null;
   templateMeteringEvent?: (props: any) => void;
   tooltipMessage?: string;
   triggerEvent?: (props: any) => void;
@@ -77,18 +79,13 @@ export function AdvantageSideNav(props: Props) {
   const {
     app,
     appLink,
+    agenticAppsPath = "",
+    agentStudioPath = "",
     regionalTeam,
     enableChatButton = true,
     showChatButton = true,
     showSelectTeamPurpose = false,
-    homeLink,
-    agentAssistantStudioLink,
-    agentAssistantLibraryLink,
-    assistantLink,
     defaultAssistantLink,
-    documentCollectionsLink,
-    settingsLink,
-    toolsLink,
     joinCreateTrigger,
     isLoading,
     isOpen,
@@ -98,31 +95,44 @@ export function AdvantageSideNav(props: Props) {
     baseEnvUrl,
     className,
     navLinks,
-    navigation,
     personalTeams = [],
     user,
     showChatTooltip,
     templateMeteringEvent,
     tooltipMessage,
     isLaunchpad = false,
+    sideNavUrls,
     history,
     children,
     ...rest
   } = props;
   const [activeMenu, setActiveMenu] = React.useState(false);
-  const [teamList, setTeamList] = React.useState<{ id: string; name: string }[] | null>(null);
-  // const [regionalModalIsOpen, setRegionalModalIsOpen] = React.useState(false);
-  const [selectedTeam, setSelectedTeam] = React.useState<{ id: string; name: string } | null>(null);
   const isMenuOpen = isOpen || activeMenu;
   const windowLocation = window.location;
   const isPartnerUser = user?.type === USER_PLATFORM_ROLE.Partner;
   const joinButtontitle = showSelectTeamPurpose ? "Create Team" : "Create or Join Team";
   const hamburguerMenu = document.getElementById("header-sidenav-menu-button");
 
+  const homeLink = sideNavUrls?.find((sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.Home)?.url;
+  const chatLink = sideNavUrls?.find((sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.Chat)?.url;
+  const toolsLink = sideNavUrls?.find((sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.Tools)?.url;
+  const agentAssistantStudioLink = sideNavUrls?.find(
+    (sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.AgentStudio
+  )?.url;
+  const agentAssistantLibraryLink = sideNavUrls?.find(
+    (sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.AgentLibrary
+  )?.url;
+  const documentCollectionsLink = sideNavUrls?.find(
+    (sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.DocumentCollections
+  )?.url;
+  const catalogNavlink = sideNavUrls?.find((sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.Catalog)?.url;
+  const settingsLink = sideNavUrls?.find((sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.Settings)?.url;
+  const adminNavlink = sideNavUrls?.find((sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.Admin)?.url;
+
   // get current selected team
   let teamSwitcherTeam: any = null;
 
-  if (personalTeams.length > 0) {
+  if (Array.isArray(personalTeams) && personalTeams.length > 0) {
     personalTeams.forEach((team) => {
       if (team.id === user?.teamInstanceSwitcherDefault) {
         teamSwitcherTeam = { ...team, isPersonal: true };
@@ -130,7 +140,7 @@ export function AdvantageSideNav(props: Props) {
     });
   }
 
-  if (teams.length > 0) {
+  if (Array.isArray(teams) && teams.length > 0) {
     teams.forEach((team) => {
       if (team.id === user?.teamInstanceSwitcherDefault) {
         teamSwitcherTeam = { ...team, isStandard: true };
@@ -138,11 +148,11 @@ export function AdvantageSideNav(props: Props) {
     });
   }
 
-  if (accounts.length > 0) {
+  if (Array.isArray(accounts) && accounts.length > 0) {
     accounts.forEach((account) => {
       if (account.id === user?.teamInstanceSwitcherDefault) {
         teamSwitcherTeam = { ...account, isAccount: true };
-      } else if (account.projectTeams && account.projectTeams?.length > 0) {
+      } else if (Array.isArray(account.projectTeams) && account.projectTeams.length > 0) {
         account.projectTeams.forEach((projectTeam) => {
           if (projectTeam.id === user?.teamInstanceSwitcherDefault) {
             teamSwitcherTeam = { ...projectTeam, isProject: true };
@@ -207,17 +217,17 @@ export function AdvantageSideNav(props: Props) {
       });
   };
 
-  const handleAssistantClick = () => {
-    let redirectLink = `${appLink.newChatRedirect()}?teamName=${teamSwitcherTeam.name}&teamId=${
-          teamSwitcherTeam.id
-        }`;
+  const handleChatClick = () => {
+    let redirectLink = chatLink
+      ? chatLink
+      : `${appLink.newChatRedirect()}?teamName=${teamSwitcherTeam.name}&teamId=${teamSwitcherTeam.id}`;
     triggerEvent &&
       triggerEvent({
-        action: "Clicked on SideNav Assistant link",
+        action: "Clicked on SideNav Chat link",
         category: "Sidenav",
         destinationPath: redirectLink,
       });
-      window.open(redirectLink, "_self", "noopener,noreferrer");
+    window.open(redirectLink, "_self", "noopener,noreferrer");
   };
 
   const handleCreateJoinClick = () => {
@@ -252,22 +262,18 @@ export function AdvantageSideNav(props: Props) {
     setActiveMenu(false);
   };
 
-  const assistantSideNavLink = (
-    // assistantLink &&
+  const chatSideNavLink = (
     <SideNavLink
-      data-testid="sidenav-assistant-link"
+      data-testid="sidenav-chat-link"
       className={!enableChatButton ? `${prefix}--bmrg-advantage-sidenav__inactive-link` : ""}
       disabled={Boolean(!enableChatButton)}
-      // isActive={assistantLink }
       renderIcon={ChatBot}
-      // href={enableChatButton}
-      onClick={enableChatButton ? handleAssistantClick : (e: any) => e.preventDefault()}
+      href={enableChatButton && chatLink}
+      onClick={enableChatButton ? handleChatClick : (e: any) => e.preventDefault()}
     >
       Chat
     </SideNavLink>
   );
-  const catalogNavlink = navigation?.platform?.catalog?.url;
-  const adminNavlink = navigation?.platform?.admin?.url;
 
   const showSecondDivider =
     (!isPartnerUser && showChatButton) ||
@@ -355,19 +361,17 @@ export function AdvantageSideNav(props: Props) {
               </SideNavLink>
             ) : null}
             <SideNavDivider />
-            {
-              // assistantLink &&
-              showChatButton &&
+            {showChatButton &&
               (showChatTooltip ? (
                 <TooltipHover
                   className={`${prefix}--bmrg-side-nav__tooltip`}
                   content={tooltipMessage}
                   direction="right"
                 >
-                  <span>{assistantSideNavLink}</span>
+                  <span>{chatSideNavLink}</span>
                 </TooltipHover>
               ) : (
-                assistantSideNavLink
+                chatSideNavLink
               ))}
             {toolsLink ? (
               <SideNavLink
@@ -385,15 +389,15 @@ export function AdvantageSideNav(props: Props) {
               <SideNavLink
                 data-testid="sidenav-agent-assistant-studio-link"
                 isActive={
-                  windowLocation.href.includes(`/launchpad/agent-assistant-studio`) ||
-                  windowLocation.href.includes(`/launchpad/agenticapps`)
+                  (agentStudioPath && windowLocation.href.includes(`/launchpad${agentStudioPath}`)) ||
+                  (agenticAppsPath && windowLocation.href.includes(`/launchpad${agenticAppsPath}`))
                 }
                 renderIcon={IntentRequestCreate}
                 href={agentAssistantStudioLink}
                 onClick={(e: any) => {
                   if (isLaunchpad) {
                     handleLaunchpadLink(e);
-                    history.push(agentAssistantStudioLink);
+                    history.push(agentStudioPath);
                   }
                   handleAgentAssistantStudioClick();
                 }}
