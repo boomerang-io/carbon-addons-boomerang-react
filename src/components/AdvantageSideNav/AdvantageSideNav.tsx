@@ -55,6 +55,7 @@ type Props = {
   isLoading?: boolean;
   isOpen?: boolean;
   navLinks?: NavLink[];
+  personalTeamEnabled?:boolean;
   personalTeams?: Array<SideNavTeam> | null;
   showChatTooltip?: boolean;
   sideNavUrls?: {
@@ -104,12 +105,14 @@ export function AdvantageSideNav(props: Props) {
     sideNavUrls,
     history,
     children,
+    personalTeamEnabled,
     ...rest
   } = props;
   const [activeMenu, setActiveMenu] = React.useState(false);
   const isMenuOpen = isOpen || activeMenu;
   const windowLocation = window.location;
   const isPartnerUser = user?.type === USER_PLATFORM_ROLE.Partner;
+  const defaultTeamHasAssistantsAccess  = user?.defaultTeamHasAssistantsAccess;
   const joinButtontitle = showSelectTeamPurpose ? "Create Team" : "Create or Join Team";
   const hamburguerMenu = document.getElementById("header-sidenav-menu-button");
 
@@ -361,7 +364,7 @@ export function AdvantageSideNav(props: Props) {
               </SideNavLink>
             ) : null}
             <SideNavDivider />
-            {showChatButton &&
+            {defaultTeamHasAssistantsAccess && personalTeamEnabled && showChatButton &&
               (showChatTooltip ? (
                 <TooltipHover
                   className={`${prefix}--bmrg-side-nav__tooltip`}

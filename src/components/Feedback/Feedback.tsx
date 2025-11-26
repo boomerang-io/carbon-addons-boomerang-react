@@ -32,11 +32,7 @@ function Feedback(props: Props) {
       <ModalBody>
         <div className={`${prefix}--bmrg-feedback`}>
           <p>
-            Share your thoughts and ideas on what we can do to improve the {props.platformName} platform and our
-            onboarding process.
-          </p>
-          <p>
-            To submit your idea, visit our portal at
+            Have an idea on how we can improve Consulting Advantage? Submit your idea  
             {" " /* We need to force a space before the link tag */}
             <a
               aria-describedby="new-window-aria-desc-0"
@@ -44,18 +40,24 @@ function Feedback(props: Props) {
               target="_blank"
               rel="noopener noreferrer"
             >
-              {props.sendIdeasUrl}
-            </a>
-            .
+              here
+            </a>.
+             You’ll be able to see other public ideas, vote on them, and track the status of your idea.
           </p>
           <p>
-            For now, you must have an {props.platformOrganization} email address and you will need to register with a
-            password during your first visit.
+           Have an innovative new asset, assistant, or automation you've built outside of ICA? 
+            {" " /* We need to force a space before the link tag */}
+           Submit your idea  <a
+              aria-describedby="new-window-aria-desc-0"
+              href={props.sendIdeasUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              here
+            </a> and you could win a BluePoints award.
           </p>
-          <p>
-            You will have the opportunity to see other public ideas, vote on them and track the status of your idea.
-          </p>
-          <p>We look forward to your feedback!</p>
+          <p>We look forward to your feedback and ideas!"</p>
+         
         </div>
       </ModalBody>
       <ModalFooter>
