@@ -252,6 +252,7 @@ export type User = {
   firstLoginDate: string;
   globalServices?: [any];
   hasConsented: boolean;
+  defaultTeamHasAssistantsAccess:boolean;
   id: string;
   isFirstVisit: boolean | null;
   isShowHelp: boolean | null;

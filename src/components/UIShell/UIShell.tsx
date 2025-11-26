@@ -67,6 +67,7 @@ type Props = {
       docs?: { url: string };
       privateTeams?: boolean;
       sendIdeasUrl?: string;
+      sendBluePointsAwardUrl?:string;
       sendMail?: boolean;
       askICAEnabled?: boolean;
       signOutUrl?: string;
@@ -159,6 +160,7 @@ function UIShell({
   const names = getProductAndPlatformNames({ productName, platformName, platform });
   const sendIdeasUrl = platform?.feedbackUrl || "https://ideas.ibm.com";
   const supportLink = platform?.supportUrl;
+  const sendBluePointsAwardUrl = platform?.sendBluePointsAwardUrl;
   const partnerEmailId = "ica-support@ibm.com";
   /**
    * Check feature enablement via explicit feature flags
@@ -315,6 +317,7 @@ function UIShell({
               platformName={platform?.platformName}
               platformOrganization={platform?.platformOrganization}
               sendIdeasUrl={sendIdeasUrl}
+              sendBluePointsAwardUrl={sendBluePointsAwardUrl}
             />
           ),
           !isPartnerUser && askICAEnabled ? (
