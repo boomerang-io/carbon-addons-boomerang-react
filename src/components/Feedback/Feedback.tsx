@@ -17,7 +17,7 @@ type Props = {
   platformName?: string;
   platformOrganization?: string;
   sendIdeasUrl?: string;
-  sendbluepointsAwardUrl?:string;
+  sendBluePointsAwardUrl?:string;
 };
 
 function Feedback(props: Props) {
@@ -50,7 +50,7 @@ function Feedback(props: Props) {
             {" " /* We need to force a space before the link tag */}
            Submit your idea  <a
               aria-describedby="new-window-aria-desc-0"
-              href={props.sendbluepointsAwardUrl}
+              href={props.sendBluePointsAwardUrl}
               target="_blank"
               rel="noopener noreferrer"
             >
