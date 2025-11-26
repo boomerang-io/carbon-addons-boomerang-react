@@ -72,6 +72,8 @@ type Props = {
     requireUserAction: number;
     submittedByUser: number;
   };
+  refetchUser?: Function;
+  refetchNavigation?: Function;
   skipToContentProps?: { href?: string; children?: string; className?: string };
   supportMenuItems?: React.ReactNode[];
   instanceSwitcherMenuItems?: React.ReactNode[];
@@ -153,6 +155,8 @@ export default function Header(props: Props) {
     navLinks,
     platform,
     prefixName = "",
+    refetchUser,
+    refetchNavigation,
     rightPanel,
     skipToContentProps,
     templateMeteringEvent,
@@ -212,6 +216,8 @@ export default function Header(props: Props) {
               menuButtonId={MenuButtonId.TeamSwitcher}
               menuListId={MenuListId.TeamSwitcher}
               navigationPlatform={platform}
+              refetchUser={refetchUser}
+              refetchNavigation={refetchNavigation}
               teamsQuery={teamsQuery}
               trackEvent={trackEvent}
               user={user}

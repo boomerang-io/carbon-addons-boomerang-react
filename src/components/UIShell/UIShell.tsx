@@ -67,7 +67,7 @@ type Props = {
       docs?: { url: string };
       privateTeams?: boolean;
       sendIdeasUrl?: string;
-      sendBluePointsAwardUrl?:string;
+      sendBluePointsAwardUrl?: string;
       sendMail?: boolean;
       askICAEnabled?: boolean;
       signOutUrl?: string;
@@ -94,6 +94,8 @@ type Props = {
   renderPrivacyRedirect?: boolean;
   renderPrivacyStatement?: boolean;
   rightPanel?: { icon?: React.ReactNode; component: React.ReactNode };
+  refetchUser?: Function;
+  refetchNavigation?: Function;
   skipToContentProps?: {
     href?: string;
     children?: string;
@@ -130,6 +132,8 @@ function UIShell({
   renderPrivacyStatement = true,
   rightPanel,
   handleShowTutorial,
+  refetchUser,
+  refetchNavigation,
   skipToContentProps,
   templateMeteringEvent,
   trackEvent,
@@ -365,6 +369,8 @@ function UIShell({
         isLaunchpad={isLaunchpad}
         isLoadingTeamSwitcher={isLoadingTeamSwitcher}
         isSuccessTeamSwitcher={isSuccessTeamSwitcher}
+        refetchUser={refetchUser}
+        refetchNavigation={refetchNavigation}
         setIsSuccessTeamSwitcher={setIsSuccessTeamSwitcher}
         trackEvent={trackEvent}
         user={user}

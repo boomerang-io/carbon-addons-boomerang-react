@@ -5,12 +5,12 @@ IBM Confidential
 */
 
 import React, { useEffect, useState } from "react";
-import { UseQueryResult, useQueryClient, useMutation } from "react-query";
+import { UseQueryResult, useMutation } from "react-query";
 import { HeaderMenu as CarbonHeaderMenu, HeaderMenuItem, InlineLoading } from "@carbon/react";
 import { AddAlt, CheckmarkFilled, ChevronDown, GroupAccount } from "@carbon/react/icons";
 import sortBy from "lodash.sortby";
 import HeaderMenu from "./HeaderMenu";
-import { resolver, serviceUrl } from "../../config/servicesConfig";
+import { resolver } from "../../config/servicesConfig";
 import { prefix } from "../../internal/settings";
 import { User } from "../../types";
 import { USER_PLATFORM_ROLE } from "../../constants/UserType";
@@ -61,6 +61,8 @@ type HeaderTeamSwitcherProps = {
   menuButtonId: string;
   menuListId: string;
   navigationPlatform: any;
+  refetchUser?: Function;
+  refetchNavigation?: Function;
   teamsQuery?: UseQueryResult<any>;
   trackEvent?: Function;
   user?: User;
@@ -80,12 +82,13 @@ export default function HeaderTeamSwitcher({
   menuButtonId,
   menuListId,
   navigationPlatform,
+  refetchUser,
+  refetchNavigation,
   teamsQuery,
   trackEvent,
   user,
   userTeams,
 }: HeaderTeamSwitcherProps) {
-  const queryClient = useQueryClient();
   const [selectedTeam, setSelectedTeam] = useState<UserTeam | null>();
   const [openAccountSubmenuId, setOpenAccountSubmenuId] = useState<string>("");
   const hasUserTeams = Boolean(userTeams);
@@ -93,7 +96,6 @@ export default function HeaderTeamSwitcher({
   const createTeamButtonText = showSelectTeamPurpose ? "Create Team" : "Create or Join Team";
   const userTeamInstanceSwitcherDefault = user?.teamInstanceSwitcherDefault;
 
-  const profileUrl = serviceUrl.resourceUserProfile({ baseServicesUrl });
   const teamLink = ({ teamId }: { teamId: string }) => {
     return `${navigationPlatform.baseEnvUrl}/launchpad/teams/${teamId}`;
   };
@@ -102,7 +104,8 @@ export default function HeaderTeamSwitcher({
     resolver.patchUserProfile,
     {
       onSuccess: () => {
-        queryClient.invalidateQueries(profileUrl);
+        if (refetchUser) refetchUser();
+        if (refetchNavigation) refetchNavigation();
       },
     }
   );
