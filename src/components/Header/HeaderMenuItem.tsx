@@ -69,7 +69,6 @@ function HeaderMenuItem(props: Props, ref: React.ForwardedRef<HTMLLinkElement>) 
     let linkTypeIcon;
     switch (kind) {
       case "external":
-        linkTypeIcon = <Launch title="Opens link in new tab" />;
         break;
       case "internal":
         linkTypeIcon = <ArrowRight title="Opens link within same platform" />;

@@ -26,7 +26,7 @@ describe("Feedback", () => {
   test("functional", async () => {
     render(<Feedback platformName={platformName} sendIdeasUrl={sendIdeasUrl} {...headerModalProps} />);
 
-    expect(await screen.findByText("We look forward to your feedback!")).toBeInTheDocument();
+    expect(await screen.findByText("We look forward to your feedback and ideas!")).toBeInTheDocument();
     fireEvent.click(screen.getByRole("button", { name: /OK/i }));
   });
 
