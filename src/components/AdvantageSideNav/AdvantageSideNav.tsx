@@ -55,6 +55,7 @@ type Props = {
   isLoading?: boolean;
   isOpen?: boolean;
   navLinks?: NavLink[];
+  personalTeamEnabled?: boolean;
   personalTeams?: Array<SideNavTeam> | null;
   showChatTooltip?: boolean;
   sideNavUrls?: {
@@ -104,6 +105,7 @@ export function AdvantageSideNav(props: Props) {
     sideNavUrls,
     history,
     children,
+    personalTeamEnabled,
     ...rest
   } = props;
   const [activeMenu, setActiveMenu] = React.useState(false);
@@ -276,11 +278,7 @@ export function AdvantageSideNav(props: Props) {
   );
 
   const showSecondDivider =
-    (!isPartnerUser && showChatButton) ||
-    toolsLink ||
-    agentAssistantStudioLink ||
-    agentAssistantLibraryLink ||
-    documentCollectionsLink;
+    showChatButton || toolsLink || agentAssistantStudioLink || agentAssistantLibraryLink || documentCollectionsLink;
 
   return (
     <SideNav
@@ -309,7 +307,7 @@ export function AdvantageSideNav(props: Props) {
                 onClick={(e: any) => {
                   if (isLaunchpad) {
                     handleLaunchpadLink(e);
-                    history.push(homeLink);
+                    history.push("/");
                   }
                   handleHomeClick();
                 }}

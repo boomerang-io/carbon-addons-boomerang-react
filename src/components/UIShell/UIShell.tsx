@@ -67,6 +67,7 @@ type Props = {
       docs?: { url: string };
       privateTeams?: boolean;
       sendIdeasUrl?: string;
+      sendBluePointsAwardUrl?: string;
       sendMail?: boolean;
       askICAEnabled?: boolean;
       signOutUrl?: string;
@@ -93,6 +94,8 @@ type Props = {
   renderPrivacyRedirect?: boolean;
   renderPrivacyStatement?: boolean;
   rightPanel?: { icon?: React.ReactNode; component: React.ReactNode };
+  refetchUser?: Function;
+  refetchNavigation?: Function;
   skipToContentProps?: {
     href?: string;
     children?: string;
@@ -129,6 +132,8 @@ function UIShell({
   renderPrivacyStatement = true,
   rightPanel,
   handleShowTutorial,
+  refetchUser,
+  refetchNavigation,
   skipToContentProps,
   templateMeteringEvent,
   trackEvent,
@@ -159,6 +164,7 @@ function UIShell({
   const names = getProductAndPlatformNames({ productName, platformName, platform });
   const sendIdeasUrl = platform?.feedbackUrl || "https://ideas.ibm.com";
   const supportLink = platform?.supportUrl;
+  const sendBluePointsAwardUrl = platform?.sendBluePointsAwardUrl;
   const partnerEmailId = "ica-support@ibm.com";
   /**
    * Check feature enablement via explicit feature flags
@@ -315,6 +321,7 @@ function UIShell({
               platformName={platform?.platformName}
               platformOrganization={platform?.platformOrganization}
               sendIdeasUrl={sendIdeasUrl}
+              sendBluePointsAwardUrl={sendBluePointsAwardUrl}
             />
           ),
           !isPartnerUser && askICAEnabled ? (
@@ -362,6 +369,8 @@ function UIShell({
         isLaunchpad={isLaunchpad}
         isLoadingTeamSwitcher={isLoadingTeamSwitcher}
         isSuccessTeamSwitcher={isSuccessTeamSwitcher}
+        refetchUser={refetchUser}
+        refetchNavigation={refetchNavigation}
         setIsSuccessTeamSwitcher={setIsSuccessTeamSwitcher}
         trackEvent={trackEvent}
         user={user}
