@@ -260,7 +260,7 @@ function UIShell({
               href={platform?.docs?.url as string}
               icon={<Document />}
               data-testid="docs"
-              kind="app"
+              kind="external"
               text="Docs"
               type="link"
             />
