@@ -83,10 +83,12 @@ export type SimpleIdNameMap = {
   isTeamMember?: boolean;
   privateTeam?: boolean;
   displayName?: string;
-  services?: Array<{ name: string; url: string }>;
+  services?: Array<{ id: string; templateId: string; name: string; url: string }>;
 };
 
 export type SimpleTeamService = {
+  id: string;
+  templateId: string;
   name: string;
   url: string;
 };
@@ -252,7 +254,7 @@ export type User = {
   firstLoginDate: string;
   globalServices?: [any];
   hasConsented: boolean;
-  defaultTeamHasAssistantsAccess:boolean;
+  defaultTeamHasAssistantsAccess: boolean;
   id: string;
   isFirstVisit: boolean | null;
   isShowHelp: boolean | null;
@@ -365,9 +367,9 @@ export interface Navigation {
     displayLogo: boolean;
     feedbackUrl: string;
     footerEnabled: boolean;
-    admin:{url:string};
-    docs:{url:string};
-    catalog:{url:string};
+    admin: { url: string };
+    docs: { url: string };
+    catalog: { url: string };
     gaEnabled: boolean;
     linkCatalogId: string;
     instanceSwitcherEnabled: boolean;
