@@ -5,7 +5,7 @@ IBM Confidential
 */
 
 import React from "react";
-import { useQuery, UseQueryResult } from "react-query";
+import { useQuery } from "react-query";
 import {
   Header as CarbonHeader,
   HeaderGlobalBar,
@@ -169,19 +169,13 @@ export default function Header(props: Props) {
   } = props;
 
   const hasUserTeams = Boolean(userTeams);
-  const hasUserTeamsAssets = Boolean(userTeamsAssets);
+
   const userTeamsUrl = serviceUrl.getUserTeamsServices({ baseServicesUrl });
-  const userTeamsAssetsUrl = serviceUrl.getUserTeamsServicesAssets({ baseServicesUrl });
+
   const teamsQuery = useQuery({
     queryKey: userTeamsUrl,
     queryFn: resolver.query(userTeamsUrl, null),
     enabled: !hasUserTeams && Boolean(baseServicesUrl),
-  });
-
-  const teamsAssetsQuery = useQuery({
-    queryKey: userTeamsAssetsUrl,
-    queryFn: resolver.query(userTeamsAssetsUrl, null),
-    enabled: !hasUserTeamsAssets && Boolean(baseServicesUrl),
   });
 
   return (
@@ -259,7 +253,6 @@ export default function Header(props: Props) {
               baseEnvUrl={baseEnvUrl}
               baseServicesUrl={baseServicesUrl}
               enabled={props.enableAppSwitcher}
-              teamsQuery={teamsAssetsQuery}
               templateMeteringEvent={templateMeteringEvent}
               triggerEvent={triggerEvent}
               userTeams={userTeamsAssets}
@@ -478,12 +471,21 @@ function AppSwitcherMenu(props: {
   enabled?: boolean;
   baseEnvUrl?: string;
   baseServicesUrl?: string;
-  teamsQuery: UseQueryResult<any>;
   templateMeteringEvent?: (props: any) => void;
   triggerEvent?: any;
   userTeams?: { data: any; isLoading: boolean; error: any };
 }) {
   const { isOpen, toggleActive, ref } = useHeaderMenu<HTMLDivElement>(MenuButtonId.Switcher);
+
+  const hasUserTeamsAssets = Boolean(props.userTeams);
+  const userTeamsAssetsUrl = serviceUrl.getUserTeamsServicesAssets({ baseServicesUrl: props.baseServicesUrl });
+  const queryEnabled = isOpen && props.enabled && !hasUserTeamsAssets && Boolean(props.baseServicesUrl);
+
+  const teamsAssetsQuery = useQuery({
+    queryKey: userTeamsAssetsUrl,
+    queryFn: resolver.query(userTeamsAssetsUrl, null),
+    enabled: queryEnabled,
+  });
 
   if (!props.enabled || !props.baseServicesUrl) {
     return null;
@@ -508,7 +510,7 @@ function AppSwitcherMenu(props: {
         baseServicesUrl={props.baseServicesUrl}
         id={MenuListId.Switcher}
         isOpen={isOpen}
-        teamsQuery={props.teamsQuery}
+        teamsQuery={teamsAssetsQuery}
         templateMeteringEvent={props.templateMeteringEvent}
         triggerEvent={props.triggerEvent}
         userTeams={props.userTeams}
