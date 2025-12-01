@@ -17,6 +17,7 @@ export const serviceUrl = {
   getStatement: ({ baseServicesUrl }: any) => `${baseServicesUrl}/users/consents`,
   getTeamServices: ({ baseServicesUrl, teamId }: any) => `${baseServicesUrl}/launchpad/teams/${teamId}/services`,
   getUserTeamsServices: ({ baseServicesUrl }: any) => `${baseServicesUrl}/users/teams/services`,
+  getUserTeamsServicesAssets: ({ baseServicesUrl }: any) => `${baseServicesUrl}/users/teams/services/assets`,
   resourceUserConsent: ({ baseServicesUrl }: any) => `${baseServicesUrl}/users/consent`,
   resourceUserProfile: ({ baseServicesUrl }: any) => `${baseServicesUrl}/users/profile`,
 };

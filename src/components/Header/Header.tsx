@@ -82,6 +82,7 @@ type Props = {
   triggerEvent?: (props: any) => any;
   user?: User;
   userTeams?: { data: any; isLoading: boolean; error: any };
+  userTeamsAssets?: { data: any; isLoading: boolean; error: any };
 };
 
 type MenuType =
@@ -164,14 +165,23 @@ export default function Header(props: Props) {
     triggerEvent,
     user,
     userTeams,
+    userTeamsAssets,
   } = props;
 
   const hasUserTeams = Boolean(userTeams);
+  const hasUserTeamsAssets = Boolean(userTeamsAssets);
   const userTeamsUrl = serviceUrl.getUserTeamsServices({ baseServicesUrl });
+  const userTeamsAssetsUrl = serviceUrl.getUserTeamsServicesAssets({ baseServicesUrl });
   const teamsQuery = useQuery({
     queryKey: userTeamsUrl,
     queryFn: resolver.query(userTeamsUrl, null),
     enabled: !hasUserTeams && Boolean(baseServicesUrl),
+  });
+
+  const teamsAssetsQuery = useQuery({
+    queryKey: userTeamsAssetsUrl,
+    queryFn: resolver.query(userTeamsAssetsUrl, null),
+    enabled: !hasUserTeamsAssets && Boolean(baseServicesUrl),
   });
 
   return (
@@ -249,10 +259,10 @@ export default function Header(props: Props) {
               baseEnvUrl={baseEnvUrl}
               baseServicesUrl={baseServicesUrl}
               enabled={props.enableAppSwitcher}
-              teamsQuery={teamsQuery}
+              teamsQuery={teamsAssetsQuery}
               templateMeteringEvent={templateMeteringEvent}
               triggerEvent={triggerEvent}
-              userTeams={userTeams}
+              userTeams={userTeamsAssets}
             />
             <RightPanelMenu enabled={Boolean(rightPanel && Object.keys(rightPanel).length)} {...rightPanel} />
           </HeaderGlobalBar>
