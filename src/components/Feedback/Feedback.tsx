@@ -57,7 +57,7 @@ function Feedback(props: Props) {
               here
             </a> and you could win a BluePoints award.
           </p>
-          <p>We look forward to your feedback and ideas!"</p>
+          <p>We look forward to your feedback and ideas!</p>
          
         </div>
       </ModalBody>
