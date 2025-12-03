@@ -57,6 +57,7 @@ function Feedback(props: Props) {
               here
             </a> and you could win a BluePoints award.
           </p>
+          <p>You must have an IBM email address to submit the idea.</p>
           <p>We look forward to your feedback and ideas!</p>
          
         </div>
