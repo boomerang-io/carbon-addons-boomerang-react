@@ -89,12 +89,7 @@ exports[`Feedback > snapshot 1`] = `
               class="cds--bmrg-feedback"
             >
               <p>
-                Share your thoughts and ideas on what we can do to improve the 
-                IBM Platform
-                 platform and our onboarding process.
-              </p>
-              <p>
-                To submit your idea, visit our portal at
+                Have an idea on how we can improve Consulting Advantage? Submit your idea
                  
                 <a
                   aria-describedby="new-window-aria-desc-0"
@@ -102,19 +97,28 @@ exports[`Feedback > snapshot 1`] = `
                   rel="noopener noreferrer"
                   target="_blank"
                 >
-                  https://ideas.ibm.com
+                  here
                 </a>
-                .
+                . You’ll be able to see other public ideas, vote on them, and track the status of your idea.
               </p>
               <p>
-                For now, you must have an 
-                 email address and you will need to register with a password during your first visit.
+                Have an innovative new asset, assistant, or automation you've built outside of ICA?
+                 
+                Submit your idea  
+                <a
+                  aria-describedby="new-window-aria-desc-0"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  here
+                </a>
+                 and you could win a BluePoints award.
               </p>
               <p>
-                You will have the opportunity to see other public ideas, vote on them and track the status of your idea.
+                You must have an IBM email address to submit the idea.
               </p>
               <p>
-                We look forward to your feedback!
+                We look forward to your feedback and ideas!
               </p>
             </div>
           </div>

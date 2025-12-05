@@ -11,7 +11,11 @@ IBM Confidential
 
 .#{$prefix}--bmrg-feedback-container {
   .#{$prefix}--modal-container {
-    height: utils.rem(288px);
+    height: 22rem;
+  }
+
+  .#{$prefix}--modal-content {
+    mask-image: none !important;
   }
 
   .#{$prefix}--bmrg-feedback {

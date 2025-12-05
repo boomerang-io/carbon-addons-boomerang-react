@@ -107,6 +107,7 @@ type Props = {
   triggerEvent?: (props: any) => any;
   user?: User;
   userTeams?: { data: any; isLoading: boolean; error: any };
+  userTeamsAssets?: { data: any; isLoading: boolean; error: any };
   enableIcaMacs?: boolean;
   handleShowTutorial?: Function;
   tutorialScreenToShow?: string;
@@ -141,6 +142,7 @@ function UIShell({
   tutorialScreenToShow,
   user,
   userTeams,
+  userTeamsAssets,
   enableIcaMacs,
 }: Props) {
   // Support base header .e.g for an error state
@@ -375,6 +377,7 @@ function UIShell({
         trackEvent={trackEvent}
         user={user}
         userTeams={userTeams}
+        userTeamsAssets={userTeamsAssets}
       />
       {isPrivacyModalRendered ? (
         <PrivacyRedirectModal

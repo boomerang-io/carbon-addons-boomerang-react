@@ -429,7 +429,7 @@ export function AdvantageSideNav(props: Props) {
             ) : null}
             {showSecondDivider ? <SideNavDivider /> : null}
             {catalogNavlink ? (
-              <SideNavLink href={catalogNavlink} renderIcon={Catalog}>
+              <SideNavLink data-testid="sidenav-catalog-link" href={catalogNavlink} renderIcon={Catalog}>
                 Catalog
               </SideNavLink>
             ) : null}
@@ -446,7 +446,7 @@ export function AdvantageSideNav(props: Props) {
               </SideNavLink>
             ) : null}
             {adminNavlink ? (
-              <SideNavLink href={adminNavlink} renderIcon={LicenseThirdParty}>
+              <SideNavLink data-testid="sidenav-admin-link" href={adminNavlink} renderIcon={LicenseThirdParty}>
                 Admin
               </SideNavLink>
             ) : null}

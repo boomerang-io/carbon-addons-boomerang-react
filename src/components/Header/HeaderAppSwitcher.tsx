@@ -172,14 +172,14 @@ function TeamServiceListMenu({
   templateMeteringEvent,
   triggerEvent,
 }: TeamServiceListMenuProps) {
-  const { name, displayName, services } = team;
+  const { id, name, displayName, services } = team;
 
   const nameToDisplay = displayName ? displayName : name;
   const isNameTruncated = nameToDisplay?.length > 30;
 
   if (!isMember) {
     return (
-      <div className={`${prefix}--side-nav__item`} title={isNameTruncated ? nameToDisplay : undefined}>
+      <div id={id} className={`${prefix}--side-nav__item`} title={isNameTruncated ? nameToDisplay : undefined}>
         <button disabled className={`${prefix}--side-nav__submenu`} data-testid="header-app-switcher-service">
           <span className={`${prefix}--side-nav__submenu-title`}>{nameToDisplay}</span>
         </button>
@@ -189,7 +189,7 @@ function TeamServiceListMenu({
 
   return (
     // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
-    <ul className={`${prefix}--bmrg-header-team`} title={isNameTruncated ? nameToDisplay : undefined}>
+    <ul id={id} className={`${prefix}--bmrg-header-team`} title={isNameTruncated ? nameToDisplay : undefined}>
       <SideNavMenu title={nameToDisplay}>
         <ServiceList
           baseEnvUrl={baseEnvUrl}
@@ -207,7 +207,7 @@ function TeamServiceListMenu({
 type ServiceListProps = {
   baseEnvUrl?: string;
   isAccount?: boolean;
-  servicesData?: Array<{ name: string; url: string }>;
+  servicesData?: Array<{ id: string; templateId: string; name: string; url: string }>;
   team: SimpleIdNameMap;
   templateMeteringEvent?: (props: any) => void;
   triggerEvent?: (props: any) => any;
@@ -232,7 +232,8 @@ function ServiceList(props: ServiceListProps) {
             const isNameTruncated = isExternalLink ? service.name.length > 28 : service.name.length > 32;
             return (
               <SideNavMenuItem
-                key={service.name}
+                id={service.id}
+                key={service.id}
                 href={service.url}
                 title={isNameTruncated ? service.name : undefined}
                 onClick={() => handleLinkClick(service)}
