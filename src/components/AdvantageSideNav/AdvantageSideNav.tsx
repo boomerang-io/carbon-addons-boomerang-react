@@ -321,7 +321,7 @@ export function AdvantageSideNav(props: Props) {
                 name={teamSwitcherTeam.name}
                 data-testid="sidenav-team-link"
                 id={teamSwitcherTeam.id}
-                isActive={windowLocation.href.includes(teamSwitcherTeam.id)}
+                isActive={windowLocation.href.includes(`/launchpad/teams/${teamSwitcherTeam.id}`)}
                 className={`${prefix}--bmrg-advantage-sidenav-team`}
                 renderIcon={UserMultiple}
                 href={`${baseEnvUrl}/${app}/teams/${teamSwitcherTeam.id}`}
