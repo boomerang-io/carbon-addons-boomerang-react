@@ -429,7 +429,12 @@ export function AdvantageSideNav(props: Props) {
             ) : null}
             {showSecondDivider ? <SideNavDivider /> : null}
             {catalogNavlink ? (
-              <SideNavLink data-testid="sidenav-catalog-link" href={catalogNavlink} renderIcon={Catalog}>
+              <SideNavLink
+                data-testid="sidenav-catalog-link"
+                isActive={windowLocation.href.includes(`${baseEnvUrl}/catalog`)}
+                href={catalogNavlink}
+                renderIcon={Catalog}
+              >
                 Catalog
               </SideNavLink>
             ) : null}
