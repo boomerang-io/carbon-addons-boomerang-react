@@ -6,7 +6,7 @@ IBM Confidential
 
 import React from "react";
 import cx from "classnames";
-import { SideNav, SideNavDivider, SideNavItems, SideNavLink } from "@carbon/react";
+import { SideNav, SideNavDivider, SideNavItems, SideNavLink, Tag } from "@carbon/react";
 import TooltipHover from "../TooltipHover";
 import {
   AddAlt,
@@ -380,7 +380,12 @@ export function AdvantageSideNav(props: Props) {
                   handleToolsClick();
                 }}
               >
-                Tools
+                <div className={`${prefix}--bmrg-advantage-sidenav-item-tag`}>
+                  Tools
+                  <Tag size="sm" title="BETA" type="high-contrast">
+                    BETA
+                  </Tag>
+                </div>
               </SideNavLink>
             ) : null}
             {agentAssistantStudioLink ? (
