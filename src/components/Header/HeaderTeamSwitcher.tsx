@@ -19,6 +19,9 @@ const headerDropdownMenuContainerClassname = `${prefix}--header-dropdown-menu-co
 const headerDropdownMenuLoadingClassname = `${prefix}--header-dropdown-menu-loading`;
 const headerDropdownMenuSuccessClassname = `${prefix}--header-dropdown-menu-success`;
 const headerDropdownMenuClassname = `${prefix}--header-dropdown-menu`;
+const headerDropdownMenuContentClassname = `${prefix}--header-dropdown-menu-content`;
+const headerDropdownMenuContentTextClassname = `${prefix}--header-dropdown-menu-content-text`;
+const headerDropdownMenuContentIconClassname = `${prefix}--header-dropdown-menu-content-icon`;
 const headerDropdownMenuListClassname = `${prefix}--bmrg-header-drop-down`;
 
 const headerDropdownMenuItemContainerClassname = `${prefix}--header-dropdown-menu-item-container`;
@@ -303,11 +306,11 @@ export default function HeaderTeamSwitcher({
       sortedStandardTeamsWithNamesToDisplay = sortBy(newStandardTeams, ["nameToDisplay"]);
     }
 
-    let selectedTeamName = selectedTeam?.displayName ? selectedTeam.displayName : selectedTeam?.name;
-
-    if (selectedTeamName && selectedTeamName.length > 65) {
-      selectedTeamName = selectedTeamName.slice(0, 65) + "...";
-    }
+    let selectedTeamName = selectedTeam?.displayName
+      ? selectedTeam.displayName
+      : selectedTeam?.name
+      ? selectedTeam?.name
+      : "No team selected";
 
     const isPartnerUser = Boolean(user?.type === USER_PLATFORM_ROLE.Partner);
 
@@ -326,7 +329,14 @@ export default function HeaderTeamSwitcher({
           id="header-team-switcher-menu"
           aria-label={menuAriaLabelRecord}
           className={headerDropdownMenuClassname}
-          menuLinkName={selectedTeamName ? selectedTeamName : "No team selected"}
+          renderMenuContent={() => (
+            <div className={headerDropdownMenuContentClassname}>
+              <p title={selectedTeamName} className={headerDropdownMenuContentTextClassname}>
+                {selectedTeamName}
+              </p>
+              <ChevronDown className={headerDropdownMenuContentIconClassname} />
+            </div>
+          )}
           onClick={handleHeaderMenuClick}
           data-testid="header-team-switcher-menu"
         >

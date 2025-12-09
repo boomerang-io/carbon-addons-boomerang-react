@@ -39,13 +39,40 @@ IBM Confidential
       overflow: hidden;
       width: 100%;
 
-      .#{$prefix}--header__menu-arrow {
+      .#{$prefix}--header-dropdown-menu-content {
+        align-items: center;
+        display: flex;
+      }
+
+      .#{$prefix}--header-dropdown-menu-content-text {
+        font-size: 0.875rem;
+        font-weight: 600;
+        line-height: 1.125rem;
+        letter-spacing: 0.01rem;
+        max-width: 14.5625rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .#{$prefix}--header-dropdown-menu-content-icon {
+        margin-left: 1rem;
         min-height: 1rem;
         min-width: 1rem;
+        transition: transform 150ms ease-in-out;
+        transform: rotate(0deg);
       }
 
       &[aria-expanded="true"] {
         background-color: var(--cds-layer-hover-01) !important;
+
+        .#{$prefix}--header-dropdown-menu-content-text {
+          width: 14.5625rem;
+        }
+
+        .#{$prefix}--header-dropdown-menu-content-icon {
+          transform: rotate(180deg);
+        }
       }
     }
 
