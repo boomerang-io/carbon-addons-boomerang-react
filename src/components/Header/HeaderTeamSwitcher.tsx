@@ -194,14 +194,15 @@ export default function HeaderTeamSwitcher({
       }
       // if teams data loaded but there are no teams
     } else if (
-      (hasUserTeams &&
+      Boolean(userTeamInstanceSwitcherDefault) &&
+      ((hasUserTeams &&
         userTeams?.data?.accountTeams?.length === 0 &&
         userTeams?.data?.standardTeams?.length === 0 &&
         userTeams?.data?.personalTeam?.length === 0) ||
-      (!hasUserTeams &&
-        teamsQuery?.data?.accountTeams?.length === 0 &&
-        teamsQuery?.data?.standardTeams?.length === 0 &&
-        teamsQuery?.data?.personalTeam?.length === 0)
+        (!hasUserTeams &&
+          teamsQuery?.data?.accountTeams?.length === 0 &&
+          teamsQuery?.data?.standardTeams?.length === 0 &&
+          teamsQuery?.data?.personalTeam?.length === 0))
     ) {
       handleNoTeamsToSelect();
     }
