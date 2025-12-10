@@ -156,6 +156,14 @@ export default function HeaderTeamSwitcher({
       }
     };
 
+    const handleNoTeamsToSelect = async () => {
+      const body = {
+        teamInstanceSwitcherDefault: null,
+      };
+
+      await mutateUserProfile({ baseServicesUrl, body });
+    };
+
     if (userHasTeams) {
       if (!userTeamInstanceSwitcherDefault) {
         if (userHasPersonalTeam) {
@@ -184,16 +192,21 @@ export default function HeaderTeamSwitcher({
         const newSelectedTeam = allTeams.find((team: UserTeam) => team.id === userTeamInstanceSwitcherDefault);
         handleSelectTeam({ team: newSelectedTeam });
       }
+      // if teams data loaded but there are no teams
+    } else if (Boolean(userTeams?.data) || Boolean(teamsQuery?.data)) {
+      handleNoTeamsToSelect();
     }
   }, [
     baseServicesUrl,
     hasUserTeams,
     mutateUserProfile,
     selectedTeam,
+    teamsQuery?.data,
     teamsQuery?.data?.accountTeams,
     teamsQuery?.data?.personalTeam,
     teamsQuery?.data?.standardTeams,
     userTeamInstanceSwitcherDefault,
+    userTeams?.data,
     userTeams?.data?.accountTeams,
     userTeams?.data?.personalTeam,
     userTeams?.data?.standardTeams,
