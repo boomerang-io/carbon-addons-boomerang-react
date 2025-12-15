@@ -233,6 +233,8 @@ function UIShell({
               baseServicesUrl={platform.baseServicesUrl}
               src={`${platform.baseServicesUrl}/users/image/${user?.email}`}
               userName={user?.displayName ?? user?.name}
+              refetchUser={refetchUser}
+              refetchNavigation={refetchNavigation}
             />
           ),
           isSendMailEnabled && (

@@ -207,26 +207,28 @@ export default function Header(props: Props) {
               : null}
           </HeaderNavigation>
           <HeaderGlobalBar>
-            <HeaderTeamSwitcher
-              analyticsHelpers={analyticsHelpers}
-              baseServicesUrl={baseServicesUrl}
-              createJoinTeamTrigger={createJoinTeamTrigger}
-              history={history}
-              isLaunchpad={isLaunchpad}
-              isLoadingTeamSwitcher={isLoadingTeamSwitcher}
-              isSuccessTeamSwitcher={isSuccessTeamSwitcher}
-              setIsSuccessTeamSwitcher={setIsSuccessTeamSwitcher}
-              menuAriaLabelRecord={MenuAriaLabelRecord.TeamSwitcher}
-              menuButtonId={MenuButtonId.TeamSwitcher}
-              menuListId={MenuListId.TeamSwitcher}
-              navigationPlatform={platform}
-              refetchUser={refetchUser}
-              refetchNavigation={refetchNavigation}
-              teamsQuery={teamsQuery}
-              trackEvent={trackEvent}
-              user={user}
-              userTeams={userTeams}
-            />
+            {Boolean(user) ? (
+              <HeaderTeamSwitcher
+                analyticsHelpers={analyticsHelpers}
+                baseServicesUrl={baseServicesUrl}
+                createJoinTeamTrigger={createJoinTeamTrigger}
+                history={history}
+                isLaunchpad={isLaunchpad}
+                isLoadingTeamSwitcher={isLoadingTeamSwitcher}
+                isSuccessTeamSwitcher={isSuccessTeamSwitcher}
+                setIsSuccessTeamSwitcher={setIsSuccessTeamSwitcher}
+                menuAriaLabelRecord={MenuAriaLabelRecord.TeamSwitcher}
+                menuButtonId={MenuButtonId.TeamSwitcher}
+                menuListId={MenuListId.TeamSwitcher}
+                navigationPlatform={platform}
+                refetchUser={refetchUser}
+                refetchNavigation={refetchNavigation}
+                teamsQuery={teamsQuery}
+                trackEvent={trackEvent}
+                user={user}
+                userTeams={userTeams}
+              />
+            ) : null}
             {props?.instanceSwitcherEnabled && (
               <InstanceSwitcherMenu enabled={Boolean(props.instanceSwitcherEnabled)} menuItems={platform?.instances} />
             )}

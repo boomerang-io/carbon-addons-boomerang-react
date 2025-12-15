@@ -4,7 +4,6 @@ IBM Confidential
 © Copyright IBM Corp. 2022, 2024
 */
 
-
 import React, { useState, useEffect } from "react";
 import {
   Button,
@@ -47,11 +46,21 @@ type Props = {
   closeModal: () => void;
   isOpen: boolean;
   baseServicesUrl: string;
+  refetchUser?: Function;
+  refetchNavigation?: Function;
   src: string;
   userName?: string;
 };
 
-function ProfileSettings({ baseServicesUrl, src, userName, isOpen, closeModal }: Props) {
+function ProfileSettings({
+  baseServicesUrl,
+  refetchUser,
+  refetchNavigation,
+  src,
+  userName,
+  isOpen,
+  closeModal,
+}: Props) {
   const queryClient = useQueryClient();
   const [initialTeams, setInitialTeams] = useState<LowerLevelGroup[]>([]);
   const [teams, setTeams] = useState<LowerLevelGroup[]>([]);
@@ -76,6 +85,8 @@ function ProfileSettings({ baseServicesUrl, src, userName, isOpen, closeModal }:
     onSuccess: () => {
       queryClient.invalidateQueries(userUrl);
       queryClient.invalidateQueries(profileUrl);
+      if (refetchUser) refetchUser();
+      if (refetchNavigation) refetchNavigation();
     },
   });
 
