@@ -69,6 +69,7 @@ function ProfileSettings({
 
   const userUrl = serviceUrl.getLaunchpadUser({ baseServicesUrl });
   const profileUrl = serviceUrl.resourceUserProfile({ baseServicesUrl });
+  const userTeamsUrl = serviceUrl.getUserTeamsServices({ baseServicesUrl });
 
   const {
     data: user,
@@ -87,6 +88,7 @@ function ProfileSettings({
     onSuccess: () => {
       queryClient.invalidateQueries(userUrl);
       queryClient.invalidateQueries(profileUrl);
+      queryClient.invalidateQueries(userTeamsUrl);
       if (refetchUser) {
         setTimeout(() => {
           refetchUser();
