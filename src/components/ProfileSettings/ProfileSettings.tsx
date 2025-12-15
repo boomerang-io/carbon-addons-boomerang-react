@@ -47,6 +47,7 @@ type Props = {
   isOpen: boolean;
   baseServicesUrl: string;
   refetchUser?: Function;
+  refetchUserTeams?: Function;
   refetchNavigation?: Function;
   src: string;
   userName?: string;
@@ -55,6 +56,7 @@ type Props = {
 function ProfileSettings({
   baseServicesUrl,
   refetchUser,
+  refetchUserTeams,
   refetchNavigation,
   src,
   userName,
@@ -88,6 +90,11 @@ function ProfileSettings({
       if (refetchUser) {
         setTimeout(() => {
           refetchUser();
+        }, 1000);
+      }
+      if (refetchUserTeams) {
+        setTimeout(() => {
+          refetchUserTeams();
         }, 1000);
       }
       if (refetchNavigation) {

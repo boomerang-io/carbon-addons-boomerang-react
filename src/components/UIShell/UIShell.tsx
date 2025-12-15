@@ -95,6 +95,7 @@ type Props = {
   renderPrivacyStatement?: boolean;
   rightPanel?: { icon?: React.ReactNode; component: React.ReactNode };
   refetchUser?: Function;
+  refetchUserTeams?: Function;
   refetchNavigation?: Function;
   skipToContentProps?: {
     href?: string;
@@ -134,6 +135,7 @@ function UIShell({
   rightPanel,
   handleShowTutorial,
   refetchUser,
+  refetchUserTeams,
   refetchNavigation,
   skipToContentProps,
   templateMeteringEvent,
@@ -234,6 +236,7 @@ function UIShell({
               src={`${platform.baseServicesUrl}/users/image/${user?.email}`}
               userName={user?.displayName ?? user?.name}
               refetchUser={refetchUser}
+              refetchUserTeams={refetchUserTeams}
               refetchNavigation={refetchNavigation}
             />
           ),
