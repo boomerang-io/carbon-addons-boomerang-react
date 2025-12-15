@@ -4,7 +4,6 @@ IBM Confidential
 © Copyright IBM Corp. 2022, 2024
 */
 
-
 import React, { useState, useEffect } from "react";
 import {
   Button,
@@ -47,17 +46,30 @@ type Props = {
   closeModal: () => void;
   isOpen: boolean;
   baseServicesUrl: string;
+  refetchUser?: Function;
+  refetchUserTeams?: Function;
+  refetchNavigation?: Function;
   src: string;
   userName?: string;
 };
 
-function ProfileSettings({ baseServicesUrl, src, userName, isOpen, closeModal }: Props) {
+function ProfileSettings({
+  baseServicesUrl,
+  refetchUser,
+  refetchUserTeams,
+  refetchNavigation,
+  src,
+  userName,
+  isOpen,
+  closeModal,
+}: Props) {
   const queryClient = useQueryClient();
   const [initialTeams, setInitialTeams] = useState<LowerLevelGroup[]>([]);
   const [teams, setTeams] = useState<LowerLevelGroup[]>([]);
 
   const userUrl = serviceUrl.getLaunchpadUser({ baseServicesUrl });
   const profileUrl = serviceUrl.resourceUserProfile({ baseServicesUrl });
+  const userTeamsUrl = serviceUrl.getUserTeamsServices({ baseServicesUrl });
 
   const {
     data: user,
@@ -76,6 +88,22 @@ function ProfileSettings({ baseServicesUrl, src, userName, isOpen, closeModal }:
     onSuccess: () => {
       queryClient.invalidateQueries(userUrl);
       queryClient.invalidateQueries(profileUrl);
+      queryClient.invalidateQueries(userTeamsUrl);
+      if (refetchUser) {
+        setTimeout(() => {
+          refetchUser();
+        }, 1000);
+      }
+      if (refetchUserTeams) {
+        setTimeout(() => {
+          refetchUserTeams();
+        }, 1000);
+      }
+      if (refetchNavigation) {
+        setTimeout(() => {
+          refetchNavigation();
+        }, 1000);
+      }
     },
   });
 
@@ -95,6 +123,7 @@ function ProfileSettings({ baseServicesUrl, src, userName, isOpen, closeModal }:
 
   async function handleSubmit() {
     const body = {
+      teamInstanceSwitcherDefault: null,
       lowerLevelGroups: teams,
     };
 

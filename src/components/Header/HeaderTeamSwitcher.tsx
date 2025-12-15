@@ -205,6 +205,8 @@ export default function HeaderTeamSwitcher({
           teamsQuery?.data?.personalTeam?.length === 0))
     ) {
       handleNoTeamsToSelect();
+    } else if (userTeamInstanceSwitcherDefault === null) {
+      setSelectedTeam(null);
     }
   }, [
     baseServicesUrl,
