@@ -85,8 +85,16 @@ function ProfileSettings({
     onSuccess: () => {
       queryClient.invalidateQueries(userUrl);
       queryClient.invalidateQueries(profileUrl);
-      if (refetchUser) refetchUser();
-      if (refetchNavigation) refetchNavigation();
+      if (refetchUser) {
+        setTimeout(() => {
+          refetchUser();
+        }, 1000);
+      }
+      if (refetchNavigation) {
+        setTimeout(() => {
+          refetchNavigation();
+        }, 1000);
+      }
     },
   });
 
@@ -106,6 +114,7 @@ function ProfileSettings({
 
   async function handleSubmit() {
     const body = {
+      teamInstanceSwitcherDefault: null,
       lowerLevelGroups: teams,
     };
 
