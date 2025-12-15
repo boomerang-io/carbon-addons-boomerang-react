@@ -6,7 +6,7 @@ IBM Confidential
 
 import React from "react";
 import cx from "classnames";
-import { SideNav, SideNavDivider, SideNavItems, SideNavLink } from "@carbon/react";
+import { SideNav, SideNavDivider, SideNavItems, SideNavLink, Tag } from "@carbon/react";
 import TooltipHover from "../TooltipHover";
 import {
   AddAlt,
@@ -321,7 +321,7 @@ export function AdvantageSideNav(props: Props) {
                 name={teamSwitcherTeam.name}
                 data-testid="sidenav-team-link"
                 id={teamSwitcherTeam.id}
-                isActive={windowLocation.href.includes(teamSwitcherTeam.id)}
+                isActive={windowLocation.href.includes(`/launchpad/teams/${teamSwitcherTeam.id}`)}
                 className={`${prefix}--bmrg-advantage-sidenav-team`}
                 renderIcon={UserMultiple}
                 href={`${baseEnvUrl}/${app}/teams/${teamSwitcherTeam.id}`}
@@ -380,7 +380,12 @@ export function AdvantageSideNav(props: Props) {
                   handleToolsClick();
                 }}
               >
-                Tools
+                <div className={`${prefix}--bmrg-advantage-sidenav-item-tag`}>
+                  Tools
+                  <Tag size="sm" title="BETA" type="high-contrast">
+                    BETA
+                  </Tag>
+                </div>
               </SideNavLink>
             ) : null}
             {agentAssistantStudioLink ? (
@@ -429,7 +434,12 @@ export function AdvantageSideNav(props: Props) {
             ) : null}
             {showSecondDivider ? <SideNavDivider /> : null}
             {catalogNavlink ? (
-              <SideNavLink data-testid="sidenav-catalog-link" href={catalogNavlink} renderIcon={Catalog}>
+              <SideNavLink
+                data-testid="sidenav-catalog-link"
+                isActive={windowLocation.href.includes(`${baseEnvUrl}/catalog`)}
+                href={catalogNavlink}
+                renderIcon={Catalog}
+              >
                 Catalog
               </SideNavLink>
             ) : null}
