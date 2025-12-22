@@ -89,17 +89,17 @@ exports[`Profile Settings > snapshot 1`] = `
             <p
               class="cds--bmrg-profile-settings__title"
             >
-              More user profile settings will be here eventually, but for now you can choose which Teams are shown in your sidebar in Launchpad.
+              More user profile settings will be here eventually, but for now you can choose which Teams are shown in your team switcher in Launchpad.
             </p>
             <h2
               class="cds--bmrg-profile-settings__subtitle"
             >
-              Teams visible in Launchpad sidebar
+              Teams visible in Launchpad team switcher
             </h2>
             <p
               class="cds--bmrg-profile-settings__description"
             >
-              Choose Teams to show or hide in your Launchpad sidebar and Catalog (useful for sensitive demos). You will not be able to access or view unchecked Teams from the sidebar, and cannot add items to them from Catalog.
+              Choose Teams to show or hide in your Launchpad team switcher and Catalog (useful for sensitive demos). You will not be able to access or view unchecked Teams from the team switcher, and cannot add items to them from Catalog.
             </p>
             <div
               class="cds--skeleton cds--structured-list"

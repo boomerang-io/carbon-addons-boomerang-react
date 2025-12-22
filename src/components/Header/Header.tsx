@@ -52,6 +52,7 @@ type Props = {
   className?: string;
   createJoinTeamTrigger?: Function;
   enableAppSwitcher?: boolean;
+  enableTeamSwitcher?: boolean;
   instanceSwitcherEnabled?: boolean;
   enableNotifications?: boolean;
   enableNotificationsCount?: boolean;
@@ -148,6 +149,7 @@ export default function Header(props: Props) {
     carbonTheme = "g10",
     className,
     createJoinTeamTrigger,
+    enableTeamSwitcher = true,
     history,
     isLaunchpad = false,
     isLoadingTeamSwitcher,
@@ -178,6 +180,8 @@ export default function Header(props: Props) {
     enabled: !hasUserTeams && Boolean(baseServicesUrl),
   });
 
+  const showTeamSwitcher = enableTeamSwitcher && Boolean(user);
+
   return (
     <>
       <Theme theme={carbonTheme}>
@@ -207,7 +211,7 @@ export default function Header(props: Props) {
               : null}
           </HeaderNavigation>
           <HeaderGlobalBar>
-            {Boolean(user) ? (
+            {showTeamSwitcher ? (
               <HeaderTeamSwitcher
                 analyticsHelpers={analyticsHelpers}
                 baseServicesUrl={baseServicesUrl}
