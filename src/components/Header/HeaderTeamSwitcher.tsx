@@ -415,11 +415,20 @@ export default function HeaderTeamSwitcher({
               const isTeamSelected = team.id === selectedTeam?.id;
               if (team.type === TEAM_TYPES.ACCOUNT) {
                 const isSubmenuOpen = team.id === openAccountSubmenuId;
-                const isProjectTeamSelected =
-                  team.projectTeams &&
-                  team.projectTeams.length > 0 &&
-                  team.projectTeams.some((team: UserTeam) => team.id === selectedTeam?.id);
+                const projectTeams = team.projectTeams;
+                const existProjectTeams = Array.isArray(projectTeams) && projectTeams.length > 0;
+                let selectedProjectTeamIndex = -1;
+
+                if (existProjectTeams) {
+                  selectedProjectTeamIndex = projectTeams.findIndex((team: UserTeam) => team.id === selectedTeam?.id);
+                }
+                const isProjectTeamSelected = selectedProjectTeamIndex >= 0;
                 const isMenuSelected = isTeamSelected || isProjectTeamSelected;
+
+                if (existProjectTeams && isProjectTeamSelected) {
+                  const [removedTeam] = projectTeams.splice(selectedProjectTeamIndex, 1);
+                  projectTeams.unshift(removedTeam);
+                }
 
                 return (
                   <div key={team.id} id={`${team.id}-account-menu`}>
@@ -470,8 +479,8 @@ export default function HeaderTeamSwitcher({
                           {isTeamSelected ? <CheckmarkFilled className={headerDropdownMenuItemIconClassname} /> : null}
                         </div>
                       </HeaderMenuItem>
-                      {team.projectTeams && team.projectTeams.length > 0
-                        ? team.projectTeams.map((team: UserTeam) => {
+                      {projectTeams && projectTeams.length > 0
+                        ? projectTeams.map((team: UserTeam) => {
                             const isTeamSelected = team.id === selectedTeam?.id;
                             return (
                               <div key={team.id} id={`${team.id}-project-menu-item`}>
