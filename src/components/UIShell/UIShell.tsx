@@ -82,6 +82,7 @@ type Props = {
     };
     platformMessage?: any;
   };
+  enableTeamSwitcher?: boolean;
   history?: any;
   isLaunchpad?: boolean;
   isLoadingTeamSwitcher?: boolean;
@@ -96,6 +97,7 @@ type Props = {
   rightPanel?: { icon?: React.ReactNode; component: React.ReactNode };
   refetchUser?: Function;
   refetchNavigation?: Function;
+  refetchUserTeams?: Function;
   skipToContentProps?: {
     href?: string;
     children?: string;
@@ -119,6 +121,7 @@ function UIShell({
   carbonTheme = "g10",
   config,
   createJoinTeamTrigger,
+  enableTeamSwitcher = true,
   history,
   isLaunchpad = false,
   isLoadingTeamSwitcher,
@@ -134,6 +137,7 @@ function UIShell({
   rightPanel,
   handleShowTutorial,
   refetchUser,
+   refetchUserTeams,
   refetchNavigation,
   skipToContentProps,
   templateMeteringEvent,
@@ -156,6 +160,7 @@ function UIShell({
           enableAppSwitcher={false}
           enableNotifications={false}
           enableNotificationsCount={false}
+          enableTeamSwitcher={enableTeamSwitcher}
           productName={productName || platformName || ""}
           user={user}
         />
@@ -215,6 +220,7 @@ function UIShell({
         instanceSwitcherEnabled={instanceSwitcherEnabled}
         enableNotifications={isNotificationsEnabled}
         enableNotificationsCount={isNotificationsCountEnabled}
+        enableTeamSwitcher={enableTeamSwitcher}
         leftPanel={leftPanel}
         navLinks={navigation}
         platform={platform}
@@ -233,6 +239,9 @@ function UIShell({
               baseServicesUrl={platform.baseServicesUrl}
               src={`${platform.baseServicesUrl}/users/image/${user?.email}`}
               userName={user?.displayName ?? user?.name}
+              refetchUser={refetchUser}
+              refetchUserTeams={refetchUserTeams}
+              refetchNavigation={refetchNavigation}
             />
           ),
           isSendMailEnabled && (
@@ -297,15 +306,15 @@ function UIShell({
             text="Release Notes"
             type="link"
           />,
-          <HeaderMenuItem
-            key="legal-terms"
-            href={platform?.legalTermsUrl as string}
-            icon={<Policy />}
-            data-testid="legal-terms"
-            kind="app"
-            text="Legal Terms"
-            type="link"
-          />,
+          // <HeaderMenuItem
+          //   key="legal-terms"
+          //   href={platform?.legalTermsUrl as string}
+          //   icon={<Policy />}
+          //   data-testid="legal-terms"
+          //   kind="app"
+          //   text="Legal Terms"
+          //   type="link"
+          // />,
           <span style={{ borderBottom: "1px solid #b8c1c1" }}></span>,
           isCommunityEnabled && (
             <HeaderMenuItem

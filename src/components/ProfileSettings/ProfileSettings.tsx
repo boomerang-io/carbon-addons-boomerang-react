@@ -47,17 +47,30 @@ type Props = {
   closeModal: () => void;
   isOpen: boolean;
   baseServicesUrl: string;
+  refetchUser?: Function;
+  refetchUserTeams?: Function;
+  refetchNavigation?: Function;
   src: string;
   userName?: string;
 };
 
-function ProfileSettings({ baseServicesUrl, src, userName, isOpen, closeModal }: Props) {
+function ProfileSettings({
+  baseServicesUrl,
+  refetchUser,
+  refetchUserTeams,
+  refetchNavigation,
+  src,
+  userName,
+  isOpen,
+  closeModal,
+}: Props) {
   const queryClient = useQueryClient();
   const [initialTeams, setInitialTeams] = useState<LowerLevelGroup[]>([]);
   const [teams, setTeams] = useState<LowerLevelGroup[]>([]);
 
   const userUrl = serviceUrl.getLaunchpadUser({ baseServicesUrl });
   const profileUrl = serviceUrl.resourceUserProfile({ baseServicesUrl });
+  const userTeamsUrl = serviceUrl.getUserTeamsServices({ baseServicesUrl });
 
   const {
     data: user,
@@ -76,6 +89,22 @@ function ProfileSettings({ baseServicesUrl, src, userName, isOpen, closeModal }:
     onSuccess: () => {
       queryClient.invalidateQueries(userUrl);
       queryClient.invalidateQueries(profileUrl);
+      queryClient.invalidateQueries(userTeamsUrl);
+      if (refetchUser) {
+        setTimeout(() => {
+          refetchUser();
+        }, 1000);
+      }
+      if (refetchUserTeams) {
+        setTimeout(() => {
+          refetchUserTeams();
+        }, 1000);
+      }
+      if (refetchNavigation) {
+        setTimeout(() => {
+          refetchNavigation();
+        }, 1000);
+      }
     },
   });
 
@@ -95,6 +124,7 @@ function ProfileSettings({ baseServicesUrl, src, userName, isOpen, closeModal }:
 
   async function handleSubmit() {
     const body = {
+      teamInstanceSwitcherDefault: null,
       lowerLevelGroups: teams,
     };
 
@@ -153,12 +183,13 @@ function ProfileSettings({ baseServicesUrl, src, userName, isOpen, closeModal }:
       <ModalBody style={{ maxHeight: "31.5rem" }}>
         <p className={`${prefix}--bmrg-profile-settings__title`}>
           More user profile settings will be here eventually, but for now you can choose which Teams are shown in your
-          sidebar in Launchpad.
+          team switcher in Launchpad.
         </p>
-        <h2 className={`${prefix}--bmrg-profile-settings__subtitle`}>Teams visible in Launchpad sidebar</h2>
+        <h2 className={`${prefix}--bmrg-profile-settings__subtitle`}>Teams visible in Launchpad team switcher</h2>
         <p className={`${prefix}--bmrg-profile-settings__description`}>
-          Choose Teams to show or hide in your Launchpad sidebar and Catalog (useful for sensitive demos). You will not
-          be able to access or view unchecked Teams from the sidebar, and cannot add items to them from Catalog.
+          Choose Teams to show or hide in your Launchpad team switcher and Catalog (useful for sensitive demos). You
+          will not be able to access or view unchecked Teams from the team switcher, and cannot add items to them from
+          Catalog.
         </p>
         {userIsLoading ? (
           <StructuredListSkeleton />

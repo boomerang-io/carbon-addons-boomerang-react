@@ -70,6 +70,7 @@ type Props = {
   triggerEvent?: (props: any) => void;
   user: User;
   isLaunchpad?: boolean;
+  isbetaLaunchpad?: boolean;
   userTeamsError?: boolean;
   userTeamsLoading?: boolean;
   history?: any;
@@ -102,6 +103,7 @@ export function AdvantageSideNav(props: Props) {
     templateMeteringEvent,
     tooltipMessage,
     isLaunchpad = false,
+    isbetaLaunchpad = false,
     sideNavUrls,
     history,
     children,
@@ -309,6 +311,12 @@ export function AdvantageSideNav(props: Props) {
                     handleLaunchpadLink(e);
                     history.push("/");
                   }
+                   if (isbetaLaunchpad) {
+                    console.log("beta launchpad home link clicked");
+                    handleLaunchpadLink(e);
+                    history.push("/launchpad");
+                  }
+                  
                   handleHomeClick();
                 }}
               >

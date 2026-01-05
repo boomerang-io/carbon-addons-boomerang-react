@@ -29,6 +29,7 @@ IBM Confidential
 
   .#{$prefix}--modal-content {
     color: shell.$bmrg-theme-primary;
+    mask-image: none !important;
     .#{$prefix}--bmrg-profile-settings__title {
       color: shell.$bmrg-theme-primary;
       font-size: utils.rem(14px);

@@ -89,21 +89,21 @@ const TEAMS_DATA = {
   ],
   accountTeams: [
     {
-      id: "11",
+      id: "1111",
       isAccountTeamMember: true,
       name: "Account 1",
       projectTeams: [
-        { accountTeamId: "11", id: "1111", name: "Project 1 1", displayName: "Project 1 1 display", services: [] },
-        { accountTeamId: "11", id: "1112", name: "Project 1 2", displayName: null, services: [] },
+        { accountTeamId: "1111", id: "1111", name: "Project 1 1", displayName: "Project 1 1 display", services: [] },
+        { accountTeamId: "1111", id: "1112", name: "Project 1 2", displayName: null, services: [] },
       ],
     },
     {
-      id: "12",
+      id: "1112",
       name: "Account 2 has an exceptionally long name an exceptionally long name",
       projectTeams: [
         {
-          accountTeamId: "12",
-          id: "121",
+          accountTeamId: "1112",
+          id: "11121",
           name: "Project 2 1 has an exceptionally long name an exceptionally long name",
           displayName: null,
           services: [],
@@ -384,7 +384,7 @@ export const UIShellDefault = (args: any) => {
             hasConsented: true,
             status: "active",
             showSupport: true,
-            type: "partner",
+            type: "admin",
             requestSummary: {
               requireUserAction: 0,
               submittedByUser: 17,
