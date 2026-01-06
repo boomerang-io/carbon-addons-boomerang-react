@@ -7,7 +7,6 @@ IBM Confidential
 
 export const TEAM_TYPES = {
   ACCOUNT: "account",
-  PERSONAL: "personal",
   PROJECT: "project",
   STANDARD: "standard",
 };

@@ -82,7 +82,6 @@ type Props = {
     };
     platformMessage?: any;
   };
-  enableTeamSwitcher?: boolean;
   history?: any;
   isLaunchpad?: boolean;
   isLoadingTeamSwitcher?: boolean;
@@ -121,7 +120,6 @@ function UIShell({
   carbonTheme = "g10",
   config,
   createJoinTeamTrigger,
-  enableTeamSwitcher = true,
   history,
   isLaunchpad = false,
   isLoadingTeamSwitcher,
@@ -160,7 +158,6 @@ function UIShell({
           enableAppSwitcher={false}
           enableNotifications={false}
           enableNotificationsCount={false}
-          enableTeamSwitcher={enableTeamSwitcher}
           productName={productName || platformName || ""}
           user={user}
         />
@@ -220,7 +217,6 @@ function UIShell({
         instanceSwitcherEnabled={instanceSwitcherEnabled}
         enableNotifications={isNotificationsEnabled}
         enableNotificationsCount={isNotificationsCountEnabled}
-        enableTeamSwitcher={enableTeamSwitcher}
         leftPanel={leftPanel}
         navLinks={navigation}
         platform={platform}

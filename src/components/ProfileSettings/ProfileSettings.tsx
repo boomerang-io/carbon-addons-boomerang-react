@@ -183,13 +183,12 @@ function ProfileSettings({
       <ModalBody style={{ maxHeight: "31.5rem" }}>
         <p className={`${prefix}--bmrg-profile-settings__title`}>
           More user profile settings will be here eventually, but for now you can choose which Teams are shown in your
-          team switcher in Launchpad.
+          sidebar in Launchpad.
         </p>
-        <h2 className={`${prefix}--bmrg-profile-settings__subtitle`}>Teams visible in Launchpad team switcher</h2>
+        <h2 className={`${prefix}--bmrg-profile-settings__subtitle`}>Teams visible in Launchpad sidebar</h2>
         <p className={`${prefix}--bmrg-profile-settings__description`}>
-          Choose Teams to show or hide in your Launchpad team switcher and Catalog (useful for sensitive demos). You
-          will not be able to access or view unchecked Teams from the team switcher, and cannot add items to them from
-          Catalog.
+          Choose Teams to show or hide in your Launchpad sidebar and Catalog (useful for sensitive demos). You will not
+          be able to access or view unchecked Teams from the sidebar, and cannot add items to them from Catalog.
         </p>
         {userIsLoading ? (
           <StructuredListSkeleton />
