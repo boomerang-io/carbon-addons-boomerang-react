@@ -4,10 +4,12 @@ IBM Confidential
 © Copyright IBM Corp. 2022, 2024
 */
 
-
 import React, { useState } from "react";
-import { Button, Tag, TextInput } from "@carbon/react";
-import { Add, Information } from "@carbon/react/icons";
+import { Button, DismissibleTag, Tag, TextInput } from "@carbon/react";
+import { Add, Draggable, Information } from "@carbon/react/icons";
+import { DndContext, closestCenter, PointerSensor, useSensor, useSensors, DragEndEvent } from "@dnd-kit/core";
+import { SortableContext, useSortable, arrayMove, verticalListSortingStrategy } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 import cx from "classnames";
 import TooltipHover from "../TooltipHover";
 import { isAccessibleKeyDownEvent } from "../../tools/accessibility";
@@ -42,6 +44,7 @@ type Props = {
   onChange?: (items: string[]) => void;
   placeholder?: string;
   readOnly?: boolean;
+  reorderable?: boolean;
   tagProps?: any;
   tagType?: string;
   textInputProps?: any;
@@ -82,6 +85,7 @@ function CreatableComponent({
   onInputBlur,
   onChange,
   placeholder,
+  reorderable,
   tagProps,
   tagType = "teal",
   textInputProps,
@@ -217,6 +221,25 @@ function CreatableComponent({
     if (onChange) onChange(items);
   };
 
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: { distance: 5 },
+    })
+  );
+
+  function handleDragEnd(event: DragEndEvent) {
+    const { active, over } = event;
+    if (over && active.id !== over.id) {
+      const oldIndex = tagItems.indexOf(active.id as string);
+      const newIndex = tagItems.indexOf(over.id as string);
+      const reorderedItems = arrayMove(tagItems, oldIndex, newIndex);
+      setCreatedItems(reorderedItems);
+      if (onChange) {
+        onChange(reorderedItems);
+      }
+    }
+  }
+
   return (
     <div key={key} className={`${prefix}--bmrg-creatable`}>
       <div className={`${prefix}--bmrg-creatable__input`}>
@@ -315,25 +338,87 @@ function CreatableComponent({
           {buttonContent}
         </Button>
       </div>
-      <div className={`${prefix}--bmrg-creatable__tags`}>
-        {tagsToShow.map((item, index) => (
-          <Tag
-            key={`${item}-${index}`}
-            disabled={disabled}
-            type={tagType}
-            onClick={nonDeletable && initialTagItems.includes(item) ? undefined : () => removeValue(item)}
-            onKeyDown={
-              nonDeletable && initialTagItems.includes(item)
-                ? undefined
-                : (e: React.KeyboardEvent<HTMLDivElement>) => isAccessibleKeyDownEvent(e) && removeValue(item)
-            }
-            filter={!nonDeletable || (nonDeletable && !initialTagItems.includes(item))}
-            {...tagProps}
-          >
-            {item}
-          </Tag>
-        ))}
-      </div>
+      {reorderable ? (
+        <DndContext sensors={disabled ? [] : sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+          <SortableContext items={tagsToShow} strategy={verticalListSortingStrategy}>
+            <div className={`${prefix}--bmrg-creatable__tags--reorderable`}>
+              {tagsToShow.map((item, index) => (
+                <ReorderableTag
+                  key={`${item}-${index}`}
+                  disabled={disabled}
+                  initialTagItems={initialTagItems}
+                  item={item}
+                  nonDeletable={nonDeletable}
+                  removeValue={removeValue}
+                  tagProps={tagProps}
+                  tagType={tagType}
+                />
+              ))}
+            </div>
+          </SortableContext>
+        </DndContext>
+      ) : (
+        <div className={`${prefix}--bmrg-creatable__tags`}>
+          {tagsToShow.map((item, index) => (
+            <Tag
+              key={`${item}-${index}`}
+              disabled={disabled}
+              type={tagType}
+              onClick={nonDeletable && initialTagItems.includes(item) ? undefined : () => removeValue(item)}
+              onKeyDown={
+                nonDeletable && initialTagItems.includes(item)
+                  ? undefined
+                  : (e: React.KeyboardEvent<HTMLDivElement>) => isAccessibleKeyDownEvent(e) && removeValue(item)
+              }
+              filter={!nonDeletable || (nonDeletable && !initialTagItems.includes(item))}
+              {...tagProps}
+            >
+              {item}
+            </Tag>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+type ReorderableTagProps = {
+  disabled?: boolean;
+  initialTagItems: string[];
+  item: string;
+  nonDeletable: boolean;
+  removeValue: Function;
+  tagProps: any;
+  tagType: string;
+};
+
+function ReorderableTag({
+  disabled,
+  initialTagItems,
+  item,
+  nonDeletable,
+  removeValue,
+  tagProps,
+  tagType,
+}: ReorderableTagProps) {
+  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: item });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+  };
+
+  return (
+    <div ref={setNodeRef} {...attributes} {...(!disabled ? listeners : {})} style={style}>
+      <DismissibleTag
+        disabled={disabled}
+        type={tagType}
+        onClose={nonDeletable && initialTagItems.includes(item) ? undefined : () => removeValue(item)}
+        renderIcon={Draggable}
+        title=""
+        text={item}
+        {...tagProps}
+      />
     </div>
   );
 }

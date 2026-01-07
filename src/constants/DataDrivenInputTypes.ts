@@ -4,7 +4,6 @@ IBM Confidential
 © Copyright IBM Corp. 2022, 2024
 */
 
-
 export const CHECKBOX_TYPES = {
   CHECKBOX: "checkbox",
 };
@@ -12,8 +11,12 @@ export const CHECKBOX_TYPES = {
 export const CREATABLE_TYPES = {
   CREATABLE_SINGLE: "creatable-single",
   CREATABLE_SINGLE_NON_DELETABLE: "creatable-single-non-deletable",
+  CREATABLE_SINGLE_REORDERABLE: "creatable-single-reorderable",
+  CREATABLE_SINGLE_REORDERABLE_NON_DELETABLE: "creatable-single-reorderable-non-deletable",
   CREATABLE_PAIR: "creatable-pair",
   CREATABLE_PAIR_NON_DELETABLE: "creatable-pair-non-deletable",
+  CREATABLE_PAIR_REORDERABLE: "creatable-pair-reorderable",
+  CREATABLE_PAIR_REORDERABLE_NON_DELETABLE: "creatable-pair-reorderable-non-deletable",
 };
 
 export const DATE_TYPES = {
