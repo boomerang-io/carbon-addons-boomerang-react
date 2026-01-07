@@ -282,6 +282,14 @@ export function AdvantageSideNav(props: Props) {
   const showSecondDivider =
     showChatButton || toolsLink || agentAssistantStudioLink || agentAssistantLibraryLink || documentCollectionsLink;
 
+  const navigateInternal = (url: string) => {
+    const target = new URL(url, window.location.origin);
+    if (target.origin === window.location.origin) {
+      history.push(target.pathname + target.search + target.hash);
+    } else {
+      window.location.href = url;
+    }
+  };
   return (
     <SideNav
       aria-label="sidenav-container"
@@ -311,7 +319,7 @@ export function AdvantageSideNav(props: Props) {
                     handleLaunchpadLink(e);
                     history.push("/");
                   }
-                   if (isbetaLaunchpad) {
+                    if (isbetaLaunchpad) {
                     console.log("beta launchpad home link clicked");
                     handleLaunchpadLink(e);
                     history.push("/launchpad");
@@ -445,8 +453,11 @@ export function AdvantageSideNav(props: Props) {
               <SideNavLink
                 data-testid="sidenav-catalog-link"
                 isActive={windowLocation.href.includes(`${baseEnvUrl}/catalog`)}
-                href={catalogNavlink}
                 renderIcon={Catalog}
+                onClick={(e: any) => {
+                  e.preventDefault();
+                  navigateInternal(catalogNavlink);
+                }}
               >
                 Catalog
               </SideNavLink>
@@ -464,7 +475,14 @@ export function AdvantageSideNav(props: Props) {
               </SideNavLink>
             ) : null}
             {adminNavlink ? (
-              <SideNavLink data-testid="sidenav-admin-link" href={adminNavlink} renderIcon={LicenseThirdParty}>
+              <SideNavLink
+                data-testid="sidenav-admin-link"
+                renderIcon={LicenseThirdParty}
+                onClick={(e: any) => {
+                  e.preventDefault();
+                  navigateInternal(adminNavlink);
+                }}
+              >
                 Admin
               </SideNavLink>
             ) : null}
