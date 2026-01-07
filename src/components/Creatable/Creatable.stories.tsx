@@ -4,7 +4,6 @@ IBM Confidential
 © Copyright IBM Corp. 2022, 2024
 */
 
-
 import React from "react";
 import { action } from "@storybook/addon-actions";
 import Creatable from "./Creatable";
@@ -48,6 +47,26 @@ export const NonDeletable = (args) => {
       nonDeletable={true}
       type="text"
       {...args}
+    />
+  );
+};
+
+export const Reorderable = (args) => {
+  const [items, setItems] = React.useState<string | string[]>("test1,test2,test3,test4");
+  const handleChange = (items: string[]) => {
+    setItems(items);
+  };
+  return (
+    <Creatable
+      id="text-input-creatable"
+      labelText={"Creatable Reorderable"}
+      helperText="Test helperText"
+      placeholder={"Create some values"}
+      values={items}
+      type="text"
+      reorderable={true}
+      {...args}
+      onChange={handleChange}
     />
   );
 };
