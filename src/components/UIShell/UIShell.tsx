@@ -98,7 +98,6 @@ type Props = {
   refetchUser?: Function;
   refetchUserTeams?: Function;
   refetchNavigation?: Function;
-  refetchUserTeams?: Function;
   skipToContentProps?: {
     href?: string;
     children?: string;
@@ -138,11 +137,7 @@ function UIShell({
   rightPanel,
   handleShowTutorial,
   refetchUser,
-<<<<<<< HEAD
    refetchUserTeams,
-=======
-  refetchUserTeams,
->>>>>>> ff0d4abf10ce41964658a26946a46ecbbda5348b
   refetchNavigation,
   skipToContentProps,
   templateMeteringEvent,
