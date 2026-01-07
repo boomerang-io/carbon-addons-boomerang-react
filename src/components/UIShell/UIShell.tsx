@@ -82,6 +82,7 @@ type Props = {
     };
     platformMessage?: any;
   };
+  enableTeamSwitcher?: boolean;
   history?: any;
   isLaunchpad?: boolean;
   isLoadingTeamSwitcher?: boolean;
@@ -95,6 +96,7 @@ type Props = {
   renderPrivacyStatement?: boolean;
   rightPanel?: { icon?: React.ReactNode; component: React.ReactNode };
   refetchUser?: Function;
+  refetchUserTeams?: Function;
   refetchNavigation?: Function;
   refetchUserTeams?: Function;
   skipToContentProps?: {
@@ -120,6 +122,7 @@ function UIShell({
   carbonTheme = "g10",
   config,
   createJoinTeamTrigger,
+  enableTeamSwitcher = true,
   history,
   isLaunchpad = false,
   isLoadingTeamSwitcher,
@@ -135,7 +138,11 @@ function UIShell({
   rightPanel,
   handleShowTutorial,
   refetchUser,
+<<<<<<< HEAD
    refetchUserTeams,
+=======
+  refetchUserTeams,
+>>>>>>> ff0d4abf10ce41964658a26946a46ecbbda5348b
   refetchNavigation,
   skipToContentProps,
   templateMeteringEvent,
@@ -158,6 +165,7 @@ function UIShell({
           enableAppSwitcher={false}
           enableNotifications={false}
           enableNotificationsCount={false}
+          enableTeamSwitcher={enableTeamSwitcher}
           productName={productName || platformName || ""}
           user={user}
         />
@@ -217,6 +225,7 @@ function UIShell({
         instanceSwitcherEnabled={instanceSwitcherEnabled}
         enableNotifications={isNotificationsEnabled}
         enableNotificationsCount={isNotificationsCountEnabled}
+        enableTeamSwitcher={enableTeamSwitcher}
         leftPanel={leftPanel}
         navLinks={navigation}
         platform={platform}

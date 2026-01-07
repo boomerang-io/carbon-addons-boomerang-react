@@ -4,9 +4,9 @@ IBM Confidential
 © Copyright IBM Corp. 2022, 2024
 */
 
-
 export const TEAM_TYPES = {
   ACCOUNT: "account",
+  PERSONAL: "personal",
   PROJECT: "project",
   STANDARD: "standard",
 };

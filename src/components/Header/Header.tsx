@@ -52,6 +52,7 @@ type Props = {
   className?: string;
   createJoinTeamTrigger?: Function;
   enableAppSwitcher?: boolean;
+  enableTeamSwitcher?: boolean;
   instanceSwitcherEnabled?: boolean;
   enableNotifications?: boolean;
   enableNotificationsCount?: boolean;
@@ -148,6 +149,7 @@ export default function Header(props: Props) {
     carbonTheme = "g10",
     className,
     createJoinTeamTrigger,
+    enableTeamSwitcher = true,
     history,
     isLaunchpad = false,
     isLoadingTeamSwitcher,
@@ -178,6 +180,8 @@ export default function Header(props: Props) {
     enabled: !hasUserTeams && Boolean(baseServicesUrl),
   });
 
+  const showTeamSwitcher = enableTeamSwitcher && Boolean(user);
+
   return (
     <>
       <Theme theme={carbonTheme}>
@@ -207,26 +211,28 @@ export default function Header(props: Props) {
               : null}
           </HeaderNavigation>
           <HeaderGlobalBar>
-            <HeaderTeamSwitcher
-              analyticsHelpers={analyticsHelpers}
-              baseServicesUrl={baseServicesUrl}
-              createJoinTeamTrigger={createJoinTeamTrigger}
-              history={history}
-              isLaunchpad={isLaunchpad}
-              isLoadingTeamSwitcher={isLoadingTeamSwitcher}
-              isSuccessTeamSwitcher={isSuccessTeamSwitcher}
-              setIsSuccessTeamSwitcher={setIsSuccessTeamSwitcher}
-              menuAriaLabelRecord={MenuAriaLabelRecord.TeamSwitcher}
-              menuButtonId={MenuButtonId.TeamSwitcher}
-              menuListId={MenuListId.TeamSwitcher}
-              navigationPlatform={platform}
-              refetchUser={refetchUser}
-              refetchNavigation={refetchNavigation}
-              teamsQuery={teamsQuery}
-              trackEvent={trackEvent}
-              user={user}
-              userTeams={userTeams}
-            />
+            {showTeamSwitcher ? (
+              <HeaderTeamSwitcher
+                analyticsHelpers={analyticsHelpers}
+                baseServicesUrl={baseServicesUrl}
+                createJoinTeamTrigger={createJoinTeamTrigger}
+                history={history}
+                isLaunchpad={isLaunchpad}
+                isLoadingTeamSwitcher={isLoadingTeamSwitcher}
+                isSuccessTeamSwitcher={isSuccessTeamSwitcher}
+                setIsSuccessTeamSwitcher={setIsSuccessTeamSwitcher}
+                menuAriaLabelRecord={MenuAriaLabelRecord.TeamSwitcher}
+                menuButtonId={MenuButtonId.TeamSwitcher}
+                menuListId={MenuListId.TeamSwitcher}
+                navigationPlatform={platform}
+                refetchUser={refetchUser}
+                refetchNavigation={refetchNavigation}
+                teamsQuery={teamsQuery}
+                trackEvent={trackEvent}
+                user={user}
+                userTeams={userTeams}
+              />
+            ) : null}
             {props?.instanceSwitcherEnabled && (
               <InstanceSwitcherMenu enabled={Boolean(props.instanceSwitcherEnabled)} menuItems={platform?.instances} />
             )}
