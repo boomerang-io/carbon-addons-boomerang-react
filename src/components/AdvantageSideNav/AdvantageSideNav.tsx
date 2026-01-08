@@ -133,6 +133,8 @@ export function AdvantageSideNav(props: Props) {
   const settingsLink = sideNavUrls?.find((sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.Settings)?.url;
   const adminNavlink = sideNavUrls?.find((sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.Admin)?.url;
 
+  const AssistantStudioLink=false;
+
   // get current selected team
   let teamSwitcherTeam: any = null;
 
@@ -407,19 +409,21 @@ export function AdvantageSideNav(props: Props) {
             {agentAssistantStudioLink ? (
               <SideNavLink
                 data-testid="sidenav-agent-assistant-studio-link"
-                isActive={
-                  (agentStudioPath && windowLocation.href.includes(`/launchpad${agentStudioPath}`)) ||
-                  (agenticAppsPath && windowLocation.href.includes(`/launchpad${agenticAppsPath}`))
-                }
+                // isActive={
+                //   (agentStudioPath && windowLocation.href.includes(`/launchpad${agentStudioPath}`)) ||
+                //   (agenticAppsPath && windowLocation.href.includes(`/launchpad${agenticAppsPath}`))
+                // }
+                className={!AssistantStudioLink ? `${prefix}--bmrg-advantage-sidenav__inactive-link` : ""}
+                disabled={Boolean(!AssistantStudioLink)}
                 renderIcon={IntentRequestCreate}
-                href={agentAssistantStudioLink}
-                onClick={(e: any) => {
-                  if (isLaunchpad) {
-                    handleLaunchpadLink(e);
-                    history.push(agentStudioPath);
-                  }
-                  handleAgentAssistantStudioClick();
-                }}
+               // href={agentAssistantStudioLink}
+                // onClick={(e: any) => {
+                //   if (isLaunchpad) {
+                //     handleLaunchpadLink(e);
+                //     history.push(agentStudioPath);
+                //   }
+                //   handleAgentAssistantStudioClick();
+                // }}
               >
                 Agent & Assistant Studio
               </SideNavLink>
@@ -428,10 +432,12 @@ export function AdvantageSideNav(props: Props) {
               <SideNavLink
                 data-testid="sidenav-agent-assistant-library-link"
                 renderIcon={Folders}
-                href={agentAssistantLibraryLink}
-                onClick={(e: any) => {
-                  handleAgentAssistantLibraryClick();
-                }}
+                //href={agentAssistantLibraryLink}
+                className={!AssistantStudioLink ? `${prefix}--bmrg-advantage-sidenav__inactive-link` : ""}
+                disabled={Boolean(!AssistantStudioLink)}
+                // onClick={(e: any) => {
+                //   handleAgentAssistantLibraryClick();
+                // }}
               >
                 Agent & Assistant Library
               </SideNavLink>
@@ -440,10 +446,12 @@ export function AdvantageSideNav(props: Props) {
               <SideNavLink
                 data-testid="sidenav-document-collections-link"
                 renderIcon={DocumentMultiple_02}
-                href={documentCollectionsLink}
-                onClick={(e: any) => {
-                  handleDocumentCollectionsClick();
-                }}
+                //href={documentCollectionsLink}
+                className={!AssistantStudioLink ? `${prefix}--bmrg-advantage-sidenav__inactive-link` : ""}
+                disabled={Boolean(!AssistantStudioLink)}
+                // onClick={(e: any) => {
+                //   handleDocumentCollectionsClick();
+                // }}
               >
                 Document Collections
               </SideNavLink>
@@ -466,7 +474,9 @@ export function AdvantageSideNav(props: Props) {
               <SideNavLink
                 data-testid="sidenav-settings-link"
                 renderIcon={Settings}
-                href={settingsLink}
+               // href={settingsLink}
+                className={!AssistantStudioLink ? `${prefix}--bmrg-advantage-sidenav__inactive-link` : ""}
+                disabled={Boolean(!AssistantStudioLink)}
                 onClick={(e: any) => {
                   handleSettingsClick();
                 }}
