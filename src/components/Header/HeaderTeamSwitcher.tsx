@@ -160,7 +160,7 @@ export default function HeaderTeamSwitcher({
 
     const handleNoTeamsToSelect = async () => {
       const body = {
-        teamInstanceSwitcherDefault: "",
+        teamInstanceSwitcherDefault: null,
       };
 
       await mutateUserProfile({ baseServicesUrl, body });
@@ -207,7 +207,7 @@ export default function HeaderTeamSwitcher({
           teamsQuery?.data?.personalTeam?.length === 0))
     ) {
       handleNoTeamsToSelect();
-    } else if (userTeamInstanceSwitcherDefault === null || userTeamInstanceSwitcherDefault === "") {
+    } else if (userTeamInstanceSwitcherDefault === null) {
       setSelectedTeam(null);
     }
   }, [
