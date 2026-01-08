@@ -100,8 +100,8 @@ export default function HeaderTeamSwitcher({
   const showSelectTeamPurpose = navigationPlatform?.requireTeamPurpose;
   const createTeamButtonText = showSelectTeamPurpose ? "Create Team" : "Create or Join Team";
   const userTeamInstanceSwitcherDefault = user?.teamInstanceSwitcherDefault;
-  console.log("userTeamInstanceSwitcherDefault",userTeamInstanceSwitcherDefault);
-
+  const hasUpdatedDefaultTeamRef = React.useRef(false);
+  
   const teamLink = ({ teamId }: { teamId: string }) => {
     return `${navigationPlatform.baseEnvUrl}/launchpad/teams/${teamId}`;
   };
@@ -148,42 +148,43 @@ export default function HeaderTeamSwitcher({
     const userHasTeams = userHasPersonalTeam || userHasAccountTeams || userHasStandardTeams;
 
     const handleSelectTeam = async ({ team }: { team: UserTeam }) => {
-      console.log("handle select team",team);
       setSelectedTeam(team);
+      if (
+        !userTeamInstanceSwitcherDefault &&
+        !hasUpdatedDefaultTeamRef.current
+      ) {
+        hasUpdatedDefaultTeamRef.current = true;
 
-      if (!userTeamInstanceSwitcherDefault) {
-        const body = {
-          teamInstanceSwitcherDefault: team.id,
-        };
-      console.log("profile patch called",team);
-        await mutateUserProfile({ baseServicesUrl, body });
-      }
+    const body = {
+      teamInstanceSwitcherDefault: team.id,
     };
 
-    const handleNoTeamsToSelect = async () => {
-      const body = {
-        teamInstanceSwitcherDefault: null,
-      };
-       console.log("patch called inside handleNoTeamsToSelect")
-      await mutateUserProfile({ baseServicesUrl, body });
+    await mutateUserProfile({ baseServicesUrl, body });
+  }
+};
+
+  const handleNoTeamsToSelect = async () => {
+    if (hasUpdatedDefaultTeamRef.current) return;
+        hasUpdatedDefaultTeamRef.current = true;
+    const body = {
+      teamInstanceSwitcherDefault: null,
+    };
+    await mutateUserProfile({ baseServicesUrl, body });
     };
 
     if (userHasTeams) {
       if (!userTeamInstanceSwitcherDefault) {
         if (userHasPersonalTeam) {
-          console.log("userHasPersonalTeam",personalTeam[0]);
           handleSelectTeam({ team: personalTeam[0] });
         } else if (userHasAccountTeams) {
           const sortedAccounts = sortBy(accountTeams, [
             (account) => (account.displayName ? account.displayName : account.name),
           ]);
-          console.log("userHasAccountTeams",sortedAccounts[0]);
           handleSelectTeam({ team: sortedAccounts[0] });
         } else if (userHasStandardTeams) {
           const sortedStandardTeams = sortBy(standardTeams, [
             (standardTeam) => (standardTeam.displayName ? standardTeam.displayName : standardTeam.name),
           ]);
-          console.log("userHasStandardTeams",sortedStandardTeams[0]);
           handleSelectTeam({ team: sortedStandardTeams[0] });
         }
       } else if (selectedTeam?.id !== userTeamInstanceSwitcherDefault) {
@@ -197,7 +198,6 @@ export default function HeaderTeamSwitcher({
         }
         const allTeams = personalTeam.concat(standardTeams, accountTeams, allProjectTeams);
         const newSelectedTeam = allTeams.find((team: UserTeam) => team.id === userTeamInstanceSwitcherDefault);
-        console.log("newSelectedTeam",newSelectedTeam)
         handleSelectTeam({ team: newSelectedTeam });
       }
       // if teams data loaded but there are no teams
