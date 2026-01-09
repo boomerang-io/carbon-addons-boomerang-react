@@ -272,6 +272,7 @@ export function AdvantageSideNav(props: Props) {
     <SideNavLink
       data-testid="sidenav-chat-link"
       className={!enableChatButton ? `${prefix}--bmrg-advantage-sidenav__inactive-link` : ""}
+      isActive={windowLocation.href.includes(`${baseEnvUrl}/chat`)}
       disabled={Boolean(!enableChatButton)}
       renderIcon={ChatBot}
       href={enableChatButton && chatLink}
@@ -381,6 +382,7 @@ export function AdvantageSideNav(props: Props) {
               (showChatTooltip ? (
                 <TooltipHover
                   className={`${prefix}--bmrg-side-nav__tooltip`}
+                  isActive={windowLocation.href.includes(`${baseEnvUrl}/chat`)}
                   content={tooltipMessage}
                   direction="right"
                 >
@@ -461,11 +463,8 @@ export function AdvantageSideNav(props: Props) {
               <SideNavLink
                 data-testid="sidenav-catalog-link"
                 isActive={windowLocation.href.includes(`${baseEnvUrl}/catalog`)}
+                href={catalogNavlink}
                 renderIcon={Catalog}
-                onClick={(e: any) => {
-                  e.preventDefault();
-                  navigateInternal(catalogNavlink);
-                }}
               >
                 Catalog
               </SideNavLink>
@@ -477,22 +476,15 @@ export function AdvantageSideNav(props: Props) {
                // href={settingsLink}
                 className={!AssistantStudioLink ? `${prefix}--bmrg-advantage-sidenav__inactive-link` : ""}
                 disabled={Boolean(!AssistantStudioLink)}
-                onClick={(e: any) => {
-                  handleSettingsClick();
-                }}
+                // onClick={(e: any) => {
+                //   handleSettingsClick();
+                // }}
               >
                 Settings
               </SideNavLink>
             ) : null}
             {adminNavlink ? (
-              <SideNavLink
-                data-testid="sidenav-admin-link"
-                renderIcon={LicenseThirdParty}
-                onClick={(e: any) => {
-                  e.preventDefault();
-                  navigateInternal(adminNavlink);
-                }}
-              >
+              <SideNavLink data-testid="sidenav-admin-link" href={adminNavlink} renderIcon={LicenseThirdParty}>
                 Admin
               </SideNavLink>
             ) : null}
