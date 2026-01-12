@@ -285,14 +285,19 @@ export function AdvantageSideNav(props: Props) {
   const showSecondDivider =
     showChatButton || toolsLink || agentAssistantStudioLink || agentAssistantLibraryLink || documentCollectionsLink;
 
-  const navigateInternal = (url: string) => {
-    const target = new URL(url, window.location.origin);
-    if (target.origin === window.location.origin) {
-      history.push(target.pathname + target.search + target.hash);
-    } else {
-      window.location.href = url;
-    }
-  };
+    const navigateInternal = (url: string) => {
+      const target = new URL(url, window.location.origin);
+
+      if (target.origin === window.location.origin) {
+        const pathname = target.pathname.startsWith("/ica")
+          ? target.pathname.slice(4)   // removes "/ica"
+          : target.pathname;
+
+        history.push(pathname + target.search + target.hash);
+      } else {
+        window.location.href = url;
+      }
+    };
   return (
     <SideNav
       aria-label="sidenav-container"
