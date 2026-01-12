@@ -93,8 +93,13 @@ const TEAMS_DATA = {
       isAccountTeamMember: true,
       name: "Account 1",
       projectTeams: [
+<<<<<<< HEAD
         { accountTeamId: "1111", id: "1111", name: "Project 1 1", displayName: "Project 1 1 display", services: [] },
         { accountTeamId: "1111", id: "1112", name: "Project 1 2", displayName: null, services: [] },
+=======
+        { accountTeamId: "1111", id: "11111", name: "Project 1 1", displayName: "Project 1 1 display", services: [] },
+        { accountTeamId: "1111", id: "11112", name: "Project 1 2", displayName: null, services: [] },
+>>>>>>> ff0d4abf10ce41964658a26946a46ecbbda5348b
       ],
     },
     {
