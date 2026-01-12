@@ -4,7 +4,6 @@ IBM Confidential
 © Copyright IBM Corp. 2022, 2024
 */
 
-
 import React from "react";
 import CheckboxListComponent from "../CheckboxList";
 import CreatableComponent from "../Creatable";
@@ -192,10 +191,20 @@ function DataDrivenInput(props: DataDrivenInputProps) {
     componentProps = {
       ...allInputProps,
       createKeyValuePair:
-        type === CREATABLE_TYPES.CREATABLE_PAIR || type === CREATABLE_TYPES.CREATABLE_PAIR_NON_DELETABLE,
+        type === CREATABLE_TYPES.CREATABLE_PAIR ||
+        type === CREATABLE_TYPES.CREATABLE_PAIR_NON_DELETABLE ||
+        type === CREATABLE_TYPES.CREATABLE_PAIR_REORDERABLE ||
+        type === CREATABLE_TYPES.CREATABLE_PAIR_REORDERABLE_NON_DELETABLE,
       nonDeletable:
         type === CREATABLE_TYPES.CREATABLE_SINGLE_NON_DELETABLE ||
-        type === CREATABLE_TYPES.CREATABLE_PAIR_NON_DELETABLE,
+        type === CREATABLE_TYPES.CREATABLE_SINGLE_REORDERABLE_NON_DELETABLE ||
+        type === CREATABLE_TYPES.CREATABLE_PAIR_NON_DELETABLE ||
+        type === CREATABLE_TYPES.CREATABLE_PAIR_REORDERABLE_NON_DELETABLE,
+      reorderable:
+        type === CREATABLE_TYPES.CREATABLE_SINGLE_REORDERABLE ||
+        type === CREATABLE_TYPES.CREATABLE_SINGLE_REORDERABLE_NON_DELETABLE ||
+        type === CREATABLE_TYPES.CREATABLE_PAIR_REORDERABLE ||
+        type === CREATABLE_TYPES.CREATABLE_PAIR_REORDERABLE_NON_DELETABLE,
       invalid: invalidInput,
       invalidText: invalidTextMessage,
       placeholder,
