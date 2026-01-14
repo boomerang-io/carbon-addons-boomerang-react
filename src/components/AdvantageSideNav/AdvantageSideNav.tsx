@@ -233,7 +233,8 @@ export function AdvantageSideNav(props: Props) {
         category: "Sidenav",
         destinationPath: redirectLink,
       });
-    window.open(redirectLink, "_self", "noopener,noreferrer");
+    // window.open(redirectLink, "_self", "noopener,noreferrer");
+    navigateInternal(redirectLink);
   };
 
   const handleCreateJoinClick = () => {
@@ -277,7 +278,7 @@ export function AdvantageSideNav(props: Props) {
       renderIcon={ChatBot}
       href={enableChatButton && chatLink}
       onClick={enableChatButton ? handleChatClick : (e: any) => e.preventDefault()}
-    >
+     >
       Chat
     </SideNavLink>
   );
@@ -487,6 +488,10 @@ export function AdvantageSideNav(props: Props) {
                 // onClick={(e: any) => {
                 //   handleSettingsClick();
                 // }}
+                 onClick={(e: any) => {
+                  e.preventDefault();
+                  navigateInternal(settingsLink);
+                }}
               >
                 Settings
               </SideNavLink>
