@@ -4,7 +4,6 @@ IBM Confidential
 © Copyright IBM Corp. 2022, 2024
 */
 
-
 @use "../../global/config" as *;
 .#{$prefix}--bmrg-creatable {
   position: relative;
@@ -40,6 +39,37 @@ IBM Confidential
   flex-wrap: wrap;
   margin-top: 0.5rem;
   width: 100%;
+}
+
+.#{$prefix}--bmrg-creatable__tags--reorderable {
+  display: flex;
+  flex-direction: column;
+  margin-top: 0.5rem;
+  width: 100%;
+
+  .cds--tag {
+    cursor: grab;
+    margin-left: 0;
+    min-width: 100%;
+    width: 100%;
+
+    .cds--tag__custom-icon ~ span {
+      min-width: calc(100% - 1.25rem);
+    }
+
+    .cds--interactive--tag-children {
+      max-inline-size: none !important;
+      width: 100%;
+
+      .cds--popover {
+        display: none;
+      }
+    }
+
+    .cds--tag__label {
+      min-width: calc(100% - 1.5rem);
+    }
+  }
 }
 
 .#{$prefix}--bmrg-creatable__tooltip {

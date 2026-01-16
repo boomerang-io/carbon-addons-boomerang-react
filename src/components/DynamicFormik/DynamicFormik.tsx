@@ -4,7 +4,6 @@ IBM Confidential
 © Copyright IBM Corp. 2022, 2024
 */
 
-
 import React from "react";
 import * as Yup from "yup";
 import { Formik, FormikProps } from "formik";
@@ -205,14 +204,20 @@ async function handleGoverningSelectChange({
 }: HandleGoverningSelectChangeType) {
   const { key, value } = input;
   const inputsGovernedByCurrentOne = inputs.filter((formikInput) => formikInput.governingKey === key);
-  if(selectedItem?.value !== value) {
+  if (selectedItem?.value !== value) {
     /** Erase value of governed inputs */
     if (inputsGovernedByCurrentOne.length) {
       await inputsGovernedByCurrentOne.forEach(async (input) => {
-        await handleGoverningSelectChange({ formikProps, input, inputs, isInputBeingChanged: false, selectedItem: null });
+        await handleGoverningSelectChange({
+          formikProps,
+          input,
+          inputs,
+          isInputBeingChanged: false,
+          selectedItem: null,
+        });
       });
     }
-  
+
     // only the top governing select should display warnings if changed and reset touched status for governed ones
     await formikProps.setFieldTouched(`['${key}']`, isInputBeingChanged);
     formikProps.setFieldValue(`['${key}']`, selectedItem ? selectedItem.value : "");
@@ -339,8 +344,12 @@ function generateYupAst({
       inputType === MULTI_SELECT_TYPES.MULTI_SELECT ||
       inputType === CREATABLE_TYPES.CREATABLE_SINGLE ||
       inputType === CREATABLE_TYPES.CREATABLE_SINGLE_NON_DELETABLE ||
+      inputType === CREATABLE_TYPES.CREATABLE_SINGLE_REORDERABLE ||
+      inputType === CREATABLE_TYPES.CREATABLE_SINGLE_REORDERABLE_NON_DELETABLE ||
       inputType === CREATABLE_TYPES.CREATABLE_PAIR ||
       inputType === CREATABLE_TYPES.CREATABLE_PAIR_NON_DELETABLE ||
+      inputType === CREATABLE_TYPES.CREATABLE_PAIR_REORDERABLE ||
+      inputType === CREATABLE_TYPES.CREATABLE_PAIR_REORDERABLE_NON_DELETABLE ||
       inputType === CHECKBOX_TYPES.CHECKBOX
     ) {
       if (useCSVforArrays) {
@@ -631,7 +640,7 @@ const TYPE_PROPS = {
 
     let typeProps: any = {
       onChange: async ({ selectedItem }: any) => {
-        if(selectedItem.value !== value) {
+        if (selectedItem.value !== value) {
           await formikProps.setFieldTouched(`['${key}']`, true);
           formikProps.setFieldValue(`['${key}']`, selectedItem ? selectedItem.value : "");
         }

@@ -458,12 +458,10 @@ export function AdvantageSideNav(props: Props) {
               <SideNavLink
                 data-testid="sidenav-document-collections-link"
                 renderIcon={DocumentMultiple_02}
-                //href={documentCollectionsLink}
-                className={!AssistantStudioLink ? `${prefix}--bmrg-advantage-sidenav__inactive-link` : ""}
-                disabled={Boolean(!AssistantStudioLink)}
-                // onClick={(e: any) => {
-                //   handleDocumentCollectionsClick();
-                // }}
+                href={documentCollectionsLink}
+                onClick={(e: any) => {
+                  handleDocumentCollectionsClick();
+                }}
               >
                 Document Collections
               </SideNavLink>
