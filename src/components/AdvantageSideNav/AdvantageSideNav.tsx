@@ -133,7 +133,13 @@ export function AdvantageSideNav(props: Props) {
   const settingsLink = sideNavUrls?.find((sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.Settings)?.url;
   const adminNavlink = sideNavUrls?.find((sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.Admin)?.url;
 
-  const AssistantStudioLink=false;
+  const AssistantStudioLink = false;
+
+  const currentUrl = new URL(window.location.href);
+  const workspace = currentUrl.searchParams.get("workspace");
+
+  const isDocumentCollectionsActive = currentUrl.pathname.includes("/chat") && workspace === "knowledge";
+  const isChatActive = currentUrl.pathname.includes("/chat") && !isDocumentCollectionsActive;
 
   // get current selected team
   let teamSwitcherTeam: any = null;
@@ -273,7 +279,7 @@ export function AdvantageSideNav(props: Props) {
     <SideNavLink
       data-testid="sidenav-chat-link"
       className={!enableChatButton ? `${prefix}--bmrg-advantage-sidenav__inactive-link` : ""}
-      isActive={windowLocation.href.includes(`${baseEnvUrl}/chat`)}
+      isActive={isChatActive}
       disabled={Boolean(!enableChatButton)}
       renderIcon={ChatBot}
       href={enableChatButton && chatLink}
@@ -332,12 +338,12 @@ export function AdvantageSideNav(props: Props) {
                     handleLaunchpadLink(e);
                     history.push("/");
                   }
-                    if (isbetaLaunchpad) {
+                  if (isbetaLaunchpad) {
                     console.log("beta launchpad home link clicked");
                     handleLaunchpadLink(e);
                     history.push("/launchpad");
                   }
-                  
+
                   handleHomeClick();
                 }}
               >
@@ -364,10 +370,10 @@ export function AdvantageSideNav(props: Props) {
                     type: teamSwitcherTeam.isPersonal
                       ? "personal"
                       : teamSwitcherTeam.isAccount
-                      ? "account"
-                      : teamSwitcherTeam.isproject
-                      ? "project"
-                      : "standard",
+                        ? "account"
+                        : teamSwitcherTeam.isproject
+                          ? "project"
+                          : "standard",
                   });
                 }}
               >
@@ -392,7 +398,7 @@ export function AdvantageSideNav(props: Props) {
               (showChatTooltip ? (
                 <TooltipHover
                   className={`${prefix}--bmrg-side-nav__tooltip`}
-                  isActive={windowLocation.href.includes(`${baseEnvUrl}/chat`)}
+                  isActive={isChatActive}
                   content={tooltipMessage}
                   direction="right"
                 >
@@ -428,14 +434,14 @@ export function AdvantageSideNav(props: Props) {
                 className={!AssistantStudioLink ? `${prefix}--bmrg-advantage-sidenav__inactive-link` : ""}
                 disabled={Boolean(!AssistantStudioLink)}
                 renderIcon={IntentRequestCreate}
-               // href={agentAssistantStudioLink}
-                // onClick={(e: any) => {
-                //   if (isLaunchpad) {
-                //     handleLaunchpadLink(e);
-                //     history.push(agentStudioPath);
-                //   }
-                //   handleAgentAssistantStudioClick();
-                // }}
+              // href={agentAssistantStudioLink}
+              // onClick={(e: any) => {
+              //   if (isLaunchpad) {
+              //     handleLaunchpadLink(e);
+              //     history.push(agentStudioPath);
+              //   }
+              //   handleAgentAssistantStudioClick();
+              // }}
               >
                 Agent & Assistant Studio
               </SideNavLink>
@@ -447,9 +453,9 @@ export function AdvantageSideNav(props: Props) {
                 //href={agentAssistantLibraryLink}
                 className={!AssistantStudioLink ? `${prefix}--bmrg-advantage-sidenav__inactive-link` : ""}
                 disabled={Boolean(!AssistantStudioLink)}
-                // onClick={(e: any) => {
-                //   handleAgentAssistantLibraryClick();
-                // }}
+              // onClick={(e: any) => {
+              //   handleAgentAssistantLibraryClick();
+              // }}
               >
                 Agent & Assistant Library
               </SideNavLink>
@@ -457,6 +463,7 @@ export function AdvantageSideNav(props: Props) {
             {documentCollectionsLink ? (
               <SideNavLink
                 data-testid="sidenav-document-collections-link"
+                isActive={isDocumentCollectionsActive}
                 renderIcon={DocumentMultiple_02}
                 href={documentCollectionsLink}
                 onClick={(e: any) => {
@@ -484,16 +491,12 @@ export function AdvantageSideNav(props: Props) {
               <SideNavLink
                 data-testid="sidenav-settings-link"
                 renderIcon={Settings}
-               // href={settingsLink}
+                // href={settingsLink}
                 className={!AssistantStudioLink ? `${prefix}--bmrg-advantage-sidenav__inactive-link` : ""}
                 disabled={Boolean(!AssistantStudioLink)}
-                // onClick={(e: any) => {
-                //   handleSettingsClick();
-                // }}
-                 onClick={(e: any) => {
-                  e.preventDefault();
-                  navigateInternal(settingsLink);
-                }}
+              // onClick={(e: any) => {
+              //   handleSettingsClick();
+              // }}
               >
                 Settings
               </SideNavLink>
