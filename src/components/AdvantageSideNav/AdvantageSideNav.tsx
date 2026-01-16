@@ -233,7 +233,8 @@ export function AdvantageSideNav(props: Props) {
         category: "Sidenav",
         destinationPath: redirectLink,
       });
-    window.open(redirectLink, "_self", "noopener,noreferrer");
+    // window.open(redirectLink, "_self", "noopener,noreferrer");
+    navigateInternal(redirectLink);
   };
 
   const handleCreateJoinClick = () => {
@@ -277,7 +278,7 @@ export function AdvantageSideNav(props: Props) {
       renderIcon={ChatBot}
       href={enableChatButton && chatLink}
       onClick={enableChatButton ? handleChatClick : (e: any) => e.preventDefault()}
-    >
+     >
       Chat
     </SideNavLink>
   );
@@ -285,14 +286,23 @@ export function AdvantageSideNav(props: Props) {
   const showSecondDivider =
     showChatButton || toolsLink || agentAssistantStudioLink || agentAssistantLibraryLink || documentCollectionsLink;
 
-  const navigateInternal = (url: string) => {
-    const target = new URL(url, window.location.origin);
-    if (target.origin === window.location.origin) {
-      history.push(target.pathname + target.search + target.hash);
-    } else {
-      window.location.href = url;
-    }
-  };
+    const navigateInternal = (url: string) => {
+        console.log("url",url);
+        const target = new URL(url, window.location.origin);
+        console.log("target",target.origin);
+        console.log("window.location.origin",window.location.origin);
+        if (target.origin === window.location.origin) {
+        console.log("target.pathname",target.pathname);
+        const pathname = target.pathname.startsWith("/ica")
+          ? target.pathname.slice(4)   // removes "/ica"
+          : target.pathname;
+        console.log("pathname",pathname);
+        history.push(pathname + target.search + target.hash);
+      } else {
+        console.log("direct url navgation",url)
+        window.location.href = url;
+      }
+    };
   return (
     <SideNav
       aria-label="sidenav-container"
@@ -461,8 +471,11 @@ export function AdvantageSideNav(props: Props) {
               <SideNavLink
                 data-testid="sidenav-catalog-link"
                 isActive={windowLocation.href.includes(`${baseEnvUrl}/catalog`)}
-                href={catalogNavlink}
                 renderIcon={Catalog}
+                onClick={(e: any) => {
+                  e.preventDefault();
+                  navigateInternal(catalogNavlink);
+                }}
               >
                 Catalog
               </SideNavLink>
@@ -477,12 +490,23 @@ export function AdvantageSideNav(props: Props) {
                 // onClick={(e: any) => {
                 //   handleSettingsClick();
                 // }}
+                 onClick={(e: any) => {
+                  e.preventDefault();
+                  navigateInternal(settingsLink);
+                }}
               >
                 Settings
               </SideNavLink>
             ) : null}
             {adminNavlink ? (
-              <SideNavLink data-testid="sidenav-admin-link" href={adminNavlink} renderIcon={LicenseThirdParty}>
+              <SideNavLink
+                data-testid="sidenav-admin-link"
+                renderIcon={LicenseThirdParty}
+                onClick={(e: any) => {
+                  e.preventDefault();
+                  navigateInternal(adminNavlink);
+                }}
+              >
                 Admin
               </SideNavLink>
             ) : null}
