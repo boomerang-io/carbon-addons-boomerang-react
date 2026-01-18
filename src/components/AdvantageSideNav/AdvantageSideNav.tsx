@@ -5,6 +5,7 @@ IBM Confidential
 */
 
 import React from "react";
+import { createBrowserHistory } from "history";
 import cx from "classnames";
 import { SideNav, SideNavDivider, SideNavItems, SideNavLink, Tag } from "@carbon/react";
 import TooltipHover from "../TooltipHover";
@@ -175,7 +176,8 @@ export function AdvantageSideNav(props: Props) {
   }
 
   // Functions to track IBM Instrumentation on Segment
-  const handleHomeClick = () => {
+  const handleHomeClick = (homeLink:any) => {
+    navigateInternal(homeLink);
     triggerEvent &&
       triggerEvent({
         action: "Clicked on SideNav Home link",
@@ -293,19 +295,14 @@ export function AdvantageSideNav(props: Props) {
     showChatButton || toolsLink || agentAssistantStudioLink || agentAssistantLibraryLink || documentCollectionsLink;
 
     const navigateInternal = (url: string) => {
-        console.log("url",url);
+      const browserHistory = createBrowserHistory();
         const target = new URL(url, window.location.origin);
-        console.log("target",target.origin);
-        console.log("window.location.origin",window.location.origin);
         if (target.origin === window.location.origin) {
-        console.log("target.pathname",target.pathname);
         const pathname = target.pathname.startsWith("/ica")
           ? target.pathname.slice(4)   // removes "/ica"
           : target.pathname;
-        console.log("pathname",pathname);
-        history.push(pathname + target.search + target.hash);
+        browserHistory.push(pathname + target.search + target.hash);
       } else {
-        console.log("direct url navgation",url)
         window.location.href = url;
       }
     };
@@ -336,15 +333,15 @@ export function AdvantageSideNav(props: Props) {
                 onClick={(e: any) => {
                   if (isLaunchpad) {
                     handleLaunchpadLink(e);
-                    history.push("/");
+                    // history.push("/");
                   }
                   if (isbetaLaunchpad) {
                     console.log("beta launchpad home link clicked");
-                    handleLaunchpadLink(e);
-                    history.push("/launchpad");
+                    // handleLaunchpadLink(e);
+                    // history.push("/launchpad");
                   }
 
-                  handleHomeClick();
+                  handleHomeClick(homeLink);
                 }}
               >
                 Home
