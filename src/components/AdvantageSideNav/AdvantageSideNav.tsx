@@ -6,6 +6,7 @@ IBM Confidential
 
 import React from "react";
 import cx from "classnames";
+import { createBrowserHistory } from "history";
 import { SideNav, SideNavDivider, SideNavItems, SideNavLink, Tag } from "@carbon/react";
 import TooltipHover from "../TooltipHover";
 import {
@@ -291,14 +292,18 @@ export function AdvantageSideNav(props: Props) {
   const showSecondDivider =
     showChatButton || toolsLink || agentAssistantStudioLink || agentAssistantLibraryLink || documentCollectionsLink;
 
-  const navigateInternal = (url: string) => {
-    const target = new URL(url, window.location.origin);
-    if (target.origin === window.location.origin) {
-      history.push(target.pathname + target.search + target.hash);
-    } else {
-      window.location.href = url;
-    }
-  };
+    const navigateInternal = (url: string) => {
+      const browserHistory = createBrowserHistory();
+        const target = new URL(url, window.location.origin);
+        if (target.origin === window.location.origin) {
+        const pathname = target.pathname.startsWith("/ica")
+          ? target.pathname.slice(4)   // removes "/ica"
+          : target.pathname;
+        browserHistory.push(pathname + target.search + target.hash);
+      } else {
+        window.location.href = url;
+      }
+    };
   return (
     <SideNav
       aria-label="sidenav-container"
