@@ -1,5 +1,6 @@
 module.exports = {
   stories: ["../src/**/*.stories.@(js|jsx|ts|tsx)"],
+
   addons: [
     "@storybook/addon-links",
     {
@@ -16,12 +17,18 @@ module.exports = {
     "@storybook/addon-storysource",
     "@storybook/addon-a11y",
   ],
-  framework: "@storybook/react",
-  core: {
-    builder: "@storybook/builder-vite",
+
+  framework: {
+    name: "@storybook/react-vite",
+    options: {}
   },
+
   typescript: {
     check: false,
     reactDocgen: 'react-docgen-typescript',
+  },
+
+  docs: {
+    autodocs: true
   }
 };
