@@ -487,7 +487,7 @@ export function AdvantageSideNav(props: Props) {
                 renderIcon={Settings}
                 href={settingsLink}
                 //className={!AssistantStudioLink ? `${prefix}--bmrg-advantage-sidenav__inactive-link` : ""}
-                //disabled={Boolean(!AssistantStudioLink)}
+                disabled={Boolean(!AssistantStudioLink)}
                 onClick={(e: any) => {
                 handleSettingsClick();
               }}
