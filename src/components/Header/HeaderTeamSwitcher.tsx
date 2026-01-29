@@ -100,8 +100,7 @@ export default function HeaderTeamSwitcher({
   const showSelectTeamPurpose = navigationPlatform?.requireTeamPurpose;
   const createTeamButtonText = showSelectTeamPurpose ? "Create Team" : "Create or Join Team";
   const userTeamInstanceSwitcherDefault = user?.teamInstanceSwitcherDefault;
-  const hasUpdatedDefaultTeamRef = React.useRef(false);
-  
+
   const teamLink = ({ teamId }: { teamId: string }) => {
     return `${navigationPlatform.baseEnvUrl}/launchpad/teams/${teamId}`;
   };
@@ -149,27 +148,22 @@ export default function HeaderTeamSwitcher({
 
     const handleSelectTeam = async ({ team }: { team: UserTeam }) => {
       setSelectedTeam(team);
-      if (
-        !userTeamInstanceSwitcherDefault &&
-        !hasUpdatedDefaultTeamRef.current
-      ) {
-        hasUpdatedDefaultTeamRef.current = true;
 
-    const body = {
-      teamInstanceSwitcherDefault: team.id,
+      if (!userTeamInstanceSwitcherDefault) {
+        const body = {
+          teamInstanceSwitcherDefault: team.id,
+        };
+
+        await mutateUserProfile({ baseServicesUrl, body });
+      }
     };
 
-    await mutateUserProfile({ baseServicesUrl, body });
-  }
-};
+    const handleNoTeamsToSelect = async () => {
+      const body = {
+        teamInstanceSwitcherDefault: null,
+      };
 
-  const handleNoTeamsToSelect = async () => {
-    if (hasUpdatedDefaultTeamRef.current) return;
-        hasUpdatedDefaultTeamRef.current = true;
-    const body = {
-      teamInstanceSwitcherDefault: null,
-    };
-    await mutateUserProfile({ baseServicesUrl, body });
+      await mutateUserProfile({ baseServicesUrl, body });
     };
 
     if (userHasTeams) {
