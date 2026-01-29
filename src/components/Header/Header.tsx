@@ -58,6 +58,7 @@ type Props = {
   enableNotificationsCount?: boolean;
   history?: any;
   isLaunchpad?: boolean;
+  isBetaLaunchpad?: boolean;
   isLoadingTeamSwitcher?: boolean;
   isSuccessTeamSwitcher?: boolean;
   setIsSuccessTeamSwitcher?: Function;
@@ -152,6 +153,7 @@ export default function Header(props: Props) {
     enableTeamSwitcher = true,
     history,
     isLaunchpad = false,
+    isBetaLaunchpad = false,
     isLoadingTeamSwitcher,
     isSuccessTeamSwitcher,
     setIsSuccessTeamSwitcher,
@@ -218,6 +220,7 @@ export default function Header(props: Props) {
                 createJoinTeamTrigger={createJoinTeamTrigger}
                 history={history}
                 isLaunchpad={isLaunchpad}
+                isBetaLaunchpad={isBetaLaunchpad}
                 isLoadingTeamSwitcher={isLoadingTeamSwitcher}
                 isSuccessTeamSwitcher={isSuccessTeamSwitcher}
                 setIsSuccessTeamSwitcher={setIsSuccessTeamSwitcher}

@@ -85,6 +85,7 @@ type Props = {
   enableTeamSwitcher?: boolean;
   history?: any;
   isLaunchpad?: boolean;
+  isBetaLaunchpad?: boolean;
   isLoadingTeamSwitcher?: boolean;
   isSuccessTeamSwitcher?: boolean;
   setIsSuccessTeamSwitcher?: Function;
@@ -124,6 +125,7 @@ function UIShell({
   enableTeamSwitcher = true,
   history,
   isLaunchpad = false,
+  isBetaLaunchpad = false,
   isLoadingTeamSwitcher,
   isSuccessTeamSwitcher,
   setIsSuccessTeamSwitcher,
@@ -378,6 +380,7 @@ function UIShell({
         ].filter(Boolean)}
         history={history}
         isLaunchpad={isLaunchpad}
+        isBetaLaunchpad={isBetaLaunchpad}
         isLoadingTeamSwitcher={isLoadingTeamSwitcher}
         isSuccessTeamSwitcher={isSuccessTeamSwitcher}
         refetchUser={refetchUser}

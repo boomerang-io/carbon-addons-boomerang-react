@@ -59,6 +59,7 @@ type HeaderTeamSwitcherProps = {
   createJoinTeamTrigger?: Function;
   history?: any;
   isLaunchpad: boolean;
+  isBetaLaunchpad:boolean;
   isLoadingTeamSwitcher?: boolean;
   isSuccessTeamSwitcher?: boolean;
   setIsSuccessTeamSwitcher?: Function;
@@ -80,6 +81,7 @@ export default function HeaderTeamSwitcher({
   createJoinTeamTrigger,
   history,
   isLaunchpad,
+  isBetaLaunchpad,
   isLoadingTeamSwitcher,
   isSuccessTeamSwitcher,
   setIsSuccessTeamSwitcher,
@@ -243,7 +245,12 @@ export default function HeaderTeamSwitcher({
 
     if (isLaunchpad && Boolean(history)) {
       history.push(`/teams/${team.id}`);
-    } else {
+    }
+    else if(isBetaLaunchpad && Boolean(history))
+    {
+      history.push(`/launchpad/teams/${team.id}`);
+    }
+     else {
       window.open(teamLink({ teamId: team.id }), "_self");
     }
   };
