@@ -131,7 +131,8 @@ export function AdvantageSideNav(props: Props) {
     (sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.DocumentCollections
   )?.url;
   const catalogNavlink = sideNavUrls?.find((sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.Catalog)?.url;
-  const settingsLink = sideNavUrls?.find((sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.Settings)?.url;
+  //const settingsLink = sideNavUrls?.find((sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.Settings)?.url;
+  const settingsLink=`${baseEnvUrl}/settings`;
   const adminNavlink = sideNavUrls?.find((sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.Admin)?.url;
 
   const AssistantStudioLink = false;
@@ -485,12 +486,8 @@ export function AdvantageSideNav(props: Props) {
               <SideNavLink
                 data-testid="sidenav-settings-link"
                 renderIcon={Settings}
-                // href={settingsLink}
-                //className={!AssistantStudioLink ? `${prefix}--bmrg-advantage-sidenav__inactive-link` : ""}
-                disabled={Boolean(!AssistantStudioLink)}
-              //   onClick={(e: any) => {
-              //   handleSettingsClick();
-              // }}
+                href={settingsLink}
+                isActive={windowLocation.href.includes(`${baseEnvUrl}/settings`)}
               >
                 Settings
               </SideNavLink>
