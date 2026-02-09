@@ -18,7 +18,9 @@ import {
   Folders,
   Home,
   IntentRequestCreate,
+  Network_3,
   Settings,
+  Store,
   UserMultiple,
 } from "@carbon/react/icons";
 import { USER_PLATFORM_ROLE } from "../../constants/UserType";
@@ -31,9 +33,11 @@ const SideNavUrlKeys = {
   Chat: "chat",
   Tools: "tools",
   AgentStudio: "agentStudio",
+  ContextStudio: "contextStudio",
   AgentLibrary: "agentLibrary",
   DocumentCollections: "documentCollections",
   Catalog: "catalog",
+  Marketplace: "marketplace",
   Settings: "settings",
   Admin: "admin",
 };
@@ -115,21 +119,24 @@ export function AdvantageSideNav(props: Props) {
   const joinButtontitle = showSelectTeamPurpose ? "Create Team" : "Create or Join Team";
   const hamburguerMenu = document.getElementById("header-sidenav-menu-button");
 
-  const homeLink = sideNavUrls?.find((sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.Home)?.url;
-  const chatLink = sideNavUrls?.find((sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.Chat)?.url;
-  const toolsLink = sideNavUrls?.find((sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.Tools)?.url;
-  const agentAssistantStudioLink = sideNavUrls?.find(
+  const homeSideNavUrl = sideNavUrls?.find((sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.Home);
+  const chatSideNavUrl = sideNavUrls?.find((sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.Chat);
+  const chatLink = chatSideNavUrl?.url;
+  const toolsSideNavUrl = sideNavUrls?.find((sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.Tools);
+  const agentAssistantStudioSideNavUrl = sideNavUrls?.find(
     (sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.AgentStudio
-  )?.url;
-  const agentAssistantLibraryLink = sideNavUrls?.find(
+  );
+  const contextStudioSideNavUrl = sideNavUrls?.find((sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.ContextStudio);
+  const agentAssistantLibrarySideNavUrl = sideNavUrls?.find(
     (sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.AgentLibrary
-  )?.url;
-  const documentCollectionsLink = sideNavUrls?.find(
+  );
+  const documentCollectionsSideNavUrl = sideNavUrls?.find(
     (sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.DocumentCollections
-  )?.url;
-  const catalogNavlink = sideNavUrls?.find((sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.Catalog)?.url;
-  const settingsLink = sideNavUrls?.find((sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.Settings)?.url;
-  const adminNavlink = sideNavUrls?.find((sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.Admin)?.url;
+  );
+  const catalogSideNavUrl = sideNavUrls?.find((sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.Catalog);
+  const marketplaceSideNavUrl = sideNavUrls?.find((sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.Marketplace);
+  const settingsSideNavUrl = sideNavUrls?.find((sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.Settings);
+  const adminSideNavUrl = sideNavUrls?.find((sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.Admin);
 
   // get current selected team
   let teamSwitcherTeam: any = null;
@@ -165,57 +172,12 @@ export function AdvantageSideNav(props: Props) {
   }
 
   // Functions to track IBM Instrumentation on Segment
-  const handleHomeClick = () => {
+  const handleSidenavLinkClick = ({ name, link }: { name: string; link: string }) => {
     triggerEvent &&
       triggerEvent({
-        action: "Clicked on SideNav Home link",
+        action: `Clicked on SideNav ${name} link`,
         category: "Sidenav",
-        destinationPath: homeLink,
-      });
-  };
-
-  const handleToolsClick = () => {
-    triggerEvent &&
-      triggerEvent({
-        action: "Clicked on SideNav Tools link",
-        category: "Sidenav",
-        destinationPath: toolsLink,
-      });
-  };
-
-  const handleAgentAssistantStudioClick = () => {
-    triggerEvent &&
-      triggerEvent({
-        action: "Clicked on SideNav Agent & Assistant Studio link",
-        category: "Sidenav",
-        destinationPath: agentAssistantStudioLink,
-      });
-  };
-
-  const handleAgentAssistantLibraryClick = () => {
-    triggerEvent &&
-      triggerEvent({
-        action: "Clicked on SideNav Agent & Assistant Library link",
-        category: "Sidenav",
-        destinationPath: agentAssistantLibraryLink,
-      });
-  };
-
-  const handleDocumentCollectionsClick = () => {
-    triggerEvent &&
-      triggerEvent({
-        action: "Clicked on SideNav Document Collections link",
-        category: "Sidenav",
-        destinationPath: documentCollectionsLink,
-      });
-  };
-
-  const handleSettingsClick = () => {
-    triggerEvent &&
-      triggerEvent({
-        action: "Clicked on SideNav Settings link",
-        category: "Sidenav",
-        destinationPath: settingsLink,
+        destinationPath: link,
       });
   };
 
@@ -273,12 +235,17 @@ export function AdvantageSideNav(props: Props) {
       href={enableChatButton && chatLink}
       onClick={enableChatButton ? handleChatClick : (e: any) => e.preventDefault()}
     >
-      Chat
+      {chatSideNavUrl?.name}
     </SideNavLink>
   );
 
   const showSecondDivider =
-    showChatButton || toolsLink || agentAssistantStudioLink || agentAssistantLibraryLink || documentCollectionsLink;
+    showChatButton ||
+    toolsSideNavUrl ||
+    agentAssistantStudioSideNavUrl ||
+    contextStudioSideNavUrl ||
+    agentAssistantLibrarySideNavUrl ||
+    documentCollectionsSideNavUrl;
 
   return (
     <SideNav
@@ -298,21 +265,21 @@ export function AdvantageSideNav(props: Props) {
       {
         <SideNavItems>
           <div>
-            {homeLink ? (
+            {homeSideNavUrl ? (
               <SideNavLink
                 data-testid="sidenav-home-link"
                 isActive={`${baseEnvUrl}/${app}/`.includes(windowLocation.href)}
                 renderIcon={Home}
-                href={homeLink}
+                href={homeSideNavUrl.url}
                 onClick={(e: any) => {
                   if (isLaunchpad) {
                     handleLaunchpadLink(e);
                     history.push("/");
                   }
-                  handleHomeClick();
+                  handleSidenavLinkClick({ name: homeSideNavUrl.name, link: homeSideNavUrl.url });
                 }}
               >
-                Home
+                {homeSideNavUrl.name}
               </SideNavLink>
             ) : null}
             {teamSwitcherTeam ? (
@@ -371,24 +338,24 @@ export function AdvantageSideNav(props: Props) {
               ) : (
                 chatSideNavLink
               ))}
-            {toolsLink ? (
+            {toolsSideNavUrl ? (
               <SideNavLink
                 data-testid="sidenav-tools-link"
                 renderIcon={Api}
-                href={toolsLink}
+                href={toolsSideNavUrl.url}
                 onClick={(e: any) => {
-                  handleToolsClick();
+                  handleSidenavLinkClick({ name: toolsSideNavUrl.name, link: toolsSideNavUrl.url });
                 }}
               >
                 <div className={`${prefix}--bmrg-advantage-sidenav-item-tag`}>
-                  Tools
+                  {toolsSideNavUrl.name}
                   <Tag size="sm" title="BETA" type="high-contrast">
                     BETA
                   </Tag>
                 </div>
               </SideNavLink>
             ) : null}
-            {agentAssistantStudioLink ? (
+            {agentAssistantStudioSideNavUrl ? (
               <SideNavLink
                 data-testid="sidenav-agent-assistant-studio-link"
                 isActive={
@@ -396,68 +363,101 @@ export function AdvantageSideNav(props: Props) {
                   (agenticAppsPath && windowLocation.href.includes(`/launchpad${agenticAppsPath}`))
                 }
                 renderIcon={IntentRequestCreate}
-                href={agentAssistantStudioLink}
+                href={agentAssistantStudioSideNavUrl.url}
                 onClick={(e: any) => {
                   if (isLaunchpad) {
                     handleLaunchpadLink(e);
                     history.push(agentStudioPath);
                   }
-                  handleAgentAssistantStudioClick();
+                  handleSidenavLinkClick({
+                    name: agentAssistantStudioSideNavUrl.name,
+                    link: agentAssistantStudioSideNavUrl.url,
+                  });
                 }}
               >
-                Agent & Assistant Studio
+                {agentAssistantStudioSideNavUrl.name}
               </SideNavLink>
             ) : null}
-            {agentAssistantLibraryLink ? (
+            {contextStudioSideNavUrl ? (
+              <SideNavLink
+                data-testid="sidenav-context-studio-link"
+                renderIcon={Network_3}
+                href={contextStudioSideNavUrl.url}
+                onClick={(e: any) => {
+                  handleSidenavLinkClick({ name: contextStudioSideNavUrl.name, link: contextStudioSideNavUrl.url });
+                }}
+              >
+                {contextStudioSideNavUrl.name}
+              </SideNavLink>
+            ) : null}
+            {agentAssistantLibrarySideNavUrl ? (
               <SideNavLink
                 data-testid="sidenav-agent-assistant-library-link"
                 renderIcon={Folders}
-                href={agentAssistantLibraryLink}
+                href={agentAssistantLibrarySideNavUrl.url}
                 onClick={(e: any) => {
-                  handleAgentAssistantLibraryClick();
+                  handleSidenavLinkClick({
+                    name: agentAssistantLibrarySideNavUrl.name,
+                    link: agentAssistantLibrarySideNavUrl.url,
+                  });
                 }}
               >
-                Agent & Assistant Library
+                {agentAssistantLibrarySideNavUrl.name}
               </SideNavLink>
             ) : null}
-            {documentCollectionsLink ? (
+            {documentCollectionsSideNavUrl ? (
               <SideNavLink
                 data-testid="sidenav-document-collections-link"
                 renderIcon={DocumentMultiple_02}
-                href={documentCollectionsLink}
+                href={documentCollectionsSideNavUrl.url}
                 onClick={(e: any) => {
-                  handleDocumentCollectionsClick();
+                  handleSidenavLinkClick({
+                    name: documentCollectionsSideNavUrl.name,
+                    link: documentCollectionsSideNavUrl.url,
+                  });
                 }}
               >
-                Document Collections
+                {documentCollectionsSideNavUrl.name}
               </SideNavLink>
             ) : null}
             {showSecondDivider ? <SideNavDivider /> : null}
-            {catalogNavlink ? (
+            {catalogSideNavUrl ? (
               <SideNavLink
                 data-testid="sidenav-catalog-link"
                 isActive={windowLocation.href.includes(`${baseEnvUrl}/catalog`)}
-                href={catalogNavlink}
+                href={catalogSideNavUrl.url}
                 renderIcon={Catalog}
               >
-                Catalog
+                {catalogSideNavUrl.name}
               </SideNavLink>
             ) : null}
-            {settingsLink ? (
+            {marketplaceSideNavUrl ? (
+              <SideNavLink
+                data-testid="sidenav-markeplace-link"
+                renderIcon={Store}
+                href={marketplaceSideNavUrl.url}
+                onClick={(e: any) => {
+                  handleSidenavLinkClick({ name: marketplaceSideNavUrl.name, link: marketplaceSideNavUrl.url });
+                }}
+              >
+                {marketplaceSideNavUrl.name}
+              </SideNavLink>
+            ) : null}
+            {settingsSideNavUrl ? (
               <SideNavLink
                 data-testid="sidenav-settings-link"
                 renderIcon={Settings}
-                href={settingsLink}
+                href={settingsSideNavUrl.url}
                 onClick={(e: any) => {
-                  handleSettingsClick();
+                  handleSidenavLinkClick({ name: settingsSideNavUrl.name, link: settingsSideNavUrl.url });
                 }}
               >
-                Settings
+                {settingsSideNavUrl.name}
               </SideNavLink>
             ) : null}
-            {adminNavlink ? (
-              <SideNavLink data-testid="sidenav-admin-link" href={adminNavlink} renderIcon={LicenseThirdParty}>
-                Admin
+            {adminSideNavUrl ? (
+              <SideNavLink data-testid="sidenav-admin-link" href={adminSideNavUrl.url} renderIcon={LicenseThirdParty}>
+                {adminSideNavUrl.name}
               </SideNavLink>
             ) : null}
           </div>

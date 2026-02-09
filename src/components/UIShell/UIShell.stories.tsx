@@ -256,22 +256,34 @@ const sidenavProps = {
       icon: "",
     },
     {
+      name: "Context Studio",
+      url: "https://www.ibm.com",
+      key: "contextStudio",
+      icon: "Network_3",
+    },
+    {
       name: "Document Collections",
       url: "https://ocp2.cloud.boomerangplatform.net/dev/curatorai/apps/ui/chat-with-documents?teamName=10thSeptTeamFinal&teamId=68c16b4f56a126227190a280",
       key: "documentCollections",
       icon: "DocumentMultiple_02",
     },
     {
-      name: "Settings",
-      url: "https://ocp2.cloud.boomerangplatform.net/dev/curatorai/apps/ui/settings?teamName=10thSeptTeamFinal&teamId=68c16b4f56a126227190a280",
-      key: "settings",
-      icon: "Settings",
-    },
-    {
       name: "Catalog",
       url: "https://ocp2.cloud.boomerangplatform.net/dev/catalog/",
       key: "catalog",
       icon: "Catalog",
+    },
+    {
+      name: "Marketplace",
+      url: "https://ocp2.cloud.boomerangplatform.net/dev/catalog/marketplace",
+      key: "marketplace",
+      icon: "Store",
+    },
+    {
+      name: "Settings",
+      url: "https://ocp2.cloud.boomerangplatform.net/dev/curatorai/apps/ui/settings?teamName=10thSeptTeamFinal&teamId=68c16b4f56a126227190a280",
+      key: "settings",
+      icon: "Settings",
     },
     {
       name: "Admin",
