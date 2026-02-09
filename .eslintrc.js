@@ -1,5 +1,5 @@
 module.exports = {
-  extends: ["react-app", "plugin:jsx-a11y/recommended", "plugin:storybook/recommended"],
+  extends: ["react-app", "plugin:jsx-a11y/recommended"],
   plugins: ["jsx-a11y"],
   overrides: [
     {

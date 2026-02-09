@@ -33,6 +33,8 @@ function AboutPlatform({ baseServicesUrl, closeModal, isOpen = false, name }: Pr
     enabled: isOpen,
   });
 
+  const currentYear = new Date().getFullYear();
+
   return (
     <ComposedModal
       open={isOpen}
@@ -91,7 +93,7 @@ function AboutPlatform({ baseServicesUrl, closeModal, isOpen = false, name }: Pr
                 </span>
               </li>
             </ul>
-            <h1 className={`${prefix}--bmrg-aboutPlatform-footer__header`}>Copyright IBM Corp. 2022, 2025</h1>
+            <h1 className={`${prefix}--bmrg-aboutPlatform-footer__header`}>Copyright IBM Corp. 2022, {currentYear}</h1>
           </div>
         </ModalBody>
       ) : null}
