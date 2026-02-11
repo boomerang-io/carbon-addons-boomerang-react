@@ -236,6 +236,7 @@ const sidenavProps = {
       url: "https://ocp2.cloud.boomerangplatform.net/dev/curatorai/apps/ui/connectors?teamName=10thSeptTeamFinal&teamId=68c16b4f56a126227190a280",
       key: "tools",
       icon: "Api",
+      tag: "BETA",
     },
     {
       name: "Team Page",
@@ -260,6 +261,7 @@ const sidenavProps = {
       url: "https://www.ibm.com",
       key: "contextStudio",
       icon: "Network_3",
+      tag: "ALPHA",
     },
     {
       name: "Document Collections",

@@ -67,6 +67,7 @@ type Props = {
     name: string;
     url: string;
     icon: string;
+    tag?: string;
   }[];
   teams?: Array<SideNavTeam> | null;
   templateMeteringEvent?: (props: any) => void;
@@ -347,12 +348,18 @@ export function AdvantageSideNav(props: Props) {
                   handleSidenavLinkClick({ name: toolsSideNavUrl.name, link: toolsSideNavUrl.url });
                 }}
               >
-                <div className={`${prefix}--bmrg-advantage-sidenav-item-tag`}>
-                  {toolsSideNavUrl.name}
-                  <Tag size="sm" title="BETA" type="high-contrast">
-                    BETA
-                  </Tag>
-                </div>
+                {toolsSideNavUrl.tag ? (
+                  <div className={`${prefix}--bmrg-advantage-sidenav-item-tag`}>
+                    <p title={toolsSideNavUrl.name} className={`${prefix}--bmrg-advantage-sidenav-item-tag-name`}>
+                      {toolsSideNavUrl.name}
+                    </p>
+                    <Tag size="sm" title={toolsSideNavUrl.tag} type="high-contrast">
+                      {toolsSideNavUrl.tag}
+                    </Tag>
+                  </div>
+                ) : (
+                  toolsSideNavUrl.name
+                )}
               </SideNavLink>
             ) : null}
             {agentAssistantStudioSideNavUrl ? (
@@ -387,7 +394,21 @@ export function AdvantageSideNav(props: Props) {
                   handleSidenavLinkClick({ name: contextStudioSideNavUrl.name, link: contextStudioSideNavUrl.url });
                 }}
               >
-                {contextStudioSideNavUrl.name}
+                {contextStudioSideNavUrl.tag ? (
+                  <div className={`${prefix}--bmrg-advantage-sidenav-item-tag`}>
+                    <p
+                      title={contextStudioSideNavUrl.name}
+                      className={`${prefix}--bmrg-advantage-sidenav-item-tag-name`}
+                    >
+                      {contextStudioSideNavUrl.name}
+                    </p>
+                    <Tag size="sm" title={contextStudioSideNavUrl.tag} type="high-contrast">
+                      {contextStudioSideNavUrl.tag}
+                    </Tag>
+                  </div>
+                ) : (
+                  contextStudioSideNavUrl.name
+                )}
               </SideNavLink>
             ) : null}
             {agentAssistantLibrarySideNavUrl ? (
@@ -440,7 +461,18 @@ export function AdvantageSideNav(props: Props) {
                   handleSidenavLinkClick({ name: marketplaceSideNavUrl.name, link: marketplaceSideNavUrl.url });
                 }}
               >
-                {marketplaceSideNavUrl.name}
+                {marketplaceSideNavUrl.tag ? (
+                  <div className={`${prefix}--bmrg-advantage-sidenav-item-tag`}>
+                    <p title={marketplaceSideNavUrl.name} className={`${prefix}--bmrg-advantage-sidenav-item-tag-name`}>
+                      {marketplaceSideNavUrl.name}
+                    </p>
+                    <Tag size="sm" title={marketplaceSideNavUrl.tag} type="high-contrast">
+                      {marketplaceSideNavUrl.tag}
+                    </Tag>
+                  </div>
+                ) : (
+                  marketplaceSideNavUrl.name
+                )}
               </SideNavLink>
             ) : null}
             {settingsSideNavUrl ? (
