@@ -1,7 +1,7 @@
 {
   "name": "@boomerang-io/carbon-addons-boomerang-react",
   "description": "Carbon Addons for Boomerang apps",
-  "version": "4.6.14-beta.22",
+  "version": "4.6.14-beta.23",
   "author": {
     "name": "Tim Bula",
     "email": "timrbula@gmail.com"
@@ -56,7 +56,7 @@
     "@tippyjs/react": "4.2.6",
     "classnames": "2.3.2",
     "dayjs": "^1.11.11",
-    "dompurify": "3.2.6",
+    "dompurify": "3.3.1",
     "downshift": "6.1.7",
     "lodash.get": "4.4.2",
     "lodash.isequal": "4.5.0",
@@ -98,7 +98,6 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^12.1.5",
     "@testing-library/user-event": "^14.4.3",
-    "@types/dompurify": "^2.4.0",
     "@types/jest": "^29.2.3",
     "@types/lodash.get": "^4.4.7",
     "@types/lodash.isequal": "^4.5.6",

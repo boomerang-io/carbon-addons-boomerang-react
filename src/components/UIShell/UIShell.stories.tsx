@@ -129,6 +129,31 @@ const PLATFORM_VERSION_DATA = {
   platformVersionError: true,
 };
 
+const PLATFORM_NOTIFICATIONS = {
+  unreadCount: 57,
+  filter: "unread",
+  limit: 1000,
+  pageable: {
+    content: [
+      {
+        date: "2025-10-15T12:28:44.939+00:00",
+        detail:
+          "Test Banner Maintenance Functionality for the following service(s): IBM Consulting Advantage Platform and Core services from Wed Oct 15 20:30 UTC 2025 to Thu Oct 16 06:30 UTC 2025",
+        id: "68ef937c910eeb79916ffd0d",
+        creator: "Platform",
+        priority: "highest",
+        title: "Upcoming Maintenance",
+        userId: "673b28324c37b55dfe70b923",
+        type: "notification",
+        target: "all",
+        severity: "info",
+        eventId: "68ef937b221653798d1b6b99",
+        read: false,
+      },
+    ],
+  },
+};
+
 const sidenavProps = {
   appLink: { newChatRedirect: "" },
   joinCreateTrigger: () => console.log("Trigger modal if exists"),
@@ -324,6 +349,7 @@ export const UIShellDefault = (args: any) => {
   mock.onGet(`${BASE_SERVICES_URL}/launchpad/teams/1/services`).reply(withDelay(4000, [200, SERVICES_DATA]));
   mock.onGet(`${BASE_SERVICES_URL}/launchpad/teams/2/services`).reply(withDelay(4000, [200, []]));
   mock.onPost(`${BASE_SERVICES_URL}/support/contact`).reply(200);
+  mock.onGet(`ws://localhost:8080/services/notifications/ws`).reply(200, PLATFORM_NOTIFICATIONS);
 
   return (
     <>
