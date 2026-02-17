@@ -456,6 +456,7 @@ export function AdvantageSideNav(props: Props) {
               <SideNavLink
                 data-testid="sidenav-markeplace-link"
                 renderIcon={Store}
+                isActive={windowLocation.href.includes(`${baseEnvUrl}/launchpad/marketplace`)}
                 href={marketplaceSideNavUrl.url}
                 onClick={(e: any) => {
                   handleSidenavLinkClick({ name: marketplaceSideNavUrl.name, link: marketplaceSideNavUrl.url });
