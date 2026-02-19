@@ -1,7 +1,7 @@
 {
   "name": "@boomerang-io/carbon-addons-boomerang-react",
   "description": "Carbon Addons for Boomerang apps",
-  "version": "4.6.14-beta.24",
+  "version": "4.6.14-beta.25",
   "author": {
     "name": "Tim Bula",
     "email": "timrbula@gmail.com"
@@ -148,6 +148,7 @@
       "glob@10": "10.5.0",
       "lodash": "4.17.23",
       "lodash-es": "4.17.23",
+      "minimatch": "^10.2.1",
       "qs": "6.14.1",
       "path-to-regexp@0.1": "0.1.12",
       "path-to-regexp@0": "1.9.0",
