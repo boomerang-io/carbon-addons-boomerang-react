@@ -91,6 +91,7 @@ type Props = {
   platformName?: string;
   productName?: string;
   profileMenuItems?: React.ReactNode[];
+  queryClient?: any;
   renderPrivacyRedirect?: boolean;
   renderPrivacyStatement?: boolean;
   rightPanel?: { icon?: React.ReactNode; component: React.ReactNode };
@@ -130,6 +131,7 @@ function UIShell({
   platformName,
   productName,
   profileMenuItems = [],
+  queryClient,
   supportMenuItems = [],
   renderPrivacyRedirect = true,
   renderPrivacyStatement = true,
@@ -148,14 +150,16 @@ function UIShell({
   userTeamsAssets,
   enableIcaMacs,
 }: Props) {
-  const queryClient = new QueryClient({
-    defaultOptions: { queries: { refetchOnWindowFocus: false } },
-  });
+  const queryClientToUse = queryClient
+    ? queryClient
+    : new QueryClient({
+        defaultOptions: { queries: { refetchOnWindowFocus: false } },
+      });
 
   // Support base header .e.g for an error state
   if (!config) {
     return (
-      <QueryClientProvider client={queryClient}>
+      <QueryClientProvider client={queryClientToUse}>
         <Header
           baseEnvUrl={baseEnvUrl ?? ""}
           baseServicesUrl=""
@@ -212,7 +216,7 @@ function UIShell({
   const isPrivacyStatementDisabled = renderPrivacyStatement === false || features?.["consent.enabled"] === false;
 
   return (
-    <QueryClientProvider client={queryClient}>
+    <QueryClientProvider client={queryClientToUse}>
       <Header
         analyticsHelpers={analyticsHelpers}
         baseEnvUrl={platform.baseEnvUrl}
