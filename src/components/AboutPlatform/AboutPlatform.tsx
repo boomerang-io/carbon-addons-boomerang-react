@@ -5,7 +5,7 @@ IBM Confidential
 */
 
 import React from "react";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import { ComposedModal, Loading, ModalHeader, ModalBody } from "@carbon/react";
 import { Information } from "@carbon/react/icons";
 import HeaderMenuItem from "../Header/HeaderMenuItem";
@@ -28,7 +28,7 @@ function AboutPlatform({ baseServicesUrl, closeModal, isOpen = false, name }: Pr
     isLoading: isPlatformVersionLoading,
     isError: isPlatformVersionError,
   } = useQuery({
-    queryKey: platformVersioUrl,
+    queryKey: [platformVersioUrl],
     queryFn: resolver.query(platformVersioUrl, null),
     enabled: isOpen,
   });

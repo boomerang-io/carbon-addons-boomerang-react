@@ -23,7 +23,6 @@ exports[`Privacy Statement - snapshot 1`] = `
         <div
           class="cds--modal-container-body"
         >
-          
           <div
             class="cds--modal-header"
           >
@@ -48,7 +47,7 @@ exports[`Privacy Statement - snapshot 1`] = `
                 >
                   <button
                     aria-label="Close"
-                    aria-labelledby="tooltip-2"
+                    aria-labelledby="tooltip-:r0:"
                     class="cds--btn--icon-only cds--modal-close cds--btn cds--btn--primary"
                     type="button"
                   >
@@ -72,7 +71,7 @@ exports[`Privacy Statement - snapshot 1`] = `
                 <span
                   aria-hidden="true"
                   class="cds--popover"
-                  id="tooltip-2"
+                  id="tooltip-:r0:"
                   role="tooltip"
                 >
                   <span
@@ -106,13 +105,13 @@ exports[`Privacy Statement - snapshot 1`] = `
               Close
             </button>
             <button
-              aria-describedby="danger-description-4"
+              aria-describedby="danger-description-:r4:"
               class="cds--btn cds--btn--danger"
               type="button"
             >
               <span
                 class="cds--visually-hidden"
-                id="danger-description-4"
+                id="danger-description-:r4:"
               >
                 danger
               </span>
@@ -141,7 +140,6 @@ exports[`Privacy Statement - snapshot 1`] = `
                   <div
                     class="cds--modal-container-body"
                   >
-                    
                     <div
                       class="cds--modal-header"
                     >
@@ -166,7 +164,7 @@ exports[`Privacy Statement - snapshot 1`] = `
                           >
                             <button
                               aria-label="Close"
-                              aria-labelledby="tooltip-6"
+                              aria-labelledby="tooltip-:r5:"
                               class="cds--btn--icon-only cds--modal-close cds--btn cds--btn--primary"
                               type="button"
                             >
@@ -190,7 +188,7 @@ exports[`Privacy Statement - snapshot 1`] = `
                           <span
                             aria-hidden="true"
                             class="cds--popover"
-                            id="tooltip-6"
+                            id="tooltip-:r5:"
                             role="tooltip"
                           >
                             <span
@@ -226,13 +224,13 @@ exports[`Privacy Statement - snapshot 1`] = `
                         No, go back to Privacy Statement
                       </button>
                       <button
-                        aria-describedby="danger-description-8"
+                        aria-describedby="danger-description-:r9:"
                         class="cds--btn cds--btn--danger"
                         type="submit"
                       >
                         <span
                           class="cds--visually-hidden"
-                          id="danger-description-8"
+                          id="danger-description-:r9:"
                         >
                           danger
                         </span>

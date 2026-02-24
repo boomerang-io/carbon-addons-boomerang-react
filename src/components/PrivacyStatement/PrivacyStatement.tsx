@@ -4,7 +4,6 @@ IBM Confidential
 © Copyright IBM Corp. 2022, 2024
 */
 
-
 import React from "react";
 import { Accordion, AccordionItem, Button, ComposedModal, ModalHeader, ModalBody, ModalFooter } from "@carbon/react";
 import { Locked } from "@carbon/react/icons";
@@ -14,7 +13,7 @@ import HeaderMenuItem from "../Header/HeaderMenuItem";
 import ToastNotification from "../Notifications/ToastNotification";
 import Loading from "../Loading";
 import notify from "../Notifications/notify";
-import { useQuery, useMutation } from "react-query";
+import { useQuery, useMutation } from "@tanstack/react-query";
 import { serviceUrl, resolver } from "../../config/servicesConfig";
 import { prefix } from "../../internal/settings";
 
@@ -56,11 +55,11 @@ function PrivacyStatement({
   const [isConfirmModalOpen, setIsConfirmModalOpen] = React.useState(false);
   const statementUrl = serviceUrl.getStatement({ baseServicesUrl });
   const statementQuery = useQuery<PrivacyStatementContent>({
-    queryKey: statementUrl,
+    queryKey: [statementUrl],
     queryFn: resolver.query(statementUrl),
   });
 
-  const { mutateAsync, error: mutateUserConsentError } = useMutation(resolver.putUserConsent);
+  const { mutateAsync, error: mutateUserConsentError } = useMutation({ mutationFn: resolver.putUserConsent });
 
   function closeConfirmModal() {
     setIsConfirmModalOpen(false);

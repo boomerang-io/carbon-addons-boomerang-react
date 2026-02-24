@@ -5,7 +5,7 @@ IBM Confidential
 */
 
 import React, { useEffect, useState } from "react";
-import { UseQueryResult, useMutation } from "react-query";
+import { UseQueryResult, useMutation } from "@tanstack/react-query";
 import { HeaderMenu as CarbonHeaderMenu, HeaderMenuItem, InlineLoading } from "@carbon/react";
 import { AddAlt, CheckmarkFilled, ChevronDown, GroupAccount } from "@carbon/react/icons";
 import sortBy from "lodash.sortby";
@@ -105,15 +105,13 @@ export default function HeaderTeamSwitcher({
     return `${navigationPlatform.baseEnvUrl}/launchpad/teams/${teamId}`;
   };
 
-  const { mutateAsync: mutateUserProfile, isLoading: mutateUserProfileIsLoading } = useMutation(
-    resolver.patchUserProfile,
-    {
-      onSuccess: () => {
-        if (refetchUser) refetchUser();
-        if (refetchNavigation) refetchNavigation();
-      },
-    }
-  );
+  const { mutateAsync: mutateUserProfile, isPending: mutateUserProfileIsLoading } = useMutation({
+    mutationFn: resolver.patchUserProfile,
+    onSuccess: () => {
+      if (refetchUser) refetchUser();
+      if (refetchNavigation) refetchNavigation();
+    },
+  });
 
   React.useEffect(() => {
     let timer: any;

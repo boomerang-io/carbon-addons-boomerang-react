@@ -5,7 +5,7 @@ IBM Confidential
 */
 
 import React from "react";
-import { UseQueryResult } from "react-query";
+import { UseQueryResult } from "@tanstack/react-query";
 import { HeaderPanel, SkeletonText, SideNavMenu, SideNavMenuItem, SwitcherDivider } from "@carbon/react";
 import { Launch } from "@carbon/react/icons";
 import ErrorMessage from "../ErrorMessage";

@@ -4,10 +4,9 @@ IBM Confidential
 © Copyright IBM Corp. 2022, 2024
 */
 
-
 import React from "react";
 import axios from "axios";
-import { QueryClient, QueryClientProvider } from "react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import ProfileSettings from "./ProfileSettings";
 import MockAdapter from "axios-mock-adapter";
 import { PROFILE_SETTINGS_DATA } from "./constants";
@@ -29,7 +28,7 @@ export default {
   },
 };
 
-export const Default = (args) => {
+export const Default = (args: any) => {
   const mock = new MockAdapter(axios);
   mock.onGet("https://ibm.com/launchpad/user").reply(200, PROFILE_SETTINGS_DATA);
   mock.onPatch("https://ibm.com/users/profile").reply(200);
