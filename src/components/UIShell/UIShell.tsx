@@ -5,7 +5,7 @@ IBM Confidential
 */
 
 import React from "react";
-import { QueryClientProvider } from "@tanstack/react-query";
+import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import {
   Book,
   Forum,
@@ -25,7 +25,6 @@ import { FeedbackMenuItem } from "../Feedback";
 import { SupportCenterMenuItem } from "../SupportCenter";
 import { PrivacyStatementMenuItem } from "../PrivacyStatement";
 import { ProfileSettingsMenuItem } from "../ProfileSettings";
-import { queryClient } from "../../config/servicesConfig";
 import { SignOutMenuItem } from "../SignOut";
 import type { NavLink, User } from "../../types";
 import { USER_PLATFORM_ROLE } from "../../constants/UserType";
@@ -149,6 +148,10 @@ function UIShell({
   userTeamsAssets,
   enableIcaMacs,
 }: Props) {
+  const queryClient = new QueryClient({
+    defaultOptions: { queries: { refetchOnWindowFocus: false } },
+  });
+
   // Support base header .e.g for an error state
   if (!config) {
     return (
