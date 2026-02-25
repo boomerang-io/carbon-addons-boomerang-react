@@ -450,7 +450,7 @@ export function AdvantageSideNav(props: Props) {
               data-testid="sidenav-agent-assistant-library-link"
               renderIcon={Folders}
               element={Link}
-              to={`${baseEnvUrl}${assistantLibraryPath}`}
+              to={`${assistantLibraryPath}`}
               className={
                 !AssistantStudioLink
                   ? `${prefix}--bmrg-advantage-sidenav__inactive-link`
