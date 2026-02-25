@@ -5,7 +5,7 @@ IBM Confidential
 */
 
 import React from "react";
-import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
+import { QueryClientProvider } from "@tanstack/react-query";
 import {
   Book,
   Forum,
@@ -26,6 +26,7 @@ import { SupportCenterMenuItem } from "../SupportCenter";
 import { PrivacyStatementMenuItem } from "../PrivacyStatement";
 import { ProfileSettingsMenuItem } from "../ProfileSettings";
 import { SignOutMenuItem } from "../SignOut";
+import { queryClient } from "../../config/servicesConfig";
 import type { NavLink, User } from "../../types";
 import { USER_PLATFORM_ROLE } from "../../constants/UserType";
 
@@ -91,9 +92,9 @@ type Props = {
   platformName?: string;
   productName?: string;
   profileMenuItems?: React.ReactNode[];
-  queryClient?: any;
   renderPrivacyRedirect?: boolean;
   renderPrivacyStatement?: boolean;
+  renderWithReactQueryClientProvider?: boolean;
   rightPanel?: { icon?: React.ReactNode; component: React.ReactNode };
   refetchUser?: Function;
   refetchUserTeams?: Function;
@@ -131,10 +132,10 @@ function UIShell({
   platformName,
   productName,
   profileMenuItems = [],
-  queryClient,
   supportMenuItems = [],
   renderPrivacyRedirect = true,
   renderPrivacyStatement = true,
+  renderWithReactQueryClientProvider = true,
   rightPanel,
   handleShowTutorial,
   refetchUser,
@@ -150,16 +151,10 @@ function UIShell({
   userTeamsAssets,
   enableIcaMacs,
 }: Props) {
-  const queryClientToUse = queryClient
-    ? queryClient
-    : new QueryClient({
-        defaultOptions: { queries: { refetchOnWindowFocus: false } },
-      });
-
   // Support base header .e.g for an error state
   if (!config) {
-    return (
-      <QueryClientProvider client={queryClientToUse}>
+    return renderWithReactQueryClientProvider ? (
+      <QueryClientProvider client={queryClient}>
         <Header
           baseEnvUrl={baseEnvUrl ?? ""}
           baseServicesUrl=""
@@ -172,6 +167,18 @@ function UIShell({
           user={user}
         />
       </QueryClientProvider>
+    ) : (
+      <Header
+        baseEnvUrl={baseEnvUrl ?? ""}
+        baseServicesUrl=""
+        carbonTheme={carbonTheme}
+        enableAppSwitcher={false}
+        enableNotifications={false}
+        enableNotificationsCount={false}
+        enableTeamSwitcher={enableTeamSwitcher}
+        productName={productName || platformName || ""}
+        user={user}
+      />
     );
   }
   const { features, navigation, platform, platformMessage } = config;
@@ -215,8 +222,8 @@ function UIShell({
    */
   const isPrivacyStatementDisabled = renderPrivacyStatement === false || features?.["consent.enabled"] === false;
 
-  return (
-    <QueryClientProvider client={queryClientToUse}>
+  return renderWithReactQueryClientProvider ? (
+    <QueryClientProvider client={queryClient}>
       <Header
         analyticsHelpers={analyticsHelpers}
         baseEnvUrl={platform.baseEnvUrl}
@@ -404,6 +411,195 @@ function UIShell({
         />
       ) : null}
     </QueryClientProvider>
+  ) : (
+    <>
+      <Header
+        analyticsHelpers={analyticsHelpers}
+        baseEnvUrl={platform.baseEnvUrl}
+        baseServicesUrl={platform.baseServicesUrl}
+        carbonTheme={carbonTheme}
+        createJoinTeamTrigger={createJoinTeamTrigger}
+        enableAppSwitcher={isAppSwitcherEnabled}
+        instanceSwitcherEnabled={instanceSwitcherEnabled}
+        enableNotifications={isNotificationsEnabled}
+        enableNotificationsCount={isNotificationsCountEnabled}
+        enableTeamSwitcher={enableTeamSwitcher}
+        leftPanel={leftPanel}
+        navLinks={navigation}
+        platform={platform}
+        platformMessage={platformMessage}
+        prefixName={names.platformName}
+        productName={names.productName}
+        rightPanel={rightPanel}
+        requestSummary={user?.requestSummary}
+        skipToContentProps={skipToContentProps}
+        templateMeteringEvent={templateMeteringEvent}
+        triggerEvent={triggerEvent}
+        profileMenuItems={[
+          isUserEnabled && (
+            <ProfileSettingsMenuItem
+              key="profile-settings"
+              baseServicesUrl={platform.baseServicesUrl}
+              src={`${platform.baseServicesUrl}/users/image/${user?.email}`}
+              userName={user?.displayName ?? user?.name}
+              refetchUser={refetchUser}
+              refetchUserTeams={refetchUserTeams}
+              refetchNavigation={refetchNavigation}
+            />
+          ),
+          isSendMailEnabled && (
+            <HeaderMenuItem
+              key="email-preferences"
+              href={`${platform.baseEnvUrl}/launchpad/email-preferences`}
+              icon={<Email />}
+              kind="internal"
+              text="Email Preferences"
+              type="link"
+            />
+          ),
+          !isPrivacyStatementDisabled && (
+            <PrivacyStatementMenuItem
+              key="privacy-statement"
+              baseServicesUrl={platform.baseServicesUrl}
+              platformEmail={platform?.platformEmail}
+            />
+          ),
+          ...profileMenuItems,
+          isSignOutEnabled && <SignOutMenuItem key="Sign Out" signOutLink={platform.signOutUrl as string} />,
+        ].filter(Boolean)}
+        supportMenuItems={[
+          !isPartnerUser && (
+            <HeaderMenuItem
+              key="docs"
+              href={platform?.docs?.url as string}
+              icon={<Document />}
+              data-testid="docs"
+              kind="external"
+              text="Docs"
+              type="link"
+            />
+          ),
+          isSupportEnabled &&
+            (supportFlagCheck || isPartnerUser ? (
+              <SupportCenterMenuItem
+                key="support-center"
+                platformName={platform?.platformName}
+                platformOrganization={platform?.platformOrganization}
+                supportLink={supportLink}
+                partnerEmailId={partnerEmailId}
+                enablePartner={isPartnerUser}
+                baseServicesUrl={platform.baseServicesUrl}
+              />
+            ) : (
+              <HeaderMenuItem
+                key="support-center"
+                href={platform?.supportUrl as string}
+                icon={<HelpDesk />}
+                kind="external"
+                text="Support Center"
+                type="link"
+              />
+            )),
+          <HeaderMenuItem
+            key="release-notes"
+            href={platform?.releaseNotesUrl as string}
+            icon={<CatalogPublish />}
+            data-testid="release-notes"
+            kind="app"
+            text="Release Notes"
+            type="link"
+          />,
+          <HeaderMenuItem
+            key="legal-terms"
+            href={platform?.legalTermsUrl as string}
+            icon={<Policy />}
+            data-testid="legal-terms"
+            kind="app"
+            text="Legal Terms"
+            type="link"
+          />,
+          <span style={{ borderBottom: "1px solid #b8c1c1" }}></span>,
+          isCommunityEnabled && (
+            <HeaderMenuItem
+              key="community"
+              href={platform?.communityUrl as string}
+              icon={<Forum />}
+              kind="external"
+              text="Community"
+              type="link"
+            />
+          ),
+          isFeedbackEnabled && (
+            <FeedbackMenuItem
+              key="feedback"
+              platformName={platform?.platformName}
+              platformOrganization={platform?.platformOrganization}
+              sendIdeasUrl={sendIdeasUrl}
+              sendBluePointsAwardUrl={sendBluePointsAwardUrl}
+            />
+          ),
+          !isPartnerUser && askICAEnabled ? (
+            <HeaderMenuItem
+              key="chat-launch"
+              href={platform?.askICAUrl as string}
+              icon={<ChatLaunch />}
+              data-testid="askICA-chatlaunch"
+              kind="external"
+              text="AskICA"
+              type="link"
+            />
+          ) : null,
+          !isPartnerUser && enableIcaMacs && (
+            <HeaderMenuItem
+              key="launch-ideation-agent"
+              href={`${platform.baseEnvUrl}/launchpad/macs`}
+              icon={<Cognitive />}
+              data-testid="launch-ideation-agent"
+              kind="app"
+              text="AI Proposal Feedback Tool"
+              type="link"
+            />
+          ),
+          isAboutPlatformEnabled && (
+            <AboutPlatformMenuItem
+              key="about-platform"
+              name={platform.name as string}
+              baseServicesUrl={platform.baseServicesUrl}
+            />
+          ),
+          tutorialScreenToShow && handleShowTutorial && (
+            <HeaderMenuItem
+              key="launch-tutorial"
+              onClick={handleShowTutorial as () => void}
+              icon={<Book />}
+              data-testid="launch-tutorial"
+              text="Launch Tutorial"
+              type="button"
+            />
+          ),
+          ...supportMenuItems,
+        ].filter(Boolean)}
+        history={history}
+        isLaunchpad={isLaunchpad}
+        isLoadingTeamSwitcher={isLoadingTeamSwitcher}
+        isSuccessTeamSwitcher={isSuccessTeamSwitcher}
+        refetchUser={refetchUser}
+        refetchNavigation={refetchNavigation}
+        setIsSuccessTeamSwitcher={setIsSuccessTeamSwitcher}
+        trackEvent={trackEvent}
+        user={user}
+        userTeams={userTeams}
+        userTeamsAssets={userTeamsAssets}
+      />
+      {isPrivacyModalRendered ? (
+        <PrivacyRedirectModal
+          isOpen
+          baseEnvUrl={platform.baseEnvUrl as string}
+          platformName={platform?.name}
+          user={user}
+        />
+      ) : null}
+    </>
   );
 }
 
