@@ -23,6 +23,7 @@ import {
   UserMultiple,
 } from "@carbon/react/icons";
 import { USER_PLATFORM_ROLE } from "../../constants/UserType";
+import { Link } from "react-router-dom";
 import { prefix } from "../../internal/settings";
 import { NavLink, SideNavTeam, SideNavAccount, User } from "types";
 
@@ -45,6 +46,7 @@ type Props = {
   appLink: any;
   agentStudioPath?: string;
   agenticAppsPath?: string;
+  assistantLibraryPath?:string;
   regionalTeam?: any;
   baseEnvUrl?: string;
   className?: string;
@@ -83,6 +85,7 @@ export function AdvantageSideNav(props: Props) {
     app,
     appLink,
     agenticAppsPath = "",
+    assistantLibraryPath = "",
     agentStudioPath = "",
     regionalTeam,
     enableChatButton = true,
@@ -124,9 +127,10 @@ export function AdvantageSideNav(props: Props) {
   const agentAssistantStudioLink = sideNavUrls?.find(
     (sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.AgentStudio
   )?.url;
-  const agentAssistantLibraryLink = sideNavUrls?.find(
-    (sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.AgentLibrary
-  )?.url;
+  // const agentAssistantLibraryLink = sideNavUrls?.find(
+  //   (sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.AgentLibrary
+  // )?.url;
+  console.log("assistantLibraryPath",`${baseEnvUrl}${assistantLibraryPath}`);
   const documentCollectionsLink = sideNavUrls?.find(
     (sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.DocumentCollections
   )?.url;
@@ -209,7 +213,7 @@ export function AdvantageSideNav(props: Props) {
       triggerEvent({
         action: "Clicked on SideNav Agent & Assistant Library link",
         category: "Sidenav",
-        destinationPath: agentAssistantLibraryLink,
+        destinationPath: `${baseEnvUrl}${assistantLibraryPath}`,
       });
   };
 
@@ -291,7 +295,7 @@ export function AdvantageSideNav(props: Props) {
   );
 
   const showSecondDivider =
-    showChatButton || toolsLink || agentAssistantStudioLink || agentAssistantLibraryLink || documentCollectionsLink;
+    showChatButton || toolsLink || agentAssistantStudioLink || documentCollectionsLink;
 
     const navigateInternal = (url: string) => {
       const browserHistory = createBrowserHistory();
@@ -442,20 +446,22 @@ export function AdvantageSideNav(props: Props) {
                 Agent & Assistant Studio
               </SideNavLink>
             ) : null}
-            {agentAssistantLibraryLink ? (
-              <SideNavLink
-                data-testid="sidenav-agent-assistant-library-link"
-                renderIcon={Folders}
-                //href={agentAssistantLibraryLink}
-                className={!AssistantStudioLink ? `${prefix}--bmrg-advantage-sidenav__inactive-link` : ""}
-                disabled={Boolean(!AssistantStudioLink)}
-              // onClick={(e: any) => {
-              //   handleAgentAssistantLibraryClick();
-              // }}
-              >
-                Agent & Assistant Library
-              </SideNavLink>
-            ) : null}
+            <SideNavLink
+              data-testid="sidenav-agent-assistant-library-link"
+              renderIcon={Folders}
+              element={Link}
+              to={`${baseEnvUrl}${assistantLibraryPath}`}
+              className={
+                !AssistantStudioLink
+                  ? `${prefix}--bmrg-advantage-sidenav__inactive-link`
+                  : ""
+              }
+              onClick={() => {
+                handleAgentAssistantLibraryClick();
+              }}
+            >
+              Agent & Assistant Library
+            </SideNavLink>
             {documentCollectionsLink ? (
               <SideNavLink
                 data-testid="sidenav-document-collections-link"
