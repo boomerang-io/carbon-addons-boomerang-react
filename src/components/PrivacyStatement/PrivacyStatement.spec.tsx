@@ -4,10 +4,9 @@ IBM Confidential
 © Copyright IBM Corp. 2022, 2024
 */
 
-
 import React from "react";
 import { expect, test, vi } from "vitest";
-import { QueryClient, QueryClientProvider } from "react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { render, fireEvent, waitFor } from "@testing-library/react";
 import { serviceUrl } from "../../config/servicesConfig";
 import PrivacyStatement from "./PrivacyStatement";

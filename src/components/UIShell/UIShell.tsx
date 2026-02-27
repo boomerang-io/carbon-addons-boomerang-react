@@ -5,7 +5,7 @@ IBM Confidential
 */
 
 import React from "react";
-import { QueryClientProvider } from "react-query";
+import { QueryClientProvider } from "@tanstack/react-query";
 import {
   Book,
   Forum,
@@ -25,8 +25,8 @@ import { FeedbackMenuItem } from "../Feedback";
 import { SupportCenterMenuItem } from "../SupportCenter";
 import { PrivacyStatementMenuItem } from "../PrivacyStatement";
 import { ProfileSettingsMenuItem } from "../ProfileSettings";
-import { queryClient } from "../../config/servicesConfig";
 import { SignOutMenuItem } from "../SignOut";
+import { queryClient } from "../../config/servicesConfig";
 import type { NavLink, User } from "../../types";
 import { USER_PLATFORM_ROLE } from "../../constants/UserType";
 
