@@ -24,13 +24,13 @@ To get a Windows environment set up for contributing to this codebase, you'll ne
 To set up WSL, follow [this guide published by the Carbon team](https://github.com/carbon-design-system/carbon/blob/master/docs/guides/setup/windows.md). The steps should be the same, except that you'll be cloning this repository instead of the Carbon repository.
 
 ```sh
-git clone git@github.ibm.com:Boomerang-Lib/carbon-addons-react-react.git
+git clone git@github.com:boomerang-io/carbon-addons-boomerang-react.git
 ```
 
 or with `https`:
 
 ```sh
-git clone https://github.ibm.com/Boomerang-Lib/boomerang.package.carbon-addons-boomerang-react.git
+git clone https://github.com/boomerang-io/carbon-addons-boomerang-react.git
 ```
 
 ## Build and start the development server
@@ -68,7 +68,7 @@ Any change to `dependencies` (including version bumps) will impact consumers tha
 
 ## Submitting pull requests and commits
 
-Commits must follow the [conventional commit](https://www.conventionalcommits.org/en/v1.0.0-beta.2/#summary) format. You won't be able to create a commit unless you follow those rules. The [recent commits in the repository](https://github.ibm.com/Boomerang-Lib/boomerang.package.carbon-addons-boomerang-react/commits/master) show examples of the format and how it's generally used.
+Commits must follow the [conventional commit](https://www.conventionalcommits.org/en/v1.0.0-beta.2/#summary) format. You won't be able to create a commit unless you follow those rules. The [recent commits in the repository](https://github.com/boomerang-io/carbon-addons-boomerang-react/commits/main) show examples of the format and how it's generally used.
 
 Commits are preferred but not required to contain a link to an issue. If you choose to link commits to an issue, the 72 character limit can be avoided by placing the link in the body of the commit. Example:
 
