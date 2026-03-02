@@ -130,7 +130,6 @@ export function AdvantageSideNav(props: Props) {
   // const agentAssistantLibraryLink = sideNavUrls?.find(
   //   (sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.AgentLibrary
   // )?.url;
-  console.log("assistantLibraryPath",`${baseEnvUrl}${assistantLibraryPath}`);
   const documentCollectionsLink = sideNavUrls?.find(
     (sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.DocumentCollections
   )?.url;
@@ -449,6 +448,7 @@ export function AdvantageSideNav(props: Props) {
             <SideNavLink
               data-testid="sidenav-agent-assistant-library-link"
               renderIcon={Folders}
+              isActive={windowLocation.href.includes(`${baseEnvUrl}${assistantLibraryPath}`)}
               element={Link}
               to={`${assistantLibraryPath}`}
               className={
