@@ -208,6 +208,7 @@ export function AdvantageSideNav(props: Props) {
   };
 
   const handleAgentAssistantLibraryClick = () => {
+    console.log("assistantLibraryPath",`${baseEnvUrl}${assistantLibraryPath}`);
     triggerEvent &&
       triggerEvent({
         action: "Clicked on SideNav Agent & Assistant Library link",
@@ -450,7 +451,8 @@ export function AdvantageSideNav(props: Props) {
               renderIcon={Folders}
               isActive={windowLocation.href.includes(`${baseEnvUrl}${assistantLibraryPath}`)}
               element={Link}
-              to={`${assistantLibraryPath}`}
+              href={`${baseEnvUrl}${assistantLibraryPath}`}
+              // to={`${assistantLibraryPath}`}
               className={
                 !AssistantStudioLink
                   ? `${prefix}--bmrg-advantage-sidenav__inactive-link`
