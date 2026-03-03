@@ -447,23 +447,23 @@ export function AdvantageSideNav(props: Props) {
               </SideNavLink>
             ) : null}
             <SideNavLink
-              data-testid="sidenav-agent-assistant-library-link"
-              renderIcon={Folders}
-              isActive={windowLocation.href.includes(`${baseEnvUrl}${assistantLibraryPath}`)}
-              element={Link}
-              href={`${baseEnvUrl}${assistantLibraryPath}`}
-              // to={`${assistantLibraryPath}`}
-              className={
-                !AssistantStudioLink
-                  ? `${prefix}--bmrg-advantage-sidenav__inactive-link`
-                  : ""
-              }
-              onClick={() => {
+                data-testid="sidenav-agent-assistant-library-link"
+                renderIcon={Folders}
+                 // to={`${assistantLibraryPath}`}
+                isActive={windowLocation.pathname.includes(assistantLibraryPath)}
+                // href={`${baseEnvUrl}${assistantLibraryPath}`}
+                onClick={(e: any) => {
+                e.preventDefault();
                 handleAgentAssistantLibraryClick();
+
+                history.push({
+                  pathname: assistantLibraryPath,
+                  state: { refresh: Date.now() }
+                });
               }}
-            >
-              Agent & Assistant Library
-            </SideNavLink>
+              >
+                Agent & Assistant Library
+              </SideNavLink>
             {documentCollectionsLink ? (
               <SideNavLink
                 data-testid="sidenav-document-collections-link"
