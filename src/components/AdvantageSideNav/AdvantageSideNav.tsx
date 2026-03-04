@@ -136,6 +136,7 @@ export function AdvantageSideNav(props: Props) {
   const catalogNavlink = sideNavUrls?.find((sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.Catalog)?.url;
   //const settingsLink = sideNavUrls?.find((sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.Settings)?.url;
   const settingsLink=`${baseEnvUrl}/settings`;
+  const AssistantLink=`${baseEnvUrl}/assistant-library`;
   const adminNavlink = sideNavUrls?.find((sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.Admin)?.url;
 
   const AssistantStudioLink = false;
@@ -451,15 +452,15 @@ export function AdvantageSideNav(props: Props) {
                 renderIcon={Folders}
                  // to={`${assistantLibraryPath}`}
                 isActive={windowLocation.href.includes(`${baseEnvUrl}/assistant-library`)}
-                // href={`${baseEnvUrl}${assistantLibraryPath}`}
-                onClick={(e: any) => {
-                e.preventDefault();
-                handleAgentAssistantLibraryClick();
-                history.push({
-                  pathname: assistantLibraryPath,
-                  state: { refresh: Date.now() }
-                });
-              }}
+                 href={AssistantLink}
+              //   onClick={(e: any) => {
+              //   e.preventDefault();
+              //   handleAgentAssistantLibraryClick();
+              //   history.push({
+              //     pathname: assistantLibraryPath,
+              //     state: { refresh: Date.now() }
+              //   });
+              // }}
               >
                 Agent & Assistant Library
               </SideNavLink>
