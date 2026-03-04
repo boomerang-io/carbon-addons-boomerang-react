@@ -450,12 +450,11 @@ export function AdvantageSideNav(props: Props) {
                 data-testid="sidenav-agent-assistant-library-link"
                 renderIcon={Folders}
                  // to={`${assistantLibraryPath}`}
-                isActive={windowLocation.pathname.includes(assistantLibraryPath)}
+                isActive={windowLocation.href.includes(`${baseEnvUrl}/assistant-library`)}
                 // href={`${baseEnvUrl}${assistantLibraryPath}`}
                 onClick={(e: any) => {
                 e.preventDefault();
                 handleAgentAssistantLibraryClick();
-
                 history.push({
                   pathname: assistantLibraryPath,
                   state: { refresh: Date.now() }
