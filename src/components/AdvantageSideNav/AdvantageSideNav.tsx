@@ -447,20 +447,20 @@ export function AdvantageSideNav(props: Props) {
                 Agent & Assistant Studio
               </SideNavLink>
             ) : null}
-            <SideNavLink
+             <SideNavLink
                 data-testid="sidenav-agent-assistant-library-link"
                 renderIcon={Folders}
                  // to={`${assistantLibraryPath}`}
-                isActive={windowLocation.href.includes(`${baseEnvUrl}/assistant-library`)}
-                 href={AssistantLink}
-              //   onClick={(e: any) => {
-              //   e.preventDefault();
-              //   handleAgentAssistantLibraryClick();
-              //   history.push({
-              //     pathname: assistantLibraryPath,
-              //     state: { refresh: Date.now() }
-              //   });
-              // }}
+                isActive={windowLocation.pathname.includes(`${baseEnvUrl}/assistant-library`)}
+                // href={`${baseEnvUrl}${assistantLibraryPath}`}
+                onClick={(e: any) => {
+                e.preventDefault();
+                handleAgentAssistantLibraryClick();
+                history.push({
+                  pathname: assistantLibraryPath,
+                  state: { refresh: Date.now() }
+                });
+              }}
               >
                 Agent & Assistant Library
               </SideNavLink>
@@ -483,7 +483,7 @@ export function AdvantageSideNav(props: Props) {
             {catalogNavlink ? (
               <SideNavLink
                 data-testid="sidenav-catalog-link"
-                isActive={windowLocation.href.includes(`${baseEnvUrl}/catalog`)}
+                isActive={windowLocation.pathname.includes(`${baseEnvUrl}/catalog`)}
                 href={catalogNavlink}
                 renderIcon={Catalog}
               >
