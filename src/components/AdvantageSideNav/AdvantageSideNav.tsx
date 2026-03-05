@@ -142,9 +142,8 @@ export function AdvantageSideNav(props: Props) {
   const AssistantStudioLink = false;
 
   const currentUrl = new URL(window.location.href);
-  const workspace = currentUrl.searchParams.get("workspace");
 
-  const isDocumentCollectionsActive = currentUrl.pathname.includes("/chat") && workspace === "knowledge";
+  const isDocumentCollectionsActive = currentUrl.pathname.includes("/chat/document-collections");
   const isChatActive = currentUrl.pathname.includes("/chat") && !isDocumentCollectionsActive;
 
   // get current selected team
