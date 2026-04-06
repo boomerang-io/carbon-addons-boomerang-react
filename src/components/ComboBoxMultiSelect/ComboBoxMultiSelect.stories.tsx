@@ -4,9 +4,8 @@ IBM Confidential
 © Copyright IBM Corp. 2022, 2024
 */
 
-
 import React from "react";
-import { action } from "@storybook/addon-actions";
+import { action } from "storybook/actions";
 import MultiSelect from "./ComboBoxMultiSelect";
 
 export default {
@@ -59,7 +58,7 @@ export const NoSelectedItems = (args) => {
     <MultiSelect
       id="multi-select"
       items={animals}
-      itemToString={(item: { label: string}) => item.label}
+      itemToString={(item: { label: string }) => item.label}
       onChange={action("Multiselect changed")}
       titleText={"Select some animals"}
       placeholder={"Select an animal"}

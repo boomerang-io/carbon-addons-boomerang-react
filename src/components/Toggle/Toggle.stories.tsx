@@ -4,9 +4,8 @@ IBM Confidential
 © Copyright IBM Corp. 2022, 2024
 */
 
-
 import React from "react";
-import { action } from "@storybook/addon-actions";
+import { action } from "storybook/actions";
 import Toggle from "./Toggle";
 
 export default {
@@ -23,7 +22,9 @@ export default {
 };
 
 export const Default = (args) => {
-  return <Toggle id="default-toggle" labelText="Toggle me" defaultToggled onToggle={action("Toggle clicked")} {...args} />;
+  return (
+    <Toggle id="default-toggle" labelText="Toggle me" defaultToggled onToggle={action("Toggle clicked")} {...args} />
+  );
 };
 
 export const InvalidWarning = (args) => {

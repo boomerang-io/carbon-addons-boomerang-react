@@ -3,19 +3,9 @@ module.exports = {
 
   addons: [
     "@storybook/addon-links",
-    {
-      name: "@storybook/addon-essentials",
-      options: {
-        actions: true,
-        backgrounds: false,
-        controls: true,
-        docs: true,
-        toolbars: true,
-        viewport: true,
-      },
-    },
-    "@storybook/addon-storysource",
     "@storybook/addon-a11y",
+    "@chromatic-com/storybook",
+    "@storybook/addon-docs"
   ],
 
   framework: {
@@ -28,7 +18,13 @@ module.exports = {
     reactDocgen: 'react-docgen-typescript',
   },
 
-  docs: {
-    autodocs: true
+  docs: {},
+
+  features: {
+    actions: true,
+    backgrounds: false,
+    controls: true,
+    toolbars: true,
+    viewport: true
   }
 };
