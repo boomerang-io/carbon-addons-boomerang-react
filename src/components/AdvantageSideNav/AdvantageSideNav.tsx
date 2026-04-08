@@ -139,7 +139,7 @@ export function AdvantageSideNav(props: Props) {
   const AssistantLink=`${baseEnvUrl}/assistant-library`;
   const adminNavlink = sideNavUrls?.find((sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.Admin)?.url;
 
-  const AssistantStudioLink = false;
+  const isAssistantStudioEnabled = Boolean(agentAssistantStudioLink);
 
   const currentUrl = new URL(window.location.href);
 
@@ -427,21 +427,21 @@ export function AdvantageSideNav(props: Props) {
             {agentAssistantStudioLink ? (
               <SideNavLink
                 data-testid="sidenav-agent-assistant-studio-link"
-                // isActive={
-                //   (agentStudioPath && windowLocation.href.includes(`/launchpad${agentStudioPath}`)) ||
-                //   (agenticAppsPath && windowLocation.href.includes(`/launchpad${agenticAppsPath}`))
-                // }
-                className={!AssistantStudioLink ? `${prefix}--bmrg-advantage-sidenav__inactive-link` : ""}
-                disabled={Boolean(!AssistantStudioLink)}
-                renderIcon={IntentRequestCreate}
-              // href={agentAssistantStudioLink}
-              // onClick={(e: any) => {
-              //   if (isLaunchpad) {
-              //     handleLaunchpadLink(e);
-              //     history.push(agentStudioPath);
-              //   }
-              //   handleAgentAssistantStudioClick();
-              // }}
+                isActive={
+                  (agentStudioPath && windowLocation.href.includes(`/launchpad${agentStudioPath}`)) ||
+                  (agenticAppsPath && windowLocation.href.includes(`/launchpad${agenticAppsPath}`))
+               }
+              className={!isAssistantStudioEnabled ? `${prefix}--bmrg-advantage-sidenav__inactive-link` : ""}
+              disabled={!isAssistantStudioEnabled}
+              renderIcon={IntentRequestCreate}
+              href={agentAssistantStudioLink}
+              onClick={(e: any) => {
+                if (isLaunchpad) {
+                  handleLaunchpadLink(e);
+                  history.push(agentStudioPath);
+                }
+                handleAgentAssistantStudioClick();
+              }}
               >
                 Agent & Assistant Studio
               </SideNavLink>
@@ -468,8 +468,8 @@ export function AdvantageSideNav(props: Props) {
                 data-testid="sidenav-document-collections-link"
                 isActive={isDocumentCollectionsActive}
                 renderIcon={DocumentMultiple_02}
-                className={!AssistantStudioLink ? `${prefix}--bmrg-advantage-sidenav__inactive-link` : ""}
-                // disabled={Boolean(!AssistantStudioLink)}
+                className={!isAssistantStudioEnabled ? `${prefix}--bmrg-advantage-sidenav__inactive-link` : ""}
+                // disabled={!isAssistantStudioEnabled}
                 href={documentCollectionsLink}
                 onClick={(e: any) => {
                   handleDocumentCollectionsClick();
