@@ -426,8 +426,8 @@ export function AdvantageSideNav(props: Props) {
             ) : null}
             {agentAssistantStudioLink ? (
               <SideNavLink
-                data-testid="sidenav-agent-assistant-studio-link"
-                isActive={windowLocation.href.includes(`/launchpad${agentStudioPath}`)}
+              data-testid="sidenav-agent-assistant-studio-link"
+              isActive={windowLocation.href.includes(`/agent-assistant-studio`)}
               className={!isAssistantStudioEnabled ? `${prefix}--bmrg-advantage-sidenav__inactive-link` : ""}
               disabled={!isAssistantStudioEnabled}
               renderIcon={IntentRequestCreate}
