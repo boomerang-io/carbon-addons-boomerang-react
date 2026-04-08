@@ -443,7 +443,7 @@ export function AdvantageSideNav(props: Props) {
                 handleAgentAssistantStudioClick();
               }}
               >
-                Agent & Assistant Studio
+                Agent Studio
               </SideNavLink>
             ) : null}
             <SideNavLink
