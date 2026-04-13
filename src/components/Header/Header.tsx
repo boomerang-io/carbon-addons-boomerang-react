@@ -5,7 +5,7 @@ IBM Confidential
 */
 
 import React from "react";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import {
   Header as CarbonHeader,
   HeaderGlobalBar,
@@ -177,7 +177,7 @@ export default function Header(props: Props) {
   const userTeamsUrl = serviceUrl.getUserTeamsServices({ baseServicesUrl });
 
   const teamsQuery = useQuery({
-    queryKey: userTeamsUrl,
+    queryKey: [userTeamsUrl],
     queryFn: resolver.query(userTeamsUrl, null),
     enabled: !hasUserTeams && Boolean(baseServicesUrl),
   });
@@ -491,7 +491,7 @@ function AppSwitcherMenu(props: {
   const queryEnabled = isOpen && props.enabled && !hasUserTeamsAssets && Boolean(props.baseServicesUrl);
 
   const teamsAssetsQuery = useQuery({
-    queryKey: userTeamsAssetsUrl,
+    queryKey: [userTeamsAssetsUrl],
     queryFn: resolver.query(userTeamsAssetsUrl, null),
     enabled: queryEnabled,
   });

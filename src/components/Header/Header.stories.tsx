@@ -7,7 +7,7 @@ IBM Confidential
 /* eslint-disable no-script-url */
 import React from "react";
 import { Link, MemoryRouter as Router } from "react-router-dom";
-import { QueryClient, QueryClientProvider } from "react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ServiceDesk } from "@carbon/react/icons";
 import { SideNav, SideNavLink, SideNavItems, SideNavMenu, SideNavMenuItem } from "@carbon/react";
 import HeaderMenuItem from "../Header/HeaderMenuItem";
@@ -145,7 +145,7 @@ export const IntegratedSidenav = () => (
                 <SideNavMenuItem href="">Menu 2</SideNavMenuItem>
                 <SideNavMenuItem href="">Menu 3</SideNavMenuItem>
               </SideNavMenu>
-              <SideNavLink isActive element={Link} renderIcon={ServiceDesk} to="" large>
+              <SideNavLink isActive renderIcon={ServiceDesk} large>
                 Large link w/icon
               </SideNavLink>
             </SideNavItems>

@@ -5,7 +5,7 @@ IBM Confidential
 */
 
 import React from "react";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import { ComposedModal, Loading, ModalHeader, ModalBody } from "@carbon/react";
 import { Information } from "@carbon/react/icons";
 import HeaderMenuItem from "../Header/HeaderMenuItem";
@@ -28,10 +28,12 @@ function AboutPlatform({ baseServicesUrl, closeModal, isOpen = false, name }: Pr
     isLoading: isPlatformVersionLoading,
     isError: isPlatformVersionError,
   } = useQuery({
-    queryKey: platformVersioUrl,
+    queryKey: [platformVersioUrl],
     queryFn: resolver.query(platformVersioUrl, null),
     enabled: isOpen,
   });
+
+  const currentYear = new Date().getFullYear();
 
   return (
     <ComposedModal
@@ -91,7 +93,7 @@ function AboutPlatform({ baseServicesUrl, closeModal, isOpen = false, name }: Pr
                 </span>
               </li>
             </ul>
-            <h1 className={`${prefix}--bmrg-aboutPlatform-footer__header`}>Copyright IBM Corp. 2022, 2025</h1>
+            <h1 className={`${prefix}--bmrg-aboutPlatform-footer__header`}>Copyright IBM Corp. 2022, {currentYear}</h1>
           </div>
         </ModalBody>
       ) : null}

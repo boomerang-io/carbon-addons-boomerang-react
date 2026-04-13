@@ -58,7 +58,6 @@ exports[`UIShell > snapshot 1`] = `
           data-testid="header-product"
           href="/launchpad"
         >
-          
           Boomerang
         </a>
         <nav

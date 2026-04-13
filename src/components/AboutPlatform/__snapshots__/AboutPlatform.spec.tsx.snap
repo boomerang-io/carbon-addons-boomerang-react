@@ -22,7 +22,6 @@ exports[`AboutPlatform > snapshot 1`] = `
         <div
           class="cds--modal-container-body"
         >
-          
           <div
             class="cds--modal-header cds--bmrg-aboutPlatform-modaltitle"
           >
@@ -42,7 +41,7 @@ exports[`AboutPlatform > snapshot 1`] = `
                 >
                   <button
                     aria-label="Close"
-                    aria-labelledby="tooltip-2"
+                    aria-labelledby="tooltip-:r0:"
                     class="cds--btn--icon-only cds--modal-close cds--btn cds--btn--primary"
                     type="button"
                   >
@@ -66,7 +65,7 @@ exports[`AboutPlatform > snapshot 1`] = `
                 <span
                   aria-hidden="false"
                   class="cds--popover"
-                  id="tooltip-2"
+                  id="tooltip-:r0:"
                   role="tooltip"
                 >
                   <span

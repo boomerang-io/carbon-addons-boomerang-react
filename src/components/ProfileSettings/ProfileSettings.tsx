@@ -27,7 +27,7 @@ import ToastNotification from "../Notifications/ToastNotification";
 import notify from "../Notifications/notify";
 import { serviceUrl, resolver } from "../../config/servicesConfig";
 import sortBy from "lodash.sortby";
-import { useQuery, useMutation, useQueryClient } from "react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { prefix } from "../../internal/settings";
 import type { LowerLevelGroup, User } from "../../types";
 
@@ -76,19 +76,20 @@ function ProfileSettings({
     isLoading: userIsLoading,
     error: userError,
   } = useQuery<User>({
-    queryKey: userUrl,
+    queryKey: [userUrl],
     queryFn: resolver.query(userUrl),
   });
 
   const {
     mutateAsync: mutateUserProfile,
-    isLoading: mutateUserProfileIsLoading,
+    isPending: mutateUserProfileIsLoading,
     error: mutateUserProfileError,
-  } = useMutation(resolver.patchUserProfile, {
+  } = useMutation({
+    mutationFn: resolver.patchUserProfile,
     onSuccess: () => {
-      queryClient.invalidateQueries(userUrl);
-      queryClient.invalidateQueries(profileUrl);
-      queryClient.invalidateQueries(userTeamsUrl);
+      queryClient.invalidateQueries({ queryKey: [userUrl] });
+      queryClient.invalidateQueries({ queryKey: [profileUrl] });
+      queryClient.invalidateQueries({ queryKey: [userTeamsUrl] });
       if (refetchUser) {
         setTimeout(() => {
           refetchUser();
