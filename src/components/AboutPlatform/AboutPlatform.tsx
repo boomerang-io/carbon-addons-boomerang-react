@@ -76,22 +76,6 @@ function AboutPlatform({ baseServicesUrl, closeModal, isOpen = false, name }: Pr
                 <span className={`${prefix}--bmrg-aboutPlatform-li`}>Advantage Core</span>
                 <span className={`${prefix}--bmrg-aboutPlatform-li-version`}>{platformVersionData.version}</span>
               </li>
-              <li className={`${prefix}--bmrg-aboutPlatform-li-between`}>
-                <span className={`${prefix}--bmrg-aboutPlatform-li`}>Assistants </span>
-                <span className={`${prefix}--bmrg-aboutPlatform-li-version`}>
-                  {platformVersionData.assistantVersion}
-                </span>
-              </li>
-              <li className={`${prefix}--bmrg-aboutPlatform-li-between`}>
-                <span className={`${prefix}--bmrg-aboutPlatform-li`}>Agents</span>
-                <span className={`${prefix}--bmrg-aboutPlatform-li-version`}>{platformVersionData.agentsVersion}</span>
-              </li>
-              <li className={`${prefix}--bmrg-aboutPlatform-li-between-last`}>
-                <span className={`${prefix}--bmrg-aboutPlatform-li`}>Scribeflow</span>
-                <span className={`${prefix}--bmrg-aboutPlatform-li-version`}>
-                  {platformVersionData.scribeFlowVersion}
-                </span>
-              </li>
             </ul>
             <h1 className={`${prefix}--bmrg-aboutPlatform-footer__header`}>Copyright IBM Corp. 2022, {currentYear}</h1>
           </div>
