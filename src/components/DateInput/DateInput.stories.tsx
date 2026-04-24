@@ -4,9 +4,8 @@ IBM Confidential
 © Copyright IBM Corp. 2022, 2024
 */
 
-
 import React from "react";
-import { action } from "@storybook/addon-actions";
+import { action } from "storybook/actions";
 import DateInput from "./DateInput";
 import { DATE_TYPES } from "../../constants/DataDrivenInputTypes";
 

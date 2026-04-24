@@ -127,7 +127,7 @@ export function AdvantageSideNav(props: Props) {
   const hamburguerMenu = document.getElementById("header-sidenav-menu-button");
 
   const homeSideNavUrl = sideNavUrls?.find((sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.Home);
-  //const chatSideNavUrl = sideNavUrls?.find((sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.Chat);
+  const chatSideNavUrl = sideNavUrls?.find((sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.Chat);
   const chatLink = sideNavUrls?.find((sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.Chat)?.url;
   const toolsSideNavUrl = sideNavUrls?.find((sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.Tools);
   
@@ -300,7 +300,7 @@ export function AdvantageSideNav(props: Props) {
       href={enableChatButton && chatLink}
       onClick={enableChatButton ? handleChatClick : (e: any) => e.preventDefault()}
     >
-      Chat
+      {chatSideNavUrl?.name}
     </SideNavLink>
   );
 
