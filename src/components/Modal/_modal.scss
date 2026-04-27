@@ -4,10 +4,9 @@ IBM Confidential
 © Copyright IBM Corp. 2022, 2024
 */
 
-
 @use "../../global/config" as *;
 @use "../../global/utils";
-@use '@carbon/themes/scss/tokens' as theme;
+@use "@carbon/themes/scss/tokens" as theme;
 
 .#{$prefix}--bmrg-body-modal-is-open,
 .#{$prefix}--bmrg-html-modal-is-open {
@@ -66,7 +65,6 @@ IBM Confidential
 
   .#{$prefix}--date-picker__input,
   .#{$prefix}--list-box,
-  .react-autosuggest__suggestions-container,
   .#{$prefix}--search-input,
   .#{$prefix}--select-input,
   .#{$prefix}--text-input,

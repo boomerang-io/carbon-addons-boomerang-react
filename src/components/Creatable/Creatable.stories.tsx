@@ -5,7 +5,7 @@ IBM Confidential
 */
 
 import React from "react";
-import { action } from "@storybook/addon-actions";
+import { action } from "storybook/actions";
 import Creatable from "./Creatable";
 
 export default {

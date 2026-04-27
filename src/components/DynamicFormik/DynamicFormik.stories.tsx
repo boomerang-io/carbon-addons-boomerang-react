@@ -4,11 +4,10 @@ IBM Confidential
 © Copyright IBM Corp. 2022, 2024
 */
 
-
 /* eslint-disable no-template-curly-in-string */
 import React from "react";
 import { Button } from "@carbon/react";
-import { action } from "@storybook/addon-actions";
+import { action } from "storybook/actions";
 import TextInput from "../TextInput";
 import * as Yup from "yup";
 import DynamicFormik from "./DynamicFormik";

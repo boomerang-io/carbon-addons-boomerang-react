@@ -195,6 +195,14 @@ IBM Confidential
   }
 }
 
+.#{$prefix}--bmrg-advantage-sidenav-item-tag-name {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  max-width: 8rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .#{$prefix}--side-nav__link {
   &:focus {
     outline: var(--cds-border-interactive) 0.0625rem solid !important;

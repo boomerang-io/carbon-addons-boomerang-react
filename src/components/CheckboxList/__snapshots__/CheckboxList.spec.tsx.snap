@@ -64,7 +64,6 @@ exports[`CheckboxList > snapshot 1`] = `
               dir="auto"
             >
               Cat
-              
             </span>
           </label>
           <div
@@ -89,7 +88,6 @@ exports[`CheckboxList > snapshot 1`] = `
               dir="auto"
             >
               Dog
-              
             </span>
           </label>
           <div
@@ -114,7 +112,6 @@ exports[`CheckboxList > snapshot 1`] = `
               dir="auto"
             >
               Panda
-              
             </span>
           </label>
           <div

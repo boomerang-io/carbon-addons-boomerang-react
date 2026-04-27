@@ -4,9 +4,8 @@ IBM Confidential
 © Copyright IBM Corp. 2022, 2024
 */
 
-
 import React from "react";
-import { action } from "@storybook/addon-actions";
+import { action } from "storybook/actions";
 import { Button } from "@carbon/react";
 import { Help, ThumbsUp, ThumbsDown } from "@carbon/react/icons";
 import DecisionButtons from "./DecisionButtons";

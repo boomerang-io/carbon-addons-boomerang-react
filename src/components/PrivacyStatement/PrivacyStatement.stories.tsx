@@ -4,10 +4,9 @@ IBM Confidential
 © Copyright IBM Corp. 2022, 2024
 */
 
-
 import React from "react";
 import axios from "axios";
-import { QueryClient, QueryClientProvider } from "react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import MockAdapter from "axios-mock-adapter";
 import PrivacyStatement from "./PrivacyStatement";
 import { PRIVACY_DATA } from "./constants";
@@ -31,7 +30,7 @@ Privacy statement component is for displaying the user agreement form and allowi
   },
 };
 
-export const Default = (args) => {
+export const Default = (args: any) => {
   const mock = new MockAdapter(axios);
   mock.onGet(serviceUrl.getStatement({ baseServicesUrl })).reply(200, PRIVACY_DATA);
   mock.onPut(serviceUrl.resourceUserConsent({ baseServicesUrl })).reply(200);

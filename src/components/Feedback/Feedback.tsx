@@ -4,7 +4,6 @@ IBM Confidential
 © Copyright IBM Corp. 2022, 2024
 */
 
-
 import React from "react";
 import { Button, ComposedModal, ModalHeader, ModalBody, ModalFooter } from "@carbon/react";
 import { Idea } from "@carbon/react/icons";
@@ -17,7 +16,7 @@ type Props = {
   platformName?: string;
   platformOrganization?: string;
   sendIdeasUrl?: string;
-  sendBluePointsAwardUrl?:string;
+  sendBluePointsAwardUrl?: string;
 };
 
 function Feedback(props: Props) {
@@ -33,7 +32,7 @@ function Feedback(props: Props) {
       <ModalBody>
         <div className={`${prefix}--bmrg-feedback`}>
           <p>
-            Have an idea on how we can improve Consulting Advantage? Submit your idea  
+            Have an idea on how we can improve Consulting Advantage? Submit your idea
             {" " /* We need to force a space before the link tag */}
             <a
               aria-describedby="new-window-aria-desc-0"
@@ -42,24 +41,11 @@ function Feedback(props: Props) {
               rel="noopener noreferrer"
             >
               here
-            </a>.
-             You’ll be able to see other public ideas, vote on them, and track the status of your idea.
-          </p>
-          <p>
-           Have an innovative new asset, assistant, or automation you've built outside of ICA? 
-            {" " /* We need to force a space before the link tag */}
-           Submit your idea  <a
-              aria-describedby="new-window-aria-desc-0"
-              href={props.sendBluePointsAwardUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              here
-            </a> and you could win a BluePoints award.
+            </a>
+            . You’ll be able to see other public ideas, vote on them, and track the status of your idea.
           </p>
           <p>You must have an IBM email address to submit the idea.</p>
           <p>We look forward to your feedback and ideas!</p>
-         
         </div>
       </ModalBody>
       <ModalFooter>
