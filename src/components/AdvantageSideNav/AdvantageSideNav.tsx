@@ -474,7 +474,7 @@ export function AdvantageSideNav(props: Props) {
               //   });
               // }}
               >
-                  Agent & Assistant Library
+                  Agent Library
               </SideNavLink>
             {documentCollectionsSideNavUrl ? (
               <SideNavLink
