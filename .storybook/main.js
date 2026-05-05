@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   stories: ["../src/**/*.stories.@(js|jsx|ts|tsx)"],
 
   addons: [
@@ -10,7 +10,11 @@ module.exports = {
 
   framework: {
     name: "@storybook/react-vite",
-    options: {}
+    options: {
+      builder: {
+        viteConfigPath: '.storybook/vite.config.js'
+      }
+    }
   },
 
   typescript: {
