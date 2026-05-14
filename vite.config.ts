@@ -10,5 +10,10 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: ["src/setupTests.ts"],
     testTimeout: 10000,
-  }
+    server: {
+      deps: {
+        inline: true,
+      },
+    },
+  },
 })
