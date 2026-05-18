@@ -33,7 +33,7 @@
   "scripts": {
     "build": "rimraf scss dist && pnpm build:components && pnpm build:styles && pnpm build:types",
     "build:components": "rollup -c --bundleConfigAsCjs",
-    "build:styles": "node scripts/build.js",
+    "build:styles": "node scripts/build.mjs",
     "build:storybook": "storybook build",
     "build:types": "tsup src/index.ts --dts-only --clean --outDir dist/types",
     "lint": "eslint src",
