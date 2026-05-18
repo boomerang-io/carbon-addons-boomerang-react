@@ -305,6 +305,8 @@ function UIShell({
             kind="app"
             text="Release Notes"
             type="link"
+            target="_blank"
+            rel="noopener noreferrer"
           />,
           <HeaderMenuItem
             key="legal-terms"
