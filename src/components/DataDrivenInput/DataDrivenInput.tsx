@@ -147,21 +147,20 @@ function DataDrivenInput(props: DataDrivenInputProps) {
   let Component;
   let componentProps = {};
 
-  let inputValue = value || values;
-  let regexError = inputValue && Boolean(pattern) && validateRegex(pattern, inputValue);
-
-  let invalidInput = regexError || invalid;
-  let invalidTextMessage = regexError && patternInvalidText ? patternInvalidText : invalidText;
-
-  React.useEffect(() => {
-    // eslint-disable-next-line
-    inputValue = determineInitialValues({
+  // Determine input value with proper fallbacks and type conversion
+  let inputValue = React.useMemo(() => {
+    return determineInitialValues({
       value,
       values,
       defaultValue,
       defaultValues,
     });
-  });
+  }, [value, values, defaultValue, defaultValues]);
+
+  let regexError = inputValue && Boolean(pattern) && validateRegex(pattern, inputValue);
+
+  let invalidInput = regexError || invalid;
+  let invalidTextMessage = regexError && patternInvalidText ? patternInvalidText : invalidText;
 
   const allInputProps = {
     id: key,
@@ -223,16 +222,16 @@ function DataDrivenInput(props: DataDrivenInputProps) {
       ...restInputProps,
     };
   } else if (Object.values(MULTI_SELECT_TYPES).includes(type)) {
-    const items = formatSelectOptions(options);
+    const items = React.useMemo(() => formatSelectOptions(options), [options]);
     Component = MultiSelect;
     componentProps = {
       ...allInputProps,
       items,
       initialSelectedItems: Array.isArray(inputValue)
-        ? items.filter((item) => inputValue.includes(item.value))
+        ? items.filter((item) => (inputValue as unknown as any[]).includes(item.value))
         : typeof inputValue === "string"
-        ? inputValue
-        : [],
+          ? inputValue
+          : [],
       itemToString: (input: any) => input && input.label,
       invalid,
       invalidText,
@@ -249,8 +248,11 @@ function DataDrivenInput(props: DataDrivenInputProps) {
       ...restInputProps,
     };
   } else if (Object.values(SELECT_TYPES).includes(type)) {
-    const items = governingOptions || formatSelectOptions(options);
-    const selectedItem = items.find((item: any) => item.value === value) ?? { label: "", value: "" };
+    const items = React.useMemo(() => governingOptions || formatSelectOptions(options), [governingOptions, options]);
+    const selectedItem = React.useMemo(
+      () => items.find((item: any) => item.value === value) ?? { label: "", value: "" },
+      [items, value],
+    );
 
     Component = Select;
     componentProps = {

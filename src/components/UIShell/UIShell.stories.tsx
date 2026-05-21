@@ -409,6 +409,7 @@ export const UIShellDefault = (args: any) => {
             communityUrl: "#",
             platformName: "IBM Consulting Advantage",
             platformOrganization: "IBM",
+            releaseNotesUrl: "releaseNotesUrl",
           },
           platformMessage: {
             kind: "info",

@@ -4,7 +4,6 @@ IBM Confidential
 © Copyright IBM Corp. 2022, 2024
 */
 
-
 import React from "react";
 import { HeaderMenuItem as CarbonHeaderMenuItem } from "@carbon/react";
 import { ArrowRight, Launch } from "@carbon/react/icons";
@@ -18,7 +17,9 @@ type Shared = {
   disabled?: boolean;
   element?: React.FC<any>;
   icon?: React.ReactNode;
+  rel?: string;
   style?: React.CSSProperties;
+  target?: string;
   variant?: "danger" | "default";
 };
 
