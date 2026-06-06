@@ -147,6 +147,7 @@ export function AdvantageSideNav(props: Props) {
   const settingsSideNavUrl = sideNavUrls?.find((sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.Settings);
   const settingsLink=`${baseEnvUrl}/settings`;
   const AssistantLink=`${baseEnvUrl}/assistant-library`;
+  const ToolsLink=`${baseEnvUrl}/tools`;
   const adminSideNavUrl = sideNavUrls?.find((sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.Admin);
 
   const isAssistantStudioEnabled = Boolean(agentAssistantStudioSideNavUrl);
@@ -417,16 +418,18 @@ export function AdvantageSideNav(props: Props) {
               ) : (
                 chatSideNavLink
               ))}
-            {toolsSideNavUrl ? (
+            {/* {toolsSideNavUrl ? ( */}
               <SideNavLink
                 data-testid="sidenav-tools-link"
                 renderIcon={Api}
-                href={toolsSideNavUrl.url}
-                onClick={(e: any) => {
-                  handleSidenavLinkClick({ name: toolsSideNavUrl.name, link: toolsSideNavUrl.url });
-                }}
+                href={ToolsLink}
+                isActive={windowLocation.href.includes(`${baseEnvUrl}/tools`)}
+                // onClick={(e: any) => {
+                //   handleSidenavLinkClick({ name: toolsSideNavUrl.name, link: toolsSideNavUrl.url });
+                // }}
               >
-                {toolsSideNavUrl.tag ? (
+                Tools
+                {/* {toolsSideNavUrl.tag ? (
                   <div className={`${prefix}--bmrg-advantage-sidenav-item-tag`}>
                     <p title={toolsSideNavUrl.name} className={`${prefix}--bmrg-advantage-sidenav-item-tag-name`}>
                       {toolsSideNavUrl.name}
@@ -437,9 +440,9 @@ export function AdvantageSideNav(props: Props) {
                   </div>
                 ) : (
                   toolsSideNavUrl.name
-                )}
+                )} */}
               </SideNavLink>
-            ) : null}
+            {/* ) : null} */}
             {agentAssistantStudioSideNavUrl ? (
               <SideNavLink
               data-testid="sidenav-agent-assistant-studio-link"
