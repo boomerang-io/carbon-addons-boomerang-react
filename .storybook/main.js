@@ -12,7 +12,7 @@ export default {
     name: "@storybook/react-vite",
     options: {
       builder: {
-        viteConfigPath: ".storybook/vite.config.js"
+        viteConfigPath: '.storybook/vite.config.js'
       }
     }
   },

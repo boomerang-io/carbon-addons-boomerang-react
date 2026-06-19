@@ -12,7 +12,7 @@ exports[`CheckboxList > snapshot 1`] = `
         <div
           class="cds--label"
           id="test-label"
-          style="margin-bottom: .3125rem;"
+          style="margin-bottom: 0.3125rem;"
         >
           label text
         </div>

@@ -38,7 +38,11 @@ function Notification({ readNotification, data }: Props) {
         <time className={`${prefix}--bmrg-notification-content__date`}>
           {`${dayjs(data.date).fromNow()} at ${dayjs(data.date).format("hh:mma")}`}
         </time>
-        <button className={`${prefix}--bmrg-notification-content__close`} onClick={() => readNotification(data.id)}>
+        <button
+          className={`${prefix}--bmrg-notification-content__close`}
+          onClick={() => readNotification(data.id)}
+          aria-label="Mark as read"
+        >
           <Close size={16} title="Mark as read icon" />
         </button>
       </div>
