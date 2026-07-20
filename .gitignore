@@ -41,3 +41,7 @@ lerna-debug.log*
 *.njsproj
 *.sln
 *.sw?
+
+# AI agent rules
+AGENTS.md
+.bob/
