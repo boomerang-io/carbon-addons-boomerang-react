@@ -11,7 +11,7 @@ IBM Confidential
 
 .#{$prefix}--bmrg-aboutPlatform-container {
   .#{$prefix}--modal-container {
-    height: 17rem; // Set to desired rem height
+    height: auto; // Fit content; rows render conditionally based on available versions
     max-height: 84vh;
     width: 28.4375rem; // Set to desired rem width
   }

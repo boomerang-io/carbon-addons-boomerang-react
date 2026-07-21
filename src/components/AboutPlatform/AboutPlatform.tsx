@@ -14,6 +14,9 @@ import TooltipHover from "../TooltipHover";
 import { resolver, serviceUrl } from "../../config/servicesConfig";
 import { prefix } from "../../internal/settings";
 
+const isValidVersion = (version?: string) =>
+  Boolean(version) && !version!.toLowerCase().includes("cannot retrieve");
+
 type Props = {
   baseServicesUrl: string;
   closeModal: () => void;
@@ -34,6 +37,13 @@ function AboutPlatform({ baseServicesUrl, closeModal, isOpen = false, name }: Pr
   });
 
   const currentYear = new Date().getFullYear();
+
+  const components = [
+    { label: "Advantage Core", value: platformVersionData?.version },
+    { label: "Assistants", value: platformVersionData?.assistantVersion },
+    { label: "Agents", value: platformVersionData?.agentsVersion },
+    { label: "Scribeflow", value: platformVersionData?.scribeFlowVersion },
+  ].filter((component) => isValidVersion(component.value));
 
   return (
     <ComposedModal
@@ -72,10 +82,17 @@ function AboutPlatform({ baseServicesUrl, closeModal, isOpen = false, name }: Pr
             </div>
             <h5 className={`${prefix}--bmrg-aboutPlatform-component-header`}>Components</h5>
             <ul>
-              <li className={`${prefix}--bmrg-aboutPlatform-li-between`}>
-                <span className={`${prefix}--bmrg-aboutPlatform-li`}>Advantage Core</span>
-                <span className={`${prefix}--bmrg-aboutPlatform-li-version`}>{platformVersionData.version}</span>
-              </li>
+              {components.map((component, index) => (
+                <li
+                  key={component.label}
+                  className={`${prefix}--bmrg-aboutPlatform-li-${
+                    index === components.length - 1 ? "between-last" : "between"
+                  }`}
+                >
+                  <span className={`${prefix}--bmrg-aboutPlatform-li`}>{component.label}</span>
+                  <span className={`${prefix}--bmrg-aboutPlatform-li-version`}>{component.value}</span>
+                </li>
+              ))}
             </ul>
             <h1 className={`${prefix}--bmrg-aboutPlatform-footer__header`}>Copyright IBM Corp. 2022, {currentYear}</h1>
           </div>
