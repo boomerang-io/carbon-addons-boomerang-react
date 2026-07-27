@@ -118,7 +118,7 @@ function PrivacyStatement({
               statementQuery.data.formContent?.sections?.length > 0 && (
                 <>
                   <Accordion>
-                    {statementQuery.data.formContent.sections.map((section) => {
+                    {statementQuery.data.formContent.sections.map((section: { title: string; content: string }) => {
                       return (
                         <AccordionItem title={section.title} key={section.title}>
                           <p

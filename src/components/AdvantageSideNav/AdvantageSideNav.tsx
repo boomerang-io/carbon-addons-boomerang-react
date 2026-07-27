@@ -145,8 +145,6 @@ export function AdvantageSideNav(props: Props) {
   const catalogSideNavUrl = sideNavUrls?.find((sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.Catalog);
   const marketplaceSideNavUrl = sideNavUrls?.find((sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.Marketplace);
   const settingsSideNavUrl = sideNavUrls?.find((sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.Settings);
-  const settingsLink=`${baseEnvUrl}/settings`;
-  const AssistantLink=`${baseEnvUrl}/assistant-library`;
   const adminSideNavUrl = sideNavUrls?.find((sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.Admin);
 
   const isAssistantStudioEnabled = Boolean(agentAssistantStudioSideNavUrl);
@@ -241,7 +239,7 @@ export function AdvantageSideNav(props: Props) {
       triggerEvent({
         action: "Clicked on SideNav Settings link",
         category: "Sidenav",
-        destinationPath: settingsLink,
+        destinationPath: settingsSideNavUrl?.url,
       });
   };
 
@@ -305,7 +303,12 @@ export function AdvantageSideNav(props: Props) {
   );
 
   const showSecondDivider =
-    showChatButton || toolsSideNavUrl || agentAssistantStudioSideNavUrl || documentCollectionsSideNavUrl ;
+    showChatButton ||
+    toolsSideNavUrl ||
+    agentAssistantStudioSideNavUrl ||
+    contextStudioSideNavUrl ||
+    agentAssistantLibrarySideNavUrl ||
+    documentCollectionsSideNavUrl;
 
     const navigateInternal = (url: string) => {
       const browserHistory = createBrowserHistory();
@@ -459,23 +462,48 @@ export function AdvantageSideNav(props: Props) {
                {agentAssistantStudioSideNavUrl.name}
               </SideNavLink>
             ) : null}
-            <SideNavLink
+            {contextStudioSideNavUrl ? (
+              <SideNavLink
+                data-testid="sidenav-context-studio-link"
+                renderIcon={Network_3}
+                href={contextStudioSideNavUrl.url}
+                onClick={(e: any) => {
+                  handleSidenavLinkClick({ name: contextStudioSideNavUrl.name, link: contextStudioSideNavUrl.url });
+                }}
+              >
+                {contextStudioSideNavUrl.tag ? (
+                  <div className={`${prefix}--bmrg-advantage-sidenav-item-tag`}>
+                    <p
+                      title={contextStudioSideNavUrl.name}
+                      className={`${prefix}--bmrg-advantage-sidenav-item-tag-name`}
+                    >
+                      {contextStudioSideNavUrl.name}
+                    </p>
+                    <Tag size="sm" title={contextStudioSideNavUrl.tag} type="high-contrast">
+                      {contextStudioSideNavUrl.tag}
+                    </Tag>
+                  </div>
+                ) : (
+                  contextStudioSideNavUrl.name
+                )}
+              </SideNavLink>
+            ) : null}
+            {agentAssistantLibrarySideNavUrl ? (
+              <SideNavLink
                 data-testid="sidenav-agent-assistant-library-link"
                 renderIcon={Folders}
-                 // to={`${assistantLibraryPath}`}
                 isActive={windowLocation.href.includes(`${baseEnvUrl}/assistant-library`)}
-                 href={AssistantLink}
-              //   onClick={(e: any) => {
-              //   e.preventDefault();
-              //   handleAgentAssistantLibraryClick();
-              //   history.push({
-              //     pathname: assistantLibraryPath,
-              //     state: { refresh: Date.now() }
-              //   });
-              // }}
+                href={agentAssistantLibrarySideNavUrl.url}
+                onClick={(e: any) => {
+                  handleSidenavLinkClick({
+                    name: agentAssistantLibrarySideNavUrl.name,
+                    link: agentAssistantLibrarySideNavUrl.url,
+                  });
+                }}
               >
-                  Agent Library
+                {agentAssistantLibrarySideNavUrl.name}
               </SideNavLink>
+            ) : null}
             {documentCollectionsSideNavUrl ? (
               <SideNavLink
                 data-testid="sidenav-document-collections-link"
@@ -530,7 +558,7 @@ export function AdvantageSideNav(props: Props) {
               <SideNavLink
                 data-testid="sidenav-settings-link"
                 renderIcon={Settings}
-                href={settingsLink}
+                href={settingsSideNavUrl.url}
                 isActive={windowLocation.href.includes(`${baseEnvUrl}/settings`)}
               >
                 {settingsSideNavUrl.name}
