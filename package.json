@@ -1,7 +1,7 @@
 {
   "name": "@boomerang-io/carbon-addons-boomerang-react",
   "description": "Carbon Addons for Boomerang apps",
-  "version": "4.7.2-beta.9",
+  "version": "4.7.2-beta.11",
   "author": {
     "name": "Tim Bula",
     "email": "timrbula@gmail.com"
@@ -127,7 +127,7 @@
     "jsdom": "^25.0.1",
     "lint-staged": "^16.4.0",
     "mock-socket": "^9.1.5",
-    "postcss": "^8.5.10",
+    "postcss": "^8.5.23",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^5.3.4",
@@ -147,9 +147,11 @@
     "overrides": {
       "@babel/core": "^7.29.6",
       "@tootallnate/once": "^3.0.1",
-      "brace-expansion": "^5.0.7",
+      "brace-expansion": "^5.0.8",
       "braces": "^3.0.3",
       "esbuild": "^0.25.0",
+      "fast-uri": "^4.1.1",
+      "immutable": "^5.1.9",
       "ip-address": "^10.1.1",
       "js-yaml": "^4.2.0",
       "micromatch": "^4.0.8",
