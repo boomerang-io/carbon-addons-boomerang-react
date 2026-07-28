@@ -4,10 +4,9 @@ IBM Confidential
 © Copyright IBM Corp. 2022, 2024
 */
 
-
 import React from "react";
 import { expect, test } from "vitest";
-import { MemoryRouter as Router } from "react-router-dom";
+import { MemoryRouter as Router } from "react-router";
 import { render } from "@testing-library/react";
 import FeatureSideNavLink from "./FeatureSideNavLink";
 import { Launch } from "@carbon/react/icons";
@@ -18,7 +17,7 @@ describe("FeatureSideNavLink", () => {
     const { getByText } = render(
       <Router>
         <FeatureSideNavLink to="/testlink">Test Link</FeatureSideNavLink>
-      </Router>
+      </Router>,
     );
     expect(getByText("Test Link")).toBeInTheDocument();
   });
@@ -29,7 +28,7 @@ describe("FeatureSideNavLink", () => {
         <FeatureSideNavLink to="/testlink" hasDivider>
           Test Link
         </FeatureSideNavLink>
-      </Router>
+      </Router>,
     );
     expect(container.lastChild).toHaveClass(`${prefix}--bmrg-feature-sidenav-link-divider`);
   });
@@ -40,7 +39,7 @@ describe("FeatureSideNavLink", () => {
         <FeatureSideNavLink to="/testlink" icon={Launch} iconProps={{ "data-testid": "rocket-icon" }} hasDivider>
           Test Link
         </FeatureSideNavLink>
-      </Router>
+      </Router>,
     );
     expect(getByTestId("rocket-icon")).toBeInTheDocument();
   });

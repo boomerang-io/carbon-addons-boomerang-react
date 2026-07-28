@@ -4,12 +4,10 @@ IBM Confidential
 © Copyright IBM Corp. 2022, 2024
 */
 
-
 import React from "react";
-import { MemoryRouter as Router } from "react-router-dom";
+import { MemoryRouter as Router } from "react-router";
 import FeatureSideNavLink from "./FeatureSideNavLink";
 import { Launch } from "@carbon/react/icons";
-
 
 export default {
   title: "Features/FeatureSideNavLink",

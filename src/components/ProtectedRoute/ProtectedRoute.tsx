@@ -4,10 +4,7 @@ IBM Confidential
 © Copyright IBM Corp. 2022, 2024
 */
 
-
 import React from "react";
-import { Route, RouteProps } from "react-router-dom";
-
 import Error403 from "../Error403";
 
 const checkAuth = (userRole: string | string[], allowedUserRoles: string[]) => {
@@ -17,7 +14,7 @@ const checkAuth = (userRole: string | string[], allowedUserRoles: string[]) => {
   return allowedUserRoles.some((allowedRole) => allowedRole === userRole);
 };
 
-type Props = Omit<RouteProps, "component"> & {
+type Props = {
   allowedUserRoles: string[];
   component: React.ReactNode;
   message?: string;
@@ -31,13 +28,8 @@ function ProtectedRoute({
   message = "If you think you should be, contact your friendly neighborhood platform admin.",
   title = "Sorry mate, you are not allowed here.",
   userRole,
-  ...rest
 }: Props) {
-  return (
-    <Route {...rest}>
-      {checkAuth(userRole, allowedUserRoles) ? component : <Error403 message={message} title={title} />}
-    </Route>
-  );
+  return checkAuth(userRole, allowedUserRoles) ? <>{component}</> : <Error403 message={message} title={title} />;
 }
 
 export default ProtectedRoute;

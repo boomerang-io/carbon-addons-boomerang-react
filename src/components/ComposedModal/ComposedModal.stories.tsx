@@ -4,7 +4,6 @@ IBM Confidential
 © Copyright IBM Corp. 2022, 2024
 */
 
-
 import React from "react";
 import TextInput from "../TextInput";
 import { Button, ModalBody, ModalFooter } from "@carbon/react";
@@ -56,7 +55,6 @@ function Component1(props) {
 export const Default = (args) => {
   return (
     <ComposedModal
-      appElement="#root"
       composedModalProps={{ selectorPrimaryFocus: 'input[id="testing"]' }}
       confirmModalProps={{
         title: "Close Composed ?",
