@@ -6,7 +6,6 @@ IBM Confidential
 
 import React from "react";
 import cx from "classnames";
-import { createBrowserHistory } from "history";
 import { SideNav, SideNavDivider, SideNavItems, SideNavLink, Tag } from "@carbon/react";
 import TooltipHover from "../TooltipHover";
 import {
@@ -25,7 +24,6 @@ import {
   UserMultiple,
 } from "@carbon/react/icons";
 import { USER_PLATFORM_ROLE } from "../../constants/UserType";
-import { Link } from "react-router-dom";
 import { prefix } from "../../internal/settings";
 import { NavLink, SideNavTeam, SideNavAccount, User } from "types";
 
@@ -316,12 +314,16 @@ export function AdvantageSideNav(props: Props) {
         const pathname = target.pathname.startsWith("/ica")
           ? target.pathname.slice(4)   // removes "/ica"
           : target.pathname;
+        const fullPath = pathname + target.search + target.hash;
+
         if (history) {
-          history.push(pathname + target.search + target.hash);
+          // Use React Router's history if available
+          history.push(fullPath);
         } else {
-          const browserHistory = createBrowserHistory();
-          browserHistory.push(pathname + target.search + target.hash);
-          window.location.reload();
+          // Fallback to native browser history API
+          window.history.pushState({}, '', fullPath);
+          // Dispatch a popstate event to notify React Router
+          window.dispatchEvent(new PopStateEvent('popstate', { state: {} }));
         }
       } else {
         window.location.href = url;
