@@ -77,7 +77,9 @@ type Props = {
   isLaunchpad?: boolean;
   userTeamsError?: boolean;
   userTeamsLoading?: boolean;
+  /** @deprecated Pass `navigate` instead. Accepted for backwards-compatibility with react-router v5 `history` objects. */
   history?: any;
+  navigate?: any;
   children?: React.ReactNode;
 };
 
@@ -109,6 +111,7 @@ export function AdvantageSideNav(props: Props) {
     isLaunchpad = false,
     sideNavUrls,
     history,
+    navigate,
     children,
     personalTeamEnabled,
     ...rest
@@ -125,14 +128,14 @@ export function AdvantageSideNav(props: Props) {
   const chatLink = chatSideNavUrl?.url;
   const toolsSideNavUrl = sideNavUrls?.find((sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.Tools);
   const agentAssistantStudioSideNavUrl = sideNavUrls?.find(
-    (sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.AgentStudio
+    (sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.AgentStudio,
   );
   const contextStudioSideNavUrl = sideNavUrls?.find((sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.ContextStudio);
   const agentAssistantLibrarySideNavUrl = sideNavUrls?.find(
-    (sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.AgentLibrary
+    (sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.AgentLibrary,
   );
   const documentCollectionsSideNavUrl = sideNavUrls?.find(
-    (sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.DocumentCollections
+    (sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.DocumentCollections,
   );
   const catalogSideNavUrl = sideNavUrls?.find((sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.Catalog);
   const marketplaceSideNavUrl = sideNavUrls?.find((sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.Marketplace);
@@ -275,7 +278,7 @@ export function AdvantageSideNav(props: Props) {
                 onClick={(e: any) => {
                   if (isLaunchpad) {
                     handleLaunchpadLink(e);
-                    history.push("/");
+                    navigate ? navigate("/") : history?.push("/");
                   }
                   handleSidenavLinkClick({ name: homeSideNavUrl.name, link: homeSideNavUrl.url });
                 }}
@@ -296,17 +299,19 @@ export function AdvantageSideNav(props: Props) {
                 onClick={(e: any) => {
                   if (isLaunchpad) {
                     handleLaunchpadLink(e);
-                    history.push(`/teams/${teamSwitcherTeam.id}`);
+                    navigate
+                      ? navigate(`/teams/${teamSwitcherTeam.id}`)
+                      : history?.push(`/teams/${teamSwitcherTeam.id}`);
                   }
                   handleTeamClick({
                     team: teamSwitcherTeam,
                     type: teamSwitcherTeam.isPersonal
                       ? "personal"
                       : teamSwitcherTeam.isAccount
-                      ? "account"
-                      : teamSwitcherTeam.isproject
-                      ? "project"
-                      : "standard",
+                        ? "account"
+                        : teamSwitcherTeam.isproject
+                          ? "project"
+                          : "standard",
                   });
                 }}
               >
@@ -374,7 +379,7 @@ export function AdvantageSideNav(props: Props) {
                 onClick={(e: any) => {
                   if (isLaunchpad) {
                     handleLaunchpadLink(e);
-                    history.push(agentStudioPath);
+                    navigate ? navigate(agentStudioPath) : history?.push(agentStudioPath);
                   }
                   handleSidenavLinkClick({
                     name: agentAssistantStudioSideNavUrl.name,
