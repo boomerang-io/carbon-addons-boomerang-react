@@ -243,7 +243,8 @@ export function AdvantageSideNav(props: Props) {
       });
   };
 
-  const handleChatClick = () => {
+  const handleChatClick = (e: any) => {
+    e.preventDefault();
     let redirectLink = chatLink
       ? chatLink
       : `${appLink.newChatRedirect()}?teamName=${teamSwitcherTeam.name}&teamId=${teamSwitcherTeam.id}`;
@@ -253,7 +254,7 @@ export function AdvantageSideNav(props: Props) {
         category: "Sidenav",
         destinationPath: redirectLink,
       });
-    window.open(redirectLink, "_self", "noopener,noreferrer");
+    navigateInternal(redirectLink);
   };
 
   const handleCreateJoinClick = () => {
@@ -295,7 +296,6 @@ export function AdvantageSideNav(props: Props) {
       isActive={isChatActive}
       disabled={Boolean(!enableChatButton)}
       renderIcon={ChatBot}
-      href={enableChatButton && chatLink}
       onClick={enableChatButton ? handleChatClick : (e: any) => e.preventDefault()}
     >
       {chatSideNavUrl?.name}
@@ -311,13 +311,18 @@ export function AdvantageSideNav(props: Props) {
     documentCollectionsSideNavUrl;
 
     const navigateInternal = (url: string) => {
-      const browserHistory = createBrowserHistory();
-        const target = new URL(url, window.location.origin);
-        if (target.origin === window.location.origin) {
+      const target = new URL(url, window.location.origin);
+      if (target.origin === window.location.origin) {
         const pathname = target.pathname.startsWith("/ica")
           ? target.pathname.slice(4)   // removes "/ica"
           : target.pathname;
-        browserHistory.push(pathname + target.search + target.hash);
+        if (history) {
+          history.push(pathname + target.search + target.hash);
+        } else {
+          const browserHistory = createBrowserHistory();
+          browserHistory.push(pathname + target.search + target.hash);
+          window.location.reload();
+        }
       } else {
         window.location.href = url;
       }
@@ -345,16 +350,17 @@ export function AdvantageSideNav(props: Props) {
                 data-testid="sidenav-home-link"
                 isActive={`${baseEnvUrl}/${app}/`.includes(windowLocation.href)}
                 renderIcon={Home}
-                href={homeSideNavUrl.url}
                 onClick={(e: any) => {
+                  e.preventDefault();
                   if (isLaunchpad) {
                     handleLaunchpadLink(e);
                     history.push("/");
-                  }
-                  if (isbetaLaunchpad) {
+                  } else if (isbetaLaunchpad) {
                     console.log("beta launchpad home link clicked");
                     handleLaunchpadLink(e);
                     history.push("/launchpad");
+                  } else {
+                    navigateInternal(homeSideNavUrl.url);
                   }
 
                   handleSidenavLinkClick({ name: homeSideNavUrl.name, link: homeSideNavUrl.url });
@@ -372,11 +378,13 @@ export function AdvantageSideNav(props: Props) {
                 isActive={windowLocation.href.includes(`/launchpad/teams/${teamSwitcherTeam.id}`)}
                 className={`${prefix}--bmrg-advantage-sidenav-team`}
                 renderIcon={UserMultiple}
-                href={`${baseEnvUrl}/${app}/teams/${teamSwitcherTeam.id}`}
                 onClick={(e: any) => {
+                  e.preventDefault();
                   if (isLaunchpad) {
                     handleLaunchpadLink(e);
                     history.push(`/teams/${teamSwitcherTeam.id}`);
+                  } else {
+                    navigateInternal(`${baseEnvUrl}/${app}/teams/${teamSwitcherTeam.id}`);
                   }
                   handleTeamClick({
                     team: teamSwitcherTeam,
@@ -424,8 +432,9 @@ export function AdvantageSideNav(props: Props) {
               <SideNavLink
                 data-testid="sidenav-tools-link"
                 renderIcon={Api}
-                href={toolsSideNavUrl.url}
                 onClick={(e: any) => {
+                  e.preventDefault();
+                  navigateInternal(toolsSideNavUrl.url);
                   handleSidenavLinkClick({ name: toolsSideNavUrl.name, link: toolsSideNavUrl.url });
                 }}
               >
@@ -450,11 +459,13 @@ export function AdvantageSideNav(props: Props) {
               className={!isAssistantStudioEnabled ? `${prefix}--bmrg-advantage-sidenav__inactive-link` : ""}
               disabled={!isAssistantStudioEnabled}
               renderIcon={IntentRequestCreate}
-              href={agentAssistantStudioSideNavUrl.url}
               onClick={(e: any) => {
+                e.preventDefault();
                 if (isLaunchpad) {
                   handleLaunchpadLink(e);
                   history.push(agentStudioPath);
+                } else {
+                  navigateInternal(agentAssistantStudioSideNavUrl.url);
                 }
                 handleAgentAssistantStudioClick();
               }}
@@ -466,8 +477,9 @@ export function AdvantageSideNav(props: Props) {
               <SideNavLink
                 data-testid="sidenav-context-studio-link"
                 renderIcon={Network_3}
-                href={contextStudioSideNavUrl.url}
                 onClick={(e: any) => {
+                  e.preventDefault();
+                  navigateInternal(contextStudioSideNavUrl.url);
                   handleSidenavLinkClick({ name: contextStudioSideNavUrl.name, link: contextStudioSideNavUrl.url });
                 }}
               >
@@ -493,8 +505,9 @@ export function AdvantageSideNav(props: Props) {
                 data-testid="sidenav-agent-assistant-library-link"
                 renderIcon={Folders}
                 isActive={windowLocation.href.includes(`${baseEnvUrl}/assistant-library`)}
-                href={agentAssistantLibrarySideNavUrl.url}
                 onClick={(e: any) => {
+                  e.preventDefault();
+                  navigateInternal(agentAssistantLibrarySideNavUrl.url);
                   handleSidenavLinkClick({
                     name: agentAssistantLibrarySideNavUrl.name,
                     link: agentAssistantLibrarySideNavUrl.url,
@@ -511,8 +524,9 @@ export function AdvantageSideNav(props: Props) {
                 renderIcon={DocumentMultiple_02}
                 className={!isAssistantStudioEnabled ? `${prefix}--bmrg-advantage-sidenav__inactive-link` : ""}
                 // disabled={!isAssistantStudioEnabled}
-                href={documentCollectionsSideNavUrl.url}
-                 onClick={(e: any) => {
+                onClick={(e: any) => {
+                  e.preventDefault();
+                  navigateInternal(documentCollectionsSideNavUrl.url);
                   handleDocumentCollectionsClick();
                 }}
               >
@@ -524,8 +538,11 @@ export function AdvantageSideNav(props: Props) {
               <SideNavLink
                 data-testid="sidenav-catalog-link"
                 isActive={windowLocation.href.includes(`${baseEnvUrl}/catalog`)}
-                href={catalogSideNavUrl.url}
                 renderIcon={Catalog}
+                onClick={(e: any) => {
+                  e.preventDefault();
+                  navigateInternal(catalogSideNavUrl.url);
+                }}
               >
                 {catalogSideNavUrl.name}
               </SideNavLink>
@@ -535,8 +552,9 @@ export function AdvantageSideNav(props: Props) {
                 data-testid="sidenav-markeplace-link"
                 renderIcon={Store}
                 isActive={windowLocation.href.includes(`${baseEnvUrl}/launchpad/marketplace`)}
-                href={marketplaceSideNavUrl.url}
                 onClick={(e: any) => {
+                  e.preventDefault();
+                  navigateInternal(marketplaceSideNavUrl.url);
                   handleSidenavLinkClick({ name: marketplaceSideNavUrl.name, link: marketplaceSideNavUrl.url });
                 }}
               >
@@ -558,14 +576,25 @@ export function AdvantageSideNav(props: Props) {
               <SideNavLink
                 data-testid="sidenav-settings-link"
                 renderIcon={Settings}
-                href={settingsSideNavUrl.url}
                 isActive={windowLocation.href.includes(`${baseEnvUrl}/settings`)}
+                onClick={(e: any) => {
+                  e.preventDefault();
+                  navigateInternal(settingsSideNavUrl.url);
+                  handleSettingsClick();
+                }}
               >
                 {settingsSideNavUrl.name}
               </SideNavLink>
             ) : null}
             {adminSideNavUrl ? (
-              <SideNavLink data-testid="sidenav-admin-link" href={adminSideNavUrl.url} renderIcon={LicenseThirdParty}>
+              <SideNavLink
+                data-testid="sidenav-admin-link"
+                renderIcon={LicenseThirdParty}
+                onClick={(e: any) => {
+                  e.preventDefault();
+                  navigateInternal(adminSideNavUrl.url);
+                }}
+              >
                 {adminSideNavUrl.name}
               </SideNavLink>
             ) : null}
