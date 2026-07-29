@@ -13,6 +13,7 @@ import {
   AddAlt,
   Api,
   Catalog,
+  ChartNetwork,
   ChatBot,
   DocumentMultiple_02,
   LicenseThirdParty,
@@ -36,6 +37,7 @@ const SideNavUrlKeys = {
   Tools: "tools",
   AgentStudio: "agentStudio",
   ContextStudio: "contextStudio",
+  ProcessStudio: "processStudio",
   AgentLibrary: "agentLibrary",
   DocumentCollections: "documentCollections",
   Catalog: "catalog",
@@ -135,6 +137,7 @@ export function AdvantageSideNav(props: Props) {
     (sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.AgentStudio
   );
   const contextStudioSideNavUrl = sideNavUrls?.find((sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.ContextStudio);
+  const processStudioSideNavUrl = sideNavUrls?.find((sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.ProcessStudio);
   const agentAssistantLibrarySideNavUrl = sideNavUrls?.find(
     (sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.AgentLibrary
   );
@@ -307,6 +310,7 @@ export function AdvantageSideNav(props: Props) {
     toolsSideNavUrl ||
     agentAssistantStudioSideNavUrl ||
     contextStudioSideNavUrl ||
+    processStudioSideNavUrl ||
     agentAssistantLibrarySideNavUrl ||
     documentCollectionsSideNavUrl;
 
@@ -486,6 +490,18 @@ export function AdvantageSideNav(props: Props) {
                 ) : (
                   contextStudioSideNavUrl.name
                 )}
+              </SideNavLink>
+            ) : null}
+            {processStudioSideNavUrl ? (
+              <SideNavLink
+                data-testid="sidenav-process-studio-link"
+                renderIcon={ChartNetwork}
+                href={processStudioSideNavUrl.url}
+                onClick={(e: any) => {
+                  handleSidenavLinkClick({ name: processStudioSideNavUrl.name, link: processStudioSideNavUrl.url });
+                }}
+              >
+                {processStudioSideNavUrl.name}
               </SideNavLink>
             ) : null}
             {agentAssistantLibrarySideNavUrl ? (
