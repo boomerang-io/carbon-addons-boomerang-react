@@ -300,11 +300,15 @@ export function AdvantageSideNav(props: Props) {
     const target = new URL(url, window.location.href);
     const base = baseEnvUrl ? new URL(baseEnvUrl, window.location.href) : null;
     const basePath = base?.origin === target.origin ? base.pathname.replace(/\/$/, "") : "";
+    const appPath = app ? `/${app}` : "";
+    const environmentPath =
+      appPath && basePath.endsWith(appPath) ? basePath.slice(0, -appPath.length) || "/" : basePath;
+    const pathToStrip = environmentPath === "/" ? "" : environmentPath;
     const targetPath = target.pathname.replace(/\/$/, "");
     let pathname = target.pathname;
 
-    if (basePath && (targetPath === basePath || target.pathname.startsWith(`${basePath}/`))) {
-      pathname = target.pathname.slice(basePath.length) || "/";
+    if (pathToStrip && (targetPath === pathToStrip || target.pathname.startsWith(`${pathToStrip}/`))) {
+      pathname = target.pathname.slice(pathToStrip.length) || "/";
     }
 
     return `${pathname}${target.search}${target.hash}`;

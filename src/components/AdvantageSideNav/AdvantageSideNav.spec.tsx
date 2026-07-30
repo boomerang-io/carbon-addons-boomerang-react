@@ -195,6 +195,59 @@ describe("FeatureSideNav", () => {
     expect(onNavigate).toHaveBeenCalledWith("/assistant-library", `${window.location.origin}/ica/assistant-library`);
   });
 
+  test("strips the environment path when baseEnvUrl includes the app path", () => {
+    const onNavigate = vi.fn();
+    const endpointProps = {
+      ...sidenavProps,
+      app: "launchpad",
+      baseEnvUrl: `${window.location.origin}/ica/launchpad`,
+      enableSpaNavigation: true,
+      onNavigate,
+      sideNavUrls: [
+        {
+          name: "Settings",
+          url: `${window.location.origin}/ica/settings`,
+          key: "settings",
+          icon: "Settings",
+        },
+      ],
+    };
+
+    const { getByText } = render(<AdvantageSideNav {...endpointProps} />);
+
+    fireEvent.click(getByText("Settings"));
+
+    expect(onNavigate).toHaveBeenCalledWith("/settings", `${window.location.origin}/ica/settings`);
+  });
+
+  test("keeps launchpad in SPA paths when baseEnvUrl includes the launchpad app path", () => {
+    const onNavigate = vi.fn();
+    const endpointProps = {
+      ...sidenavProps,
+      app: "launchpad",
+      baseEnvUrl: `${window.location.origin}/ica/launchpad`,
+      enableSpaNavigation: true,
+      onNavigate,
+      sideNavUrls: [
+        {
+          name: "Marketplace",
+          url: `${window.location.origin}/ica/launchpad/marketplace`,
+          key: "marketplace",
+          icon: "Store",
+        },
+      ],
+    };
+
+    const { getByText } = render(<AdvantageSideNav {...endpointProps} />);
+
+    fireEvent.click(getByText("Marketplace"));
+
+    expect(onNavigate).toHaveBeenCalledWith(
+      "/launchpad/marketplace",
+      `${window.location.origin}/ica/launchpad/marketplace`
+    );
+  });
+
   test("uses the navigation endpoint URL for the team page link", () => {
     const onNavigate = vi.fn();
     const endpointProps = {
