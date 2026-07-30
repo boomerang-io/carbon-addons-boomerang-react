@@ -114,6 +114,8 @@ type Props = {
   enableIcaMacs?: boolean;
   handleShowTutorial?: Function;
   tutorialScreenToShow?: string;
+  enableSpaNavigation?: boolean;
+  onNavigate?: (path: string) => void;
 };
 
 function UIShell({
@@ -150,6 +152,8 @@ function UIShell({
   userTeams,
   userTeamsAssets,
   enableIcaMacs,
+  enableSpaNavigation = false,
+  onNavigate,
 }: Props) {
   // Support base header .e.g for an error state
   if (!config) {
@@ -165,6 +169,9 @@ function UIShell({
           enableTeamSwitcher={enableTeamSwitcher}
           productName={productName || platformName || ""}
           user={user}
+          enableSpaNavigation={enableSpaNavigation}
+          onNavigate={onNavigate}
+          history={history}
         />
       </QueryClientProvider>
     );
@@ -234,6 +241,8 @@ function UIShell({
         skipToContentProps={skipToContentProps}
         templateMeteringEvent={templateMeteringEvent}
         triggerEvent={triggerEvent}
+        enableSpaNavigation={enableSpaNavigation}
+        onNavigate={onNavigate}
         profileMenuItems={[
           isUserEnabled && (
             <ProfileSettingsMenuItem
