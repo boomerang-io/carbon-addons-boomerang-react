@@ -6,8 +6,8 @@ IBM Confidential
 
 import React, { useEffect, useState } from "react";
 import { UseQueryResult, useMutation } from "@tanstack/react-query";
-import { HeaderMenu as CarbonHeaderMenu, HeaderMenuItem, InlineLoading } from "@carbon/react";
-import { AddAlt, CheckmarkFilled, ChevronDown, GroupAccount } from "@carbon/react/icons";
+import { HeaderMenu as CarbonHeaderMenu, HeaderMenuItem, InlineLoading, Tooltip } from "@carbon/react";
+import { AddAlt, Badge, CheckmarkFilled, ChevronDown, GroupAccount } from "@carbon/react/icons";
 import sortBy from "lodash.sortby";
 import HeaderMenu from "./HeaderMenu";
 import { resolver } from "../../config/servicesConfig";
@@ -51,6 +51,7 @@ type UserTeam = {
   nameToDisplay?: string;
   type?: string;
   projectTeams?: UserTeam[];
+  versionLabel?: string;
 };
 
 type HeaderTeamSwitcherProps = {
@@ -373,7 +374,7 @@ export default function HeaderTeamSwitcher({
 
     const isPartnerUser = Boolean(user?.type === USER_PLATFORM_ROLE.Partner);
 
-    return (
+return (
       <div className={headerDropdownMenuContainerClassname}>
         {isLoadingTeamSwitcher ? (
           <div className={headerDropdownMenuLoadingClassname}>
@@ -419,6 +420,7 @@ export default function HeaderTeamSwitcher({
             {allTeams.map((team: UserTeam) => {
               if (Boolean(team?.id)) {
                 const isTeamSelected = team.id === selectedTeam?.id;
+                const isV2Team = team?.versionLabel == "v2"? true : false;
                 if (team.type === TEAM_TYPES.ACCOUNT) {
                   const isSubmenuOpen = team.id === openAccountSubmenuId;
                   const projectTeams = team.projectTeams;
@@ -452,9 +454,12 @@ export default function HeaderTeamSwitcher({
                             <span title={team.nameToDisplay} className={headerDropdownMenuItemTextClassname}>
                               {team.nameToDisplay}
                             </span>
-                            {isMenuSelected ? (
-                              <CheckmarkFilled className={headerDropdownMenuItemIconClassname} />
-                            ) : null}
+                            <span style={{display: "flex", gap: "1rem"}}>
+                              {isMenuSelected ? (
+                                <CheckmarkFilled className={headerDropdownMenuItemIconClassname} />
+                              ) : null}
+                              { isV2Team? <Tooltip className="v2-tooltip" align="bottom" autoAlign label="ICA2.0 Team"><Badge/></Tooltip> : null }
+                            </span>
                           </div>
                           <div className={headerDropdownMenuItemAccountIconsClassname}>
                             <GroupAccount className={headerDropdownMenuItemAccountGroupIconClassname} />
@@ -484,9 +489,12 @@ export default function HeaderTeamSwitcher({
                             <span title={team.nameToDisplay} className={headerDropdownMenuItemTextClassname}>
                               Account Page
                             </span>
-                            {isTeamSelected ? (
-                              <CheckmarkFilled className={headerDropdownMenuItemIconClassname} />
-                            ) : null}
+                            <span style={{display: "flex", gap: "1rem"}}>
+                              {isTeamSelected ? (
+                                <CheckmarkFilled className={headerDropdownMenuItemIconClassname} />
+                              ) : null}
+                              { isV2Team? <Tooltip className="v2-tooltip" align="bottom" autoAlign label="ICA2.0 Team"><Badge/></Tooltip> : null }
+                            </span>
                           </div>
                         </HeaderMenuItem>
                         {projectTeams && projectTeams.length > 0
@@ -508,9 +516,12 @@ export default function HeaderTeamSwitcher({
                                       <span title={team.nameToDisplay} className={headerDropdownMenuItemTextClassname}>
                                         {team.nameToDisplay}
                                       </span>
-                                      {isTeamSelected ? (
-                                        <CheckmarkFilled className={headerDropdownMenuItemIconClassname} />
-                                      ) : null}
+                                      <span style={{display: "flex", gap: "1rem"}}>
+                                        {isTeamSelected ? (
+                                          <CheckmarkFilled className={headerDropdownMenuItemIconClassname} />
+                                        ) : null}
+                                        { isV2Team? <Tooltip className="v2-tooltip" align="bottom" autoAlign label="ICA2.0 Team"><Badge/></Tooltip> : null }
+                                      </span>
                                     </div>
                                   </HeaderMenuItem>
                                 </div>
@@ -537,7 +548,10 @@ export default function HeaderTeamSwitcher({
                           <span title={team.nameToDisplay} className={headerDropdownMenuItemTextClassname}>
                             {team.nameToDisplay}
                           </span>
-                          {isTeamSelected ? <CheckmarkFilled className={headerDropdownMenuItemIconClassname} /> : null}
+                          <span style={{display: "flex", gap: "1rem"}}>
+                            {isTeamSelected ? <CheckmarkFilled className={headerDropdownMenuItemIconClassname} /> : null}
+                            { isV2Team? <Tooltip className="v2-tooltip" align="bottom" autoAlign label="ICA2.0 Team"><Badge/></Tooltip> : null }
+                          </span>
                         </div>
                       </HeaderMenuItem>
                     </div>
