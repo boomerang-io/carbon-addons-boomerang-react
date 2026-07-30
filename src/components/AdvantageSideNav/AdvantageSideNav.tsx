@@ -71,6 +71,7 @@ type Props = {
     url: string;
     icon: string;
     tag?: string;
+    isExternal?: boolean;
   }[];
   teams?: Array<SideNavTeam> | null;
   templateMeteringEvent?: (props: any) => void;
@@ -260,7 +261,7 @@ export function AdvantageSideNav(props: Props) {
         category: "Sidenav",
         destinationPath: redirectLink,
       });
-    if (!navigateSideNavLink(event, redirectLink)) {
+    if (!navigateSideNavLink(event, redirectLink, chatSideNavUrl?.isExternal)) {
       window.open(redirectLink, "_self", "noopener,noreferrer");
     }
   };
@@ -328,10 +329,11 @@ export function AdvantageSideNav(props: Props) {
     );
   };
 
-  const navigateSideNavLink = (event: any, url?: string) => {
+  const navigateSideNavLink = (event: any, url?: string, isExternal?: boolean) => {
     console.log('[AdvantageSideNav] navigateSideNavLink called', {
       enableSpaNavigation,
       url,
+      isExternal,
       hasHistory: !!history,
       hasOnNavigate: !!onNavigate,
     });
@@ -343,8 +345,9 @@ export function AdvantageSideNav(props: Props) {
 
     const target = new URL(url, window.location.href);
 
-    if (target.origin !== window.location.origin) {
-      console.log('[AdvantageSideNav] Navigation aborted - different origin');
+    // If isExternal is true or different origin, use default href behavior
+    if (isExternal || target.origin !== window.location.origin) {
+      console.log('[AdvantageSideNav] Navigation aborted - external or different origin');
       return false;
     }
 
@@ -373,7 +376,7 @@ export function AdvantageSideNav(props: Props) {
       isActive={isChatActive}
       disabled={Boolean(!enableChatButton)}
       renderIcon={ChatBot}
-      href={enableChatButton && chatLink}
+      href={enableChatButton && (chatSideNavUrl?.isExternal || !enableSpaNavigation) ? chatLink : undefined}
       onClick={enableChatButton ? handleChatClick : (e: any) => e.preventDefault()}
     >
       {chatSideNavUrl?.name}
@@ -499,9 +502,11 @@ export function AdvantageSideNav(props: Props) {
               <SideNavLink
                 data-testid="sidenav-tools-link"
                 renderIcon={Api}
-                href={enableSpaNavigation ? undefined : toolsSideNavUrl.url}
+                href={toolsSideNavUrl.isExternal || !enableSpaNavigation ? toolsSideNavUrl.url : undefined}
                 onClick={(e: any) => {
-                  navigateSideNavLink(e, toolsSideNavUrl.url);
+                  if (!toolsSideNavUrl.isExternal) {
+                    navigateSideNavLink(e, toolsSideNavUrl.url, toolsSideNavUrl.isExternal);
+                  }
                   handleSidenavLinkClick({ name: toolsSideNavUrl.name, link: toolsSideNavUrl.url });
                 }}
               >
@@ -584,9 +589,11 @@ export function AdvantageSideNav(props: Props) {
                 data-testid="sidenav-agent-assistant-library-link"
                 renderIcon={Folders}
                 isActive={windowLocation.href.includes(`${baseEnvUrl}/assistant-library`)}
-                href={enableSpaNavigation ? undefined : agentAssistantLibrarySideNavUrl.url}
+                href={agentAssistantLibrarySideNavUrl.isExternal || !enableSpaNavigation ? agentAssistantLibrarySideNavUrl.url : undefined}
                 onClick={(e: any) => {
-                  navigateSideNavLink(e, agentAssistantLibrarySideNavUrl.url);
+                  if (!agentAssistantLibrarySideNavUrl.isExternal) {
+                    navigateSideNavLink(e, agentAssistantLibrarySideNavUrl.url, agentAssistantLibrarySideNavUrl.isExternal);
+                  }
                   handleSidenavLinkClick({
                     name: agentAssistantLibrarySideNavUrl.name,
                     link: agentAssistantLibrarySideNavUrl.url,
@@ -603,9 +610,11 @@ export function AdvantageSideNav(props: Props) {
                 renderIcon={DocumentMultiple_02}
                 className={!isAssistantStudioEnabled ? `${prefix}--bmrg-advantage-sidenav__inactive-link` : ""}
                 // disabled={!isAssistantStudioEnabled}
-                href={enableSpaNavigation ? undefined : documentCollectionsSideNavUrl.url}
+                href={documentCollectionsSideNavUrl.isExternal || !enableSpaNavigation ? documentCollectionsSideNavUrl.url : undefined}
                  onClick={(e: any) => {
-                  navigateSideNavLink(e, documentCollectionsSideNavUrl.url);
+                  if (!documentCollectionsSideNavUrl.isExternal) {
+                    navigateSideNavLink(e, documentCollectionsSideNavUrl.url, documentCollectionsSideNavUrl.isExternal);
+                  }
                   handleDocumentCollectionsClick();
                 }}
               >
@@ -656,10 +665,12 @@ export function AdvantageSideNav(props: Props) {
               <SideNavLink
                 data-testid="sidenav-settings-link"
                 renderIcon={Settings}
-                href={enableSpaNavigation ? undefined : settingsSideNavUrl.url}
+                href={settingsSideNavUrl.isExternal || !enableSpaNavigation ? settingsSideNavUrl.url : undefined}
                 isActive={windowLocation.href.includes(`${baseEnvUrl}/settings`)}
                 onClick={(e: any) => {
-                  navigateSideNavLink(e, settingsSideNavUrl.url);
+                  if (!settingsSideNavUrl.isExternal) {
+                    navigateSideNavLink(e, settingsSideNavUrl.url, settingsSideNavUrl.isExternal);
+                  }
                   handleSettingsClick();
                 }}
               >
