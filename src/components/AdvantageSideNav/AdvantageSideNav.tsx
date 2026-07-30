@@ -411,19 +411,21 @@ export function AdvantageSideNav(props: Props) {
               </SideNavLink>
             ) : null}
             <SideNavDivider />
-            {showChatButton &&
-              (showChatTooltip ? (
-                <TooltipHover
-                  className={`${prefix}--bmrg-side-nav__tooltip`}
-                  isActive={isChatActive}
-                  content={tooltipMessage}
-                  direction="right"
-                >
-                  <span>{chatSideNavLink}</span>
-                </TooltipHover>
-              ) : (
-                chatSideNavLink
-              ))}
+
+            {chatSideNavUrl ?
+              (showChatButton &&
+                (showChatTooltip ? (
+                  <TooltipHover
+                    className={`${prefix}--bmrg-side-nav__tooltip`}
+                    isActive={isChatActive}
+                    content={tooltipMessage}
+                    direction="right"
+                  >
+                    <span>{chatSideNavLink}</span>
+                  </TooltipHover>
+                ) : (
+                  chatSideNavLink
+                ))) : null}
             {toolsSideNavUrl ? (
               <SideNavLink
                 data-testid="sidenav-tools-link"
