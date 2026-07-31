@@ -549,9 +549,11 @@ export function AdvantageSideNav(props: Props) {
               <SideNavLink
                 data-testid="sidenav-context-studio-link"
                 renderIcon={Network_3}
-                href={enableSpaNavigation ? undefined : contextStudioSideNavUrl.url}
+                href={contextStudioSideNavUrl.isExternal || !enableSpaNavigation ? contextStudioSideNavUrl.url : undefined}
                 onClick={(e: any) => {
-                  navigateSideNavLink(e, contextStudioSideNavUrl.url);
+                  if (!contextStudioSideNavUrl.isExternal) {
+                    navigateSideNavLink(e, contextStudioSideNavUrl.url, contextStudioSideNavUrl.isExternal);
+                  }
                   handleSidenavLinkClick({ name: contextStudioSideNavUrl.name, link: contextStudioSideNavUrl.url });
                 }}
               >
@@ -576,8 +578,11 @@ export function AdvantageSideNav(props: Props) {
               <SideNavLink
                 data-testid="sidenav-process-studio-link"
                 renderIcon={ChartNetwork}
-                href={processStudioSideNavUrl.url}
+                href={processStudioSideNavUrl.isExternal || !enableSpaNavigation ? processStudioSideNavUrl.url : undefined}
                 onClick={(e: any) => {
+                  if (!processStudioSideNavUrl.isExternal) {
+                    navigateSideNavLink(e, processStudioSideNavUrl.url, processStudioSideNavUrl.isExternal);
+                  }
                   handleSidenavLinkClick({ name: processStudioSideNavUrl.name, link: processStudioSideNavUrl.url });
                 }}
               >
