@@ -54,18 +54,18 @@ exports[`Feedback > snapshot 1`] = `
                 Use Boomerang
               </span>
               <svg
+                aria-hidden="true"
                 fill="currentColor"
                 focusable="false"
                 height="16"
                 preserveAspectRatio="xMidYMid meet"
-                role="img"
                 title="Opens link within same platform"
                 viewBox="0 0 16 16"
                 width="16"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  d="M9.3 3.7L13.1 7.5 1 7.5 1 8.5 13.1 8.5 9.3 12.3 10 13 15 8 10 3z"
+                  d="M9.3 3.7 13.1 7.5 1 7.5 1 8.5 13.1 8.5 9.3 12.3 10 13 15 8 10 3z"
                 />
               </svg>
             </div>

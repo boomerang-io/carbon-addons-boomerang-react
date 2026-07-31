@@ -4,7 +4,6 @@ IBM Confidential
 © Copyright IBM Corp. 2022, 2024
 */
 
-
 import React from "react";
 import {
   Button,
@@ -56,7 +55,7 @@ export const Default = () => {
   return (
     <>
       <Button onClick={() => setIsOpen(true)}>Open Modal</Button>
-      <Modal isOpen={isOpen} appElement="#root">
+      <Modal isOpen={isOpen}>
         <Component1 setIsOpen={setIsOpen} />
       </Modal>
     </>

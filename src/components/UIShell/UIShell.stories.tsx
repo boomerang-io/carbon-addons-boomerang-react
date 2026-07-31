@@ -8,7 +8,7 @@ IBM Confidential
 import React from "react";
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import { BrowserRouter as Router, Link } from "react-router";
 import AdvantageSideNav from "../AdvantageSideNav";
 import HeaderMenuItem from "../Header/HeaderMenuItem";
 import {

@@ -4,7 +4,6 @@ IBM Confidential
 © Copyright IBM Corp. 2022, 2024
 */
 
-
 import React from "react";
 import { Button, TextInput, ModalBody, ModalFooter, Tooltip } from "@carbon/react";
 import FlowModal from "./FlowModal";
@@ -70,7 +69,9 @@ class Component3 extends React.Component {
           <p>This component will ask if you really wanna close the modal when pressing the close modal button</p>
         </ModalBody>
         <ModalFooter>
-          <Button kind="secondary" onClick={(this.props as any).requestPreviousStep}>Previous</Button>
+          <Button kind="secondary" onClick={(this.props as any).requestPreviousStep}>
+            Previous
+          </Button>
           <Button onClick={(this.props as any).forceCloseModal}>Force Close Modal</Button>
         </ModalFooter>
       </FlowModalForm>
@@ -81,7 +82,6 @@ class Component3 extends React.Component {
 export const Default = (args) => {
   return (
     <FlowModal
-      appElement="#root"
       composedModalProps={{ selectorPrimaryFocus: 'input[id="testing"]' }}
       confirmModalProps={{
         title: "Close Modal Flow?",

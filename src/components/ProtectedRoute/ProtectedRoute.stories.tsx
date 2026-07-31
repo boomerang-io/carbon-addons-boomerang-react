@@ -4,9 +4,8 @@ IBM Confidential
 © Copyright IBM Corp. 2022, 2024
 */
 
-
 import React from "react";
-import { MemoryRouter as Router  } from "react-router-dom";
+import { MemoryRouter as Router } from "react-router";
 import ProtectedRoute from "./ProtectedRoute";
 
 export default {
@@ -19,7 +18,7 @@ export default {
       },
     },
   },
-  decorators: [(story) => <Router >{story()}</Router>],
+  decorators: [(story) => <Router>{story()}</Router>],
 };
 
 const Component = () => <div>Yay, you are authorized to view this page.</div>;
@@ -30,8 +29,7 @@ export const Authorized = (args) => {
 
 Authorized.args = {
   allowedUserRoles: ["admin", "operator"],
-  component: Component,
-  path: "/",
+  component: <Component />,
   userRole: ["user", "operator"],
 };
 
@@ -41,8 +39,7 @@ export const NotAuthorized = (args) => {
 
 NotAuthorized.args = {
   allowedUserRoles: ["admin", "operator"],
-  component: Component,
-  path: "/",
+  component: <Component />,
   userRole: "user",
 };
 
@@ -52,8 +49,7 @@ export const WithCustomMessage = (args) => {
 
 WithCustomMessage.args = {
   allowedUserRoles: ["admin", "operator"],
-  component: Component,
-  path: "/",
+  component: <Component />,
   title: "custom title",
   subtitle: "custom subtitle",
   userRole: "user",

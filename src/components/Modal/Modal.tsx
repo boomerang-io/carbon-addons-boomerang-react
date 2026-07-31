@@ -4,7 +4,6 @@ IBM Confidential
 © Copyright IBM Corp. 2022, 2024
 */
 
-
 import React from "react";
 import ReactModal from "react-modal";
 import cx from "classnames";
@@ -22,7 +21,8 @@ export function Modal(props: Props) {
   const { appElement = "#app", className, containerClassName, children, isOpen = false, ...rest } = props;
 
   React.useEffect(() => {
-    ReactModal.setAppElement(appElement);
+    const el = document.querySelector(appElement);
+    ReactModal.setAppElement(el instanceof HTMLElement ? el : document.body);
   }, [appElement]);
 
   return (

@@ -4,9 +4,8 @@ IBM Confidential
 © Copyright IBM Corp. 2022, 2024
 */
 
-
 import React from "react";
-import { MemoryRouter as Router, Link } from "react-router-dom";
+import { MemoryRouter as Router, Link } from "react-router";
 import { FeatureHeader, FeatureHeaderTitle, FeatureHeaderSubtitle } from "./index";
 import { default as Tabs } from "../FeatureNavTabs";
 import { default as Tab } from "../FeatureNavTab";

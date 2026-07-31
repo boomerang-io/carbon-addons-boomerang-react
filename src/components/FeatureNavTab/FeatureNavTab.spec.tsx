@@ -4,11 +4,10 @@ IBM Confidential
 © Copyright IBM Corp. 2022, 2024
 */
 
-
 import React from "react";
 import { expect, test } from "vitest";
 import { render } from "@testing-library/react";
-import { MemoryRouter as Router } from "react-router-dom";
+import { MemoryRouter as Router } from "react-router";
 import FeatureNavTab from "./FeatureNavTab";
 
 const props = {
@@ -21,7 +20,7 @@ describe("FeatureNavTab", () => {
     const { queryByText } = render(
       <Router>
         <FeatureNavTab {...props} />
-      </Router>
+      </Router>,
     );
     expect(queryByText(/Red Panda/i)).toBeInTheDocument();
   });

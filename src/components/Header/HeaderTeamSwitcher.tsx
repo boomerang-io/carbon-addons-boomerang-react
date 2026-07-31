@@ -57,7 +57,9 @@ type HeaderTeamSwitcherProps = {
   analyticsHelpers?: any;
   baseServicesUrl?: string;
   createJoinTeamTrigger?: Function;
+  /** @deprecated Pass `navigate` instead. Accepted for backwards-compatibility with react-router v5 `history` objects. */
   history?: any;
+  navigate?: any;
   isLaunchpad: boolean;
   isLoadingTeamSwitcher?: boolean;
   isSuccessTeamSwitcher?: boolean;
@@ -79,6 +81,7 @@ export default function HeaderTeamSwitcher({
   baseServicesUrl,
   createJoinTeamTrigger,
   history,
+  navigate,
   isLaunchpad,
   isLoadingTeamSwitcher,
   isSuccessTeamSwitcher,
@@ -239,8 +242,8 @@ export default function HeaderTeamSwitcher({
       });
     }
 
-    if (isLaunchpad && Boolean(history)) {
-      history.push(`/teams/${team.id}`);
+    if (isLaunchpad) {
+      navigate ? navigate(`/teams/${team.id}`) : history?.push(`/teams/${team.id}`);
     } else {
       window.open(teamLink({ teamId: team.id }), "_self");
     }
@@ -361,8 +364,8 @@ export default function HeaderTeamSwitcher({
     let selectedTeamName = selectedTeam?.displayName
       ? selectedTeam.displayName
       : selectedTeam?.name
-      ? selectedTeam?.name
-      : "No team selected";
+        ? selectedTeam?.name
+        : "No team selected";
 
     const isPartnerUser = Boolean(user?.type === USER_PLATFORM_ROLE.Partner);
 

@@ -4,13 +4,12 @@ IBM Confidential
 © Copyright IBM Corp. 2022, 2024
 */
 
-
 import React from "react";
-import { NavLink, NavLinkProps } from "react-router-dom";
+import { NavLink, NavLinkProps } from "react-router";
 import cx from "classnames";
 import { prefix } from "../../internal/settings";
 
-type Props = NavLinkProps & {
+type Props = Omit<NavLinkProps, "className"> & {
   activeClassName?: string;
   className?: string;
   children?: string | number | ((...args: any[]) => any) | any | React.ReactNode;
@@ -27,8 +26,11 @@ function FeatureSideNavLink(props: Props) {
   return (
     <>
       <NavLink
-        className={cx(`${prefix}--bmrg-feature-sidenav-link`, className)}
-        activeClassName={cx(`${prefix}--bmrg-feature-sidenav-active-link`, activeClassName)}
+        className={({ isActive }) =>
+          cx(`${prefix}--bmrg-feature-sidenav-link`, className, {
+            [cx(`${prefix}--bmrg-feature-sidenav-active-link`, activeClassName)]: isActive,
+          })
+        }
         {...rest}
       >
         {Icon && <Icon {...iconProps} />}
