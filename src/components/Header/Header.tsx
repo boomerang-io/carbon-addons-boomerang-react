@@ -85,6 +85,8 @@ type Props = {
   user?: User;
   userTeams?: { data: any; isLoading: boolean; error: any };
   userTeamsAssets?: { data: any; isLoading: boolean; error: any };
+  enableSpaNavigation?: boolean;
+  onNavigate?: (path: string) => void;
 };
 
 type MenuType =
@@ -170,6 +172,8 @@ export default function Header(props: Props) {
     user,
     userTeams,
     userTeamsAssets,
+    enableSpaNavigation = false,
+    onNavigate,
   } = props;
 
   const hasUserTeams = Boolean(userTeams);
@@ -184,13 +188,46 @@ export default function Header(props: Props) {
 
   const showTeamSwitcher = enableTeamSwitcher && Boolean(user);
 
+  const handleLogoClick = (e: React.MouseEvent) => {
+    console.log('[Header] Logo clicked', {
+      enableSpaNavigation,
+      hasHistory: !!history,
+      hasOnNavigate: !!onNavigate,
+      baseEnvUrl,
+    });
+
+    if (enableSpaNavigation) {
+      e.preventDefault();
+      console.log('[Header] Preventing default and navigating to /launchpad');
+      const launchpadUrl = `${baseEnvUrl}/launchpad`;
+      if (onNavigate) {
+        console.log('[Header] Using onNavigate callback');
+        onNavigate("/launchpad");
+      } else if (history?.push) {
+        console.log('[Header] Using history.push');
+        history.push("/launchpad");
+      } else {
+        console.log('[Header] Using window.history.pushState');
+        window.history.pushState(null, "", "/launchpad");
+        window.dispatchEvent(new PopStateEvent("popstate"));
+      }
+    } else {
+      console.log('[Header] SPA navigation disabled - following href');
+    }
+  };
+
   return (
     <>
       <Theme theme={carbonTheme}>
         <CarbonHeader aria-label="App navigation header" className={className}>
           {skipToContentProps ? <SkipToContent {...skipToContentProps} /> : null}
           <SidenavMenu leftPanel={props.leftPanel} navLinks={props.navLinks} />
-          <HeaderName href={`${baseEnvUrl}/launchpad`} prefix={prefixName} data-testid="header-product">
+          <HeaderName
+            href={enableSpaNavigation ? undefined : `${baseEnvUrl}/launchpad`}
+            prefix={prefixName}
+            data-testid="header-product"
+            onClick={handleLogoClick}
+          >
             {productName}
           </HeaderName>
           <HeaderNavigation aria-label="Platform navigation">

@@ -219,4 +219,12 @@ IBM Confidential
       }
     }
   }
+  .cds--bmrg-header-drop-down {
+    a.cds--header__menu-item {
+      span.v2-tooltip
+      span.cds--popover-content {
+        color: #ffffff !important;
+      }
+    }
+  }
 }
