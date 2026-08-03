@@ -4,16 +4,10 @@ IBM Confidential
 © Copyright IBM Corp. 2022, 2024
 */
 
-
 import React, { Component } from "react";
 import { ToastContainer, Slide } from "react-toastify";
 import { Close } from "@carbon/react/icons";
-import { injectStyle } from "react-toastify/dist/inject-style";
 import { prefix } from "../../internal/settings";
-
-if (typeof window !== "undefined") {
-  injectStyle();
-}
 
 type CloseButtonProps = {
   closeToast?: (...args: any[]) => any;

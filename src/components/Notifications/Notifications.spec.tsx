@@ -4,7 +4,6 @@ IBM Confidential
 © Copyright IBM Corp. 2022, 2024
 */
 
-
 import React from "react";
 import { expect, test } from "vitest";
 import { render, fireEvent } from "@testing-library/react";
@@ -25,8 +24,8 @@ describe("Notifications", () => {
         >
           Try Me
         </Button>
-        <NotificationsContainer containerId="test" />
-      </div>
+        <NotificationsContainer />
+      </div>,
     );
     const notificationButton = getByText(/Try Me/);
     fireEvent.click(notificationButton);
@@ -35,7 +34,7 @@ describe("Notifications", () => {
 
   test("a11y", async () => {
     const { container } = render(
-      <ToastNotification subtitle="This happened" title="Something happened" kind="success" />
+      <ToastNotification subtitle="This happened" title="Something happened" kind="success" />,
     );
     const results = await axe(container);
     expect(results).toHaveNoViolations();
