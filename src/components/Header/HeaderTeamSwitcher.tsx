@@ -6,8 +6,8 @@ IBM Confidential
 
 import React, { useEffect, useState } from "react";
 import { UseQueryResult, useMutation } from "@tanstack/react-query";
-import { HeaderMenu as CarbonHeaderMenu, HeaderMenuItem, InlineLoading, Tooltip } from "@carbon/react";
-import { AddAlt, Badge, CheckmarkFilled, ChevronDown, GroupAccount } from "@carbon/react/icons";
+import { HeaderMenu as CarbonHeaderMenu, HeaderMenuItem, InlineLoading, Tooltip, Tag } from "@carbon/react";
+import { AddAlt, CheckmarkFilled, ChevronDown, GroupAccount } from "@carbon/react/icons";
 import sortBy from "lodash.sortby";
 import HeaderMenu from "./HeaderMenu";
 import { resolver } from "../../config/servicesConfig";
@@ -454,11 +454,18 @@ return (
                             <span title={team.nameToDisplay} className={headerDropdownMenuItemTextClassname}>
                               {team.nameToDisplay}
                             </span>
-                            <span style={{display: "flex", gap: "1rem"}}>
+                            <span style={{display: "flex", gap: "1rem", justifyContent: "center", alignItems: "center"}}>
                               {isMenuSelected ? (
                                 <CheckmarkFilled className={headerDropdownMenuItemIconClassname} />
                               ) : null}
-                              { isV2Team? <Tooltip className="v2-tooltip" align="bottom" autoAlign label="ICA2.0 Team"><Badge/></Tooltip> : null }
+                              { isV2Team? <Tooltip className="v2-tooltip" align="bottom" autoAlign label="ICA2.0 Team">
+                                <Tag
+                                  className="some-class"
+                                  size="md"
+                                  title="Clear filter"
+                                  type="blue"
+                                >2.0</Tag>
+                              </Tooltip> : null }
                             </span>
                           </div>
                           <div className={headerDropdownMenuItemAccountIconsClassname}>
@@ -489,17 +496,25 @@ return (
                             <span title={team.nameToDisplay} className={headerDropdownMenuItemTextClassname}>
                               Account Page
                             </span>
-                            <span style={{display: "flex", gap: "1rem"}}>
+                            <span style={{display: "flex", gap: "1rem", justifyContent: "center", alignItems: "center"}}>
                               {isTeamSelected ? (
                                 <CheckmarkFilled className={headerDropdownMenuItemIconClassname} />
                               ) : null}
-                              { isV2Team? <Tooltip className="v2-tooltip" align="bottom" autoAlign label="ICA2.0 Team"><Badge/></Tooltip> : null }
+                              { isV2Team? <Tooltip className="v2-tooltip" align="bottom" autoAlign label="ICA2.0 Team">
+                                <Tag
+                                  className="some-class"
+                                  size="md"
+                                  title="Clear filter"
+                                  type="blue"
+                                >2.0</Tag>
+                              </Tooltip> : null }
                             </span>
                           </div>
                         </HeaderMenuItem>
                         {projectTeams && projectTeams.length > 0
                           ? projectTeams.map((team: UserTeam) => {
                               const isTeamSelected = team.id === selectedTeam?.id;
+                              const isProjectTeamV2 = team.versionLabel == "v2"? true : false;
                               return (
                                 <div key={team.id} id={`${team.id}-project-menu-item`}>
                                   <HeaderMenuItem
@@ -516,11 +531,18 @@ return (
                                       <span title={team.nameToDisplay} className={headerDropdownMenuItemTextClassname}>
                                         {team.nameToDisplay}
                                       </span>
-                                      <span style={{display: "flex", gap: "1rem"}}>
+                                      <span style={{display: "flex", gap: "1rem", justifyContent: "center", alignItems: "center"}}>
                                         {isTeamSelected ? (
                                           <CheckmarkFilled className={headerDropdownMenuItemIconClassname} />
                                         ) : null}
-                                        { isV2Team? <Tooltip className="v2-tooltip" align="bottom" autoAlign label="ICA2.0 Team"><Badge/></Tooltip> : null }
+                                        { isProjectTeamV2? <Tooltip className="v2-tooltip" align="bottom" autoAlign label="ICA2.0 Team">
+                                          <Tag
+                                            className="some-class"
+                                            size="md"
+                                            title="Clear filter"
+                                            type="blue"
+                                          >2.0</Tag>
+                                        </Tooltip> : null }
                                       </span>
                                     </div>
                                   </HeaderMenuItem>
@@ -548,9 +570,16 @@ return (
                           <span title={team.nameToDisplay} className={headerDropdownMenuItemTextClassname}>
                             {team.nameToDisplay}
                           </span>
-                          <span style={{display: "flex", gap: "1rem"}}>
+                          <span style={{ display: "flex", gap: "1rem", justifyContent: "center", alignItems: "center" }}>
                             {isTeamSelected ? <CheckmarkFilled className={headerDropdownMenuItemIconClassname} /> : null}
-                            { isV2Team? <Tooltip className="v2-tooltip" align="bottom" autoAlign label="ICA2.0 Team"><Badge/></Tooltip> : null }
+                            {isV2Team ? <Tooltip className="v2-tooltip" align="bottom" autoAlign label="ICA2.0 Team">
+                              <Tag
+                                className="some-class"
+                                size="md"
+                                title="Clear filter"
+                                type="blue"
+                              >2.0</Tag>
+                            </Tooltip> : null}
                           </span>
                         </div>
                       </HeaderMenuItem>
