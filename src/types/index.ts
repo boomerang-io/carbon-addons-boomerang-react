@@ -312,6 +312,12 @@ export type UserTeams = {
   personalTeam: SimpleIdNameMap[];
 };
 
+type PlatformNotificationMetadata = {
+  migrationEligibility?: boolean;
+  teamId?: string;
+  migrationTimeStamp?: string;
+};
+
 export type PlatformNotification = {
   creator: string;
   date: string;
@@ -325,6 +331,7 @@ export type PlatformNotification = {
   title: string;
   type: string;
   userId: string;
+  metadata?: PlatformNotificationMetadata;
 };
 
 export interface Navigation {

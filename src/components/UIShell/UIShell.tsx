@@ -27,13 +27,14 @@ import { PrivacyStatementMenuItem } from "../PrivacyStatement";
 import { ProfileSettingsMenuItem } from "../ProfileSettings";
 import { SignOutMenuItem } from "../SignOut";
 import { queryClient } from "../../config/servicesConfig";
-import type { NavLink, User } from "../../types";
+import type { NavLink, PlatformNotification, User } from "../../types";
 import { USER_PLATFORM_ROLE } from "../../constants/UserType";
 
 type Props = {
   analyticsHelpers?: any;
   carbonTheme?: "white" | "g10" | "g90" | "g100";
   createJoinTeamTrigger?: Function;
+  onNotificationAction?: (data: PlatformNotification) => void;
   baseEnvUrl?: string;
   config?: {
     features?: {
@@ -124,6 +125,7 @@ function UIShell({
   carbonTheme = "g10",
   config,
   createJoinTeamTrigger,
+  onNotificationAction,
   enableTeamSwitcher = true,
   history,
   isLaunchpad = false,
@@ -225,6 +227,7 @@ function UIShell({
         baseServicesUrl={platform.baseServicesUrl}
         carbonTheme={carbonTheme}
         createJoinTeamTrigger={createJoinTeamTrigger}
+        onNotificationAction={onNotificationAction}
         enableAppSwitcher={isAppSwitcherEnabled}
         instanceSwitcherEnabled={instanceSwitcherEnabled}
         enableNotifications={isNotificationsEnabled}
