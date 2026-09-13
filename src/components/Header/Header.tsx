@@ -42,7 +42,7 @@ import useHeaderMenu from "../../hooks/useHeaderMenu";
 import useWindowSize from "../../hooks/useWindowSize";
 import { resolver, serviceUrl } from "../../config/servicesConfig";
 import { prefix } from "../../internal/settings";
-import type { NavLink, User } from "../../types";
+import type { NavLink, PlatformNotification, User } from "../../types";
 
 type Props = {
   analyticsHelpers?: any;
@@ -51,6 +51,7 @@ type Props = {
   carbonTheme?: "white" | "g10" | "g90" | "g100";
   className?: string;
   createJoinTeamTrigger?: Function;
+  onNotificationAction?: (data: PlatformNotification) => void;
   enableAppSwitcher?: boolean;
   enableTeamSwitcher?: boolean;
   instanceSwitcherEnabled?: boolean;
@@ -152,6 +153,7 @@ export default function Header(props: Props) {
     carbonTheme = "g10",
     className,
     createJoinTeamTrigger,
+    onNotificationAction,
     enableTeamSwitcher = true,
     history,
     isLaunchpad = false,
@@ -286,6 +288,7 @@ export default function Header(props: Props) {
               baseServicesUrl={baseServicesUrl}
               enabled={Boolean(props.enableNotifications)}
               countEnabled={Boolean(props.enableNotificationsCount)}
+              onNotificationAction={onNotificationAction}
             />
             <SupportMenu
               enabled={Array.isArray(props.supportMenuItems) && props.supportMenuItems.length > 0}
@@ -411,6 +414,7 @@ function NotificationsMenu(props: {
   countEnabled: boolean;
   baseEnvUrl?: string;
   baseServicesUrl?: string;
+  onNotificationAction?: (data: PlatformNotification) => void;
 }) {
   const { isOpen, toggleActive, ref } = useHeaderMenu<HTMLDivElement>(MenuButtonId.Notifcations);
   const [hasNewNotifications, setHasNewNotifications] = React.useState(false);
@@ -448,6 +452,7 @@ function NotificationsMenu(props: {
         isOpen={isOpen}
         setHasNewNotifications={setHasNewNotifications}
         setNotificationsCount={setNotificationsCount}
+        onNotificationAction={props.onNotificationAction}
       />
     </div>
   );

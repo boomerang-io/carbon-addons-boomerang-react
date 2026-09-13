@@ -21,6 +21,7 @@ type Props = {
   isOpen: boolean;
   setHasNewNotifications: (hasNewNotifications: boolean) => void;
   setNotificationsCount: (notificationsCount: number) => void;
+  onNotificationAction?: (data: PlatformNotification) => void;
 };
 
 type State = { currentNotifications: PlatformNotification[]; numNotifications: number; error: boolean };
@@ -155,9 +156,12 @@ export default class PlatformNotificationsContainer extends React.Component<Prop
   }
 
   renderNotifications() {
+    const { onNotificationAction } = this.props;
     return this.state.currentNotifications.slice(0, 5).map((notification) => (
       <li key={notification.id} data-testid="header-notification">
-        <Notification readNotification={this.handleReadNotification.bind(this)} data={notification} />
+        <Notification readNotification={this.handleReadNotification.bind(this)} data={notification}
+          onActionClick={onNotificationAction}
+        />
       </li>
     ));
   }

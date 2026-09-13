@@ -18,9 +18,11 @@ dayjs.extend(relativeTime);
 type Props = {
   readNotification: (id: string) => void;
   data: PlatformNotification;
+  onActionClick?: (data: PlatformNotification) => void;
 };
 
-function Notification({ readNotification, data }: Props) {
+function Notification({ readNotification, data, onActionClick }: Props) {
+  const migrationEligibility = data.metadata?.migrationEligibility;
   return (
     <div
       className={cx(`${prefix}--bmrg-notification`, {
@@ -35,6 +37,15 @@ function Notification({ readNotification, data }: Props) {
           className={`${prefix}--bmrg-notification-content__desc`}
           dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(data.detail) }}
         />
+        {migrationEligibility !== undefined && (
+          <button
+            type="button"
+            className={`${prefix}--bmrg-notification-content__action`}
+            onClick={() => onActionClick?.(data)}
+          >
+            {migrationEligibility ? "Begin Migration" : "View Details"}
+          </button>
+        )}
         <time className={`${prefix}--bmrg-notification-content__date`}>
           {`${dayjs(data.date).fromNow()} at ${dayjs(data.date).format("hh:mma")}`}
         </time>

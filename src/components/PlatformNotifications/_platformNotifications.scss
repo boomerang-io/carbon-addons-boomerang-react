@@ -228,3 +228,20 @@ IBM Confidential
     outline: utils.rem(2px) solid shell.$bmrg-header-active-text;
   }
 }
+
+.#{$prefix}--bmrg-notification-content__action {
+  display: block;
+  margin-top: 8px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #0f62fe;
+  font-size: 13px;
+  text-decoration: underline;
+  cursor: pointer;
+  font-family: inherit;
+
+  &:hover {
+    color: #0043ce;
+  }
+}
