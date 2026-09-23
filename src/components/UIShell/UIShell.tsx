@@ -358,7 +358,7 @@ function UIShell({
               icon={<ChatLaunch />}
               data-testid="askICA-chatlaunch"
               kind="external"
-              text="AskICA"
+              text="FAQ"
               type="link"
             />
           ) : null,
