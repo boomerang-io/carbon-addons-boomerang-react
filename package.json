@@ -1,7 +1,7 @@
 {
   "name": "@boomerang-io/carbon-addons-boomerang-react",
   "description": "Carbon Addons for Boomerang apps",
-  "version": "4.8.0-beta.5",
+  "version": "4.8.0-beta.6",
   "author": {
     "name": "Tim Bula",
     "email": "timrbula@gmail.com"
@@ -48,7 +48,7 @@
   },
   "dependencies": {
     "@carbon/ibm-products": "2.95.0",
-    "@carbon/react": "1.112.0",
+    "@carbon/react": "1.118.0",
     "@dnd-kit/core": "^6.3.1",
     "@dnd-kit/sortable": "^10.0.0",
     "@dnd-kit/utilities": "^3.2.2",
@@ -57,7 +57,7 @@
     "@tippyjs/react": "4.2.6",
     "classnames": "2.3.2",
     "dayjs": "^1.11.11",
-    "dompurify": "3.4.14",
+    "dompurify": "3.4.16",
     "downshift": "6.1.7",
     "lodash.get": "4.4.2",
     "lodash.isequal": "4.5.0",
@@ -65,13 +65,13 @@
     "match-sorter": "6.3.1",
     "react-modal": "3.16.1",
     "react-toastify": "11.1.0",
-    "sanitize-html": "^2.17.7"
+    "sanitize-html": "^2.18.0"
   },
   "peerDependencies": {
     "@carbon/react": "^1.112.0",
     "@tanstack/react-query": "^5.90.21",
-    "axios": "^1.18.1",
-    "formik": "^2.4.6",
+    "axios": "^1.20.0",
+    "formik": "^2.4.9",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router": "^7.18.2",
@@ -108,7 +108,7 @@
     "@typescript-eslint/parser": "^8.56.1",
     "@typescript-eslint/utils": "^8.56.1",
     "@vitejs/plugin-react": "^5.0.0",
-    "axios": "^1.18.1",
+    "axios": "^1.20.0",
     "axios-mock-adapter": "^2.1.0",
     "cpy": "^11.1.0",
     "cross-env": "^7.0.3",
@@ -118,7 +118,7 @@
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-storybook": "10.5.2",
     "eslint-plugin-testing-library": "^7.16.0",
-    "formik": "^2.4.6",
+    "formik": "^2.4.9",
     "globals": "^17.3.0",
     "husky": "^8.0.1",
     "in-publish": "^2.0.1",
@@ -139,23 +139,24 @@
     "tsup": "^8.5.1",
     "typescript": "^4.6.3",
     "vite": "^6.4.3",
-    "vitest": "^4.1.9",
+    "vitest": "^4.1.11",
     "yup": "^0.32.11"
   },
   "pnpm": {
     "overrides": {
       "@babel/core": "^7.29.6",
       "@tootallnate/once": "^3.0.1",
-      "brace-expansion": "^5.0.9",
+      "brace-expansion": "^5.0.12",
       "braces": "^3.0.3",
       "esbuild": "^0.25.0",
-      "fast-uri": "^4.1.2",
+      "fast-uri": "^4.2.1",
       "immutable": "^5.1.9",
-      "ip-address": "^10.5.0",
-      "js-yaml": "^4.3.1",
+      "ip-address": "^10.7.3",
+      "js-yaml": "^5.4.3",
       "micromatch": "^4.0.8",
       "nanoid": "^6.0.1",
-      "undici": "^7.29.0",
+      "source-map-js": "^1.2.2",
+      "undici": "^7.29.1",
       "vite": "^6.4.3"
     }
   },
