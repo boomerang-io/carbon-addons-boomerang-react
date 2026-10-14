@@ -1,0 +1,78 @@
+diff --git a/dist/cjs.js b/dist/cjs.js
+index 7c36cbdd06cc22c92d590be3f87a08a91ca06b40..49efd5c33c6eed20be3e80cb55f5f2939b181f30 100644
+--- a/dist/cjs.js
++++ b/dist/cjs.js
+@@ -58,7 +58,10 @@ function getEnumerableOwnPropertySymbols(target) {
+ }
+ 
+ function getKeys(target) {
+-	return Object.keys(target).concat(getEnumerableOwnPropertySymbols(target))
++	// CVE-2026-93753: never copy dangerous prototype-poisoning keys
++	return Object.keys(target).filter(function(key) {
++		return !propertyIsForbidden(key)
++	}).concat(getEnumerableOwnPropertySymbols(target))
+ }
+ 
+ function propertyIsOnObject(object, property) {
+@@ -69,6 +72,13 @@ function propertyIsOnObject(object, property) {
+ 	}
+ }
+ 
++// CVE-2026-93753: block keys that can poison the prototype chain.
++// __proto__ directly triggers the legacy prototype setter on plain objects;
++// constructor and prototype are blocked for defense in depth.
++function propertyIsForbidden(key) {
++	return key === '__proto__' || key === 'constructor' || key === 'prototype'
++}
++
+ // Protects from prototype poisoning and unexpected merging up the prototype chain.
+ function propertyIsUnsafe(target, key) {
+ 	return propertyIsOnObject(target, key) // Properties are safe to merge if they don't exist in the target yet,
+@@ -84,7 +94,7 @@ function mergeObject(target, source, options) {
+ 		});
+ 	}
+ 	getKeys(source).forEach(function(key) {
+-		if (propertyIsUnsafe(target, key)) {
++		if (propertyIsForbidden(key) || propertyIsUnsafe(target, key)) {
+ 			return
+ 		}
+ 
+diff --git a/dist/umd.js b/dist/umd.js
+index 4071e7c56ec8e5273fe166f6e723ac460fab8b72..c6ab04aa8dff9f6a1e7a446ad8bc869c640586e6 100644
+--- a/dist/umd.js
++++ b/dist/umd.js
+@@ -62,7 +62,10 @@
+ 	}
+ 
+ 	function getKeys(target) {
+-		return Object.keys(target).concat(getEnumerableOwnPropertySymbols(target))
++		// CVE-2026-93753: never copy dangerous prototype-poisoning keys
++		return Object.keys(target).filter(function(key) {
++			return !propertyIsForbidden(key)
++		}).concat(getEnumerableOwnPropertySymbols(target))
+ 	}
+ 
+ 	function propertyIsOnObject(object, property) {
+@@ -73,6 +76,13 @@
+ 		}
+ 	}
+ 
++	// CVE-2026-93753: block keys that can poison the prototype chain.
++	// __proto__ directly triggers the legacy prototype setter on plain objects;
++	// constructor and prototype are blocked for defense in depth.
++	function propertyIsForbidden(key) {
++		return key === '__proto__' || key === 'constructor' || key === 'prototype'
++	}
++
+ 	// Protects from prototype poisoning and unexpected merging up the prototype chain.
+ 	function propertyIsUnsafe(target, key) {
+ 		return propertyIsOnObject(target, key) // Properties are safe to merge if they don't exist in the target yet,
+@@ -88,7 +98,7 @@
+ 			});
+ 		}
+ 		getKeys(source).forEach(function(key) {
+-			if (propertyIsUnsafe(target, key)) {
++			if (propertyIsForbidden(key) || propertyIsUnsafe(target, key)) {
+ 				return
+ 			}
+ 

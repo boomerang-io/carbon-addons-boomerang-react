@@ -1,7 +1,7 @@
 {
   "name": "@boomerang-io/carbon-addons-boomerang-react",
   "description": "Carbon Addons for Boomerang apps",
-  "version": "4.8.0-beta.6",
+  "version": "4.8.0-beta.7",
   "author": {
     "name": "Tim Bula",
     "email": "timrbula@gmail.com"
@@ -158,6 +158,10 @@
       "source-map-js": "^1.2.2",
       "undici": "^7.29.1",
       "vite": "^6.4.3"
+    },
+    "patchedDependencies": {
+      "deepmerge@4.3.1": "patches/deepmerge@4.3.1.patch",
+      "deepmerge@2.2.1": "patches/deepmerge@2.2.1.patch"
     }
   },
   "lint-staged": {
