@@ -46,3 +46,6 @@ overrides:
 patchedDependencies:
   deepmerge@2.2.1: patches/deepmerge@2.2.1.patch
   deepmerge@4.3.1: patches/deepmerge@4.3.1.patch
+shamefullyHoist: true
+autoInstallPeers: true
+strictPeerDependencies: false
