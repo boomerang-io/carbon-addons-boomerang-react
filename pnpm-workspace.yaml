@@ -1,0 +1,48 @@
+allowBuilds:
+  '@carbon-labs/react-resizer': true
+  '@carbon/colors': true
+  '@carbon/feature-flags': true
+  '@carbon/grid': true
+  '@carbon/ibm-products': true
+  '@carbon/ibm-products-styles': true
+  '@carbon/icon-helpers': true
+  '@carbon/icons-react': true
+  '@carbon/layout': true
+  '@carbon/motion': true
+  '@carbon/react': true
+  '@carbon/styles': true
+  '@carbon/themes': true
+  '@carbon/type': true
+  '@carbon/utilities': true
+  '@carbon/utilities-react': true
+  '@ibm/plex': true
+  '@ibm/plex-mono': true
+  '@ibm/plex-sans': true
+  '@ibm/plex-sans-arabic': true
+  '@ibm/plex-sans-devanagari': true
+  '@ibm/plex-sans-hebrew': true
+  '@ibm/plex-sans-thai': true
+  '@ibm/plex-sans-thai-looped': true
+  '@ibm/plex-serif': true
+  '@parcel/watcher': true
+  esbuild: true
+minimumReleaseAge: 0
+overrides:
+  '@babel/core': ^7.29.6
+  '@tootallnate/once': ^3.0.1
+  'brace-expansion': ^5.0.12
+  'braces': ^3.0.3
+  'esbuild': ^0.25.0
+  'fast-uri': ^4.2.1
+  'immutable': ^5.1.9
+  'ip-address': ^10.7.3
+  'js-yaml': ^5.4.3
+  'micromatch': ^4.0.8
+  'nanoid': ^6.0.1
+  'source-map-js': ^1.2.2
+  'undici': ^8.12.1
+  'vite': ^6.4.3
+
+patchedDependencies:
+  deepmerge@2.2.1: patches/deepmerge@2.2.1.patch
+  deepmerge@4.3.1: patches/deepmerge@4.3.1.patch

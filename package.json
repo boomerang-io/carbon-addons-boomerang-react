@@ -1,7 +1,7 @@
 {
   "name": "@boomerang-io/carbon-addons-boomerang-react",
   "description": "Carbon Addons for Boomerang apps",
-  "version": "4.8.0-beta.7",
+  "version": "4.8.0-beta.8",
   "author": {
     "name": "Tim Bula",
     "email": "timrbula@gmail.com"
@@ -65,10 +65,10 @@
     "match-sorter": "6.3.1",
     "react-modal": "3.16.1",
     "react-toastify": "11.1.0",
-    "sanitize-html": "^2.18.0"
+    "sanitize-html": "^2.18.1"
   },
   "peerDependencies": {
-    "@carbon/react": "^1.112.0",
+    "@carbon/react": "^1.118.0",
     "@tanstack/react-query": "^5.90.21",
     "axios": "^1.20.0",
     "formik": "^2.4.9",
@@ -78,7 +78,7 @@
     "yup": ">=0.32.11"
   },
   "devDependencies": {
-    "@carbon/react": "1.112.0",
+    "@carbon/react": "1.118.0",
     "@chromatic-com/storybook": "^5.1.1",
     "@commitlint/cli": "^20.5.0",
     "@commitlint/config-conventional": "^20.5.0",
@@ -141,28 +141,6 @@
     "vite": "^6.4.3",
     "vitest": "^4.1.11",
     "yup": "^0.32.11"
-  },
-  "pnpm": {
-    "overrides": {
-      "@babel/core": "^7.29.6",
-      "@tootallnate/once": "^3.0.1",
-      "brace-expansion": "^5.0.12",
-      "braces": "^3.0.3",
-      "esbuild": "^0.25.0",
-      "fast-uri": "^4.2.1",
-      "immutable": "^5.1.9",
-      "ip-address": "^10.7.3",
-      "js-yaml": "^5.4.3",
-      "micromatch": "^4.0.8",
-      "nanoid": "^6.0.1",
-      "source-map-js": "^1.2.2",
-      "undici": "^7.29.1",
-      "vite": "^6.4.3"
-    },
-    "patchedDependencies": {
-      "deepmerge@4.3.1": "patches/deepmerge@4.3.1.patch",
-      "deepmerge@2.2.1": "patches/deepmerge@2.2.1.patch"
-    }
   },
   "lint-staged": {
     "src/**/*": "prettier --write --ignore-unknown",
