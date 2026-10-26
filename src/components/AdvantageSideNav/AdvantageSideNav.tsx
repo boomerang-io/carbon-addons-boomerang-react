@@ -82,10 +82,9 @@ type Props = {
   isbetaLaunchpad?: boolean;
   userTeamsError?: boolean;
   userTeamsLoading?: boolean;
+  /** @deprecated Pass `navigate` instead. Accepted for backwards-compatibility with react-router v5 `history` objects. */
   history?: any;
-  enableSpaNavigation?: boolean;
-  onNavigate?: (path: string, url: string) => void;
-  resolveSpaPath?: (url: string) => string;
+  navigate?: any;
   children?: React.ReactNode;
 };
 
@@ -119,9 +118,7 @@ export function AdvantageSideNav(props: Props) {
     isbetaLaunchpad = false,
     sideNavUrls,
     history,
-    enableSpaNavigation = false,
-    onNavigate,
-    resolveSpaPath,
+    navigate,
     children,
     personalTeamEnabled,
     ...rest
@@ -139,15 +136,15 @@ export function AdvantageSideNav(props: Props) {
   const chatLink = sideNavUrls?.find((sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.Chat)?.url;
   const toolsSideNavUrl = sideNavUrls?.find((sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.Tools);
   const agentAssistantStudioSideNavUrl = sideNavUrls?.find(
-    (sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.AgentStudio
+    (sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.AgentStudio,
   );
   const contextStudioSideNavUrl = sideNavUrls?.find((sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.ContextStudio);
   const processStudioSideNavUrl = sideNavUrls?.find((sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.ProcessStudio);
   const agentAssistantLibrarySideNavUrl = sideNavUrls?.find(
-    (sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.AgentLibrary
+    (sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.AgentLibrary,
   );
   const documentCollectionsSideNavUrl = sideNavUrls?.find(
-    (sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.DocumentCollections
+    (sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.DocumentCollections,
   );
 
   const catalogSideNavUrl = sideNavUrls?.find((sideNavUrl) => sideNavUrl.key === SideNavUrlKeys.Catalog);
@@ -419,13 +416,7 @@ export function AdvantageSideNav(props: Props) {
                 onClick={(e: any) => {
                   if (isLaunchpad) {
                     handleLaunchpadLink(e);
-                    history.push("/");
-                  } else if (isbetaLaunchpad) {
-                    console.log("beta launchpad home link clicked");
-                    handleLaunchpadLink(e);
-                    history.push("/launchpad");
-                  } else {
-                    navigateSideNavLink(e, homeSideNavUrl.url);
+                    navigate ? navigate("/") : history?.push("/");
                   }
 
                   handleSidenavLinkClick({ name: homeSideNavUrl.name, link: homeSideNavUrl.url });
@@ -447,12 +438,9 @@ export function AdvantageSideNav(props: Props) {
                 onClick={(e: any) => {
                   if (isLaunchpad) {
                     handleLaunchpadLink(e);
-                    history.push(`/teams/${teamSwitcherTeam.id}`);
-                  } else {
-                    navigateSideNavLink(
-                      e,
-                      teamPageSideNavUrl?.url || `${baseEnvUrl}/${app}/teams/${teamSwitcherTeam.id}`
-                    );
+                    navigate
+                      ? navigate(`/teams/${teamSwitcherTeam.id}`)
+                      : history?.push(`/teams/${teamSwitcherTeam.id}`);
                   }
                   handleTeamClick({
                     team: teamSwitcherTeam,
@@ -539,8 +527,18 @@ export function AdvantageSideNav(props: Props) {
                 } else {
                   navigateSideNavLink(e, agentAssistantStudioSideNavUrl.url);
                 }
-                handleAgentAssistantStudioClick();
-              }}
+                renderIcon={IntentRequestCreate}
+                href={agentAssistantStudioSideNavUrl.url}
+                onClick={(e: any) => {
+                  if (isLaunchpad) {
+                    handleLaunchpadLink(e);
+                    navigate ? navigate(agentStudioPath) : history?.push(agentStudioPath);
+                  }
+                  handleSidenavLinkClick({
+                    name: agentAssistantStudioSideNavUrl.name,
+                    link: agentAssistantStudioSideNavUrl.url,
+                  });
+                }}
               >
                {agentAssistantStudioSideNavUrl.name}
               </SideNavLink>

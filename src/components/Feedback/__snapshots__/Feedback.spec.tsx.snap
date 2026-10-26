@@ -1,7 +1,9 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Feedback > snapshot 1`] = `
-<body>
+<body
+  class="cds--body--with-modal-open"
+>
   <div>
     <div
       aria-hidden="false"
@@ -28,6 +30,7 @@ exports[`Feedback > snapshot 1`] = `
           >
             <h2
               class="cds--modal-header__heading cds--type-beta"
+              id="cds--modal-header__heading--id-:r1:"
             >
               Submit an Idea
             </h2>
@@ -42,8 +45,8 @@ exports[`Feedback > snapshot 1`] = `
                 >
                   <button
                     aria-label="Close"
-                    aria-labelledby="tooltip-:r0:"
-                    class="cds--btn--icon-only cds--modal-close cds--btn cds--btn--primary"
+                    aria-labelledby="tooltip-:r3:"
+                    class="cds--modal-close cds--btn cds--btn--primary cds--btn--icon-only"
                     type="button"
                   >
                     <svg
@@ -58,7 +61,7 @@ exports[`Feedback > snapshot 1`] = `
                       xmlns="http://www.w3.org/2000/svg"
                     >
                       <path
-                        d="M17.4141 16L24 9.4141 22.5859 8 16 14.5859 9.4143 8 8 9.4141 14.5859 16 8 22.5859 9.4143 24 16 17.4141 22.5859 24 24 22.5859 17.4141 16z"
+                        d="M17.4141 16 24 9.4141 22.5859 8 16 14.5859 9.4143 8 8 9.4141 14.5859 16 8 22.5859 9.4143 24 16 17.4141 22.5859 24 24 22.5859 17.4141 16z"
                       />
                     </svg>
                   </button>
@@ -66,7 +69,7 @@ exports[`Feedback > snapshot 1`] = `
                 <span
                   aria-hidden="true"
                   class="cds--popover"
-                  id="tooltip-:r0:"
+                  id="tooltip-:r3:"
                   role="tooltip"
                 >
                   <span
@@ -82,7 +85,7 @@ exports[`Feedback > snapshot 1`] = `
             </div>
           </div>
           <div
-            class="cds--layer-two cds--modal-content"
+            class="cds--layer-two cds--modal-content cds--modal-scroll-content--no-fade"
           >
             <div
               class="cds--bmrg-feedback"

@@ -57,7 +57,9 @@ type Props = {
   instanceSwitcherEnabled?: boolean;
   enableNotifications?: boolean;
   enableNotificationsCount?: boolean;
+  /** @deprecated Pass `navigate` instead. Accepted for backwards-compatibility with react-router v5 `history` objects. */
   history?: any;
+  navigate?: any;
   isLaunchpad?: boolean;
   isBetaLaunchpad?: boolean;
   isLoadingTeamSwitcher?: boolean;
@@ -156,6 +158,7 @@ export default function Header(props: Props) {
     onNotificationAction,
     enableTeamSwitcher = true,
     history,
+    navigate,
     isLaunchpad = false,
     isBetaLaunchpad = false,
     isLoadingTeamSwitcher,
@@ -258,6 +261,7 @@ export default function Header(props: Props) {
                 baseServicesUrl={baseServicesUrl}
                 createJoinTeamTrigger={createJoinTeamTrigger}
                 history={history}
+                navigate={navigate}
                 isLaunchpad={isLaunchpad}
                 isBetaLaunchpad={isBetaLaunchpad}
                 isLoadingTeamSwitcher={isLoadingTeamSwitcher}

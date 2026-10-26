@@ -6,7 +6,7 @@ IBM Confidential
 
 /* eslint-disable no-script-url */
 import React from "react";
-import { Link, MemoryRouter as Router } from "react-router-dom";
+import { Link, MemoryRouter as Router } from "react-router";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ServiceDesk } from "@carbon/react/icons";
 import { SideNav, SideNavLink, SideNavItems, SideNavMenu, SideNavMenuItem } from "@carbon/react";

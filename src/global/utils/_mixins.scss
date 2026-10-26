@@ -4,6 +4,7 @@ IBM Confidential
 © Copyright IBM Corp. 2022, 2026
 */
 
+@use "sass:meta";
 
 @forward "@carbon/react/scss/utilities/convert" show em, rem;
 
@@ -60,7 +61,7 @@ $breakpoints: (
 @mixin create-properties($token-map, $prefix: --cds) {
   @each $name, $variable in $token-map {
     // Only create properties for non-map objects. Some theme tokens are maps in the default themes that we merge with
-    @if type-of($variable) != map {
+    @if meta.type-of($variable) != map {
       #{$prefix}-#{$name}: #{$variable};
     }
   }

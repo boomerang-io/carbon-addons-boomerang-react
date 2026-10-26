@@ -4,9 +4,8 @@ IBM Confidential
 © Copyright IBM Corp. 2022, 2026
 */
 
-
 import React from "react";
-import { MemoryRouter as Router } from "react-router-dom";
+import { MemoryRouter as Router } from "react-router";
 import FeatureSideNav from "./FeatureSideNav";
 import FeatureSideNavLinks from "./FeatureSideNavLinks";
 import FeatureSideNavFooter from "./FeatureSideNavFooter";

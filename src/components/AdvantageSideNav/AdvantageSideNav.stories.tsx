@@ -5,7 +5,7 @@ IBM Confidential
 */
 
 import React from "react";
-import { MemoryRouter as Router } from "react-router-dom";
+import { MemoryRouter as Router } from "react-router";
 import AdvantageSideNav from "./AdvantageSideNav";
 
 export default {

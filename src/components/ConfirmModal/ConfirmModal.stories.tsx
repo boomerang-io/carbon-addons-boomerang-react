@@ -26,7 +26,6 @@ export const Default = (args) => {
   return (
     <ConfirmModal
       affirmativeAction={action("confirm modal affirmative action")}
-      appElement="#root"
       label="do things"
       title="Yeah?"
       modalTrigger={({ openModal }) => <Button onClick={openModal}>Open confirm modal</Button>}
@@ -54,7 +53,6 @@ export const ExternallyControlled = (args) => {
       }
       onCloseModal={() => setIsOpen(false)}
       isExternallyControlled
-      appElement="#root"
       label="do things"
       title="Yeah?"
       modalTrigger={() => <Button onClick={() => setIsOpen(true)}>Open confirm modal</Button>}

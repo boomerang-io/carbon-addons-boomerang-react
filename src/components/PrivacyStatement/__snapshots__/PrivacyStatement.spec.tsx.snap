@@ -1,7 +1,9 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Privacy Statement - snapshot 1`] = `
-<body>
+<body
+  class="cds--body--with-modal-open"
+>
   <div>
     <div
       aria-hidden="false"
@@ -28,11 +30,13 @@ exports[`Privacy Statement - snapshot 1`] = `
           >
             <h2
               class="cds--modal-header__label cds--type-delta"
+              id="cds--modal-header__label--id-:r1:"
             >
               Effective as of 
             </h2>
             <h2
               class="cds--modal-header__heading cds--type-beta"
+              id="cds--modal-header__heading--id-:r1:"
             >
               Privacy Statement
             </h2>
@@ -47,8 +51,8 @@ exports[`Privacy Statement - snapshot 1`] = `
                 >
                   <button
                     aria-label="Close"
-                    aria-labelledby="tooltip-:r0:"
-                    class="cds--btn--icon-only cds--modal-close cds--btn cds--btn--primary"
+                    aria-labelledby="tooltip-:r3:"
+                    class="cds--modal-close cds--btn cds--btn--primary cds--btn--icon-only"
                     type="button"
                   >
                     <svg
@@ -63,7 +67,7 @@ exports[`Privacy Statement - snapshot 1`] = `
                       xmlns="http://www.w3.org/2000/svg"
                     >
                       <path
-                        d="M17.4141 16L24 9.4141 22.5859 8 16 14.5859 9.4143 8 8 9.4141 14.5859 16 8 22.5859 9.4143 24 16 17.4141 22.5859 24 24 22.5859 17.4141 16z"
+                        d="M17.4141 16 24 9.4141 22.5859 8 16 14.5859 9.4143 8 8 9.4141 14.5859 16 8 22.5859 9.4143 24 16 17.4141 22.5859 24 24 22.5859 17.4141 16z"
                       />
                     </svg>
                   </button>
@@ -71,7 +75,7 @@ exports[`Privacy Statement - snapshot 1`] = `
                 <span
                   aria-hidden="true"
                   class="cds--popover"
-                  id="tooltip-:r0:"
+                  id="tooltip-:r3:"
                   role="tooltip"
                 >
                   <span
@@ -87,7 +91,7 @@ exports[`Privacy Statement - snapshot 1`] = `
             </div>
           </div>
           <div
-            class="cds--layer-two cds--modal-content"
+            class="cds--layer-two cds--modal-content cds--modal-scroll-content--no-fade"
           >
             <div
               class="cds--bmrg-privacy-statement"
@@ -105,16 +109,9 @@ exports[`Privacy Statement - snapshot 1`] = `
               Close
             </button>
             <button
-              aria-describedby="danger-description-:r4:"
               class="cds--btn cds--btn--danger"
               type="button"
             >
-              <span
-                class="cds--visually-hidden"
-                id="danger-description-:r4:"
-              >
-                danger
-              </span>
               Request account deletion
             </button>
             <div
@@ -145,11 +142,13 @@ exports[`Privacy Statement - snapshot 1`] = `
                     >
                       <h2
                         class="cds--modal-header__label cds--type-delta"
+                        id="cds--modal-header__label--id-:r9:"
                       >
                         Delete Account
                       </h2>
                       <h2
                         class="cds--modal-header__heading cds--type-beta"
+                        id="cds--modal-header__heading--id-:r9:"
                       >
                         Request account deletion
                       </h2>
@@ -164,8 +163,8 @@ exports[`Privacy Statement - snapshot 1`] = `
                           >
                             <button
                               aria-label="Close"
-                              aria-labelledby="tooltip-:r5:"
-                              class="cds--btn--icon-only cds--modal-close cds--btn cds--btn--primary"
+                              aria-labelledby="tooltip-:rb:"
+                              class="cds--modal-close cds--btn cds--btn--primary cds--btn--icon-only"
                               type="button"
                             >
                               <svg
@@ -180,7 +179,7 @@ exports[`Privacy Statement - snapshot 1`] = `
                                 xmlns="http://www.w3.org/2000/svg"
                               >
                                 <path
-                                  d="M17.4141 16L24 9.4141 22.5859 8 16 14.5859 9.4143 8 8 9.4141 14.5859 16 8 22.5859 9.4143 24 16 17.4141 22.5859 24 24 22.5859 17.4141 16z"
+                                  d="M17.4141 16 24 9.4141 22.5859 8 16 14.5859 9.4143 8 8 9.4141 14.5859 16 8 22.5859 9.4143 24 16 17.4141 22.5859 24 24 22.5859 17.4141 16z"
                                 />
                               </svg>
                             </button>
@@ -188,7 +187,7 @@ exports[`Privacy Statement - snapshot 1`] = `
                           <span
                             aria-hidden="true"
                             class="cds--popover"
-                            id="tooltip-:r5:"
+                            id="tooltip-:rb:"
                             role="tooltip"
                           >
                             <span
@@ -204,7 +203,7 @@ exports[`Privacy Statement - snapshot 1`] = `
                       </div>
                     </div>
                     <div
-                      class="cds--layer-two cds--modal-content"
+                      class="cds--layer-two cds--modal-content cds--modal-scroll-content--no-fade"
                     >
                       <p
                         class="cds--bmrg-privacy-statement-delete__desc"
@@ -224,16 +223,9 @@ exports[`Privacy Statement - snapshot 1`] = `
                         No, go back to Privacy Statement
                       </button>
                       <button
-                        aria-describedby="danger-description-:r9:"
                         class="cds--btn cds--btn--danger"
                         type="submit"
                       >
-                        <span
-                          class="cds--visually-hidden"
-                          id="danger-description-:r9:"
-                        >
-                          danger
-                        </span>
                         Yes, delete my account
                       </button>
                     </div>

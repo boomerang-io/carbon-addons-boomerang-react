@@ -43,7 +43,7 @@ function Notification({ readNotification, data, onActionClick }: Props) {
             className={`${prefix}--bmrg-notification-content__action`}
             onClick={() => onActionClick?.(data)}
           >
-            {migrationEligibility ? "Begin Migration" : "View Details"}
+               View More Details
           </button>
         )}
         <time className={`${prefix}--bmrg-notification-content__date`}>

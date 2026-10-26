@@ -84,7 +84,9 @@ type Props = {
     platformMessage?: any;
   };
   enableTeamSwitcher?: boolean;
+  /** @deprecated Pass `navigate` instead. Accepted for backwards-compatibility with react-router v5 `history` objects. */
   history?: any;
+  navigate?: any;
   isLaunchpad?: boolean;
   isBetaLaunchpad?: boolean;
   isLoadingTeamSwitcher?: boolean;
@@ -128,6 +130,7 @@ function UIShell({
   onNotificationAction,
   enableTeamSwitcher = true,
   history,
+  navigate,
   isLaunchpad = false,
   isBetaLaunchpad = false,
   isLoadingTeamSwitcher,
@@ -393,6 +396,7 @@ function UIShell({
           ...supportMenuItems,
         ].filter(Boolean)}
         history={history}
+        navigate={navigate}
         isLaunchpad={isLaunchpad}
         isBetaLaunchpad={isBetaLaunchpad}
         isLoadingTeamSwitcher={isLoadingTeamSwitcher}
