@@ -33,14 +33,14 @@ overrides:
   'brace-expansion': ^5.0.12
   'braces': ^3.0.3
   'esbuild': ^0.25.0
-  'fast-uri': ^4.2.1
+  'fast-uri': ^4.2.3
   'immutable': ^5.1.9
   'ip-address': ^10.7.3
   'js-yaml': ^5.4.3
   'micromatch': ^4.0.8
   'nanoid': ^6.0.1
   'source-map-js': ^1.2.2
-  'undici': ^8.12.1
+  'undici': ^8.12.2
   'vite': ^6.4.3
 
 patchedDependencies:
